@@ -1,0 +1,10 @@
+@import url("reset.css");
+.bg{background: url(../images/bg.jpg); width:777px; height:96px; display:block; margin:0 auto; position:relative;}
+
+.port1{ position:absolute; left:378px; top:59px; width:46px;}
+.port1 ul li.port01{ display:block; background:url(../images/port.png); width:46px; height:50px;}
+
+
+.port2{ position:absolute; left:378px; top:34px; width:46px;}
+.port2 ul li.port02{ display:block; background:url(../images/port.png); width:46px; height:50px;}
+/*.message{position:absolute;background:url(../images/mesg.png);width:254px;height:185px;left: 21px;top: -184px; padding-left:50px; padding-top:30px;}*/

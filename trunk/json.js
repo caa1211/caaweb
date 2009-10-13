@@ -114,7 +114,8 @@ $(function(){
                 },
                 'hrzAccordion': {
                     url: "pages/others/hrzAccordion/demo.html"
-                }
+                },
+                'zyDock' : {url : "pages/others/zyDock/femto.html"}
             },
             animation: {
                 'chainable Effects': {

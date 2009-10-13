@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=big5" />
+        <link href="css/css.css" rel="stylesheet" type="text/css" />
+        <style type="text/css">
+        </style>
+        <!-- In head section we should include the style sheet for the grid -->
+        <script src="../jquery-1.3.2.min.js" type="text/javascript">
+        </script>
+
+		
+        <script src="testVD.js" type="text/javascript">
+        </script>
+		
+	
+ 
+ 
+        <script type="text/javascript">
+            
+            var jsonData1 = {
+                port1: {status:"on", msg :"outerMsg1"}
+				 ,
+				 
+				 port2: {status:"on", msg :"outerMsg2"}
+            };
+            
+            var jsonData2 = {
+                 //"port1": {"status":"on", "msg" :"outerMsg"}
+                 port1: {status:"off"}
+				  ,
+				  
+				 port2: {status:"off"}
+            };
+            
+            $(function(){
+            
+		/*	
+	  $('#updateBtn1').tooltip({ 
+    track: true, 
+    delay: 0, 
+    showURL: false, 
+    showBody: " - ", 
+    fade: 250 
+});*/
+            
+                vd = $('#_vd').testVD();
+                
+              // vd2 = $('#_vd2').testVD();
+	
+                
+                
+                $('#updateBtn1').click(function(){
+                    vd.setValue(jsonData1);
+                });
+                
+                
+                $('#updateBtn2').click(function(){
+                    vd.setValue(jsonData2);
+                });
+                
+                
+                $('#updateBtn1_2').click(function(){
+                    vd2.setValue(jsonData1);
+                });
+                
+                
+                $('#updateBtn2_2').click(function(){
+                    vd2.setValue(jsonData2);
+                });
+                
+                
+            });
+        </script>
+    </head>
+    <body>
+
+        <div id='_vd' >
+        </div>
+      <button id='updateBtn1'   >
+            on
+        </button>
+        <button id='updateBtn2' >
+            off
+        </button>
+        <!--div id='_vd2'>
+        </div>
+		
+        <button id='updateBtn1_2'>
+            on
+        </button>
+        <button id='updateBtn2_2'>
+            off
+        </button-->
+        <!-- the grid definition in html is a table tag with class 'scroll' -->
+    </body>
+</html>
