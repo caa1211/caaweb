@@ -1,0 +1,9 @@
+/*@import url("reset.css");*/
+.bg{background: url(../images/bg.jpg); width:777px; height:96px; display:block; margin:0 auto; position:relative;}
+.port1{ position:absolute; left:378px; top:59px; width:46px;}.port1 ul li.port01{ display:block;  width:46px; height:50px;}
+.port2{ position:absolute; left:378px; top:34px; width:46px;}.port2 ul li.port02{ display:block;  width:46px; height:50px;}
+
+.port1-on{background:url(../images/port1.gif);}
+.port1-offline{background:url(../images/port2.gif);}
+
+.port2-on{background:url(../images/port2.gif);}

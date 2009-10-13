@@ -1,0 +1,64 @@
+.page {border: solid 1px blue; width:400px; height:400px;}
+
+
+#VDgroup {   
+    background:#fff url(/img/global/gradient/h600.png) repeat scroll 0 0;
+    border:5px solid #789;
+    font-size:12px;
+   height:140px;
+    margin:20px auto;   
+    width:830px;
+    overflow:hidden;
+    position:relative;
+    /* rounded corners for modern browsers */
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+}  
+
+
+#VDgroup .items {
+    width:20000em;  
+    clear:both; 
+    position:absolute;  
+}
+
+/* single item */
+#VDgroup .vd { 
+    padding:20px 30px;
+    width:750px;
+    float:left; 
+}
+
+
+
+
+
+/* prev, next, prevPage and nextPage buttons */
+a.browse {
+    background:url(hori_large.png) no-repeat;
+    display:block;
+    width:30px;
+    height:30px;
+    float:left;
+    margin:40px 10px;
+    cursor:pointer;
+    font-size:1px;
+}
+
+/* right */
+a.right                 { background-position: 0 -30px; clear:right; margin-right: 0px;}
+a.right:hover       { background-position:-30px -30px; }
+a.right:active  { background-position:-60px -30px; } 
+
+
+/* left */
+a.left              { margin-left: 0px; } 
+a.left:hover        { background-position:-30px 0; }
+a.left:active   { background-position:-60px 0; }
+
+/* disabled navigational button */
+a.disabled {
+    visibility:hidden !important;       
+}   
+
+
