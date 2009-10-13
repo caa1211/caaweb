@@ -1,0 +1,276 @@
+/*
+ * Script from NETTUTS.com [by James Padolsey]
+ * @requires jQuery($), jQuery UI & sortable/draggable UI modules
+ * Extend from Joze zyxel.com
+ * 090828
+ * 090828-2 add widgetIndividual for customized button setting
+ */
+
+$(function(){
+var iNettuts = {
+    
+    jQuery : $,
+    
+    settings : {
+        columns : '.column',
+        widgetSelector: '.widget',
+        handleSelector: '.widget-head',
+        contentSelector: '.widget-content',
+        widgetDefault : {
+            movable: true,
+            removable: true,
+            refreshable: true,
+            settingable: true,
+            collapsible: true
+        },
+        widgetIndividual : {
+         noSetting : {settingable: false},
+         noRefresh : {refreshable: false},
+         noRemove :  {removable: false},
+         noCollapse: {collapsible: false},
+         noMove: {movable: false}
+        }
+    },
+
+    init : function () {
+
+        this.attachStylesheet('zyDDPanel.js.css');
+        this.addWidgetControls();
+        this.makeSortable();
+    },
+    
+    getWidgetSettings : function (widget) {
+        var $ = this.jQuery,
+            settings = this.settings;
+            var returnSettings = settings.widgetDefault;
+            
+        $.each(settings.widgetIndividual, function(i, val) {
+            if ($(widget).hasClass('widget')&&$(widget).hasClass(i)) {
+                returnSettings= $.extend({}, returnSettings, val);
+            }
+        }
+        
+        );
+
+return returnSettings
+        //return (id&&settings.widgetIndividual[id]) ? $.extend({},settings.widgetDefault,settings.widgetIndividual[id]) : settings.widgetDefault;
+    },
+    
+    addWidgetControls : function () {
+
+        var iNettuts = this,
+            $ = this.jQuery,
+            settings = this.settings;
+            
+        $(settings.widgetSelector, $(settings.columns)).each(function () {
+
+            var thisWidgetSettings = iNettuts.getWidgetSettings(this);
+            //debugger;
+            if (thisWidgetSettings.removable) {
+				
+				var panel =   $(this);
+				 
+                $('<a href="#" class="remove" title="Close Widget">CLOSE</a>').mousedown(function (e) {
+                    e.stopPropagation();    
+                }).click(function () {
+                    
+                    $("<div class='win_warning'>This widget will be removed.</div>").zyUiDialog({
+                        confirmDB: true,
+                        buttons: {
+                            Ok: function(){
+                                panel.animate({
+                                    opacity: 0
+                                }, function(){
+                                    panel.wrap('<div/>').parent().slideUp(function(){
+                                        panel.remove();
+                                    });
+                                });
+                                
+                                $(this).dialog('close');
+                            },
+                            Cancel: function(){
+                                $(this).dialog('close');
+                            }
+                        }
+                    }).dialog('open');
+                     
+/*
+                   if(confirm('This widget will be removed, ok?')) {
+                        $(this).parents(settings.widgetSelector).animate({
+                            opacity: 0    
+                        },function () {
+                            $(this).wrap('<div/>').parent().slideUp(function () {
+                                $(this).remove();
+                            });
+                        });
+                    }*/
+                    return false;
+                }).appendTo($(settings.handleSelector, this));
+            }
+            
+            if(thisWidgetSettings.refreshable)
+            {
+                 $('<a href="#" class="refresh" title="Refresh Widget">REFRESH</a>').mousedown(function (e) {
+                    e.stopPropagation();    
+                }).click(function (e) {
+                    $(this).trigger('refresh', $(this).parents('.widget'));
+                    }
+                  ).appendTo($(settings.handleSelector, this));
+            }
+            
+            if(thisWidgetSettings.settingable)
+            {
+                 $('<a href="#" class="setting" title="Edit Widget">SETTING</a>').mousedown(function (e) {
+                    e.stopPropagation();    
+                }).click(function (e) {
+                    $(this).trigger('setting', $(this).parents('.widget'));
+                    }
+                  ).appendTo($(settings.handleSelector, this));
+            }
+            
+            /*
+            if (thisWidgetSettings.editable) {
+                $('<a href="#" class="edit">EDIT</a>').mousedown(function (e) {
+                    e.stopPropagation();    
+                }).toggle(function () {
+                    $(this).css({backgroundPosition: '-66px 0', width: '55px'})
+                        .parents(settings.widgetSelector)
+                            .find('.edit-box').show().find('input').focus();
+                    return false;
+                },function () {
+                    $(this).css({backgroundPosition: '', width: ''})
+                        .parents(settings.widgetSelector)
+                            .find('.edit-box').hide();
+                    return false;
+                }).appendTo($(settings.handleSelector,this));
+                $('<div class="edit-box" style="display:none;"/>')
+                    .append('<ul><li class="item"><label>Change the title?</label><input value="' + $('h3',this).text() + '"/></li>')
+                    .append((function(){
+                        var colorList = '<li class="item"><label>Available colors:</label><ul class="colors">';
+                        $(thisWidgetSettings.colorClasses).each(function () {
+                            colorList += '<li class="' + this + '"/>';
+                        });
+                        return colorList + '</ul>';
+                    })())
+                    .append('</ul>')
+                    .insertAfter($(settings.handleSelector,this));
+            }
+            */
+            
+            if (thisWidgetSettings.collapsible) {
+                $('<a href="#" class="collapse">COLLAPSE</a>').mousedown(function(e){
+                    e.stopPropagation();
+                }).toggle(function(){
+                    var kk = $(this);
+                    $(this).parents(settings.widgetSelector).find(settings.contentSelector).slideUp({
+                        duration: 150,
+                        easing: 'easeOutQuart',
+                        complete: function(e){kk.removeClass('collapse').addClass('expand');}
+                    });
+                   
+                   //$(this).parents(settings.widgetSelector).find(settings.contentSelector).hide();
+                   //$(this).removeClass('collapse').addClass('expand');
+                    return false;
+                }, function(){
+                    var kk = $(this);
+                    $(this).parents(settings.widgetSelector).find(settings.contentSelector).slideDown({
+                        duration: 150,
+                        easing: 'easeInQuad',
+                        complete: function(e){kk.removeClass('expand').addClass('collapse');}
+                    });
+                   
+                    //$(this).parents(settings.widgetSelector).find(settings.contentSelector).show();
+                    //$(this).removeClass('expand').addClass('collapse');
+                    return false;
+                }).appendTo($(settings.handleSelector, this));
+            }
+        });
+        /*
+        $('.edit-box').each(function () {
+            $('input',this).keyup(function () {
+                $(this).parents(settings.widgetSelector).find('h3').text( $(this).val().length>20 ? $(this).val().substr(0,20)+'...' : $(this).val() );
+            });
+            $('ul.colors li',this).click(function () {
+                
+                var colorStylePattern = /\bcolor-[\w]{1,}\b/,
+                    thisWidgetColorClass = $(this).parents(settings.widgetSelector).attr('class').match(colorStylePattern)
+                if (thisWidgetColorClass) {
+                    $(this).parents(settings.widgetSelector)
+                        .removeClass(thisWidgetColorClass[0])
+                        .addClass($(this).attr('class').match(colorStylePattern)[0]);
+                }
+                return false;
+                
+            });
+        });
+        */
+    },
+    
+    attachStylesheet : function (href) {
+        var $ = this.jQuery;
+        return $('<link href="' + href + '" rel="stylesheet" type="text/css" />').appendTo('head');
+    },
+    
+    makeSortable : function () {
+      
+        var iNettuts = this,
+            $ = this.jQuery,
+            settings = this.settings,
+            $sortableItems = (function () {
+                var notSortable = '';
+                $(settings.widgetSelector,$(settings.columns)).each(function (i) {
+                    if (!iNettuts.getWidgetSettings(this).movable) {
+                        if(!this.id) {
+                            this.id = 'widget-no-id-' + i;
+                        }
+                        notSortable += '#' + this.id + ',';
+                    }
+                });
+				
+
+                return notSortable!=''?$('> li:not(' + notSortable + ')', settings.columns):$('li', settings.columns) ;
+ 
+            })();
+        
+        $sortableItems.find(settings.handleSelector).css({
+            cursor: 'move'
+        })/*.mousedown(function (e) {
+            
+            $sortableItems.css({width:''});
+            $(this).parent().css({
+                width: $(this).parent().width() + 'px'
+            });
+        }).mouseup(function () {
+            if(!$(this).parent().hasClass('dragging')) {
+                $(this).parent().css({width:''});
+            } else {
+                $(settings.columns).sortable('disable');
+            }
+        })*/;
+
+
+        $(settings.columns).sortable({
+            items: $sortableItems,
+            connectWith: $(settings.columns),
+            handle: settings.handleSelector,
+            placeholder: 'widget-placeholder',
+            forcePlaceholderSize: true,
+            revert: 300,
+            //delay: 50,
+            opacity: 0.8,
+            containment: 'document',
+            start: function (e,ui) {
+                $(ui.helper).addClass('dragging');
+            },
+            stop: function (e,ui) {
+                $(ui.item).css({width:''}).removeClass('dragging');
+                $(settings.columns).sortable('enable');
+            }
+        });
+    }
+  
+};
+
+iNettuts.init();
+
+});

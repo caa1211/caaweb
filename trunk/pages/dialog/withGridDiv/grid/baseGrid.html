@@ -1,0 +1,95 @@
+
+<SCRIPT type="text/javascript">
+
+var i = 0;
+
+    $(function(){
+
+    var mydata = [
+        {id:"1",invdate:"2007-10-01",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+        {id:"2",invdate:"2007-10-02",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"}
+        ];
+
+
+        var gridimgpath = 'images/grid';
+        var myGrid = $("#list1").zyjqGrid({
+            imgpath: gridimgpath,
+			header: 'header1',
+			rownumbers: true,
+            multiselect: true,
+            pager: 'pager1',
+            datatype: "local",
+            
+            onAdd: function(){
+                debugger;
+            },
+            sortname: 'id',
+			//width: 330,
+			//autoFit: false,
+			//height: 50,
+			//width: 500,
+            viewrecords: true,
+            colNames: ['Inv No', 'Date', 'Client', 'Amount', 'Tax', 'Total', 'Notes'],
+            colModel: [{
+                name: 'id',
+                index: 'id',
+                width: 60,
+                sorttype: "int"
+            }, {
+                name: 'invdate',
+                index: 'invdate',
+                width: 90,
+                sorttype: "date"
+            }, {
+                name: 'name',
+                index: 'name',
+                width: 100
+            }, {
+                name: 'amount',
+                index: 'amount',
+                width: 80,
+                align: "right",
+                sorttype: "float"
+            }, {
+                name: 'tax',
+                index: 'tax',
+                width: 80,
+                align: "right",
+                sorttype: "float"
+            }, {
+                name: 'total',
+                index: 'total',
+                width: 80,
+                align: "right",
+                sorttype: "float"
+            }, {
+                name: 'note',
+                index: 'note',
+                width: 150,
+                sortable: false
+            }]
+             ,loadComplete: function(){}
+        });
+        
+        for (var i = 0; i <= mydata.length; i++) 
+            jQuery("#list1").addRowData(i + 1, mydata[i]);
+  
+      
+    });
+	
+    
+//	$("#list1").height=500;
+
+</SCRIPT>
+
+<div id="gridDiv" class="gridDiv" style="width:100%;">
+<div id='header1' class="scroll GridHeader" ></div>
+<table id="list1" class="scroll" cellpadding="0" cellspacing="0" >
+</table>
+<div id="pager1" class="scroll GridHeader">
+
+</div>
+
+
+
+</div>
