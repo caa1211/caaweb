@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>iPhone Springboard</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <script type="text/javascript" src="js/jquery-1.3.1.min.js">
+        </script>
+        <script type="text/javascript" src="js/zyDock.js">
+        </script>
+        <script type="text/javascript">
+            
+            $(function(){
+            
+                $('#scrollcontainer').zyDock({
+                    minSize: 80,
+                    maxSize: 150,
+                    event: 'mouse'
+                });
+                $('.highlight').focus();
+            });
+            
+        </script>
+    </head>
+    <body>
+    <div class="inbg">
+        <div id="scrollcontainer" style='left:130px; top: 150px; padding-left:30px; '>
+            <ul>
+                <li class="mediacenter">
+                    <a href="media.html" class='highlight'>
+                        <div class='dockItem'>
+                            <img src='images/i_media_center.png' alt='images/i_media_center_on.png'/>
+                            <div class='dockText'>Media Center</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="message">
+                    <a href="message.html">
+                        <div class='dockItem'>
+                            <img src='images/i_message.png' alt='images/i_message_on.png'/>
+                            <div class='dockText'>Message</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="backup">
+                    <a href="backup.html">
+                        <div class='dockItem'>
+                            <img src='images/i_backup.png' alt='images/i_backup_on.png'/>
+                            <div class='dockText'>Backup</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="subscription">
+                    <a href="subscription.html">
+                        <div class='dockItem'>
+                            <img src='images/i_subscription.png' alt='images/i_subscription_on.png'/>
+                            <div class='dockText'>Subscription</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

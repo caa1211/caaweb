@@ -1,0 +1,39 @@
+@import url("reset.css");
+body {background-color:#25262b; padding:0; margin:0; }
+a { outline:none; }
+p { padding:0; margin:0; }
+img { border:0; }
+
+#iphone-scrollcontainer { height:461px; width:320px; position:absolute; top:140px; left:40px; background-color:#000000; overflow:hidden; }
+
+.row { clear:both; }
+.icon { float:left; margin:9px 11px; }
+.ico_txt { text-align:center; font-family:Georgia, Times, serif; font-size:10px; color:#d4d4d5; }
+
+#springboard-bar { position:absolute; top:368px; background-image:url(../images/springboard-bar-bg.png);
+			background-repeat:repeat-x; width:100%; height:92px; display:none; /* Will be displayed with jQuery */ }
+#springboard-bar div.icon { margin-top:13px; }
+#springboard-bar div.icon p.ico_txt { margin-top:8px; }
+
+#springboard-items { width:100%; height:368px; display:none; }
+
+.upleft { position:relative; left:-160px; top:-160px; }
+.upright { position:relative; left:160px; top:-160px; }
+.downleft { position:relative; left:-160px; top:160px; }
+.downright { position:relative; left:160px; top:160px; }
+
+.indexbg{ background:url(../images/iphone-bg.png) no-repeat; width:398px; height:801px; margin:0px auto; position:relative; margin-top:20px;}
+.inbg{ background:url(../images/in_phonebg.jpg) no-repeat; width:398px; height:801px; margin:0px auto; position:relative; margin-top:20px;}
+#scrollcontainer { height:461px; width:320px; position:absolute; top:140px; left:40px; overflow:hidden; }
+#scrollcontainer ul li{ position:relative; display:block;  margin-top:25px;}
+#scrollcontainer ul li a div div{ font-family:Verdana, Geneva, sans-serif; font-size:18px; font-weight:bold; text-decoration:none; color:#CCC; position:absolute;top:115px; text-align:center; width:148px;}
+
+
+/*.mediacenter a{ display:block; background:url(../images/i_media_center.png) no-repeat; width:83px; height:66px; margin:0px auto;}*/
+/*.mediacenter a:hover{background:url(../images/i_media_center_on.png) no-repeat; width:148px; height:119px;}*/
+/*.backup a{ display:block; background:url(../images/i_backup.png) no-repeat; width:83px; height:66px; margin:0px auto;}*/
+/*.backup a:hover{background:url(../images/i_backup_on.png) no-repeat; width:148px; height:119px;}
+.message a{ display:block; background:url(../images/i_message.png) no-repeat; width:83px; height:66px; margin:0px auto;}
+.message a:hover{background:url(../images/i_message_on.png) no-repeat; width:148px; height:119px;}
+.subscription a{ display:block; background:url(../images/i_subscription.png) no-repeat; width:83px; height:66px; margin:0px auto;}
+.subscription a:hover{background:url(../images/i_subscription_on.png) no-repeat; width:148px; height:119px;}*/
