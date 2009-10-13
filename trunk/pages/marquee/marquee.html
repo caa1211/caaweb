@@ -1,0 +1,104 @@
+<script language="JavaScript" type="text/javascript" src="jquery-1.3.2.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="jquery.marquee.js"></script>
+<link type="text/css" href="jquery.marquee.min.css" rel="stylesheet" media="all" />
+<script tyle="text/javascript">
+	
+$(function(){
+	
+$("#testDiv").marquee(); 
+
+var marquee = $(".tmarquee").marquee({
+         yScroll: "botton"                          // the position of the marquee initially scroll (can be 
+                                                 // either "top" or "bottom")
+       , showSpeed: 500                          // the speed of to animate the initial dropdown of the messages
+       , scrollSpeed: 12                         // the speed of the scrolling (keep number low)
+       , pauseSpeed: 500                        // the time to wait before showing the next message or 
+                                                 // scrolling current message
+       , pauseOnHover: false                      // determine if we should pause on mouse hover
+       , loop: -1                                // determine how many times to loop through the marquees 
+                                                 // (#'s < 0 = infinite)
+       , fxEasingShow: "swing"                   // the animition easing to use when showing a new marquee
+       , fxEasingScroll: "linear"                // the animition easing to use when showing a new marquee
+
+       // define the class statements
+       , cssShowing: "marquee-showing"
+
+       // event handlers
+       , init: null                              // callback that occurs when a marquee is initialized
+       , beforeshow: null                        // callback that occurs before message starts scrolling on screen
+       , show: null                              // callback that occurs when a new marquee message is displayed
+       , aftershow: null                         // callback that occurs after the message has scrolled
+}); 
+
+
+$('#testBtn').bind('click', function(){
+	
+
+	var boj  = $("#marquee").removeClass('.tmarquee');
+	
+	//debugger;
+	
+	
+});
+
+//marquee.marquee("pause");
+
+//$('#testBtn').mouseover(function(){marquee.marquee("resume");});
+//$('#testBtn').mouseout(function(){marquee.marquee("pause"); marquee.marquee("update") });
+/*$
+ * ("#id").marquee("update")
+This updates the marquee's cache—which is required after dynamically updating the <ul /> elements content in order to show the new elements. 
+
+$("#id").marquee("pause")
+Pauses the current marquee to prevent it from scrolling.
+
+$("#id").marquee("resume")
+Resumes the marquee so it begins scrolling again.
+
+$("#id").marquee("object")
+Returns a reference to the internal $.Marquee object. This is for advanced usage only. Examine the source code for uses of the $.Marquee object. 
+*/
+});
+	
+	
+	
+</script>
+
+
+<button id='testBtn'>test</button>
+<div id ='testDiv'  class="marquee" style='border:solid 2px red; width:100px;height:100px'></div>
+<ul id="marquee" class="marquee tmarquee">
+  <li>
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed a nulla. 
+    Lorem ipsum dolor sit amet, consectetuer.</li>
+  <li>
+    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per 
+    inceptos hymenaeos. Fusce tincidunt adipiscing,massa. Class aptent taciti 
+    sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. 
+    Fusce tincidunt adipiscing,massa.
+  </li>
+  <li>
+    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per 
+    inceptos hymenaeos. Fusce tincidunt adipiscing,massa.
+  </li>
+  <li>
+    Mauris ullamcorper euismod leo. Nulla congue tellus vitae ante at pede eu 
+    ligula lacinia. Integer sed sapien, rutrum nec.
+  </li>
+  <li>
+    Aliquam erat volutpat. Fusce dolor. Vestibulum ornare congue turpis 
+    sollicitudin nunc elit. Nullam erat neque, facilisis quis.
+  </li>
+  <li>
+    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur 
+    ridiculus mus. Nam non eros sed facilisis, bibendum eu.
+  </li>
+</ul>
+	<span class='demo'>
+</span>
+
+<!--web link-->
+<br/><br/><br/>
+<a href='http://www.givainc.com/labs/marquee_jquery_plugin.htm' 
+class='ui-state-default ui-corner-all' 
+target='_blank'>reference</a>

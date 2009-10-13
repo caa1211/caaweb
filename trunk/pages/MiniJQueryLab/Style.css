@@ -1,0 +1,34 @@
+﻿textarea 
+{
+	width: 95%;
+	height: 120px;
+}
+.clsButton 
+{
+	font-size: 9pt;
+	position: absolute;
+	width: 60px;
+}
+body 
+{ 
+	background-color: #444444; 
+	color: White;
+	font-size: 9pt;
+	font-family: Verdana;
+}
+td 
+{
+	background-color: #333333;
+	padding: 5px;
+}
+legend 
+{
+	color: Yellow;
+}
+.clsSpanBtn 
+{
+	color: #00ff00;
+	cursor: pointer;
+	text-decoration: underline;
+	font-size: 9pt;
+}

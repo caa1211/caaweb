@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Mini jQuery Lab Ver 1.2.1 Beta</title>
+    <script src="jquery-1.3.1.js" type="text/javascript"></script>
+    <script src="jquery.textarea.js" type="text/javascript"></script>
+    <script src="shCore.js" type="text/javascript"></script>
+    <script src="shBrushJScript.js" type="text/javascript"></script>
+    <link href="SyntaxHighlighter.css" rel="stylesheet" type="text/css" />
+    <link href="Style.css" rel="stylesheet" type="text/css" />
+    <script src="SiteConfig.js" type="text/javascript"></script>
+    <script src="thickbox.js" type="text/javascript"></script>
+    <link href="thickbox.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+/*
+Ver 1.0 by Jeffrey
+Ver 1.1 by Jeffrey
+  ** Add Load Html Demo button
+Ver 1.2 by Jeffrey
+  ** Fix View HTML Source issue under FF
+  ** Converted to online version
+Ver 1.2.1 by Jeffrey
+  ** Reload Empty.htm to clear DOM every execution  
+*/
+    $(function() {
+        $(".clsButton").each(function() {
+            var b = $(this);
+            var ta = b.prev().children("textarea");
+            var pos = ta.offset();
+            b.css({
+                top: pos.top + "px",
+                left: (pos.left + ta.width() - b.width()) + "px"
+            });
+        }).click(function() {
+            var b = $(this);
+            var btnId = b.attr("id");
+            var frmCnt = $("#frmLab").contents();
+            var data = b.prev().children("textarea").val();
+            switch (btnId) {
+                case "btnSetCss":
+                    frmCnt.find("head style").remove();
+                    frmCnt.find("head").append("<style type='text/css'>" + data + "</style>");
+                    break;
+                case "btnSetBody":
+                    frmCnt.find("body").html(data);
+                    break;
+                case "btnEvalScript":
+                    //reload EmptyFrame.htm to refresh DOM
+                    $("#frmLab").queue("job", function() {
+                        $("#btnSetCss,#btnSetBody").click();
+                        document.getElementById("frmLab").contentWindow.eval(data);
+                    }).attr("src", "EmptyFrame.htm");
+                    break;
+            }
+        });
+        $("#frmLab").load(function() {
+            parent.window.jQuery("#frmLab").dequeue("job");
+        });
+        dp.SyntaxHighlighter.ClipboardSwf = 'clipboard.swf';
+        dp.SyntaxHighlighter.HighlightAll('code');
+        $("#btnGetHtml").click(function() {
+            var pack = new Object();
+            $("textarea:not([name])").each(function() {
+                var ta = $(this);
+                pack[ta.attr("id").substring(2).toLowerCase()] = ta.val();
+            });
+            var src =
+                    "<html>\n<head>\n" +
+                    "<style type='text/css'>\n" + pack["css"] + "\n</style>\n" +
+                    "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.js'><" + "/script>\n" +
+                    "<script type='text/javascript'>\n$(function() {\n" + pack["script"] + "\n});\n<" + "/script>\n" +
+                    "</head><body>\n" + pack["body"] + "\n</body>\n</html>\n";
+            //<, > replace
+            src = src.replace(/[<]/g, "&lt;").replace(/[>]/g, "&gt;").replace(/\n/g, "\r\n");
+            //assign innerHTML will ignore all line-breaks
+            if ($.browser.msie) {
+                var hs = document.getElementById("taHtmlSource");
+                var oh = hs.outerHTML;
+                var ih = hs.innerHTML;
+                hs.outerHTML = oh.replace(ih, src);
+            }
+            else
+                $("#taHtmlSource").html(src);
+            $(".dp-highlighter").remove();
+            dp.SyntaxHighlighter.HighlightAll('code');
+            $("#dvSource").show();
+            $("#dvMain").slideUp("fast");
+        });
+        $("#spnCloseSrc").click(function() { $(".clsDispDiv").toggle("fast"); });
+        $("textarea").tabby().each(function() { var ta = $(this); ta.width(ta.width()); ta.height(ta.height()); });
+        var loadError = false;
+        $("#frmInvisible").load(function() {
+            var frmDoc = $($("#frmInvisible")[0].contentWindow.document);
+            if (frmDoc.find("head script").length == 0) return;
+            $("#taCss").val($.trim(frmDoc.find("head style").html()));
+            var scr = $.trim(frmDoc.find("head script:not([src])").html());
+            scr = scr.replace(/^[$][(]function[(][)] [{]/, "")
+              .replace(/[}][)];.*?$/, "");
+            $("#taScript").val(scr);
+        });
+        $("#btnLoadHtml").click(function() {
+            var src = $("#txtHtmlPath").val();
+            if (src.length == 0) return;
+            $("#frmInvisible").attr("src", src);
+            $.ajax({
+                type: "GET",
+                url: src,
+                success: function(data) {
+                    var st = data.indexOf("<body");
+                    var ed = data.indexOf("</body>") + 7;
+                    var bdy = data.substring(st, ed).replace(/^[<]body.*[>]/, "").replace("</body>", "");
+                    $("#taBody").val(bdy);
+                },
+                error: function(xhr) {
+                    alert("Failed to load HTML: " + src +
+                          "\nError=" + xhr.status + " " + xhr.statusText);
+                }
+            });
+        });
+        $("#txtHtmlPath").keydown(function(evt) {
+            if (evt.which == 13) $("#btnLoadHtml").click();
+        });
+        if (!$.browser.msie) $("#spnLoadHtml").hide();
+    });
+</script>
+</head>
+<body>
+<iframe id="frmInvisible" style="display:none;"></iframe>
+<div id="dvMain" class="clsDispDiv">
+<h3>Darkthread Mini jQuery Lab Ver 1.2.1 Beta <span id="extInfo"></span>&nbsp;&nbsp;&nbsp;<span class="clsSpanBtn" id="btnGetHtml">View HTML Source</span> <span id="spnLoadHtml"><span class="clsSpanBtn" id="btnLoadHtml">Load Demo HTML</span> <input type="text" id="txtHtmlPath" style="width:120px; height:18px;" alt="Type HTML file url"/></span></h3>
+<table style="width:800px;height:300px;">
+<tr style="height:150px"><td style="width:400px;">
+<fieldset>
+<legend>CSS</legend>
+<textarea id="taCss"></textarea>
+</fieldset>
+<input type="button" id="btnSetCss" value="Refresh" class="clsButton"/>
+</td><td>
+<fieldset>
+<legend>Body HTML</legend>
+<textarea id="taBody"></textarea>
+</fieldset>
+<input type="button" id="btnSetBody" value="Refresh" class="clsButton"/>
+</td></tr>
+<tr style="height:150px;"><td colspan="2">
+<fieldset>
+<legend>Script</legend>
+<textarea id="taScript"></textarea>
+</fieldset>
+<input type="button" id="btnEvalScript" value="Execute" class="clsButton"/>
+</td></tr>
+</table>
+<div style="color: Orange;">HTML Result</div>
+<iframe id="frmLab" src="EmptyFrame.htm" width="800" height="300" style="background-color: White;"></iframe>
+</div>
+<div id="dvSource" class="clsDispDiv" style="display: none;">
+<span id="spnCloseSrc" class="clsSpanBtn">Close Source View</span>
+<pre id="taHtmlSource" name="code" class="javascript">&nbsp;</pre>
+</div>
+
+</body>
+</html>
