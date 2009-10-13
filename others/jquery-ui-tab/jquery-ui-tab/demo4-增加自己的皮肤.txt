@@ -1,0 +1,10 @@
+	打开jquery.themeswitch.js，找到第20行，
+	有一行 var switcherpane =  ..... ;
+	中间有个< ul>标签,里面的li正是需要替换的。
+	换成如下格式：
+	< li>
+		< a href="?ffDefault=Trebuchet+MS...[完整路径 ，如果忘记了，可以去ui.theme.css里查找]">
+		< img src="theme image" alt="UI Lightness" title="UI Lightness" />
+		< span class="themeName">UI lightness< /span>
+		< /a>
+	< /li>

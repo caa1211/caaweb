@@ -1,0 +1,5 @@
+你是否已经感觉到每次更换皮肤都要从 ui.jquery.com 网站上去下载？
+如果已经感觉对了，那么请你马上把
+http://jqueryui.com/themeroller/themeswitchertool/
+程序还有皮肤样式等 移到自己本地的服务器上来。
+这样就可以非常轻松的解决问题了。
