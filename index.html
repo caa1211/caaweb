@@ -26,14 +26,15 @@
         <script type="text/javascript">
 
         $.openPage = function(targetFrame, url){
-            targetFrame.fadeOut(200, function(){$(this).attr("src", url);});
+            //targetFrame.fadeOut(200, function(){$(this).attr("src", url);});
 			
+            targetFrame.attr("src", url);
 			//load Complete
             targetFrame[0][document.all ? "onreadystatechange" : "onload"] = function(){
                 if (document.all && this.readyState != "loaded" && this.readyState != "complete") {
                     return;
                 }
-                targetFrame.fadeIn(200);
+                //targetFrame.fadeIn(200);
                 targetFrame.trigger('pageOpened', url);
             }
         }
