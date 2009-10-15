@@ -1,0 +1,28 @@
+.refresh {background-image:url(../../images/zyxel/icons/refresh.gif) !important;}
+.x-grid3-row-alt {background-color:pink;}
+
+/*for debug*/
+.selectBorder {border: solid 2px pink;}
+
+.allEditRow {border: solid 2px yellow;}
+
+.x-grid3-active-col {
+	width:100%;
+    height:16px;
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-color:transparent;
+	background-image:url(../../images/zyxel/icons/inactive.gif);
+}
+
+
+.x-grid3-active-col-on {
+     width:100%;
+    height:16px;
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-color:transparent;
+	background-image:url(../../images/zyxel/icons/active.gif);
+	
+}
+
