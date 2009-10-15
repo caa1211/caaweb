@@ -137,7 +137,7 @@ $(function(){
             '3D': {
                 base: {
                     url: "flash/pages/3D/base/01.html",
-                    index: flash3DBase
+                    index: 'flash3DBase'
                 }
             },
             
