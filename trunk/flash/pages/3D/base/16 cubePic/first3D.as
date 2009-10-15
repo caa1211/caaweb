@@ -57,27 +57,27 @@ package
 
 		private function init3DObject():void{
 			//init3DObject函式, 用來建立PV3D物件、材質及偵聽事件。
-		var bmpMat1 : BitmapFileMaterial = new BitmapFileMaterial('16 方塊圖/1.png', true);
+		var bmpMat1 : BitmapFileMaterial = new BitmapFileMaterial('16 cubePic/1.png', true);
 			//bmpMat1.doubleSided = true;
 			bmpMat1.smooth = true;
 			
-			var bmpMat2 : BitmapFileMaterial = new BitmapFileMaterial('16 方塊圖/2.png', true);
+			var bmpMat2 : BitmapFileMaterial = new BitmapFileMaterial('16 cubePic/2.png', true);
 			//bmpMat2.doubleSided = true;
 			bmpMat2.smooth = true;
 			
-			var bmpMat3 : BitmapFileMaterial = new BitmapFileMaterial('16 方塊圖/3.png', true);
+			var bmpMat3 : BitmapFileMaterial = new BitmapFileMaterial('16 cubePic/3.png', true);
 			//bmpMat3.doubleSided = true;
 			bmpMat3.smooth = true;
 			
-			var bmpMat4 : BitmapFileMaterial = new BitmapFileMaterial('16 方塊圖/4.png', true);
+			var bmpMat4 : BitmapFileMaterial = new BitmapFileMaterial('16 cubePic/4.png', true);
 			//bmpMat4.doubleSided = true;
 			bmpMat4.smooth = true;
 			
-			var bmpMat5 : BitmapFileMaterial = new BitmapFileMaterial('16 方塊圖/5.png', true);
+			var bmpMat5 : BitmapFileMaterial = new BitmapFileMaterial('16 cubePic/5.png', true);
 			//bmpMat5.doubleSided = true;
 			bmpMat5.smooth = true;
 			
-			var bmpMat6 : BitmapFileMaterial = new BitmapFileMaterial('16 方塊圖/6.png', true);
+			var bmpMat6 : BitmapFileMaterial = new BitmapFileMaterial('16 cubePic/6.png', true);
 			//bmpMat6.doubleSided = true;
 			bmpMat6.smooth = true;
 			
