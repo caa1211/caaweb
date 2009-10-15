@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Grid</title>
+        <link rel="stylesheet" type="text/css" href="../ext/resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="../css/zyxel/zycss.css" />
+        <link rel="stylesheet" type="text/css" href="../css/zyxel/zytheme.css" />
+        <script type="text/javascript" src="../ext/adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="../ext/ext-all-debug.js"></script>
+        <script type="text/javascript" src="../common/zyVType.js"></script>
+        <script type="text/javascript" src="../common/zyFunction.js"></script>
+        <script type="text/javascript" src="../common/zyComponent.js"></script>
+        <script type="text/javascript" src="../common/zyExtend.js"></script>
+        <script type="text/javascript" src="../common/zyDebug.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/temp.css" />
+        <script type="text/javascript" src="zyCOEComponent.js"></script>
+        <script type="text/javascript" src="CheckColumn.js"></script>
+        <script type="text/javascript">
+            
+            Ext.onReady(function(){
+               // Ext.BLANK_IMAGE_URL = '../ext/resources/images/default/s.gif';
+                
+                var data = [[0, 'descn1'], [1, 'descn2'], [false, 'descn3'], [true, 'descn4'], [1, 'descn5']];
+
+                var store = new Ext.data.Store({
+                    proxy: new Ext.data.MemoryProxy(data),
+                    autoLoad: true,
+                    reader: new Ext.data.ArrayReader({}, 
+                    [
+                    {name: 'id'}, 
+                    {name: 'desc'}
+                    ])
+                });
+                
+                var checkColumn1 = new Ext.grid.zyCheckColumn({
+                    header: "Check",
+                    dataIndex: 'id',
+                    width: 50,
+                    align: 'center'
+                });
+                
+                var activeColumn = new Ext.grid.zyActiveColumn({
+                    header: "Active",
+                    dataIndex: 'id',
+                    width: 50,
+                    aling:'left'
+                });
+                
+                var cm = new Ext.grid.ColumnModel([
+                
+                 new Ext.grid.RowNumberer(),
+                 {header: 'id', dataIndex: 'id'}, 
+                  checkColumn1,
+                  activeColumn, 
+                 {header: 'description', dataIndex: 'desc'}
+                 
+                ]);
+                
+                var grid = new Ext.grid.zyCOEEditorGridPanel({
+                    title: 'grid',
+                    plugins: [checkColumn1, activeColumn],
+                    store: store,
+                    cm: cm
+                });
+                
+                
+                var form = new Ext.FormPanel({
+                    items: [grid]
+                });
+                
+                var viewport = new Ext.Viewport({
+                    layout: 'fit',
+                    items: [form]
+                });
+                
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
