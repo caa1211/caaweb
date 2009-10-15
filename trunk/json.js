@@ -134,27 +134,34 @@ $(function(){
         //-------------------------------
         ,flash: {
         
-            jQueryUI: {
-                web: {
-                    url: "http://www.jqueryui.com/home"
-                },
-                themes: {
-                    url: "http://www.jqueryui.com/themeroller/"
+            '3D': {
+                base: {
+                    url: "flash/pages/3D/01.html"
                 }
             },
             
-            'jQuery Tools': {
+            'open flash chart': {
                 web: {
-                    url: "http://flowplayer.org/tools/"
+                    url: "flash/pages/flashChart/openFlashChart/8 ChartStyle/chart.html"
                 }
             }
         
         }
         
         //-------------------------------
-        ,others: {
-        
-         
+        ,extjs: {
+	     	Grid:{
+			  base: {url: "extjs2/GridDemo/gridDemo.html"},
+			  customedBtn: {url: "extjs2/GridDemo/customedBtn.html"},
+			  editorGridDemo: {url: "extjs2/GridDemo/editorGridDemo.html"},
+			  allEditRow: {url: "extjs2/GridDemo/allEditRow.html"},
+			  hideTBbar: {url: "extjs2/GridDemo/hideTBbar.html"}
+			},
+            VD: {
+                withJQueryVD: {url: "extjs/pages/VD/複製 -複製 -03-03-02.html"}
+            }
+			
+
         
         }
     

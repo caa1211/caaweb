@@ -26,13 +26,14 @@
         <script type="text/javascript">
 
         $.openPage = function(targetFrame, url){
-            targetFrame.attr("src", url);
+            targetFrame.fadeOut(200, function(){$(this).attr("src", url);});
 			
 			//load Complete
             targetFrame[0][document.all ? "onreadystatechange" : "onload"] = function(){
                 if (document.all && this.readyState != "loaded" && this.readyState != "complete") {
                     return;
                 }
+                targetFrame.fadeIn(200);
                 targetFrame.trigger('pageOpened', url);
             }
         }
@@ -212,7 +213,7 @@
                 }
             });
             outerLayout.close('west');
-            outerLayout.close('north');
+           // outerLayout.close('north');
             outerLayout.close('south');
             
             middleLayout = $('div.outer-center').layout({
