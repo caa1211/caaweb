@@ -1,0 +1,400 @@
+/* CSS Document */
+@import url("reset.css");
+body { font-family:tahoma,arial,helvetica,sans-serif; font-size:11px; color:#000; }
+p {margin-bottom:10px;}
+input, select{font-size:10px;}
+.clearfloat {clear:both; height:0;font-size: 1px;line-height: 0px;}
+/*a, button {noFocusLine:expression(this.onFocus=this.blur());-moz-outline-style:none;}*/
+a{color:#0066cc; text-decoration:underline;}
+a:hover{color:#003399; text-decoration:none;}
+.nblock-body {padding:10px 15px;font-size:10px;margin-left:15px;}
+.note{background-image:url(../../images/zyxel/others/i_note.gif);padding-left:18px;font-weight:bold;background-repeat:no-repeat;height:16px;margin-top:14px;font-size:10px;}
+
+/*   Login Page Beginning   */
+.l-wrap {display:block;margin-left:30%;margin-top:75px;position:relative;}
+.l-wrap .logo {display:block;background-image:url(../../images/zyxel/others/logo.gif);width:103px;height:29px;top:10px;position:absolute;}
+.l-wrap .vline {display:block;background:#fff;width:2px;height:310px;left:140px;position:absolute;filter:alpha(opacity=50);opacity:0.5;-moz-opacity:0.5;zoom:1;}
+.l-wrap .section {display:block;left:160px;position:absolute;color:#ffffff;width:340px;}
+.l-wrap .section .model {font-size:18px;font-weight:bold;color:#9ce2ff;margin-top:13px;}
+.l-wrap .section label {color:#ffffff;}
+.l-wrap .section .suffixtext {color:#ffffff;}
+/*   Login Page Ending   */
+
+.showlogin {display:block;position:relative;width:500px;height:330px;background-image:url(../../images/zyxel/others/advance_bg.gif);padding:10px;font-family:tahoma,arial,helvetica,sans-serif; font-size:11px;}
+.showlogin .logo {display:block;background-image:url(../../images/zyxel/others/logo.gif);width:103px;height:29px;top:10px;position:absolute;}
+.showlogin .vline {display:block;background:#fff;width:2px;height:310px;left:140px;position:absolute;filter:alpha(opacity=50);opacity:0.5;-moz-opacity:0.5;zoom:1;}
+.showlogin .section {display:block;left:160px;position:absolute;color:#ffffff;width:340px;}
+.showlogin .section .model {font-size:18px;font-weight:bold;color:#9ce2ff;margin-top:13px;}
+.showlogin .section label {color:#ffffff;}
+.showlogin .section .suffixtext {color:#ffffff;font-size:11px;padding-left:4px;}
+
+.x-login {border:0;}
+.x-login-bwrap {color:#ffffff;font-size:11px;}
+.x-login label {font-size:11px;}
+.x-login-footer {padding:0;margin:0;}
+.x-login-footer  .x-panel-btns-ct {padding:0 0 5px 20px;margin:0;}
+.x-login .x-panel-body{background:none;}
+.loginpanel {border:0;}
+.statement {padding-top:10px;padding-bottom:10px;text-align:center;}
+.title {padding-top:10px;padding-bottom:10px;font-weight:bold;}
+.limit {padding:5px 0;text-align:center;}
+.showerror {color:#ff0000;font-size:11px;text-align:center;padding:2px 4px 4px 4px;font-weight:bold;}
+
+.inputbox li {float:left;width:340px;padding-top:3px;}
+.inputbox li .left {float:left;display:block;width:137px;text-align:right;line-height:18px;padding-right:3px;}
+.inputbox li .right {float:right;display:block;width:200px;}
+.inputbox li .right input {width:110px;font-size:11px;}
+
+.btn {display:block;text-align:center;height:30px;width:340px;margin-top:4px;}
+.btn input {font-size:11px;width:70px;margin-left:6px;height:22px;font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;}
+
+.accessblock {color:#fff;width:100%;height:350px;text-align:center;background-image:url(../../images/zyxel/others/advance_bg.gif);font-size:11px;}
+.showaccess {display:block;width:500px;padding:10px;margin-top:30px;text-align:left;}
+.showaccess .logo {display:block;background-image:url(../../images/zyxel/others/logo.gif);width:103px;height:29px;margin-top:10px;margin-left:10px;}
+.showaccess .model {font-size:18px;font-weight:bold;margin-top:13px;text-align:center;}
+.showaccess .statement {text-align:center;margin-top:10px;}
+.showaccess .btn{width:75px;height:21px;font-size:11px;font-family:tahoma,arial,helvetica,sans-serif;}
+.showaccess .access {display:block;margin-left:10px;margin-top:15px;}
+.access li {float:left;width:490px;padding-top:3px;}
+.access li .left {float:left;display:block;width:280px;line-height:18px;padding-right:3px;}
+.access li .right {float:right;display:block;width:200px;}
+.access li .right input {width:80px;font-size:11px;}
+.access .button {font-size:11px;}
+.showaccess .btn {display:block;text-align:center;height:30px;width:100%;margin-top:30px;}
+.showaccess .btn input {font-size:11px;width:90px;height:22px;font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;}
+
+/***   Dashboard Beginning   ***/
+.contentTop{ display:block; height:44px; background-image:url(../../images/zyxel/others/content_top.gif); position:relative;}
+.pageTitle { display:block; position:absolute; color:#ffffff; top:6px; left:20px; text-transform:uppercase;font-weight:bold;}
+.ws {background-image:url(../../images/zyxel/icons/win_ws.png)!important;}
+.widget {display:block; position:absolute; right:40px; top:0; height:20px;}
+.widget a { display: block;background-image:url(../../images/zyxel/others/btn_widget.gif);background-position:right top;	color: #1f4f8b;	text-decoration: none;	font-size:9px; padding:0 10px 0 0;}
+.widget a span {	display:block;background-image:url(../../images/zyxel/others/btn_widget.gif);background-position:left top; padding:3px 0 5px 30px;}
+.widget a:hover{background-image:url(../../images/zyxel/others/btn_widget_on.gif);}
+.widget a:hover span{background-image:url(../../images/zyxel/others/btn_widget_on.gif);color:#086c9a;}
+.showtable { display:block; margin:0 auto; width:94%}
+/***   Dashboard Ending   ***/
+
+/*  Virtual Device Beginning  */
+.crop {position:relative;width:870px;height:140px;margin:0 auto;overflow:hidden;}
+.widearea {position:relative;width:1740px;height:140px;margin:0 auto;}
+.widearea #position {position:absolute;width:860px;height:140px;left:5px;top:0;visibility:visible;z-index:26;}
+.widearea #position .housing {position:absolute;width:790px;height:140px;left:20px;top:0;z-index:10;}
+.widearea #position .i_rear a {position:absolute; width:35px;height:21px;background-image:url(../../images/zyxel/others/i_rear.gif);z-index:26;right:0;top:25px;font-family:tahoma,arial,helvetica,sans-serif;font-size:11px;text-decoration:none;color:#263E7B;text-align:center;background-repeat:no-repeat;padding-top:32px;font-weight:bold;}
+.widearea #position .i_rear a:hover {background-image:url(../../images/zyxel/others/i_rear_on.gif);color:#263E7B;font-weight:bold;}
+.widearea #position2 {position:absolute;width:860px;height:140px;right:10px;top:0;visibility:visible;z-index:26;}
+.widearea #position2 .housing_b {position:absolute;width:790px;height:140px;left:60px;top:0;z-index:10;}
+.widearea #position2 .i_front a {position:absolute; width:35px;height:21px;background-image:url(../../images/zyxel/others/i_front.gif);z-index:26;left:10px;top:25px;font-family:tahoma,arial,helvetica,sans-serif;font-size:11px;text-decoration:none;color:#263E7B;text-align:center;background-repeat:no-repeat;padding-top:32px;font-weight:bold;}
+.widearea #position2 .i_front a:hover {background-image:url(../../images/zyxel/others/i_front_on.gif);color:#263E7B;font-weight:bold;}
+/*  Virtual Device Ending  */
+
+/* head beginning */
+#header { display:block; width:100%; height:50px; position:relative;}
+#header .logo {display:block; background-image:url(../../images/zyxel/others/advance_logo.jpg); width:102px; height:29px; position:absolute; top:12px; left:18px;}
+#header .model {display:block; position:absolute; top:15px; left:130px; font-size:18px; font-weight:bold; color:#9ce2ff;}
+#header .hotkey { display:block; position:absolute; top:2px; right:10px; color:#d7effe; font-size:10px; font-family:tahoma,arial,helvetica,sans-serif;}
+#header .hotkey a { color:#78c7fe; text-decoration:underline;}
+#header .hotkey a:hover { color:#b5e1ff; text-decoration:none;}
+#header .hotkey .hk { margin-left:15px;}
+#header .hotkey .hk a.h1 { color:#d7effe; text-decoration:none; background-image:url(../../images/zyxel/others/i_about.gif); background-repeat:no-repeat; padding-left:13px;}
+#header .hotkey .hk a.h1:hover { color:#b5e1ff; text-decoration:none; background-image:url(../../images/zyxel/others/i_about_on.gif);}
+#header .hotkey .hk a.h2 { color:#d7effe; text-decoration:none; background-image:url(../../images/zyxel/others/i_sitemap.gif); background-repeat:no-repeat; padding-left:15px;}
+#header .hotkey .hk a.h2:hover { color:#b5e1ff; text-decoration:none; background-image:url(../../images/zyxel/others/i_sitemap_on.gif);}
+#header .hotkey .hk a.h3 { color:#d7effe; text-decoration:none; background-image:url(../../images/zyxel/others/i_console.gif); background-repeat:no-repeat; padding-left:17px;}
+#header .hotkey .hk a.h3:hover { color:#b5e1ff; text-decoration:none; background-image:url(../../images/zyxel/others/i_console_on.gif);}
+#header .hotkey .hk a.h4 { color:#d7effe; text-decoration:none; background-image:url(../../images/zyxel/others/i_cli.gif); background-repeat:no-repeat; padding-left:17px;}
+#header .hotkey .hk a.h4:hover { color:#b5e1ff; text-decoration:none; background-image:url(../../images/zyxel/others/i_cli_on.gif);}
+#header .hotkey .hk a.h5 { color:#d7effe; text-decoration:none; background-image:url(../../images/zyxel/others/i_help.gif); background-repeat:no-repeat; padding-left:12px;}
+#header .hotkey .hk a.h5:hover { color:#b5e1ff; text-decoration:none; background-image:url(../../images/zyxel/others/i_help_on.gif);}
+#header .hotkey .hk a.h6 { color:#d7effe; text-decoration:none; background-image:url(../../images/zyxel/others/i_object.gif); background-repeat:no-repeat; padding-left:12px;}
+#header .hotkey .hk a.h6:hover { color:#b5e1ff; text-decoration:none; background-image:url(../../images/zyxel/others/i_object_on.gif);}
+ /* head ending */
+
+
+/****  Tab Menu Beginning   ***/
+#leftPanel { display:block; position:relative; float:left;z-index:1000;}
+.tabBlock { display:block; width:37px; position:absolute; left:0; top:51px;}
+/* DEFAULT STATES */
+#globalnav { display:block; position:absolute; width:36px; height:152px; left:3px; top:1px;}
+#globalnav ul { list-style-type:none;}
+#globalnav li {	display:block;}
+#globalnav li.m1 a { display:block; width:36px; height:38px; background:url(../../images/zyxel/others/tab_dashboard.gif) left no-repeat;}
+#globalnav li.m2 a { display:block; width:34px; height:38px; background:url(../../images/zyxel/others/tab_monitor.gif) left no-repeat;}
+#globalnav li.m3 a { display:block; width:34px; height:38px; background:url(../../images/zyxel/others/tab_config.gif) left no-repeat;}
+#globalnav li.m4 a { display:block; width:34px; height:38px; background:url(../../images/zyxel/others/tab_maintenance.gif) left no-repeat;}
+
+/* OVER STATES */
+#globalnav li.m1 a:hover {	background: url(../../images/zyxel/others/tab_dashboard_over.gif) left no-repeat;}
+#globalnav li.m2 a:hover {	background: url(../../images/zyxel/others/tab_monitor_over.gif) left no-repeat;}
+#globalnav li.m3 a:hover {	background: url(../../images/zyxel/others/tab_config_over.gif) left no-repeat;}
+#globalnav li.m4 a:hover {	background: url(../../images/zyxel/others/tab_maintenance_over.gif) left no-repeat;}
+
+/* ON STATES */
+#globalnav.dashboard li.m1 a { background:url(../../images/zyxel/others/tab_dashboard_on.gif) left no-repeat; cursor:default; }
+#globalnav.dashboard li.m1 a:hover { background:url(../../images/zyxel/others/tab_dashboard_on.gif) left no-repeat; cursor:default; }
+#globalnav.monitor li.m2 a { background:url(../../images/zyxel/others/tab_monitor_on.gif) left no-repeat; cursor:default; }
+#globalnav.monitor li.m2 a:hover { backgrounde:url(../../images/zyxel/others/tab_monitor_on.gif) left no-repeat; cursor:default; }
+#globalnav.config li.m3 a { background:url(../../images/zyxel/others/tab_config_on.gif) left no-repeat; cursor:default; }
+#globalnav.config li.m3 a:hover { background:url(../../images/zyxel/others/tab_config_on.gif) left no-repeat; cursor:default; }
+#globalnav.maintenance li.m4 a { background:url(../../images/zyxel/others/tab_maintenance_on.gif) left no-repeat; cursor:default; }
+#globalnav.maintenance li.m4 a:hover { background:url(../../images/zyxel/others/tab_maintenance_on.gif) left no-repeat; cursor:default; }
+/****  Tab Menu Ending   ***/
+
+.nochild { background: url(../../images/zyxel/others/minus.gif) 0 1px no-repeat !important;}
+
+/***  Help  Beginning  ***/
+.helpTitle { font-size:140%; font-weight:bold; color:#003366; margin-bottom:16px;}
+.helpSection { font-size:110%; font-weight:bold; color:#003366; margin-bottom:4px;}
+.helpNote { color:#990000; margin-bottom:10px;}
+.helpList { list-style:disc; padding-left:20px;}
+.helpList li { padding-bottom:10px;}
+/*** Help Ending  ***/
+
+/*   Quick Setup Beginning  */
+.qs {background-image:url(../../images/zyxel/icons/win_qs.png)!important;}
+#qs-menu ul li {float:left;}
+.qsi-title {font-weight:bold; margin:100px 8px 3px 8px;}
+.qsi-stae { margin:0 8px 6px 8px;}
+.qs-item1 {width:170px; height:245px; background-color:#e5efff; border:solid 1px #c5d7f1; color:#686868; font-size:11px; background-image:url(../../images/zyxel/others/qs_wan.gif); background-position:top center ; background-repeat:no-repeat;}
+.qs-item1_over {width:170px; height:245px; background-color:#c1daff; border:solid 1px #91b5e5; color:#345583; font-size:11px; cursor:pointer; background-image:url(../../images/zyxel/others/qs_wan.gif); background-position:top center ; background-repeat:no-repeat;}
+*html .qs-item1 {width:172px;}
+*html .qs-item1_over {width:172px;}
+.qs-item2 {width:170px; height:245px; background-color:#e5efff; border:solid 1px #c5d7f1; color:#686868; font-size:11px; background-image:url(../../images/zyxel/others/qs_vpn.gif); background-position:top center ; background-repeat:no-repeat;}
+.qs-item2_over {width:170px; height:245px; background-color:#c1daff; border:solid 1px #91b5e5; color:#345583; font-size:11px; cursor:pointer; background-image:url(../../images/zyxel/others/qs_vpn.gif); background-position:top center ; background-repeat:no-repeat;}
+*html .qs-item2 {width:172px;}
+*html .qs-item2_over {width:172px;}
+.qs-status {padding:4px 0 1px 4px; line-height:24px;}
+.qs-title { font-size:16px; font-weight:bold; color:#1d5089; margin: 10px 0 15px 10px;}
+.qs-step { height:35px; margin: 0 1px; background-image:url(../../images/zyxel/others/t_step_bg.gif); background-position:top; background-repeat:repeat-x;}
+.qs-step ul li {float:left;padding:0;margin:0;}
+.qs-step ul li.arrow { float:left; display:block; background-image:url(../../images/zyxel/others/i_arrow.gif); width:6px; height:10px; margin-top:12px; background-repeat:no-repeat;}
+.text-focus{color:#2169ca; font-size:14px; font-weight:bold; margin-top:8px; margin-left:8px; margin-right:8px; text-align:center;}
+.text-focus span {display:block; font-size:13px; width:36px; height:25px; background-image:url(../../images/zyxel/others/t_circle_on.gif); background-position:bottom; background-repeat:no-repeat; line-height:24px;}
+.text-step{color:#7495c0; font-size:12px; margin-top:10px; margin-left:8px; margin-right:8px; text-align:center;}
+.text-step span {display:block; font-size:11px; width:30px; height:20px; background-image:url(../../images/zyxel/others/t_circle.gif); background-position:bottom; background-repeat:no-repeat; line-height:16px;}
+.qs-headline { font-size:12px; font-weight:bold; margin:15px 10px 10px 10px;}
+.qs-subtitle { font-size:11px; font-weight:bold; margin:10px 10px 10px 20px;}
+.x-panel-body p { margin:10px; font-size:12px;}
+.x-window-mc .x-layout-collapsed{position:absolute;left:-10000px;top:-10000px;visibility:hidden;background-color:#b5ceec;width:20px;height:20px;overflow:hidden;border-top:1px solid #dfe8f6;z-index:20;}
+
+.save {background:url(../../images/zyxel/others/save.gif) no-repeat !important ;}
+/*  Quick Setup Ending  */
+
+
+#treeView p {text-align:right; padding:0 6px 0; font-size:10px; margin-bottom:4px; margin-top:2px;}
+#treeView p a { color:#dbeaff; text-decoration:none;background-image:url(../../images/zyxel/others/i_tqs.gif);background-position:top left;padding:2px 0 2px 18px;background-repeat:no-repeat;}
+#treeView p a:hover { color:#0dbeed;background-image:url(../../images/zyxel/others/i_tqs_on.gif);}
+
+
+/*    Task bar icons Beginning    */
+.add {background-image:url(../../images/zyxel/icons/add.gif) !important;}
+.edit {background-image:url(../../images/zyxel/icons/edit.gif) !important;}
+.remove {background-image:url(../../images/zyxel/icons/remove.gif) !important;}
+.active {background-image:url(../../images/zyxel/icons/active.gif) !important;}
+.inactive {background-image:url(../../images/zyxel/icons/inactive.gif) !important;}
+.connect {background-image:url(../../images/zyxel/icons/connected.gif) !important;}
+.disconnect {background-image:url(../../images/zyxel/icons/disconnect.gif) !important;}
+.showall {background-image:url(../../images/zyxel/icons/showall.gif) !important;}
+.showbasic {background-image:url(../../images/zyxel/icons/showbasic.gif) !important;}
+.ton {background-image:url(../../images/zyxel/icons/ton.gif) !important;}
+.email {background-image:url(../../images/zyxel/icons/email.gif) !important;}
+.clear{background-image:url(../../images/zyxel/icons/clear.gif) !important;}
+.flush{background-image:url(../../images/zyxel/icons/flush.gif) !important;}
+.export{background-image:url(../../images/zyxel/icons/export.gif) !important;}
+.exportall{background-image:url(../../images/zyxel/icons/exportall.gif) !important;}
+.import{background-image:url(../../images/zyxel/icons/import.gif) !important;}
+.update{background-image:url(../../images/zyxel/icons/update.gif) !important;}
+.download{background-image:url(../../images/zyxel/icons/download.gif) !important;}
+.copy{background-image:url(../../images/zyxel/icons/copy.gif) !important;}
+.rename{background-image:url(../../images/zyxel/icons/rename.gif) !important;}
+.run{background-image:url(../../images/zyxel/icons/run.gif) !important;}
+.addto{background-image:url(../../images/zyxel/icons/addto.gif) !important;}
+.force{background-image:url(../../images/zyxel/icons/force.gif) !important;}
+.upload{background-image:url(../../images/zyxel/icons/upload.gif) !important;}
+.newfolder{background-image:url(../../images/zyxel/icons/newfolder.gif) !important;}
+.up{background-image:url(../../images/zyxel/icons/up.gif) !important;}
+.log{background-image:url(../../images/zyxel/icons/log.gif) !important;}
+.action{background-image:url(../../images/zyxel/icons/action.gif) !important;}
+.refresh{background-image:url(../../images/zyxel/icons/refresh.gif) !important;}
+.info{background-image:url(../../images/zyxel/icons/info.gif) !important;}
+.object{background-image:url(../../images/zyxel/icons/object.gif) !important;}
+.server{background-image:url(../../images/zyxel/icons/server.gif) !important;}
+.editor_edit{background-image:url(../../images/zyxel/icons/editrow.gif) !important;}
+/*    Task bar icons Ending    */
+
+/*    Dashboard Table Icons Beginning    */
+.db-info {background-image:url(../../images/zyxel/icons/db_info.png) !important;background-repeat:no-repeat;line-height:16px;padding-left:20px;padding-bottom:2px;}
+.db-resource {background-image:url(../../images/zyxel/icons/db_resource.png) !important;background-repeat:no-repeat;line-height:16px;padding-left:20px;padding-bottom:2px;}
+.db-license{background-image:url(../../images/zyxel/icons/db_license.png) !important;background-repeat:no-repeat;line-height:16px;padding-left:20px;padding-bottom:2px;}
+.db-port {background-image:url(../../images/zyxel/icons/db_port.png) !important;background-repeat:no-repeat;line-height:16px;padding-left:20px;padding-bottom:2px;}
+.db-virus {background-image:url(../../images/zyxel/icons/db_virus.png) !important;background-repeat:no-repeat;line-height:16px;padding-left:20px;padding-bottom:2px;}
+.db-intrusion {background-image:url(../../images/zyxel/icons/db_intrusion.png) !important;background-repeat:no-repeat;line-height:16px;padding-left:20px;padding-bottom:2px;}
+.db-session {background-image:url(../../images/zyxel/icons/db_session.png) !important;background-repeat:no-repeat;line-height:16px;padding-left:20px;padding-bottom:2px;}
+.db-app {background-image:url(../../images/zyxel/icons/db_app.png) !important;background-repeat:no-repeat;line-height:16px;padding-left:20px;padding-bottom:2px;}
+.db-vr {background-image:url(../../images/zyxel/icons/db_vr.png) !important;background-repeat:no-repeat;line-height:16px;padding-left:20px;padding-bottom:2px;}
+/*    Dashboard Table Icons Ending    */
+
+/*    Site Map Beginning    */
+.sm-monitor {background-image:url(../../images/zyxel/icons/sm_monitor.png) !important;}
+.sm-config {background-image:url(../../images/zyxel/icons/sm_config.png) !important;}
+.sm-main{background-image:url(../../images/zyxel/icons/sm_main.png) !important;}
+.sm-row {display:block;width:97%;margin-top:10px;}
+.sm-row .block {width:27%;float:left;padding:0 15px;margin-bottom:10px;}
+.sm-row .block ul li{list-style:circle; margin-left:16px;}
+/*    Site Map Ending    */
+
+/*    About Beginning    */
+.about {background-image:url(../../images/zyxel/icons/win_about.png) !important;}
+.a-bg {background-color:#ebe9ed;}
+.a-top {width:100%;height:140px;background-image:url(../../images/zyxel/others/zyxel_cis.gif);background-position:left;background-repeat:no-repeat;position:relative;}
+.a-top .model {position:absolute;top:30px;left:160px;font-size:16px;font-weight:bold;}
+.a-top .link {position:absolute;top:120px;left:160px;font-size:11px;}
+.a-top .link a {color:#0000ff; text-decoration:underline;}
+.a-top .link a:hover {color:#990000; text-decoration:none;}
+.line1 {width:100%;height:1px;background-color:#a7a6aa;font-size:1px;overflow:hidden;display:block;}
+.line2 {width:100%;height:1px;background-color:#ffffff;font-size:1px;overflow:hidden;display:block;}
+.a-bottom {width:100%;height:164px;background:#ebe9ed;position:relative;padding:20px 20px 4px 20px;}
+.a-bottom p {font-size:11px;}
+.a-bottom .copyright {position:absolute;top:145px;left:6px;font-size:10px;}
+.a-bottom .btns {position:absolute;top:135px;left:325px;}
+/*    About Ending    */
+
+/*    Site Map Beginning    */
+.sm {background-image:url(../../images/zyxel/icons/win_sm.png) !important;}
+/*    Site Map Ending    */
+
+.field-note{width:100%; border:0; background-color:#ffffff; background-image:none; font:normal 11px tahoma,arial,helvetica;}
+
+/*  define background color of portal section   */
+.dd-area{width:94%; margin:0 auto; background-color:#39639e;}
+.dd-panel{background-color:#39639e;}
+
+/* session filter beginning   */
+.x-portselect{border:0 solid #99bbe8;}
+.x-portselect .x-toolbar{border:0;overflow:hidden;padding:2px;background-image:none;background-color:#ffffff;}
+/* session filter ending   */
+
+/* dashboard table beginning   */
+.tds {width:100%;}
+.tds tr td{ padding:3px 5px;}
+.row2 {background-color:#fcfdff;}
+/* dashboard table ending   */
+
+.newobj {background-image:url(../../images/zyxel/icons/newobj.png) !important;}
+
+/*    System Resource Beginning    */
+.sr-wrap {width:92%;display:block;margin:0 auto;padding:10px 0 5px 0;}
+.sr-section {width:100%;display:block;margin:5px 0 10px 0;position:relative;}
+.sr-section-over {width:100%;display:block;margin:5px 0 10px 0;position:relative;cursor:pointer;}
+.sr-section-over .sr-enlarge a{display:block;width:24px;height:24px;position:absolute;right:0;top:22px;background-image:url(../../images/zyxel/others/btn_enlarge.png);}
+.sr-section-over .sr-enlarge a:hover{background-image:url(../../images/zyxel/others/btn_enlarge_on.png);}
+.sr-section-over .sr-goto a{display:block;width:24px;height:24px;position:absolute;right:24px;top:22px;background-image:url(../../images/zyxel/others/btn_goto.png);}
+.sr-section-over .sr-goto a:hover{background-image:url(../../images/zyxel/others/btn_goto_on.png);}
+.sr-title{font-weight:bold;position:absolute;left:10px;top:-6px;background-color:#ffffff;padding:0 4px;color:#515151;}
+.sr-border {border-right:solid 1px #dedede;border-left:solid 1px #dedede;height:40px;}
+.sr-r1 {height:1px; font-size:1px; overflow:hidden; display:block; background:#dedede; margin:0 2px;}
+.sr-r2 {height:1px; font-size:1px; overflow:hidden; display:block; border-right:2px solid #dedede; border-left:2px solid #dedede; margin:0 1px;}
+.sr-r3 {height:1px; font-size:1px; overflow:hidden; display:block; border-right:2px solid #dedede; border-left:2px solid #dedede; margin:0;}
+.sr-section-over .sr-title{font-weight:bold;position:absolute;left:10px;top:-6px;background-color:#ffffff;padding:0 4px;color:#171717;}
+.sr-section-over .sr-border {border-right:solid 1px #adadad;border-left:solid 1px #adadad;height:40px;}
+.sr-section-over .sr-r1 {height:1px; font-size:1px; overflow:hidden; display:block; background:#adadad; margin:0 2px;}
+.sr-section-over .sr-r2 {height:1px; font-size:1px; overflow:hidden; display:block; border-right:2px solid #adadad; border-left:2px solid #adadad; margin:0 1px;}
+.sr-section-over .sr-r3 {height:1px; font-size:1px; overflow:hidden; display:block; border-right:2px solid #adadad; border-left:2px solid #adadad; margin:0;}
+.sr-bar{border:1px solid #929292;width:96%;height:19px;background-image:url(../../images/zyxel/others/i_percentage_center.gif);padding:0 1px;}
+.sr-dist1{width:75%;margin-left:3%;float:left;margin-top:10px;}
+.sr-dist2{width:15%;float:left;line-height:19px;margin-top:10px;}
+/*    System Resource Ending    */
+
+/*    Licensed Service Beginning    */
+.ls-normal { font:normal 11px tahoma,arial,helvetica,sans-serif; color:#00731a;}
+.ls-none{ font:normal 11px tahoma,arial,helvetica,sans-serif; color:#9c9c9c;}
+.ls-expired { font:normal 11px tahoma,arial,helvetica,sans-serif; color:#d90000;}
+/*    Licensed Service Ending    */
+
+/*   icons for message window   */
+.x-window-dlg .ext-mb-save { background:transparent url(../../images/zyxel/others/save.gif) no-repeat top left;height:32px;}
+.x-window-dlg .ext-mb-power { background:transparent url(../../images/zyxel/others/power.gif) no-repeat top left;height:44px;margin-right:15px;}
+
+/* quick set up */
+.quick-set-up {background-image:url(../../images/zyxel/others/i_tqs.gif) !important;}
+
+/* Toolbars */
+.x-toolbar1{border-color:#39639e;background:#39639e url(../../images/default/toolbar/bg.gif) repeat-x top left;}
+.x-toolbar1 button {color:#eeeef0;}
+
+/*  for show tip in grid */
+a.grid-tip{color:#333333; border-bottom:dotted 1px; text-decoration:none;}
+a.grid-tip:hover{color:#333333; border-bottom:none; text-decoration:none;}
+  
+/* for suffix text */
+.suffixtext { margin-left:6px;font-size:11px;margin-right:5px;}
+
+/* for suffix combo */
+.suffixcombo {margin-left:24px;}
+
+/* for arrange used space bar */
+.usedspace { margin:0 20%; text-align:center;}
+
+/* for list in panel*/
+ul.list {list-style-type:disc;margin: 3px 0 3px 15px;padding:3px 0 3px 15px;}
+
+
+/* FileUploadField component styles */
+
+.x-form-file-wrap {position:relative;height:22px;}
+.x-form-file-wrap .x-form-file {position:absolute;right:0;-moz-opacity:0;filter:alpha(opacity:0);opacity:0;z-index:2;height: 22px;}
+.x-form-file-wrap .x-form-file-btn {position:absolute;right:0;z-index:1;}
+.x-form-file-wrap .x-form-file-text {position:absolute;left:0;z-index:3;color: #777;} 
+
+.ux-flag-us {background-image:url(../../images/zyxel/flags/us.png) ! important;}
+.ux-flag-tw {background-image:url(../../images/zyxel/flags/tw.png) ! important;}
+.ux-flag-cn {background-image:url(../../images/zyxel/flags/cn.png) ! important;}
+.ux-flag-jp {background-image:url(../../images/zyxel/flags/jp.png) ! important;}
+.ux-flag-de {background-image:url(../../images/zyxel/flags/de.png) ! important;}
+.ux-flag-fr {background-image:url(../../images/zyxel/flags/fr.png) ! important;}
+.ux-icon-combo-icon {background-repeat:no-repeat;background-position:0 50%;width:18px;height:14px;}
+
+/* X-BROWSER-WARNING: this is not being honored by Safari */
+input.ux-icon-combo-input {padding-left:25px;}
+
+.x-form-field-wrap .ux-icon-combo-icon {top:3px;left:5px;}
+.ux-icon-combo-item {background-repeat:no-repeat !important;background-position:3px 50% !important;	padding-left:24px !important;}
+
+/* port grouping */
+.port_block {text-align:center;}
+*html .device_bg {display:block;width:500px;height:116px;background:url(../../images/zyxel/others/device.gif);padding-top:26px;}
+.device_bg {display:block;width:500px;height:90px;background:url(../../images/zyxel/others/device.gif);padding-top:26px;margin:0 auto;}
+.port_block {margin-left:1px;margin-right:1px;}
+.port_text {text-align:center;font-weight:bold;font-size:11px;padding-top:6px;}
+.thumb-section {text-align:center;}
+.port_block ul {padding:0;margin:0}
+*html .port_block ul {padding:0;margin:0;padding-right:30px;}
+li.thumb-wrap {float:left;height:50px;margin-top:30px;text-align:center;}
+
+/* port role */
+*html .prusg100_left {width:145px;height:24px;float:left;font-size:11px;line-height:20px;}
+*html .prusg100_right {width:355px;height:24px;float:right;}
+.prusg100_left {width:150px;height:24px;float:left;font-size:11px;line-height:20px;}
+.prusg100_right {width:350px;height:24px;float:right;}
+.prusg100_radio {margin-right:34px;}
+*html .prusg100_radio {margin-right:27px;}
+
+*html .prusg200_left {width:160px;height:24px;float:left;font-size:11px;line-height:20px;padding-left:30px;}
+*html .prusg200_right {width:310px;height:24px;float:right;}
+.prusg200_left {width:168px;height:24px;float:left;font-size:11px;line-height:20px;padding-left:30px;}
+.prusg200_right {width:302px;height:24px;float:right;}
+.prusg200_radio {margin-right:34px;}
+*html .prusg200_radio {margin-right:27px;}
+
+/* zytreegrid */
+.ux-maximgb-treegrid-brditem {color:#15428B;}
+.ux-maximgb-treegrid-uiwrap {float:left;	position:relative;height:18px;white-space:nowrap;overflow:hidden;}
+.ux-maximgb-treegrid-elbow-empty {position:absolute;height:18px;	width:16px;overflow:hidden;}
+.ux-maximgb-treegrid-elbow-line {position:absolute;height:18px;width:16px;overflow:hidden;background:url(../../ext/resources/images/default/tree/elbow-line.gif) repeat-x;}
+.ux-maximgb-treegrid-elbow {	position:absolute;height:18px;width:16px;overflow:hidden;background:url(../../ext/resources/images/default/tree/elbow.gif) no-repeat;}
+.ux-maximgb-treegrid-elbow-end {	position:absolute;height:18px;width:16px;overflow: hidden;background: url(../../ext/resources/images/default/tree/elbow-end.gif) no-repeat;}
+.ux-maximgb-treegrid-elbow-active {cursor:pointer;}
+.ux-maximgb-treegrid-elbow-minus {position:absolute;height:18px;	width:16px;overflow: hidden;background: url(../../ext/resources/images/default/tree/elbow-minus.gif) no-repeat;}
+.ux-maximgb-treegrid-elbow-end-minus {position:absolute;height:18px;	width:16px;overflow:hidden;background: url(../../ext/resources/images/default/tree/elbow-end-minus.gif) no-repeat;}
+.ux-maximgb-treegrid-elbow-plus {position:absolute;height:18px;width:16px;overflow:hidden;background: url(../../ext/resources/images/default/tree/elbow-plus.gif) no-repeat;}
+.ux-maximgb-treegrid-elbow-end-plus {position: absolute;height:18px;width:16px;overflow: hidden;background: url(../../ext/resources/images/default/tree/elbow-end-plus.gif) no-repeat;}
