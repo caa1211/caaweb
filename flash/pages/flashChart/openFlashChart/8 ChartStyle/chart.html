@@ -1,0 +1,78 @@
+ 
+<html>
+<head>
+ 
+
+
+<link rel="stylesheet" type="text/css" href="custom-theme/jquery-ui-1.7.2.custom.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.7.2.custom.min.js"></script>
+<script type="text/javascript" src="js/swfobject.js"></script>
+
+<script type="text/javascript"> 
+
+$(function(){
+    
+    $('.resizable').resizable({handles:'all'}).css('border','solid 5px pink');
+    
+    function ofc_resize(left, width, top, height){
+        var tmp = 
+        new Array(
+        'left:' + left, 
+        'width:' + width, 
+        'top:' + top, 
+        'height:' + height);
+    }
+
+})
+//pie
+swfobject.embedSWF(
+  "open-flash-chart.swf", "pie_chart",
+  "100%", "100%", "9.0.0", "expressInstall.swf",
+  {"data-file":"gallery/tutorial-2-charts-pie.php"} );
+ 
+//line
+swfobject.embedSWF(
+  "open-flash-chart.swf", "line_chart",
+  "100%", "100%", "9.0.0", "expressInstall.swf",
+  {"data-file":"gallery/tutorial-2-charts-line.php"} );
+ 
+//bar
+ swfobject.embedSWF(
+  "open-flash-chart.swf", "bar_chart",
+  "100%", "100%", "9.0.0", "expressInstall.swf",
+  {"data-file":"gallery/bar.php"} );
+ 
+ //horizontal
+  swfobject.embedSWF(
+  "open-flash-chart.swf", "horizontal_chart",
+  "100%", "100%", "9.0.0", "expressInstall.swf",
+  {"data-file":"gallery/horizontal.php"} );
+
+</script>
+ 
+ 
+</head>
+<body>
+ 
+<p>Hello World</p>
+ 
+
+<div class="resizable" style="width:600px; height:400px; padding: 10px;">
+<div id="pie_chart"></div>
+</div>
+
+<div class="resizable" style="width:900px; height:300px; padding: 10px;">
+<div id="line_chart"></div>
+</div>
+
+<div class="resizable" style="width:700px; height:400px; padding: 10px;">
+<div id="bar_chart"></div>
+</div>
+
+<div class="resizable" style="width:600px; height:300px; padding: 10px;">
+<div id="horizontal_chart"></div>
+</div>   
+ 
+</body>
+</html> 

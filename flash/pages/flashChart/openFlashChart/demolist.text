@@ -1,0 +1,23 @@
+01 basic and external json data
+http://hie/flashChart/01%20basic/chart.html?ofc=data.json
+ 
+02 using flash loader
+ http://hie/flashChart/02%20swfObject%20load%20flash(using%20Javascript)/chart.html?ofc=data.json
+ 
+03  embed flash and json data
+http://hie/flashChart/03%20path%20inner%20html/chart.html 
+ 
+04 load php data
+http://hie/flashChart/04%20with%20JSON/chart.html?ofc=data.php
+ 
+05 within javascript
+http://hie/flashChart/05%20usingJavaScript/chart.html
+ 
+06 within php
+http://hie/flashChart/06loadTwiceChartPHP/js.php
+ 
+07 twice chart
+http://hie/flashchart/07twiceChart/chart.html
+ 
+08 resizable
+http://hie/flashChart/8%20ChartStyle/chart.html
