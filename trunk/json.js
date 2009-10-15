@@ -136,7 +136,7 @@ $(function(){
         
             '3D': {
                 base: {
-                    url: "flash/pages/3D/01.html"
+                    url: "flash/pages/3D/base/01.html"
                 }
             },
             
