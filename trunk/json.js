@@ -143,7 +143,8 @@ $(function(){
             
             'open flash chart': {
                 web: {
-                    url: "flash/pages/flashChart/openFlashChart/8 ChartStyle/chart.html"
+                    url: "flash/pages/flashChart/openFlashChart/8 ChartStyle/chart.html",
+                    index: 'openFlashChart'
                 }
             }
         
