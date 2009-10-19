@@ -138,7 +138,12 @@ $(function(){
                 base: {
                     url: "flash/pages/3D/base/01.html",
                     index: 'flash3DBase'
-                }
+                },
+				carousel:
+				{
+				  url: "flash/pages/3D/two/demo.html", index: 'flash3Dcarousel'
+				}
+				
             },
             
             'open flash chart': {
