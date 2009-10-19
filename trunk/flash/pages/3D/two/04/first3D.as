@@ -267,7 +267,6 @@ package
 			_plane.filters = [new BlurFilter(_blur, _blur)];
 		}
 		
-		
 		view.singleRender();
 
 		}
