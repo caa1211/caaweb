@@ -155,9 +155,9 @@ package
 			this.addChild(view);	
 			this.addEventListener(Event.ENTER_FRAME, onEventRender3D);	
 			//view.camera.x = 1000;
-			view.camera.z = 3000;
+			view.camera.z = 3100;
 			view.camera.x = 0;
-			view.camera.y = 600;
+			view.camera.y = 1200;
 		}
 
 
@@ -253,8 +253,8 @@ package
 					*/
 				}
 		private function onEventRender3D(e:Event):void {	
-			if (!isRender)
-			return;
+			//if (!isRender)
+			//return;
 	/*	rootNote.y = 200;
         rootNote.rotationY += 3;
 		for (var i = 1; i < 6; i++ )
