@@ -168,6 +168,11 @@ $(function(){
                     url: "flash/pages/3D/base/01.html",
                     index: 'flash3DBase'
                 },
+				paper3D:
+				{
+				  url: "flash/pages/3D/three/01.html"
+				},
+				
 				carousel:
 				{
 				  url: "flash/pages/3D/two/demo.html", index: 'flash3Dcarousel'
