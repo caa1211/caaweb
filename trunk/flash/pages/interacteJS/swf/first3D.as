@@ -25,7 +25,7 @@ package
 		//A01_BasicDocument類別, 繼承MovieClip。		
 		private var view:BasicView;
 		private var plane:Plane;
-		public var aaa:String = 'from flash';
+			public var aaa:String = "'from flash'";
 		//宣告view變數, 型別為BasicView。		
 		public function first3D():void{
 			//建構函式, 該類別被實體化時, 會執行一次。
