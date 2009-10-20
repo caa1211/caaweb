@@ -253,8 +253,8 @@ package
 					*/
 				}
 		private function onEventRender3D(e:Event):void {	
-			//if (!isRender)
-			//return;
+			if (!isRender)
+			return;
 	/*	rootNote.y = 200;
         rootNote.rotationY += 3;
 		for (var i = 1; i < 6; i++ )
