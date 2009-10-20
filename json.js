@@ -87,6 +87,35 @@ $(function(){
                     url: "pages/tooltip/boxover/01.html"
                 }
             },
+            chart:{
+                'test1':{url: "others/jquery.jqplot.0.9.4/dist/test1.html"},
+                'test2':{url: "others/jquery.jqplot.0.9.4/dist/test2.html"},
+                'test3':{url: "others/jquery.jqplot.0.9.4/dist/test3.html"},
+                'test4':{url: "others/jquery.jqplot.0.9.4/dist/test4.html"},
+                'test5':{url: "others/jquery.jqplot.0.9.4/dist/test5.html"},
+                'test6':{url: "others/jquery.jqplot.0.9.4/dist/test6.html"},
+                'test7':{url: "others/jquery.jqplot.0.9.4/dist/test7.html"},
+                'test8':{url: "others/jquery.jqplot.0.9.4/dist/test8.html"},
+                'test9':{url: "others/jquery.jqplot.0.9.4/dist/test9.html"},
+                'test10':{url: "others/jquery.jqplot.0.9.4/dist/test10.html"},
+                'test11':{url: "others/jquery.jqplot.0.9.4/dist/test11.html"},
+                'test12':{url: "others/jquery.jqplot.0.9.4/dist/test12.html"},
+                'test13':{url: "others/jquery.jqplot.0.9.4/dist/test13.html"},
+                'test14':{url: "others/jquery.jqplot.0.9.4/dist/test14.html"},
+                'test15':{url: "others/jquery.jqplot.0.9.4/dist/test15.html"},
+                'test16':{url: "others/jquery.jqplot.0.9.4/dist/test16.html"},
+                'test17':{url: "others/jquery.jqplot.0.9.4/dist/test17.html"},
+                'test18':{url: "others/jquery.jqplot.0.9.4/dist/test18.html"},
+                'test19':{url: "others/jquery.jqplot.0.9.4/dist/test19.html"},
+                'test20':{url: "others/jquery.jqplot.0.9.4/dist/test20.html"},
+                'test21':{url: "others/jquery.jqplot.0.9.4/dist/test21.html"},
+                'test22':{url: "others/jquery.jqplot.0.9.4/dist/test22.html"},
+                'test23':{url: "others/jquery.jqplot.0.9.4/dist/test23.html"},
+                'test24':{url: "others/jquery.jqplot.0.9.4/dist/test24.html"},
+                'test25':{url: "others/jquery.jqplot.0.9.4/dist/test25.html"},
+                'test26':{url: "others/jquery.jqplot.0.9.4/dist/test26.html"},
+                'test27':{url: "others/jquery.jqplot.0.9.4/dist/test27.html"},
+            },
             others: {
                 'date picker': {
                     url: "pages/others/datePicker/demo.html"
