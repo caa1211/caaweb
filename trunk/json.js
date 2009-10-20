@@ -145,13 +145,17 @@ $(function(){
 				}
 				
             },
+			
             
             'open flash chart': {
                 web: {
                     url: "flash/pages/flashChart/openFlashChart/8 ChartStyle/chart.html",
                     index: 'openFlashChart'
                 }
-            }
+            },
+			others:{
+			interacteJS:{ url: "flash/pages/interacteJS/demo.html"}
+			}
         
         }
         
