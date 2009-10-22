@@ -49,7 +49,7 @@ package
 			this.addChild(view);	
 			this.addEventListener(Event.ENTER_FRAME, onEventRender3D);	
 		
-			stage.addEventListener(MouseEvent.CLICK, onStageClick);
+			//stage.addEventListener(MouseEvent.CLICK, onStageClick);
 			//	view.camera.z = 5000;
 		}
 		
@@ -60,7 +60,7 @@ package
 				_emptyObj3D.moveBackward(1000);
 				Tweener.addTween(view.camera, 
 				{
-						x: _emptyObj3D.x,
+					x: _emptyObj3D.x,
 					y: _emptyObj3D.y,
 					z: _emptyObj3D.z,
 					rotationX: _emptyObj3D.rotationX,
@@ -154,8 +154,8 @@ package
 				
 				);
 				
-				
-				
+				e.stopPropagation();
+		
 		
 				}
 		private function onEventRender3D(e:Event):void {	
