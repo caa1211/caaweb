@@ -1,0 +1,37 @@
+<script src="jquery.core.1-3-2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="jquery.swfobject.1-0-7.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(
+	function () {
+		$('#flash-example-5 .movie').flash(
+			{
+				swf: 'javascript-flash-interaction.swf',
+				params: {
+					play: false
+				},
+				flashvars: {
+					message: 'I come from Flash.'
+				},
+				height: 86,
+				width: 481
+			}
+		);
+	}
+);
+</script>
+<div class="example" id="flash-example-5">
+	<div class="movie"></div>
+	<p style="font-family: arial;">
+		<input type="button" onclick="$('#flash-example-5').flash(function(){this.GotoFrame(0);});" value="&lt;&lt;" />
+		<input type="button" onclick="$('#flash-example-5').flash(function(){var currentFrame = this.TGetProperty('/', 4), previousFrame=parseInt(currentFrame) - 2; if (previousFrame < 0) {previousFrame = 9;}this.GotoFrame(previousFrame);});" value="&lt;" />
+		<input type="button" onclick="$('#flash-example-5').flash(function(){this.Play();});" value="PLAY" />
+		<input type="button" onclick="$('#flash-example-5').flash(function(){this.StopPlay();});" value="PAUSE" />
+		<input type="button" onclick="$('#flash-example-5').flash(function(){var currentFrame = this.TGetProperty('/', 4), nextFrame = parseInt(currentFrame); if (nextFrame >= 10) {nextFrame = 0;}this.GotoFrame(nextFrame);});" value="&gt;" />
+		<input type="button" onclick="$('#flash-example-5').flash(function(){this.GotoFrame(9);});" value="&gt;&gt;" />
+	</p>
+	<p>
+		<input type="text" value="I come from javascript." size="20" onfocus="this.select();" id="data" /> 
+		<input type="button" onclick="$('#flash-example-5').flash(function(){this.SetVariable('/:message', document.getElementById('data').value)});" value="Send to Flash" /> 
+		<input type="button" onclick="$('#flash-example-5').flash(function(){document.getElementById('data').value=this.GetVariable('/:message')});" value="Recieve from Flash" /> 
+	</p>
+</div>
