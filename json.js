@@ -203,8 +203,12 @@ $(function(){
 			  hideTBbar: {url: "extjs2/GridDemo/hideTBbar.html"}
 			},
             VD: {
-                withJQueryVD: {url: "extjs/pages/VD/複製 -複製 -03-03-02.html"}
+                withJQueryVD: {url: "extjs/pages/VD/複製 -複製 -03-03-02.html"},
+                VD2: {url: "extjs/pages/twiceVD/page.html"}
             }
+     
+            
+         
 			
 
         
