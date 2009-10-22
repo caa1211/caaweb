@@ -60,13 +60,13 @@
  } ;
    
    
-   $vd1 = $('#vd1').VDcomponent();
-   $vd1.setValue(date1);
+   $vd1 = $('#vd1').VDcomponent({async : true, loaded: function(){   $vd1.setValue(date1);}});
+ 
 
 
    
-      $vd2 = $('#vd2').VDcomponent();
-      $vd2.setValue(date2);
+      $vd2 = $('#vd2').VDcomponent({async : true,loaded: function(){ $vd2.setValue(date2);  }});
+     
 
 
       var api = $("#VDgroup").scrollable({
