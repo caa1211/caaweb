@@ -1,8 +1,4 @@
-/*2009/10/22: add loaded and updated callback, add async property
- * 
- * 
- * 
- */
+
 ;
 (function($){
 
@@ -10,14 +6,11 @@
         var _defaultSetting = {
             showSpeed: 300,
             easing: '',
-            effect: 'fadeIn', //fadeIn, slideDown or show
+            effect: 'customized', //fadeIn, slideDown or show
             //path setting
-            vdHtml: 'VD/VDHtml/VD.html',
-            vdCss: ['VD/VDHtml/css/reset.css', 'VD/VDHtml/css/css.css'],
-            portDef: 'VD/portDef.js',
-            loaded: function(){},
-            updated: function(){},
-            async: false
+            vdHtml: 'VD1/VDHtml/VD.html',
+            vdCss: ['VD1/VDHtml/css/reset.css', 'VD1/VDHtml/css/css.css'],
+            portDef: 'VD1/portDef.js'
         }
         
         var _settings = $.extend(_defaultSetting, settings);
@@ -42,15 +35,17 @@
                         obj.hide(0).addClass(cls).css('visibility', 'visible').show(_settings.showSpeed, _settings.easing);
                    else if (_settings.effect == 'slideDown') 
                         obj.hide(0).addClass(cls).css('visibility', 'visible').slideDown(_settings.showSpeed, _settings.easing);
+                          else if (_settings.effect == 'customized') 
+                        obj.hide(0).addClass(cls).css('visibility', 'visible').animate({height:'show', opacity: 'show'},_settings.showSpeed, _settings.easing);
                 }
             }
             
             if (obj.attr('title') != title) 
                 obj.attr('title', title);
         };
-        var _data;
+        
         this.setValue = function(data){
-            _data= data;
+        
             $.each(data, function(i, date){
                 $portObj = _vdObj.find('#' + i + '');
                 
@@ -73,10 +68,7 @@
                     changePortStatus($portObj, portCls, portTitle);
                 }
             })
-            _settings.updated();
         };
-        
-        this.getValue = function(){return _data};
         
         var attachStylesheet = function(href){
             styleSheet = $('<link href="' + href + '" rel="stylesheet"/>')
@@ -88,13 +80,12 @@
         var portDef = '';
         var frameContents;
         var _handler = function(){
- 
-            $.ajaxSettings.async = _settings.async;
-            
+            $.ajaxSettings.async = false;
             $.getJSON(_settings.portDef, function(json){
                 portDef = json;
-
-                 _vdObj.load(_settings.vdHtml, function(){
+            });
+            
+            _vdObj.load(_settings.vdHtml, function(){
                 $.each(_settings.vdCss, function(i, d){
                     attachStylesheet(d);
                 });
@@ -105,13 +96,7 @@
                     removePortCls($portObj, 0);
                 })
                 
-                _settings.loaded();
-                $.ajaxSettings.async = true;
             })
-            
-            });
-         
-         
         }
         
         return this.each(_handler);
