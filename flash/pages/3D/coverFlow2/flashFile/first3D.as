@@ -39,7 +39,7 @@ package
 		private var rootNote:DisplayObject3D;
 		public function first3D():void{
 			init3DEngine();
-			init3DAxis();
+			//init3DAxis();
 			init3DObject();
 			initObject();
 			
@@ -130,7 +130,7 @@ package
 			//view.camera.x = 1000;
 			view.camera.z = -3000;
 			//view.camera.x = -200;
-			//view.camera.y = -200;
+			view.camera.y = 300;
 		}
 
 		
