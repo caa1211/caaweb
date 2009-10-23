@@ -88,8 +88,8 @@ $(function(){
                 }
             },
             chart:{
-                'test1':{url: "others/jquery.jqplot.0.9.4/dist/test1.html"},
-                'test2':{url: "others/jquery.jqplot.0.9.4/dist/test2.html"},
+                'test1':{url: "others/jquery.jqplot.0.9.4/dist/test1.html", index: 'jQueryChart01'},
+                'test2':{url: "others/jquery.jqplot.0.9.4/dist/test2.html", index: 'jQueryChart01'},
                 'test3':{url: "others/jquery.jqplot.0.9.4/dist/test3.html"},
                 'test4':{url: "others/jquery.jqplot.0.9.4/dist/test4.html"},
                 'test5':{url: "others/jquery.jqplot.0.9.4/dist/test5.html"},
@@ -170,12 +170,17 @@ $(function(){
                 },
 				paper3D:
 				{
-				  url: "flash/pages/3D/three/01.html"
+				  url: "flash/pages/3D/three/01.html", index: 'flash3Dpaper3D'
 				},
 				
 				carousel:
 				{
 				  url: "flash/pages/3D/two/demo.html", index: 'flash3Dcarousel'
+				},
+				
+				coverFlow:
+				{
+				   url:"flash/pages/3D/coverFlow/01.html", index: 'flash3DcoverFlow'
 				}
 				
             },
@@ -204,7 +209,7 @@ $(function(){
 			},
             VD: {
                // withJQueryVD: {url: "extjs/pages/VD/複製 -複製 -03-03-02.html"},
-                withJQueryVD: {url: "extjs/pages/twiceVD/page.html"}
+                withJQueryVD: {url: "extjs/pages/twiceVD/page.html", index: 'extjsWithJQueryVD'}
             }
      
             

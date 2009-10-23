@@ -9,7 +9,8 @@ package
 	import flash.events.*;
 	import flash.filters.BlurFilter;
 	import flash.net.URLRequest;
-	import org.papervision3d.core.effects.view.ReflectionView;
+	import org.papervision3d.events.FileLoadEvent;
+	//import org.papervision3d.core.effects.view.ReflectionView;
 	import org.papervision3d.view.BasicView;
 	import org.papervision3d.materials.ColorMaterial;
 	import org.papervision3d.objects.primitives.Plane;
@@ -24,16 +25,17 @@ package
 	
 	import org.papervision3d.objects.DisplayObject3D;
 	
-
+	import org.papervision3d.objects.primitives.*;
+	import org.papervision3d.materials.*;
 	import org.papervision3d.events.*;
-
+	import milkmidi.papervision3d.materials.ReflectionFileMaterial;
 	
 	public class first3D extends MovieClip {	
 		
 			private var ldr:Loader;
 			var cameraFlag = 0;
 			
-		private var view:ReflectionView;
+		private var view:BasicView;
 		private var rootNote:DisplayObject3D;
 		public function first3D():void{
 			init3DEngine();
@@ -112,11 +114,12 @@ package
 	
 		private function init3DEngine():void{
 
-			view = new ReflectionView(0, 0, true, true, "Target");	
+			view = new BasicView(0, 0, true, true, "Target");	
 			
-			view.viewportReflection.filters = [new BlurFilter(2, 2, 3)];
+		/*	view.viewportReflection.filters = [new BlurFilter(2, 2, 3)];
 			view.viewportReflection.alpha = .6;
 			view.surfaceHeight = -400;
+		*/
 			
 			view.viewport.buttonMode = true;
 			rootNote = new DisplayObject3D();
@@ -133,7 +136,7 @@ package
 		
 		
 		var rotateAngle:int = 70;
-		var middleOffset:int = 900;
+		var middleOffset:int = 1000;
 		var interval = 300;
 		var zinterval = -100;
 		var zoom = 1800;
@@ -195,12 +198,15 @@ package
 			for (var i = 1; i < totleItems+1; i++ )
 			{	
 				
-		    var _bmpMat:BitmapFileMaterial = new BitmapFileMaterial('backgrounds/' + i + '.png');
+				
+		   // var _bmpMat:BitmapFileMaterial = new BitmapFileMaterial('backgrounds/' + i + '.png');
+			var _bmpMat:ReflectionFileMaterial = new ReflectionFileMaterial('backgrounds/' + i + '.png', true);
 			_bmpMat.addEventListener(FileLoadEvent.LOAD_COMPLETE, onFileLoaderComplete);
-			var _plane:Plane = new Plane(_bmpMat, 500, 550);
-			_bmpMat.doubleSided = true;
+			
+			var _plane:Plane = new Plane(_bmpMat, 500, 1100, 4, 4);
+			//_bmpMat.doubleSided = true;
 			_bmpMat.interactive = true;
-			_bmpMat.smooth = true;
+			//_bmpMat.smooth = true;
 			
 	        /*
 		             if (i < targetItemIndex)
@@ -231,8 +237,7 @@ package
 			_plane.extra = { id:i };
 			_plane.addEventListener(InteractiveScene3DEvent.OBJECT_OVER, on3DOver);
 			_plane.addEventListener(InteractiveScene3DEvent.OBJECT_OUT, on3DOut);
-			
-		   _plane.addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, on3DPress);
+		    _plane.addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, on3DPress);
 				
 			_plane.useOwnContainer = true;
 			rootNote.addChild(_plane);	
@@ -252,16 +257,15 @@ package
 				
 				}
 			
+			
 			private function on3DOver(e:InteractiveScene3DEvent):void {
 				if (e.displayObject3D.extra.id == targetItemIndex)
 				return;
 				e.displayObject3D.scale = 1.1;
-				view.singleRender();
 				}
 			
 			private function on3DOut(e:InteractiveScene3DEvent):void {	
 				e.displayObject3D.scale = 1;
-				view.singleRender();
 				}
 
 			
@@ -277,8 +281,8 @@ package
 		rootNote.getChildByName('plane'+i).rotationY +=3
 		*/
 		
-		if (isRender == false)
-		return;
+		//if (isRender == false)
+		//return;
 		
 			for (var i = 1; i < 12; i++ )
 		{
