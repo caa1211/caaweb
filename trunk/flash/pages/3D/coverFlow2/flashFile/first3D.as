@@ -2,14 +2,11 @@
 
 package
 {
-	import flash.display.InteractiveObject;
-	import flash.display.Loader;
-	import flash.display.MovieClip;
+
 	import flash.display.*;
 	import flash.events.*;
 	import flash.filters.BlurFilter;
-	import flash.net.URLRequest;
-	import org.papervision3d.events.FileLoadEvent;
+
 	//import org.papervision3d.core.effects.view.ReflectionView;
 	import org.papervision3d.view.BasicView;
 	import org.papervision3d.materials.ColorMaterial;
@@ -18,15 +15,10 @@ package
 	import caurina.transitions.Tweener;
 	
 	import org.papervision3d.events.InteractiveScene3DEvent;
-	import org.papervision3d.materials.BitmapFileMaterial;
 	import org.papervision3d.objects.DisplayObject3D;
 	
 	import org.papervision3d.materials.utils.MaterialsList;
 	
-	import org.papervision3d.objects.DisplayObject3D;
-	
-	import org.papervision3d.objects.primitives.*;
-	import org.papervision3d.materials.*;
 	import org.papervision3d.events.*;
 	import milkmidi.papervision3d.materials.ReflectionFileMaterial;
 	
@@ -149,7 +141,7 @@ package
 		    var middleOffsetValue = 0;
 		    targetItemIndex = id;
 	        var zoomValue;
-	
+	        stage.quality = StageQuality.MEDIUM;
 			for (var i = 1; i < totleItems+1; i++ )
 			{			
 		             if (i < targetItemIndex)
@@ -180,6 +172,7 @@ package
 					time:0.8,
 					onComplete: function():void {
 						isRender = false;
+						stage.quality = StageQuality.HIGH;
 						}
 					});
 				
