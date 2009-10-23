@@ -55,7 +55,7 @@ $(function(){
             },
             jTools: {
                 wizard: {
-                    url: "pages/jQueryTools/scrollable/03 一次切一個(wizard).html"
+                    url: "pages/jQueryTools/scrollable/03 一次�?一??wizard).html"
                 },
                 navigation: {
                     url: "pages/jQueryTools/scrollable/06.html"
@@ -181,6 +181,10 @@ $(function(){
 				coverFlow:
 				{
 				   url:"flash/pages/3D/coverFlow/01.html", index: 'flash3DcoverFlow'
+				},
+				'coverFlow 2':
+				{
+				   url:"flash/pages/3D/coverFlow2/01.html", index: 'flash3DcoverFlow2'
 				}
 				
             },
