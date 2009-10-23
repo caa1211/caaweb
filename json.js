@@ -89,7 +89,7 @@ $(function(){
             },
             chart:{
                 'test1':{url: "others/jquery.jqplot.0.9.4/dist/test1.html", index: 'jQueryChart01'},
-                'test2':{url: "others/jquery.jqplot.0.9.4/dist/test2.html", index: 'jQueryChart01'},
+                'test2':{url: "others/jquery.jqplot.0.9.4/dist/test2.html", index: 'jQueryChart02'},
                 'test3':{url: "others/jquery.jqplot.0.9.4/dist/test3.html"},
                 'test4':{url: "others/jquery.jqplot.0.9.4/dist/test4.html"},
                 'test5':{url: "others/jquery.jqplot.0.9.4/dist/test5.html"},
