@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>EOGallery, an AJAX image gallery with slideshow animation effect made with jQuery</title>
+		<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="css/thickbox.css" type="text/css" media="screen" />
+		<script type="text/javascript" src="js/jquery-1.1.1.pack.js"></script>
+		<script type="text/javascript" src="js/slider.pack.js"></script>
+		<script type="text/javascript" src="js/global.js"></script>
+		<script type="text/javascript" src="js/thickbox.js"></script>
+		<link rel="icon" type="image/png" href="images/favicon.png" />
+		<!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" /><![endif]-->
+	</head>
+	<body>
+		<div id="container">
+			<div id="header" class="clearfix">
+				<h1><a href="."><img src="images/logo.gif" alt="EOGallery" /></a></h1>
+				<p id="maincaption">EOGallery is a web animated slideshow gallery maid with <a href="http://www.jquery.com" class="ext">jQuery</a>. It only uses basic jQuery functions and <a href="http://codylindley.com" class="ext">Cody Lindley's</a> <a href="http://jquery.com/demo/thickbox/" class="ext">Thickbox</a> to display larger pictures. By the way, EOGallery is <a href="http://validator.w3.org/check/referer" class="ext">XHTML 1.0 strict</a> valid and almost <a href="http://jigsaw.w3.org/css-validator/check/referer" class="ext">CSS valid</a>, it has been tested on Firefox, Safari, Internet Explorer 6 and works even with non-javascript and/or non-css browsers. EOGallery has been maid for testing purposes, there could be bugs and strange behaviors. For more informations, read read <a href="http://www.fprod.net/blog/category/eogallery/" class="ext">FProd's blog.</a><br />Enjoy trying it.</p>
+				<div id="links">
+					<h3>Links</h3>
+					<ul>
+						<li><a href="http://www.fprod.net" class="ext" title="Creator of EOGallery">FProd</a></li><li><a href="http://www.fprod.net/blog/category/eogallery/" class="ext" title="Blog articles about EOGallery">FProd's Blog</a></li><li><a href="http://www.jquery.com" class="ext" title="Javascript library">jQuery</a></li><li><a href="http://jquery.com/demo/thickbox/" class="ext" title="jQuery Plugin-in used to display larger pictures">Thickbox</a></li><li><a href="http://www.wikipedia.org" class="ext" title="Example images used here are from Wikipedia">Wikipedia</a></li><li><a href="http://www.lipsum.com/" class="ext" title="Lorem Ipsum used on this page">Lorem Ipsum</a></li><li><a href="downloads/eogallery-1.0.zip" class="ext" title="EOGallery's source code">Source code (zip)</a></li><li><a href="http://www.fprod.net/contact.php" class="ext" title="Contact us">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+			<div id="main" class="clearfix">
+				<div id="slider">
+					<div>
+						<div class="floating">
+							<a id="butleft" href="#"><img src="images/left.png" alt="" /></a>
+						</div>
+						<div class="floating">
+							<ul class="clearfix">
+								<li id="image5">
+									<a href="uploads/Caspar-David-Friedrich_640.jpg" class="thickbox imtitle" title="Caspar David Friedrich">Caspar David Friedrich</a>
+									<a href="uploads/Caspar-David-Friedrich_640.jpg" class="thickbox" title="Caspar David Friedrich"><img src="uploads/Caspar-David-Friedrich_320.jpg" alt="" /></a>
+									<div id="text5" class="text">Caspar David Friedrich<br /><br />
+										Curabitur a tortor.<br />
+										Duis adipiscing felis nec leo.<br />
+										Nunc laoreet dapibus sapien.<br />
+										Donec mollis ante sed massa.
+									</div>
+								</li>
+								<li id="image7">
+									<a href="uploads/Eugene-Delacroix-La-liberte-guidant-le-peuple_640.jpg" class="thickbox imtitle" title="La liberté">La liberté</a>
+									<a href="uploads/Eugene-Delacroix-La-liberte-guidant-le-peuple_640.jpg" class="thickbox" title="La liberté"><img src="uploads/Eugene-Delacroix-La-liberte-guidant-le-peuple_320.jpg" alt="" /></a>
+									<div id="text7" class="text">La liberté<br /><br />
+										Sed scelerisque nulla non velit. Cras sapien quam, bibendum a, placerat nec, sagittis et, purus.
+									</div>
+								</li>
+								<li id="image8">
+									<a href="uploads/Jacques-Louis-David_640.jpg" class="thickbox imtitle" title="Le Sacre">Le Sacre</a>
+									<a href="uploads/Jacques-Louis-David_640.jpg" class="thickbox" title="Le Sacre"><img src="uploads/Jacques-Louis-David_320.jpg" alt="" /></a>
+									<div id="text8" class="text">Le Sacre<br /><br />
+										Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Mauris molestie lorem ut pede.<br />
+										Mauris mi magna, consequat vel, volutpat ac, egestas ac, eros. Curabitur pellentesque.
+									</div>
+								</li>
+								<li id="image6">
+									<a href="uploads/Dominique-Ingres-le-Bain-turc_640.jpg" class="thickbox imtitle" title="Le Bain Turc">Le Bain Turc</a>
+									<a href="uploads/Dominique-Ingres-le-Bain-turc_640.jpg" class="thickbox" title="Le Bain Turc"><img src="uploads/Dominique-Ingres-le-Bain-turc_320.jpg" alt="" /></a>
+									<div id="text6" class="text">Le Bain Turc<br /><br />
+										Integer posuere magna. Vestibulum congue pretium massa. Sed scelerisque nulla non velit.
+									</div>
+								</li>
+								<li id="image9">
+									<a href="uploads/munch-scream_640.jpg" class="thickbox imtitle" title="Le Cri">Le Cri</a>
+									<a href="uploads/munch-scream_640.jpg" class="thickbox" title="Le Cri"><img src="uploads/munch-scream_320.jpg" alt="" /></a>
+									<div id="text9" class="text">Le Cri<br /><br />
+										Sed vulputate. Nulla facilisi. In hac habitasse platea dictumst. Suspendisse vehicula vehicula magna. Vivamus tellus diam, eleifend et, dapibus porttitor, volutpat sed, leo. Duis risus turpis, aliquam in, ultrices a, ultrices id, orci. Nulla facilisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam iaculis justo nec orci.
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="floating">
+							<a id="butright" href="#"><img src="images/right.png" alt="" /></a>
+						</div>
+					</div>
+					<div id="controls">
+						<a href="" id="playpause" title="Play/Pause automatic slideshow"><img src="images/playred.png" alt="Play/Pause" /></a> <a href="" id="directlink" title="Direct link to the current picture"><img src="images/directlink.png" alt="Direct Link" style="margin-bottom: 7px; margin-left: 10px;" /></a>
+					</div>
+				</div>
+				<div id="texts"></div>
+			</div>
+			<div id="footer">
+				<strong>EOGallery v1.0</strong> by <a href="http://www.fprod.net">FProd</a>
+			</div>
+		</div>
+	</body>
+</html>
