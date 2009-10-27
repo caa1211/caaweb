@@ -1,0 +1,25 @@
+root = {
+
+caa:{
+birthday: 1211,
+phone: 0982798540,
+weight: 80,
+image: 'images/book001.png'
+},
+
+miki:{
+birthday: 0518,
+phone: 0982532540,
+weight: 48,
+image: 'images/book002.png'
+},
+
+mark:{
+birthday: 0617,
+phone: 0932154469,
+weight: 67,
+image: 'images/book003.png'
+}
+
+
+}
