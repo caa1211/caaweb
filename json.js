@@ -55,7 +55,7 @@ $(function(){
             },
             jTools: {
                 wizard: {
-                    url: "pages/jQueryTools/scrollable/03 一次�?一??wizard).html"
+                    url: "pages/jQueryTools/scrollable/03 一次�?一??wizard).html"
                 },
                 navigation: {
                     url: "pages/jQueryTools/scrollable/06.html"
@@ -116,6 +116,11 @@ $(function(){
                 'test26':{url: "others/jquery.jqplot.0.9.4/dist/test26.html"},
                 'test27':{url: "others/jquery.jqplot.0.9.4/dist/test27.html"},
             },
+            menu: {
+                'single layer':{
+                    url:"pages/menu/01/demo.html"
+                }
+                },
             others: {
                 'date picker': {
                     url: "pages/others/datePicker/demo.html"
