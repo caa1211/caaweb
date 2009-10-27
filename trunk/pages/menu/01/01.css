@@ -1,0 +1,36 @@
+ul#topnav {
+    
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: left;
+    font-size: 1.1em;
+}
+ul#topnav li{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;  /*--Important - Masking out the hover state by default--*/
+    float: left;
+    height:40px;
+}
+ul#topnav a, ul#topnav span { /*--The <a> and <span> share the same properties since the <span>  will be a duplicate of the <a> tag--*/
+    padding: 10px 20px;
+    float: left;
+    text-decoration: none;
+    color: #fff;
+   
+   /* background: url(a_bg.gif) repeat-x;*/
+    text-transform: uppercase;
+    clear: both;
+    width: 100%;
+    height: 20px;
+    line-height: 20px; /*--Vertical alignment of text--*/
+}
+ul#topnav a{ /*--This is basically the hover state of navigation--*/
+    color: #555;
+    background-position: left bottom;
+}
+ul#topnav span{ /*--Default state of navigation--*/
+    background-position: left top;
+    
+}
