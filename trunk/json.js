@@ -119,6 +119,9 @@ $(function(){
             menu: {
                 'single layer':{
                     url:"pages/menu/01/demo.html"
+                },
+                'lavalamp':{
+                    url:"pages/menu/02/demo.html"
                 }
                 },
             others: {
