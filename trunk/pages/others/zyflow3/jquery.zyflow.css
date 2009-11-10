@@ -1,0 +1,7 @@
+
+
+.flowContainer {position: relative; }
+.flowContainer .item {position: absolute; top: 250px;  }
+/*.caption { font-size: 20px; text-align: center;}*/
+.flowItemTitle { font-size: 20px;  position: relative; top: 500px; z-index:100; color: white;text-align: center;}
+

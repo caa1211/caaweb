@@ -153,6 +153,8 @@ $(function(){
                     url: "pages/others/hrzAccordion/demo.html"
                 },
                 'zyDock' : {url : "pages/others/zyDock/femto.html"}
+                ,
+                'zyFlow' : {url : "pages/others/zyflow3/demo.html"}
             },
             animation: {
                 'chainable Effects': {
