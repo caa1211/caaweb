@@ -2,16 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Lava Lamp Menu Demo</title>
+  
+ 
+  <link href="css/reset.css" rel="stylesheet" type="text/css" />
+  <link type="text/css" href="css/tabFw2.css" rel="stylesheet" />
 
-  <link type="text/css" href="css/reset.css" rel="stylesheet" />
-  <link type="text/css" href="css/tabFW.css" rel="stylesheet" />
-  <link href="css/tabs.css" rel="stylesheet" type="text/css" />
   
   <script src="../../js/jquery-1.3.2.min.js" type="text/javascript"></script>
   <script src="js/jquery.getParams.js" type="text/javascript"></script> 
-  <!--script src="js/jquery.tools.min_tab.js" type="text/javascript"></script-->
-  <script src="js/jquery.tools.min.js" type="text/javascript"></script>
-  
+
   <script type="text/javascript">
 
   $(function(){
@@ -27,7 +26,8 @@
               $.each(data, function(i, item){
                   var menuItemA = $('<a>' + i + '</a>');
                   menuItemA.attr('id', 't'+indexCounter );
-                  menuItemA.attr('href', item.url);
+                  //menuItemA.attr('href', item.url);
+                  menuItemA.attr('href', '#');
                   var tabItemLi = $('<li></li>');
                   tabItemLi.attr('url', item.url);
                   tabItemLi.attr('tabId', i);
@@ -39,7 +39,7 @@
                   }
                   indexCounter++;
                   tabItemLi.append(menuItemA);
-                  $tabContainer.append(tabItemLi);
+                 // $tabContainer.append(tabItemLi);
               });
 
               doTab(defaultIndex);
@@ -48,13 +48,8 @@
   //do tab
   
   function doTab(index){
-      if (tabIndex != -1) 
-          index = tabIndex;
-          
-      $("ul.tabs").tabs("div.panes > div", {
-          effect: 'ajax',
-          initialIndex: index
-      });//.history();
+     
+      
   }
   
   if ($.getURLParam("tabIndex") != null) {
@@ -76,9 +71,14 @@
 </head>
 
 <body>
+ 
 
-<ul class="tabs">
-    <!--li>
+
+<!-- tab "panes" -->
+
+ 
+ <ul class="tabs">
+    <li>
         <a href="#">Tab 1</a>
     </li>
     <li>
@@ -86,12 +86,14 @@
     </li>
     <li>
         <a href="#">Tab 3</a>
-    </li-->
+    </li>
 </ul>
-<!-- tab "panes" -->
-<div class="panes">
- <div class="pane" style="display:block"></div> 
-</div>
+ 
+<div style=" border: solid 1px green; position:absolute;  width:100%; height:100%; "  >
+<iframe class="pane" style=" border: solid 1px red;position:relative; ">
+ fg
+ </iframe> 
+ </div>
 
 </body>
 

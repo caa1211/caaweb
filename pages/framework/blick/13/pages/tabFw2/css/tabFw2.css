@@ -1,0 +1,3 @@
+
+.tabs{height: 30px;  border:solid 1px yellow; }
+.tabs li{border: solid 1px blue; display: inline; list-style-type: none; padding: 5px 10px;}
