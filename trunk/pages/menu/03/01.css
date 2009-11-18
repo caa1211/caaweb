@@ -1,0 +1,51 @@
+
+        
+        
+        
+        .lavaLamp{
+            position: relative;
+            height: 70px;
+            width: 300px;
+            background-color: white;
+            padding: 15px;
+            margin: 10px 0;
+            overflow: hidden;
+            border: 1px solid gray;
+        }
+        
+    
+       .lavaLamp div.back 
+       {
+             position: absolute;
+              border: 1px solid #000;
+              width: 100px;
+              z-index: 8;
+             
+              
+       }
+        
+          .lavaLamp div {
+             /* border: 1px  dotted blue;*/
+                   /* float: left;*/
+                    list-style: none;
+                 
+                }
+                
+          .lavaLamp div a {
+                        font: bold 14px arial;
+                        text-decoration: none;
+                        color: #000;
+                        outline: none;
+                        text-align: center;
+                        top: 7px;
+                        text-transform: uppercase;
+                       
+                    }
+                        .lavaLamp div a:hover, .lavaLamp div a:active, .lavaLamp div a:visited {
+                            border: none;
+                        }         
+        
+        
+        
+        
+     

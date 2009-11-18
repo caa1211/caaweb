@@ -1,0 +1,42 @@
+body{ min-height:150px; _height: 150px; behavior:expression(this.style.height=(document.documentElement.offsetHeight<150)?"150px":"100%");}
+
+
+/*.menuline { background:url(images/menu_line.gif); height:93px; width:1px;}*/
+.menuItem {float:left;list-style-type:none;}
+.menuItem a{display:block;  width:89px; height:30px; background-repeat:no-repeat; font-weight:bold; color:#d5d8da; text-decoration:none; font-size:12px; text-align:center; padding-top:63px; line-height:12px;}
+.menuItem a:hover{cursor:pointer;}
+
+
+
+
+/* for scrollable begin*/
+div.scrollable { 
+ border: solid 2px yellow;
+z-index:10000;
+top: -50px;
+    /* required settings */ 
+    position:relative; 
+    overflow:hidden; 
+    height: 100px;
+   margin: 0 auto;
+ /*    left:100px;*/
+    width: 535px; 
+    
+     
+} 
+
+.menuItemHover{ opacity:0.3;  }
+
+div.scrollable ul.items { 
+    /* this cannot be too large */ 
+    width:20000em; 
+    position:absolute; 
+    float:left; 
+} 
+ 
+
+.browse{background:pink;   position:absolute; }
+.browse.disabled {
+    visibility:hidden !important;     
+}   
+/* for scrollable end*/

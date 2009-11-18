@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title id='title'></title>
+        
+        <link type="text/css" href="css/reset.css" rel="stylesheet" />
+		<link type="text/css" href="css/ui_layout.css" rel="stylesheet" />
+        <link type="text/css" href="css/css.css" rel="stylesheet" />
+        <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+        
+        <script type="text/javascript" src="js/iframe.jquery.js"></script>
+		<script type="text/javascript" src="js/jquery.layout.js"></script>
+        <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+        <script type="text/javascript" src="js/tools.scrollable-1.1.0.min.js"></script>
+        <script type="text/javascript">
+
+     
+
+        $(function(){
+        var $menuDiv = $('#menuDiv');
+        var $frameObj = $('#mainFrame');
+  
+        //var itemClass = "menuItem";
+           
+           
+        function openPage(url){
+             $frameObj.src(url , function(){}); 
+        }
+    
+      function activeMenuItem(id)
+        {
+            var perviousItem = $menuDiv.find('.menuItem[menuId='+activeMenuItemID +']');
+            var offpath = perviousItem.attr('iconOff');
+            perviousItem.css('background', 'url('+offpath+') no-repeat');
+            
+            activeMenuItemID= id;
+            var activeItem = $menuDiv.find('.menuItem[menuId='+activeMenuItemID +']');
+            var onpath = activeItem.attr('iconOn');
+            activeItem.css('background', 'url('+onpath+') no-repeat');
+            openPage(activeItem.attr('url'));
+        }
+
+           $.getJSON("mainMenu.json", function(data){
+             var $menuContainer =  $('<ul style="border:solid 1px green;"  class="items"></ul>');
+     
+             $.each(data, function(i, item){   
+             var menuItemA = $('<a>'+ i + '</a>'); 
+             var menuItemLi = $('<li class="menuItem"></li>');
+             menuItemLi.attr('menuId', i);
+             menuItemLi.attr('iconOn', item.icon.on);
+             menuItemLi.attr('iconOff', item.icon.off);
+             menuItemLi.attr('url', item.url);
+             menuItemLi.css('background', 'url(' + item.icon.off + ') no-repeat');
+             
+             //setdefault
+             if (item.defaultPage != undefined) {
+                 activeMenuItemID = i; 
+             }
+             
+             menuItemLi.click(function(){ 
+             activeMenuItem($(this).attr('menuId'));
+             });
+             menuItemLi.append(menuItemA);
+             $menuContainer.append(menuItemLi);
+                });
+
+              $('#menuDiv').append($menuContainer); 
+              
+              activeMenuItem(activeMenuItemID);   
+              parseMenuJsonCompleted();
+           });
+
+           function setScrollable(){
+               var api = $("div.scrollable").scrollable({
+                   size: 6,
+                 //  easing: 'easeOutElastic',//'easeInBack', 
+                   api: true,
+                   speed: 500,
+                   hoverClass: 'menuItemHover',
+                   //activeClass: 'caaActive',
+                   // clickable: false ,
+                   onSeek: function(){
+                       //  alert("current page is " + this.getPageIndex());
+                   }
+               });
+           }
+
+            var outerLayout = $('body').layout({
+                center__paneSelector: ".outer-center",
+                south__paneSelector: ".outer-south",
+                north__paneSelector: ".outer-north",
+                north__size: 100,
+                south__size: 100,
+                collapsable: false,
+                slidable: false,
+                resizable: false,
+                spacing_open:    0,       // no resizer-bar when open (zero height)
+                spacing_closed:  20,
+                center__onresize: function(){}
+            });
+
+           function parseMenuJsonCompleted() 
+           {
+         
+              setScrollable();
+           }
+        });
+        </script>
+    </head>
+    <body>
+        
+      
+       
+    <div class='outer-north '>
+        <div style=' width: 100%; height: 100%; margin: 0 auto;  border: solid 1px blue;  '>
+         </div>
+    </div> 
+      
+    <div class='outer-south' style='overflow:visible;' >
+       
+        <a class="prevPage browse left" >previous</a>
+        <a class="nextPage browse right" style='left:30px;'>next</a>
+        
+        <div style=' width: 70%; margin: 0 auto;  border: solid 1px blue; '>
+            <div id='menuDiv' class='scrollable'></div>
+         </div>
+     </div>
+     
+ 
+    <div class='outer-center'>
+ 
+       <div style='width: 100%; height:100%;margin: 0 auto;  border: solid 1px blue; position:absolute; z-index:1;'>
+           <iframe id='mainFrame'style=' position:absolute; z-index:2; width:100%; height:100%; '  allowtransparency="true" frameborder="0" src='#'></iframe>
+       </div>  
+    </div>
+    
+   
+   
+    
+    </body>
+</html>

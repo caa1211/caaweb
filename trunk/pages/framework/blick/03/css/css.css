@@ -1,0 +1,45 @@
+body{ min-height:150px; _height: 150px; behavior:expression(this.style.height=(document.documentElement.offsetHeight<150)?"150px":"100%");}
+
+
+/*.menuline { background:url(images/menu_line.gif); height:93px; width:1px;}*/
+.menuItem {float:left;list-style-type:none;}
+.menuItem a{display:block;  width:89px; height:30px; background-repeat:no-repeat; font-weight:bold; color:#d5d8da; text-decoration:none; font-size:12px; text-align:center; padding-top:63px; line-height:12px;}
+/*.menuItem a:hover{cursor:default;}*/
+.menuItem.hover{ border: solid 3px blue;  }
+
+/* for scrollable begin*/
+div.scrollable { 
+ border: solid 2px yellow;
+
+margin: 0 auto;
+    /* required settings */ 
+    position:relative;
+    overflow:hidden; 
+    height: 100px;
+    margin: 0 auto;
+    width: 540px;    
+} 
+
+
+
+div.scrollable ul.items { 
+    /* this cannot be too large */ 
+    width:20000em; 
+    position:absolute; 
+    float:left; 
+} 
+ 
+
+.browse{background:pink;   position:absolute; }
+.browse.disabled {
+    visibility:hidden !important;     
+}   
+/* for scrollable end*/
+
+.offCls {background:#c0c0c0;}
+.onCls {background:#ffff80;}
+
+
+.subItems{position:absolute;border: solid 2px red; z-index:100000; list-style-type:none;}
+.subItems li {position: relative; width:100px; height:30px; border: solid 1px green;}
+.subItems li.hover {border: solid 3px blue;  }

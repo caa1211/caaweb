@@ -30,17 +30,19 @@
                 delay: 1
             }, time, callback);
         }
-        $("<div id='x'>Darkthread</div>").appendTo("body").width(100).delay(500, {
+        $("<div id='x'>Darkthread</div>").appendTo("body").width(100).delay(3000, {
             color: "blue",
             border: "solid 1px red"
-        }).animate({
+        });
+        
+        /*.animate({
             width: "200px"
-        }, 1000).delay(1000, {
+        }, 1000).delay(0, {
             backgroundColor: "yellow",
             fontWeight: "bold"
         }).delay(1000, function(){
             alert("Done!");
-        });
+        });*/
         
     });
     </script> 
