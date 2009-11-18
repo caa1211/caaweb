@@ -18,9 +18,9 @@
     var tabIndex = -1;
       function loadData(subPath){
     
-          var allPath = 'tabDatas/' + subPath + '.json'
+          var allPath = subPath;
           var $tabContainer = $('.tabs');
-
+             
           $.getJSON(allPath, function(data){
               var indexCounter = 0;
               var defaultIndex = 0;
@@ -57,17 +57,18 @@
       });//.history();
   }
   
+  
+  
   if ($.getURLParam("tabIndex") != null) {
       var tabIndex = $.getURLParam("tabIndex");
   }
-
-      if ($.getURLParam("data") != null) {
-          var data = $.getURLParam("data");
-          loadData(data);
-      }
-       else
-          loadData('setting');
-    
+  
+  if ($.getURLParam("tabJson") != null) {
+      var data = $.getURLParam("tabJson");
+      loadData(data);
+  }
+  else 
+      loadData('setting');
   });
         
         

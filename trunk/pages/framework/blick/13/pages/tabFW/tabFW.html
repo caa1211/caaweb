@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Lava Lamp Menu Demo</title>
-
   <link type="text/css" href="css/reset.css" rel="stylesheet" />
   <link type="text/css" href="css/tabFW.css" rel="stylesheet" />
   <link href="css/tabs.css" rel="stylesheet" type="text/css" />
@@ -27,7 +26,8 @@
               $.each(data, function(i, item){
                   var menuItemA = $('<a>' + i + '</a>');
                   menuItemA.attr('id', 't'+indexCounter );
-                  menuItemA.attr('href', item.url);
+                  //menuItemA.attr('href', item.url);
+                  menuItemA.attr('href', '#');
                   var tabItemLi = $('<li></li>');
                   tabItemLi.attr('url', item.url);
                   tabItemLi.attr('tabId', i);
@@ -51,10 +51,11 @@
       if (tabIndex != -1) 
           index = tabIndex;
           
-      $("ul.tabs").tabs("div.panes > div", {
-          effect: 'ajax',
+     $("ul.tabs").tabs("div.panes > div", {
+          //effect: 'ajax',
           initialIndex: index
       });//.history();
+      
   }
   
   if ($.getURLParam("tabIndex") != null) {
@@ -90,7 +91,9 @@
 </ul>
 <!-- tab "panes" -->
 <div class="panes">
- <div class="pane" style="display:block"></div> 
+ <div class="pane" style="display:block; border: solid 1px red;">
+ </div> 
+ 
 </div>
 
 </body>
