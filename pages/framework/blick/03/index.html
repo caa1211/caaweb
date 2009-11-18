@@ -1,0 +1,385 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title id='title'></title>
+        
+        <link type="text/css" href="css/reset.css" rel="stylesheet" />
+		<link type="text/css" href="css/ui_layout.css" rel="stylesheet" />
+        <link type="text/css" href="css/css.css" rel="stylesheet" />
+        <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+        
+        <script type="text/javascript" src="js/iframe.jquery.js"></script>
+		<script type="text/javascript" src="js/jquery.layout.js"></script>
+        <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+        <script type="text/javascript" src="js/tools.scrollable-1.1.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.hoverIntent.minified.js"></script>
+        
+        <script type="text/javascript">
+        $.fn.delay = function(time, callback){
+            // Empty function:jQuery.fx.step.delay = function() { };   
+            // You can set the second argument as CSS properties    
+            if (typeof callback == "object") {
+                var cssObj = callback;
+                callback = function(){
+                    $(this).css(cssObj);
+                }
+            }
+           
+            // Return meaningless animation, (will be added to queue)
+            
+            return this.animate({
+                delay: 1
+            }, time, callback);
+        }
+        
+        $.fn.slideUpShow = function(time, callback){
+            if (typeof callback == "object") {
+                var cssObj = callback;
+                callback = function(){
+                    $(this).css(cssObj);
+                }
+            }
+            //alert(time);
+            return this.animate({
+                top: -1*$(this).height(),
+                opacity: "1"
+            }, time, callback);
+        }
+        
+          $.fn.slideDownHide = function(time, callback){
+            if (typeof callback == "object") {
+                var cssObj = callback;
+                callback = function(){
+                    $(this).css(cssObj);
+                }
+            }
+            return this.animate({
+                top: "0",
+                opacity: "0"
+            }, time, callback);
+        }
+        
+        
+        $(function(){
+        var $menuDiv = $('#menuDiv');
+        var $frameObj = $('#mainFrame');
+        var actionItemID;
+        var $subMenuDiv=$('#subMenuDiv');
+        
+        function openPage(url){
+           //  $frameObj.fadeOut(0)
+             $frameObj.src(url );//, function(){$frameObj.fadeIn(300);}); 
+        }
+        
+        function sliceString(str, clipIndex){
+            retStr = null;
+            var nn = str.indexOf(str.split('_')[clipIndex+1]);
+          
+            if (nn != -1) 
+                retStr = str.slice(nn);
+            
+            return retStr;
+        }
+        
+        function findJsonItemFromIdDeep(json, id, clipIndex){
+        //lert(id)
+        //debugger;
+            if (clipIndex == undefined) 
+                clipIndex = 0;
+            var jsonItem = null;
+            retainID = sliceString(id, clipIndex);
+            splitID = id.split('_')[clipIndex];
+            
+            
+            $.each(json, function(i, item){
+                if (i.split('_')[clipIndex] == splitID) 
+                    if (retainID != null) 
+                        jsonItem = findJsonItemFromIdDeep(item.submenu, id, clipIndex + 1);
+                    else 
+                        jsonItem = item;
+            });
+            return jsonItem;
+        }
+   
+     function findJsonItemFromId(id){
+         var jsonItem = null;
+         $.each(menuJsonData, function(i, item){
+             if (i == id) 
+                 jsonItem = item;
+         });
+         return jsonItem;
+     }
+
+        function activeItem(activeId){
+            var activeMainMenuID = activeId.split('_')[0];
+          //  alert(activeMainMenuID)
+            $.each(menuJsonData, function(i, item){
+            
+                if (i == activeMainMenuID) {
+                    var previousJsonItem = findJsonItemFromId(actionItemID);
+                    if (previousJsonItem != null) 
+                        $menuDiv.find('ul li[id=' + actionItemID + ']').removeClass(previousJsonItem.switchCls.on);
+                    
+                    actionItemID = i;
+                    var actionJsonItem = findJsonItemFromId(actionItemID);
+                    var actionObj = $menuDiv.find('ul li[id=' + actionItemID + ']')
+                    actionObj.addClass(actionJsonItem.switchCls.on);
+                    
+                }
+                
+               // alert(findJsonItemFromIdDeep(menuJsonData, activeId))
+                openPage(findJsonItemFromIdDeep(menuJsonData, activeId).url);
+                
+            })
+        }
+     
+        function hideSubMenuPanel(panel, liObj)
+        {
+           
+            panel.delay(100, function(){
+               
+                    // panel.stop(false, true);
+                     panel.attr('isAnimation', 'true');
+                     panel.fadeOut(300, function(){
+                    //panel.slideDownHide(300, function(){
+                         $(this).attr('isAnimation', 'false');
+                     });
+                
+              
+                liObj.removeClass('hover');
+            });
+        }
+        
+        function showSubMenuPanel(panel, liObj)
+        { 
+            if (panel.attr('isAnimation') == undefined || panel.attr('isAnimation')=='true') {
+                panel.stop(true, true);
+                panel.attr('isAnimation', 'true');
+                panel.fadeIn(300, function()
+               //panel.slideUpShow(300, function()
+               {
+                    $(this).attr('isAnimation', 'false');
+                });
+            }
+            else
+            panel.stop(true, false).fadeIn(0);
+            //panel.stop(true, false).slideUpShow(0);
+            
+            liObj.addClass('hover');
+        }
+        
+        function hideSubMenu($liObj)
+        {
+         var id = $liObj.attr('id');
+         var subMenu = $subMenuDiv.children('.subItems[targetID=' + id + ']');
+         hideSubMenuPanel(subMenu, $liObj);
+        }
+        
+        function MShow(subMenu, $liObj){
+            //$(this).stop(true,true).show(0);
+            showSubMenuPanel(subMenu, $liObj);
+        }
+        
+        function MHide(subMenu, $liObj){
+            hideSubMenuPanel(subMenu, $liObj);
+        }
+            
+        function showSubMenu($liObj){
+            var id = $liObj.attr('id');
+            var position = $liObj.position();
+            var left = position.left + $liObj.parent().position().left;
+
+            var subMenu = $subMenuDiv.children('.subItems[targetID=' + id + ']');
+            
+            subMenu.css('left', left);
+            MShow(subMenu, $liObj);
+        }
+        
+        function doSubMenu($liObj, item){
+ 
+            var $menuContainer =  $('<ul></ul>');
+                $menuContainer.addClass('subItems');
+                $menuContainer.attr('targetID', $liObj.attr('id'));
+                
+                $.each(item.submenu, function(i, item){
+                    var $menuItemA = $('<a></a>');
+                    $menuItemA.html(item.title);
+                    var $menuItemLi = $('<li></li>');
+                    $menuItemLi.css({'background':'pink', 'z-index': 50001 });
+                    $menuItemLi.addClass('subItem')
+                    $menuItemLi.addClass(item.switchCls.off)
+                
+             $menuItemLi.append($menuItemA);
+             
+             $menuItemLi.hover(
+                 function(){
+                    $(this).css('cursor', 'pointer').addClass('hover');
+                 }
+                ,function(){
+                   $(this).removeClass('hover');
+                 }).click(function(){
+                     
+                       hideSubMenu($liObj);
+                       
+                       activeItem(i);
+                     //  alert(i);
+                      // openPage(item.url);
+                 });
+                 
+             $menuContainer.append($menuItemLi);
+             
+                    });
+                   
+        
+                  $subMenuDiv.append($menuContainer);
+                 
+                  $menuContainer.mouseenter(function(){
+                      //MShow($(this), $liObj);
+                    
+                      showSubMenu($liObj);
+                  }).mouseleave(function(){
+                      //MHide($(this), $liObj);
+                       hideSubMenu($liObj);
+                  });
+                  
+                   $menuContainer.css('top', $menuContainer.height()*-1);
+                   $menuContainer.hide(0);
+        }
+        
+        var menuJsonData;
+        
+        //do mainMenu
+        $.getJSON("menu.json", function(data){
+             var $menuContainer =  $('<ul style="border:solid 1px green;"></ul>');
+             $menuContainer.addClass('items');
+             menuJsonData = data;
+             $.each(data, function(i, item){   
+             
+             var $menuItemA = $('<a></a>'); 
+                 $menuItemA.html(item.title);
+             var $menuItemLi = $('<li></li>');
+                 $menuItemLi.attr('id', i);
+                 $menuItemLi.addClass('menuItem')
+                 $menuItemLi.addClass(item.switchCls.off)
+     
+            //set default
+            if (item.defaultPage != undefined) {
+                activeItem(i);
+             }
+
+             
+             //has submenu
+             if (item.submenu != undefined) {
+                 doSubMenu($menuItemLi, item);
+                 
+                 $menuItemLi.hover(//bug!!!
+                 function(){
+                    $(this).css('cursor', 'default');
+                    showSubMenu($(this));
+                 }
+                ,function(){
+                    hideSubMenu($(this));
+                 });
+             }
+             //do not has submenu
+             else{
+                 $menuItemLi.css('cursor', 'pointer').hover(function(){
+                     $(this).addClass('hover');
+                 }, function(){
+                     $(this).removeClass('hover');
+                 }).click(function(){
+                     activeItem(i);
+                 });
+             
+             }
+             
+             //behavior
+    
+             $menuItemLi.append($menuItemA);
+          
+             $menuContainer.append($menuItemLi);
+           });
+            
+             $menuDiv.append($menuContainer); 
+             parseMenuJsonCompleted();
+           });
+
+
+           function setScrollable(){
+               var api = $("div.scrollable").scrollable({
+                   size: 6,
+                   activeClass: 'caaActive',
+                 //  easing: 'easeOutElastic',//'easeInBack', 
+                   api: true,
+                   speed: 500,
+                 //  hoverClass: 'menuItemHover',
+                   onSeek: function(){
+                       //  alert("current page is " + this.getPageIndex());
+                   }
+               });
+           }
+
+            var outerLayout = $('body').layout({
+                center__paneSelector: ".outer-center",
+                south__paneSelector: ".outer-south",
+                north__paneSelector: ".outer-north",
+                north__size: 100,
+                south__size: 100,
+                collapsable: false,
+                slidable: false,
+                resizable: false,
+                spacing_open:    0,       // no resizer-bar when open (zero height)
+                spacing_closed:  20,
+                center__onresize: function(){}
+            });
+
+           $subMenuDiv.css({'top': -1*$menuDiv.height(),'width':$menuDiv.width() });
+           function parseMenuJsonCompleted() 
+           {
+              setScrollable();
+           }
+        });
+        </script>
+    </head>
+    <body>
+        
+      
+       
+    <div class='outer-north '>
+        <div style=' width: 100%; height: 100%; margin: 0 auto;  border: solid 1px blue;  '>
+         <div id='tempDiv'>dtyrty</div>
+         </div>
+        
+    </div> 
+      
+   
+ 
+    <div class='outer-center' /*style='opacity:0.3'*/>
+ 
+       <div style='width: 100%; height:100%;margin: 0 auto;  border: solid 1px blue; position:absolute; z-index:1;'>
+           <iframe id='mainFrame'style=' position:absolute; z-index:2; width:100%; height:100%; '  allowtransparency="true" frameborder="0" src='#'></iframe>
+       </div>  
+    </div>
+    
+    <div class='outer-south'  >
+          <a class="prevPage browse left" >previous</a>
+           <a class="nextPage browse right" style='left:100px;'>next</a>
+    
+         
+         <div id='menuDiv' class='scrollable'></div>
+         
+        
+    <div id='subMenuDiv' style='margin: 0 auto; border: solid 1px green; position:relative;  height:1px;ink;z-index:100; '>
+    </div>
+      
+       
+    </div>
+         
+    
+    
+         
+      
+    
+    </body>
+</html>

@@ -1,0 +1,107 @@
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<!--
+    this file includes all tools together with the jQuery library
+-->
+<link rel="stylesheet" type="text/css" href="10.css"/>
+<script src="../../../js/jquery-1.3.2.min.js"></script>
+
+<script src="tools.scrollable-1.1.0.min.js"></script>
+
+<script src="jquery.easing.1.3.js"></script>
+
+
+<script>
+$(function(){
+    var root = $("div.scrollable").scrollable({
+        // vertical: true,
+        size: 5,
+        //easing: 'easeOutElastic',
+        //api: true,
+        speed: 500,
+    //    hoverClass: 'caaHover',
+       // activeClass: 'caaActive',
+        //clickable: false ,
+        onSeek: function(){
+            //  alert("current page is " + this.getPageIndex());
+        }
+        
+    })/*.navigator({
+        navi: 'div.navi',
+        naviItem: 'a',
+        activeClass: 'current'
+    })*/;
+    
+    var api = root.scrollable();
+    $("#testBtn").click(function(){
+        api.next();
+    });
+    
+    //$('.page').click(function(e){alert('');return false;})
+    
+    
+});
+</script>
+
+
+<!-- without body tag IE may have unprodictable behaviours --> 
+<body>
+<!-- "previous page" action --> 
+<!--button class="prevPage browse left">prev</button--> 
+ <a class="prevPage browse left"></a>
+ 
+<!-- root element for scrollable --> 
+<div class="scrollable">     
+     
+    <!-- root element for the items --> 
+    <ul class="items"> 
+       
+         <li class="menuItem "><a id='highlight' href='#'>1</a></li>
+         <li class="menuItem "><a href='#'>2 </a></li>
+         <li class="menuItem "><a href='#'>3 </a></li>
+         <li class="menuItem "><a href='#'>4 </a></li>
+         <li class="menuItem "><a href='#'>5 </a></li>
+         <li class="menuItem "><a href='#'>6 </a></li>
+          <li class="menuItem "><a href='#'>7 </a></li>
+         <li class="menuItem "><a href='#'>8</a></li>
+         <li class="menuItem "><a href='#'>9</a></li>
+      
+  
+    </ul> 
+     
+</div> 
+ 
+ 
+ <div class="navi"> 
+    <a href="#" class="active">1</a> 
+    <a href="#" >2</a> 
+    <a href="#" >3</a> 
+</div>
+
+
+
+<!-- "next page" action --> 
+<!--button class="nextPage browse right">next</button-->
+
+<a class="nextPage browse right"></a>
+
+<button id='testBtn'>next</button>
+
+
+<!--web link-->
+<br/><br/><br/>
+<a href='http://flowplayer.org/tools/' 
+class='ui-state-default ui-corner-all' 
+target='_blank'>reference</a>
+
+
+</body>
+
+

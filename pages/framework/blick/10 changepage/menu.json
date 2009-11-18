@@ -1,0 +1,145 @@
+ {
+ 
+ "a": {
+        "title": "asdg",
+        "switchCls": {
+            "off": "a_off",
+            "on": "a_on"
+        },
+        "submenu": {
+               "aa": {
+                   "title": "A-1",
+                   "url": "pages/A/1.html"
+               },
+               "aaa1": {
+                   "title": "A-2",
+                    "url": "pages/A/2.html"
+               }, 
+               "a3": {
+                   "title": "A-3",
+                    "url": "pages/tabFW/tabFW.html?data=A/a3"
+               } 
+        }
+    },
+ 
+    "b": {
+        "title": "jrjt",
+     
+        "switchCls": {
+            "off": "b_off",
+            "on": "b_on"
+        },
+        "url": "pages/tabFW/tabFW.html?data=setting",
+        
+        "submenu": {
+               "b_1": {
+                   "title": "B-1",
+                   "switchCls": {
+                        "off": "offCls",
+                        "on": "onCls"
+                   },
+                   "url": "pages/B/1.html"
+               },
+               "b_2": {
+                   "title": "B-2",
+                   "switchCls": {
+                       "off": "offCls",
+                       "on": "onCls"
+                   },
+                   "url": "pages/B/2.html"
+               }
+           
+        }
+       
+    },
+    
+    "c": {
+        "title": "il",
+        "switchCls": {
+            "off":"c_off",
+            "on": "c_on"
+        },
+        "url": "http://www.google.com"
+    },
+    
+    "d": {
+        "title": "45",
+        "switchCls": {
+            "off": "d_off",
+            "on": "d_on"
+        },
+        "url": "pages/tabFW/tabFW.html?data=setting"
+    },
+    
+    "e": {
+        "title": "oo",
+        "switchCls": {
+               "off": "e_off",
+               "on": "e_on"
+        },
+        "submenu": {
+               "e_1": {
+                   "title": "E-1",
+                   "url": "pages/E/1.html"
+               },
+               "e_2": {
+                   "title": "E-2",
+                   "url": "pages/E/2.html"
+               },
+               "e_3": {
+                   "title": "E-3",
+                   "url": "pages/E/3.html"
+               }
+        }
+    },
+    
+    "f": {
+        "title": "ert",
+        "switchCls": {
+            "off": "f_off",
+            "on": "f_on"
+        },
+        "url": "pages/tabFW/tabFW.html?data=setting"
+    },
+    
+    "g": {
+        "title": "hj",
+        "switchCls": {
+            "off": "g_off",
+            "on": "g_on"
+        },
+        "url": "pages/tabFW/tabFW.html?data=setting"
+    },
+    
+    "h": {
+        "title": ",hj,",
+        "switchCls": {
+            "off": "h_off",
+            "on": "h_on"
+        },
+        "url": "pages/tabFW/tabFW.html?data=setting"
+    },
+    
+    "i": {
+        "title": "943",
+        "switchCls": {
+            "off": "i_off",
+            "on": "i_on"
+        },
+        "url": "pages/tabFW/tabFW.html?data=setting"
+    },
+    
+    "j": {
+        "title": "98plkyu",
+        "switchCls": {
+            "off": "j_off",
+            "on": "j_on"
+        },
+        "url": "pages/tabFW/tabFW.html?data=setting"
+    }
+
+
+
+
+
+}

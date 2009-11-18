@@ -1,0 +1,15 @@
+
+  {
+         "AA": {"icon": {"off": "images/icons/i_m01.jpg", "on": "images/icons/i_m01_on.jpg" }, "url":"pages/secondLevel/secondLevel.html?data=setting", "defaultPage" : "true" },
+         "Bcc": {"icon": {"off": "images/icons/i_m02.jpg", "on": "images/icons/i_m02_on.jpg" }, "url":"http://www.kimo.com.tw"  },
+         "C": {"icon": {"off": "images/icons/i_m03.jpg", "on": "images/icons/i_m03_on.jpg" }, "url":"http://www.google.com"  }, 
+         "D": {"icon": {"off": "images/icons/i_m04.jpg", "on": "images/icons/i_m04_on.jpg" }, "url":"http://www.google.com"  },
+         "E": {"icon": {"off": "images/icons/i_m05.jpg", "on": "images/icons/i_m05_on.jpg" }, "url":"http://www.google.com"  },
+         "F": {"icon": {"off": "images/icons/i_m06.jpg", "on": "images/icons/i_m06_on.jpg" }, "url":"http://www.google.com"  },
+         "G": {"icon": {"off": "images/icons/i_m07.jpg", "on": "images/icons/i_m07_on.jpg" }, "url":"http://www.google.com"  },
+         "h": {"icon": {"off": "images/icons/i_m07.jpg", "on": "images/icons/i_m07_on.jpg" }, "url":"http://www.google.com"  },
+         "i": {"icon": {"off": "images/icons/i_m07.jpg", "on": "images/icons/i_m07_on.jpg" }, "url":"http://www.google.com"  }
+  }
+
+    
+

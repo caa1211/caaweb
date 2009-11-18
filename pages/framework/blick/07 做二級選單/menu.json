@@ -1,0 +1,208 @@
+ {
+ 
+ "a": {
+        "title": "1",
+        "switchCls": {
+            "off": "offCls",
+            "on": "onCls"
+        },
+        "submenu": {
+               "aa": {
+                   "title": "A-1",
+                   "switchCls": {
+                        "off": "offCls",
+                        "on": "onCls"
+                   },
+                   "url": "pages/A/1.html"
+               },
+               "aaa1": {
+                   "title": "A-2",
+                   "switchCls": {
+                       "off": "offCls",
+                       "on": "onCls"
+                   },
+                    "url": "pages/A/2.html"
+               }, 
+               "a3": {
+                   "title": "A-3",
+                   "switchCls": {
+                       "off": "offCls",
+                       "on": "onCls"
+                   },
+                    "url": "pages/tabFW/index.html?data=A/a3"
+               } 
+        }
+    },
+ 
+    "b": {
+        "title": "2",
+        "defaultPage": "true",
+        "switchCls": {
+            "off": "offCls",
+            "on": "onCls"
+        },
+        "url": "pages/secondLevel/secondLevel.html?data=setting",
+        
+        "submenu": {
+               "b_1": {
+                   "title": "B-1",
+                   "switchCls": {
+                        "off": "offCls",
+                        "on": "onCls"
+                   },
+                   "url": "pages/B/1.html"
+               },
+               "b_2": {
+                   "title": "B-2",
+                   "switchCls": {
+                       "off": "offCls",
+                       "on": "onCls"
+                   },
+                   "url": "pages/B/2.html"
+               }
+           
+        }
+       
+    },
+    
+    "c": {
+        "title": "3",
+        "switchCls": {
+            "off":"offCls",
+            "on": "onCls"
+        },
+        "url": "http://www.google.com"
+    },
+    
+    "d": {
+        "title": "4",
+        "switchCls": {
+            "off": "offCls",
+            "on": "onCls"
+        },
+        "url": "pages/secondLevel/secondLevel.html?data=setting"
+    },
+    
+    "e": {
+        "title": "5",
+        "switchCls": {
+            "off": "offCls",
+            "on": "onCls"
+        },
+        "url": "pages/secondLevel/secondLevel.html?data=setting",
+        
+        "submenu": {
+               "e_1": {
+                   "title": "E-1",
+                   "switchCls": {
+                        "off": "offCls",
+                        "on": "onCls"
+                   },
+                   "url": "pages/E/1.html"
+               },
+               "e_2": {
+                   "title": "E-2",
+                   "switchCls": {
+                       "off": "offCls",
+                       "on": "onCls"
+                   },
+                   "url": "pages/E/2.html"
+               },
+               "e_3": {
+                   "title": "E-3",
+                   "switchCls": {
+                       "off": "offCls",
+                       "on": "onCls"
+                   },
+                   "url": "pages/E/3.html"
+               }
+        }
+    },
+    
+    "f": {
+        "title": "6",
+        "switchCls": {
+            "off": "offCls",
+            "on": "onCls"
+        },
+        "url": "pages/secondLevel/secondLevel.html?data=setting"
+    },
+    
+    "g": {
+        "title": "7",
+        "switchCls": {
+            "off": "offCls",
+            "on": "onCls"
+        },
+        "url": "pages/secondLevel/secondLevel.html?data=setting"
+    },
+    
+    "h": {
+        "title": "8",
+        "switchCls": {
+            "off": "offCls",
+            "on": "onCls"
+        },
+        "url": "pages/secondLevel/secondLevel.html?data=setting"
+    },
+    
+    "i": {
+        "title": "9",
+        "switchCls": {
+            "off": "offCls",
+            "on": "onCls"
+        },
+        "url": "pages/secondLevel/secondLevel.html?data=setting"
+    },
+    
+    "j": {
+        "title": "10",
+        "switchCls": {
+            "off": "offCls",
+            "on": "onCls"
+        },
+        "url": "pages/secondLevel/secondLevel.html?data=setting"
+    }
+,
+    
+    "k": {
+        "title": "11",
+        "switchCls": {
+            "off": "offCls",
+            "on": "onCls"
+        },
+        "url": "pages/secondLevel/secondLevel.html?data=setting"
+    }
+    ,
+    "l": {
+        "title": "12",
+        "switchCls": {
+            "off": "offCls",
+            "on": "onCls"
+        },
+        "url": "pages/secondLevel/secondLevel.html?data=setting"
+    }
+    ,
+    "m": {
+        "title": "13",
+        "switchCls": {
+            "off": "offCls",
+            "on": "onCls"
+        },
+        "url": "pages/secondLevel/secondLevel.html?data=setting"
+    }
+     ,
+    "n": {
+        "title": "14",
+        "switchCls": {
+            "off": "offCls",
+            "on": "onCls"
+        },
+        "url": "pages/secondLevel/secondLevel.html?data=setting"
+    }
+     
+
+
+
+
+}

@@ -1,0 +1,46 @@
+       #secondMenu {width:150px;}
+       
+       
+        .menuWrap{
+            
+            position: relative;
+            height: 70px;
+            width: 100px;
+            background-color: pink;
+            padding: 15px;
+            margin: 0 auto;
+            overflow: hidden;
+            border: 1px solid red;
+        }
+        
+    
+       .menuWrap li.back 
+       {
+            
+             position: absolute;
+             border: 1px solid yellow;
+             z-index: 8;    
+       }
+        
+          .menuWrap li {
+             /* border: 1px  dotted blue;*/
+                   /* float: left;*/
+                  width: 100px;
+                    list-style: none;
+                }
+                
+          .menuWrap li a {
+                        font: bold 14px arial;
+                        text-decoration: none;
+                        color: #000;
+                        outline: none;
+                        text-align: center;
+                        top: 7px;
+                        text-transform: uppercase;
+                       
+                    }
+                        .menuWrap li a:hover, .menuWrap li a:active, .menuWrap li a:visited {
+                            border: none;
+                        }         
+        
+        

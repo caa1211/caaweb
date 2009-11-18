@@ -1,0 +1,11 @@
+
+  {
+         "setting 1": {"url":"pages/setting/01.html"  },
+         "setting 2": {"url":"pages/setting/02.html"  , "defaultPage" : "true" },
+         "setting 3": {"url":"pages/setting/03.html"  },
+         "setting 4": {"url":"pages/setting/04.html"  },
+         "google": {"url":"http://www.google.com"  }
+  }
+
+    
+
