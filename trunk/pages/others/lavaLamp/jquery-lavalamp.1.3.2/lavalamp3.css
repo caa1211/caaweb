@@ -1,0 +1,35 @@
+
+
+/* Demo 6 - returnHome and homing demo */
+#lavaLampHome {
+position: relative;
+width: 450px;
+background-color:#FFFFDD;
+padding: 10px;
+margin: 10px 0;
+overflow: hidden;
+border: 2px solid #663300;
+}
+#lavaLampHome li {
+float: left;
+list-style: none;
+}
+#lavaLampHome li.backLava {
+border: 2px dashed #CC3300;
+background-color:#FFCC99;
+width: 9px;
+position: absolute;
+}
+#lavaLampHome li a {
+font:14pt Georgia, "Times New Roman", Times, serif;
+text-decoration: none;
+color: #330033;
+text-align: center;
+padding: 5px 10px;
+letter-spacing: 0;
+z-index: 10;
+display: block;
+float: left;
+position: relative;
+margin: auto 5px;
+}

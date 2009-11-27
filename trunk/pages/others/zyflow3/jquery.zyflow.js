@@ -43,8 +43,7 @@
                         }, d
                         , function(){
                              $(this).parent().children('.caption').hide(); 
-                          //$(this).parent().children('.caption').fadeOut(100);
-                          
+                             $(this).css('cursor', 'pointer')
                         }
                         );
                        
@@ -59,6 +58,8 @@
                         , function(){
                            $(this).parent().children('.caption').hide(); 
                            
+                            $(this).css('cursor', 'default')
+                            
                            var currentTitle = $(this).parent().children('.caption').html();
                            $('.flowItemTitle').html(currentTitle);
                           _settings.naviCompleted( _settings.activeIndex, data );}
@@ -74,7 +75,7 @@
                         }, d
                         , function(){
                              $(this).parent().children('.caption').hide(); 
-                          //$(this).parent().children('.caption').fadeOut(100);
+                             $(this).css('cursor', 'pointer')
                         }
                         
                         );
@@ -94,16 +95,19 @@
          naviTo( _settings.activeIndex, 0);
      } ;
      this.itemLength  = $this.children('.item').length;
-
+     
      var _handler = function(){
-      naviTo(_settings.activeIndex , 0);   
-      
       $this.children('.item').each(function(i, d){
-          $(d).click(function(e){   naviTo(i, _settings.during);     e.stopPropagation();});
-          $(d).mouseenter(function(){ $(this).css('cursor', 'pointer');})
-         
+          $(d).click(function(e){ 
+            
+          if(flowObj.activeIndex != i)
+          naviTo(i, _settings.during);     e.stopPropagation();
+          
+          });
+          $(d).bind('mouseenter', function(){ $(this).css('cursor', 'pointer')});
       });
       
+      naviTo(_settings.activeIndex , 0);   
      };
   
      var zyflow = this.each(_handler);

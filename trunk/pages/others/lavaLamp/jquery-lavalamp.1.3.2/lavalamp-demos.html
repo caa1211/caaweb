@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>LavaLamp 1.3.2 Demo - a jQuery plugin</title>
+<link rel="stylesheet" href="lavalamp3.css" />
+</head>
+
+<body>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+<script type="text/javascript" src="lib/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="lib/jquery.lavalamp.1.3.2-min.js"></script>
+<script type="text/javascript">
+<!--
+	var query = new Object();
+	window.location.search.replace(
+	new RegExp( "([^?=&]+)(=([^&]*))?", 'g' ),
+		function( $0, $1, $2, $3 ){
+			query[ $1 ] = $3;
+		}
+	);
+	easing = query['e'] || 'Expo';
+	
+	function loadEasing(e) {
+		location.href = location.pathname+'?e='+e;
+	}
+	
+	function setEasing(e) {
+		loadLamps(e);
+	}
+
+// for dynamic easing changes		
+	function loadLamps(easing) {
+		$('#lavaLampBasicImage').lavaLamp({
+			fx: 'easeIn'+easing,
+			speed: 800,
+			homeTop:-1,
+			homeLeft:-1
+		});
+
+		$('#lavaLampVariableImage').lavaLamp({
+			fx: 'easeOut'+easing,
+			speed: 800,
+			startItem:1
+		});
+
+		$('#lavaLampBorderOnly').lavaLamp({
+			fx: 'easeInOut'+easing,
+			speed: 1000,
+			returnDelay:1000
+		});
+
+		$('#lavaLampVertical').lavaLamp({
+			fx: 'easeOut'+easing,
+			speed: 1000,
+			click: function() {return false;},
+			setOnClick: false
+		});
+
+		$('#lavaLampFun').lavaLamp({
+			fx: 'easeInOut'+easing,
+			speed: 1000,
+			autoReturn: false
+		});
+
+		$('#lavaLampHome').lavaLamp({
+			fx: 'easeInOut'+easing,
+			speed: 1000,
+			returnHome: true,
+			homeLeft: -100,
+			homeTop: -25,
+			homeWidth:700,
+			homeHeight:10
+		});
+
+	}
+	
+// jquery initialize:
+	$(function() {
+		$('#menu').lavaLamp({fx: 'swing', speed: 333});
+		loadLamps(easing);
+		
+		$('select#easing option[value='+easing+']').attr('selected','selected');
+		$('.easingLabel').text(easing);
+	});
+//console.log();
+-->
+</script>
+	
+<div>
+	<h1>LavaLamp 1.3.2 Demos - a jQuery plugin</h1>
+	Choose an Easing Style for all demos
+	<select name="easing" id="easing" onchange="loadEasing(this.value)">
+	<option value="Back">Back</option>
+	<option value="Quad">Quad</option>
+	<option value="Cubic">Cubic</option>
+	<option value="Quart">Quart</option>
+	<option value="Quint">Quint</option>
+	<option value="Sine">Sine</option>
+	<option value="Expo">Expo</option>
+	<option value="Circ">Circ</option>
+	<option value="Elastic">Elastic</option>
+	<option value="Bounce">Bounce</option>
+	</select>
+</div>
+<div>
+	<ul id="menu">
+		<li><a href="#" onclick="return false">Select a Demo &rarr;</a></li>
+		<li><a href="#classic">returnHome</a></li>
+		<li><a href="#startitem">starting item</a></li>
+		<li><a href="#returndelay">returnDelay</a></li>
+		<li><a href="#customclick">custom click</a></li>
+		<li><a href="#autoreturn">autoReturn</a></li>
+		<li><a href="#homing">homing features</a></li>
+	</ul>
+	<p><a href="http://nixbox.com/demos/jquery-lavalamp.php" title="back to download page">download LavaLamp for jQuery</a></p>
+</div>
+<div id="classic">
+	<h2>Classic Spaceship Demo - introducing returnHome and homing features - <i>Ease In</i> - <span class="easingLabel"></span></h2>
+	<h3><strong>returnHome</strong> is set to <strong>false</strong> by default, this keeps the lavalamp where you last clicked.  The absolute home position (in relation to the parent UL) and size is set up via <strong>homeLeft, homeTop, homeWidth and homeHeight</strong>.   Clicking the link below the menu will tell the lavalamp to move back to the home position, but does not change the selectedLava class.</h3>
+	<pre>
+$('#lavaLampBasicImage').lavaLamp({
+	fx: 'easeIn'<span class="easingLabel"></span>,
+	speed: 800,
+	homeTop:-1,
+	homeLeft:-1
+});
+	</pre>
+	<ul id="lavaLampBasicImage" class="lamp">
+		<li><a href="#PhoneHome">Phone Home</a></li>
+		<li><a href="#Contact">Make Contact</a></li>
+		<li><a href="#Ride">Ride spaceship</a></li>
+	</ul>
+	<a href="#" onclick="$('#lavaLampBasicImage li.homeLava').mouseover();return false;">ET, go home!</a> <code>$('#lavaLampBasicImage li.homeLava').mouseover()</code></div>
+<div id="startitem">
+	<h2>startItem demo - <i>Ease Out</i> - <span class="easingLabel"></span></h2>
+	<h3>setting startItem:1 defaults to the 2nd menu element upon page load ( menu arrays start with index 0 )</h3>
+	<pre>
+$("#lavaLampVariableImage").lavaLamp({
+	fx: "easeOut<span class="easingLabel"></span>,
+	speed: 800,
+	startItem: 1
+});
+	</pre>
+	<ul id="lavaLampVariableImage" class="lamp">
+		<li><a href="#Zaphod">Vote Zaphod</a></li> 
+		<li><a href="#Ford">On second thought,<br/>Vote Ford</a></li> 
+		<li><a href="#Trillian">Or Better Yet, <br/>Vote Trillian!</a></li> 
+		<li><a href="#Arthur">Vote Arthur</a></li>
+	</ul>
+</div>
+<div id="returndelay">
+	<h2>returnDelay demo - <i>Ease In/Out</i> - <span class="easingLabel"></span></h2>
+	<h3><strong>returnDelay</strong> is set to 1000 milliseconds ( 1 second ): the returnDelay starts counting down after the last move animation is completed. (<strong>returnDelay + speed</strong>)  The timing is not 100% accurate on this method, especially after mouseout on the parent UL.</h3>
+	<pre>
+$('#lavaLampBorderOnly').lavaLamp({
+	fx: 'easeInOut<span class="easingLabel"></span>',
+	speed: 1000,
+	returnDelay:1000
+});
+	</pre>
+	<ul id="lavaLampBorderOnly" class="lamp">
+		<li><a href="#Home">Home</a></li>
+		<li><a href="#About">About</a></li>
+		<li><a href="#Order">Order<br/>Something</a></li>
+		<li><a href="#Contact">Contact<br />Now!</a></li>
+		<li><a href="#FAQ">FAQ</a></li>
+	</ul>
+</div>
+<div id="customclick">
+	<h2>click &amp; setOnClick:false demo - <i>Ease Out</i> - <span class="easingLabel"></span></h2>
+	<h3>the <strong>click</strong> function just returns false: links will not activate when clicked (watch your address bar for verification) <strong>setOnClick</strong> is set to false, so clicking will <b>not</b> set new element as default return.</h3>
+	<pre>
+$("#lavaLampVertical").lavaLamp({
+	fx: "easeOut<span class="easingLabel"></span>",
+	speed: 1000,
+	click: function() {return false;},
+	setOnClick: false
+});
+	</pre>
+	<ul id="lavaLampVertical" class="lamp">
+		<li><a href="#Wizard">Wizard</a></li>
+		<li><a href="#Cartographer">Cartographer</a></li>
+		<li><a href="#Ranger">Ranger</a></li>
+		<li><a href="#Warlock">Warlock</a></li>
+		<li><a href="#NerfHerder">Nerf Herder</a></li>
+	</ul>
+</div>
+<div id="autoreturn">
+	<h2>autoReturn:false demo - <em>Ease In/Out</em> - <span class="easingLabel"></span></h2>
+	<h3><strong>autoReturn</strong> is set to false: whatever menu item the mouse pointer was last over keeps the hover</h3>
+	<pre>
+$('#lavaLampFun').lavaLamp({
+	fx: 'easeInOut<span class="easingLabel"></span>',
+	speed: 1000,
+	autoReturn: false
+});
+	</pre>
+	<ul id="lavaLampFun" class="lamp">
+		<li><a href="#Swing">Swing bada Swing!</a></li>
+		<li><a href="#Run">Run to First</a></li>
+		<li><a href="#Steal">Steal Second</a></li>
+		<li><a href="#Home">Go for Home!</a></li>
+	</ul>
+	<a href="#" onclick="$('#lavaLampFun li.selectedLava').mouseover();return false;">Click to Return to last selected</a> <code>$('#lavaLampFun li.selectedLava').mouseover()</code></div>
+
+<div id="homing">
+	<h2>returnHome and homing demo - <em>Ease In</em> - <span class="easingLabel"></span></h2>
+	<h3><strong>returnHome</strong> is true, telling lavalamp to return to the home position, even if a menu item is clicked. <strong>homeLeft, homeTop, homeWidth and homeHeight</strong> settings create the appropriate starting point, which is a shape larger than the parent UL for effect (overflow:hidden on UL is necessary CSS for this effect).</h3>
+	<pre>
+$('#lavaLampHome').lavaLamp({
+	fx: 'easeIn<span class="easingLabel"></span>',
+	speed: 1000,
+	returnHome:true,
+	homeLeft: -100,
+	homeTop: -25,
+	homeWidth:700,
+	homeHeight:10
+});
+	</pre>
+	<ul id="lavaLampHome" class="lamp">
+		<li><a href="#Pizza">Pizza</a></li>
+		<li><a href="#Ravioli">Ravioli</a></li>
+		<li><a href="#Putanesca">Putanesca</a></li>
+		<li><a href="#HotLava">Hot Lava Salad</a></li>
+	</ul>
+</div>
+<p><a href="http://nixbox.com/demos/jquery-lavalamp.php" title="back to download page">download LavaLamp for jQuery</a></p>
+<h3>copyright (c) 2008, 2009 Jolyon Terwilliger / Nixbox Web Designs</h3>
+<h3>feel free to reuse this code anyway you see fit in your own projects realizng you assume all responsibility once you do.</h3>
+</body>
+</html>

@@ -1,0 +1,42 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+.shadow_table {
+	display: block;
+	border: 0;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+.shadow_top {
+	background: url(images/top.png) repeat-x;
+	height: 4px;
+    overflow: hidden;
+}
+.shadow_bottom {
+	background: url(images/bottom.png) repeat-x;
+	height: 4px;
+    overflow: hidden;
+}
+.shadow_left {
+	background: url(images/left.png) repeat-y;
+	width: 4px;
+    overflow: hidden;
+}
+.shadow_right {
+	background: url(images/right.png) repeat-y;
+	width: 4px;
+    overflow: hidden;
+}
+.shadow_left_top {
+	background: url(images/left_top.png);
+}
+.shadow_left_bottom {
+	background: url(images/left_bottom.png);
+}
+.shadow_right_top {
+	background: url(images/right_top.png);
+}
+.shadow_right_bottom {
+	background: url(images/right_bottom.png);
+}

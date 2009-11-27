@@ -1,0 +1,27 @@
+/* Demo 6 - returnHome and homing demo */
+#lavaLampHome {
+
+
+}
+#lavaLampHome li {
+float: left;
+list-style: none;
+}
+#lavaLampHome li.backLava {
+border: 2px dashed #CC3300;
+background-color:#FFCC99;
+width: 9px;
+position: absolute;
+}
+#lavaLampHome li a {
+
+
+text-align: center;
+
+letter-spacing: 0;
+z-index: 10;
+display: block;
+
+position: relative;
+
+}
