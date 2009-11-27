@@ -1,0 +1,11 @@
+
+  {
+         "General": {"url":"../networkSettings/wireless/general.html"  },
+         "More AP": {"url":"../networkSettings/wireless/moreAP.html"  },
+         "WPS": {"url":"../networkSettings/wireless/wps.html"  },
+         "WPS Station": {"url":"../networkSettings/wireless/wpsStation.html"  },
+         "WDS": {"url":"../networkSettings/wireless/wds.html"  },
+         "Advanced Setup": {"url":"../networkSettings/wireless/advancedSetup.html"  }
+  }
+
+    

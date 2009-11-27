@@ -1,0 +1,9 @@
+
+  {
+         "Port Forwarding": {"url":"../networkSettings/nat/portForwarding.html"  },
+         "Trigger Port": {"url":"../networkSettings/nat/triggerPort.html"  },
+         "DMZ": {"url":"../networkSettings/nat/dmz.html"  },
+         "ALG": {"url":"../networkSettings/nat/alg.html"  },
+  }
+
+    

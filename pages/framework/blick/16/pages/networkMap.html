@@ -1,0 +1,20 @@
+ <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
+
+  <script type="text/javascript">
+      
+      $(function(){
+          //debugger;
+           $('#testBtn').click(function(){
+               var db1 =  parent.window.$.zyUiDialog({
+                   width: 450,
+                   height: 205,
+                   title: 'edit'
+               });
+               db1.load('edit.html');
+               db1.dialog('open');
+           });
+      })
+  
+</script>
+
+<button id='testBtn'>    dasfasdfsaf</button>
