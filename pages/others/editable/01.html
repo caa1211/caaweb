@@ -45,15 +45,17 @@
             editClass: 'editClass',
             onEdit: function(content){
                 $(this).find('input').select();
-            }
+            },
+            onSubmit: function(a, b , c , d ){ $(this).val('sadgasg');    a.current='asdgg'; if(a.current='') $('#inlineEdit3').val('fghf');},
         });
         
         $('#inlineEdit4').editable({editClass: 'editClass',submit: 'save',cancel: 'cancel',
             onEdit: function(content){
-                $(this).find('input').select();
+                content.current='asdgg'
             }});
     });
   
+   $('#inlineEdit3').val('fghf')
     </script> 
 
 </head>

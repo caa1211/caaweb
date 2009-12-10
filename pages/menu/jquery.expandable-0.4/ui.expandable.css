@@ -1,0 +1,46 @@
+/*
+ * Expandable, a jQuery plugin to dynamically group and hide web content
+ * Copyright (C) 2009  Marc Diethelm
+ * License: (GPL 3, http://www.gnu.org/licenses/gpl-3.0.txt) see license.txt
+ */
+
+/*.ui-expandable {
+	border: 1px solid #cccccc;
+	border-width: 1px 0;
+}*/
+.ui-expandable .ui-widget-header {
+	overflow: hidden;
+	width: 100%;
+}
+.ui-expandable-icon,
+.ui-expandable .ui-expandable-title {
+	float: left;
+}
+.ui-expandable .ui-widget-header .ui-icon {
+	height:16px;
+	width:16px;
+	margin-right: 2px;
+}
+.ui-expandable .ui-widget-header .ui-icon.icon-closed {
+	background-image: url(expandable-closed.png);
+}
+.ui-expandable .ui-widget-header .ui-icon.icon-open {
+	background-image: url(expandable-open.png);
+}
+.ui-expandable-extraIcon {
+	float: right;
+}
+.ui-expandable .ui-widget-content {
+	border-top-width: 0; /* fixes double border when using jQuery UI theme */
+}
+/* some elements create a gap between content and title (eg. UL) */
+/*.ui-expandable .ui-widget-content {
+	margin: 0;
+	padding: 0;
+}*/
+/* many such corrections could be made I suppose: */
+.ui-expandable .ui-widget-content ul,
+.ui-expandable .ui-widget-content ol,
+.ui-expandable .ui-widget-content dl {
+	padding-left: 15px;
+}
