@@ -10,6 +10,7 @@
  * 090903 refine code, add 'resizeConfirmDB' and 'contenerCss' option
  * 090916 cancel event bubble to parent element
  * 090923 cancel event bubble from overlay to parent element
+ * 091211 add trigger openDB event
  */
 ;
 (function($){
@@ -24,12 +25,13 @@
             resizeConfirmDB: false, //no background, resizable
             close: null,
             open: function(e){
+            
                 $(e.target).parents('.ui-dialog').click(function(e){
                     $.cancelBubble(e);
                 });
                  $('.ui-widget-overlay').click(function(e){
                     $.cancelBubble(e);
-                });
+                });      
             },
             containerCss: {
                 'background': '#FFF',
@@ -37,7 +39,7 @@
                 'margin-right': '4px'
             },
             buttons: {
-                'Ok': function(){},
+                'Ok': function(e){  $(this).trigger('aaa');  },
                 'Cancel': function(e){$.cancelBubble(e);$(this).dialog('close');}
             }
         };

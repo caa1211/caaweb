@@ -110,10 +110,7 @@
             })
             
             });
-         
-         
         }
-        
         return this.each(_handler);
     }
  

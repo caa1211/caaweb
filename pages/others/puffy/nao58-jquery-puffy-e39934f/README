@@ -1,0 +1,21 @@
+Small jQuery plugin to provide a cute effect on images.
+
+Requirements:
+	jQuery library & jQuery UI library
+
+Usage:
+	$('img').puffy(opt);
+
+Options:
+	effect: change effect in case you don't want to use puff.
+	options: options for effect.
+	duration: effect speed.
+	callback: callback function which is called when the effect has finished.
+
+Demo:
+	Try out demonstrations under "demo" directory.
+	All images are provided by Yuuki MATSUKI.
+
+----
+Copyright (c) 2009 MORI Naohiko
+Dual licensed under the MIT and GPL licenses.

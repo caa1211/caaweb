@@ -27,11 +27,15 @@
                  });
                  //DB Open
                  $('<div>message</div>').prependTo(db1);
-                 db1.dialog('open');
                  
+                 db1.bind('dialogopen', function(e){/*alert('open');*/$(e.target).parents('.ui-dialog').css('border',' solid 1px red'); });
+                 db1.dialog('open');
+                  db1.bind('aaa', function(){alert('aaa')});
                  //DB close
                  $('#msg').click(function(){
-                     db1.dialog('close');
+                     //db1.dialog('close');
+                     db1.trigger('dialogclose');
+                   
                  });
              });
              
