@@ -55,7 +55,7 @@ $(function(){
             },
             jTools: {
                 wizard: {
-                    url: "pages/jQueryTools/scrollable/03 一次�?一??wizard).html"
+                    url: "pages/jQueryTools/scrollable/03.html"
                 },
                 navigation: {
                     url: "pages/jQueryTools/scrollable/06.html"
@@ -154,7 +154,7 @@ $(function(){
                 },
                 'zyDock' : {url : "pages/others/zyDock/femto.html"}
                 ,
-                'zyFlow' : {url : "pages/others/zyflow3/demo.html"}
+                'zyFlow' : {url : "pages/others/zyflow4/demo.html"}
             },
             animation: {
                 'chainable Effects': {

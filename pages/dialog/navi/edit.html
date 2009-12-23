@@ -1,0 +1,45 @@
+  <SCRIPT type="text/javascript">
+         
+         $(function(){
+         
+           db = $('#content1').parents('.dialogContener');      //find db obj
+            
+            
+            //close
+             $('#btn').click(function(){
+                 db.dialog('close');
+             });
+             
+             
+           //navi
+             $('#btn2').click(function(){
+                 db.load('edit2.html')
+             });
+
+             
+           //navi  
+             $('#content3').hide(0);
+             $('#btn3').click(function(){
+             $('#content3').show(0);
+             $('#content1').hide(0);
+             $('.ui-dialog-buttonpane button:contains("Cancel")').unbind('click').click(function(){ alert(''); }).html('back');
+             });
+             
+         });
+     </SCRIPT>
+     
+     
+    
+<div id='content1'>content1
+
+<button id='btn'>close</button>
+<button id='btn2'>navi to content 2</button>
+<button id='btn3'>navi to content 3</button>
+
+</div>
+
+
+
+<div id='content3'> 
+content3
+</div> 
