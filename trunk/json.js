@@ -137,6 +137,12 @@ $(function(){
                 'loading Mask': {
                     url: "pages/others/loadingMask/01.html"
                 },
+                'loading Mask 2': {
+                    url: "pages/others/loadingMask_2/demo.html"
+                },
+                'disconnect message': {
+                    url: "pages/others/disconnectMsg/demo.html"
+                },
                 'growl': {
                     url: "pages/others/growl/demo.html"
                 },
@@ -155,6 +161,8 @@ $(function(){
                 'zyDock' : {url : "pages/others/zyDock/femto.html"}
                 ,
                 'zyFlow' : {url : "pages/others/zyflow4/demo.html"}
+                 ,
+                'table Sorting' : {url : "pages/others/tableSorting/demo.html"}
             },
             animation: {
                 'chainable Effects': {

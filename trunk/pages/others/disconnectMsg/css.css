@@ -1,0 +1,5 @@
+/*down_message*/
+.downmessage{position:absolute;left:5%;_left:10%; background:#000;height:101px;bottom:20px;width:90%;z-index: 80000100; border:#FFF 2px solid; alpha(opacity=80);-moz-opacity: 0.8;     opacity: 0.8;}
+.downmessage ul li{ float:left; display:block;}
+.downmessage ul li.downleft{ display:block; width:20px; height:101px;}
+.downcenter{ display:block; width:80%;height:101px; color:#CCC;}
