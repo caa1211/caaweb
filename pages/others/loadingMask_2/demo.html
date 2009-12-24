@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--common css-->
+    <link href="../../../css/themes/custom-theme/jquery-ui-1.7.2.custom.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/themes/myCustom.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/demos.css" rel="stylesheet" type="text/css" />
+    
+    
+    <!--common js-->
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript"></script>
+    <script src="../../../js/jquery-ui-1.7.2.custom.min.js" type="text/javascript"></script>
+    <script src="../../../js/zyJqFunctions.js" type="text/javascript"></script>
+    <script src="jquery.simplemodal-1.3.min.js" type="text/javascript"></script>
+
+    
+    <script type="text/javascript">
+        
+    $.openLoadingMask = function(flag){
+        var content;
+        var position;
+        if (flag == undefined || flag == 1) {
+            content = '<div><img src="images/loading.gif" /> <div>Loading...<div></div>'
+            position = ["40%", "45%"];
+        }
+        else 
+            if (flag == 2) {
+                content = '<div class="wait"><table width="100%" border="0" cellspacing="3" cellpadding="2"><tr><td align="center">&nbsp;</td><td class="w_red">&nbsp;</td></tr><tr><td width="31%" align="right" ><img src="images/loading.gif" width="48" height="48" style="margin-right:10px;" /></td><td width="69%" class="w_red">Router is restarting now.Please wait ...</td></tr><tr><td colspan="2">&nbsp;</td></tr><tr><td colspan="2" class="white_12" >As there will be no indication of when the process is complete, please wait for one minute before attempting to access the router again. </td></tr><tr><td colspan="2" class="white_12" >&nbsp;</td></tr></table></div>';
+                position = ["41%", "39%"];
+            }
+        
+        $.modal(content, {
+            position: position,
+            opacity: 60,
+            overlayCss: {
+                backgroundColor: "#000"
+            },
+            containerCss: {
+                background: "none",
+                color: "#FFF"
+            },
+            onOpen: function(dialog){
+                dialog.overlay.fadeIn('fast', function(){
+                    // dialog.data.hide();
+                    dialog.container.fadeIn('fast');
+                    dialog.data.fadeIn('fast');
+                });
+            },
+            
+            onClose: function(dialog){
+                dialog.data.fadeOut('fast', function(){
+                    dialog.container.hide('fast');
+                    dialog.overlay.fadeOut('fast', function(){
+                        $.modal.close();
+                    });
+                });
+            }
+        });
+    };
+    
+    $.closeLoadingMask = function(){
+    
+        setTimeout(function(){
+            $.modal.close();
+        }, 1000)
+        
+    };
+        $(function()
+        {
+        setTimeout(function(){$.closeLoadingMask()}, 1000);
+        $.openLoadingMask();
+   
+
+        });
+  
+  
+  
+    $.openTroubleShooting = function(src){
+            var content = '<iframe frameborder=0 src="' + src + '" style=" width:700px; height:360px; margin-top: 200px;  margin-left: -200px;">'
+            $.modal(content, {
+                opacity: 95,
+                overlayCss: {
+                    backgroundImage:"url(images/bg.gif)"
+                },
+                containerCss: {
+                    background: "none",
+                    color: "#FFF"
+                }
+            });
+        };
+        
+        $.closeTroubleShooting = function(){
+            $.modal.close();
+        };
+        
+    </script> 
+
+</head>
+<body>
+
+
+ 
+<!--web link-->
+<br/><br/><br/>
+<a href='aaaaa' 
+class='ui-state-default ui-corner-all' 
+target='_blank'>reference</a>
+
+
+</body>
+</html>
