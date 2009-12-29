@@ -36,7 +36,8 @@
             containerCss: {
                 'background': '#FFF',
                 'margin-left': '4px',
-                'margin-right': '4px'
+                'margin-right': '4px',
+                  'position':'relative'
             },
             buttons: {
                 'Ok': function(e){  $(this).trigger('aaa');  },
