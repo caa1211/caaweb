@@ -4,3 +4,6 @@
    //處理IE6的問題 
 //  ）
 } 
+
+
+           if ($.browser.msie && ($.browser.version == "6.0") && !$.support.style) {

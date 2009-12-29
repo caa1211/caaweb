@@ -196,14 +196,15 @@ $(function(){
 				  url: "flash/pages/3D/two/demo.html", index: 'flash3Dcarousel'
 				},
 				
-				coverFlow:
-				{
-				   url:"flash/pages/3D/coverFlow/01.html", index: 'flash3DcoverFlow'
-				},
+			
 				'coverFlow 2':
 				{
 				   url:"flash/pages/3D/coverFlow2/01.html", index: 'flash3DcoverFlow2'
-				}
+				},
+                'coverFlow 3':
+                {
+                   url:"flash/pages/3D/coverFlow3/01.html", index: 'flash3DcoverFlow2'
+                }
 				
             },
 			
