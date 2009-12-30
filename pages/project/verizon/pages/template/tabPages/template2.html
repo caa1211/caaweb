@@ -1,0 +1,169 @@
+<script type="text/javascript">
+$(function(){
+    $('#editBtn').click(function(){
+    
+        var db1 = window.parent.$.zyUiDialog({
+            width: 770,
+            height: 430,
+            title: 'Edit sample'
+        });
+        db1.load('pages/template/tabPages/edit.html');
+        db1.dialog('open');
+    });
+    
+    $('#deleteBtn').click(function(){
+    
+        var db1 = window.parent.$.zyUiDialog({
+            width: 450,
+            height: 190,
+            title: 'Delete sample',
+            buttons: {
+                'OK': function(){ db1.dialog('close')}
+            }
+			
+        });
+        db1.load('pages/delete.html');
+        db1.dialog('open');
+    });
+	 $('#addnewshareBtn').click(function(){
+    
+       var db1 = window.parent.$.zyUiDialog({
+            width: 770,
+            height: 305,
+            title: 'Add new share sample'
+        });
+        db1.load('pages/template/tabPages/add.html');
+        db1.dialog('open');
+    });
+});
+ </script>
+<div class="content_frame" >
+<!--Unit Explain start-->
+<div class="explain">
+<div><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b><b class="r4"></b></div>
+<div class="explain_text">Wireless Network Name (also known as SSID) is used to identify the wireless network. The Security Mode and Password are 
+for guarding the safety of the transferring data within the wireless network.</div>
+<div><b class="r4"></b><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></div></div>
+<!--Unit Explain End-->
+<!--Set area start-->
+<div class="data_frame"><ul>
+<li class="set1">
+  <div class="w_table">
+    <input type="button" name="sysAddUserBtn" value="Add new share" id='addnewshareBtn'/>
+  </div></li>
+<!--level 1 title start--><li class="title"> Wide Area Network (WAN) Service Setup</li><!--level 1 title end-->
+<li class="set1"> 
+<div class="w_table">Choose Add, or Remove to configure a WAN service over a selected interface.</div>
+<div class="w_table">
+  <!--Table define start-->
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_frame">
+    <tr>
+      <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td><table width="100%" bor+
+          der="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td><table width="100%" cellpadding="0" cellspacing="0" >
+                <tr align="center" valign="top">
+                  <td width="5%" class="top_font">#</td>
+                  <td class="top_font">Interface</td>
+                  <td class="top_font">Description</td>
+                  <td class="top_font">Type</td>
+                  <td class="top_font">Rate</td>
+                  <td class="top_font">Vlan8021p</td>
+                  <td  class="top_font">VlanMuxId</td>
+                  <td  class="top_font">ConnId</td>
+                  <td  class="top_font">IGMP</td>
+                  <td  class="top_font">NAT</td>
+                  <td  class="top_font">Firewall</td>
+                  <td width="60"  class="top_font" style="border-right:0px;">Modify</td>
+                </tr>
+                <tr align="center">
+                  <td class="table_font">1</td>
+                  <td class="table_font">ptm0_1</td>
+                  <td class="table_font">ipoe_0_0_1_1</td>
+                  <td class="table_font">PTM/IPoE</td>
+                  <td class="table_font">N/A</td>
+                  <td class="table_font">N/A</td>
+                  <td class="table_font">N/A</td>
+                  <td class="table_font">1</td>
+                  <td class="table_font">Disabled</td>
+                  <td class="table_font">Enabled</td>
+                  <td class="table_font">Enabled</td>
+                  <td class="table_font"><div class="i_modify"><ul><li><a href="#" class="edit" id='editBtn' title="Edit"></a></li><li ><a href="#"  id='deleteBtn' class="delete" title="Delete"></a></li></ul></div></td>
+                  </tr>
+                
+              </table></td>
+            </tr>
+          </table></td>
+        </tr>
+      </table></td>
+    </tr>
+  </table>
+</div></li>
+<!--level 1 title start--><li class="title"> ISDN Phone </li><!--level 1 title end-->
+<li class="set1"><div class="w_table"><table width="100%" border="0" cellpadding="0" cellspacing="2" >
+                <tr >
+                  <td width="35%" class="title2" style="text-indent:-12px;" >Assign default SIP Account</td>
+                  <td width="10%" rowspan="4"  align="center" class="blod" >Or</td>
+                  <td width="35%" class="title2" style="text-indent:-12px;" >
+                    Manually configure the MSN of ISDN phone</td>
+            </tr>
+                <tr >
+                  <td style="text-indent:15px; line-height:16px;">For those ISDN phones without MSN number configured, use this setting as default outgoing SIP account.</td>
+                  <td style="text-indent:15px;line-height:16px;">You can also configure one of the following number as the MSN of your ISDN phone. The ISDN phone will chose this SIP account when making an outgoing call.</td>
+                </tr>
+                <tr >
+                  <td >&nbsp;</td>
+                  <td >&nbsp;</td>
+                </tr>
+                <tr >
+                  <td valign="top" ><span class="table_font">
+                    <select name="sipSelect">
+                      <option>SIP-1 (1234568)</option>
+                      <option>SIP-2 (1234568)</option>
+                    </select>
+                  </span></td>
+                  <td valign="top" ><ul>
+                    <div class="w_text3">
+                      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_frame">
+                        <tr>
+                          <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                      <td><table width="100%" cellpadding="0" cellspacing="0" class="table_frame" >
+                                          <tr align="center" >
+                                            <td class="top_font">SIP Number</td>
+                                          </tr>
+                                          <tr align="center" >
+                                            <td  class="table_font">SIP-1 (1234568)</td>
+                                          </tr>
+                                          <tr align="center" >
+                                            <td  class="table_font">SIP-2 (1234568)</td>
+                                          </tr>
+                                      </table></td>
+                                    </tr>
+                                </table></td>
+                              </tr>
+                          </table></td>
+                        </tr>
+                      </table>
+                    </div>
+                  </ul>
+                  </td>
+                </tr>
+                
+              </table></div></li>
+<!--Please add this tag--><li class="space"> </li>
+<!--Note define start-->
+<li class="noteframe"> <div class="w_text"><span class="i_note">Note:</span></div><div class="note_text">&nbsp;&nbsp;Router: In this mode, the device is supported to connect to internet via ADSL/Cable Modem. PCs in LAN ports share the same IP to ISP through WAN Port. Access Point: In this mode, all Ethernet ports are bridged together. The device allows the wireless-equipped computer can communicate with a wired network. </div></li>
+<!--Note define end-->
+<li class="space"> </li>
+<!--Button define start-->
+<li class="buttonframe"><div class="button_position"><input name="sysSubmit" value="Add Button" type="submit" />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<input name="Cancel" value="Cancel" type="reset" />&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<input name="sysSubmit" value="Apply" type="submit" /></div></li>
+<!--Button define end-->
+</ul></div>
+<!--Set area end-->
+</div>
+<br/><br/>

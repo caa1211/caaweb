@@ -1,0 +1,19 @@
+
+ <script type="text/javascript"> 
+ $(function(){
+ $('#tempBtn').click(function(){
+               var db1 = window.parent.$.zyUiDialog({
+                   width: 850,
+                   height: 605,
+                   title: 'edit'
+               });
+               db1.load('pages/networkSettings/wireless/wlan_moreap_edit.html');
+               db1.dialog('open');
+           });
+       });       
+  </script>    
+
+<div class="content_frame" >
+<button id='tempBtn'> open </button>
+</div>
+<br/><br/>

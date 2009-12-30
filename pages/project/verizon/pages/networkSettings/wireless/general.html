@@ -1,0 +1,135 @@
+<script type="text/javascript" src="../../js/wireless.js"></script>
+<div class="content_frame" >
+<!--Unit Explain start-->
+<div class="explain">
+<div><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b><b class="r4"></b></div>
+<div class="explain_text">Wireless security can protect the data from unauthorized access or damage via wireless network. You need a wireless network name (al known as SSID) and security mode to set up the wireless security.</div>
+<div><b class="r4"></b><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></div></div>
+<!--Unit Explain End-->
+<!--Set area start-->
+<div class="data_frame"><ul>
+<li class="title">Wireless Network Setup</li>
+<li class="set1"> 
+<div class="w_text"><ul> <li class="left_table" >Wireless</li><li class="right_table"><input name="ssid_state" id="radio" type="radio" value="enable" checked="checked" /> 
+Enable
+      <input name="ssid_state" id="radio2" type="radio" value="disable" /> 
+Disable (settings are invalid when disabled)</li></ul><br style="clear:both;" /></div>
+<!--Note define start-->
+<li class="noteframe">
+  <div class="note_text"></div></li>
+<!--Note define end-->
+<div class="space"></div>
+<li class="title">Wireless Network Settings</li>
+<li class="set1"> 
+<div class="w_text"><ul><li class="left_table">Wireless Network Name<span class="right_table">(SSID)</span>:</li><li class="right_table"><input type="text" name="textfield" id="textfield" />
+</li> </ul></div>
+<div class="w_text"><ul><li class="left_table">&nbsp;</li><li class="right_table"><input type="checkbox" name="checkbox" id="checkbox" /> 
+Hide SSID</li> </ul></div>
+<div class="w_text"><ul><li class="left_table">&nbsp;</li><li class="right_table"><input type="checkbox" name="checkbox" id="checkbox" /> Multicast Forwarding</li> </ul></div>
+<div class="w_text"><ul><li class="left_table">BSSID:</li><li class="right_table">00:19:CB:13:26:1B</li></ul></div>
+</li>
+<div class="space"></div>
+<li class="title">Security Level</li>
+<div class="w_text">
+<li class="set1"> 
+<div class="w_slider" style="margin-left:-50px; margin-top:20px;">
+<div class="i_wifi_img"></div>
+<div class="w_level_color"><ul><li><img src="../../images/i_s_bar_left.gif" /></li>
+<li class="s01"><span class="triangle"  style="margin-left:60px;"></span></li><li class="s02"><span class="triangle"></span></li><li class="s03"><span class="triangle"></span></li><li><img src="../../images/i_s_bar_right.gif" /></li></ul></div>
+<div class="w_draw"><div style="position:absolute; z-index:100; width:262px; margin:0 auto; margin-top:10px; left: 60px; top: -10px;">
+<div id='silder'><a href="#"></a></div></div><ul>
+        <li class="w_draw_center">&nbsp;</li>
+    </ul></div>
+<span id ='select_1'>
+<div id="w_no" class='_off'><ul><li>No Security</li></ul></div>
+<div id="w_no_on" class='_on' style="display:none;"><ul><li>No Security</li></ul></div>
+</span>
+<span id ='select_2'>
+<div id="w_basic" class='_off'><ul><li>Basic</li></ul></div>
+<div id="w_basic_on" style="display:none;" class='_on'><ul><li>Basic<span class="selectarrow"></span></li></ul>
+</div>
+</span>
+
+<span id ='select_3'>
+<div id="w_more" style="display:none;" class='_off'><ul><li>More Secure<br />(Recommended)</li></ul></div>
+<div id="w_more_on" class='_on'><ul><li>More Secure<br />(Recommended)<span class="selectarrow" style="margin-left:5px;"></span></li></ul>
+</div>
+</span>
+</div></div>
+</li>
+<!--Basic start-->
+<div id="wepmode" class="selectframe clearfix">
+<li class="set1">
+<div class="w_text" style="*margin-left:-15px" ><ul> <li class="left_table">Security Mode:</li> <li class="right_table">WEP</li></ul></div>
+<div class="w_text"  ><input type="checkbox" name="checkbox" id="checkbox" /> Generate password automatically </div>
+<div class="space"></div>
+<div class="w_text" style="line-height:16px;">Enter 13 characters (a-z, A-Z, and 0-9). Spaces and underscores are not allowed.</div>
+<div class="w_text3" id="wepdesc" style="display:none;">Select one password as your active password.</div>
+<div class="w_text3" ><ul><li class="left_table"><input name="radio6" type="radio" id="radio6" value="radio6" checked="checked" /> Password 1:</li>
+<li class="right_table"><input type="text" name="textfield" id="textfield" /> <span class="linking moreBtn" id="btn_wepmore">more...</span> </li></ul></div>
+<!-- WEP more setting beginning -->
+<div id="wepmore"  class="clearfix">
+<div class="w_text3"><ul><li class="left_table"><input name="radio6" type="radio" id="radio6" value="radio6" /> Password 2:</li> <li class="right_table"><input type="text" name="textfield" id="textfield" />
+</li></ul></div>
+<div class="w_text3"  ><ul><li class="left_table"><input name="radio6" type="radio" id="radio6" value="radio6" /> Password 3:</li><li class="right_table"><input type="text" name="textfield" id="textfield" />
+</li></ul></div>
+<div class="w_text3"  ><ul><li class="left_table"><input name="radio6" type="radio" id="radio6" value="radio6" /> Password 4:</li><li class="right_table"><input type="text" name="textfield" id="textfield" />
+</li></ul></div>
+<div class="w_text3 "><ul><li class="left_table">WEP Encryption:</li><li class="right_table"><select name="select" id="select"><option>128-bit</option></select></li></ul><div class="br"></div></div>
+<div class="w_text3"><a href="#" class="linking">Edit MAC Filter</a></div>
+</div>
+<!-- WEP more setting ending -->
+</li>
+</div>
+<!--Basic end-->
+<!--More Security start-->
+<div id="secmode" class="selectframe clearfix"><ul>
+<li class="set1" > 
+<div class="w_text" style="*margin-left:-15px"><ul><li class="left_table" >Security Mode:</li><li class="right_table"><select name="select" id="selectSecmode"> <option value="1">WPA-PSK</option> <option value="2">WPA2-PSK</option> <option value="3">WPA</option> <option value="4">WPA2</option> </select></li></ul></div>
+<!-- WPA-PSK/WPA2-PSK setting beginning -->
+<div class="space"></div>
+<div id="pwd">
+<div class="w_text" style="line-height:16px;">Enter 8-63 characters (a-z, A-Z, and 0-9). Spaces and underscores are not allowed.</div>
+<div class="w_text"><ul><li class="left_table">Password:</li><li class="right_table"><input type="text" name="textfield" id="textfield" />
+<span class="linking moreBtn" id="btn_wpapskmore">more...</span><span class="linking moreBtn" id="btn_wpa2pskmore" style="display:none;">more...</span> </li></ul></div>
+</div>
+<!-- WPA-PSK/WPA2-PSK setting ending -->
+<!-- WPA/WPA2 setting beginning -->
+<div id="authserver" style="display:none;">
+<div class="w_text"> Authentication Server</div>
+<div class="w_text"><ul><li class="left_table">&nbsp;&nbsp;IP Address:</li><li class="right_table"><input type="text" name="textfield" id="textfield" /></li></ul> </div>
+<div class="w_text"><ul><li class="left_table">&nbsp;&nbsp;Port Number:</li> <li class="right_table"><input type="text" name="textfield" id="textfield" /></li></ul> </div>
+<div class="w_text"><ul><li class="left_table">&nbsp;&nbsp;Shared Secret:</li><li class="right_table"><input type="text" name="textfield" id="textfield" /> <span class="linking moreBtn" id="btn_wpamore">more...</span><span class="linking moreBtn" id="btn_wpa2more">more...</span></li></ul></div>
+</div>
+<!-- WPA/WPA2 setting ending -->
+<!-- only for WPA2-PSK more setting beginning -->
+<div class="w_text3" id="pskcom" style="display:none; "> <ul><li class="left_table">WPA-PSK Compatible:</li><li class="right_table">  <input name="radio3" type="radio" id="radio3" value="radio3" checked="checked" /> Enable <input type="radio" name="radio3" id="radio3" value="radio3" /> Disable</li></ul></div>
+<!-- only for WPA2-PSK more setting ending -->
+<!-- only for WPA2 more setting beginning -->
+<div class="w_text3" id="wpacom" style="display:none;"><ul><li class="left_table">WPA Compatible:</li> <li class="right_table"> <input name="radio5" type="radio" id="radio5" value="radio5" checked="checked" /> Enable<input type="radio" name="radio5" id="radio5" value="radio5" /> Disable</li></ul></div>
+<!-- only for WPA2 more setting ending -->
+<!-- WPA-PSK/WPA2-PSK/WPA more setting beginning -->
+<div class="w_text3" id="encryp" style="display:none;"> <ul> <li class="left_table">Encyption:</li><li class="right_table"><select name="select" id="select"><option>TKIP</option><option>AES</option><option>TKIP+AES</option> </select></li></ul></div>
+<!-- WPA-PSK/WPA2-PSK/WPA more setting ending -->
+<!-- only for WPA2 more setting beginning -->
+<div id="wpa2" style="display:none;">
+<div class="w_text3" > <ul><li class="left_table">WPA2 Pre-authentication:</li><li class="right_table"> <input name="radio4" type="radio" id="radio4" value="radio4" checked="checked" /> Enable<input type="radio" name="radio4" id="radio4" value="radio4" /> Disable</li></ul></div>
+<div class="w_text3" > <ul><li class="left_table">Network Re-auth Interval:</li><li class="right_table"><input type="text" name="textfield" id="textfield" /> sec</li></ul></div></div>
+<!-- only for WPA2 more setting ending -->
+<!-- WPA-PSK/WPA2-PSK/WPA more setting beginning -->
+<div id="timer" style="display:none;">
+<div class="w_text3" > <ul><li class="left_table">Group Key Update Timer:</li><li class="right_table"> <input type="text" name="textfield" id="textfield" /> sec</li></ul></div>
+<div class="w_text3" > <ul><li class="left_table"><a href="#" class="linking">Edit MAC Filter</a></li><li class="right_table">&nbsp;</li></ul></div></div>
+<!-- WPA-PSK/WPA2-PSK/WPA more setting ending -->
+</li></ul>
+</div>
+<!--More Security end-->
+<li class="space"> </li>
+<!--Button define start-->
+<li class="buttonframe"><div class="button_position"><input name="sysSubmit" value="Apply" type="submit" />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<input name="Cancel" value="Cancel" type="reset" /></div></li>
+<!--Button define end-->
+</ul>
+</div>
+<!--Set area end-->
+</div>
+<br/><br/>

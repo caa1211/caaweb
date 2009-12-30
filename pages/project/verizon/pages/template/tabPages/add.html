@@ -1,0 +1,58 @@
+<div class="popup_frame" >
+<!--Set area start-->
+<div class="data_frame"><ul>
+<!--level 1 title start--><li class="title">Add Share</li><!--level 1 title end-->
+<!--level 1 start-->
+<li class="set1"> 
+<!--Sample 1 start-->
+<div class="w_text">
+  <ul>
+    <li class="left_table">Wireless Radio  :</li>
+    <li class="right_table">
+      <input name="ssid_state" id="radio" type="radio" value="enable" checked="checked" />
+      Enabled
+      <input name="ssid_state" id="radio2" type="radio" value="disable" />
+      Disabled </li>
+  </ul>
+</div>
+<!--Sample 1 end-->
+<!--Sample 1 start-->
+<div class="w_text">
+<ul>
+<li class="left_table"> Share Path :</li>
+<li class="right_table"><span class="cfig_word">
+  <input type="text" name="CIFS_Adduser_username" size="30" maxlength="50" />
+  <input type="button" name="CIFS_Browse" value="Browse" onclick="return popup('CIFS_Browser.html', 'CIFS Browser')" />
+</span></li>
+</ul>
+</div>
+<!--Sample 1 end-->
+<!--Sample 1 start-->
+<div class="w_text">
+<ul>
+<li class="left_table">Description :</li>
+<li class="right_table"><span class="cfig_word">
+  <input type="text" name="CIFS_Adduser_username2" size="30" maxlength="50" />
+</span></li>
+</ul>
+</div>
+<!--Sample 1 end-->
+<!--Sample 1 start-->
+<div class="w_text">
+  <ul>
+    <li class="left_table">Access Level :</li>
+    <li class="right_table"><span class="cfig_word">
+      <select name="accesSel" style="width:179" onchange="doAccessChange(this.value);">
+        <option value="public">Public</option>
+        <option value="security">Security</option>
+      </select>
+    </span></li>
+  </ul>
+</div>
+<!--Sample 1 end-->
+</li>
+<li class="space"> </li>
+
+</ul></div>
+<!--Set area end-->
+</div>
