@@ -1,0 +1,247 @@
+<script type="text/javascript">
+$(function(){   
+	 $('#frame2').hide(0);
+	 
+	 function backClick(){
+			$('#frame2').hide(0);
+	        $('#frame1').show(0);	
+			$(this).siblings('button:contains("Apply")').html('OK').unbind('click').click(function(){alert('ok')} );
+		    $(this).remove().empty();
+		}		
+		
+	 function applyClick(){
+		 window.parent.$.zyUiDialog({
+            width: 450,
+            height: 190,
+            title: 'Delete sample',
+            buttons: {
+                'OK': function(){ $(this).dialog('close');}
+            }
+			
+        }).load('pages/template/tabPages/msg.html').dialog('open');
+		 
+		}										 
+										 
+	$('#addnewshareBtn').click(function(){
+   // $('.ui-widget-content button:contains("Cancel")').unbind('click').click(backClick).html('Back');
+	$('.ui-dialog-buttonpane button:contains("OK")').unbind('click').click(applyClick).html('Apply');
+
+	var $newButton = $('<button></button>')
+	$newButton.addClass('ui-state-default').addClass('ui-corner-all');
+	$newButton.attr('type', 'button');
+	$newButton.click(backClick).html('Back');
+	$('.ui-dialog-buttonpane').append($newButton);
+  
+	
+	$('#frame2').show(0);
+	$('#frame1').hide(0);
+    });
+	 
+    $('#backBtn').click(function(){				   
+	$('#frame1').show(0);
+	$('#frame2').hide(0);
+    });
+	 
+    
+    });
+</script>
+<div class="popup_frame" id='frame1' >
+<!--Unit Explain start-->
+<!--Unit Explain End-->
+<!--Set area start-->
+<div class="data_frame"><ul>
+<!--level 1 start-->
+<li class="title">Test Button</li>
+<li class="set1">
+ <div class="w_table">
+    <input type="button" name="sysAddUserBtn" value="Add level 2" id='addnewshareBtn'/>
+  </div> 
+  </li>
+<!--level 1 sample-1  end-->
+<li class="title">SSID</li>
+<li class="title2"><span class="i_title2">Title2</span></li>
+<li class="set2"> <div class="w_text">
+  <ul>
+    <li class="left_table">Wireless Power Level :</li>
+    <li class="right_table">
+      <select name="power_level" id="power_level">
+        <option selected="selected">Full</option>
+        <option>75%</option>
+        <option>50%</option>
+        <option>25%</option>
+        <option>6%</option>
+      </select>
+    </li>
+  </ul>
+</div>
+</li>
+<li class="set2"> <div class="w_text">
+  <ul>
+    <li class="left_table">802.11 mode :</li>
+    <li class="right_table">
+      <select name="80211bg_mode" id="80211bg_mode">
+        <option selected="selected">Mixed - 802.11b, 802.11g, 802.11n </option>
+        <option>802.11n </option>
+        <option>802.11g </option>
+        <option>802.11b </option>
+      </select>
+    </li>
+  </ul>
+</div>
+</li>
+<!--Please add this tag--><li class="space"> </li>
+<!--Note define start-->
+<li class="noteframe"> <div class="w_text"><span class="i_note">Note:</span></div><div class="note_text">&nbsp;&nbsp;Router: In this mode, the device is supported to connect to internet via ADSL/Cable Modem. PCs in LAN ports share the same IP to ISP through WAN Port. Access Point: In this mode, all Ethernet ports are bridged together. The device allows the wireless-equipped computer can communicate with a wired network. </div></li>
+<!--Note define end-->
+<li class="space"> </li>
+
+</ul></div>
+<!--Set area end-->
+</div>
+
+<div class="popup_frame" id='frame2' >
+<!--Set area start-->
+<div class="data_frame"><ul>
+<!--level 1 title start--><li class="title">General</li><!--level 1 title end-->
+<!--level 1 start-->
+<li class="set1"> 
+<!--Sample 1 start-->
+<div class="w_text">
+  <ul>
+    <li class="left_table">Wireless Radio  :</li>
+    <li class="right_table">
+      <input name="ssid_state" id="radio" type="radio" value="enable" checked="checked" />
+      Enable
+      <input name="ssid_state" id="radio2" type="radio" value="disable" />
+      Disable </li>
+  </ul>
+</div>
+<!--Sample 1 end-->
+<!--Sample 1 start-->
+<div class="w_text">
+  <ul>
+    <li class="left_table">&nbsp;</li>
+    <li class="right_table">
+      <input name="ssid_state" id="radio" type="radio" value="enable" checked="checked" />
+      Enable
+      <input name="ssid_state" id="radio2" type="radio" value="disable" />
+      Disable </li>
+  </ul>
+</div>
+<!--Sample 1 end-->
+</li>
+<!--level 1 table start-->
+<li class="title">Table of Level 1 </li>
+<li class="set1"> <div class="w_table">
+  <!--Table define start-->
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_frame">
+    <tr>
+      <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td><table width="100%" cellpadding="0" cellspacing="0" >
+                <tr align="center">
+                  <td width="5%"class="top_font">#</td>
+                  <td class="top_font">Active Active Active Active</td>
+                  <td class="top_font">Hide SSID</td>
+                  <td class="top_font" style="border-right:0px;">Name</td>
+                </tr>
+                <tr align="center">
+                  <td class="table_font">1</td>
+                  <td class="table_font"><input type="checkbox" name="checkbox" value="checkbox" /></td>
+                  <td class="table_font"><input type="checkbox" name="checkbox3" value="checkbox" /></td>
+                  <td class="table_font"><span class="right_table">
+                    <input name="RN_EnterName3" size="30" maxlength="20" onblur="chkName(this)" type="text" />
+                  </span></td>
+                  </tr>
+                
+              </table></td>
+            </tr>
+          </table></td>
+        </tr>
+      </table></td>
+    </tr>
+  </table>
+</div></li>
+<!--level 1 sample-1  end-->
+<li class="title">SSID</li>
+<!--level 2 title start--><li class="title2"><span class="i_title2">Title2</span></li><!--level 2 title end-->
+<!--level 2 start-->
+<li class="set2"> <div class="w_table">
+  <!--Table define start-->
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_frame">
+    <tr>
+      <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td><table width="100%" cellpadding="0" cellspacing="0" >
+                <tr align="center">
+                  <td width="5%" valign="top" class="top_font">#</td>
+                  <td class="top_font">Active</td>
+                  <td class="top_font">Hide SSID Hide SSID Hide SSID Hide SSID Hide SSID</td>
+                  <td class="top_font" style="border-right:0px;">Name </td>
+                </tr>
+                <tr align="center">
+                  <td class="table_font">1</td>
+                  <td class="table_font"><input type="checkbox" name="checkbox2" value="checkbox" /></td>
+                  <td class="table_font"><input type="checkbox" name="checkbox2" value="checkbox" /></td>
+                  <td class="table_font"><span class="right_table">
+                    <input name="RN_EnterName" size="30" maxlength="20" onblur="chkName(this)" type="text" />
+                  </span></td>
+                </tr>
+              </table></td>
+            </tr>
+          </table></td>
+        </tr>
+      </table></td>
+    </tr>
+  </table>
+</div>
+<!--Table define end-->
+</li>
+<!--level 2 end-->
+<li class="title2"><span class="i_title2">Title2</span></li>
+<li class="set2"> <div class="w_text">
+  <ul>
+    <li class="left_table">Wireless Power Level :</li>
+    <li class="right_table">
+      <select name="power_level" id="power_level">
+        <option selected="selected">Full</option>
+        <option>75%</option>
+        <option>50%</option>
+        <option>25%</option>
+        <option>6%</option>
+      </select>
+    </li>
+  </ul>
+</div>
+</li>
+<li class="set2"> 
+<div class="w_text">
+  <ul>
+    <li class="left_table">802.11 mode :</li>
+    <li class="right_table">
+      <select name="80211bg_mode" id="80211bg_mode">
+        <option selected="selected">Mixed - 802.11b, 802.11g, 802.11n </option>
+        <option>802.11n </option>
+        <option>802.11g </option>
+        <option>802.11b </option>
+      </select>
+    </li>
+  </ul>
+</div>
+</li>
+<!--Please add this tag-->
+<li class="space"> </li>
+<!--Note define start-->
+<li class="noteframe"> <div class="w_text"><span class="i_note">Note:</span></div><div class="note_text">&nbsp;&nbsp;Router: In this mode, the device is supported to connect to internet via ADSL/Cable Modem. PCs in LAN ports share the same IP to ISP through WAN Port. Access Point: In this mode, all Ethernet ports are bridged together. The device allows the wireless-equipped computer can communicate with a wired network. </div></li>
+<!--Note define end-->
+</ul></div>
+<!--Set area end-->
+</div>
+<br/><br/>
+
+
+

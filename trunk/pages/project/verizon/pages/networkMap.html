@@ -1,0 +1,772 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<link href="../css/brick.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="../js/jquery.clickmenu.pack.js"></script>
+<script type="text/javascript">
+$(function(){
+
+    function adjustDownMsg(){
+        $('#downMsg').css({
+            top: $(window).height() - $('#downMsg').height() - 20 + $(window).scrollTop()
+        });
+    }
+    
+    $(window).scroll(adjustDownMsg).resize(adjustDownMsg);
+ 
+    function connection(flag, init){
+        var time = 200;
+        if (init) 
+            time = 0;
+        adjustDownMsg();
+        if (flag) {
+		   $('.disconnect').hide();
+		   $('.connect').show();
+           $('#downMsg').animate({
+             top: $(window).height() - $('#downMsg').height()-10 + $(window).scrollTop(),
+             opacity: 'hide'
+           }, time, adjustDownMsg);
+         // $('#downMsg').fadeOut(time, adjustDownMsg);
+        }
+        else {
+		  $('.disconnect').show();
+		  $('.connect').hide();
+          $('#downMsg').fadeIn(time); 
+        }
+    }
+
+    $('.i_internet').toggle(
+      function(e){
+        connection(false);
+    }, function(){
+        connection(true);
+    })  
+	//initial
+	  connection(true, true);
+    //connection(false);
+})
+
+var menu = 
+    '<ul style="position: relative;">'+
+    '<li class="menutop">'+
+    '</li>'+
+         '<li>'+
+            '<a href="#" class="info">Info</a>'+
+         '</li>'+
+         '<li>'+
+            '<a href="#" class="block">Block</a>'+
+         '</li>'+
+         '<li >'+
+            '<a href="#" class="changename">Change name/icon</a>'+
+         '</li>'+
+   '<li class="menubottom">'+
+   '</li>'+
+      '</ul>';
+      
+      $(function(){
+          var zCounter = 10000;
+          $('.list').each(function(i, d){
+              zCounter-=1;
+              $(d).children('li').append(menu);
+              $(d).css('z-index', zCounter);
+              $(d).clickMenu();
+              });
+   
+  
+  	$('.changename').click(function(){
+      
+	  // alert($(this).parents('.list').attr('id'));
+   
+        var db1 = window.parent.$.zyUiDialog({
+            width: 700,
+            height:372,
+            title: 'Change icon/name'
+        });
+        db1.load('pages/changeicon.html');
+        db1.dialog('open');
+    });
+	
+	    $('.info').click(function(){
+    
+        var db1 = window.parent.$.zyUiDialog({
+            width: 450,
+            height: 220,
+            title: 'Info',
+            buttons: {
+                'OK': function(){ db1.dialog('close')}
+            }
+        });
+        db1.load('pages/info.html');
+        db1.dialog('open');
+    });
+	$('.block').click(function(){
+          var db1 = window.parent.$.zyUiDialog({
+            width: 450,
+            height: 200,
+            title: 'Delete sample',
+            buttons: {
+                'OK': function(){ db1.dialog('close')}
+            }
+			
+        });
+        db1.load('pages/block.html');
+        db1.dialog('open');
+    });
+	
+            var mapPosition = $('#mapView').position();
+            $('#statusView').css('left', $('#mapView').width() + mapPosition.left).hide(0);
+
+function changeView(showObj, hideObj, width, callback){
+    showObj.css('left', -1 * width); 
+    showObj.animate({
+         left: '+=' + width,
+         opacity: 'show'
+     }, 300, callback)
+    
+     hideObj.animate({
+         left: '+=' + width,
+         opacity: 'hide'
+     }, 300)
+     
+}
+     
+var currentView = 'mapView';
+var subMenuHeight = 90;
+$('.arrowbn').append('<span class="arrowbnText">Status</span>');
+$('.networkmapframe').height($('#mapView').height() + subMenuHeight);
+  
+$('#btn1').toggle(function(){
+    var width = -1 * $('#statusView').width();
+    var thisBtn = $(this);
+
+    changeView($('#statusView'), $('#mapView') , width, function(){
+    thisBtn.css('background', 'url(../images/i_right_arrow.gif)');
+    $('.arrowbnText').html('Network Map');
+    currentView = 'statusView';
+        });
+    $('.networkmapframe').animate({height:$('#statusView').height()-20}, 300 );
+}, function(){
+    var width = $('#mapView').width();
+    var thisBtn = $(this);
+     
+    changeView($('#mapView'), $('#statusView'), width, function(){
+    thisBtn.css('background', 'url(../images/i_left_arrow.gif)');
+    $('.arrowbnText').html('Status'); 
+    currentView = 'mapView';
+     });
+    $('.networkmapframe').animate({height:$('#mapView').height() + subMenuHeight}, 300 );
+})
+
+   $('.iconBtn').click(function(){
+			$('.iconBtn').addClass('highlight');
+			$('.listBtn').removeClass('highlight');		
+		  $('.iconView').fadeIn(0);
+		  $('.listView').fadeOut(0);
+          $('.networkmapframe').height($('#mapView').height() + subMenuHeight);
+    });		
+					
+   $('.listBtn').click(function(){
+			$('.listBtn').addClass('highlight');
+			$('.iconBtn').removeClass('highlight');
+	$('.listView').fadeIn(0);
+	$('.iconView').fadeOut(0);
+    $('.networkmapframe').height($('#mapView').height() + subMenuHeight);
+	});
+ 
+	$('.listmode').hover(
+	function(){
+	$(this).children('a').addClass('hover').css('cursor', 'pointer');
+	}, function(){
+	$(this).children('a').removeClass('hover');
+	})
+	
+	$('.iconmode').hover(
+	function(){
+	$(this).children('a').addClass('hover').css('cursor', 'pointer');
+	}, function(){
+	$(this).children('a').removeClass('hover');
+	})
+//----
+
+$(window).resize(function(){
+    if (currentView == 'mapView') 
+        $('.networkmapframe').height($('#mapView').height() + subMenuHeight);
+    else 
+        if (currentView == 'statusView') 
+            $('.networkmapframe').height($('#statusView').height() - 20);
+});
+
+$('#checkPrbmBtn').click(function(){ window.parent.$.openTroubleShooting("pages/troubleshooting.html");});
+});	  
+ </script>
+<title>Untitled Document</title>
+</head>
+<body>
+<div class="content_frame2" >
+<div class="arrowbn"><a href="#" id="btn1"></a></div>
+<div class="networkmapframe" style='overflow:hidden;'>
+  <div class="i_left_arrow"></div>
+  <!--map view start-->
+  <div id="mapView"  style='height:auto;'>
+  <div class="space"></div>
+    <div class=" title" style=" position:absolute; top:25px; left:15px;">Network Map</div>
+    <div class="modesetting">
+          <table width="420" border="0" cellspacing="0" cellpadding="0" align="right">
+            <tr>
+              <td class="blod">Refresh interval:</td>
+              <td><select name="Sys_RefreshList" size="1" onchange="resetInterval()">
+                <option value="00000000" selected="selected">None </option>
+                <option value="00000001">5 seconds </option>
+                <option value="00000002">10 seconds </option>
+                <option value="00000003">15 seconds </option>
+                <option value="00000004">20 seconds </option>
+                <option value="00000005">25 seconds </option>
+                <option value="00000006">30 seconds </option>
+              </select></td>
+              <td class="blod">Viewing mode:</td>
+              <td><div class="viewmode">
+                <ul>
+                  <li class="iconmode"><a class="iconBtn highlight" title="Icon View"></a></li>
+                  <li class="listmode"><a class="listBtn" title="List View"></a></li>
+                </ul>
+              </div></td>
+            </tr>
+          </table>
+        </div>
+    <div class="iconView"  >
+      <ul>
+       
+        <li>
+          <!--Icon View start-->
+          <div class="iconfrmae">
+            <table width="96%" border="0" cellspacing="0" cellpadding="0" align="center">
+              <tr>
+                <td width="190" valign="top"><!--Disconnect start-->
+                    <div style="position:absolute; width:190px;">
+                      <div class="disconnect" >
+                        <div class="i_internet"><img src="../images/network/i_internet.png" width="55" height="55" /><span style="display:block; text-align:center;">Internet</span></div>
+                        <div class="i_internet_dline">
+                          <div class="i_modem"><span style=" margin-top:55px; display:block; text-align:center;">Modem</span>
+                              <div class="i_modom_dline">
+                                <div class="i_router">
+                                  <div class="iconviewbn">
+                                    <ul style="margin-top:20px; margin-left:10px;">
+                                      <li>
+                                        <ul id="list1" class="list">
+                                          <li title="NB one">NBG7215<img src="../images/network/i_downarrow.gif" width="6" height="4" /></li>
+                                        </ul>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                        <div class="i_router_line"> </div>
+                      </div>
+                    </div>
+                  <!--Disconnect end-->
+                    <div class="connect">
+                      <div class="i_internet"><img src="../images/network/i_internet.png" width="55" height="55" /><span style="display:block; text-align:center;">Internet</span></div>
+                      <div class="i_internet_line">
+                        <div class="i_modem"><span style=" margin-top:55px; display:block; text-align:center;">Modem</span>
+                            <div class="i_modom_line">
+                              <div class="i_router">
+                                <div class="iconviewbn">
+                                  <ul style="margin-top:20px; margin-left:10px;">
+                                    <li>
+                                      <ul id="list1" class="list">
+                                        <li title="NB one">NBG7215<img src="../images/network/i_downarrow.gif" width="6" height="4" /></li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="i_router_line"> </div>
+                    </div></td>
+                <td width="7" valign="top" background="../images/network/i_green_line.gif"><span style="display:block;background:url(../images/center_bg.gif) left -70px; height:50px; width:7px; "></span>
+                    <div class="rightwirelessline"><span style="position:absolute; top:-15px; ">Wireless</span></div></td>
+                <td valign="top" ><div class="mapviewright">
+                  <div class="wireless_frame">
+                    <div class="iconviewbn">
+                      <ul>
+                        <li style=" z-index:8000000">
+                          <ul id="list1" class="list">
+                            <li title="NB one">NB one <img src="../images/network/i_downarrow.gif" width="6" height="4" /></li>
+                          </ul>
+                        </li>
+                        <li style=" z-index:7000000">
+                          <ul id="list2" class="list">
+                            <li title="NB two">NB two <img src="../images/network/i_downarrow.gif" width="6" height="4" /></li>
+                          </ul>
+                        </li>
+                        <li style=" z-index:6000000">
+                          <ul id="list3" class="list">
+                            <li title="Game one">Game one <img src="../images/network/i_downarrow.gif" width="6" height="4" /></li>
+                          </ul>
+                        </li>
+                        <li style=" z-index:5000000">
+                          <ul id="list4" class="list">
+                            <li title="Rotuer">Router<img src="../images/network/i_downarrow.gif" width="6" height="4" /></li>
+                          </ul>
+                        </li>
+                        <li style="z-index:4000000">
+                          <ul id="list5" class="list">
+                            <li title="Phone">Phone <img src="../images/network/i_downarrow.gif" width="6" height="4" /></li>
+                          </ul>
+                        </li>
+                        <li style=" z-index:3000000">
+                          <ul id="list6" class="list">
+                            <li title="Camera">Camera<img src="../images/network/i_downarrow.gif" width="6" height="4" /></li>
+                          </ul>
+                        </li>
+                        <li style="z-index:2000000">
+                          <ul id="list7" class="list">
+                            <li title="NB six">Server <img src="../images/network/i_downarrow.gif" width="6" height="4" /></li>
+                          </ul>
+                        </li>
+                        <li style=" z-index:1000000">
+                          <ul id="list8" class="list">
+                            <li title="Set-top box">Set-top box<img src="../images/network/i_downarrow.gif" width="6" height="4" /></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="wireless_device">
+                      <ul>
+                        <li>
+                          <div class="i_wifi"><img src="../images/network/i_wifi_0.png" /></div>
+                          <span class="i_device"><img src="../images/network/i_pc.png" width="55" height="52" /></span></li>
+                        <li>
+                          <div class="i_wifi"><img src="../images/network/i_wifi_3.png" /></div>
+                          <span class="i_device"><img src="../images/network/i_pc.png" width="55" height="52" /></span></li>
+                        <li>
+                          <div class="i_wifi"><img src="../images/network/i_wifi_2.png" /></div>
+                          <span class="i_device"><img src="../images/network/i_game.png" width="55" height="52" /></span></li>
+                        <li>
+                          <div class="i_wifi"><img src="../images/network/i_wifi_1.png" /></div>
+                          <span class="i_device"><img src="../images/network/i_router2.png" width="55" height="52" /></span></li>
+                        <li>
+                          <div class="i_wifi"><img src="../images/network/i_wifi_0.png" /></div>
+                          <span class="i_device"><img src="../images/network/i_phone.png" width="55" height="52" /></span></li>
+                        <li>
+                          <div class="i_wifi"><img src="../images/network/i_wifi_1.png" /></div>
+                          <span class="i_device"><img src="../images/network/i_camera.png" width="55" height="52" /></span></li>
+                        <li>
+                          <div class="i_wifi"><img src="../images/network/i_wifi_0.png" /></div>
+                          <span class="i_device"><img src="../images/network/i_server.png" width="55" height="52" /></span></li>
+                        <li>
+                          <div class="i_wifi"><img src="../images/network/i_wifi_2.png" /></div>
+                          <span class="i_device"><img src="../images/network/i_stb.png" width="55" height="52" /></span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div></td>
+              </tr>
+            </table>
+            <table width="96%" border="0" cellspacing="0" cellpadding="0" align="center">
+              <tr>
+                <td>&nbsp;</td>
+                <td height="30" valign="bottom" background="../images/network/i_green_line.gif">&nbsp;</td>
+                <td valign="top" >&nbsp;</td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td height="30" valign="bottom" background="../images/network/i_green_line.gif">&nbsp;</td>
+                <td valign="top" ><div class="mapviewright">
+                  <div class="wired_frame">
+                    <div class="iconviewbn" style="top:50px;">
+                      <ul>
+                        <li style=" z-index:8000000">
+                          <ul id="list1" class="list">
+                            <li title="NB one">NB one <img src="../images/network/i_downarrow.gif" width="6" height="4" /></li>
+                          </ul>
+                        </li>
+                        <li style=" z-index:7000000">
+                          <ul id="list2" class="list">
+                            <li title="NB two">NB two <img src="../images/network/i_downarrow.gif" width="6" height="4" /></li>
+                          </ul>
+                        </li>
+                        <li style=" z-index:6000000">
+                          <ul id="list3" class="list">
+                            <li title="Game one">Game one <img src="../images/network/i_downarrow.gif" width="6" height="4" /></li>
+                          </ul>
+                        </li>
+                        <li style=" z-index:5000000">
+                          <ul id="list4" class="list">
+                            <li title="NB three">Print <img src="../images/network/i_downarrow.gif" width="6" height="4" /></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="wired_device">
+                      <ul>
+                        <li><span class="i_device"><img src="../images/network/i_pc.png" width="55" height="52" /></span></li>
+                        <li>
+                          <div class="i_moca"><img src="../images/network/i_moca.gif" /></div>
+                          <span class="i_device"><img src="../images/network/i_pc.png" width="55" height="52" /></span></li>
+                        <li><span class="i_device"><img src="../images/network/i_game.png" width="55" height="52" /></span></li>
+                        <li><span class="i_device"><img src="../images/network/i_print.png" width="55" height="52" /></span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div></td>
+              </tr>
+              <tr>
+                <td width="190">&nbsp;</td>
+                <td width="7" height="50" valign="top" ><div style="position:relative;">
+                  <div class="rightwiredline"><span style="position:absolute; bottom:-15px; ">Wired</span></div>
+                </div></td>
+                <td valign="top" ></td>
+              </tr>
+            </table>
+          </div>
+          <!--Icon View End-->
+        </li>
+      </ul>
+    </div>
+    <!--List view-->
+    <div class="listView" style="display:none;">
+      <ul>
+  
+        <li>
+          <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="50%">&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td colspan="2" valign="top"><div class="w_table">
+                <!--Table define start-->
+                <table width="96%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_frame">
+                  <tr>
+                    <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td><table width="100%" cellpadding="0" cellspacing="0" >
+                              <tr align="center">
+                                <td width="5%" class="top_font">#</td>
+                                <td  class="top_font">Device Name</td>
+                                <td  class="top_font">IP Address</td>
+                                <td  class="top_font">MAC Address</td>
+                                <td class="top_font">Address Source</td>
+                                <td class="top_font">Connection Type</td>
+                                </tr>
+                              <tr align="center">
+                                <td  class="table_font"><img src="../images/network/i_s_pc.gif" width="16" height="16" /></td>
+                                <td  class="table_font">NB One</td>
+                                <td class="table_font">192.168.1.2</td>
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                </tr>
+                              <tr align="center">
+                                <td  class="table_font"><img src="../images/network/i_s_game.gif" width="16" height="16" /></td>
+                                <td  class="table_font">Game console One</td>
+                                <td class="table_font">192.168.1.3 </td>
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                </tr>
+                              <tr align="center">
+                                <td  class="table_font"><img src="../images/network/i_s_camera.gif" width="16" height="16" /></td>
+                                <td  class="table_font">Camera One</td>
+                                <td class="table_font">192.168.1.4 </td>
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                </tr>
+                              <tr align="center">
+                                <td  class="table_font"><img src="../images/network/i_s_printer.gif" width="16" height="16" /></td>
+                                <td  class="table_font">Printer One</td>
+                                <td class="table_font">192.168.1.5</td>
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                </tr>
+                              <tr align="center">
+                                <td  class="table_font"><img src="../images/network/i_s_stb.gif" width="16" height="16" /></td>
+                                <td  class="table_font">Set-top box </td>
+                                <td class="table_font">192.168.1.6</td>
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                </tr>
+                              <tr align="center">
+                                <td  class="table_font"><img src="../images/network/i_s_server.gif" width="16" height="16" /></td>
+                                <td  class="table_font">Server</td>
+                                <td class="table_font">192.168.1.7</td>
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                </tr>
+                              <tr align="center">
+                                <td  class="table_font"><img src="../images/network/i_s_phone.gif" width="16" height="16" /></td>
+                                <td  class="table_font">Telephone </td>
+                                <td class="table_font">192.168.1.8</td>
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                </tr>
+                              <tr align="center">
+                                <td  class="table_font"><img src="../images/network/i_s_router.gif" width="16" height="16" /></td>
+                                <td  class="table_font">Router</td>
+                                <td class="table_font">192.168.1.9</td>
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                </tr>
+                              <tr align="center">
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                <td class="table_font">&nbsp;</td>
+                                </tr>
+                            </table></td>
+                          </tr>
+                        </table></td>
+                      </tr>
+                    </table></td>
+                  </tr>
+                </table>
+              </div></td>
+            </tr>
+          </table>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!--List view end-->
+  <div id="statusView" style="width:100%; height:auto; position:absolute; display:none; ">
+    <div class=" title" style="margin-top:25px; magin-left:15px;" >Status</div>
+    <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="50%">&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td valign="top"><div class="w_text3">
+          <table width="96%" border="0" align="center"  cellpadding="0" cellspacing="0" class="table_frame">
+            <tr>
+              <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td><table width="100%" cellpadding="0" cellspacing="0" class="table_frame" >
+                        <tr >
+                          <td colspan="2" class="top_font">Device Information</td>
+                        </tr>
+                        <tr >
+                          <td width="40%"  class="table_font">Host Name: </td>
+                          <td  class="table_font w_blue">ZyXEL</td>
+                        </tr>
+                        <tr >
+                          <td  class="table_font">Model Number: </td>
+                          <td  class="table_font w_blue">NBG 7215 </td>
+                        </tr>
+                        <tr >
+                          <td  class="table_font">Firmware Version: </td>
+                          <td  class="table_font w_blue">v1.0.1</td>
+                        </tr>
+                        <tr >
+                          <td  class="table_font">WAN Information </td>
+                          <td  class="table_font">&nbsp;</td>
+                        </tr>
+                        <tr >
+                          <td  class="table_font">&nbsp;&nbsp;- MAC Address:</td>
+                          <td  class="table_font w_blue">00:19:cb:a2:08:6b </td>
+                        </tr>
+                        <tr >
+                          <td  class="table_font">&nbsp;&nbsp;-  IP Address: </td>
+                          <td  class="table_font w_blue">172.23.30.105</td>
+                        </tr>
+                        <tr >
+                          <td  class="table_font">&nbsp;&nbsp;- IP Subnet Mask:</td>
+                          <td  class="table_font w_blue">255.255.255.0 </td>
+                        </tr>
+                        <tr >
+                          <td  class="table_font">&nbsp;&nbsp;- DHCP: </td>
+                          <td  class="table_font w_blue">Client</td>
+                        </tr>
+                        <tr >
+                          <td  class="table_font">LAN Information :</td>
+                          <td  class="table_font">&nbsp;</td>
+                        </tr>
+                        <tr >
+                          <td  class="table_font">&nbsp;&nbsp;- MAC Address:</td>
+                          <td  class="table_font w_blue">00:19:cb:a2:08:6a </td>
+                        </tr>
+                        <tr >
+                          <td  class="table_font">&nbsp;&nbsp;-  IP Address: </td>
+                          <td  class="table_font w_blue">192.168.1.1 </td>
+                        </tr>
+                        <tr >
+                          <td  class="table_font">&nbsp;&nbsp;- MAC Address:</td>
+                          <td  class="table_font w_blue">255.255.255.0 </td>
+                        </tr>
+                        <tr >
+                          <td  class="table_font">&nbsp;&nbsp;- IP Subnet Mask:</td>
+                          <td  class="table_font w_blue">Server</td>
+                        </tr>
+                        <tr >
+                          <td  class="table_font">&nbsp;</td>
+                          <td  class="table_font">&nbsp;</td>
+                        </tr>
+                      </table></td>
+                    </tr>
+                  </table></td>
+                </tr>
+              </table></td>
+            </tr>
+          </table>
+        </div></td>
+        <td valign="top"><table width="96%" border="0" align="center"  cellpadding="0" cellspacing="0" class="table_frame">
+          <tr>
+            <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td><table width="100%" cellpadding="0" cellspacing="0" class="table_frame" >
+                      <tr >
+                        <td colspan="2" class="top_font">Device Information </td>
+                      </tr>
+                      <tr >
+                        <td width="40%"  class="table_font">WLAN Information: </td>
+                        <td  class="table_font w_blue">&nbsp;</td>
+                      </tr>
+                      <tr >
+                        <td  class="table_font">&nbsp;&nbsp;- MAC Address:</td>
+                        <td  class="table_font w_blue">00:19:cb:a2:08:6a </td>
+                      </tr>
+                      <tr >
+                        <td  class="table_font">&nbsp;&nbsp;- Status: </td>
+                        <td  class="table_font w_blue">On</td>
+                      </tr>
+                      <tr >
+                        <td  class="table_font">&nbsp;&nbsp;- Name(SSID): </td>
+                        <td  class="table_font w_blue">ZyXEL</td>
+                      </tr>
+                      <tr >
+                        <td  class="table_font">&nbsp;&nbsp;- Channel: </td>
+                        <td  class="table_font w_blue">Auto Channel </td>
+                      </tr>
+                      <tr >
+                        <td  class="table_font">&nbsp;&nbsp;- Operating Channel: </td>
+                        <td  class="table_font w_blue">6</td>
+                      </tr>
+                      <tr >
+                        <td  class="table_font">&nbsp;&nbsp;- Security Mode: </td>
+                        <td  class="table_font w_blue"><a href="#">No Security</a></td>
+                      </tr>
+                      <tr >
+                        <td  class="table_font">&nbsp;&nbsp;- 802.11 Mode: </td>
+                        <td  class="table_font w_blue">Configured</td>
+                      </tr>
+                      <tr >
+                        <td  class="table_font">&nbsp;&nbsp;- WPS:</td>
+                        <td  class="table_font w_blue">255.255.255.0 </td>
+                      </tr>
+                      <tr >
+                        <td  class="table_font">&nbsp;</td>
+                        <td  class="table_font">&nbsp;</td>
+                      </tr>
+                    </table></td>
+                  </tr>
+                </table></td>
+              </tr>
+            </table></td>
+          </tr>
+        </table>
+            <br />
+            <br />
+            <table width="96%" border="0" align="center"  cellpadding="0" cellspacing="0" class="table_frame">
+              <tr>
+                <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td><table width="100%" cellpadding="0" cellspacing="0" class="table_frame" >
+                                <tr >
+                                  <td colspan="3" class="top_font">System Status</td>
+                                </tr>
+                                <tr >
+                                  <td width="40%"  class="table_font">System Up Time: </td>
+                                  <td colspan="2"  class="table_font w_blue">16:25:11</td>
+                                </tr>
+                                <tr >
+                                  <td  class="table_font">Current Date/Time: </td>
+                                  <td colspan="2"  class="table_font w_blue">2009-3-18/16:25:8 </td>
+                                </tr>
+                                <tr >
+                                  <td  class="table_font">System Resource:</td>
+                                  <td colspan="2"  class="table_font w_blue">&nbsp;</td>
+                                </tr>
+                                <tr >
+                                  <td  class="table_font">&nbsp;&nbsp;- CPU Usage:</td>
+                                  <td width="38%" height="18"class="table_font"><table width="100%" height="18" border="1" cellpadding="0" cellspacing="0" bordercolor="#7895c8">
+                                      <tr>
+                                        <td background="../images/i_percentage_center.gif"><table width="50%" height="18" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                              <td height="18" background="../images/i_percentage_blue.gif">&nbsp;</td>
+                                            </tr>
+                                        </table></td>
+                                      </tr>
+                                  </table></td>
+                                  <td  class="table_font w_blue">45%</td>
+                                </tr>
+                                <tr >
+                                  <td  class="table_font">&nbsp;&nbsp;- Memory Usage:</td>
+                                  <td  class="table_font"><table width="100%" height="18" border="1" cellpadding="0" cellspacing="0" bordercolor="#7895c8">
+                                      <tr>
+                                        <td background="../images/i_percentage_center.gif"><table width="50%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                              <td height="18" background="../images/i_percentage_blue.gif">&nbsp;</td>
+                                            </tr>
+                                        </table></td>
+                                      </tr>
+                                  </table></td>
+                                  <td  class="table_font w_blue">45%</td>
+                                </tr>
+                                <tr >
+                                  <td  class="table_font">&nbsp;</td>
+                                  <td colspan="2"  class="table_font">&nbsp;</td>
+                                </tr>
+                            </table></td>
+                          </tr>
+                      </table></td>
+                    </tr>
+                </table></td>
+              </tr>
+          </table></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!--Error Message Start-->
+<div class="downmessage" id="downMsg"><ul><li class="downleft"></li>
+<li class="downcenter" style="position:relative;">
+  <div style=" position:absolute;width:100%; z-index:800; top:15px; left:10px;"><span class="blod">Check the problems</span><br /><br />
+<span>NBG 7215 is disconnected from the internet. Please click “OK” to diagnose the internet connection status. <br /></span>
+</div></li></ul><div class="button_position" style=" position:absolute; top:65px; right:-5px;"><input name="New Message" type="button" id="checkPrbmBtn"
+ value="OK" />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;</div></div>
+<!--Error Message End-->
+</div>
+</body>
+</html>

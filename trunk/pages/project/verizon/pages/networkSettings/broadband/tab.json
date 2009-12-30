@@ -1,0 +1,8 @@
+
+  {      "tabTitle": "Broadband",
+         "Internet": {"url":"../networkSettings/broadband/internet.html"  },
+         "Auto WAN Setting": {"url":"../networkSettings/broadband/autoWanSetting.html"  },
+         "MoCA": {"url":"../networkSettings/broadband/moCA.html"  }
+  }
+
+    

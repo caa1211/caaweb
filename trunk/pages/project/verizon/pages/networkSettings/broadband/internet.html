@@ -1,0 +1,27 @@
+
+
+<script type="text/javascript">
+$(function(){
+
+    $('#testBtn').click(function(){
+    
+        var db1 = window.parent.$.zyUiDialog({
+            width: 450,
+            height: 205,
+            title: 'edit'
+        });
+        db1.load('pages/networkSettings/broadband/edit.html');
+        db1.dialog('open');
+    });
+    
+    
+    
+    
+    $('#testBtn2').click(function(){
+        tabApi.next(); 
+    });
+});
+ </script>
+ 
+<button id='testBtn'>show message</button>
+<button id='testBtn2'>next</button>

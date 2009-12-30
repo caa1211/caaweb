@@ -174,7 +174,12 @@ $(function(){
                 '3D image': {
                     url: "pages/animation/3d/02.html"
                 }
-            }
+            },
+              'project': {
+                  'verizon': {
+                      url: "pages/project/verizon/index.html"
+                  }
+              }
         
         }
         
