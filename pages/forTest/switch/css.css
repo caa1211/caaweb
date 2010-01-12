@@ -1,0 +1,8 @@
+
+
+ul.switch {background: red;}
+ul.switch.on {background: yellow;}
+
+
+.switch_left{width:50px; height:50px; background: yellow; }
+.switch_right{width:50px; height:50px; background: red; }
