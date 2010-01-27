@@ -125,44 +125,22 @@ $(function(){
                 }
                 },
             others: {
-                'date picker': {
-                    url: "pages/others/datePicker/demo.html"
-                },
-                'inline Edit': {
-                    url: "pages/others/inlineEdit/01.html"
-                },
-                'editable': {
-                    url: "pages/others/editable/01.html"
-                },
-                'loading Mask': {
-                    url: "pages/others/loadingMask/01.html"
-                },
-                'loading Mask 2': {
-                    url: "pages/others/loadingMask_2/demo.html"
-                },
-                'disconnect message': {
-                    url: "pages/others/disconnectMsg/demo.html"
-                },
-                'growl': {
-                    url: "pages/others/growl/demo.html"
-                },
-                'orderMenu': {
-                    url: "pages/others/orderMenu/index2.html"
-                },
-                'slider': {
-                    url: "pages/others/slider/demo.html"
-                },
-                'dock': {
-                    url: "pages/others/jqDock/demo.html"
-                },
-                'hrzAccordion': {
-                    url: "pages/others/hrzAccordion/demo.html"
-                },
-                'zyDock' : {url : "pages/others/zyDock/femto.html"}
-                ,
-                'zyFlow' : {url : "pages/others/zyflow4/demo.html"}
-                 ,
-                'table Sorting' : {url : "pages/others/tableSorting/demo.html"}
+                'date picker': {url: "pages/others/datePicker/demo.html"},
+                'inline Edit': {url: "pages/others/inlineEdit/01.html"},
+                'editable': {url: "pages/others/editable/01.html"},
+                'loading Mask': {url: "pages/others/loadingMask/01.html"},
+                'loading Mask 2': {url: "pages/others/loadingMask_2/demo.html"},
+                'disconnect message': {url: "pages/others/disconnectMsg/demo.html"},
+                'growl': {url: "pages/others/growl/demo.html"},
+                'orderMenu': {url: "pages/others/orderMenu/index2.html"},
+                'slider': {url: "pages/others/slider/demo.html"},
+                'dock': {url: "pages/others/jqDock/demo.html"},
+                'hrzAccordion': {url: "pages/others/hrzAccordion/demo.html"},
+                'zyDock' : {url : "pages/others/zyDock/femto.html"},
+                'zyFlow' : {url : "pages/others/zyflow4/demo.html"},
+                'table Sorting' : {url : "pages/others/tableSorting/demo.html"},
+                'text Overflow' : {url : "pages/others/textOverflow/demo.html"}
+                
             },
             animation: {
                 'chainable Effects': {
