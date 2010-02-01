@@ -17,7 +17,7 @@
 Ext.onReady(function(){
 
         
-	$('<div id="vdContener"><div id="vd"></div></div>').appendTo('body');
+	$('<div id="vdContener" style="border: solid 10px blue;"><div id="vd1"></div><div id="vd2"></div></div>').appendTo('body');
 		
     var viewport = new Ext.Viewport({
         layout: 'border',
@@ -66,7 +66,7 @@ Ext.onReady(function(){
  } ;
  
 				
- var vd = $('#vd').css('border', 'solid 1px red').VDcomponent({
+ var vd = $('#vd1').css('border', 'solid 1px red').VDcomponent({
      async: true,
      loaded: function(obj){
          vd.setValue(date1);
@@ -77,6 +77,19 @@ Ext.onReady(function(){
      }
      
  });
+ 
+  var vd2 = $('#vd2').css('border', 'solid 1px red').VDcomponent({
+     async: true,
+     loaded: function(obj){
+         vd.setValue(date1);
+     },
+     updated: function(){ 
+       var myJSONText = JSON.stringify(vd.getValue());
+       $('#dataContainer').html(myJSONText);
+     }
+     
+ });
+ 
  
 /* 
  function replacer(key, value) {
@@ -89,9 +102,15 @@ Ext.onReady(function(){
 
  $('#btn').toggle(function(){
      vd.setValue(date2);
+     
+        vd2.show();
+     vd2.setValue(date1);
 
  }, function(){
      vd.setValue(date1);
+     
+      vd2.setValue(date2);
+      vd2.hide();
  });
                 
 	
