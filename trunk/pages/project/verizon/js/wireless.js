@@ -153,16 +153,39 @@ $(function(){
         max: 3,
         //handle: $('.draw_btn'),
         step: 1,
-        stop: function(event, ui){
-            if (periousValue != ui.value) 
-                stopSilde();
-        },
-        change: function(event, ui){
+      //modify 20100114 start
+	    change: function(event, ui){
             if (periousValue != ui.value) {
-                $('#select_' + ui.value).trigger('selectMe');
+                 stopSilde();
+        $('#select_' + ui.value).trigger('selectMe');
+                updateSliderHandlePQAAttr(ui.value);
                 periousValue = ui.value;
+     //modify 20100114 end
             }
         }
     });
+	
+        function updateSliderHandlePQAAttr(value){
+        switch (value) {
+            case 1:
+                $('#silder .ui-slider-handle').attr('pqaattr', 'No Security');
+                break;
+            case 2:
+                $('#silder .ui-slider-handle').attr('pqaattr', 'Basic');
+                break;
+            case 3:
+                $('#silder .ui-slider-handle').attr('pqaattr', 'More Secure');
+                break;
+  
+        }
+    }
     
+    updateSliderHandlePQAAttr(periousValue);
+    
+    $('li.sliderBlock').each(function(i, d){
+        $(this).click(function(){
+            $("#silder").slider('value', i + 1); 
+        })
+    })
 });
+

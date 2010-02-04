@@ -1,7 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" style='width:100%; height:100%;'>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
         <title id='title'>.::Welcome to the Web-Based Configurator::.</title>
         <link type="text/css" href="css/basic.css" rel="stylesheet" />
         <link type="text/css" href="css/iconDefine.css" rel="stylesheet" />
@@ -21,7 +22,7 @@
         <script type="text/javascript" src="js/jquery.pngFix.pack.js"></script>
         <script type="text/javascript" src="js/jquery.bgiframe.pack.js"></script>
     <script type="text/javascript">          
-	
+
         $.fn.delay = function(time, callback){
             // Empty function:jQuery.fx.step.delay = function() { };   
             // You can set the second argument as CSS properties    
@@ -30,15 +31,12 @@
                 callback = function(){
                     $(this).css(cssObj);
                 }
-            }
-           
+            }           
             // Return meaningless animation, (will be added to queue)
-            
             return this.animate({
                delay: 1
             }, time, callback);
         }
-        
    
         $.fn.caaShow = function(time, callback){
            var animateTop = $(this).height()*-1;
@@ -69,24 +67,36 @@
         
          $.openLoadingMask = function(flag){ 
             var content;
-            var position;
+            var contentSize;
             if (flag == undefined || flag == 1) {
                 content = '<div><img src="images/loading.gif" /> <div>Loading...<div></div>'
-                position = ["40%", "45%"];
+                 contentSize = [16, 16];
             }
             else 
                 if (flag == 2) {
-                    content = '<div class="wait"><table width="100%" border="0" cellspacing="3" cellpadding="2"><tr><td align="center">&nbsp;</td><td class="w_red">&nbsp;</td></tr><tr><td width="31%" align="right" ><img src="images/loading.gif" width="48" height="48" style="margin-right:10px;" /></td><td width="69%" class="w_red">Router is restarting now.Please wait ...</td></tr><tr><td colspan="2">&nbsp;</td></tr><tr><td colspan="2" class="white_12" >As there will be no indication of when the process is complete, please wait for one minute before attempting to access the router again. </td></tr><tr><td colspan="2" class="white_12" >&nbsp;</td></tr></table></div>';
-                    position = ["41%", "39%"];
+                    content = '<div class="wait" ><table width="100%" border="0" cellspacing="3" cellpadding="2" ><tr><td align="center">&nbsp;</td><td class="w_red">&nbsp;</td></tr><tr><td width="31%" align="right" ><img src="images/loading.gif" width="48" height="48" style="margin-right:10px;" /></td><td width="69%" class="w_red">Router is restarting now.Please wait ...</td></tr><tr><td colspan="2">&nbsp;</td></tr><tr><td colspan="2" class="white_12" >As there will be no indication of when the process is complete, please wait for one minute before attempting to access the router again. </td></tr><tr><td colspan="2" class="white_12" >&nbsp;</td></tr></table></div>';
+                    contentSize = [386, 182];
                 }
              
+            var modifyPosition = function(){
+                var modalContainer = $('#modalContainer');
+                if (modalContainer.length != 0) {
+                    var leftS = $('body').width() / 2 - contentSize[0] / 2;
+                    var topS = $('body').height() / 2 - contentSize[1] / 2;
+                    modalContainer.css('margin-left', leftS).css('margin-top', topS);
+                }
+                else {
+                    $(window).unbind('resize', modifyPosition);
+                }
+            }
+            
             $.modal(content, {
-                position: position,
+                position : ['0','0'],
                 opacity: 60,
                 overlayCss: {
                     backgroundColor: "#000"
                 },
-                containerCss:{background:"none", color:"#FFF"},
+                containerCss:{ margin:"0",background:"none", color:"#FFF",width:contentSize[0]+"px", height:contentSize[1]+"px"},
                 onOpen: function(dialog){
                     dialog.overlay.fadeIn('fast', function(){
                        // dialog.data.hide();
@@ -94,7 +104,11 @@
                         dialog.data.fadeIn('fast');
                     });
                 },
-                
+                containerId: 'modalContainer',
+                onShow: function(){
+                    modifyPosition();
+                    $(window).resize(modifyPosition); 
+                },
                 onClose: function(dialog){
                     dialog.data.fadeOut('fast', function(){
                         dialog.container.hide('fast');
@@ -112,27 +126,41 @@
           
         $.openTroubleShooting = function(src){
            // var content = '<iframe frameborder=0 src="' + src + '" style=" width:700px; height:360px;">'
-            var content = '<div  style=" width:700px; height:360px;"></div>'
-            
+           var content = '<div  style=" width:700px; height:360px;"></div>'
+           var contentSize = [660, 420];
+           var modifyPosition = function(){
+               var modalContainer = $('#modalContainer');
+               if (modalContainer.length != 0) {
+                   var leftS = $('body').width() / 2 - contentSize[0] / 2;
+                   var topS = $('body').height() / 2 - contentSize[1] / 2;
+                    
+                   modalContainer.css('margin-left', leftS).css('margin-top', topS);
+               }
+               else {
+                   $(window).unbind('resize', modifyPosition);
+               }
+           }
+                        
             $.modal(content, {
-                opacity: 95,
+                position : ['0','0'],
+                opacity: 85,
                 overlayCss: {
                     backgroundImage: "url(images/bg.gif)"
                 },
                 containerId: 'modalContainer',
                 onShow: function(){
-                        var marginLeft =  -175 ;
-                        var modalContainer =  $('#modalContainer');
-                        if ($.browser.msie && ($.browser.version == "6.0") && !$.support.style) {
-                             marginLeft=$(window).width()/2 -  350;
-                        }
-                  modalContainer.css({'margin-top': '200px','margin-left': marginLeft }).load(src, function(){$(this).pngFix();});
+                     var modalContainer =  $('#modalContainer');
+                    modifyPosition();
+                    $(window).resize(modifyPosition);
+                    modalContainer.load(src, function(){
+                        $(this).pngFix();
+                    });
                 },
                 containerCss: {
+                    margin:"0",
+                    width:contentSize[0]+"px", height:contentSize[1]+"px",
                     background: "none",
                     color: "#FFF"
-
-
                 }
             });
         };
@@ -163,7 +191,7 @@
         function initMainFrame(){
             $frameObj.contents().pngFix();
             if ($frameObj.attr('src').indexOf('?tabJson') == -1) 
-                $.closeLoadingMask(); 
+                $.closeLoadingMask();
         }
 
         function openPage(url){
@@ -308,7 +336,7 @@
         function showSubMenu($liObj){//call this outer
             var id = $liObj.attr('id');
             var subMenu = $subMenuDiv.children('.subItems[targetID=' + id + ']');
-            	subMenu.bgiframe({opacity:false, left:3, width:160 , top:5, height: subMenu.height()-15 });
+            	subMenu.bgiframe({opacity:false, left:3, width:160 , top:5, height: subMenu.height()-15, src:'bgiframe.htm' });
             var position = $liObj.position();
             var left = position.left + $liObj.parent().position().left;
             subMenu.css('left', left-30 );
@@ -385,21 +413,18 @@
                 activeItem( $menuItemLi.attr('id'));
              }*/
 
-             
              //has submenu
+             
              if (item.submenu != undefined) {
                  doSubMenu($menuItemLi, item);
-                 $menuItemLi.hover(
-                 function(){
-                    $(this).css('cursor', 'default');
-                    showSubMenu($(this));
-                 }
-                ,function(){
-                    hideSubMenu($(this));
+                 $menuItemLi.hover(function(){
+                     showSubMenu($(this));
+                 }, function(){
+                     hideSubMenu($(this));
                  });
              }
-             //do not has submenu
-             else{
+             
+             if (item.url != undefined) {
                  $menuItemLi.css('cursor', 'pointer').hover(function(){
                      $(this).addClass('hover');
                  }, function(){
@@ -407,7 +432,7 @@
                  }).click(function(){
                      activeItem($menuItemLi.attr('id'));
                  });
-             
+                 
              }
              
              //behavior
@@ -440,10 +465,10 @@
               });
            }
 
-
            function setScrollable(){
                    scrollApi = $("div.scrollable").scrollable({
                    size: scrollSize,
+                   keyboard: false,
                    //activeClass: 'caaActive',
                    //easing:'easeInBack',//'easeOutElastic', //'easeInBack',//'easeOutElastic',
                    api: true,
@@ -451,7 +476,6 @@
 				   clickable:false,
                //  hoverClass: 'menuItemHover',
                onSeek: function(){
-               
                    var index = scrollApi.getIndex();
                    var size = scrollApi.getSize();
                    var visibleSize = scrollApi.getVisibleItems().length;
@@ -469,7 +493,10 @@
                });
            }
 
-            var outerLayout = $('body').layout({
+            $('html').css('overflow-y', 'hidden');
+            $('html').css('overflow-x', 'auto');
+			
+            var outerLayout = $('div.index').layout({
                 center__paneSelector: ".outer-center",
                 south__paneSelector: ".outer-south",
                 north__paneSelector: ".outer-north",
@@ -482,7 +509,7 @@
                 spacing_closed:  20,
                 center__onresize: function(){}
             });
-
+          
            $subMenuDiv.css({'top': -1*$menuDiv.height(),'width':$menuDiv.width() });
    
           //mouse wheel
@@ -501,22 +528,9 @@
                          $('.subItems').caaHide();
                    } 
             });
-            
-
-           //---------------------------temp
-          // $('#tempBtn').click(function(){ var aaa = findJsonItemFromID('networkSettings-broadband'); alert(aaa.url); activeItem('a-aa') })
-          $('#tempBtn').click(function(){
-               var db1 = $.zyUiDialog({
-                   width: 450,
-                   height: 205,
-                   title: 'edit'
-               });
-               db1.load('edit.html');
-               db1.dialog('open');
-           });
-           
+             
            $('#logoutBtn').click(function(){
-               window.parent.$.zyUiDialog({
+               $.zyUiDialog({
                    width: 450,
                    height: 200,
                    title: 'Logout',
@@ -534,11 +548,9 @@
            $('.browse.right').click(function(){
                scrollApi.nextPage(); 
            });
-           
            $('.browse.left').click(function(){
                scrollApi.prevPage();
            });
-           
            function parseMenuJsonCompleted(){
                setScrollable();
                //default page
@@ -549,31 +561,25 @@
                }
                else
                activeItem(defaultPage);
-           }    
-           
-           $('#homeBtn').click(function(){ activeItem(defaultPage);});
-           
+           }     
         });
-      
         </script>
     </head>
-    <body class="index">      
+    <body style='height:100%;'>  
+    <div class = 'index' >  
     <div class="outer-north">
 <div class="header_position_index">
     <div class="logo"></div>
     <div class="model-name"> NBG7215</div>
     <div class="top_line"></div>
     <ul class="header-right" style="position:absolute; top:0px; right:0px;">
-    <li class='home-icon'></li>
-        <li class='text'><a id='homeBtn' href="#">Home</a></li>
         <li class="logout-icon"></li>
-        <li class="text" id="logoutBtn"><a href="#">Logout</a></li>
-        
+        <li class="text" id="logoutBtn"><a href="#">Logout</a></li>  
     </ul>
 </div>
     </div> 
     <div class="outer-center">
-       <div style="width: 75%; height:100%;margin: 0 auto; position:relative; z-index:1;">
+       <div style="width: 85%; height:100%; margin: 0 auto; position:relative; z-index:1; ">
          <iframe id="mainFrame"  style=" position:absolute;overflow-x:hidden;overflow-y:auto;overflow-x:hidden;left:-4px; z-index:2; width:100%; height:100%; border-left:4px #FFF solid;border-right:4px #FFF solid; " allowtransparency="true" frameborder="0" src="#"></iframe>
        </div>  
     </div>
@@ -590,5 +596,7 @@
           <div id="subMenuDiv" style="margin: 0 auto;  position:relative;  z-index:10000;">
           </div>
           </div></div>
+          </div>
+          </div>  
     </body>
 </html>
