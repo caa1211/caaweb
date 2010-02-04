@@ -1,13 +1,21 @@
+<script type="text/javascript" src="../../js/jquery.text-overflow.js"></script>
 <script type="text/javascript">
+$(function(){
+$('.textOverflow').each(function(){ $(this).attr('title', $(this).text());} );    
+$('.textOverflow').ellipsis(true); 
+});
  $(function(){
      $('#testBtn0').click(function(){
     
         var db1 = window.parent.$.zyUiDialog({
             width: 800,
-            height: 500,
+            height: 450,
             title: 'Add Level 1'
         });
-        db1.load('pages/template/tabPages/tab6_DB1.html');
+		var link = 'pages/template/tabPages/tab6_DB1.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
         db1.dialog('open');
     });
     
@@ -22,7 +30,10 @@
             }
 			
         });
-        db1.load('pages/delete.html');
+		var link = 'pages/delete.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../'+link;
+        db1.load(link);
         db1.dialog('open');
     });
     
@@ -37,7 +48,10 @@
             height: 430,
             title: 'Edit sample'
         });
-        db1.load('pages/template/tabPages/edit.html');
+        var link = 'pages/template/tabPages/edit.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
         db1.dialog('open');
     });
 
@@ -67,36 +81,40 @@ for guarding the safety of the transferring data within the wireless network.</d
         <tr>
           <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
-              <td><table width="100%" cellpadding="0" cellspacing="0" >
-                <tr align="center">
-                  <td width="5%" class="top_font">#</td>
-                  <td class="top_font">Interface</td>
-                  <td class="top_font">Description</td>
-                  <td class="top_font">Type</td>
-                  <td class="top_font">Rate</td>
-                  <td class="top_font">Vlan8021p</td>
-                  <td class="top_font">VlanMuxId</td>
-                  <td class="top_font">ConnId</td>
-                  <td class="top_font">IGMP</td>
-                  <td class="top_font">NAT</td>
-                  <td class="top_font">Firewall</td>
-                  <td width="60" class="top_font" style="border-right:0px;">Modify</td>
+              <td><table width="100%" cellpadding="0" cellspacing="0" style="table-layout:fixed;">
+                <tr align="center" valign="top">
+                  <td width="5%" class="top_font textOverflow">#</td>
+                  <td class="top_font textOverflow">Interface</td>
+                  <td class="top_font textOverflow">Description</td>
+                  <td class="top_font textOverflow">Type</td>
+                  <td class="top_font textOverflow">Rate</td>
+                  <td class="top_font textOverflow">Vlan8021p</td>
+                  <td  class="top_font textOverflow">VlanMuxId</td>
+                  <td  class="top_font textOverflow">ConnId</td>
+                  <td  class="top_font textOverflow">IGMP</td>
+                  <td  class="top_font textOverflow">NAT</td>
+                  <td  class="top_font textOverflow">Firewall</td>
+                  <td width="60"  class="top_font textOverflow" style="border-right:0px;">Modify</td>
                 </tr>
                 <tr align="center">
-                  <td class="table_font">1</td>
-                  <td class="table_font">ptm0_1</td>
-                  <td class="table_font">ipoe_0_0_1_1</td>
-                  <td class="table_font">PTM/IPoE</td>
-                  <td class="table_font">N/A</td>
-                  <td class="table_font">N/A</td>
-                  <td class="table_font">N/A</td>
-                  <td class="table_font">1</td>
-                  <td class="table_font">Disabled</td>
-                  <td class="table_font">Enabled</td>
-                  <td class="table_font">Enabled</td>
-                  <td class="table_font"><div class="i_modify"><ul><li><a href="#" class="edit" id='editBtn' title="Edit"></a></li><li ><a href="#"  id='deleteBtn' class="delete" title="Delete"></a></li></ul></div></td>
-                  </tr>
-                
+                  <td class="table_font textOverflow">1</td>
+                  <td class="table_font textOverflow">ptm0_1</td>
+                  <td class="table_font textOverflow">ipoe_0_0_1_1</td>
+                  <td class="table_font textOverflow">PTM/IPoE</td>
+                  <td class="table_font textOverflow">N/A</td>
+                  <td class="table_font textOverflow">N/A</td>
+                  <td class="table_font textOverflow">N/A</td>
+                  <td class="table_font textOverflow">1</td>
+                  <td class="table_font textOverflow">Disabled</td>
+                  <td class="table_font textOverflow">Enabled</td>
+                  <td class="table_font textOverflow">Enabled</td>
+                  <td class="table_font textOverflow"><div class="i_modify">
+                    <ul>
+                      <li><a href="#" class="edit" id='editBtn' title="Edit"></a></li>
+                      <li ><a href="#"  id='deleteBtn' class="delete" title="Delete"></a></li>
+                    </ul>
+                  </div></td>
+                </tr>
               </table></td>
             </tr>
           </table></td>

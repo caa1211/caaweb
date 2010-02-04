@@ -89,16 +89,7 @@
             "off": "m04_off",
             "on": "m04_on"
         },
-        "submenu": {
-               "websiteBlocking": {
-                   "title": "Website Blocking",
-                   "url": "pages/parentalControl/websiteBlocking/websiteBlocking.html"
-               },
-               "ruleSummary": {
-                   "title": "Rule Summary",
-                   "url": "pages/parentalControl/ruleSummary/ruleSummary.html"
-               }
-        }
+         "url": "pages/parentalControl/websiteBlocking/websiteBlocking.html"
     },
     
     "advanced": {

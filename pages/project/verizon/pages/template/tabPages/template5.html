@@ -50,7 +50,10 @@ $(function(){
                  }
              }
          });
-        db1.load('pages/template/tabPages/tab5_DB1.html');
+		var link = 'pages/template/tabPages/tab5_DB1.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
         db1.dialog('open');
     });
     

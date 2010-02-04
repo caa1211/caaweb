@@ -1,8 +1,13 @@
+<script type="text/javascript" src="../../js/jquery.text-overflow.js"></script>
 <script type="text/javascript">
+$(function(){
+$('.textOverflow').each(function(){ $(this).attr('title', $(this).text());} );    
+$('.textOverflow').ellipsis(true); 
+});
  $(function(){
 $("#tempTable").tablesorter(); 
   });
-</script>
+</script> 
 <div class="content_frame" >
 <!--Unit Explain start-->
 <div class="explain">
@@ -16,70 +21,70 @@ $("#tempTable").tablesorter();
 <!--Table define start-->
 <li class="set1">
 <div class="w_table">       
-<table id='tempTable' class='tablesorter table_frame' width="100%"cellpadding="0" cellspacing="0" >
+<table id='tempTable' class='tablesorter table_frame' width="100%"cellpadding="0" cellspacing="0" style="table-layout:fixed;">
                    
                <thead>
                 <tr align="center">
-                  <th width="5%" class="top_font"><div class="sortImg">#</div></th>
-                  <th class="top_font"><div class="sortImg">Interface</div></th>
-                  <td class="top_font"><div class="sortImg">Description</div></td>
-                  <th class="top_font"><div class="sortImg">Type</div></th>
-                  <th class="top_font"><div class="sortImg">Rate</div></th>
-                  <th class="top_font"><div class="sortImg">Vlan8021p</div></th>
-                  <th class="top_font"><div class="sortImg">VlanMuxId</div></th>
-                  <th class="top_font"><div class="sortImg">ConnId</div></th>
-                  <th class="top_font"><div class="sortImg">IGMP</div></th>
-                  <th class="top_font"><div class="sortImg">NAT</div></th>
-                  <th class="top_font"><div class="sortImg">Firewall</div></th>
-                  <td width="60" class="top_font" style="border-right:0px;"><div class="sortImg">Modify </div></td>
+                  <th width="5%" class="top_font textOverflow"><div class="sortImg">#</div></th>
+                  <th class="top_font textOverflow"><div class="sortImg">Interface</div></th>
+                  <td class="top_font textOverflow"><div class="sortImg">Description</div></td>
+                  <th class="top_font textOverflow"><div class="sortImg">Type</div></th>
+                  <th class="top_font textOverflow"><div class="sortImg">Rate</div></th>
+                  <th class="top_font textOverflow"><div class="sortImg">Vlan8021p</div></th>
+                  <th class="top_font textOverflow"><div class="sortImg">VlanMuxId</div></th>
+                  <th class="top_font textOverflow"><div class="sortImg">ConnId</div></th>
+                  <th class="top_font textOverflow"><div class="sortImg">IGMP</div></th>
+                  <th class="top_font textOverflow"><div class="sortImg">NAT</div></th>
+                  <th class="top_font textOverflow"><div class="sortImg">Firewall</div></th>
+                  <td width="60" class="top_font textOverflow" style="border-right:0px;"><div class="sortImg">Modify </div></td>
                 </tr>
                </thead>
                   
                     <tbody>
                 <tr align="center">
-                  <td class="table_font">1</td>
-                  <td class="table_font">aaa</td>
-                  <td class="table_font">ipoe_0_0_1_1</td>
-                  <td class="table_font">PTM/IPoE</td>
-                  <td class="table_font">N/A</td>
-                  <td class="table_font">N/A</td>
-                  <td class="table_font">N/A</td>
-                  <td class="table_font">1</td>
-                  <td class="table_font">Disabled</td>
-                  <td class="table_font">Enabled</td>
-                  <td class="table_font"><button>aa</button></td>
-                  <td class="table_font"><div class="i_modify"><ul><li><a href="#" class="edit" id='editBtn' title="Edit"></a></li><li ><a href="#"  id='deleteBtn' class="delete" title="Delete"></a></li></ul></div></td>
+                  <td class="table_font textOverflow">1</td>
+                  <td class="table_font textOverflow">aaa</td>
+                  <td class="table_font textOverflow">ipoe_0_0_1_1</td>
+                  <td class="table_font textOverflow">PTM/IPoE</td>
+                  <td class="table_font textOverflow">N/A</td>
+                  <td class="table_font textOverflow">N/A</td>
+                  <td class="table_font textOverflow">N/A</td>
+                  <td class="table_font textOverflow">1</td>
+                  <td class="table_font textOverflow">Disabled</td>
+                  <td class="table_font textOverflow">Enabled</td>
+                  <td class="table_font textOverflow"><button>aa</button></td>
+                  <td class="table_font textOverflow"><div class="i_modify"><ul><li><a href="#" class="edit" id='editBtn' title="Edit"></a></li><li ><a href="#"  id='deleteBtn' class="delete" title="Delete"></a></li></ul></div></td>
                   </tr>
                 
                   <tr align="center">
-                  <td class="table_font">3</td>
-                  <td class="table_font">bbb</td>
-                  <td class="table_font">bhagfr</td>
-                  <td class="table_font">asdgsag</td>
-                  <td class="table_font">tsdgsg</td>
-                  <td class="table_font">asdgasg</td>
-                  <td class="table_font">hbndfgn</td>
-                  <td class="table_font">ndnh</td>
-                  <td class="table_font">ngn</td>
-                  <td class="table_font">234gfgf</td>
-                  <td class="table_font"><button>bb</button></td>
-                  <td class="table_font"><div class="i_modify"><ul><li><a href="#" class="edit" id='editBtn' title="Edit"></a></li><li ><a href="#"  id='deleteBtn' class="delete" title="Delete"></a></li></ul></div></td>
+                  <td class="table_font textOverflow">3</td>
+                  <td class="table_font textOverflow">bbb</td>
+                  <td class="table_font textOverflow">bhagfr</td>
+                  <td class="table_font textOverflow">asdgsag</td>
+                  <td class="table_font textOverflow">tsdgsg</td>
+                  <td class="table_font textOverflow">asdgasg</td>
+                  <td class="table_font textOverflow">hbndfgn</td>
+                  <td class="table_font textOverflow">ndnh</td>
+                  <td class="table_font textOverflow">ngn</td>
+                  <td class="table_font textOverflow">234gfgf</td>
+                  <td class="table_font textOverflow"><button>bb</button></td>
+                  <td class="table_font textOverflow"><div class="i_modify"><ul><li><a href="#" class="edit" id='editBtn' title="Edit"></a></li><li ><a href="#"  id='deleteBtn' class="delete" title="Delete"></a></li></ul></div></td>
                   </tr>
                   
                   
                    <tr align="center">
-                  <td class="table_font">20</td>
-                  <td class="table_font">ccc</td>
-                  <td class="table_font">bhagfr</td>
-                  <td class="table_font">asdgsag</td>
-                  <td class="table_font">tsdgsg</td>
-                  <td class="table_font">asdgasg</td>
-                  <td class="table_font">hbndfgn</td>
-                  <td class="table_font">ndnh</td>
-                  <td class="table_font">ngn</td>
-                  <td class="table_font">234gfgf</td>
-                  <td class="table_font"><button>cc</button></td>
-                  <td class="table_font"><div class="i_modify"><ul><li><a href="#" class="edit" id='editBtn' title="Edit"></a></li><li ><a href="#"  id='deleteBtn' class="delete" title="Delete"></a></li></ul></div></td>
+                  <td class="table_font textOverflow">20</td>
+                  <td class="table_font textOverflow">ccc</td>
+                  <td class="table_font textOverflow">bhagfr</td>
+                  <td class="table_font textOverflow">asdgsag</td>
+                  <td class="table_font textOverflow">tsdgsg</td>
+                  <td class="table_font textOverflow">asdgasg</td>
+                  <td class="table_font textOverflow">hbndfgn</td>
+                  <td class="table_font textOverflow">ndnh</td>
+                  <td class="table_font textOverflow">ngn</td>
+                  <td class="table_font textOverflow">234gfgf</td>
+                  <td class="table_font textOverflow"><button>cc</button></td>
+                  <td class="table_font textOverflow"><div class="i_modify"><ul><li><a href="#" class="edit" id='editBtn' title="Edit"></a></li><li ><a href="#"  id='deleteBtn' class="delete" title="Delete"></a></li></ul></div></td>
                   </tr>
                   
                     </tbody>

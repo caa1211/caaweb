@@ -17,7 +17,10 @@ $(function(){
             }
 			
         });
-        db1.load('pages/securitySettings/macFilter/macdelete.html');
+		var link = 'pages/securitySettings/macFilter/macdelete.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../'+link;
+        db1.load(link);
         db1.dialog('open');
     });
 	 $('.addnewshareBtn').click(function(){
@@ -26,7 +29,10 @@ $(function(){
             height: 240,
             title: 'Add device to allow list by MAC address'
         });
-        db1.load('pages/securitySettings/macFilter/macadd.html');
+       var link = 'pages/securitySettings/macFilter/macadd.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../'+link;
+        db1.load(link);
         db1.dialog('open');
     });
 });

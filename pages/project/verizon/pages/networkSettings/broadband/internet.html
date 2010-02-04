@@ -10,7 +10,10 @@ $(function(){
             height: 205,
             title: 'edit'
         });
-        db1.load('pages/networkSettings/broadband/edit.html');
+		var link = 'pages/networkSettings/broadband/edit.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../'+link;
+        db1.load(link);
         db1.dialog('open');
     });
     
