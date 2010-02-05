@@ -140,7 +140,8 @@ $(function(){
                 'zyFlow' : {url : "pages/others/zyflow4/demo.html"},
                 'table Sorting' : {url : "pages/others/tableSorting/demo.html"},
                 'text Overflow' : {url : "pages/others/textOverflow/demo.html"}, 
-                'zyMask': {url : "pages/others/zyMask/demo.html"}
+                'zyMask': {url : "pages/others/zyMask/demo.html"},
+                'easing calculater': {url : "pages/others/easing/demo2.html"}
                 
             },
             animation: {
