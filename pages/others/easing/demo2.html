@@ -56,14 +56,14 @@ $('#okBtn').click(function(){
     var beginPoint = new Array();
     for(var i=0; i<bpS.length; i++)
     {
-         beginPoint.push(  parseFloat(bpS[i]) );
+         beginPoint.push(  parseInt(bpS[i]) );
     }
    
     var epS = $('#endText').val().split(',');
      var endPoint = new Array();
     for(var i=0; i<epS.length; i++)
     {
-         endPoint.push(  parseFloat(epS[i]) );
+         endPoint.push(  parseInt(epS[i]) );
     }
  
     var easingfn = eval('$.easing.'+$('#selecter').val());
