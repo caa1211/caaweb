@@ -139,7 +139,8 @@ $(function(){
                 'zyDock' : {url : "pages/others/zyDock/femto.html"},
                 'zyFlow' : {url : "pages/others/zyflow4/demo.html"},
                 'table Sorting' : {url : "pages/others/tableSorting/demo.html"},
-                'text Overflow' : {url : "pages/others/textOverflow/demo.html"}
+                'text Overflow' : {url : "pages/others/textOverflow/demo.html"}, 
+                'zyMask': {url : "pages/others/zyMask/demo.html"}
                 
             },
             animation: {
