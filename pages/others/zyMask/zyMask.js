@@ -9,7 +9,7 @@
  *
  * $Date: 2010-02-04 $
  * depend on simpleModal(http://www.ericmmartin.com/projects/simplemodal/)
- * $Rev: 001 $
+ * $Rev: 002 $
  *
  */
 ;
@@ -35,7 +35,7 @@
                     $(window).unbind('resize', modifyPosition);
                 }
             }
-            
+            var _settings;
             var _defaultSettings = {
                 position: ['0', '0'],
                 opacity: 60,
@@ -49,31 +49,34 @@
                     width: contentSize[0] + "px",
                     height: contentSize[1] + "px"
                 },
-                /*onOpen: function(dialog){
+                onOpen: function(dialog){
                     dialog.overlay.fadeIn('fast', function(){
                         // dialog.data.hide();
                         dialog.container.fadeIn('fast');
                         dialog.data.fadeIn('fast');
                     });
-                },*/
+                },
                 containerId: 'modalContainer',
-                onShow: function(){
+                onload: function(){},
+                onShow: function(e ){
                     modifyPosition();
                     $(window).resize(modifyPosition);
-                    
+                    _settings.onload(e);
+
                 }
-              /* , onClose: function(dialog){
+              , onClose: function(dialog){
                     dialog.data.fadeOut('fast', function(){
                         dialog.container.hide('fast');
                         dialog.overlay.fadeOut('fast', function(){
                             $.modal.close();
                         });
                     });
-                }*/
+                }
             }
             
-            var _settings = $.extend(_defaultSettings, settings);
-            $.modal(content, _settings);
+            _settings = $.extend(_defaultSettings, settings);
+            var modalObj =  $.modal(content, _settings);
+            return modalObj;
         },
         
         closezyMask: function(){
