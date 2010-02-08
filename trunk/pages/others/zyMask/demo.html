@@ -23,9 +23,9 @@
         $('#outerHtml').click(function(){
             var  content ='<div id="emptyDiv"></div>';
             
-            $.zyMask(content, [100, 300]);
+            $.zyMask(content, [100, 300], {onload:function(){$('#emptyDiv').load('troubleshooting.html');}});
             
-            $('#emptyDiv').load('troubleshooting.html');
+            
         });
         
         
