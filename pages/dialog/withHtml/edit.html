@@ -1,2 +1,20 @@
 
-<div>other html</div>
+
+<script type="text/javascript">
+   
+$(function(){
+      
+var OkBtn = $('.ui-dialog-buttonpane').children("button:contains('OK')");
+db = $(this).find('.dialogContener');      //find db obj
+
+    OkBtn.click(function(e){
+   //db.trigger('dialogclose');           
+   db.dialog('close');
+    
+    });
+    });
+
+</script>
+
+
+<div>other html s</div>
