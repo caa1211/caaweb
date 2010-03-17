@@ -141,7 +141,8 @@ $(function(){
                 'table Sorting' : {url : "pages/others/tableSorting/demo.html"},
                 'text Overflow' : {url : "pages/others/textOverflow/demo.html"}, 
                 'zyMask': {url : "pages/others/zyMask/demo.html"},
-                'easing calculater': {url : "pages/others/easing/demo2.html"}
+                'easing calculater': {url : "pages/others/easing/demo2.html"}, 
+                'zySpinBtn':{url:"pages/others/zySpinBtn/demo.html"}
                 
             },
             animation: {
