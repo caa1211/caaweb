@@ -1,0 +1,8 @@
+/*normal status*/
+.spinBtn{ border: solid 2px black; background-color:#AAAAAA; text-align:center;}
+
+/*focus status*/
+.spinBtn:focus{border: solid 2px red; background-color:yellow;}
+
+/*edit status*/
+.spinBtn.edit {border: solid 2px green; background-color:white;}
