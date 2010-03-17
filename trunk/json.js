@@ -142,7 +142,7 @@ $(function(){
                 'text Overflow' : {url : "pages/others/textOverflow/demo.html"}, 
                 'zyMask': {url : "pages/others/zyMask/demo.html"},
                 'easing calculater': {url : "pages/others/easing/demo2.html"}, 
-                'zySpinBtn':{url:"pages/others/zySpinBtn/demo.html"}
+                'zySpinBtn':{url:"pages/others/zySpinBtn2/demo.html"}
                 
             },
             animation: {
