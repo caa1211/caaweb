@@ -122,6 +122,9 @@ $(function(){
                 },
                 'lavalamp':{
                     url:"pages/menu/02/demo.html"
+                },
+                 'lava lamp menu':{
+                    url:"pages/menu/lavaLampMenu/demo.html"
                 }
                 },
             others: {
