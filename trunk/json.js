@@ -114,7 +114,7 @@ $(function(){
                 'test24':{url: "others/jquery.jqplot.0.9.4/dist/test24.html"},
                 'test25':{url: "others/jquery.jqplot.0.9.4/dist/test25.html"},
                 'test26':{url: "others/jquery.jqplot.0.9.4/dist/test26.html"},
-                'test27':{url: "others/jquery.jqplot.0.9.4/dist/test27.html"},
+                'test27':{url: "others/jquery.jqplot.0.9.4/dist/test27.html"}
             },
             menu: {
                 'single layer':{
