@@ -1,0 +1,17 @@
+
+.naviView{width:100%; height:auto; position:absolute;}
+/* Lan----------------------------------*/ 
+.vdFrame{ position:relative; width:503px; height:203px; background:url(images/i_vd.gif); margin:0 auto; color:#FFFFFF;}
+.lanFrame{ position:absolute; top:125px; left:-54px;width:400px; height:28px;}
+.lanFrame ul li{ float:right;display:block; margin-left:4px; margin-top:11px;text-align:center; width:33px; height:54px; font-size:7px;line-height:15px;  position:relative; }
+.lanname{ position:absolute; width:440px; height:25px; line-height:25px; top:0; right:-1px;}
+.lanname ul li{ float:right; display:block;}
+.lanname ul li.dslname{ margin-right:58px;}
+.lanname ul li.lannamearea{ margin-left:6px;}
+.lanname ul li.wanname{ margin-left:18px;}
+.lanname ul li.wifiSignalname{ margin-left:64px;}
+.lan_on{background:url(images/earthnet.gif) no-repeat; display:block; width:33px; height:54px; }
+.wifiSignal_off{ width:40px; height:38px; position:absolute; right:0px; top:25px;}
+.wifiSignal_on{ background:url(images/i_wifi_on.gif) no-repeat; width:40px; height:38px; position:absolute;  right:-2px; top:48px;}
+.wan_on{ background:url(images/wan.gif); width:33px; height:54px; position:absolute; right:115px; top:145px;}
+.dslline_on{ background:url(images/wan.gif); width:33px; height:54px; position:absolute; left:102px; top:145px;}

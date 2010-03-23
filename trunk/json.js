@@ -47,6 +47,11 @@ $(function(){
                     url: "pages/jQueryVD/multiVD/page.html",
                     index: 'vd'
                 }
+                ,
+                'tooltip-vd': {
+                    url: "pages/jQueryVD/2628/demo.html",
+                    index: 'vd'
+                }
             },
             marquee: {
                 basic: {
