@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
+        
+        <script type="text/javascript" src="../../adapter/jquery/jquery-1.3.2.js"></script>
+        <script type="text/javascript" src="../../adapter/jquery/ext-jquery-adapter.js"></script>
+        <!-- jQuery end -->
+
+        <script type="text/javascript" src="../../adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="../../ext-all-debug.js"></script>
+        <script type="text/javascript" src="../localXHR.js"></script>
+        
+         <script type="text/javascript" src="../localXHR.js"></script>
+
+        <script type="text/javascript" src="../../adapter/jquery/zyjquery-adapter.js"></script>
+        <script type="text/javascript">
+            
+  // 修改该空白背景图的路径，指向你服务端一个有效的图片路径。
+  Ext.BLANK_IMAGE_URL = 'ext/resources/images/default/s.gif';
+ 
+$(function(){
+    
+    var p=new Ext.Panel({
+   id:"panel1",
+        title:"标题",
+        collapsible:true,
+       // renderTo:  'wnd',
+        closable:true,
+        width:400,
+        height:300,
+        tbar:[{text:"按钮1"},{text:"按钮2"}], //顶部工具栏
+        bbar:[{text:"按钮1"},{text:"按钮2"}],  //底部工具栏
+        html:"内容",
+        buttons:[{text:"按钮1"},{text:"按钮2"}] //footer部工具栏
+   });
+   
+var wnd = new Ext.Window({
+    id:'caa',
+    width: 300,
+    height: 450,
+    layout:'fit',
+    el:"win",
+    title: 'Instant Messenger', 
+    items:[{
+        id:'myPanel',
+        xtype:'panel',
+        title: 'My Panel',//标题
+        collapsible:true,//右上角上的那个收缩按钮，设为false则不显示
+        width:400,
+        height:200
+    }]
+    /*, listeners:{
+        'afterlayout':function(){wnd.items.add(p);}
+    } */
+});
+//wnd.on('afterlayout', function(){ this.items.add(p); })
+wnd.show();
+
+
+  var extEl = Ext.get("myPanel");
+ 
+ var jqEl = Ext.getJQuery(extEl);
+ jqEl.hide().show(1000);
+ jqEl.find('.x-panel-body').append('<button id="appendBtn">aaa</button>')  
+ 
+  var extEl2 = jQuery.getExt($(jqEl));    
+
+//extEl2.setStyle('width', '100px'); 
+Ext.get("appendBtn").on('click', function(){   extEl2.setStyle('width', '100px');       });
+
+
+
+/*
+wnd.on('click', function(e, a, b, c){debugger;});
+p.fireEvent('click', 'param1');
+*/
+});
+
+
+
+        </script>
+    </head>
+    <body >
+   
+		<div id="win" class="x-hidden"> </div>
+    </body>
+</html>
