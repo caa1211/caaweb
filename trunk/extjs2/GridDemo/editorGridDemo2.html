@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Grid</title>
+        <link rel="stylesheet" type="text/css" href="../ext/resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="../css/zyxel/zycss.css" />
+        <link rel="stylesheet" type="text/css" href="../css/zyxel/zytheme.css" />
+        <script type="text/javascript" src="../ext/adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="../ext/ext-all-debug.js"></script>
+        <script type="text/javascript" src="../common/zyVType.js"></script>
+        <script type="text/javascript" src="../common/zyFunction.js"></script>
+        <script type="text/javascript" src="../common/zyComponent.js"></script>
+        <script type="text/javascript" src="../common/zyExtend.js"></script>
+        <script type="text/javascript" src="../common/zyDebug.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/temp.css" />
+        <script type="text/javascript" src="zyCOEComponent.js"></script>
+        <script type="text/javascript" src="CheckColumn.js"></script>
+        <script type="text/javascript">
+            
+            Ext.onReady(function(){
+               // Ext.BLANK_IMAGE_URL = '../ext/resources/images/default/s.gif';
+                
+                var data = [[false, 'descn1'], [1, 'descn2'], [false, 'descn3'], [true, 'descn4'], [1, 'descn5']];
+
+                var store = new Ext.data.Store({
+                    proxy: new Ext.data.MemoryProxy(data),
+                    autoLoad: true,
+                    reader: new Ext.data.ArrayReader({}, 
+                    [
+                    {name: 'id'}, 
+                    {name: 'desc'}
+                    ])
+                });
+                
+                var checkColumn1 = new Ext.grid.zyCheckColumn({
+                    header: "Check",
+                    dataIndex: 'id',
+                    width: 50,
+                    align: 'center'
+					,editor: new Ext.grid.GridEditor(new Ext.form.TextField({selectOnFocus: true}))//change
+                });
+                
+
+				var Selections = [[true],[false]];
+					
+                var cm = new Ext.grid.ColumnModel([
+                
+                //  new Ext.grid.RowNumberer(),
+				 
+				  //Combo box
+                  {
+				  header: 'id', 
+				  dataIndex: 'id',
+				  editor: new Ext.grid.GridEditor(new Ext.form.ComboBox({//change
+                          store: new Ext.data.SimpleStore({
+                          fields: ["comboSelection"],
+                          data: Selections
+                          }),
+                   valueField:'comboSelection',
+                   displayField: 'comboSelection',
+                   mode: 'local',
+                   readOnly:true,
+                   forceSelection: true,
+                   editable: false,
+                   triggerAction: 'all',
+                   width: 100
+                  }))
+				  }, 
+				  
+				 //Text field
+                 checkColumn1,
+				 
+				 //Check box
+                 {
+				   header: 'checkbox', 
+				   dataIndex: 'id',
+				   editor: new Ext.grid.GridEditor(new Ext.form.Checkbox({//change
+						allowBlank: false
+					})),
+				   renderdr: function(value)
+                   {
+                    return value?'yes':'no';
+                   }
+				 },
+				 
+				 //Text field
+                 {
+				   header: 'description', 
+				   dataIndex: 'desc',
+				   editor: new Ext.grid.GridEditor(new Ext.form.TextField({selectOnFocus: true}))//change
+				 }
+                ]);
+                
+                var grid = new Ext.zyEditorGridPanel({//change
+                    title: 'grid',
+                    //plugins: [checkColumn1],
+                    store: store,
+                    cm: cm
+                });
+                
+                
+                var form = new Ext.FormPanel({
+                    items: [grid]
+                });
+                
+                var viewport = new Ext.Viewport({
+                    layout: 'fit',
+                    items: [form]
+                });
+                
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
