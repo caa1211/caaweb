@@ -1,0 +1,22 @@
+UL.tree li{list-style-type: none; border:0px;}
+
+
+
+UL.tree LI .checkbox {
+
+ PADDING-BOTTOM: 0px; 
+ MARGIN: 0px; 
+ PADDING-LEFT: 0px; 
+ WIDTH: 20px; 
+ PADDING-RIGHT: 
+ 0px; BACKGROUND: url(check0.gif) no-repeat 0px 0px; FLOAT: left;
+  HEIGHT: 18px; 
+ cursor: pointer; 
+ PADDING-TOP: 0px
+}
+UL.tree LI .checked {
+    BACKGROUND-IMAGE: url(check2.gif)
+}
+UL.tree LI .half_checked {
+    BACKGROUND-IMAGE: url(check1.gif)
+}
