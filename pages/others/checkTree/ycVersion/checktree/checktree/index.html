@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>jQuery Plugins - CheckTree(ycTIN Edition) - Demo</title>
+        <link type="text/css" rel="stylesheet" href="jquery.checktree.css" />
+        <script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+        <script type="text/javascript" src="jquery.checktree_yctin.min.js"></script>
+        <script type="text/javascript" src="jquery.updateWithJSON.min.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            var $checktree;
+            $(function(){
+                $checktree = $("ul.tree").checkTree();
+            });
+			function load(id) {
+				$.getJSON("data/" + id + ".txt",{},function(json){
+					$checktree.clear();
+					$.updateWithJSON(json);
+					$checktree.update();
+				});
+			}
+			function clearAll(){
+				$checktree.clear();
+				$checktree.update();
+			}
+        </script>
+        <h1>jQuery Plugins - CheckTree(ycTIN Edition) - Demo</h1>
+        <hr size="1" noshade="noshade" />
+		Demo : 
+			<a href="javascript:;" onclick="load(1)" >Ajax 1</a>, 
+			<a href="javascript:;" onclick="load(2)" >Ajax 2</a>, 
+			<a href="javascript:;" onclick="clearAll()" >Clear</a>
+		| 
+		Homepage : <a href="http://www.yctin.com/" target="_blank">http://www.yctin.com/</a>
+        <hr size="1" noshade="noshade" />
+        <ul class="tree">
+            <li>
+                <input type="checkbox">
+                <label>
+                    Computer
+                </label>
+                <ul>
+                    <li>
+                        <input type='checkbox' name='ids[]' id='p_1'value='1'>
+                        <label>
+                            Hardware
+                        </label>
+						<ul>
+							<li>
+		                        <input type='checkbox' name='ids[]' id='p_10'value='10'>
+		                        <label>
+		                            CPU
+		                        </label>
+		                    </li>
+							<li>
+		                        <input type='checkbox' name='ids[]' id='p_11'value='11'>
+		                        <label>
+		                            RAM
+		                        </label>
+		                    </li>
+							<li>
+		                        <input type='checkbox' name='ids[]' id='p_12'value='12'>
+		                        <label>
+		                            HDD
+		                        </label>
+		                    </li>
+						</ul>
+                    </li>
+                    <li>
+                        <input type='checkbox' name='ids[]' id='p_2'value='2'>
+                        <label>
+                            Software
+                        </label>
+                        <ul>
+                            <li>
+                                <input type='checkbox' name='ids[]' id='p_20'value='20'>
+                                <label>
+                                    OS
+                                </label>
+                                <ul>
+                                    <li>
+                                        <input type='checkbox' name='ids[]' id='p_200'value='200'>
+                                        <label>
+                                            Windows
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <input type='checkbox' name='ids[]' id='p_201'value='201'>
+                                        <label>
+                                            Linux
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <input type='checkbox' name='ids[]' id='p_202'value='202'>
+                                        <label>
+                                            Unix
+                                        </label>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <input type='checkbox' name='ids[]' id='p_21'value='21'>
+                                <label>
+                                    Application
+                                </label>
+								<ul>									
+                                    <li>
+                                        <input type='checkbox' name='ids[]' id='p_210'value='210'>
+                                        <label>
+                                            MS Word
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <input type='checkbox' name='ids[]' id='p_211'value='211'>
+                                        <label>
+                                            MS Excel
+                                        </label>
+                                    </li>
+								</ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <br style="clear:both"/>
+    </body>
+</html>

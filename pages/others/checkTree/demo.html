@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--common css-->
+   
+    
+    <LINK rel=stylesheet type=text/css href="css.css"></Link>
+    <!--common js-->
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript"></script>
+
+  
+  
+    <script type="text/javascript">
+
+        $(function()
+        {
+ 
+  function createNode(data, recursiveCounter ){
+       if(recursiveCounter==undefined)
+       recursiveCounter = "";
+       var contenter = $('<ul class="tree"></ul>');
+                var counter = 0;
+                $.each(data, function(i, item){
+                    if(item.title==undefined)
+                    return;
+                    var liNode = $('<li></li>');
+                   
+                    var nodeStr = recursiveCounter + '_'+counter;
+                    counter++;
+                    
+                    var inputNode = $('<div class="checkbox" id="node'+nodeStr +'" ></div>');
+                    liNode.append(inputNode);
+                    var labelNode = $(' <LABEL>'+item.title +'</LABEL>');
+                    liNode.append(labelNode);
+                    
+                    if (item.submenu != undefined) {
+                      var subMenuContenter =  createNode(item.submenu, nodeStr);
+                      liNode.append(subMenuContenter);
+                    }
+                    
+                    contenter.append(liNode);
+                });
+                return contenter;
+  }
+ 
+ 
+            $.getJSON("menu.json", function(data){
+              var contenter= createNode(data);
+                $('body').append(contenter);
+               doCheckBoxTreeCompleted();
+            });
+            
+            
+           function checkNode(){
+                 var node =  $('#node_1_0_1')
+                 nodeStatusUpdate(node) 
+                 
+               // node.click(function(){clearAll() })
+            }
+            
+            function clearAll(){
+                $('.checkbox').removeClass('checked').removeClass('half_checked');
+            }
+            
+            function selectAll(){
+                $('.checkbox').addClass('checked');
+            }
+            
+            
+         //$('body').click(function(){checkNode() })
+            
+            function treeStatusUpdate(treeObj){
+                 if (treeObj.length > 1) {
+                     var parentNode;
+                     treeObj.each(function(i, item){
+                         if (i == 0) {
+                          
+                             parentNode = item;
+                         }
+                     })
+                     treeObj = $(parentNode);
+                 }
+                       
+             
+                 var childrenNum = treeObj.contents().find('.checkbox').length;
+                 var checkedNum = treeObj.contents().find('.checkbox.checked').length;
+                
+                 
+               if (childrenNum == checkedNum) {
+                   treeObj.siblings('.checkbox').removeClass('half_checked').addClass('checked');
+               }
+               else 
+                   if (childrenNum > checkedNum && checkedNum != 0) {
+                      treeObj.siblings('.checkbox').addClass('half_checked');
+                   }
+                   else 
+                       if (checkedNum == 0) {
+                          treeObj.siblings('.checkbox').removeClass('half_checked').removeClass('checked');
+                       }
+
+             if(treeObj.parents('.tree').length>0)
+               treeStatusUpdate(treeObj.parents('.tree')); 
+            }
+            
+            function nodeStatusUpdate(nodeObj)
+            {  if (!nodeObj.removeClass('half_checked').hasClass('checked')) {
+                          nodeObj.addClass('checked');
+                         nodeObj.siblings('ul').find('li .checkbox').addClass('checked');
+                          
+                      }
+                      else {
+                          nodeObj.removeClass('half_checked').removeClass('checked');
+                          nodeObj.siblings('ul').find('li .checkbox').removeClass('checked');
+                      }   
+                          
+                          if(nodeObj.parents('.tree').length>0)
+                          treeStatusUpdate( nodeObj.parents('.tree'));
+                          
+                          }
+            
+            $('#clearAllBtn').click(function(){ clearAll();})
+            $('#selectAllBtn').click(function(){ selectAll();})
+       
+            
+            function instillCheckJson(){
+                
+                  $.getJSON("check.json", function(checkJson){
+                      
+                   $.each(checkJson, function(i, item){
+                   $jsonOption = $('<option>'+i+'</option>')
+                   $jsonOption.attr('checkJson', item);
+                   $('#jsonSelect').append($jsonOption)
+                  });
+                 
+                         $('#jsonSelect').change(function(e){
+                           clearAll();
+                           var selectIndex =this.selectedIndex+1;
+                           var checkJson =   $(this).find("option:nth-child("+ selectIndex +")").attr('checkJson')
+                               checkJson = checkJson.split(',');
+                               for(var j=0; j<checkJson.length; j++)
+                               {
+                                    var checkNode  =$('#node_'+checkJson[j]);
+                                nodeStatusUpdate(checkNode);
+                               }
+                        })
+             });
+                
+            }
+            
+            function doCheckBoxTreeCompleted(){
+                
+              instillCheckJson();  
+                      $('ul.tree').find(".checkbox").click(
+                      function() {
+                         nodeStatusUpdate($(this)) 
+                       });
+            }
+            
+        });
+  
+    </script> 
+
+</head>
+<body>
+<button id='clearAllBtn'>clear All</button>
+<button id='selectAllBtn'>select All</button>
+<SELECT id='jsonSelect'></SELECT>
+
+
+<!--UL  class=tree>
+    <LI>
+        <INPUT type=checkbox>
+        <LABEL>
+            United States
+        </LABEL>
+        
+    </LI>
+    <LI>
+        <INPUT type=checkbox>
+        <LABEL>
+            Canadia
+        </LABEL>
+    </LI>
+    <LI>
+        <INPUT value=afghanistan type=checkbox name=geo>
+        <LABEL>
+            Afghanistan
+        </LABEL>
+    </LI>
+    <LI>
+        <INPUT type=checkbox>
+        <LABEL>
+            Sealand
+        </LABEL>
+        <UL>
+            <LI>
+                <INPUT value=tree_city type=checkbox name=geo>
+                <LABEL>
+                    Tree City
+                </LABEL>
+            </LI>
+            <LI>
+                <INPUT value=oil_province type=checkbox name=geo>
+                <LABEL>
+                    Oil 
+                    Province
+                </LABEL>
+               
+            </LI>
+            <LI>
+                <INPUT value=fun_province_checkbox type=checkbox>
+                <LABEL>
+                    Fun 
+                    Province
+                </LABEL>
+                
+            </LI>
+        </UL>
+    </LI>
+</UL-->
+ 
+
+
+</body>
+</html>
