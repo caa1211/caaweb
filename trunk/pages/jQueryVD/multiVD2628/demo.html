@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--common css-->
+    <link href="../../../css/themes/custom-theme/jquery-ui-1.7.2.custom.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/themes/myCustom.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/demos.css" rel="stylesheet" type="text/css" />
+    <link href="jquery.tooltip.css" rel="stylesheet" type="text/css" />
+    
+    <!--common js-->
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript"></script>
+    <script src="../../../js/jquery-ui-1.7.2.custom.min.js" type="text/javascript"></script>
+    <script src="../../../js/zyJqFunctions.js" type="text/javascript"></script>
+   
+    <script src="jquery.tooltip.min.js" type="text/javascript"></script>
+     <script src="VD/VDcomponent.js" type="text/javascript"></script>
+     
+    <script type="text/javascript">
+
+        $(function()
+        {
+   
+   //VD for 2628-----------------------------------------
+//test data 1
+  var VDdate1 = {
+     dslline: {status: 'on', msg: 'dsl line on' },
+     lan1: {status: 'off' },
+     lan2: {status: 'on', msg: 'LAN2 on \n ip:192.168.0.1'},
+     lan3: {status: 'off'},
+     lan4: {status: 'on', msg:'LAN4 \n on'},
+     wan: {status: 'off' },
+     wifiSignal: {status: 'on', msg: 'wifiSignal on'}
+   } ;
+//test data 2
+  var VDdate2 = {
+     dslline: {status: 'off', msg: 'dsl line on' },
+     lan1: {status: 'off' },
+     lan2: {status: 'on', msg: 'LAN2 on'},
+     lan3: {status: 'off'},
+     lan4: {status: 'off', msg:'LAN4 on'},
+     wan: {status: 'on' , msg:'wan on'},
+     wifiSignal: {status: 'off', msg: 'wifiSignal on'}
+   } ;
+  
+ // install vd 
+  var $VDObj2628 = $('#vd2628').VDcomponent({
+        vdHtml: 'VD/2628/VD.html',
+        vdCss: ['VD/2628/css/css.css'],
+        portDef:'VD/2628/portDef.js'
+  });
+  
+  //vd set init value
+  $VDObj2628.setValue(VDdate1);
+  
+  //for test!
+  $VDObj2628.toggle(function(){
+       $VDObj2628.setValue(VDdate1);
+  }, function(){
+       $VDObj2628.setValue(VDdate2);
+  })
+  
+//VD others-----------
+     var date1 = {
+     port1: {status: 'on', msg:'port1 on'},
+     port2: {status: 'off'},
+     rj1: {status: 'off',msg: 'rj1 on'},
+     rj2: {status: 'on',msg: 'rj2 on'},
+     rj3: {status: 'on',msg: 'rj3 on'},
+     rj4: {status: 'on',msg: 'rj4 on'},
+     rj1_left: {status: 'off',msg: ''},
+     rj2_left: {status: 'offline',msg: 'rj2 left offline'},
+     rj3_left: {status: 'on',msg: 'rj3 left off'},
+     rj4_left: {status: 'offline',msg: 'rj4 left offline'},
+     
+     rj1_right: {status: 'off',msg: 'rj1 right on'},
+     rj2_right: {status: 'off',msg: 'rj2 right on'},
+     rj3_right: {status: 'off',msg: 'rj3 right on'},
+     rj4_right: {status: 'on',msg: 'rj4 right on'}
+ } ;
+ 
+ //for test
+ var $VDOther = $('#vdOther').VDcomponent({
+     vdHtml: 'VD/VDHtml/VD.html',
+     vdCss: ['VD/VDHtml/css/reset.css', 'VD/VDHtml/css/css.css'],
+     portDef: 'VD/VDHtml/portDef.js'
+ });
+  $VDOther.setValue(date1);
+  
+        
+
+        });
+  
+    </script> 
+
+</head>
+<body>
+
+<div>
+    
+    <div id='vd2628' style='width:750px;float:left; border: solid 1px red;'></div>
+    <div id='vdOther' style='width:750px;float:left; border: solid 1px red;'></div>
+    
+</div>
+ 
+<!--web link-->
+<br/><br/><br/>
+<a href='aaaaa' 
+class='ui-state-default ui-corner-all' 
+target='_blank'>reference</a>
+
+
+</body>
+</html>
