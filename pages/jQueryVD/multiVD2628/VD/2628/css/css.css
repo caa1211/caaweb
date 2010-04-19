@@ -1,0 +1,25 @@
+/*@import url("reset.css");*/
+/* Lan----------------------------------*/ 
+.vdFrame{ position:relative; width:503px; height:203px; background:url(../images/i_vd.gif); margin:0 auto; color:#FFFFFF;}
+.lanFrame{ position:absolute; top:134px; left:191px;width:155px; height:28px;}
+.lanFrame ul li{ float:right;display:block; margin-left:4px; margin-top:11px;text-align:center; width:33px; height:54px; font-size:7px;line-height:15px;  position:relative; }
+.lanname{ position:absolute; width:440px; height:25px; line-height:25px; top:212px; right:-1px;}
+.lanname ul li{ float:right; display:block;}
+.lanname ul li.dslname{ margin-right:58px;}
+.lanname ul li.lannamearea{ margin-left:6px;}
+.lanname ul li.wanname{ margin-left:18px;}
+.lanname ul li.wifiSignalname{ margin-left:64px;}
+.lan_on{background:url(../images/earthnet.gif) no-repeat; display:block; width:33px; height:54px; }
+.wifiSignal_off{ width:40px; height:38px; position:absolute; right:0px; top:25px;}
+.wifiSignal_on{ background:url(../images/i_wifi_on.gif) no-repeat; width:40px; height:38px; position:absolute;  right:-2px; top:48px;}
+.wan_on{ background:url(../images/wan.gif); width:33px; height:54px; position:absolute; right:115px; top:145px;}
+.dslline_on{ background:url(../images/wan.gif); width:33px; height:54px; position:absolute; left:102px; top:145px;}
+/* Traffic for WAN---------------------------------*/
+.sent{ display:block; font-weight:bold; top:130px; left:60px; width:200px; margin-left:15px; overflow:hidden; text-align:right;}
+html* .sent{display:block; font-weight:bold; top:130px; left:60px; width:200px; margin-left:15px;word-break:break-all;}
+.sent span{ display:block;}
+.received{display:block;font-weight:bold; top:130px; right:40px; width:200px;overflow:hidden;}
+html* .received{display:block;font-weight:bold; top:130px; right:40px; width:200px; word-break:break-all;}
+.received span{ display:block;}
+.nat_1{position:relative; background:url(../images/i_router.gif); height:90px; width:131px; margin-left:10px; margin-right:20px; }
+.nat_1 span{ position:absolute;background:url(../images/i_internet.gif) no-repeat;;width:57px;height:55px; left:90px; top:30px;}
