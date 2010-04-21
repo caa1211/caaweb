@@ -1,0 +1,36 @@
+<mce:style type="text/css"><!--
+    .aboutDlg {
+        width: 308px;
+        height: 240px;
+        padding-top: 20px;
+    }
+    
+    .aboutDlg_btn {
+        background-color: #eaeaea;
+        width: 308px;
+        height: 56px;
+        text-align: center;
+    }
+    
+    .aboutDlg p {
+        color: #4b4b4b;
+        margin: 15px;
+    }   
+--></mce:style><style type="text/css" mce_bogus="1">    .aboutDlg {
+        width: 308px;
+        height: 240px;
+        padding-top: 20px;
+    }
+    
+    .aboutDlg_btn {
+        background-color: #eaeaea;
+        width: 308px;
+        height: 56px;
+        text-align: center;
+    }
+    
+    .aboutDlg p {
+        color: #4b4b4b;
+        margin: 15px;
+    }   </style>
+<mce:script src="about/about.js" mce_src="about/about.js"></mce:script>

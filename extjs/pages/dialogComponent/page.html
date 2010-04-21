@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
+          <link rel="stylesheet" type="text/css" href="Ext.zyDialog.css" />
+        <script type="text/javascript" src="../../adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="../../ext-all-debug.js"></script>
+        <script type="text/javascript" src="../localXHR.js"></script>
+          <script type="text/javascript" src="Ext.zyDialog.js"></script> 
+      
+        <script type="text/javascript">
+            
+  // 修改该空白背景图的路径，指向你服务端一个有效的图片路径。
+  Ext.BLANK_IMAGE_URL = 'ext/resources/images/default/s.gif';
+ 
+Ext.onReady(function(){
+    
+new Ext.ux.aboutDialog({
+    picture:'about/setup_22.JPG'
+    ,AppVersion:.9
+    ,AppText:"Html、Javascript、DOM是Ajax浏览器页面开发必须掌握的基础知识，否则，页面编程无从谈起。"
+    ,AppLinkText:'Ext中文网'
+    ,AppLinkHref: 'http://www.ajaxjs.com'
+}).show();
+ 
+           
+});
+        </script>
+    </head>
+    <body >
+    
+		<div id="win" class="x-hidden"> </div>
+    </body>
+</html>

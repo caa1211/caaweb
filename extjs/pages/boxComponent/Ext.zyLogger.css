@@ -1,0 +1,28 @@
+.x-logger {
+    overflow: auto;
+}
+.x-log-entry .x-log-level {
+    float: left;
+    width: 4em;
+    text-align: center;
+    margin-right: 3px;
+}
+.x-log-entry .x-log-time {
+    margin-right: 3px;
+}
+.x-log-entry .x-log-message {
+    margin-right: 3px;
+}
+.x-log-debug-entry, .x-log-info-entry, .x-log-warning-entry, .x-log-error-entry {
+ display:none;
+}
+&nbsp;
+.x-log-show-debug .x-log-debug-entry { display: block }
+.x-log-show-info .x-log-info-entry { display: block }
+.x-log-show-warning .x-log-warning-entry { display: block }
+.x-log-show-error .x-log-error-entry { display: block }
+&nbsp;
+.x-log-debug-entry .x-log-level { background-color: #46c }
+.x-log-info-entry .x-log-level  { background-color: green }
+.x-log-warning-entry .x-log-level  { background-color: yellow }
+.x-log-error-entry .x-log-level  { background-color: red }
