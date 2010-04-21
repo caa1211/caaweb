@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
+        <script type="text/javascript" src="../../adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="../../ext-all-debug.js"></script>
+        <script type="text/javascript" src="../localXHR.js"></script>
+        <script type="text/javascript">
+            
+  // 修改该空白背景图的路径，指向你服务端一个有效的图片路径。
+  Ext.BLANK_IMAGE_URL = 'ext/resources/images/default/s.gif';
+ 
+ 
+ 
+ var MyPanel = Ext.extend(Ext.Panel, {
+     title:'111',
+     initComponent: function(){
+         Ext.apply(this,{
+             title:'333',
+             width: 300,
+             height: 300
+         })
+        
+        MyPanel.superclass.initComponent.apply(this, arguments);
+        // 位于构造器之后，在这里你可以为当前对象新添加功能（如处理如事件）
+        this.on('click',function() {alert("你已点击" + this.title);},this);
+     }
+     // 新添加的函数
+     ,myNewFunction: function() {/*alert('')*/},
+     // 重写原有函数
+     onRender: function() {
+       
+        MyPanel.superclass.onRender.apply(this, arguments);
+        this.myNewFunction();
+    }
+
+     
+ })
+ 
+ 
+Ext.onReady(function(){
+   
+var wnd = new Ext.Window({
+    width: 300,
+    height: 450,
+    layout:'fit',
+    el:"win",
+    title: 'Instant Messenger'
+    , items:[new MyPanel({
+        title:"222"
+        })]
+    
+});
+
+ wnd.show();
+ 
+           
+});
+        </script>
+    </head>
+    <body >
+    
+		<div id="win" class="x-hidden"> </div>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
+        <script type="text/javascript" src="../../adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="../../ext-all-debug.js"></script>
+        <script type="text/javascript" src="../localXHR.js"></script>
+        <script type="text/javascript">
+            
+  // 修改该空白背景图的路径，指向你服务端一个有效的图片路径。
+  Ext.BLANK_IMAGE_URL = 'ext/resources/images/default/s.gif';
+Ext.onReady(function(){ 
+      new Ext.Viewport({    //注意这里是Viewport，NO ViewPort 
+    enableTabScroll:true, 
+    layout:"border", 
+    items:[{title:"面板", 
+      region:"north",   //顶部面板 
+      height:50, 
+      html:'<h1>网站后台管理系统</h1>' 
+      }, 
+      { 
+      title:"菜单", 
+      region:"west",    //左边菜单项，有按钮可控制伸缩的 
+      width:200, 
+      collapsible:true, 
+      html:"菜单栏" 
+      }, 
+      { 
+      xtype:"tabpanel",   //选项卡 
+      region:"center",     
+      items:[{title:"面板1",html:'<h1>面板1内容</h1>'}, 
+        {title:"面板2",html:'<h1>面板2内容</h1>'}, 
+        {title:"面板3",html:'<h1>面板3内容</h1>'}] 
+      } 
+      ] 
+      }); 
+});
+        </script>
+    </head>
+    <body >
+    
+		<div id="win" class="x-hidden"> </div>
+    </body>
+</html>

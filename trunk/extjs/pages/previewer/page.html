@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
+        <script type="text/javascript" src="../../adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="../../ext-all-debug.js"></script>
+        <script type="text/javascript" src="../localXHR.js"></script>
+        <script type="text/javascript">
+            
+  // 修改该空白背景图的路径，指向你服务端一个有效的图片路径。
+  Ext.BLANK_IMAGE_URL = 'ext/resources/images/default/s.gif';
+ 
+Ext.MyWindow=Ext.extend(Ext.Window ,{
+xtype:"window",
+    title:"我的窗口",
+    width:400,
+    height:250,
+    initComponent: function(){
+        this.tbar=[
+            {
+                text:"我的按钮"
+            },
+            {
+                text:"我的按钮"
+            }
+        ]
+        this.items=[
+            
+            {
+                xtype:"checkbox",
+                fieldLabel:"标签",
+                boxLabel:"boxLabel"
+            },
+            {
+                xtype:"datefield",
+                fieldLabel:"标签"
+            }
+        ]
+        Ext.MyWindow.superclass.initComponent.call(this);
+    }
+})
+
+Ext.onReady(function(){ 
+
+var wnd = new Ext.MyWindow({
+    width: 300,
+    height: 450,
+    layout:'fit',
+    el:"win",
+    title: 'Instant Messenger'
+    
+});
+wnd.show();
+ 
+           
+});
+        </script>
+    </head>
+    <body >
+    
+		<div id="win" class="x-hidden"> </div>
+    </body>
+</html>

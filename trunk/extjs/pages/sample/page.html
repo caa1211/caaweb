@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
+           
+             <script type="text/javascript" src="../../adapter/jquery/jquery-1.3.2.js"></script>
+             <script type="text/javascript" src="../../adapter/jquery/ext-jquery-adapter.js"></script>
+             
+    
+       
+        <script type="text/javascript" src="../../ext-all-debug.js"></script>
+        <script type="text/javascript" src="../localXHR.js"></script>
+        <script type="text/javascript">
+            
+  // 修改该空白背景图的路径，指向你服务端一个有效的图片路径。
+  Ext.BLANK_IMAGE_URL = 'ext/resources/images/default/s.gif';
+ 
+Ext.onReady(function(){
+    
+     Ext.get(document.body).update('<div id="test" style="width:500px; height:500px; border: solid 1px red;"></div>');
+     new Ext.Panel({
+         id:'aa',
+         renderTo: 'test',
+         width: '200px',
+         title: 'My Title',
+         html: 'My HTML content'
+     });
+     
+     
+  // Ext.get(document.body).append('<button>aaa</button>');
+   
+});
+        </script>
+    </head>
+    <body >
+    
+    </body>
+</html>
