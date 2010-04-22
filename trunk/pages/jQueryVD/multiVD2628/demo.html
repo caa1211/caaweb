@@ -46,7 +46,7 @@
  // install vd 
   var $VDObj2628 = $('#vd2628').VDcomponent({
         vdHtml: 'VD/2628/VD.html',
-        vdCss: ['VD/2628/css/css.css'],
+        vdCss: ['VDBase'.css, 'VD/2628/css/css.css'],
         portDef:'VD/2628/portDef.js'
   });
   
@@ -68,7 +68,8 @@
      rj2: {status: 'on',msg: 'rj2 on'},
      rj3: {status: 'on',msg: 'rj3 on'},
      rj4: {status: 'on',msg: 'rj4 on'},
-     rj1_left: {status: 'off',msg: ''},
+     rj1_left: {status: 'on',msg: ''},
+     
      rj2_left: {status: 'offline',msg: 'rj2 left offline'},
      rj3_left: {status: 'on',msg: 'rj3 left off'},
      rj4_left: {status: 'offline',msg: 'rj4 left offline'},
@@ -79,15 +80,38 @@
      rj4_right: {status: 'on',msg: 'rj4 right on'}
  } ;
  
+ 
+  var date2 = {
+     port1: {status: 'on', msg:'port1 on'},
+     port2: {status: 'on', msg:'port1 on'},
+     rj1: {status: 'on',msg: 'rj1 on'},
+          rj1_left: {status: 'offline', msg:'offline'},
+          rj1_right: {status: 'on'},
+     rj2: {status: 'off',msg: 'rj2 on'},
+          rj2_left: {status: 'offline',msg: 'rj2 left offline'},
+          rj2_right: {status: 'off',msg: 'rj2 right on'},
+     rj3: {status: 'on',msg: 'rj3 on'},
+          rj3_left: {status: 'on',msg: 'rj3 left off'},
+          rj3_right: {status: 'off',msg: 'rj3 right on'},
+     rj4: {status: 'on',msg: 'rj4 on'},
+          rj4_left: {status: 'offline',msg: 'rj4 left offline'},
+          rj4_right: {status: 'on',msg: 'rj4 right on'}
+ } ;
+ 
+ 
  //for test
  var $VDOther = $('#vdOther').VDcomponent({
      vdHtml: 'VD/VDHtml/VD.html',
-     vdCss: ['VD/VDHtml/css/reset.css', 'VD/VDHtml/css/css.css'],
+     vdCss: ['VD/vdBase.css', 'VD/VDHtml/css/css.css'],
      portDef: 'VD/VDHtml/portDef.js'
  });
   $VDOther.setValue(date1);
   
-        
+  $VDOther.toggle(function(){
+       $VDOther.setValue(date2);
+  }, function(){
+       $VDOther.setValue(date1);
+  })
 
         });
   

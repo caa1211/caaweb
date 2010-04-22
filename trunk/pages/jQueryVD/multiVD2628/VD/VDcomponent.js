@@ -13,6 +13,8 @@
  * 2010/04/19
  * add error handle for unknow port
  * 
+ * 2010/04/22
+ * modify some code 
  */
 ;
 (function($){
@@ -21,9 +23,9 @@
          var _tipOption = {
                 showBody: "\n",
                // fade: 100,
-                opacity: 1,
+               // opacity: 1,
                 track: true,
-                delay: 1, 
+                delay: 0, 
                 showURL: false,
                 fixPNG: false
             };
@@ -31,12 +33,12 @@
         var _defaultSetting = {            
             showSpeed: 300,
             easing: '',
-            effect: 'fadeIn', //fadeIn, slideDown or show
-            
+            effect: 'none', //fadeIn, slideDown, show, none
+ 
             //path setting
-            vdHtml: 'VD/VDHtml/VD.html',
-            vdCss: ['VD/VDHtml/css/reset.css', 'VD/VDHtml/css/css.css'],
-            portDef: 'VD/VDHtml/portDef.js',
+            vdHtml: '',
+            vdCss: '',   //ex: ['xxx.css', 'ooo.css']
+            portDef: '',
             
             loaded: function(){},
             updated: function(){},
@@ -51,7 +53,7 @@
                 if (d != undefined) 
                     $portObj.removeClass(d);
             })
-            $portObj.css('visibility', 'hidden');
+             $portObj.addClass('off');
         }
         var changePortStatus = function(obj, cls, title){
 
@@ -59,12 +61,15 @@
                 removePortCls(obj, 0);
                 
                 if (!obj.hasClass(cls)) {
+                  obj.removeClass('off').hide(0).addClass(cls);
                    if (_settings.effect == 'fadeIn'||_settings.effect == '' ) 
-                        obj.hide(0).addClass(cls).css('visibility', 'visible').fadeIn(_settings.showSpeed, _settings.easing);
+                        obj.fadeIn(_settings.showSpeed, _settings.easing);
                    else if (_settings.effect == 'show' ) 
-                        obj.hide(0).addClass(cls).css('visibility', 'visible').show(_settings.showSpeed, _settings.easing);
+                        obj.show(_settings.showSpeed, _settings.easing);
                    else if (_settings.effect == 'slideDown') 
-                        obj.hide(0).addClass(cls).css('visibility', 'visible').slideDown(_settings.showSpeed, _settings.easing);
+                        obj.slideDown(_settings.showSpeed, _settings.easing);
+                   else if (_settings.effect == 'none') 
+                        obj.show(0);
                 }
             }
             
@@ -118,17 +123,22 @@
         var portDef = '';
         var frameContents;
         var _handler = function(){
-
+            
+            if (_settings.vdHtml == '' || _settings.vdCss == '' || _settings.portDef == '') {
+                alert('you shold add vdHtml, vdCss and portDef in config !')
+                return;
+            }
+            
             $.ajaxSettings.async = _settings.async;
             
             $.getJSON(_settings.portDef, function(json){
                 portDef = json;
-
                  _vdObj.load(_settings.vdHtml, function(){
+               
                 $.each(_settings.vdCss, function(i, d){
                     attachStylesheet(d);
                 });
-                
+                    
                 $.each(portDef, function(i, date){
                     $portObj = _vdObj.find('#' + i + '');
                   if ($portObj.length != 0) {
