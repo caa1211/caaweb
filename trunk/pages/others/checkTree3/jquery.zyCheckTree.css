@@ -44,3 +44,18 @@ UL.tree LI.loseControl
     border: solid 1px red;
 } 
 
+UL.tree LI.loseControl .checkbox
+{
+  cursor: default;
+} 
+
+UL.tree label
+{
+  cursor: pointer;
+} 
+
+
+UL.tree LI.loseControl label
+{
+  cursor: default;
+} 

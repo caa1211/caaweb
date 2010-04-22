@@ -15,7 +15,8 @@
             parseJson:'menu.json',
             isParseTreeByJson: true,
             isCollapsble: true,
-            loseControlOptions:[]//loseControlOptions:['0', '2_1']
+            loseControlOptions:[],//loseControlOptions:['0', '2_1'], 
+            canLabelCheck: true
         }
         
         var _settings = $.extend(_defaultSetting, settings);
@@ -29,7 +30,6 @@
         this.selectAll = function(){
             this.each(function(){
                 $('.checkbox:not(.loseControl)', this).removeClass('half_checked').addClass('checked');
-                
                 //for lose control
                 $('li.loseControl', this).parent('.tree').each(function(){
                     parentStatusUpdate($(this));
@@ -98,10 +98,6 @@
             return contenter;
         }
 
-        function selectAll(){
-            $('.checkbox').addClass('checked');
-        }
-            
         function parentStatusUpdate(treeObj){
             if (treeObj.length > 1) {
                 var parentNode;
@@ -196,17 +192,24 @@
                 });
             }
             
-            $container.find('ul.tree .checkbox').filter(function(){
+           var controlableCheckBoxs = $container.find('ul.tree .checkbox').filter(function(){
                 var hasLoseControl =$(this).parents('.loseControl').length!=0
                 
                 if(hasLoseControl)
-                $(this).css('cursor', 'default').addClass('loseControl');
+                $(this).addClass('loseControl');
                 
                  return !hasLoseControl;
-            }).click(function(){     
-                nodeStatusUpdate($(this));
             });
             
+            controlableCheckBoxs.click(function(){
+                nodeStatusUpdate($(this));
+            })
+
+            if (_settings.canLabelCheck) 
+                controlableCheckBoxs.siblings('label').click(function(){
+                    nodeStatusUpdate($(this).siblings('.checkbox'));
+                });
+                
             if(_settings.isCollapsble)
             {
               applyExpandable($container);
