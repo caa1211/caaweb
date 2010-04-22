@@ -1,4 +1,4 @@
-/*@import url("reset.css");*/
+
 /* Lan----------------------------------*/ 
 .vdFrame{ position:relative; width:503px; height:203px; background:url(../images/i_vd.gif); margin:0 auto; color:#FFFFFF;}
 .lanFrame{ position:absolute; top:134px; left:191px;width:155px; height:28px;}

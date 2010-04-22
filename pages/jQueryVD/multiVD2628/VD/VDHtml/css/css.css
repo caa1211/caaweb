@@ -1,4 +1,4 @@
-/*@import url("reset.css");*/
+
 .bg{background: url(../images/bg.jpg); width:777px; height:96px; display:block; margin:0 auto; position:relative;}
 .port1{ position:absolute;  left:384px;top:37px; width:40px; height:50px;}
 .port2{position:absolute;left:384px;top:60px;width:40px;height:50px;}
@@ -7,21 +7,22 @@
 .port{position:absolute;width:198px;height:36px;left: 180px;top: 45px;}
 .port ul li{position:relative; float:left;  width:41px;  height:59px; margin-right:8px;}
 .port ul li span.number{ position:absolute;top:-15px; left:16px;}
-.port ul li span.left{ position:absolute;top:3px; left:3px;  width:11px; height:4px;}
-.port ul li span.right{ position:absolute;top:3px; right:3px;  width:11px; height:4px;}
+.port ul li span.left{ position:absolute;top:3px; left:3px;  width:11px; height:4px; line-height:4px;}
+.port ul li span.right{ position:absolute;top:3px; right:3px;  width:11px; height:4px; line-height:4px;}
 
 
 .port1_on {background:url(../images/usb.gif); }
-
 .port2_on {background:url(../images/usb.gif);}
 
 .rj1_on{background:url(../images/port.gif);}
+
+
 .rj2_on{background:url(../images/port.gif);}
 .rj3_on{background:url(../images/port.gif);}
 .rj4_on{background:url(../images/port.gif);}
 
 
-.rj1_left_on{ background:url(../images/01.gif);}
+.rj1_left_on{ background:url(../images/01.gif); }
 .rj2_left_on{ background:url(../images/01.gif);}
 .rj3_left_on{ background:url(../images/01.gif);}
 .rj4_left_on{ background:url(../images/01.gif);}
