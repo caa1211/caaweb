@@ -488,6 +488,10 @@ Ext.zyGridPanel = Ext.extend(Ext.grid.GridPanel,{
 	objrefbtnText:'Object References',
 	displayText: 'Displaying {0} - {1} of {2}',
 	//eo multi-lingual
+    
+    //Joze for oo
+    afterApplyParentConfig: function(){},
+    
 	initComponent: function() {
 		Ext.apply(this, {
 			stateful: true,
@@ -846,6 +850,10 @@ Ext.zyGridPanel = Ext.extend(Ext.grid.GridPanel,{
 			if (!_edit.disabled && !_edit.hidden)
 				this.onBtnClick('edit');
 		});
+        
+        //Joze for oo
+        this.afterApplyParentConfig();
+        
 		Ext.zyGridPanel.superclass.initComponent.apply(this);
 	},
 	onBtnClick: function(which) {
