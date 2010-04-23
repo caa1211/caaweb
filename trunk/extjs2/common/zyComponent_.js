@@ -6,25 +6,10 @@
  * hchoe@zyxel.com.tw
  * http://www.zyxel.com
  */
-var PQATested = (cp.get('PQATestedStatus')=='yes');
-//alert(PQATested);
+
 /* defined zytextfield */
 Ext.zyTextField = Ext.extend(Ext.form.TextField, {
-	enableKeyEvents: true,
-	onDestroy: function() {
-		if (this.validationTask) {
-			this.validationTask.cancel();
-			this.validationTask = null;
-		}
-		Ext.zyTextField.superclass.onDestroy.call(this);
-	},
-	afterRender: function() { // create title for PQA auto testing , Jerry san
-		Ext.zyTextField.superclass.afterRender.call(this);
-		if(PQATested){
-			this.el.dom.title = this.fieldLabel;
-			this.el.dom.pqaattr = this.value;
-		}
-	}
+	enableKeyEvents: true
 });
 Ext.reg('zytextfield', Ext.zyTextField); 
 
@@ -40,32 +25,12 @@ Ext.reg('zynumberfield', Ext.zyNumberField);
 
 /* defined zycombo */
 Ext.zyComboBox = Ext.extend(Ext.form.ComboBox, {
-	id:'zyCBoxId',
 	mode: 'local',
 	forceSelection: true,
 	triggerAction: 'all',
-	suffixCls: 'suffixcombo',
-	typeAhead: true,
-	inote:'',
-	afterRender: function(){
-		Ext.zyComboBox.superclass.afterRender.call(this);
-		if(!Ext.isEmpty(this.inote)){
-			var temp = '<img src="/ext-js/images/usg/others/i_infotip.gif" align="absmiddle" ext:qtip="'+this.inote+'">';
-			Ext.get(this.el.dom.nextSibling.id).insertSibling({tag: 'span', cls: this.suffixCls, html: temp}, 'after');
-		}
-	}
+	typeAhead: true
 });
 Ext.reg('zycombo', Ext.zyComboBox); 
-
-/* defined zyprefixtextfield */
-Ext.zyPrefixTextField = Ext.extend(Ext.zyTextField, {
-	prefix: '',
-	afterRender: function(){
-		Ext.zyPrefixTextField.superclass.afterRender.call(this);
-		this.el.insertSibling({tag: 'span', html: this.prefix}, 'before');
-	}
-});
-Ext.reg('zyprefixtextfield', Ext.zyPrefixTextField);
 
 /* defined zysuffixtextfield */
 Ext.zySuffixTextField = Ext.extend(Ext.zyTextField, {
@@ -84,10 +49,6 @@ Ext.zySuffixTextField = Ext.extend(Ext.zyTextField, {
 				this.suffix = this.suffix.replace(this.hypertext, temp);			
 			this.el.insertSibling({tag: 'span', cls: this.suffixCls, html: this.suffix}, 'after');
 		}
-		if(PQATested){// create title for PQA auto testing , Jerry san
-			this.el.dom.title = this.fieldLabel;
-			this.el.dom.pqaattr = this.value;
-		}
 	}
 });
 Ext.reg('zysuffixtextfield', Ext.zySuffixTextField);
@@ -99,55 +60,54 @@ Ext.zySuffixNumberField = Ext.extend(Ext.zyNumberField, {
 	filename:'',
 	hypertext:'',
 	zytabpages:'',
-	inote:'',
+
 	afterRender: function(){
 		Ext.zySuffixNumberField.superclass.afterRender.call(this);
-		if(!Ext.isEmpty(this.inote)){
-			this.el.insertSibling({tag: 'span', cls: this.suffixCls, 
-				html: '<img src="/ext-js/images/usg/others/i_infotip.gif" align="absmiddle" ext:qtip="'+this.inote+'">'}, 'after');
-		}
+
 		if (this.suffix && this.suffix != ''){
 			var temp = String.format('<a href="#" onClick="callMainPage(\'{0}\',\'{2}\')">{1}</a>', this.filename, this.hypertext, this.zytabpages);
 			if ((this.hypertext.trim() != '') && (this.filename.trim() != '') && (this.suffix.indexOf(this.hypertext) != -1))
-				this.suffix = this.suffix.replace(this.hypertext, temp);				
+				this.suffix = this.suffix.replace(this.hypertext, temp);
+				
 			this.el.insertSibling({tag: 'span', cls: this.suffixCls, html: this.suffix}, 'after');
 		}
+		
 	}
 });
 Ext.reg('zysuffixnumberfield', Ext.zySuffixNumberField);
 
 // when hide/show field, it also can hide/show fieldLabel
 Ext.override(Ext.layout.FormLayout, {
-	renderItem : function(c, position, target){
-		if(c && !c.rendered && c.isFormField && c.inputType != 'hidden'){
-			var args = [
-				c.id, c.fieldLabel,
-				c.labelStyle||this.labelStyle||'',
-				this.elementStyle||'',
-				typeof c.labelSeparator == 'undefined' ? this.labelSeparator : c.labelSeparator,
-				(c.itemCls||this.container.itemCls||'') + (c.hideLabel ? ' x-hide-label' : ''),
-				c.clearCls || 'x-form-clear-left'
-			];
-			if(typeof position == 'number'){
-				position = target.dom.childNodes[position] || null;
-			}
-			if(position){
-				c.formItem = this.fieldTpl.insertBefore(position, args, true);
-			}else{
-				c.formItem = this.fieldTpl.append(target, args, true);
-			}
-			c.actionMode = 'formItem';
-			c.render('x-form-el-'+c.id);
-		}else {
-			Ext.layout.FormLayout.superclass.renderItem.apply(this, arguments);
-		}
-	}
+    renderItem : function(c, position, target){
+        if(c && !c.rendered && c.isFormField && c.inputType != 'hidden'){
+            var args = [
+                   c.id, c.fieldLabel,
+                   c.labelStyle||this.labelStyle||'',
+                   this.elementStyle||'',
+                   typeof c.labelSeparator == 'undefined' ? this.labelSeparator : c.labelSeparator,
+                   (c.itemCls||this.container.itemCls||'') + (c.hideLabel ? ' x-hide-label' : ''),
+                   c.clearCls || 'x-form-clear-left' 
+            ];
+            if(typeof position == 'number'){
+                position = target.dom.childNodes[position] || null;
+            }
+            if(position){
+                c.formItem = this.fieldTpl.insertBefore(position, args, true);
+            }else{
+                c.formItem = this.fieldTpl.append(target, args, true);
+            }
+            c.actionMode = 'formItem';
+            c.render('x-form-el-'+c.id);
+        }else {
+            Ext.layout.FormLayout.superclass.renderItem.apply(this, arguments);
+        }
+    }
 });
 
 Ext.override(Ext.form.TriggerField, {
-	actionMode: 'wrap',
-	onShow: Ext.form.TriggerField.superclass.onShow,
-	onHide: Ext.form.TriggerField.superclass.onHide
+    actionMode: 'wrap',
+    onShow: Ext.form.TriggerField.superclass.onShow,
+    onHide: Ext.form.TriggerField.superclass.onHide
 });
 
 /* defined zysuffixcombo */
@@ -228,6 +188,27 @@ Ext.extend(Ext.ux.Jsan.zyPageSize, Ext.util.Observable, {
 		if (value == pt.pageSize) {
 			return;
 		}
+		else if (value < pt.pageSize) {
+			pt.pageSize = value;
+			var ap = Math.round(pt.cursor/value)+1;
+			var cursor = (ap-1)*value;
+			var store = pt.store;
+			if (cursor > pt.totalLength) { //alex lee
+				pt.pageSize = value;
+				pt.doLoad(cursor-value);
+			}
+			else {
+				pt.cursor = cursor;
+				var d = pt.getPageData();
+				pt.afterTextEl.el.innerHTML = String.format(pt.afterPageText, d.pages);
+				pt.field.dom.value = ap;
+				pt.first.setDisabled(ap == 1);
+				pt.prev.setDisabled(ap == 1);
+				pt.next.setDisabled(ap == d.pages);
+				pt.last.setDisabled(ap == d.pages);
+				pt.updateInfo();
+			}
+		}
 		else {
 			pt.pageSize = value;
 			pt.doLoad(Math.floor(pt.cursor/pt.pageSize) * pt.pageSize);
@@ -252,6 +233,9 @@ Ext.extend(Ext.ux.Jsan.zyPageSize, Ext.util.Observable, {
 		this.combo.on('select', this.setPageSize, this);
 		this.updateStore();
 
+		if (this.addBefore){
+			this.zyPagingToolbar.add(this.addBefore);
+		}
 		if (this.beforeText){
 			this.zyPagingToolbar.add(this.beforeText);
 		}
@@ -267,11 +251,7 @@ Ext.extend(Ext.ux.Jsan.zyPageSize, Ext.util.Observable, {
 
 /* defined zypaging */
 Ext.zyPagingToolbar = Ext.extend(Ext.PagingToolbar, {
-	loadByPage: false,
-	_p: {cli: 'cli', count: 'count', totalCount: 'static', store: 'store', semaphore: 0, boundary: null},
-	pageSize: 50,
-	initComponent : function(){
-		this._p = {cli: 'cli', count: 'count', totalCount: 'static', store: 'store', semaphore: 0, boundary: null};
+    initComponent : function(){
 		this.addEvents('change', 'beforechange');
 		Ext.zyPagingToolbar.superclass.initComponent.call(this);
 		this.totalLength = 0; //alex lee
@@ -280,8 +260,7 @@ Ext.zyPagingToolbar = Ext.extend(Ext.PagingToolbar, {
 		/* since store here have no load event, hence bind will fail to execute onLoad.
  		 * Thus, we add doLoad here to execute onLoad directly.
  		 */
-		if (!this.loadByPage)
-			this.doLoad(this.cursor);
+		this.doLoad(this.cursor);
     },
 
     updateInfo : function(){
@@ -299,16 +278,13 @@ Ext.zyPagingToolbar = Ext.extend(Ext.PagingToolbar, {
 
 	onLoad : function(store, r, o){
 		if(!this.rendered){
+	//		this.totalLength = store.getCount(); //alex lee
 			this.dsLoaded = [store, r, o];
 			return;
 		}
-		if (!this.loadByPage)
-			this.totalLength = store.snapshot ? store.snapshot.length : store.getCount(); //alex lee
-		else
-			this.totalLength = this._p.count;
+		this.totalLength = store.snapshot ? store.snapshot.length : store.getCount(); //alex lee
 		this.cursor = o.params ? o.params[this.paramNames.start] : 0;
-		if (!this.loadByPage)
-			this.getPageRange();// Jerry san
+		this.getPageRange();// Jerry san
 		var d = this.getPageData(), ap = d.activePage, ps = d.pages;
 		
 		this.afterTextEl.el.innerHTML = String.format(this.afterPageText, d.pages);
@@ -352,21 +328,7 @@ Ext.zyPagingToolbar = Ext.extend(Ext.PagingToolbar, {
 		o[pn.start] = start;
 		o[pn.limit] = this.pageSize;
 		if(this.fireEvent('beforechange', this, o) !== false){
-			if (this.loadByPage) {//alex lee
-				var _s = o[pn.start];
-				var _e = o[pn.start] + o[pn.limit];
-				if(!Ext.isEmpty(this._p.boundary))
-					_e = (_e > this._p.boundary) ? this._p.boundary : _e;
-				if (this._p.cli !== 'cli') {
-					if (this._p.totalCount == 'dynamic') {
-						this._p.semaphore = 1;
-						this._p.store.load();//total count, and set semaphore = 1 to prevent load "this.store" in page privation function.
-					}
-					this.store.proxy.conn.url = composeCLI(String.format(this._p.cli, _s + 1, _e));
-					this.store.load({params:o});
-				}
-			} else 
-				this.onLoad(this.store, this, {params:o});//Jerry san
+			this.onLoad(this.store, this, {params:o});//Jerry san
 		}
 	},
 
@@ -398,24 +360,22 @@ Ext.reg('zypaging', Ext.zyPagingToolbar);
 
 /*for handle unselect grid*/
 function cancelGridClickBubble(grid){
-	grid.on('click', function(e){
-		e.stopPropagation();
-		if(selectedGridIds.indexOf(this.id) == -1)
-			selectedGridIds.push(this.id);	//Joze
-	});
-	if (grid.bbar != null && grid.bbar != '') 
-		grid.bbar.on('click', function(e){
-			e.stopPropagation();
-		});
-	if (grid.tbar != null && grid.tbar != '') 
-		grid.tbar.on('click', function(e){
-			e.stopPropagation();
-		});
+    grid.on('click', function(e){
+        e.stopPropagation();
+    });
+    if (grid.bbar != null && grid.bbar != '') 
+        grid.bbar.on('click', function(e){
+            e.stopPropagation();
+        });
+    if (grid.tbar != null && grid.tbar != '') 
+        grid.tbar.on('click', function(e){
+            e.stopPropagation();
+        });
 }
+
 /* defined zygrid */
 Ext.zyGridPanel = Ext.extend(Ext.grid.GridPanel,{
 	ZLDSYSPARM_MAX: null,
-	currRowIndex: 1,//default value, Jerry san
 	add: Ext.emptyFn,
 	edit: Ext.emptyFn,
 	rm: Ext.emptyFn,
@@ -472,7 +432,6 @@ Ext.zyGridPanel = Ext.extend(Ext.grid.GridPanel,{
 	drawExportIcon:false,
 	drawVirtualIcon:false,
 	drawObjRefIcon:false,
-	enablePageTools:true,
 	// FIXME: multi-lingual --alex lee
 	addbtnText: 'Add',
 	editbtnText: 'Edit',
@@ -492,15 +451,17 @@ Ext.zyGridPanel = Ext.extend(Ext.grid.GridPanel,{
 		Ext.apply(this, {
 			stateful: true,
 			stripeRows: true,
-			anchor: '-50',
+			cls: 'innerscope',
+			anchor: '-20',
+			autoWidth: true,
 			autoHeight: true,
+			layout: 'fit',
 			collapsible: true,
 			enableDragDrop: true,
 			selModel:
 				new Ext.grid.RowSelectionModel({
 					listeners: {
 						rowselect: function(sm, row, rec) {
-							this.grid.currRowIndex = row+2;//Jerrry san
 							cmp = this.grid.params;
 							ADD = String.format(cmp.ADD, this.grid.id);
 							EDIT = String.format(cmp.EDIT, this.grid.id);
@@ -595,7 +556,6 @@ Ext.zyGridPanel = Ext.extend(Ext.grid.GridPanel,{
 							};
 						},
 						rowdeselect: function(sm, row, rec) {
-							this.grid.currRowIndex=1;//reset to default, Jerry san
 							cmp = this.grid.params;
 							ADD = String.format(cmp.ADD, this.grid.id);
 							EDIT = String.format(cmp.EDIT, this.grid.id);
@@ -675,8 +635,8 @@ Ext.zyGridPanel = Ext.extend(Ext.grid.GridPanel,{
 											match1 = !excp.removable;
 											match2 = !excp.enable;
 											match3 = !excp.disable;
-											match4 = !excp.disconnable;
-											match5 = !excp.exportable;
+											match5 = !excp.disconnable;
+											match6 = !excp.exportable;
 											return false;
 										}
 									});
@@ -697,7 +657,7 @@ Ext.zyGridPanel = Ext.extend(Ext.grid.GridPanel,{
 				groupTextTpl: '{text} ({[values.rs.length]} {[values.rs.length > 1 ? "Items" : "Item"]})'
 			}),
 			/* bottom bar */
-			bbar: this.enablePageTools ? new Ext.zyPagingToolbar({
+			bbar: new Ext.zyPagingToolbar({
 				store: this.store,
 				displayInfo: true,
 				plugins: new Ext.ux.Jsan.zyPageSize(),
@@ -709,7 +669,7 @@ Ext.zyGridPanel = Ext.extend(Ext.grid.GridPanel,{
 						}		
 					}, scope: this}
 				}
-			}): [],
+			}),
 			/* top bar */
 			tbar:[
 				{
@@ -814,6 +774,7 @@ Ext.zyGridPanel = Ext.extend(Ext.grid.GridPanel,{
 				},
 				{
 					id: String.format(this.params.EXPALL, this.id),
+					id:'exportall'+ this.id,
 					text:this.exportallbtnText,
 					tooltip:'Export All',
 					iconCls:'exportall',
@@ -838,18 +799,24 @@ Ext.zyGridPanel = Ext.extend(Ext.grid.GridPanel,{
 					hidden: !this.drawObjRefIcon,
 					handler: this.onBtnClick.createDelegate(this, ["objref"])
 				}
-			]
+			],
+			listeners: {
+				render: function() {
+					this.store.load();
+				}
+			}
 		});
-		this.on('render', cancelGridClickBubble);
-		this.on('rowdblclick', function() {
-			var _edit = Ext.getCmp(String.format(this.params.EDIT, this.id));
-			if (!_edit.disabled && !_edit.hidden)
-				this.onBtnClick('edit');
-		});
+
 		Ext.zyGridPanel.superclass.initComponent.apply(this);
 	},
+	listeners:{	//Joze -for handle unselect grid
+		render: cancelGridClickBubble,
+		click: function(){
+			    if(selectedGridIds.indexOf(this.id)==-1)
+					selectedGridIds.push(this.id);	//Joze
+				}
+	},
 	onBtnClick: function(which) {
-		if (!/^(edit|objref)$/.test(which) && dumpMsgIfLimitedAdmin()) return;
 		var length = this.selModel.getCount();
 		var s = this.selModel.getSelections();
 		var count = this.store.snapshot ? this.store.snapshot.length : this.store.getCount();
@@ -858,13 +825,10 @@ Ext.zyGridPanel = Ext.extend(Ext.grid.GridPanel,{
 			case "add" :
 			 	if (this.ZLDSYSPARM_MAX != null && count >=  this.ZLDSYSPARM_MAX)
 					Ext.Msg.alert('Alert', 'Items have reached the maximum number.');
- 			  	else {
-					Ext.getBody().mask('Loading', 'x-mask-loading');
+ 			  	else
  			 	 	this.add();
-				}
 			break;
 			case "edit" :
-				Ext.getBody().mask('Loading', 'x-mask-loading');
 				this.edit();
 			break;
 			case "remove" :
@@ -872,8 +836,6 @@ Ext.zyGridPanel = Ext.extend(Ext.grid.GridPanel,{
 					function(btn) {
 						if (btn == 'yes') this.rm();
 					}, this);
-					Ext.getCmp(String.format(this.params.EDIT, this.id)).disable(); 
-					Ext.getCmp(String.format(this.params.REMOVE, this.id)).disable();
 			break;
 			case "activate":
 				this.activate();
@@ -1010,8 +972,8 @@ Ext.zyExtraGridPanel = Ext.extend(Ext.grid.GridPanel,{
 	uploadbtnText:'Upload',
 	copybtnText:'Copy',
 	renamebtnText:'Rename',
-	runbtnText:'Apply',
-	forcebtnText:'Force Logout',
+	runbtnText:'Run',
+	forcebtnText:'Force',
 	newfolderbtnText:'New Folder',
 	upbtnText:'Up',
 	moreinfobtnText:'More Information',
@@ -1021,7 +983,8 @@ Ext.zyExtraGridPanel = Ext.extend(Ext.grid.GridPanel,{
 		Ext.apply(this, {
 			stateful: true,
 			stripeRows: true,
-			anchor: '-50',
+			cls: 'innerscope',
+			anchor: '-20',
 			autoWidth: true,
 			autoHeight: true,
 			layout: 'fit',
@@ -1190,7 +1153,7 @@ Ext.zyExtraGridPanel = Ext.extend(Ext.grid.GridPanel,{
 						}
 					}
 				}),
-		//	loadMask: true,
+			loadMask: true,
 			view: new Ext.grid.GroupingView({
 				startCollapsed:true,
 				forceFit: true,
@@ -1285,7 +1248,7 @@ Ext.zyExtraGridPanel = Ext.extend(Ext.grid.GridPanel,{
 					id: String.format(this.params.RUN, this.id),
 					text:this.runbtnText,
 					disabled:true,
-					tooltip:this.runbtnText,
+					tooltip:'Run',
 					iconCls:'run',
 					hidden: !this.drawRunIcon,
 					handler: this.onBtnClick.createDelegate(this, ["run"])
@@ -1324,11 +1287,16 @@ Ext.zyExtraGridPanel = Ext.extend(Ext.grid.GridPanel,{
 			}
 		});
 
-		this.on('render', cancelGridClickBubble);
 		Ext.zyExtraGridPanel.superclass.initComponent.apply(this);
 	},
+	listeners:{	//Joze -for handle unselect grid
+		render: cancelGridClickBubble,
+		click: function(){
+			    if(selectedGridIds.indexOf(this.id)==-1)
+					selectedGridIds.push(this.id);	//Joze
+				}
+	},
 	onBtnClick: function(which) {
-		if ((which != "moreinfo") && dumpMsgIfLimitedAdmin()) return;
 		var length = this.selModel.getCount();
 		var s = this.selModel.getSelections();
 		var match = false;
@@ -1379,15 +1347,6 @@ Ext.reg('zyextragrid', Ext.zyExtraGridPanel);
 
 /* defined zycombocategory */
 Ext.zyComboCategory = Ext.extend(Ext.form.ComboBox,{
-	suffixCls: 'suffixcombo',
-	inote:'',
-	afterRender: function(){
-		Ext.zyComboCategory.superclass.afterRender.call(this);
-		if(!Ext.isEmpty(this.inote)){
-			Ext.get(this.el.dom.nextSibling.id).insertSibling({tag: 'span', cls: this.suffixCls, 
-				html: '<img src="/ext-js/images/usg/others/i_infotip.gif" align="absmiddle" ext:qtip="'+this.inote+'">'}, 'after');
-		}
-	},
 	initComponent: function() {
 		Ext.apply(this, {
 			forceSelection: true,
@@ -1464,25 +1423,22 @@ Ext.extend(Ext.zyGridFilters, Ext.util.Observable, {
 	init: function(grid) {
 		if(grid instanceof Ext.grid.GridPanel) {
 			this.grid  = grid;
-			this.bindStore(this.grid.getStore(), true);
-			this.grid.filters = this;
-			this.grid.addEvents({'filterupdate': true});
-			grid.on({
-				scope: this,
-				beforestaterestore: this.applyState,
-				beforestatesave: this.saveState,
-				beforedestroy: this.destroy,
-				reconfigure: this.onReconfigure
-			});
-			if (grid.rendered){
-				this.onRender();
+			this.store = this.grid.getStore();
+			if(this.local){
+				this.store.on('load', function(store) {
+					store.filterBy(this.getRecordFilter());
+				}, this);
 			} else {
-				grid.on({
-					scope: this,
-					single: true,
-					render: this.onRender
-				});
+				this.store.on('beforeload', this.onBeforeLoad, this);
 			}
+
+			this.grid.filters = this;
+			this.grid.addEvents('filterupdate');
+
+			grid.on("render", this.onRender, this);
+			grid.on("beforestaterestore", this.applyState, this);
+			grid.on("beforestatesave", this.saveState, this);
+
 		} 
 		else if(grid instanceof Ext.PagingToolbar) {
 			this.toolbar = grid;
@@ -1717,48 +1673,11 @@ Ext.extend(Ext.zyGridFilters, Ext.util.Observable, {
 	
 	getFilterClass: function(type) {
 		return Ext.grid.filter[type.substr(0, 1).toUpperCase() + type.substr(1) + 'Filter'];
-	},
-	bindStore : function(store, initial){
-		if(!initial && this.store){
-			if (this.local)
-				store.un('load', this.onLoad, this);
-			 else
-				store.un('beforeload', this.onBeforeLoad, this);
-		}
-		if(store){
-			if (this.local)
-				store.on('load', this.onLoad, this);
-			else
-				store.on('beforeload', this.onBeforeLoad, this);
-		}
-		this.store = store;
-    },
-	onReconfigure : function () {
-		this.bindStore(this.grid.getStore());
-		this.store.clearFilter();
-		this.removeAll();
-		this.addFilters(this.grid.getColumnModel());
-		this.updateColumnHeadings();
-	},
-	destroy : function () {
-		this.removeAll();
-		this.purgeListeners();
-		if(this.filterMenu){
-			Ext.menu.MenuMgr.unregister(this.filterMenu);
-			this.filterMenu.destroy();
-			this.filterMenu = this.menu.menu = null;
-		}
-	},
-	removeAll : function () {
-		if(this.filters){
-			Ext.destroy.apply(Ext, this.filters.items);
-			this.filters.clear();
-		}
 	}
 });
 
 // defined filter for filter
-Ext.namespace("Ext.grid.filter");
+Ext.ns("Ext.grid.filter");
 Ext.grid.filter.Filter = function(config){
 	Ext.apply(this, config);
 	this.events = {
@@ -1954,7 +1873,8 @@ Ext.grid.filter.StringFilter = Ext.extend(Ext.grid.filter.Filter, {
 	},
 
 	onKeyUp: function(event) {
-		if(event.getKey() == event.ENTER) {
+		if(event.getKey() == event.ENTER)
+		{
 			this.menu.hide(true);
 			return;
 		}
@@ -1969,7 +1889,7 @@ Ext.grid.filter.StringFilter = Ext.extend(Ext.grid.filter.Filter, {
 		if(this.active) {
 			this.fireEvent("update", this);
 		}
-		this.setActive(this.isActivatable());
+			this.setActive(this.isActivatable());
 	},
 
 	setValue: function(value) {
@@ -2485,10 +2405,9 @@ Ext.zyMultiselect = Ext.extend(Ext.form.Field,  {
 				'</tpl>',
 				'<tpl if="this._Tag != values._Tag">',
 				'<tpl exec="this._Tag = values._Tag"></tpl>',
-				'<h1 align=center>=== {_Tag} ===</h1>',
+				'<h1 align=center>===== {_Tag} =====</h1>',
 				'</tpl>',
-				PQATested ?	('<div class="'+ cls +'-item'+ _tpl +' title="{_Name}">{_Name}</div>') :
-				('<div class="'+ cls +'-item'+ _tpl +'>{_Name}</div>'),// create title for PQA auto testing , Jerry san
+				'<div class="'+ cls +'-item'+ _tpl +'>{_Name}</div>',
 				'<tpl if="xcount == xindex">',
 				'<tpl exec="this._Tag = xcount"></tpl>',
 				'</tpl>',
@@ -2597,7 +2516,7 @@ Ext.zyItemSelector = Ext.extend(Ext.form.Field,  {
 	onRender : function(ct, position){
 		Ext.zyItemSelector.superclass.onRender.call(this, ct, position);
 
-        	this.fromMultiselect = new Ext.zyMultiselect({
+        this.fromMultiselect = new Ext.zyMultiselect({
 			legend: this.fromLegend,
 			delimiter: this.delimiter,
 			allowDup: this.allowDup,
@@ -2863,32 +2782,32 @@ Ext.zyEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel,{
 	conn: Ext.emptyFn,
 	disconn: Ext.emptyFn,
 	menugroup: null,
-	onEditComplete : function(ed, value, startValue){
-		this.editing = false;
-		this.activeEditor = null;
-		ed.un("specialkey", this.selModel.onEditorKey, this.selModel);
-		var r = ed.record;
-		var field = this.colModel.getDataIndex(ed.col);
-		value = this.postEditValue(value, startValue, r, field);
-		if(String(value) !== String(startValue)){
-			var e = {
-				grid: this,
-				record: r,
-				field: field,
-				originalValue: startValue,
-				value: value,
-				row: ed.row,
-				column: ed.col,
-				cancel:false
-			};
-			if(this.fireEvent("validateedit", e) !== false && !e.cancel){
-				r.set(field, e.value);
-				delete e.cancel;
-				this.fireEvent("afteredit", e);
-			}
-		}
-		this.view.focusRow(ed.row);
-	},
+	onEditComplete : function(ed, value, startValue){   
+        this.editing = false;   
+        this.activeEditor = null;   
+        ed.un("specialkey", this.selModel.onEditorKey, this.selModel);   
+        var r = ed.record;   
+        var field = this.colModel.getDataIndex(ed.col);   
+        value = this.postEditValue(value, startValue, r, field);   
+        if(String(value) !== String(startValue)){   
+            var e = {   
+                grid: this,   
+                record: r,   
+                field: field,   
+                originalValue: startValue,   
+                value: value,   
+                row: ed.row,   
+                column: ed.col,   
+               cancel:false  
+            };   
+            if(this.fireEvent("validateedit", e) !== false && !e.cancel){   
+                r.set(field, e.value);   
+                delete e.cancel;   
+                this.fireEvent("afteredit", e);   
+            }   
+        }   
+	  this.view.focusRow(ed.row); 
+   }, 
 	params : {
 		ADD: '{0}_add_',
 		EDIT: '{0}_edit_',
@@ -2942,7 +2861,8 @@ Ext.zyEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel,{
 		Ext.apply(this, {
 			stateful: true,
 			stripeRows: true,
-			anchor: '-50',
+			cls: 'innerscope',
+			anchor: '-20',
 			autoWidth: true,
 			autoHeight: true,
 			layout: 'fit',
@@ -3008,7 +2928,7 @@ Ext.zyEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel,{
 							}
 							else {
 								var rec = sm.getSelected();
-								var match1 = match2 = match3 = match4 = match5 = match6 = match7 = match8 = match9 = false;
+                                var match1 = match2 = match3 = match4 = match5 = match6 = match7 = match8 = match9 = false;
 								if (excp.item) {
 									Ext.each(excp.item, function(val) {
 										if (rec.get(excp.dataIndex) == val) {
@@ -3239,32 +3159,37 @@ Ext.zyEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel,{
 								if (e.getKey() == e.ENTER)
 									this.onBtnClick('moveto');
 								else if (e.getKey() == e.ESC) {
-									Ext.getCmp(String.format(this.params.MOVETO, this.id)).setValue(null);
+									Ext.getCmp(String.format(this.params.MOVETO, this.id)).setValue('');
 									Ext.getCmp(String.format(this.params.MOVETO, this.id)).hide();
 								}
 							}, this);
 						}, scope: this}
 					}
 				}
-			]
+			],
+			listeners: {
+				render: function() {
+					this.store.load();
+				}
+			}
 		});
 
-		this.on('render', cancelGridClickBubble);
 		Ext.zyEditorGridPanel.superclass.initComponent.apply(this);
 	},
-	onAdd: function() {
+	onAdd: function(){
 		var store = this.getStore();
 		var selections = this.selModel.getSelections();
 		var n = selections.length;
 		var idx = 0;
-		var EditorCols = [];
 		
-		for (var i = 0; i < this.getColumnModel().config.length; i++) {
-			if (this.getColumnModel().config[i].editor != undefined) {
+        var EditorCols = [];
+		
+        for (var i = 0; i < this.getColumnModel().config.length; i++) {
+            if (this.getColumnModel().config[i].editor != undefined) {
 				EditorCols.push(i);
 				break;
 			}
-		}
+        }
 		
 		if(store.recordType) {
 			var rec = new store.recordType({});
@@ -3272,46 +3197,53 @@ Ext.zyEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel,{
 				rec.data[f.name] = f.defaultValue || null;
 			});
 			rec.data['__zyeditorMark'] = 'new';
+		//	rec.commit();
 			if (n >= 1){
 				idx = this.currRowIndex+1;
 			}
-			this.stopEditing();
 			store.insert(idx, rec);
+			this.getView().refresh();
 			//Jerry san
 			this.fireEvent('afteradd', store, idx, this);
 			
 			//joze
-			while(EditorCols.length>0){
+            this.stopEditing();
+			while(EditorCols.length>0)
+			{
 				this.startEditing(idx, EditorCols.pop());
 			}
-			this.getView().refresh();
 			//Select the new added row
 			this.selModel.selectRow(idx); 
+			
+			return rec;
 		}
+		return false;
 	},
-	onEdit: function(){
-		var selections = this.selModel.getSelections();
-		var EditorCols = [];
-		var idx = this.currRowIndex;
-		for (var i = 0; i < this.getColumnModel().config.length; i++) {
-			if (this.getColumnModel().config[i].editor != undefined) {
-				EditorCols.push(i);
-				break;
-			}
-		}
-		while (EditorCols.length > 0) {
-			this.startEditing(idx, EditorCols.pop());
-		}
-	//	this.selModel.selectRow(idx);
-	},
+    onEdit: function(){
+        var selections = this.selModel.getSelections();
+        var EditorCols = [];
+        var idx = this.currRowIndex;
+        for (var i = 0; i < this.getColumnModel().config.length; i++) {
+            if (this.getColumnModel().config[i].editor != undefined) {
+                EditorCols.push(i);
+                break;
+            }
+        }
+        while (EditorCols.length > 0) {
+            this.startEditing(idx, EditorCols.pop());
+        }
+        
+      //  this.selModel.selectRow(idx);
+    },
 	onRm:function(records) {
 		var store = this.getStore();
 		var selections = this.selModel.getSelections(); 
 		var n = selections.length;
 		for(var i = 0; i < n; i++){
-			if (typeof selections[i].get('__zyeditorMark') == 'undefined')
+			if (typeof selections[i].get('__zyeditorMark') == 'undefined') {
+				selections[i].dirty = false;
 				store.afterEdit(selections[i]);
-			selections[i].dirty = false;
+			} 
 			store.remove(selections[i]);
 		}
 		this.getView().refresh();
@@ -3320,7 +3252,6 @@ Ext.zyEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel,{
 		Ext.getCmp(String.format(this.params.MOVETO, this.id)).hide();
 		
 		Ext.getCmp(String.format(this.params.ADD, this.id)).enable();
-		Ext.getCmp(String.format(this.params.EDIT, this.id)).disable(); 
 		Ext.getCmp(String.format(this.params.REMOVE, this.id)).disable();
 		Ext.getCmp(String.format(this.params.ACT, this.id)).disable();
 		Ext.getCmp(String.format(this.params.INACT, this.id)).disable();
@@ -3368,7 +3299,7 @@ Ext.zyEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel,{
 		var store = this.getStore();
 		var m = store.getModifiedRecords();
 		Ext.each(m, function(r) {
-			if (r.get('__zyeditorMark') == 'new' && r.dirty)
+			if (r.get('__zyeditorMark') == 'new')
 				add.push(r);
 		});
 		return add;
@@ -3394,24 +3325,28 @@ Ext.zyEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel,{
 		return modified;
 	},
 	onBtnClick: function(which) {
-		if (dumpMsgIfLimitedAdmin()) return;
 		var length = this.selModel.getCount();
 		var s = this.selModel.getSelections();
-		var count = this.store.getCount();
+		var count = this.store.snapshot ? this.store.snapshot.length : this.store.getCount();
 		var match = false;
 		switch(which) {
 			case "add" :
-			 	if (this.ZLDSYSPARM_MAX != null && count >= this.ZLDSYSPARM_MAX)
+			 	if (this.ZLDSYSPARM_MAX != null && count >= this.ZLDSYSPARM_MAX) 
 					Ext.Msg.alert('Alert', 'Items have reached the maximum number.');
-				else
+				else {
 					this.onAdd();
-			break;	
-			case "edit" :
-				if (this.ZLDSYSPARM_MAX != null && count >= this.ZLDSYSPARM_MAX) 
-					Ext.Msg.alert('Alert', 'Items have reached the maximum number.');
-				else
-					this.onEdit();
+				}
+				 
 			break;
+			
+			case "edit" :
+			 	if (this.ZLDSYSPARM_MAX != null && count >= this.ZLDSYSPARM_MAX) 
+					Ext.Msg.alert('Alert', 'Items have reached the maximum number.');
+				else {
+                    this.onEdit();
+				}
+			break;
+			
 			case "remove" :
 				if (this.ZLDSYSPARM_MIN != null && count - length < this.ZLDSYSPARM_MIN){
 					Ext.Msg.alert('Alert', 'The minimum item number is ' + this.ZLDSYSPARM_MIN + '.');
@@ -3477,78 +3412,127 @@ Ext.zyEditorGridPanel = Ext.extend(Ext.grid.EditorGridPanel,{
 			case "disconnect" :
 				this.disconn();
 			break;
+	
 		}
+	}
+	,
+		listeners:{	//Joze -for handle unselect grid Editor Grid
+		render: cancelGridClickBubble,
+		click: function(){
+			    if(selectedGridIds.indexOf(this.id)==-1)
+					selectedGridIds.push(this.id);	//Joze
+				},
+		rowclick: function(){
+			this.stopEditing(); 
+			}
 	}
 });
 Ext.reg('zyeditorgrid', Ext.zyEditorGridPanel);
 
 /* defined zyuploadfield*/
 Ext.zyFileUploadField = Ext.extend(Ext.form.TextField,  {
-	buttonText: 'Browse...',//FIXME: multi-lingual   
-	buttonOffset: 3,
-	readOnly: true,
-	autoSize: Ext.emptyFn,
-
-	initComponent: function(){
-		Ext.zyFileUploadField.superclass.initComponent.call(this);
-		this.addEvents('fileselected');
-	},
-
-	onRender : function(ct, position){
+    
+    buttonText: 'Browse...',//FIXME: multi-lingual   
+    buttonOnly: false,    
+    buttonOffset: 3,
+   
+    // private
+    readOnly: true,
+    
+    /**
+     * @hide 
+     * @method autoSize
+     */
+    autoSize: Ext.emptyFn,
+    
+    // private
+    initComponent: function(){
+        Ext.zyFileUploadField.superclass.initComponent.call(this);
+        
+        this.addEvents(
+            /**
+             * @event fileselected
+             * Fires when the underlying file input field's value has changed from the user
+             * selecting a new file from the system file selection dialog.
+             * @param {Ext.form.FileUploadField} this
+             * @param {String} value The file value returned by the underlying file input field
+             */
+            'fileselected'
+        );
+    },
+    
+    // private
+    onRender : function(ct, position){
 		Ext.zyFileUploadField.superclass.onRender.call(this, ct, position);
-
-		this.wrap = this.el.wrap({cls:'x-form-field-wrap x-form-file-wrap'});
-		this.el.addClass('x-form-file-text');
-		this.el.dom.removeAttribute('name');
-
-		this.fileInput = this.wrap.createChild({
-			id: this.getFileInputId(),
-			name: this.name||this.getId(),
-			cls: 'x-form-file',
-			tag: 'input', 
-			type: 'file',
-			size: 1
-		});
-
-		var btnCfg = Ext.applyIf(this.buttonCfg || {}, {
-			text: this.buttonText
-		});
-		this.button = new Ext.Button(Ext.apply(btnCfg, {
-			renderTo: this.wrap,
-			cls: 'x-form-file-btn' + (btnCfg.iconCls ? ' x-btn-icon' : '')
-		}));
-
-		this.fileInput.on('change', function(){
-			var v = this.fileInput.dom.value;
-			this.setValue(v);
-			this.fireEvent('fileselected', this, v);
-		}, this);
-	},
-
-	getFileInputId: function(){
-		return this.id+'-file';
-	},
-
-	onResize : function(w, h){
+        
+        this.wrap = this.el.wrap({cls:'x-form-field-wrap x-form-file-wrap'});
+        this.el.addClass('x-form-file-text');
+        this.el.dom.removeAttribute('name');
+        
+        this.fileInput = this.wrap.createChild({
+            id: this.getFileInputId(),
+            name: this.name||this.getId(),
+            cls: 'x-form-file',
+            tag: 'input', 
+            type: 'file',
+            size: 1
+        });
+        
+        var btnCfg = Ext.applyIf(this.buttonCfg || {}, {
+            text: this.buttonText
+        });
+        this.button = new Ext.Button(Ext.apply(btnCfg, {
+            renderTo: this.wrap,
+            cls: 'x-form-file-btn' + (btnCfg.iconCls ? ' x-btn-icon' : '')
+        }));
+        
+        if(this.buttonOnly){
+            this.el.hide();
+            this.wrap.setWidth(this.button.getEl().getWidth());
+        }
+        
+        this.fileInput.on('change', function(){
+            var v = this.fileInput.dom.value;
+            this.setValue(v);
+            this.fireEvent('fileselected', this, v);
+        }, this);
+    },
+    
+    // private
+    getFileInputId: function(){
+        return this.id+'-file';
+    },
+    
+    // private
+    onResize : function(w, h){
 		Ext.zyFileUploadField.superclass.onResize.call(this, w, h);
-		this.wrap.setWidth(w);
-		var w = this.wrap.getWidth() - this.button.getEl().getWidth() - this.buttonOffset;
-		this.el.setWidth(w);
+        
+        this.wrap.setWidth(w);
+        
+        if(!this.buttonOnly){
+            var w = this.wrap.getWidth() - this.button.getEl().getWidth() - this.buttonOffset;
+            this.el.setWidth(w);
+        }
+    },
+    
+    // private
+    preFocus : Ext.emptyFn,
+    
+    // private
+    getResizeEl : function(){
+        return this.wrap;
     },
 
-	preFocus : Ext.emptyFn,
+    // private
+    getPositionEl : function(){
+        return this.wrap;
+    },
 
-	getResizeEl : function(){
-		return this.wrap;
-	},
-
-	getPositionEl : function(){
-		return this.wrap;
-	},
-
-	alignErrorIcon : function(){
-		this.errorIcon.alignTo(this.wrap, 'tl-tr', [2, 0]);
-	}
+    // private
+    alignErrorIcon : function(){
+        this.errorIcon.alignTo(this.wrap, 'tl-tr', [2, 0]);
+    }
+    
 });
 Ext.reg('zyuploadfield', Ext.zyFileUploadField);
 
@@ -3601,7 +3585,8 @@ Ext.zyTabPanel = Ext.extend(Ext.TabPanel, {
 			Ext.getBody().unmask();
 		},
 		beforetabchange: function(tp, newTab, currentTab) {
-			if ((currentTab != undefined) && (newTab.id != currentTab.id) ) {
+			if ((currentTab != undefined) && (newTab.id != currentTab.id) )
+			{
 				Ext.getBody().mask('Loading..', 'x-mask-loading');	
 				return false;
 			}
@@ -3621,6 +3606,7 @@ Ext.reg('zytabpanel', Ext.zyTabPanel);
 /* defined zywindow*/
 Ext.zyWindow = Ext.extend(Ext.Window, {
 	modal: true,
+	help: Ext.emptyFn,
 	ok: Ext.emptyFn,
 	cancel: Ext.emptyFn,
 	save: Ext.emptyFn,
@@ -3629,11 +3615,7 @@ Ext.zyWindow = Ext.extend(Ext.Window, {
 	drawCancelBtn: true, 
 	drawSaveBtn: false,
 	drawRefreshBtn: false,
-	drawHelpBtn: true,
 	iconCls: 'add',
-	help: function() {//Jerry san
-		openHelp(Context, Topic);
-	},
 	listeners: {
 		render: function(panel) {
 			var formPanel = panel.getComponent(0);
@@ -3641,9 +3623,6 @@ Ext.zyWindow = Ext.extend(Ext.Window, {
 				panel.buttons[0].setDisabled(!valid);
 			});
 			Ext.getBody().unmask();
-		},
-		show: function(){
-   			this.getKeyMap().disable();//disable ESC key, Jerry san
 		}
 	},
 
@@ -3656,27 +3635,22 @@ Ext.zyWindow = Ext.extend(Ext.Window, {
 			tools: [{
 				id: 'help',
 				qtip: 'help',
-				hidden: !this.drawHelpBtn,
 				handler: this.onBtnClick.createDelegate(this, ["help"])
-			},{
-				id: 'close',
-				qtip: 'close',
-				handler: this.onBtnClick.createDelegate(this, ["cancel"])
 			}],
-			buttons: [{//DO NOT Chnage order
-				text: _T('_button', '_OK'),
+			buttons: [{
+				text: _T('_button', '_OK'), //DO NOT Touch
 				hidden: !this.drawOkBtn,
 				handler: this.onBtnClick.createDelegate(this, ["ok"])
 			},{
-				text: _T('_button', '_Refresh'),
+				text: 'Refresh',
 				hidden: !this.drawRefreshBtn,
 				handler: this.onBtnClick.createDelegate(this, ["refresh"])
 			},{
-				text: _T('_button', '_Cancel'),
+				text: _T('_button', '_Cancel'), // DO NOT Touch
 				hidden: !this.drawCancelBtn,
 				handler: this.onBtnClick.createDelegate(this, ["cancel"])
 			},{
-				text: _T('_button', '_Save'),
+				text: 'Save',
 				hidden: !this.drawSaveBtn,
 				handler: this.onBtnClick.createDelegate(this, ["save"])
 			}]
@@ -3722,6 +3696,8 @@ Ext.zyFormPanel = Ext.extend(Ext.form.FormPanel, {
 	autoScroll: true,
 	border: false,
 	hideMode: 'offsets',
+	bodyStyle: 'padding:0 20px;font-size:11px;',
+	itemCls: 'innerscope',
 	monitorValid: true,
 	initComponent: function() {
 		Ext.apply(this, {
@@ -3752,68 +3728,39 @@ Ext.zyFieldSet = Ext.extend(Ext.form.FieldSet, {
 });
 Ext.reg('zyfieldset', Ext.zyFieldSet); 
 
+/* defined zyradio */
+Ext.zyRadio = Ext.extend(Ext.form.Radio, {
+	hideLabel: true
+});
+Ext.reg('zyradio', Ext.zyRadio); 
+
 Ext.override(Ext.form.Radio, {
     getResizeEl : function(){
         return this.wrap;
     }
 });
-/* defined zyradio */
-Ext.zyRadio = Ext.extend(Ext.form.Radio, {
-	hideLabel: true,
-	listeners: {		
-		check: function(x){// create title for PQA auto testing , Jerry san
-			if(PQATested){
-				x.imageEl.dom.title = x.boxLabel;
-				x.imageEl.dom.pqaattr = x.checked;
-			}
-		}
-	}
-});
-Ext.reg('zyradio', Ext.zyRadio); 
 
 /* defined zyradiogroup */
-Ext.zyRadioGroup = Ext.extend(Ext.form.RadioGroup, {	
-	listeners: {		
-		check: function(x){// create title for PQA auto testing , Jerry san
-			if(PQATested){
-				x.imageEl.dom.title = x.boxLabel;
-				x.imageEl.dom.pqaattr = x.checked;
-			}
-		}
-	}
+Ext.zyRadioGroup = Ext.extend(Ext.form.RadioGroup, {
+
 });
 Ext.reg('zyradiogroup', Ext.zyRadioGroup); 
+
+/* defined zycheckbox */
+Ext.zyCheckbox = Ext.extend(Ext.form.Checkbox, {
+	hideLabel: true
+});
+Ext.reg('zycheckbox', Ext.zyCheckbox); 
 
 Ext.override(Ext.form.Checkbox, {
     getResizeEl : function(){
         return this.wrap;
     }
 });
-/* defined zycheckbox */
-Ext.zyCheckbox = Ext.extend(Ext.form.Checkbox, {
-	hideLabel: true,
-	suffixCls: 'suffixtext',
-	inote:'',
-	listeners: {		
-		check: function(x){// create title for PQA auto testing , Jerry san
-			if(PQATested){
-				x.imageEl.dom.title = x.boxLabel;
-				x.imageEl.dom.pqaattr = x.checked;
-			}
-		}
-	},
-	afterRender: function(){
-		Ext.zyCheckbox.superclass.afterRender.call(this);
-		if(!Ext.isEmpty(this.inote)){
-			Ext.get(this.el.dom.nextSibling.id).insertSibling({tag: 'span', cls: this.suffixCls, 
-				html: '<img src="/ext-js/images/usg/others/i_infotip.gif" align="absmiddle" ext:qtip="'+this.inote+'">'}, 'after');
-		}
-	}
-});
-Ext.reg('zycheckbox', Ext.zyCheckbox); 
 
 /* defined zycheckboxgroup */
-Ext.zyCheckboxGroup = Ext.extend(Ext.form.CheckboxGroup, {		
+Ext.zyCheckboxGroup = Ext.extend(Ext.form.CheckboxGroup, {
+
 });
 Ext.reg('zycheckboxgroup', Ext.zyCheckboxGroup); 
 
@@ -3841,7 +3788,8 @@ Ext.reg('zyviewport', Ext.zyViewport);
 
 /* defined zypanel */
 Ext.zyPanel = Ext.extend(Ext.Panel, {
-	hideMode: 'offsets'
+	hideMode: 'offsets',
+	border: false
 });
 Ext.reg('zypanel', Ext.zyPanel); 
 
@@ -3872,19 +3820,17 @@ Ext.reg('zyprogress', Ext.zyProgressBar);
 /* defined zysummarygrid */
 Ext.zySummaryGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	displayText:'Displaying {0} - {1} of {2}',
-	drawPagingToolBar: true,
+	
 	initComponent: function() {
 		Ext.apply(this, {
-			stateful: false,
 			anchor: '-50',
 			stripeRows: true,
 			autoWidth: true,
 			autoHeight: true,
-			layout: 'fit',
 			viewConfig: {
 				forceFit: true
 			},
-			bbar: (this.drawPagingToolBar ? new Ext.zyPagingToolbar({
+			bbar: new Ext.zyPagingToolbar({
 				store: this.store,
 				displayInfo: true,
 				plugins: new Ext.ux.Jsan.zyPageSize(),
@@ -3896,10 +3842,17 @@ Ext.zySummaryGridPanel = Ext.extend(Ext.grid.GridPanel, {
 						}		
 					}, scope: this}
 				}
-			}) : '')
+			})
 		});
-		this.on('render', cancelGridClickBubble);
 		Ext.zySummaryGridPanel.superclass.initComponent.apply(this);
+	}
+	,
+	listeners:{	//Joze -for handle unselect grid
+		render: cancelGridClickBubble,
+		click: function(){
+			    if(selectedGridIds.indexOf(this.id)==-1)
+					selectedGridIds.push(this.id);	//Joze
+				}
 	}
 });
 
@@ -3911,7 +3864,6 @@ Ext.zyHyperPage = Ext.extend(Ext.Panel,{
 	hypertext:'',
 	text:'',
 	zytabpages:'',
-	inote:'',	
 	initComponent: function() {
 		Ext.apply(this, {
 			baseCls:'desc',
@@ -3922,13 +3874,14 @@ Ext.zyHyperPage = Ext.extend(Ext.Panel,{
 		if ((this.hypertext.trim() == '') && (this.text.trim() != ''))
 			this.hypertext = this.text;
 			
-		var temp = String.format('<a href="#" onClick="callMainPage(\'{0}\',\'{2}\')">{1}</a> &nbsp;&nbsp;{3}', this.filename, this.hypertext, this.zytabpages,
-			(!Ext.isEmpty(this.inote) ? '<img src="/ext-js/images/usg/others/i_infotip.gif" align="absmiddle" ext:qtip="'+this.inote+'">': ''));
+		var temp = String.format('<a href="#" onClick="callMainPage(\'{0}\',\'{2}\')">{1}</a>', this.filename, this.hypertext, this.zytabpages);
 		if ((this.hypertext.trim() != '') && (this.filename.trim() != '') && (this.text.indexOf(this.hypertext) != -1))
 			this.html = this.text.replace(this.hypertext, temp);
 		else
-			this.html = this.text;		
+			this.html = this.text;
+		
 	}
+	
 });
 Ext.reg('zyhyperpage', Ext.zyHyperPage);
 
@@ -3975,17 +3928,7 @@ Ext.zyDescPanel = Ext.extend(Ext.Panel, {
 Ext.reg('zydescpanel', Ext.zyDescPanel); 
 
 Ext.zyMenu = Ext.extend(Ext.menu.Menu, {
-	floating: false,
-	onHide : function(){
-		Ext.zyMenu.superclass.onHide.call(this);
-		this.deactivateActive();
-		if(this.el && this.floating){
-			this.el.hide();
-		}
-		if(this.deepHide === true && this.parentMenu && this.parentMenu.floating){
-			this.parentMenu.hide(true);
-		}
-	}
+	
 });
 Ext.reg('zymenu', Ext.zyMenu); 
 
@@ -4019,7 +3962,7 @@ Ext.extend(Ext.zyGroupSummary, Ext.util.Observable, {
 		if(!this.cellTpl){
 			this.cellTpl = new Ext.Template(
 				'<td class="x-grid3-col x-grid3-cell x-grid3-td-{id} {css}" style="{style}">',
-				'<div class="x-grid3-cell-inner x-grid3-col-{id}" unselectable="on"><h1>{value}</h1></div>',
+				'<div class="x-grid3-cell-inner x-grid3-col-{id}" unselectable="on">{value}</div>',
 				"</td>"
 			);
 			this.cellTpl.disableFormats = true;
@@ -4079,7 +4022,6 @@ Ext.extend(Ext.zyGroupSummary, Ext.util.Observable, {
 	doAllWidths : function(ws, tw){
 		var gs = this.view.getGroups(), s, cells, wlen = ws.length;
 		for(var i = 0, len = gs.length; i < len; i++){
-			if (gs[i].childNodes.length < 3) continue;
 			s = gs[i].childNodes[2];
 			s.style.width = tw;
 			s.firstChild.style.width = tw;
@@ -4164,11 +4106,13 @@ Ext.reg('zyextrawindow', Ext.zyExtraWindow);
 
 /* zytreegrid */
 Ext.namespace('Ext.zyTreeGrid');
-Ext.zyTreeGrid.AbstractTreeStore = Ext.extend(Ext.data.Store, {
+Ext.zyTreeGrid.AbstractTreeStore = Ext.extend(Ext.data.Store,
+{
 	leaf_field_name : '_is_leaf',
 	page_offset : 0,
 	active_node : null,
-	constructor : function(config) {
+	constructor : function(config)
+	{
 		Ext.zyTreeGrid.AbstractTreeStore.superclass.constructor.call(this, config);
 		
 		if (!this.paramNames.active_node) {
@@ -4186,7 +4130,8 @@ Ext.zyTreeGrid.AbstractTreeStore = Ext.extend(Ext.data.Store, {
 		);
 	},	
 
-	applySort : function() {
+	applySort : function()
+	{
 		if(this.sortInfo && !this.remoteSort){
 			var s = this.sortInfo, f = s.field;
 			this.sortData(f, s.direction);
@@ -4196,7 +4141,8 @@ Ext.zyTreeGrid.AbstractTreeStore = Ext.extend(Ext.data.Store, {
 		}
 	},
 	
-	sortData : function(f, direction) {
+	sortData : function(f, direction) 
+	{
 		direction = direction || 'ASC';
 		var st = this.fields.get(f).sortType;
 		var fn = function(r1, r2){
@@ -4210,7 +4156,8 @@ Ext.zyTreeGrid.AbstractTreeStore = Ext.extend(Ext.data.Store, {
 		this.applyTreeSort();
 	},
 	
-	load : function(options) {
+	load : function(options)
+	{
 		if (options) {
 			if (options.params) {
 				if (options.params[this.paramNames.active_node] === undefined) {
@@ -4232,7 +4179,8 @@ Ext.zyTreeGrid.AbstractTreeStore = Ext.extend(Ext.data.Store, {
 		return Ext.zyTreeGrid.AbstractTreeStore.superclass.load.call(this, options); 
 	},
 	
-	loadRecords : function(o, options, success) {
+	loadRecords : function(o, options, success)
+	{
 		if (!o || success === false) {
 			if (success !== false) {
 				this.fireEvent("load", this, [], options);
@@ -4300,8 +4248,11 @@ Ext.zyTreeGrid.AbstractTreeStore = Ext.extend(Ext.data.Store, {
 		}
 	},
 	
-	applyTreeSort : function() {
-		var i, len, temp, rec, records = [], roots = this.getRootNodes();
+	applyTreeSort : function()
+	{
+		var i, len, temp,
+			rec, records = [],
+			roots = this.getRootNodes();
 				
 		for (i = 0, len = roots.length; i < len; i++) {
 			rec = roots[i];
@@ -4322,8 +4273,11 @@ Ext.zyTreeGrid.AbstractTreeStore = Ext.extend(Ext.data.Store, {
 		}
 	},
 	
-	collectNodeChildrenTreeSorted : function(records, rec) {
-		var i, len,	child, children = this.getNodeChildren(rec);
+	collectNodeChildrenTreeSorted : function(records, rec)
+	{
+		var i, len,
+			child, 
+			children = this.getNodeChildren(rec);
 				
 		for (i = 0, len = children.length; i < len; i++) {
 			child = children[i];
@@ -4332,11 +4286,13 @@ Ext.zyTreeGrid.AbstractTreeStore = Ext.extend(Ext.data.Store, {
 		}
 	},
 	
-	getActiveNode : function() {
+	getActiveNode : function()
+	{
 		return this.active_node;
 	},
 	
-	setActiveNode : function(rc) {
+	setActiveNode : function(rc)
+	{
 		if (this.active_node !== rc) {
 			if (rc) {
 				if (this.data.indexOf(rc) != -1) {
@@ -4358,16 +4314,21 @@ Ext.zyTreeGrid.AbstractTreeStore = Ext.extend(Ext.data.Store, {
 		}
 	},
 	 
-	isExpandedNode : function(rc) {
+	isExpandedNode : function(rc)
+	{
 		return rc.ux_maximgb_treegrid_expanded === true;
 	},
 	
-	setNodeExpanded : function(rc, value) {
+	setNodeExpanded : function(rc, value)
+	{
 		rc.ux_maximgb_treegrid_expanded = value;
 	},
 	
-	isVisibleNode : function(rc) {
-		var i, len, ancestors = this.getNodeAncestors(rc), result = true;
+	isVisibleNode : function(rc)
+	{
+		var i, len,
+				ancestors = this.getNodeAncestors(rc),
+				result = true;
 		
 		for (i = 0, len = ancestors.length; i < len; i++) {
 			result = result && this.isExpandedNode(ancestors[i]);
@@ -4379,11 +4340,13 @@ Ext.zyTreeGrid.AbstractTreeStore = Ext.extend(Ext.data.Store, {
 		return result;
 	},
 	
-	isLeafNode : function(rc) {
+	isLeafNode : function(rc)
+	{
 		return rc.get(this.leaf_field_name) == true;
 	},
 	
-	isLoadedNode : function(rc) {
+	isLoadedNode : function(rc)
+	{
 		var result;
 		
 		if (rc.ux_maximgb_treegrid_loaded !== undefined) {
@@ -4399,17 +4362,25 @@ Ext.zyTreeGrid.AbstractTreeStore = Ext.extend(Ext.data.Store, {
 		return result;
 	},
 	
-	collapseNode : function(rc) {
-		if (this.isExpandedNode(rc) &&	this.fireEvent('beforecollapsenode', this, rc) !== false) {
+	collapseNode : function(rc)
+	{
+		if (
+			this.isExpandedNode(rc) &&
+			this.fireEvent('beforecollapsenode', this, rc) !== false 
+		) {
 			this.setNodeExpanded(rc, false);
 			this.fireEvent('collapsenode', this, rc);
 		}
 	},
 	
-	expandNode : function(rc) {
+	expandNode : function(rc)
+	{
 		var params;
 		
-		if (!this.isExpandedNode(rc) &&	this.fireEvent('beforeexpandnode', this, rc) !== false) {
+		if (
+			!this.isExpandedNode(rc) &&
+			this.fireEvent('beforeexpandnode', this, rc) !== false
+		) {
 			if (this.isLoadedNode(rc)) {
 				this.setNodeExpanded(rc, true);
 				this.fireEvent('expandnode', this, rc);
@@ -4427,7 +4398,8 @@ Ext.zyTreeGrid.AbstractTreeStore = Ext.extend(Ext.data.Store, {
 		}
 	},
 	
-	expandNodeCallback : function(r, options, success) {
+	expandNodeCallback : function(r, options, success)
+	{
 		var rc = this.getById(options.params[this.paramNames.active_node]);
 		
 		if (success && rc) {
@@ -4440,7 +4412,8 @@ Ext.zyTreeGrid.AbstractTreeStore = Ext.extend(Ext.data.Store, {
 		}
 	},
 	
-	getLoadedNodeIdFromOptions : function(options) {
+	getLoadedNodeIdFromOptions : function(options)
+	{
 		var result = null;
 		if (options && options.params && options.params[this.paramNames.active_node]) {
 			result = options.params[this.paramNames.active_node];
@@ -4448,7 +4421,8 @@ Ext.zyTreeGrid.AbstractTreeStore = Ext.extend(Ext.data.Store, {
 		return result;
 	},
 	
-	getPageOffsetFromOptions : function(options) {
+	getPageOffsetFromOptions : function(options)
+	{
 		var result = 0;
 		if (options && options.params && options.params[this.paramNames.start]) {
 			result = parseInt(options.params[this.paramNames.start], 10);
@@ -4460,23 +4434,28 @@ Ext.zyTreeGrid.AbstractTreeStore = Ext.extend(Ext.data.Store, {
 	},
 	
 	// Public
-	hasNextSiblingNode : function(rc) {
+	hasNextSiblingNode : function(rc)
+	{
 		return this.getNodeNextSibling(rc) !== null;
 	},
 	
 	// Public
-	hasPrevSiblingNode : function(rc) {
+	hasPrevSiblingNode : function(rc)
+	{
 		return this.getNodePrevSibling(rc) !== null;
 	},
 	
 	// Public
-	hasChildNodes : function(rc) {
+	hasChildNodes : function(rc)
+	{
 		return this.getNodeChildrenCount(rc) > 0;
 	},
 	
 	// Public
-	getNodeAncestors : function(rc) {
-		var ancestors = [],	parent;
+	getNodeAncestors : function(rc)
+	{
+		var ancestors = [],
+				parent;
 		
 		parent = this.getNodeParent(rc);
 		while (parent) {
@@ -4488,13 +4467,18 @@ Ext.zyTreeGrid.AbstractTreeStore = Ext.extend(Ext.data.Store, {
 	},
 	
 	// Public
-	getNodeChildrenCount : function(rc)	{
+	getNodeChildrenCount : function(rc)
+	{
 		return this.getNodeChildren(rc).length;
 	},
 	
 	// Public
-	getNodeNextSibling : function(rc) {
-		var siblings, parent, index, result = null;
+	getNodeNextSibling : function(rc)
+	{
+		var siblings,
+				parent,
+				index,
+				result = null;
 				
 		parent = this.getNodeParent(rc);
 		if (parent) {
@@ -4514,8 +4498,12 @@ Ext.zyTreeGrid.AbstractTreeStore = Ext.extend(Ext.data.Store, {
 	},
 	
 	// Public
-	getNodePrevSibling : function(rc) {
-		var siblings, parent, index, result = null;
+	getNodePrevSibling : function(rc)
+	{
+		var siblings,
+				parent,
+				index,
+				result = null;
 				
 		parent = this.getNodeParent(rc);
 		if (parent) {
@@ -4534,11 +4522,16 @@ Ext.zyTreeGrid.AbstractTreeStore = Ext.extend(Ext.data.Store, {
 	}
 });
 
-Ext.zyTreeGrid.AdjacencyListStore = Ext.extend(Ext.zyTreeGrid.AbstractTreeStore, {
+Ext.zyTreeGrid.AdjacencyListStore = Ext.extend(Ext.zyTreeGrid.AbstractTreeStore,
+{
 	parent_id_field_name : '_parent',
 	
-	getRootNodes : function() {
-		var i, len, result = [], records = this.data.getRange();
+	getRootNodes : function()
+	{
+		var i, 
+			len, 
+			result = [], 
+			records = this.data.getRange();
 		
 		for (i = 0, len = records.length; i < len; i++) {
 			if (records[i].get(this.parent_id_field_name) == null) {
@@ -4549,16 +4542,22 @@ Ext.zyTreeGrid.AdjacencyListStore = Ext.extend(Ext.zyTreeGrid.AbstractTreeStore,
 		return result;
 	},
 	
-	getNodeDepth : function(rc) {
+	getNodeDepth : function(rc)
+	{
 		return this.getNodeAncestors(rc).length;
 	},
 	
-	getNodeParent : function(rc) {
+	getNodeParent : function(rc)
+	{
 		return this.getById(rc.get(this.parent_id_field_name));
 	},
 	
-	getNodeChildren : function(rc) {
-		var i, len, result = [], records = this.data.getRange();
+	getNodeChildren : function(rc)
+	{
+		var i, 
+				len, 
+				result = [], 
+				records = this.data.getRange();
 		
 		for (i = 0, len = records.length; i < len; i++) {
 			if (records[i].get(this.parent_id_field_name) == rc.id) {
@@ -4570,8 +4569,10 @@ Ext.zyTreeGrid.AdjacencyListStore = Ext.extend(Ext.zyTreeGrid.AbstractTreeStore,
 	}
 });
 
-Ext.zyTreeGrid.GridView = Ext.extend(Ext.grid.GridView, {
-	initTemplates : function() {
+Ext.zyTreeGrid.GridView = Ext.extend(Ext.grid.GridView, 
+{
+	initTemplates : function()
+	{
 		var ts = this.templates || {};
 		
 		ts.master = new Ext.Template(
@@ -4598,19 +4599,19 @@ Ext.zyTreeGrid.GridView = Ext.extend(Ext.grid.GridView, {
 		
 		ts.row = new Ext.Template(
 			'<div class="x-grid3-row {alt} ux-maximgb-treegrid-level-{level}" style="{tstyle} {display_style}">',
-			'<table class="x-grid3-row-table" border="0" cellspacing="0" cellpadding="0" style="{tstyle}">',
-			'<tbody>',
-			'<tr>{cells}</tr>',
-			(
-				this.enableRowBody ? 
-					'<tr class="x-grid3-row-body-tr" style="{bodyStyle}">' +
-						'<td colspan="{cols}" class="x-grid3-body-cell" tabIndex="0" hidefocus="on">'+
-							'<div class="x-grid3-row-body">{body}</div>'+
-						'</td>'+
-					'</tr>'
-					: 
-					''
-			),
+				'<table class="x-grid3-row-table" border="0" cellspacing="0" cellpadding="0" style="{tstyle}">',
+        	'<tbody>',
+        		'<tr>{cells}</tr>',
+            (
+            	this.enableRowBody ? 
+            		'<tr class="x-grid3-row-body-tr" style="{bodyStyle}">' +
+            			'<td colspan="{cols}" class="x-grid3-body-cell" tabIndex="0" hidefocus="on">'+
+            				'<div class="x-grid3-row-body">{body}</div>'+
+            			'</td>'+
+            		'</tr>' 
+            			: 
+            		''
+            ),
 			'</tbody>',
 			'</table>',
 			'</div>'
@@ -4641,8 +4642,9 @@ Ext.zyTreeGrid.GridView = Ext.extend(Ext.grid.GridView, {
 		this.templates = ts;
 		Ext.zyTreeGrid.GridView.superclass.initTemplates.call(this);
 	},
-
-	initElements : function() {
+	
+  initElements : function()
+  {
 		var E = Ext.Element;
 		
 		var el = this.grid.getGridEl().dom.firstChild;
@@ -4670,9 +4672,11 @@ Ext.zyTreeGrid.GridView = Ext.extend(Ext.grid.GridView, {
 		
 		this.resizeMarker = new E(cs[1]);
 		this.resizeProxy = new E(cs[2]);
+		
 	},
 	
-	doRender : function(cs, rs, ds, startRow, colCount, stripe)	{
+	doRender : function(cs, rs, ds, startRow, colCount, stripe)
+	{
 		var ts = this.templates, ct = ts.cell, rt = ts.row, last = colCount-1;
 		var tstyle = 'width:'+this.getTotalWidth()+';';
 		var buf = [], cb, c, p = {}, rp = {tstyle: tstyle}, r;
@@ -4725,10 +4729,14 @@ Ext.zyTreeGrid.GridView = Ext.extend(Ext.grid.GridView, {
 		return buf.join("");
 	},
   
-	renderCellTreeUI : function(record, store) {
-		var tpl = this.templates.treeui, line_tpl = this.templates.elbow_line, tpl_data = {}, rec, parent,
-			depth = level = store.getNodeDepth(record);
-
+	renderCellTreeUI : function(record, store)
+	{
+		var tpl = this.templates.treeui,
+  			line_tpl = this.templates.elbow_line,
+  			tpl_data = {},
+  			rec, parent,
+  			depth = level = store.getNodeDepth(record);
+  		
 		tpl_data.wrap_width = (depth + 1) * 16;	
 		if (level > 0) {
 			tpl_data.elbow_line = '';
@@ -4739,11 +4747,18 @@ Ext.zyTreeGrid.GridView = Ext.extend(Ext.grid.GridView, {
 				if (parent) {
 					if (store.hasNextSiblingNode(parent)) {
 						tpl_data.elbow_line = 
-						line_tpl.apply({left : level * 16, cls : 'ux-maximgb-treegrid-elbow-line'}) + tpl_data.elbow_line;
+	  					line_tpl.apply({
+	  						left : level * 16, 
+	  						cls : 'ux-maximgb-treegrid-elbow-line'}) + 
+							tpl_data.elbow_line;
 					}
 					else {
 						tpl_data.elbow_line = 
-						line_tpl.apply({left : level * 16, cls : 'ux-maximgb-treegrid-elbow-empty'}) + tpl_data.elbow_line;
+						line_tpl.apply({
+							left : level * 16,
+							cls : 'ux-maximgb-treegrid-elbow-empty'
+						}) +
+						tpl_data.elbow_line;
 					}
 				}
 				else {
@@ -4788,8 +4803,10 @@ Ext.zyTreeGrid.GridView = Ext.extend(Ext.grid.GridView, {
 		return tpl.apply(tpl_data);
 	},
 	
-	expandRow : function(record, initial) {
-		var ds = this.ds, i, len, row, pmel, children, index, child_index;
+	expandRow : function(record, initial)
+	{
+		var ds = this.ds,
+			i, len, row, pmel, children, index, child_index;
 		
 		if (typeof record == 'number') {
 			index = record;
@@ -4826,8 +4843,10 @@ Ext.zyTreeGrid.GridView = Ext.extend(Ext.grid.GridView, {
 		}
 	},
 	
-	collapseRow : function(record) {
-		var ds = this.ds, i, len, children, row, index;
+	collapseRow : function(record)
+	{
+		var ds = this.ds,
+			i, len, children, row, index;
 				
 		if (typeof record == 'number') {
 			index = record;
@@ -4860,7 +4879,8 @@ Ext.zyTreeGrid.GridView = Ext.extend(Ext.grid.GridView, {
 		}
 	},
 	
-	initData : function(ds, cm) {
+	initData : function(ds, cm)
+	{
 		Ext.zyTreeGrid.GridView.superclass.initData.call(this, ds, cm);
 		if (this.ds) {
 			this.ds.un('activenodechange', this.onStoreActiveNodeChange, this);
@@ -4874,8 +4894,10 @@ Ext.zyTreeGrid.GridView = Ext.extend(Ext.grid.GridView, {
 		}
 	},
 	
-	onStoreActiveNodeChange : function(store, old_rc, new_rc) {
-		var parents, i, len, rec, items = [], ts = this.templates;
+	onStoreActiveNodeChange : function(store, old_rc, new_rc)
+	{
+		var parents, i, len, rec, items = [],
+				ts = this.templates;
 				
 		if (new_rc) {
 			parents = this.ds.getNodeAncestors(new_rc),
@@ -4898,35 +4920,45 @@ Ext.zyTreeGrid.GridView = Ext.extend(Ext.grid.GridView, {
 		}
 	},
 	
-	onLoad : function(store, records, options) {
+	onLoad : function(store, records, options)
+	{
 		var id = store.getLoadedNodeIdFromOptions(options);
 		if (id === null) {
 			Ext.zyTreeGrid.GridView.superclass.onLoad.call(this, store, records, options);
 		}
 	},
 	
-	onStoreExpandNode : function(store, rc)	{
+	onStoreExpandNode : function(store, rc)
+	{
 		this.expandRow(rc);
 	},
 	
-	onStoreCollapseNode : function(store, rc) {
+	onStoreCollapseNode : function(store, rc)
+	{
 		this.collapseRow(rc);
 	}
 });
 
-Ext.zyTreeGrid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
+Ext.zyTreeGrid.GridPanel = Ext.extend(Ext.grid.GridPanel, 
+{
 	master_column_id : 0,
+	
 	i18n : null,
+	
 	stateful: true,
 	stripeRows: true,
 	anchor: '-50',
 	autoWidth: true,
 	autoHeight: true,
 	collapsible: true,
-	viewConfig: {forceFit: true},
+	viewConfig: {
+		forceFit: true
+	},
 
-	initComponent : function() {
+	initComponent : function()
+	{
 		Ext.zyTreeGrid.GridPanel.superclass.initComponent.call(this);
+		
 		Ext.applyIf(this.i18n, Ext.zyTreeGrid.GridPanel.prototype.i18n);
 		
 		this.getSelectionModel().on(
@@ -4934,16 +4966,25 @@ Ext.zyTreeGrid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 			this.onTreeGridSelectionChange,
 			this
 		);
-		this.on('render', cancelGridClickBubble);
 	},
-	getView : function() {
+	listeners:{	//Joze -for handle unselect grid
+		render: cancelGridClickBubble,
+		click: function(){
+			    if(selectedGridIds.indexOf(this.id)==-1)
+					selectedGridIds.push(this.id);	//Joze
+				}
+	},
+
+	getView : function()
+	{
 		if (!this.view) {
 			this.view = new Ext.zyTreeGrid.GridView(this.viewConfig);
 		}
 		return this.view;
 	},
 	
-	onClick : function(e) {
+	onClick : function(e)
+	{
 		var target = e.getTarget(),
 			view = this.getView(),
 			row = view.findRowIndex(target),
@@ -4967,7 +5008,8 @@ Ext.zyTreeGrid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 		}
 	},
 
-	onMouseDown : function(e) {
+	onMouseDown : function(e)
+	{
 		var target = e.getTarget();
 
 		if (!Ext.fly(target).hasClass('ux-maximgb-treegrid-elbow-active')) {
@@ -4975,13 +5017,14 @@ Ext.zyTreeGrid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 		}
 	},
 	
-	onDblClick : function(e) {
+	onDblClick : function(e)
+	{
 		var target = e.getTarget(),
-			view = this.getView(),
-			row = view.findRowIndex(target),
-			store = this.getStore(),
-			sm = this.getSelectionModel(), 
-			record, record_id;
+				view = this.getView(),
+				row = view.findRowIndex(target),
+				store = this.getStore(),
+				sm = this.getSelectionModel(), 
+				record, record_id;
 			
 		if (!row && Ext.fly(target).hasClass('ux-maximgb-treegrid-brditem')) {
 			record_id = Ext.id(target);
@@ -5009,7 +5052,8 @@ Ext.zyTreeGrid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 		Ext.zyTreeGrid.GridPanel.superclass.onDblClick.call(this, e);
 	},
 	
-	onTreeGridSelectionChange : function(sm, selection)	{
+	onTreeGridSelectionChange : function(sm, selection)
+	{
 		var record;
 		if (sm.getSelected) {
 			record = sm.getSelected();
@@ -5026,3 +5070,4 @@ Ext.zyTreeGrid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 });
 
 Ext.reg('zytreegrid', Ext.zyTreeGrid.GridPanel);
+
