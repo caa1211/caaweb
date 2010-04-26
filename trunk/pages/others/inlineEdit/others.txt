@@ -1,0 +1,3 @@
+
+jquery-in-place-editor 
+http://code.google.com/p/jquery-in-place-editor/

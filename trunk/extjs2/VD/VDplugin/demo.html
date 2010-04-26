@@ -62,7 +62,6 @@
   
 //VD others-----------
      var date1 = {
-     panelMsg:{ msg:'msg 1 '},
      port1: {status: 'on', msg:'port1 on'},
      port2: {status: 'off'},
      rj1: {status: 'off',msg: 'rj1 on'},
@@ -75,104 +74,43 @@
      rj3_left: {status: 'on',msg: 'rj3 left off'},
      rj4_left: {status: 'offline',msg: 'rj4 left offline'},
      
-     rj1_right: {status: 'off', 'msg':''},
+     rj1_right: {status: 'off'},
      rj2_right: {status: 'off'},
      rj3_right: {status: 'off',msg: ''},
      rj4_right: {status: 'on',msg: 'rj4 right on'}
  } ;
-
+ 
  
   var date2 = {
-     panelMsg:{ msg:'msg 2'},
      port1: {status: 'on', msg:'port1 on'},
      port2: {status: 'on', msg:'port1 on'},
      rj1: {status: 'on',msg: 'rj1 on'},
-              rj1_left: {status: 'offline', msg:'offline'},
-              rj1_right: {status: 'on'},
+          rj1_left: {status: 'offline', msg:'offline'},
+          rj1_right: {status: 'on'},
      rj2: {status: 'off',msg: 'rj2 on'},
-              rj2_left: {status: 'offline',msg: 'rj2 left offline'},
-              rj2_right: {status: 'off',msg: 'rj2 right on'},
+          rj2_left: {status: 'offline',msg: 'rj2 left offline'},
+          rj2_right: {status: 'off',msg: 'rj2 right on'},
      rj3: {status: 'on',msg: 'rj3 on'},
-              rj3_left: {status: 'on',msg: 'rj3 left off'},
-              rj3_right: {status: 'off',msg: 'rj3 right on'},
+          rj3_left: {status: 'on',msg: 'rj3 left off'},
+          rj3_right: {status: 'off',msg: 'rj3 right on'},
      rj4: {status: 'on',msg: 'rj4 on'},
-              rj4_left: {status: 'offline',msg: 'rj4 left offline'},
-              rj4_right: {status: 'on',msg: 'rj4 right on'}
+          rj4_left: {status: 'offline',msg: 'rj4 left offline'},
+          rj4_right: {status: 'on',msg: 'rj4 right on'}
  } ;
- 
- function dataWrapper(data)
- {
-     var resultData=new Object();
-     $.each(data,function(i, item){
-      switch(i) 
-      {
-          case 'rj1':
-          case 'rj2':
-          case 'rj3':
-          case 'rj4':
-            var obj = new Object();
-            if(item.status_1!='off'|| item.status_2!='off')
-             obj.status ='on'
-            else
-             obj.status ='off'
-             obj.msg = item.msg;
-             resultData[i]=obj;
-             
-             var leftObj = new Object();
-             leftObj.status = item.status_1;
-             leftObj.msg = '';
-             resultData[i+'_left']=leftObj;
-             
-             var rightObj = new Object();
-             rightObj.status = item.status_2;
-             rightObj.msg = '';
-             resultData[i+'_right']=rightObj;
-         break;
-          
-          default:
-            resultData[i] = item;
-          break;  
-      } 
-     })
-     
-     return resultData;
- }
- 
- var dd = {
-     panelMsg:{ msg:'msg 1'},
-     port1: {status: 'on', msg:'port1 on'},
-     port2: {status: 'on', msg:'port1 on'},
-     rj1: {status_1: 'off', status_2:'off', msg: 'rj1 on'},
-     rj2: {status_1: 'on', status_2:'off', msg: 'rj2 on'},
-     rj3: {status_1: 'on', status_2:'off', msg: 'rj3 on'},
-     rj4: {status_1: 'on', status_2:'off', msg: 'rj4 on'} 
- }
-
-  var ee = {
-     panelMsg:{ msg:'msg 2'},
-     port1: {status: 'on', msg:'port1 on'},
-     port2: {status: 'off', msg:'port1 on'},
-     rj1: {status_1: 'off', status_2:'on', msg: 'rj1 on'},
-     rj2: {status_1: 'on', status_2:'on', msg: 'rj2 on'},
-     rj3: {status_1: 'off', status_2:'on', msg: 'rj3 on'},
-     rj4: {status_1: 'off', status_2:'off', msg: 'rj4 on'} 
- }
-
  
  
  //for test
  var $VDOther = $('#vdOther').VDcomponent({
      vdHtml: 'VD/VDHtml/VD.html',
      vdCss: ['VD/vdBase.css', 'VD/VDHtml/css/css.css'],
-     portDef: 'VD/VDHtml/portDef.js',
-     dataWrapper: dataWrapper
+     portDef: 'VD/VDHtml/portDef.js'
  });
-  $VDOther.setValue(ee);
+  $VDOther.setValue(date1);
   
   $VDOther.toggle(function(){
-      $VDOther.setValue(dd);
+       $VDOther.setValue(date2);
   }, function(){
-       $VDOther.setValue(ee);
+       $VDOther.setValue(date1);
   })
 
         });

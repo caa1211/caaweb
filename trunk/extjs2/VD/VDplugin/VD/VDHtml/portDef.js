@@ -1,7 +1,4 @@
 portDef = {
-    'panelMsg':{
-         status: {}
-    },
     'port1': {
         status: {
             on:  'port1_on',
