@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Grid</title>
+        <link rel="stylesheet" type="text/css" href="../ext/resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="../css/zyxel/zycss.css" />
+        <link rel="stylesheet" type="text/css" href="../css/zyxel/zytheme.css" />
+        <script type="text/javascript" src="../ext/adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="../ext/ext-all-debug.js"></script>
+        <script type="text/javascript" src="../common/zyVType.js"></script>
+        <script type="text/javascript" src="../common/zyFunction.js"></script>
+        <script type="text/javascript" src="../common/zyComponent.js"></script>
+        <script type="text/javascript" src="../common/zyExtend.js"></script>
+        <script type="text/javascript" src="../common/zyDebug.js"></script>
+        
+           <link href="VDplugin/jquery.zyTooltip.css" rel="stylesheet" type="text/css" />
+           
+    <script src="VDplugin/jquery.js" type="text/javascript"></script>
+    <script src="VDplugin/jquery.zyTooltip.min.js" type="text/javascript"></script>
+    <script src="VDplugin/VD/VDcomponent.js" type="text/javascript"></script>
+      
+        <script type="text/javascript">
+            
+        Ext.onReady(function(){
+        
+            var vd = new Ext.Template('<div id="vd"> </div>');
+            
+            var panel = new Ext.zyPanel({
+                renderTo: 'mainDiv',
+                border: false,
+                listeners: {
+                    afterlayout: function(){
+                    
+                        var $VDObj2628 = $('#vd').VDcomponent({
+                            vdHtml: 'VDplugin/VD/2628/VD.html',
+                            vdCss: ['VDplugin/VDBase'.css, 'VDplugin/VD/2628/css/css.css'],
+                            portDef: 'VDplugin/VD/2628/portDef.js'
+                        });
+                        
+                        
+                        var VDdate1 = {
+                            dslline: {
+                                status: 'on',
+                                msg: 'dsl line on'
+                            },
+                            lan1: {
+                                status: 'off'
+                            },
+                            lan2: {
+                                status: 'on',
+                                msg: 'LAN2 on \n ip:192.168.0.1'
+                            },
+                            lan3: {
+                                status: 'off'
+                            },
+                            lan4: {
+                                status: 'on',
+                                msg: 'LAN4 \n on'
+                            },
+                            wan: {
+                                status: 'off'
+                            },
+                            wifiSignal: {
+                                status: 'on',
+                                msg: 'wifiSignal on'
+                            }
+                        };
+                        
+                        
+                        //vd set init value
+                        $VDObj2628.setValue(VDdate1);
+                        
+                    }
+                },
+                items: [vd, {
+                    xtype: 'zyformspacer'
+                }]
+            });
+        });
+            
+            
+        </script>
+    </head>
+    <body>
+        <div id='mainDiv'></div>
+    </body>
+</html>

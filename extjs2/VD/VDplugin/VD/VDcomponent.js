@@ -15,9 +15,6 @@
  * 
  * 2010/04/22
  * modify some code 
- * 
- * 2010/04/26
- * Add dataWrapper config for setting data wrapper callback function
  */
 ;
 (function($){
@@ -25,7 +22,7 @@
     $.fn.VDcomponent = function(settings){
          var _tipOption = {
                 showBody: "\n",
-                fade: 100,
+               // fade: 100,
                // opacity: 1,
                 track: true,
                 delay: 0, 
@@ -45,8 +42,7 @@
             
             loaded: function(){},
             updated: function(){},
-            async: false,
-            dataWrapper: null
+            async: false
         }
         
         var _settings = $.extend(_defaultSetting, settings);
@@ -82,9 +78,6 @@
         };
         var _data;
         this.setValue = function(data){
-            if(_settings.dataWrapper!=null)
-            data = _settings.dataWrapper(data);
-            
             _data= data;
             $.each(data, function(i, date){
                 $portObj = _vdObj.find('#' + i + '');
@@ -98,11 +91,11 @@
                     alert('undefined port: ' + i);
                     return false;
                 }
-                /*
+                
                 if (portDef[i].status[data[i].status] == undefined) {
                     alert('port: ' + i + ' has undefined status:' + data[i].status);
                     return false;
-                }*/
+                }
                 
                 if (portDef[i].status[data[i].status] == '') {
                     removePortCls($portObj, _settings.hideSpeed);

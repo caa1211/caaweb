@@ -1,4 +1,3 @@
-/*for handle unselect grid*/
 
 Ext.namespace("Ext.hci");
 
