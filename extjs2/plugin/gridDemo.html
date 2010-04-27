@@ -85,28 +85,55 @@
         ]
     }); 
 
-    var grid = new Ext.hci.zyGridPanel({
+extraButtons = function(config){
+   
+    Ext.apply(this, config);
+ 
+       for (var i = 0; i < this.length; i++) {
+          if (this[i].mode != undefined && this[i].iconCls.search('extraButton') == -1) {
+              var modeStr = this.extraButtons[i].mode.join(' ');
+              this[i].iconCls = this[i].iconCls + ' extraButton ' + modeStr;
+              modeStr.search('emptyOn') == -1 ? this[i].disabled = true : this[i].disabled = false;
+          }
+          this.tbar.splice(this[i].index, 0, this[i]);
+      }
+     debugger; 
+   // Ext.apply(this, config);
+};
+
+extraButtons.prototype ={
+    init : function(grid){
+      debugger;
+    }
+};
+
+
+    
+      var extraBtns = new extraButtons([{
+            text: "Dial Now",
+            tooltip: 'Dial Now',
+            iconCls: 'dial',
+            hidden: false,
+            mode: ['singleOn'], //emptyOn, singleOn, multiOn
+            index: 0, 
+            handler:function(){}
+        }]);
+
+
+ 
+
+    var grid = new Ext.hci.zyEditorGridPanel({
         store: store, //FIXME : this is demo purpose, please use corresponding store if merge.
         cm: cm,
         id:'grid',
-        plugins: filters,
-		drawAddIcon: false,
-		drawIcon: false,
+        plugins: [filters, extraBtns],
         drawActiveIcon: false,
         drawInActiveIcon: false,
         listeners:{
             'resize': function(){
                 Ext.zyGridPanel.superclass.onResize.call(this);
             }
-        },
-        extraButtons:[{
-            text: "Dial Now",
-            tooltip: 'Dialadfadf',
-            iconCls: 'dial',
-            mode: ['singleOn'], //emptyOn, singleOn, multiOn
-            index: 1, 
-            handler:function(){}
-        }]
+        }
     });
   
                 
