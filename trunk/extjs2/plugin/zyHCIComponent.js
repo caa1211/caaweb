@@ -16,8 +16,6 @@ var zyHCIGridPanelConfig = {
    //--Joze  for extraButtons 
      for (var i = 0; i < this.extraButtons.length; i++) {
           if (this.extraButtons[i].mode != undefined && this.extraButtons[i].iconCls.search('extraButton') == -1) {
-		      var tooltipText = this.extraButtons[i].tooltip;
-		      this.extraButtons[i].tooltip = tooltipText==undefined ? this.extraButtons[i].text : tooltipText;
               var modeStr = this.extraButtons[i].mode.join(' ');
               this.extraButtons[i].iconCls = this.extraButtons[i].iconCls + ' extraButton ' + modeStr;
               modeStr.search('emptyOn') == -1 ? this.extraButtons[i].disabled = true : this.extraButtons[i].disabled = false;
@@ -51,3 +49,4 @@ Ext.reg('hcizygrid', Ext.hci.zyGridPanel);
 
 Ext.hci.zyEditorGridPanel = Ext.extend(Ext.zyEditorGridPanel, zyHCIGridPanelConfig);
 Ext.reg('hcizyeditorgrid', Ext.hci.zyEditorGridPanel);
+
