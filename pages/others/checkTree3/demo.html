@@ -68,6 +68,18 @@
                 checkTree2.expandAll();
            });
              
+            
+  var  selectedJosnIDs = [ "network-wireless",  "network-routing",  "network-nat",  "network-dns",  "security-parentalControl",  "security-certificates",  "voip-sip",  "voip-callRule",  "systemMonitoring-voipStatus",  "Template"];
+            
+          $('#getSelectedJosnIDsBtn').click(function(){
+            var result =  checkTree1.getCheckedJsonIDs();
+              alert(result.join(',  '));
+           });
+           
+          $('#setSelectedJsonIDsBtn').click(function(){
+              checkTree1.setCheckedJsonIDs(selectedJosnIDs);
+           });
+           
         });
   
     </script> 
@@ -77,6 +89,10 @@
 <button id='clearAllBtn'>clear All</button>
 <button id='selectAllBtn'>select All</button>
 <button id='getSelectedItemBtn'>get SelectedItems</button>
+
+<button id='getSelectedJosnIDsBtn'>get Selected Json id</button>
+<button id='setSelectedJsonIDsBtn'>set Selected Json id</button>
+
 <button id='collapseBtn'>collapse Btn</button>
 <button id='expandBtn'>expand Btn</button>
 
