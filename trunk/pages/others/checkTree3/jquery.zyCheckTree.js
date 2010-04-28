@@ -47,7 +47,7 @@
                   }
             })
         }
-        
+ 
         this.getCheckedItems = function()
         {
             var retArray =new Array();
@@ -68,13 +68,53 @@
             })
             return retArray.length==1?retArray[0]:retArray;
         }
+        
+         this.setCheckedJsonIDs = function(checkArray)
+        {
+            if(this.isParseTreeByJson==false)
+            return;
+            
+            this.each(function(){
+                 $('.checkbox', this).removeClass('checked').removeClass('half_checked');
+                  for (var j = 0; j < checkArray.length; j++) {
+                      var checkNode = $(".checkbox[targetID='"+checkArray[j]+ "']", this)
+                      nodeStatusUpdate(checkNode);
+                  }
+            })
+        }
+        
+        this.getCheckedJsonIDs = function()
+        {
+            if(this.isParseTreeByJson==false)
+            return null;
+            
+            var retArray =new Array();
+        
+            this.each(function(){        
+                var checkedArray = new Array();
+                $('.checkbox.checked', this).each(function(){
+                   var parentNode;
+                        $(this).parents('ul.tree').each(function(i, item){
+                            if (i == 0) 
+                                parentNode = $(item);
+                        })
 
-        function createNode(data, recursiveCounter){
+                   if (parentNode.siblings('.checkbox').length==0 || parentNode.siblings('.checkbox').hasClass('half_checked')) 
+                            checkedArray.push($(this).attr('targetID'));
+                });
+                 retArray.push(checkedArray);
+            })
+            return retArray.length==1?retArray[0]:retArray; 
+        }
+
+        function createNode(data, recursiveCounter, targetIDStr){
             if (recursiveCounter == undefined) 
                 recursiveCounter = "";
+
             var contenter = $('<ul class="tree"></ul>');
             var counter = 0;
             $.each(data, function(i, item){
+
                 if (item.title == undefined) 
                 return;
                 var liNode = $('<li></li>');
@@ -82,14 +122,19 @@
                 var nodeStr = recursiveCounter + '_' + counter;
                 counter++;
                 
-                var inputNode = $('<div class="checkbox" id="node' + nodeStr + '" ></div>');
+                var IDStr;
+                if (targetIDStr == undefined) 
+                IDStr = i; 
+                else
+                IDStr = targetIDStr + '-' + i;
+                var inputNode = $('<div class="checkbox" id="node' + nodeStr + ' " targetID='+IDStr+'  ></div>');
                 liNode.append(inputNode);
                 
                 var labelNode = $(' <LABEL>' + item.title + '</LABEL>');
                 liNode.append(labelNode);
                 
                 if (item.submenu != undefined) {
-                    var subMenuContenter = createNode(item.submenu, nodeStr);
+                    var subMenuContenter = createNode(item.submenu, nodeStr, IDStr);
                     liNode.append(subMenuContenter);
                 }
                 
