@@ -41,8 +41,9 @@
         {
             this.each(function(){
                  $('.checkbox', this).removeClass('checked').removeClass('half_checked');
+                 
                   for (var j = 0; j < checkArray.length; j++) {
-                      var checkNode =$('#node_' + checkArray[j], this);  //$('#node_' + checkArray[j]);
+                      var checkNode =$('#node_' + checkArray[j], this);
                       nodeStatusUpdate(checkNode);
                   }
             })
@@ -127,7 +128,7 @@
                 IDStr = i; 
                 else
                 IDStr = targetIDStr + '-' + i;
-                var inputNode = $('<div class="checkbox" id="node' + nodeStr + ' " targetID='+IDStr+'  ></div>');
+                var inputNode = $('<div class="checkbox" id="node' + nodeStr + '" targetID='+IDStr+'  ></div>');
                 liNode.append(inputNode);
                 
                 var labelNode = $(' <LABEL>' + item.title + '</LABEL>');
