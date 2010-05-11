@@ -90,7 +90,7 @@
         cm: cm,
         id:'grid',
         plugins: filters,
-		drawAddIcon: false,
+
 		drawIcon: false,
         drawActiveIcon: false,
         drawInActiveIcon: false,
@@ -99,6 +99,7 @@
                 Ext.zyGridPanel.superclass.onResize.call(this);
             }
         },
+		onAdd: function(){alert('');},
         extraButtons:[{
             text: "Dial Now",
             tooltip: 'Dialadfadf',
