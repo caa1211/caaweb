@@ -35,6 +35,11 @@
                 points: { show: false }
             },
             yaxis: { ticks: 10 },
+            
+                xaxis:{
+                mode:"time",
+                timeformat:"%H:%M:%S"},
+                
             selection: { mode: "xy" }
         };
 
@@ -44,8 +49,8 @@
 
 
  var caadata = [ 
- { label: "Foo", data: [ [0.010, 0.001], [17, -14], [30, 5] ] },
- { label: "Bar", data: [ [11, 13], [19, 11], [30, -7] ] }
+ { label: "Foo", data: [ [1167692400000, 0.001], [1167778800000, -14], [1167865200000, 5] ] },
+ { label: "Bar", data: [ [1167692400000, 13], [1167778800000, 11], [1167865200000, -7] ] }
   ]
 
     var plot = $.plot($("#placeholder"), caadata, options);
