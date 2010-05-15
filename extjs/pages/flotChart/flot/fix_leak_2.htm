@@ -36,13 +36,13 @@ Ext.onReady(function(){
     var options = {
             legend: { show: true},
             series: {
-                lines: {show: true},
-                points: {show: true}
+                lines: {show: true}
+               
             },
             yaxis: { ticks:10, tickFormatter:suffixFormatter, min:0, tickDecimals:0},
             xaxis: { ticks:10,  tickDecimals:0 , mode:"time", timeformat:"%H:%M:%S"},
             selection: { mode: "xy"},
-            shadowSize: 5
+            shadowSize: 1
 			/*,
 			grid: {
 			 markings: [ { xaxis: { from: 9, to: 9 }, yaxis: { from: 0, to: 1000000 }, color: "#bb0000" } ]
@@ -100,10 +100,10 @@ Ext.onReady(function(){
 		if (!Ext.getCmp('panel1').collapsed) {
 
           
-           $chartHolder.find("canvas").each(function(){ 
-            $(this)[0].getContext('2d').clearRect(0,0,  $(this).width(),  $(this).height());
-            $(this).empty().remove();
-          }).empty(); // clear placeholder 
+          	$chartHolder.find("canvas").each(function(){
+		jQuery.event.remove(this); 
+		jQuery.removeData(this); }); 
+		$chartHolder.get(0).innerHTML = ""; // clear placeholder 
          
          
             $plot= $.plot($chartHolder, inputData, options);
