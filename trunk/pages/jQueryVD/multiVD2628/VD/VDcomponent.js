@@ -18,6 +18,9 @@
  * 
  * 2010/04/26
  * Add dataWrapper config for setting data wrapper callback function
+ * 
+ * 2010/05/25
+ * set title to the item, even if it be off.
  */
 ;
 (function($){
@@ -64,7 +67,7 @@
             if (!obj.hasClass(cls)) {
                 removePortCls(obj, 0);
                 
-                if (!obj.hasClass(cls)) {
+                if (!obj.hasClass(cls)&& cls!='') {
                   obj.removeClass('off').hide(0).addClass(cls);
                    if (_settings.effect == 'fadeIn'||_settings.effect == '' ) 
                         obj.fadeIn(_settings.showSpeed, _settings.easing);
@@ -104,7 +107,7 @@
                     return false;
                 }*/
                 
-                if (portDef[i].status[data[i].status] == '') {
+                if (data[i].status == undefined) {
                     removePortCls($portObj, _settings.hideSpeed);
                 }
                 else {
