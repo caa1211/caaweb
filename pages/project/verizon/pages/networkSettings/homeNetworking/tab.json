@@ -1,9 +1,0 @@
-
-  {
-         "LAN Status": {"url":"../networkSettings/homeNetworking/lanStatus.html"  },
-         "LAN Setup": {"url":"../networkSettings/homeNetworking/lanSetup.html"  },
-         "UPnP": {"url":"../networkSettings/homeNetworking/upnp.html"  },
-         "DLNA": {"url":"../networkSettings/homeNetworking/dlna.html"  }
-  }
-
-    
