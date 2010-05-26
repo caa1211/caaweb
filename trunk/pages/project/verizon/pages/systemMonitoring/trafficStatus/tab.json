@@ -1,9 +1,0 @@
-
-  {
-         "tabTitle" : "Traffic Status",
-		 "WAN": {"url":"../systemMonitoring/trafficStatus/wan.html"  },
-         "LAN": {"url":"../systemMonitoring/trafficStatus/lan.html"  },
-         "MoCA Statistic": {"url":"../systemMonitoring/trafficStatus/mocaStatistic.html"  }
-  }
-
-    
