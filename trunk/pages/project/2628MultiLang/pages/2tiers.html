@@ -1,0 +1,119 @@
+<LINK rel="stylesheet" type="text/css" href="css/2tierCSS.css"></Link>
+<LINK rel="stylesheet" type="text/css" href="css/jquery.zyCheckTree.css"></Link>
+<script type="text/javascript" src="js/jquery.zyCheckTree.js"></script>
+<script type="text/javascript">
+$(function(){
+    var CheckTree = $('#CheckTree').zyCheckTree({
+		loseControlOptions: ['0']
+    });
+    
+    var CheckWz = $('#CheckWz').zyCheckTree({
+        isParseTreeByJson: false
+    });
+    
+	var adminCheckArray = new Array("0", "1", "2_2", "2_3", "3_1", "4", "5");
+	var userCheckArray = new Array("0", "1", "2", "3_2", "3_3", "3_5", "4", "5");
+
+    function updateCheckTreeBySelector(){
+        var accountType = $("#account").find('option:selected').text();
+        if (accountType == 'Admin') {
+            $("#status").show();
+			$(".right").show();
+			$("#username").val('Admin');
+			$("#pwd").val('admin');
+			CheckTree.setCheckedItems(adminCheckArray);
+        } else if (accountType == 'User') {
+            $("#status").show();
+			$(".right").show();
+			$("#username").val('User');
+			$("#pwd").val('user');
+			CheckTree.setCheckedItems(userCheckArray);
+        } else {
+			$("#status").hide();
+			$(".right").hide();
+			$("#username").val('Super User');
+			$("#pwd").val('supervisor');
+		}
+    }
+    
+    updateCheckTreeBySelector();
+    
+	$("#account").change(function(){
+  		updateCheckTreeBySelector();
+	});
+	
+	//collapse all
+	$('#collapseBtn').click(function(){
+		CheckTree.collapseAll();
+	});
+	
+	//expand all
+	$('#expandBtn').click(function(){
+		CheckTree.expandAll();
+	});
+	
+	$('#exitBtn').click(function() {
+	 window.location='../index.html';
+    });
+			
+});
+</script>
+<div class="wrap">
+  <div class="left">
+    <div class="content">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="40%" class="item">Account Type:</td>
+          <td><select name="select" id="account">
+            <option value="Super User">Super User</option>
+            <option value="Admin" selected="selected">Admin</option>
+            <option value="User">User</option>
+      </select></td>
+        </tr>
+        <tr id="status">
+          <td class="item">Status:</td>
+          <td><input name="radio" type="radio" id="radio" value="radio" checked="checked" />
+            Enable &nbsp;&nbsp;
+            <input type="radio" name="radio" id="radio2" value="radio" />
+            Disable</td>
+        </tr>
+        <tr>
+          <td class="item">User Name:</td>
+          <td><span class="value">
+            <input name="textfield" type="text" id="username" value="admin" />
+          </span></td>
+        </tr>
+        <tr>
+          <td class="item">Password:</td>
+          <td><span class="value">
+            <input name="textfield2" type="password" id="pwd" value="1234" />
+          </span></td>
+        </tr>
+      </table></div>
+  </div>
+  <div class="right">
+    <div class="item" style="margin-top:42px;">Privilege Setting:
+      <div class="tools"><a href="#" id="expandBtn">Expand All</a> | <a href="#" id="collapseBtn">Collapse All</a></div>
+    </div>
+    <div class="treepanel">
+      <div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div>
+      <div class="inner">
+        <div class="wizard"><h1>Wizard</h1>
+          <div id="CheckWz">
+            <ul class="tree">
+              <li>
+                <div id="node_wz" class="checkbox checked"></div>
+                <label>Quick Start</label>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="config"><h1>Configuration</h1>
+          <div id='CheckTree'></div>
+        </div>
+      </div>
+      <div class="r4"></div><div class="r3"></div><div class="r2"></div><div class="r1"></div>
+    </div>
+  </div>
+  <div class="clearfloat"></div>
+</div>

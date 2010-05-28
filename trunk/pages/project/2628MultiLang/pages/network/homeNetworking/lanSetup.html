@@ -1,0 +1,103 @@
+<div class="content_frame">
+<!--Unit Explain start-->
+<div class="explain"><div><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b><b class="r4"></b></div><div class="explain_text">The internal network and DHCP Server built in this device can be configured in this section.</div>
+<div> <b class="r4"></b><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></div></div>
+<!--Unit Explain End-->
+<div class="data_frame"><ul>
+<li class="set1">
+		 <div class="title">LAN IP Setup</div>
+               <div class="w_text">
+                  <ul>
+                     <li class="left_table">IP Address :</li>
+                     <li class="right_table">
+                        <input maxlength="15" size="15" name="ethIpAddress" onChange="setDhcpAddresses()" />
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Subnet Mask :</li>
+                     <li class="right_table">
+                        <input maxlength="15" size="15" name="ethSubnetMask" onChange='setDhcpAddresses()' />
+                     </li>
+                  </ul>
+               </div>
+            </li>
+          <li class="space"></li>
+            <li class="set1">
+			<div class="title">DHCP Server State</div>
+               <div class="w_text">
+                  <ul>
+                     <li class="left_table">DHCP :</li>
+                     <li class="right_table">
+                        <input name="enblDhcpSrv" type="radio" value="1" /> Enable
+                        <input name="enblDhcpSrv" type="radio"  value="0" /> Disable
+                        <input name="enblDhcpSrv" type="radio"  value="2" /> DHCP Relay </li>
+                  </ul>
+               </div>
+            </li>
+			<li class="space"></li>
+               <li class="set1">
+			    <div class="title">IP Addressing Values</div>
+                  <div class="w_text">
+                     <ul>
+                      <li class="left_table">Beginning IP Address  :</li>
+                      <li class="right_table"><input maxlength="15" size="15" name="dhcpEthStart" /></li>
+                     </ul>
+                     <ul>
+                        <li class="left_table">Ending IP Address  :</li>
+                        <li class="right_table">
+                           <input maxlength="15" size="15" name="dhcpEthEnd" onChange="changeEthStart(this.value)" />
+                        </li>
+                     </ul>
+                  </div>
+               </li>
+              <li class="space"></li>
+               <li class="set1">
+			     <div class="title">DHCP Server Lease Time</div>
+                  <div class="w_text">
+                     <input name="day" type="text" maxlength="3" size="10" />Days
+                     <input name="hour" type="text" maxlength="2" size="10" />Hours
+                     <input name="minute" type="text" maxlength="2" size="10" />Minutes                  </div>
+               </li>
+              <li class="space"></li>
+               <li class="set1">
+			   <div class="title">DHCP Relay Server Addresss</div>
+                  <div class="w_text">
+                     <ul>
+                        <li class="left_table">IP Address  :</li>
+                        <li class="right_table">
+                           <input maxlength="15" size="15" name="dhcpRelayServer" />
+                        </li>
+                     </ul>
+                  </div>
+               </li>
+               <li class="space"></li>
+               <li class="set1">
+			    <div class="title">DNS Values</div>
+                  <div class="w_text">
+                     <ul>
+                        <li class="left_table">DNS :</li>
+                        <li class="right_table">
+                           <input name="dnsType" type="radio" onclick="DNSTypeChange()" /> Dynamic
+                           <input name="dnsType" type="radio" onclick="DNSTypeChange()" /> Static</li>
+                     </ul>
+                     <ul>
+                        <li class="left_table">DNS Server 1  :</li>
+                        <li class="right_table">
+                           <input maxlength="15" size="15" name="dns_server_1" />
+                        </li>
+                     </ul>
+                     <ul>
+                        <li class="left_table">DNS Server 2  :</li>
+                        <li class="right_table">
+                           <input maxlength="15" size="15" name="dns_server_2" />
+                        </li>
+                     </ul>
+                  </div>
+               </li>
+            <li class="space"></li>
+            <li class="buttonframe"><div class="button_position"><input name="sysSubmit" value="Apply" type="button" />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+ <input name="Cancel" value="Cancel" type="button" /></div>
+            </li>
+         </ul>
+</div>
+      </div><br/><br/>

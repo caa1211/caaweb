@@ -1,0 +1,92 @@
+<div class="popup_frame" >
+<div class="data_frame2"><ul>
+ <li class="set1">
+   <div class="w_text"><ul> 
+                  <li class="left_table">Filter Name:</li>
+                  <li class="right_table"><input type='text' size="22" maxlength="16" name="fltName"></li>
+               </ul>
+			  <ul> 
+                  <li class="left_table">Select Device:</li>
+                  <li class="right_table">
+					<select name='srcDevice' id='srcDevice' size='1' ></select>
+				  </li>
+               </ul>
+			   <ul> 
+                  <li class="left_table">Source IP address:</li>
+                  <li class="right_table"><input type='text' size="22" name="srcAddr">&nbsp;[/prefix length]</li>
+               </ul>
+			   <ul> 
+                  <li class="left_table">Select Device:</li>
+                  <li class="right_table">
+					<select name='dstDevice' id='dstDevice' size='1' ></select>
+				  </li>
+               </ul>
+			   <ul>
+                  <li class="left_table">Destination IP address:</li>
+                  <li class="right_table"><input type='text' size="22" name="dstAddr">&nbsp;[/prefix length]</li>
+               </ul>
+			   <ul>
+                  <li class="left_table">Select Protocol:</li>
+                  <li class="right_table">
+					<select name='customPrtcl' id='customPrtcl' size='1'>
+				</select>
+				  </li>
+               </ul>
+			   <ul>	
+				<li class="left_table">Protocol:</li>
+				<li class="right_table">
+				<select name='protocol' id='protocol' size='1' onChange='protocolChange()'>
+					<option value='4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+					<option value='0'>TCP/UDP</option>
+					<option value='1'>TCP</option>
+					<option value='2'>UDP</option>
+					<option value='3'>ICMP</option>
+					</select></li>
+               </ul>
+			   <ul>
+                  <li class="left_table">Custom Source Port:</li>
+                  <li class="right_table"><input type='text' size="22" name="srcPort" disabled>&nbsp; (port or port:port)</li>
+               </ul>
+			   <ul>
+                  <li class="left_table">Custom Destination Port:</li>
+                  <li class="right_table"><input type='text' size="22" name="dstPort" disabled>&nbsp; (port or port:port)</li>
+               </ul>
+			   <ul>
+                  <li class="left_table">Policy:</li>
+                  <li class="right_table"><select name='policy' id='policy' size='1' onChange='policyChg()'>
+                        <option value='ACCEPT' selected>ACCEPT</option>
+                        <option value='DROP'>DROP</option>
+                        <option value='REJECT'>REJECT</option>
+                      </select></li>
+               </ul>
+			   <ul>
+                  <li class="left_table">Direction:</li>
+                  <li class="right_table"><select name='direction' id='direction' size='1'>
+                        <option value='INCOMING'>INCOMING</option>
+                        <option value='OUTGOING'>OUTGOING</option>
+                      </select></li>
+               </ul>
+			   <ul>
+                  <li class="left_table">Enable Rate Limit</li>
+                  <li class="right_table">
+				<input type='checkbox' name='enblLimit' id='enblLimit' onClick='limitCheck()'>
+                  </li>
+               </ul>
+			   <ul>
+                  <li class="left_table">&nbsp;</li>
+                  <li class="right_table">
+				<input type='textbox' name='rate' id='rate' size='5' maxlength='5' disabled>packet(s)&nbsp;per
+				<select name='limitType' id='limitType' disabled>
+					<option value='m' selected>Minute</option>
+					<option value='s'>Second</option>
+				</select> &nbsp;(1-512)
+                  </li>
+               </ul>
+			   <ul>               
+                  <li class="left_table">Scheduler Rules:</li>
+                  <li class="right_table"><select name='schedSel' id='schedSel' size='1'>
+			</select> &nbsp; <a href='#' >Add New Rule</a>
+			  </li>
+               </ul></div></li>
+</ul></div>
+</div>

@@ -1,0 +1,177 @@
+<div class="popup_frame" >
+<div class="data_frame2"><ul>
+<li class="set1">
+<div class="title">General </div>
+<div class="w_text"><input type="checkbox" name="CIFS_Serv_Active" onclick="doAccessChange('EnShare',this);" checked="checked"/> Active</div></li>
+<li class="space"></li>
+<li class="set1">
+<div class="title">SIP Account Selection </div>
+<div class="w_text">
+<ul>
+<li class="left_table">SIP Account Selection  : </li>
+<li class="right_table">
+<select id="sipSelect" >
+<option selected="selected" value="1">SIP 1</option>
+<option value="2">SIP 2</option>
+<option value="2">SIP 3</option>
+<option value="2">SIP 4</option>
+<option value="2">SIP 5</option>
+<option value="2">SIP 6</option>
+<option value="2">SIP 7</option>
+<option value="2">SIP 8</option>
+<option value="2">SIP 9</option>
+<option value="2">SIP 10</option>
+</select>
+</li></ul></div>
+</li>
+<li class="space"></li>
+<li class="set1">
+<div class="title">SIP Service Provider Association</div>
+<div class="w_text"><ul>
+<li class="left_table">SIP Account Associated with  : </li>
+<li class="right_table">
+<select name="select" >
+<option selected="selected" value="1">SIP Service Provider 1[Hinet]</option>
+<option value="2">SIP Service Provider 2[SeedNet]</option>
+</select>
+</li></ul></div>
+<div class="space"></div>
+<div class="title">General</div>
+<div class="w_text">
+  <ul>
+    <li class="left_table">SIP Account   :</li>
+    <li class="right_table">
+      <input name="ssid_state" id="radio" type="radio" value="enable" checked="checked" />
+      Enabled
+      <input name="ssid_state" id="radio2" type="radio" value="disable" />
+      Disabled </li>
+  </ul>
+<ul>
+<li class="left_table"><span class="tindent">SIP Account Number</span>  : </li>
+<li class="right_table"><input type="text" id="sipAccountNumber"  /></li>
+</ul></div>
+</li>
+<li class="space"></li>
+<li class="set1">
+<div class="title">Authentication</div>
+<div class="w_text"><ul>
+<li class="left_table">Username : </li>
+<li class="right_table"><input type="text" id="sipAccountNumber2"  /></li>
+</ul>
+<ul>
+<li class="left_table">Password : </li>
+<li class="right_table"><input type="password" id="sipAccountNumber3"/></li>
+</ul></div>
+</li>
+<li class="space"></li>
+<li class="set1">
+<div class="title">URL Type</div>
+<div class="w_text"><ul>
+<li class="left_table">URL Type : </li>
+<li class="right_table"><input type="text" id="sipAccountNumber22"/></li>
+</ul></div>
+</li>
+<li class="space"></li>
+<li class="set1">
+<div class="title">Voice Features</div>
+<div class="w_text"><ul>
+<li class="left_table">Primary Compression Type : </li>
+<li class="right_table">
+<select id="codecSelect1">
+<option value="G.729" selected="selected">G.729</option>
+<option value="G.711a">G.711a</option>
+<option value="G.711u">G.711u</option>
+<option value="G.726-16">G.726-16</option>
+<option value="G.726-24">G.726-24</option>
+<option value="G.726-32">G.726-32</option>
+<option value="G.726-40">G.726-40</option>
+</select>
+</li>
+</ul>
+<ul>
+<li class="left_table">Secondary Compression Type : </li>
+<li class="right_table">
+<select id="codecSelect2" >
+<option value="G.729">G.729</option>
+<option value="G.711a" selected="selected">G.711a</option>
+<option value="G.711u">G.711u</option>
+<option value="G.726-16">G.726-16</option>
+<option value="G.726-24">G.726-24</option>
+<option value="G.726-32">G.726-32</option>
+<option value="G.726-40">G.726-40</option>
+<option value="None">None </option>
+</select>
+</li></ul>
+<ul>
+<li class="left_table">Third Compression Type : </li>
+<li class="right_table">
+<select id="codecSelect3" >
+<option value="G.729">G.729</option>
+<option value="G.711a">G.711a</option>
+<option value="G.711u" selected="selected">G.711u</option>
+<option value="G.726-16">G.726-16</option>
+<option value="G.726-24">G.726-24</option>
+<option value="G.726-32">G.726-32</option>
+<option value="G.726-40">G.726-40</option>
+<option value="None">None </option>
+</select>
+</li></ul>
+<ul>
+<li class="left_table">Speaking Volume Control  : </li>
+<li class="right_table">
+<select id="speakingVolume" name="speakingVolume">
+<option value="0" selected="selected">Minimum</option>
+<option value="1">Middle</option>
+<option value="2">Maximun</option>
+</select>
+</li></ul>
+<ul>
+<li class="left_table">Listening Volume Control   : </li>
+<li class="right_table">
+<select id="listeningVolume" >
+<option value="0" selected="selected">Minimum</option>
+<option value="1">Middle</option>
+<option value="2">Maximun</option>
+</select></li>
+</ul></div>
+<div class="w_text" style="clear:both;"><input name="checkbox2"  type="checkbox" value="checkbox" /> Active G.168 (Echo Cancellation) </div>
+<div class="w_text"><input name="checkbox3"  type="checkbox" value="checkbox" checked="checked"/>  Active VAD(Voice Active Detector)</div>
+</li>
+<li class="space"></li>
+<li class="set1">
+<div class="title">Call Features</div>
+<div class="w_text"><input name="checkbox22"  type="checkbox" value="checkbox" checked="checked"/> Send Caller ID </div>
+<div class="w_text"><input name="checkbox23"  type="checkbox" value="checkbox" /> Active Call Transfer</div>
+<div class="w_text"><input name="checkbox24"  type="checkbox" value="checkbox" /> Active Call Waiting </div>
+</li>
+<li class="set1">
+<div class="w_text"><ul>
+<li class="left_table">Call Waiting Reject Timer  : </li>
+<li class="right_table"><input type="text" id="waitingRejectTimer" name="waitingRejectTimer" />
+<span >Second</span></li>
+</ul></div>
+</li>
+<li class="space"></li>
+<li class="set1">
+<div class="w_text">
+<ul>
+<li class="left_table"><input name="checkbox222"  type="checkbox" value="checkbox" checked="checked"/> Active Unconditional Forward </li>
+<li class="right_table">To Number : <input type="text" id="unconditionalNumber" name="unconditionalNumber" /></li>
+</ul>
+<ul>
+<li class="left_table"><input name="checkbox2222"  type="checkbox" value="checkbox" checked="checked"/> Active Busy Forward</li>
+<li class="right_table">To Number : <input type="text" id="unconditionalNumber2" name="unconditionalNumber2" /></li>
+</ul>
+<ul>
+<li class="left_table"><input name="checkbox2223"  type="checkbox" value="checkbox" checked="checked"/> Active No Answer Forward </li>
+<li class="right_table">To Number : <input type="text" id="unconditionalNumber3" name="unconditionalNumber3" /></li>
+</ul></div>
+</li>
+<li class="set1">
+<div class="w_text"><ul>
+<li class="left_table">No Answer Ring Count </li>
+<li class="right_table"><input id="noAnswerCount" name="noAnswerCount" type="text" size="10"/> <span>Time</span></li>
+</ul></div>
+</li>
+<li class="space"></li>
+</ul></div>

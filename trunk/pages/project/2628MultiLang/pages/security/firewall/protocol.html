@@ -1,0 +1,87 @@
+<script type="text/javascript">
+$(function(){
+     $('input[name="Fw_Add"]').click(function(){
+
+        var db1 = window.parent.$.zyUiDialog({
+            width: 500,
+            height:250,
+            title: 'Add New Protocol Entry'
+        });
+        var link = 'pages/security/firewall/protocol_add.html';
+        db1.load(link);
+        db1.dialog('open');
+       });
+       
+      $('#deleteBtn').click(function(){
+    
+        var db1 = window.parent.$.zyUiDialog({
+            width: 450,
+            height: 190,
+            title: 'Delete',
+            buttons: {
+                'OK': function(){ db1.dialog('close')}
+            }
+			
+        });
+		var link = 'pages/delete.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
+        db1.dialog('open');
+})});
+</script>
+<div class="content_frame" >
+<!--Unit Explain start-->
+<div class="explain">
+<div><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b><b class="r4"></b></div>
+<div class="explain_text">Each entry in the following table represents a or a set of custom protocol rules. It is a re-usable object and should be used in conjunction with ACL Rules in Access Control.</div>
+<div><b class="r4"></b><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></div></div>
+<!--Unit Explain End-->
+<div class="data_frame"><ul>
+<li class="set1">
+  <div class="w_table"><input name="Fw_Add" id="Fw_Add" type="button" value="Add new protocol entry" /></div>
+</li>
+<li class="set1"> 
+<div class="w_table">
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_frame">
+    <tr>
+      <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+
+			<td><table width="100%" cellpadding="0" cellspacing="0" id='tbl'>
+			<tr >
+			<td width="35%" valign="top" class="top_font"><center>Name</center></td>
+			<td width="35%" valign="top" class="top_font"><center>Ports/Protocol Number</center></td>
+			<td width="8%" class="top_font"><center>
+			  Modify
+			</center></td>
+			</tr>
+             <tr align="center">
+                  <td class="table_font">1</td>
+                  <td class="table_font">Enabled</td>
+                  <td class="table_font"><div class="i_modify"><ul><li ><a href="#"  id='deleteBtn' class="delete" title="Delete"></a></li></ul></div></td>
+              </tr>
+
+              </table></td>
+            </tr>
+          </table></td>
+        </tr>
+      </table></td>
+    </tr>
+  </table>
+</div><!--Table define end-->
+</li>
+<li class="space"></li>
+<!--level 1 end-->
+<!--Note define start-->
+<li class="space"> </li>
+<!--Note define start-->
+<li class="noteframe"> <div class="w_text"><span class="i_note">Note:</span></div>
+<div class="note_text">If a protocol rule is removed, related ACL rules will also be removed.</div></li>
+<!--Note define end-->
+<li class="space"> </li>
+</ul></div>
+<!--Set area end-->
+</div><br /><br />

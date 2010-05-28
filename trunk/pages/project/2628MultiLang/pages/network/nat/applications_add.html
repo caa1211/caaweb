@@ -1,0 +1,42 @@
+<div class="popup_frame" >
+ <div class="data_frame2"><ul>
+            <li class="set1">
+               <div class="w_text">
+                  <ul>
+                     <li class="left_table">WAN Interface :</li>
+                     <li class="right_table">
+                        <select name='dstWanIf'></select>
+                        </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Server IP Address :</li>
+                     <li class="right_table">
+                        <input name="srvAddr" id="srvAddr" size="15" maxlength="15" type="text" />
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Application Category  :</li>
+                     <li class="right_table">
+                        <select name="Category" id="Category" onChange="caSelect()">	
+                              <option value="-1">All </option>
+                              <option value="0" >Games </option>
+                              <option value="1" >Game Consoles </option>
+                              <option value="2" >Audio/Video </option>
+                              <option value="3" >Applications </option>
+                              <option value="4" >VPN </option>
+                              <option value="5" >Servers </option>
+                         </select>
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Application Forwarded  :</li>
+                     <li class="right_table"><div class="w_table">
+                        <select name="Applications" id="Applications" onChange="appSelect()">
+                        </select>
+                        <input name="add" value="View Rule" type="button" onClick="viewRule()"></div>
+                     </li>
+                  </ul>
+               </div>
+            </li>
+         </ul></div>
+      </div>

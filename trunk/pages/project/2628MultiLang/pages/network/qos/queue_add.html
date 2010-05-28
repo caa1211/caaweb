@@ -1,0 +1,49 @@
+<div class="popup_frame" >
+<div class="data_frame2"><ul>
+<li class="set1">
+  <div class="w_text">
+  <ul>
+    <li class="left_table"><input type="checkbox" name='qosqueueEnable' id='qosqueueEnable' size="1" > Active</li>
+    <li class="right_table">&nbsp;</li>
+  </ul>
+  <ul>
+    <li class="left_table">Name  :</li>
+    <li class="right_table"><input type='text' size="22" name="queueName" id="queueName"></li>
+  </ul>
+  <ul>
+    <li class="left_table">Interface  :</li>
+    <li class="right_table">
+      <select id="queueintf" name="queueintf">
+        <option value="0">&nbsp;</option>
+  	</select>
+   </li>
+  </ul>
+  <ul>
+    <li class="left_table">Priority  :</li>
+     <li class="right_table">
+      <select id="precedence" name="precedence">
+      </select>
+   </li>
+  </ul>
+  <ul>
+    <li class="left_table">Weight  :</li>
+     <li class="right_table">
+      <select id="weight" name="weight"></select>
+   </li>
+  </ul>
+  <ul>
+    <li class="left_table">Buffer Management  :</li>
+     <li class="right_table">
+      <select name="dropAlgrm" id="dropAlgrm" size="1">
+        <option value='DT'>Drop Tail (DT)</option>
+      </select>
+   </li>
+  </ul>
+  <ul>
+    <li class="left_table">Rate Limit  :</li>
+    <li class="right_table"><input type='text' size="22" maxlength="17" id = "shapRate" name="shapRate">&nbsp;(kbps)</li>
+  </ul>
+</div>
+</li>
+</ul></div>
+</div>

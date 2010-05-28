@@ -1,0 +1,30 @@
+/*@import url("reset.css");*/
+/* Lan----------------------------------*/ 
+#vd2812 .vdFrame{position:relative;width:480px;height:450px;margin:0 auto;color:#FFFFFF;background: url(../images/i_vd.gif)  no-repeat;}
+#vd2812 .lanFrame{ position:absolute; top:231px; left:198px;width:155px; height:28px;}
+#vd2812 .lanFrame ul li{float:right;display:block;margin-top:11px;text-align:center;width:37px;height:29px;font-size:6px;line-height:15px;position:relative;margin-right: -2px;}
+#vd2812 .lanname{ position:absolute; width:440px; height:25px; line-height:25px; top:307px; right:31px;}
+#vd2812 .lanname ul li{ float:right; display:block;}
+#vd2812 .lanname ul li.usbname{ margin-right:5px;}
+#vd2812 .lanname ul li.dslname{ margin-right:10px;}
+#vd2812 .lanname ul li.lannamearea{ margin-left:2px;}
+#vd2812 .lanname ul li.wanname{ margin-left:3px;}
+#vd2812 .lanname ul li.wifiSignalname{ margin-left:64px;}
+#vd2812 .lan_on{background:url(../images/earthnet.gif) no-repeat; display:block; width:37px; height:29px; }
+#vd2812 .wifiSignal_off{ width:40px; height:38px; position:absolute; right:0px; top:25px;}
+#vd2812 .wifiSignal_on{ background:url(../images/i_wifi_on.gif) no-repeat; width:40px; height:38px; position:absolute;  right:51px; top:-4px;}
+#vd2812 .wan_on{ background:url(../images/wan.gif); width:37px; height:29px; position:absolute; right:89px; top:242px;}
+#vd2812 .dslline_on{ background:url(../images/wan.gif); width:37px; height:29px; position:absolute; left:142px; top:242px;}
+/* Traffic for WAN---------------------------------*/
+#vd2812 .sent{ display:block; font-weight:bold; top:130px; left:60px; width:200px; margin-left:15px; overflow:hidden; text-align:right;}
+html* #vd2812 .sent{display:block; font-weight:bold; top:130px; left:60px; width:200px; margin-left:15px;word-break:break-all;}
+#vd2812 .sent span{ display:block;}
+#vd2812 .received{display:block;font-weight:bold; top:130px; right:40px; width:200px;overflow:hidden;}
+html* #vd2812 .received{display:block;font-weight:bold; top:130px; right:40px; width:200px; word-break:break-all;}
+#vd2812 .received span{ display:block;}
+#vd2812 .nat_1{position:relative; background:url(../images/network/i_router.gif); height:90px; width:131px; margin-left:10px; margin-right:20px; }
+#vd2812 .nat_1 span{ position:absolute;background:url(../images/network/i_internet.gif) no-repeat;;width:57px;height:55px; left:90px; top:30px;}
+#vd2812 .usb1_on{background:url(../images/usb.gif); width:17px; height:30px; position:absolute; left:187px; top:242px;}
+#vd2812 .usb2_on{background:url(../images/usb.gif); width:17px; height:30px; position:absolute; left:12px; top:110px;}
+#vd2812 .phone1_on{background:url(../images/i_phone.gif); width:25px; height:28px; position:absolute; left:402px; top:243px;}
+#vd2812 .phone2_on{background:url(../images/i_phone.gif); width:25px; height:28px; position:absolute; left:426px; top:243px;}

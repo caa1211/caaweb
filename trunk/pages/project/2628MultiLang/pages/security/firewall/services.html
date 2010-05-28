@@ -1,0 +1,142 @@
+<script type="text/javascript" src="../../js/jquery.text-overflow.js"></script>
+<script type="text/javascript">
+$(function(){
+$('.textOverflow').each(function(){ $(this).attr('title', $(this).text());} );    
+$('.textOverflow').ellipsis(true); 
+});
+$(function(){
+    $('#editBtn').click(function(){
+    
+        var db1 = window.parent.$.zyUiDialog({
+            width: 770,
+            height: 430,
+            title: 'Edit sample'
+        });
+		var link = 'pages/template/tabPages/edit.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
+        db1.dialog('open');
+    });
+    
+    $('#deleteBtn').click(function(){
+    
+        var db1 = window.parent.$.zyUiDialog({
+            width: 450,
+            height: 190,
+            title: 'Delete sample',
+            buttons: {
+                'OK': function(){ db1.dialog('close')}
+            }
+			
+        });
+		var link = 'pages/delete.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
+        db1.dialog('open');
+    });
+	 $('#addnewshareBtn').click(function(){
+    
+       var db1 = window.parent.$.zyUiDialog({
+            width: 770,
+            height: 305,
+            title: 'Add new share sample'
+        });
+		var link = 'pages/template/tabPages/add.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
+        db1.dialog('open');
+    });
+});
+ </script>
+<div class="content_frame" >
+<!--Unit Explain start-->
+<div class="explain">
+<div><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b><b class="r4"></b></div>
+<div class="explain_text">Services..</div>
+<div><b class="r4"></b><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></div></div>
+<!--Unit Explain End-->
+<!--Set area start-->
+<div class="data_frame"><ul>
+<div class="w_text">
+  <ul>
+    <li class="left_table">LAN-to-WAN Services 
+          Blocking   :</li>
+    <li class="right_table">
+      <input  id="radio" type="radio" value="enable" checked="checked" />
+      Enable
+      <input  id="radio2" type="radio" value="disable" />
+      Disable (settings are invalid when disabled)</li>
+  </ul>
+</div>
+<li class="set1"><div class="title"> ISDN Phone </div></li>
+<li class="set2">
+<div class="w_table">
+<table width="100%" border="0" cellpadding="0" cellspacing="2" >
+                <tr >
+                  <td valign="top" class="title3">Assign default SIP Account</td>
+                  <td valign="top" class="title3">&nbsp;</td>
+                  <td valign="top" class="title3">Blocked Services</td>
+                </tr>
+                <tr >
+                  <td valign="top" ><select size="10" >
+                      <option  selected="selected">Custom Port...</option>
+                      <option  value="1">FTP(TCP:20,21)</option>
+                      <option  value="2">HTTP(TCP:80)</option>
+                      <option   value="3">PING(ICMP:0)</option>
+                      <option   value="4">TELNET(TCP:23)</option>
+                      <option   value="5">TFTP(UDP:69)</option>
+                      <option  value="6">SSH(TCP:22)</option>
+                  </select></td>
+                  <td valign="top" ><input type="button" name="FWRCfg_SrcAdd" value="Add &gt;&gt;" onclick="SrcAddRule(this.form)" />
+                  <br />
+                  <br />
+                  <input type="button" name="FWRCfg_ServiceDelete" value="Delete"  onclick="ServiceRemove(this.form)" /></td>
+                  <td valign="top" ><select size="10" 
+                   name="FwServices_ServiceDest">
+                    <option  value="1">UDP(666~666)</option>
+                  </select></td>
+                </tr>
+          </table>
+</div></li>
+<div class="w_text">Select "Custom Port", you can give new port range for blocking</div>
+<div class="w_text"><TABLE cellSpacing=0 cellPadding=0 width="100%" 
+border=0>
+                          <TBODY>
+                          <TR>
+                            <TD colSpan=2>&nbsp;</TD></TR>
+                          <TR>
+                            <TD width="25%">Type&nbsp;&nbsp;<SELECT 
+                              onchange=this.form.FWPortStart.focus(); size=1 
+                              name=FWServiceType> <OPTION value=1 
+                                selected>TCP<OPTION value=2>UDP<OPTION 
+                                value=0>TCP and UDP</OPTION></SELECT> </TD>
+                            <TD width="75%">Port Number&nbsp;&nbsp; <INPUT 
+                              maxLength=5 onchange=chkPort(this.value); size=5 
+                              name=FWPortStart> &nbsp;~&nbsp; <INPUT maxLength=5 
+                              onchange=chkPort(this.value); size=5 
+                              name=FWPortEnd> </TD></TR></TBODY></TABLE></div>
+							  <li class="space"> </li>
+<div class="w_text">
+  <input style="WIDTH: 60pt" onclick="ButtonClick(1)" type="submit" value=" Add " name="FWServices_Add" />
+  <input style="WIDTH: 60pt" onclick="ButtonClick(2)" type="submit" value=" Delete " name="FWServices_Del" />
+  <input style="WIDTH: 60pt" onclick="ButtonClick(3)" type="submit" value=" Clear All " name="FWServices_Clear" />
+</div>
+<!--Note define start-->
+<li class="space"> </li>
+<!--Button define start-->
+<li class="buttonframe">
+  <div class="button_position">
+    <input name="sysSubmit" value="Apply" type="submit" />
+    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+    <input name="Cancel" value="Cancel" type="reset" />
+  </div>
+</li>
+<!--Button define end-->
+</ul>
+</div>
+<!--Set area end-->
+</div>
+<br/><br/>

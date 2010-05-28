@@ -1,0 +1,155 @@
+<div class="popup_frame" >
+<!--Unit Explain start-->
+<!--Unit Explain End-->
+<!--Set area start-->
+<div class="data_frame2"><ul>
+<li class="set1">
+  <li class="set1">
+<div class="title">VPN - IKE - Advanced Setup</div>
+<div class="w_text">
+                  <ul>
+                     <li class="left_table">Protocol : </li>
+                     <li class="right_table">
+                       <input name="VPN_AdvIKE_Protocol" size="3" maxlength="3" value="0" onkeypress="chk_num(event)" type="text" />
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Enable Replay Detection : </li>
+                     <li class="right_table">
+                       <select name="VPN_AdvIKE_ERD" size="1" rpgetrtr="VPN_AdvIKE_ERDGet" rpputtype="Function" rpputptr="VPN_AdvIKE_ERDPut">
+                         <option value="00000000" selected="selected">NO </option>
+                         <option value="00000001">YES </option>
+                       </select>
+                     </li>
+                  </ul>
+                  <ul><li class="left_table">Local Start Port :</li>
+                     <li class="right_table">
+                       <input name="VPN_AdvIKE_LocalPortStart" size="5" maxlength="5" value="0" onkeypress="chk_num(event)" type="text" />
+                       End
+                       <input name="VPN_AdvIKE_LocalPortEnd" size="5" maxlength="5" value="0" onkeypress="chk_num(event)" type="text" />
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Remote Start Port :</li>
+                     <li class="right_table">
+                       <input name="VPN_AdvIKE_RemPortStart" size="5" maxlength="5" value="0" onkeypress="chk_num(event)" type="text" />
+                       End
+                       <input name="VPN_AdvIKE_RemPortEnd" size="5" maxlength="5" value="0" onkeypress="chk_num(event)" type="text" />
+                     </li>
+                  </ul>
+        </div>
+  <li class="space"></li>
+			<li class="set1">
+<div class="title">Phase1</div>
+<div class="w_text">
+                  <ul>
+                     <li class="left_table">Negotiation Mode :</li>
+                     <li class="right_table">
+                       <select name="VPN_P1_NM" size="1" rpgetrtr="VPN_P1_NMGet" rpputtype="Function" rpputptr="VPN_P1_NMPut">
+                         <option value="00000000" selected="selected">Main </option>
+                         <option value="00000001">Aggressive </option>
+                       </select>
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Pre-Shared Key :</li>
+                     <li class="right_table">
+                       <input name="VPN_P1_PSK" size="31" maxlength="31" type="text" />
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Encryption Algorithm :</li>
+                     <li class="right_table">
+                       <select name="VPN_P1_EA" size="1" rpgetrtr="IPSec_P1_EAGet" rpputtype="Function" rpputptr="IPSec_P1_EAPut">
+                         <option value="00000000" selected="selected">DES </option>
+                         <option value="00000001">3DES </option>
+                         <option value="00000002">AES </option>
+                       </select>
+                     </li>
+                  </ul>
+				  <ul>
+                     <li class="left_table">Authentication Algorithm :</li>
+                     <li class="right_table">
+                       <select name="VPN_P1_AA" size="1">
+                         <option value="0" selected="selected">MD5</option>
+                         <option value="1">SHA1</option>
+                       </select>
+                     </li>
+                  </ul>
+				   <ul>
+                     <li class="left_table">SA Life Time (Seconds) :</li>
+                     <li class="right_table">
+                       <input name="VPN_P1_SAT" size="10" maxlength="10" value="28800" onkeypress="chk_num(event)" type="text" />
+                     </li>
+                  </ul>
+				  	   <ul>
+                     <li class="left_table">Key Group :</li>
+                     <li class="right_table">
+                       <select name="VPN_P1_KG" size="1">
+                         <option value="0" selected="selected">DH1</option>
+                         <option value="1">DH2</option>
+                       </select>
+                     </li>
+                  </ul>
+        </div>
+      </li>
+ <li class="space"></li>
+ <li class="set1">
+<div class="title">Phase2</div>
+<div class="w_text">
+                  <ul><li class="left_table">Active Protocol :</li>
+                     <li class="right_table">
+                       <select name="IPSec_P2_AP" size="1" onchange="IKE_ActPro(this.selectedIndex)">
+                         <option value="0" selected="selected">ESP</option>
+                         <option value="1">AH</option>
+                       </select>
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Encryption Algorithm :</li>
+                     <li class="right_table">
+                       <select name="IPSec_P2_EA" size="1" rpgetrtr="IPSec_P2_EAGet" rpputtype="Function" rpputptr="IPSec_P2_EAPut">
+                         <option value="00000000" selected="selected">DES </option>
+                         <option value="00000001">3DES </option>
+                         <option value="00000002">AES </option>
+                         <option value="00000003">NULL </option>
+                       </select>
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Authentication Algorithm :</li>
+                     <li class="right_table">
+                       <select name="IPSec_P2_AA" size="1">
+                         <option value="0">MD5</option>
+                         <option value="1" selected="selected">SHA1</option>
+                       </select>
+                     </li>
+                  </ul>
+				         <ul>
+                     <li class="left_table">SA Life Time (Seconds) :</li>
+                     <li class="right_table">
+                       <input name="IPSec_P2_SAT" size="10" maxlength="10" value="28800" onkeypress="chk_num(event)" type="text" />
+                     </li>
+                  </ul>
+				         <ul><li class="left_table">Encapsulation :</li>
+                     <li class="right_table">
+                       <select name="IPSec_P2_Encap" size="1" rpgetrtr="IPSec_P2_EncapGet" rpputtype="Function" rpputptr="IPSec_P2_EncapPut">
+                         <option value="00000000" selected="selected">Tunnel </option>
+                         <option value="00000001">Transport </option>
+                       </select>
+                     </li>
+                  </ul>
+				  <ul><li class="left_table">Perfect Forward Secrecy (PFS) :</li>
+                     <li class="right_table">
+                       <select name="IPSec_P2_PFS" size="1" rpgetrtr="IPSec_P2_PFSGet" rpputtype="Function" rpputptr="IPSec_P2_PFSPut">
+                         <option value="00000000" selected="selected">NONE </option>
+                         <option value="00000001">DH1 </option>
+                         <option value="00000002">DH2 </option>
+                       </select>
+                     </li>
+                  </ul>
+        </div>
+      </li>
+</ul></div>
+</div>
+<br/><br/>

@@ -1,0 +1,68 @@
+ <div class="popup_frame" >
+<div class="data_frame2"><ul>
+            <li class="set1">
+               <div class="w_text"><input type="checkbox" name="enable" /> Active</div>
+            </li>
+            <li class="set1">
+               <div class="w_text">
+                  <ul>
+                     <li class="left_table">Service Name :</li>
+                     <li class="right_table">
+                        <input name="srvName" id="srvName" size="20" maxlength="20" type="text" />
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">WAN Interface :</li>
+                     <li class="right_table">
+                        <select name='dstWanIf'></select>
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table"> Start Port :</li>
+                     <li class="right_table">
+                        <input name="eStart" id="eStart" size="12" maxlength="12" type="text" onblur="clickEPS()"/>
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">End Port :</li>
+                     <li class="right_table">
+                        <input name="eEnd" id="eEnd" size="12" maxlength="12" type="text" onblur="clickEPE()"/>
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Translation Start Port :</li>
+                     <li class="right_table">
+                        <input name="iStart" id="iStart" size="12" maxlength="12" type="text" onChange="changeIPS()" onblur="clickIPS()"/>
+</li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Translation End Port :</li>
+                     <li class="right_table">
+                        <input name="iEnd" id="iEnd" size="12" maxlength="12" type="text" />
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Server IP Address :</li>
+                     <li class="right_table">
+                        <input name="srvAddr" id="srvAddr" size="15" maxlength="15" type="text" />
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Protocol :</li>
+                     <li class="right_table">
+                        <select name="proto" size="1" tabindex="1">
+                              <option value="1" selected>TCP</option>
+                              <option value="2">UDP</option>
+                              <option value="3">TCP/UDP</option>
+                        </select>
+                     </li>
+                  </ul>
+               </div>
+            </li>
+			<li class="space"> </li>
+<!--Note define start-->
+<li class="noteframe"> <div class="w_text"><span class="i_note">Note:</span></div>
+<div class="note_text">&nbsp;&nbsp;If Start Port and End Port configured to the same port, the input text of Translation Start Port can be configurable, and when user configure this value to different port number, its means cofigure for Port Translation(one to one mapping) </div>
+</li> <li class="space"> </li>  
+         </ul></div>
+      </div>

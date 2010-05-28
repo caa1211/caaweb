@@ -1,0 +1,69 @@
+ <div class="popup_frame" >
+<div class="data_frame2"><ul>
+            <li class="set1">
+               <div class="w_text">
+                  <input type="checkbox" name="enable" /> Active
+               </div>
+            </li>
+            <li class="set1">
+               <div class="w_text">
+                  <ul>
+                     <li class="left_table">Service Name :</li>
+                     <li class="right_table">
+                        <input name="appName" id="appName" size="20" maxlength="20" type="text" />
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">WAN Interface :</li>
+                     <li class="right_table">
+                        <select name='dstWanIf'></select>
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Trigger Start Port :</li>
+                     <li class="right_table">
+                        <input name="tStart" id="tStart" size="12" maxlength="12" type="text" onblur="clickEPS()"/>
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Trigger End Port :</li>
+                     <li class="right_table">
+                        <input name="tEnd" id="tEnd" size="12" maxlength="12" type="text" onblur="clickEPE()"/>
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Trigger Protocol :</li>
+                     <li class="right_table">
+                        <select name="tProto" size="1" tabindex="1">
+                              <option value="1" selected>TCP</option>
+                              <option value="2">UDP</option>
+                              <option value="3">TCP/UDP</option>
+                        </select>
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Open Start Port :</li>
+                     <li class="right_table">
+                        <input name="oStart" id="oStart" size="12" maxlength="12" type="text" onChange="changeIPS()" onblur="clickIPS()"/>
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Open End Port :</li>
+                     <li class="right_table">
+                        <input name="oEnd" id="oEnd" size="12" maxlength="12" type="text" />
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Open Protocol :</li>
+                     <li class="right_table">
+                        <select name="oProto" size="1" tabindex="1">
+                              <option value="1" selected>TCP</option>
+                              <option value="2">UDP</option>
+                              <option value="3">TCP/UDP</option>
+                        </select>
+                     </li>
+                  </ul>
+               </div>
+            </li>
+         </ul></div>
+      </div>

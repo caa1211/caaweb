@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Physical line in not properly connected</title>
+<link href="../css/brick.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="../js/jquery.simplemodal-1.3.min.js"></script>
+<script type="text/javascript" src="../js/zyMask.js"></script>		
+<script type="text/javascript">
+
+   $.openLoadingMask = function(){ 
+  
+            var content;
+            var contentSize;
+            
+            content = '<div class="wait" ><table width="100%" border="0" cellspacing="3" cellpadding="2" ><tr><td align="center">&nbsp;</td><td>&nbsp;</td></tr><tr><td width="3%" align="right" ><img src="../images/loading.gif"  style="margin-right:10px;" /></td><td width="69%" class="w_red">Please wait ...</td></tr><tr><td colspan="2">&nbsp;</td></tr><tr><td colspan="2" class="white_12" >Please wait while the router is recovering the connection.</td></tr><tr><td colspan="2" class="white_12" >&nbsp;</td></tr></table></div>';
+            contentSize = [386, 182];
+			
+               $.zyMask(content, contentSize);
+        };
+		
+		$.closeLoadingMask = function(){
+             $.closezyMask();
+        };
+		
+		
+		
+	$(function(){
+				$('#BackupBtn').click(function(){
+				   $.openLoadingMask();
+				});
+	 });
+	
+	
+    </script>
+</head>
+
+<body>
+<div id="wrapper2">
+<div id="popup_win3">
+<ul>
+<li class="popup_left2"></li>
+<li class="popup_center2">
+<div id="popup_content2">
+<ul>
+<li class="popup_title4">Physical line in not properly connected</li>
+<li>
+  <div style="position:absolute; height:235px; z-index:3000; left: 40px; top:70px; width:620px; overflow-x:hidden;overflow-y:auto; padding-right:20px;">
+    <ul>
+	<li class="popup_word3">Connection error occurred. The following information might help you resolve the error. </li>
+      <li class="space"></li>
+      <li class="popup_word3">
+<div class="w_text blod"><img src="../images/i_accept_on.gif" /> Physical Connection</div>
+<div class="w_text blod"><img src="../images/i_accept_on.gif" /> Internet Connection</div>
+<div class="w_text blod"><img src="../images/i_block_on.gif" width="10" height="10" /> DNS</div>
+<div class="step1">
+  <div class="w_text"> Click <span class="blod">Re-connect</span> to connect  to DNS servers again.</div>
+  <div class="w_text" style="text-align:right;"><input name="sysSubmit"  value="Reconnect" type="submit" id='BackupBtn'/>
+  </div>
+</div>
+  </li>
+    </ul>
+  </div></li>
+</ul>
+</div>
+
+</li>
+<li class="popup_right2"></li>
+</ul>
+</div>
+<div id="popup3"></div>
+</div>
+
+
+</body>
+</html>

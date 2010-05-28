@@ -1,0 +1,89 @@
+<script type="text/javascript">
+$(function(){
+    $('#editBtn').click(function(){
+        var db1 = window.parent.$.zyUiDialog({
+            width: 770,
+            height: 430,
+            title: 'More AP Edit'
+        });
+		var link = 'pages/network/wireless/wlan_moreap_edit.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
+        db1.dialog('open');
+    });
+    
+    $('#deleteBtn').click(function(){
+    
+        var db1 = window.parent.$.zyUiDialog({
+            width: 450,
+            height: 190,
+			multiLingo: true,
+            title: $lingoObj.getDictionary()['Delete'],
+            buttons: {
+                'OK': function(){ db1.dialog('close')}
+            }
+        });
+		var link = 'pages/delete.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link, function(){  $(this).parent('.ui-dialog').find('.ui-dialog-buttonpane button').attr('lingo','auto'); });
+        db1.dialog('open');
+    });
+	
+	
+	$('button#test').click(function(){
+	$('.content_frame').append('<div lingo="Modify">'+$lingoObj.getDictionary()['Modify']+'</div>')
+	
+	})
+});
+
+ </script>
+      <div class="content_frame">
+<!--Unit Explain start-->
+         <div class="explain"> <div><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b> <b class="r4"></b> </div>
+            <div class="explain_text">This device enables up to 4 wireless networks to work at the same time. Assign a name and a security level (if needed) to start the 2nd, 3rd, and 4th wireless network services.</div><div><b class="r4"></b><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b> </div> </div>
+<!--Unit Explain End-->
+         <div class="data_frame"><ul>
+            <li class="set1">
+			<div class="w_table">
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_frame">
+    <tr>
+      <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td><table width="100%" cellpadding="0" cellspacing="0" >
+                <tr align="center">
+                  <td width="5%"class="top_font">#</td>
+                  <td class="top_font">Status</td>
+                  <td class="top_font">SSID</td>
+                  <td class="top_font">Security</td>
+                  <td lang='L_modify' width="60" class="top_font" style="border-right:0px;" lingo='auto'>Modify</td>
+                </tr>
+                <tr align="center">
+                  <td class="table_font">1</td>
+                  <td class="table_font"><img src="../../images/i_active_off.gif" width="18" height="18" /></td>
+                  <td class="table_font">&nbsp;</td>
+                  <td class="table_font">&nbsp;</td>
+                  <td class="table_font"><div class="i_modify"><ul><li><a href="#" class="edit" id='editBtn' title="Edit"></a></li><li ><a href="#"  id='deleteBtn' class="delete" title="Delete"></a></li></ul></div></td>
+                  </tr>
+              </table></td>
+            </tr>
+          </table></td>
+        </tr>
+      </table></td>
+    </tr>
+  </table>
+</div> 
+            </li>
+            <li class="space"></li>
+            <li class="buttonframe">
+               <div class="button_position">
+                  <br />
+               </div>
+            </li>
+         </ul></div>
+      </div><br/><br/>
+<button id='test' lingo='test' > test </button>
+
