@@ -209,7 +209,9 @@ var updateViewStatus = function(view){
         case 'mapView':
 
         btnL.parent().addClass('disable');
-        $('#naviRText').html($lingoObj.getDictionary()['Status']); 
+        $('#naviRText').attr('lingo', 'auto').html('Status'); 
+		$lingoObj.refreshLingo($('#naviRText'));
+
         modifyNetworkmapframeH();
 		
 		$('.viewModeHide, #viewModeicon').show();
@@ -220,9 +222,13 @@ var updateViewStatus = function(view){
         btnR.parent().removeClass('disable');
         btnL.parent().removeClass('disable');
 		
-        $('#naviRText').html('Virtual device'); 
-		$('#naviLText').html($lingoObj.getDictionary()['Network Map']); 
-
+        $('#naviRText').attr('lingo', 'auto').html('Virtual device');
+		$lingoObj.refreshLingo($('#naviRText'));
+	
+		$('#naviLText').attr('lingo', 'auto').html('Network Map'); 
+        $lingoObj.refreshLingo($('#naviLText'));
+		
+		
         modifyNetworkmapframeH();
 		
 		$('.viewModeHide, #viewModeicon').hide();
@@ -231,7 +237,9 @@ var updateViewStatus = function(view){
         case 'VDView':
 
         btnR.parent().addClass('disable');
-        $('#naviLText').html($lingoObj.getDictionary()['Status']); 
+        $('#naviLText').attr('lingo', 'auto').html('Status'); 
+		$lingoObj.refreshLingo($('#naviLText'));
+		
         modifyNetworkmapframeH();
         break;
         default:

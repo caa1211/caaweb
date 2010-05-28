@@ -36,7 +36,7 @@
 	  var dictionary;
 	  this.getLingo = function(){return CLingo;};
 	  this.getDictionary =function(){return dictionary;};
-	  this.refreshLingo =function($obj){updateDomLang($obj);};
+	  this.refreshLingo =function($obj){ var $p = $obj.parent(); $p.find('[lngType]').removeAttr('lngType');  updateDomLang($p);};
 
 	  function updateDomLang_forTitle($targetObj)
 	   {
@@ -68,6 +68,7 @@
 	   }
 	   
 	  function updateDomLang($targetObj){
+	
 	         var lAttr = settings.lingoAttr;
              $('*['+  lAttr +']', $targetObj).each(function(){
 
