@@ -9,7 +9,7 @@
  *
  * $Date: 2010-05-28 $
  * $Rev: 001 $
- * add refreshLingo method
+ * 
  */
 
 ;
@@ -30,15 +30,14 @@
        }
        
       var settings = $.extend(defaultSetting , settings);
-	 
+	  this.getLingo = function(){return CLingo;};
 	  var CLingo =settings.DLingo;
 	  var $LingoObj = this;
 	  var dictionary;
-	  this.getLingo = function(){return CLingo;};
-	  this.getDictionary =function(){return dictionary;};
-	  this.refreshLingo =function($obj){updateDomLang($obj);};
+	  this.getDictionary =function(){return dictionary;}
+	   var Pdictionary;
 
-	  function updateDomLang_forTitle($targetObj)
+	   function updateDomLang_forTitle($targetObj)
 	   {
 	     var lAttr = settings.lingoTitleAttr;
              $('*['+  lAttr +']', $targetObj).each(function(){
@@ -80,13 +79,24 @@
 				  var lngS = $(this).attr(lAttr); 
                   if(lngS =='auto')
 				   {
-				   $(this).attr(lAttr, text);
-				   lngS = text;
+				    var $this = $(this);
+					
+				   $.each(Pdictionary , function(i, d){
+				      if(d==text)
+					  {
+					  $this.attr(lAttr, i);
+					  lngS = i;
+					  }
+				   });
+				   
+				   if(lngS =='auto')
+                      return;
+
 				   }
 				   
 		       var lngT = $(this).attr('lngType');
 				  
-				  if (lngT!=CLingo )
+				if (lngT!=CLingo )
 				{
 				
 				var lingoText = dictionary[lngS];
@@ -126,6 +136,10 @@
 		  $.ajaxSetup({async: false});
        $.getJSON(src,function(data){
 	             callbackRes=1;
+				 if(dictionary!=undefined)
+				 Pdictionary = dictionary;
+				 else
+				  Pdictionary = data;
 	             dictionary = data;
             	 updateDomLang($body);
                 $body.unbind('ajaxComplete').unbind('ajaxError');
