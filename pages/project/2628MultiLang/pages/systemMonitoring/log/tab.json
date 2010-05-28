@@ -1,0 +1,11 @@
+
+  {
+         "tabTitle" : "Log",
+         "System Log": {"url":"../systemMonitoring/log/systemLog.html"  },
+         "Security Log": {"url":"../systemMonitoring/log/securityLog.html"  },
+         "Web Activity Log": {"url":"../systemMonitoring/log/webActivityLog.html"  },
+         "Phone Log": {"url":"../systemMonitoring/log/phoneLog.html"  },
+		 "VoIP Call History": {"url":"../systemMonitoring/log/voipCallHistory.html"  }
+  }
+
+    

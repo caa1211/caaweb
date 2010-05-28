@@ -1,0 +1,65 @@
+<div class="popup_frame" >
+<div class="data_frame2"><ul>
+<li class="set1">
+    <div class="w_text">
+		<ul>
+			<li class="left_table"> PC Name/IP/MAC   :</li>
+			<li class="right_table">
+				<select name="showhostName" onChange='pcChange(this.form.showhostName,this.form.pcMac)'>
+				<%ejGetOtherBig(hostlist)%>
+				<option value="0">User Defined</option>
+				</select>
+				<input type="text" name="pcMac" size="17" maxlength="17" disabled/> (00:XX:XX:XX:XX:XX)
+			</li>
+		</ul>
+		<ul>
+			<li class="left_table">Access Type  :</li>
+			<li class="right_table">
+				<input type="radio" checked="checked" value="0" name="Access_Type" onClick="activelist()"/>&nbsp;Block Web Site
+			</li>
+		</ul>
+		<ul>
+			<li class="left_table">&nbsp;</li>
+			<li class="right_table">
+				<input type="radio" value="1" name="Access_Type" onClick="activelist()"/>&nbsp;Allow Web Site
+			</li>
+		</ul>
+		<ul>
+			<li class="left_table">&nbsp;</li>
+			<li class="right_table">
+				<input type="radio" value="2" name="Access_Type" onClick="disablelist()" />
+				&nbsp;Block All
+			</li>
+		</ul>
+		<ul>
+			<li class="left_table">
+				Web Site  :
+			</li>
+			<li class="right_table"><div class="button_other">
+				<input type="text" name="webSite" size="31" maxlength="31"/>
+				<input name="addbut" id="addbut" type='button' onClick='addClick();' value='Add'>
+			</div></li>
+		</ul>
+		<ul>
+			<li class="left_table">&nbsp;</li>
+			<li class="right_table">
+				<select size="10" multiple="multiple" id="websiteList" style="width: 200px;" name="websiteList">
+				</select><div class="button_other">
+				<input name="rmbut" id="rmbut" type='button' onclick='remove()' value='remove'/></div>
+			</li>
+		</ul>
+		<ul>
+			<li class="left_table"> Scheduler Rules :
+			</li>
+			<li class="right_table">
+				<select name="scheduleName">
+				  <%ejGetOtherBig(ScheduleName)%>
+				</select>
+				&nbsp; <a href='#' onClick= "$('.ui-dialog-titlebar-close').trigger('click'); window.parent.document.activePage('advanced-schedulerRules');">Add New Rule</a>
+			</li>
+		</ul>
+	</div>
+</li>
+</ul>
+</div>
+</div>

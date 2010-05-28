@@ -1,0 +1,94 @@
+<script type="text/javascript">
+$(function(){
+    $('#editBtn').click(function(){
+        var db1 = window.parent.$.zyUiDialog({
+            width: 500,
+            height: 270,
+            title: 'Static Route Edit'
+        });
+		var link = 'pages/network/routing/static_add.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
+        db1.dialog('open');
+    });
+    $('#addnewshareBtn').click(function(){
+    
+       var db1 = window.parent.$.zyUiDialog({
+            width: 500,
+            height:270,
+            title: 'Add New Static Route'
+        });
+		var link = 'pages/network/routing/static_add.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
+        db1.dialog('open');
+    });
+	
+    $('#deleteBtn').click(function(){
+    
+        var db1 = window.parent.$.zyUiDialog({
+            width: 450,
+            height: 190,
+            title: 'Delete',
+            buttons: {
+                'OK': function(){ db1.dialog('close')}
+            }
+        });
+		var link = 'pages/delete.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
+        db1.dialog('open');
+    });
+});
+ </script>
+ <div class="content_frame"><div class="explain"> <div> <b class="r1"></b><b class="r2"></b> <b class="r3"></b><b class="r4"></b> <b class="r4"></b></div>
+<div class="explain_text">Static Routing describes routes through a network by fixed paths.</div><div><b class="r4"></b><b class="r4"></b><b class="r3"></b><b class="r2"></b> <b class="r1"></b></div></div>
+         <div class="data_frame"><ul>
+            <li class="set1">
+               <div class="w_table">
+                  <input type="button" name="sysAddUserBtn" value="Add new static route"id="addnewshareBtn" " />
+               </div>
+            </li>
+            <li class="set1">
+              <div class="w_table">
+  <!--Table define start-->
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_frame">
+    <tr>
+      <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td><table width="100%" cellpadding="0" cellspacing="0" >
+                <tr align="center">
+                  <td width="5%"class="top_font">#</td>
+                  <td class="top_font" width="10%">Status</td>
+                  <td class="top_font">MName</td>
+                  <td class="top_font">Destination IP</td>
+                  <td class="top_font">Gateway </td>
+                  <td class="top_font">Subnet Mask </td>
+                  <td width="60" class="top_font" style="border-right:0px;">Modify</td>
+                </tr>
+                <tr align="center">
+                  <td class="table_font">1</td>
+                  <td class="table_font"><img src="../../images/i_active_off.gif" width="18" height="18" /></td>
+                  <td class="table_font">--</td>
+                  <td class="table_font">--</td>
+                  <td class="table_font">--</td>
+                  <td class="table_font">--</td>
+                  <td class="table_font"><div class="i_modify"><ul><li><a href="#" class="edit" id='editBtn' title="Edit"></a></li><li ><a href="#"  id='deleteBtn' class="delete" title="Delete"></a></li></ul></div></td>
+                  </tr>
+                
+              </table></td>
+            </tr>
+          </table></td>
+        </tr>
+      </table></td>
+    </tr>
+  </table>
+</div>
+ </li>
+</ul>
+</div><br/><br/>

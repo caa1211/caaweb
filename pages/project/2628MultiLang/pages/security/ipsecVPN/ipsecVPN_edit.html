@@ -1,0 +1,242 @@
+<div class="popup_frame" >
+<!--Unit Explain start-->
+<!--Unit Explain End-->
+<!--Set area start-->
+<div class="data_frame2"><ul>
+<li class="set1">
+  <li class="set1">
+<div class="title">IPSec Setup</div>
+<div class="w_text" >
+      <input name="VPNRuleActive" type="checkbox" />
+      Active 
+      <input name="VPNRuleKeepAlive" type="checkbox" />
+      Keep Alive 
+      <input name="VPNRuleNatTraversal" type="checkbox" />
+      NAT Traversal
+</div>
+    <div class="w_text">
+                  <ul>
+                     <li class="left_table">RTS/CTS Threshold :</li>
+                     <li class="right_table">
+                       <input  size="31" maxlength="31" type="text" />
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">IPSec Key Mode :</li>
+                     <li class="right_table">
+                       <select name="VPNKeyMode" size="1" onchange="doIPSecChange(this.selectedIndex)" rpgetrtr="VPNKeyModeGet" rpputtype="Function" rpputptr="VPNKeyModePut">
+                         <option value="00000000" selected="selected">IKE </option>
+                         <option value="00000001">Manual </option>
+                       </select>
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Negotiation Mode :</li>
+                     <li class="right_table">
+                       <select  size="1" rpgetrtr="VPNNetgoModeGet" rpputtype="Function" rpputptr="VPNNetgoModePut">
+                         <option value="00000000" selected="selected">Main </option>
+                         <option value="00000001">Aggressive </option>
+                       </select>
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Encapsulation Mode :</li>
+                     <li class="right_table">
+                       <select name="VPNEncapMode" size="1" rpgetrtr="VPNEncapModeGet" rpputtype="Function" rpputptr="VPNEncapModePut">
+                         <option value="00000000" selected="selected">Tunnel </option>
+                         <option value="00000001">Transport </option>
+                       </select>
+                     </li>
+                  </ul>
+        </div>
+  <li class="space"></li>
+			<li class="set1">
+<div class="title">Local</div>
+<div class="w_text">
+                  <ul>
+                     <li class="left_table">Local Address Type :</li>
+                     <li class="right_table"><b>
+                       <select name="VPN_RemoteIPType" size="1" onChange="IPTypeChange(this.form,1);" rpgetrtr="VPN_RemoteIPTypeGet" rpputtype="Function" rpputptr="VPN_RemoteIPTypePut"><option value="00000000" selected="selected">Single
+</option><option value="00000001">Range
+</option><option value="00000002">Subnet
+</option></select>
+                     </b></li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">IP Address Start :</li>
+                     <li class="right_table">
+                       <input name="VPN_IKE_SrcAddrStart" size="15" maxlength="15" value="0.0.0.0" maclength="15" onblur="chkIP(this,0)" type="text" />
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">End / Subnet Mask :</li>
+                     <li class="right_table">
+                       <input name="VPN_IKE_SrcAddrEnd" size="15" maxlength="15" value="0.0.0.0" maclength="15" onblur="chkIP(this,0)" type="text" />
+                     </li>
+                  </ul>
+        </div>
+      </li>
+ <li class="space"></li>
+ <li class="set1">
+<div class="title">Remote</div>
+<div class="w_text">
+                  <ul>
+                     <li class="left_table">Remote Address Type :</li>
+                     <li class="right_table">
+                       <select name="VPN_RemoteIPType" size="1" onchange="IPTypeChange(this.form,1);" rpgetrtr="VPN_RemoteIPTypeGet" rpputtype="Function" rpputptr="VPN_RemoteIPTypePut">
+                         <option value="00000000" selected="selected">Single </option>
+                         <option value="00000001">Range </option>
+                         <option value="00000002">Subnet </option>
+                       </select>
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">IP Address Start :</li>
+                     <li class="right_table">
+                       <input name="VPN_IKE_DestAddrStart" size="15" maxlength="15" value="0.0.0.0" maclength="15" onblur="chkIP(this,0)" type="text" />
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">End / Subnet Mask :</li>
+                     <li class="right_table">
+                       <input name="VPN_IKE_DestAddrEnd" size="15" maxlength="15" value="0.0.0.0" maclength="15" onblur="chkIP(this,0)" type="text" />
+                     </li>
+                  </ul>
+        </div>
+      </li>
+ <li class="space"></li>
+ <li class="set1">
+<div class="title">Address Information</div>
+<div class="w_text">
+                  <ul>
+                     <li class="left_table">Local ID Type :</li>
+                     <li class="right_table">
+                       <select name="IPSec_IKE_LocalIDType" size="1" rpgetrtr="IPSec_IKE_LocalIDTypeGet" rpputtype="Function" rpputptr="IPSec_IKE_LocalIDTypePut">
+                         <option value="00000000" selected="selected">IP </option>
+                         <option value="00000001">DNS </option>
+                         <option value="00000002">E-mail </option>
+                       </select>
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Content :</li>
+                     <li class="right_table">
+                       <input name="IPSec_IKE_LocalIDContent" size="31" maxlength="31" onblur="chkIP(this,1)" type="text" />
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Local ID Type :</li>
+                     <li class="right_table">
+                       E-mail
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Content :</li>
+                     <li class="right_table">
+                       0019CB000001@auto.gen.cert
+                     </li>
+                  </ul>
+				        <ul>
+                     <li class="left_table">My IP Address :</li>
+                     <li class="right_table">
+                       <input name="VPN_IKE_MyIPAddr" size="15" maxlength="15" value="0.0.0.0" maclength="15" onblur="checkIPFormat(this)" type="text" />
+                     </li>
+                  </ul>
+				        <ul>
+                     <li class="left_table">Peer ID Type :</li>
+                     <li class="right_table">
+                       <select name="IPSec_IKE_PeerIDType" size="1" rpgetrtr="IPSec_IKE_PeerIDTypeGet" rpputtype="Function" rpputptr="IPSec_IKE_PeerIDTypePut">
+                         <option value="00000000" selected="selected">IP </option>
+                         <option value="00000001">DNS </option>
+                         <option value="00000002">E-mail </option>
+                       </select>
+                     </li>
+                  </ul>
+				        <ul>
+                     <li class="left_table">Content :</li>
+                     <li class="right_table">
+                       <input name="IPSec_IKE_PeerIDContent" size="31" maxlength="31" onblur="chkIP(this,2)" type="text" />
+                     </li>
+                  </ul>
+				         <ul>
+                     <li class="left_table">Peer ID Type :</li>
+                     <li class="right_table">
+                       <select disabled="disabled" name="IKE_Select_PeerIDType_Cert" size="1" onchange="doPeerIDTypeChange(this.selectedIndex);">
+                         <option value="00000000" selected="selected">IP </option>
+                         <option value="00000001">DNS </option>
+                         <option value="00000002">E-mail </option>
+                         <option value="00000003">Subject Name </option>
+                         <option value="00000004">Any </option>
+                       </select>
+                     </li>
+                  </ul>
+				         <ul>
+                     <li class="left_table">Content :</li>
+                     <li class="right_table">
+                       <input disabled="disabled" name="IPSec_IKE_Cert_PeerIDContent" size="30" maxlength="31" onBlur="chkIP(this,3)" type="text">
+                     </li>
+                  </ul>
+				         <ul>
+                     <li class="left_table">Secure Gateway Address :</li>
+                     <li class="right_table">
+                       <input name="VPN_IKE_SecGatewayAddr" size="30" maxlength="31" value="0.0.0.0" onchange="doSecurityGatewayIP();" type="text" />
+                     </li>
+                  </ul>
+        </div>
+      </li>
+ <li class="space"></li>
+ <li class="set1">
+<div class="title">Security Protocol</div>
+<div class="w_text">
+                  <ul>
+                     <li class="left_table">VPN Protocol :</li>
+                     <li class="right_table">
+                       <input  size="31" maxlength="31" type="text" />
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">
+                       <input name="IPSec_IKE_PreKey" value="0" checked="checked" onclick="IKE_PreClick(this.form);" type="radio" />
+                     Pre-Shared Key </li>
+                     <li class="right_table">
+                       <input name="VPN_IKE_ShareKey" size="31" maxlength="31" type="text" />
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">
+                       <input name="IPSec_IKE_PreKey" value="1" onclick="IKE_CertClick(this.form);" type="radio" />
+                     Certificate</li>
+                     <li class="right_table">
+                       <select disabled="disabled" name="Cert_Key" size="1" onChange="fnChange();"><option selected="selected">auto_generated_self_signed_cert
+</option></select><select name="Cert_Key_LocalIDType" size="1" style="display: none;"><option selected="selected">E-mail
+</option></select><select name="Cert_Key_LocalIDCont" size="1" style="display: none;"><option selected="selected">0019CB000001@auto.gen.cert
+</option></select>(See <a style="color: rgb(0, 0, 255); text-decoration: underline;" href="http://10.0.0.138/Cert_MyCert.html"> My Certificates</a>)
+
+                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">Encryption Algorithm :</li>
+                     <li class="right_table">
+                       <select name="VPNEncrypAlgm" size="1" rpgetrtr="VPNEncrypAlgmGet" rpputtype="Function" rpputptr="VPNEncrypAlgmPut">
+                         <option value="00000000" selected="selected">DES </option>
+                         <option value="00000001">3DES </option>
+                         <option value="00000002">AES </option>
+                         <option value="00000003">NULL </option>
+                       </select>
+                     </li>
+                  </ul>
+				  <ul>
+                     <li class="left_table">Authentication Algorithm :</li>
+                     <li class="right_table">
+                       <select name="VPNAuthAlgm" size="1" rpgetrtr="VPNAuthAlgmGet" rpputtype="Function" rpputptr="VPNAuthAlgmPut">
+                         <option value="00000000">MD5 </option>
+                         <option value="00000001" selected="selected">SHA1 </option>
+                       </select>
+                     </li>
+                  </ul>
+        </div>
+      </li>
+</ul></div>
+<!--Set area end-->
+</div>
+<br/><br/>

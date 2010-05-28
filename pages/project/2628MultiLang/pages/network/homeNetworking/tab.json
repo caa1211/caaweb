@@ -1,0 +1,13 @@
+
+  {
+         "tabTitle" : "Home Networking",
+         "LAN Setup": {"url":"../network/homeNetworking/lanSetup.html"  },
+         "Static DHCP": {"url":"../network/homeNetworking/staticDHCP.html"  },
+         "UPnP": {"url":"../network/homeNetworking/upnp.html"  },
+         "File Sharing": {"url":"../network/homeNetworking/fileSharing.html"  },
+         "Media Server": {"url":"../network/homeNetworking/mediaServer.html"  },
+         "Print Server": {"url":"../network/homeNetworking/printServer.html"  },
+         "IP Alias": {"url":"../network/homeNetworking/ipalias.html"  }
+  }
+
+    

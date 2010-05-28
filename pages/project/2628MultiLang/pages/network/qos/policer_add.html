@@ -1,0 +1,110 @@
+<div class="popup_frame" >
+    <div class="data_frame2">
+      <ul>
+        <li class="set1">
+		 <div class="title">Policer Setting</div>
+          <div class="w_text">
+            <ul>
+              <li class="left_table"><input type="checkbox" name="policerEnbl" id="policerEnbl" /> Active</li>
+              <li class="right_table">
+              </li>
+            </ul>
+            <ul>
+              <li class="left_table">Name  :</li>
+              <li class="right_table">
+                <input type="text" name="policerName" id="policerName" size="30">
+              </li>
+            </ul>
+            <ul>
+              <li class="left_table">Meter Type  :</li>
+              <li class="right_table">
+                <select name="meterType" id="meterType" SIZE="1">
+                  <option value="SimpleTokenBucket" selected>Simple Token Bucket</option>
+                </select>
+              </li>
+            </ul>
+            <ul>
+              <li class="left_table">Committed Rate :</li>
+              <li class="right_table">
+                <input type="text" name="cmitRate" id="cmitRate" size="30">&nbsp;(kbps)
+              </li>
+            </ul>
+            <ul>
+              <li class="left_table">Committed Burst Size :</li>
+              <li class="right_table">
+                <input type="text" name="cmitBurstSize" id="cmitBurstSize" size="30">&nbsp;(kbyte)
+              </li>
+            </ul>
+          </div>
+        </li>
+		<li class="space"></li>
+<li class="set1"> <div class="title">Regulated Classes Member Setting</div></li>
+<li class="set2"> 
+<div class="w_text"><table width="98%" border="0" cellpadding="0" cellspacing="2" >
+<tr >
+<td width="35%" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="365" class="title3">Available Class</td>
+</tr>
+</table></td>
+<td width="10%"  align="center"  ></td>
+<td width="35%"  ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="366" class="title3">Selected Class</td>
+</tr>
+</table></td>
+</tr>
+<tr >
+<td valign="top" ><ul>
+<div class="w_text3">
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_frame">
+<tr>
+<td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+<tr>
+<td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+<tr>
+<td>
+<table width="100%" cellpadding="0" cellspacing="0" class="table_frame" id='availableClass' >
+<tr align="center" >
+<td width="5%" class="top_font">#</td>
+<td class="top_font">Class Name</td></tr>
+</table></td></tr>
+</table></td></tr>
+</table></td></tr>
+</table>
+</div>
+</ul></td>
+<td  align="center" class="blod" >
+<input type='button' style="background:url(images/i_right_bn.gif) no-repeat; width:32px; height:27px;border:none; display:block; cursor:pointer;" >
+<input type='button' style="background:url(images/i_left_bn.gif) no-repeat; width:32px; height:27px;border:none; display:block; cursor:pointer;">
+</td>
+<td valign="top" ><ul>
+<div class="w_text3">
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_frame">
+<tr>
+<td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+<tr>
+<td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+<tr>
+<td>
+<table width="100%" cellpadding="0" cellspacing="0" class="table_frame" id='selectedClass'>
+<tr align="center" >
+<td width="5%" class="top_font">#</td>
+<td class="top_font">Class Name</td>
+</tr>
+</table></td>
+</tr>
+</table></td>
+</tr>
+</table></td>
+</tr>
+</table>
+</div>
+</ul>
+</td>
+</tr>
+</table></div>
+</li>
+</ul>
+</div>
+</div>

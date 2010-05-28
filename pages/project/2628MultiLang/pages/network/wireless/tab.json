@@ -1,0 +1,11 @@
+
+  {
+         "tabTitle" : "Wireless",
+         "General": {"url":"../network/wireless/general.html"  },
+         "More AP": {"url":"../network/wireless/moreAP.html"  },
+         "MAC Authentication": {"url":"../network/wireless/MACAuthentication.html"  },
+         "WPS": {"url":"../network/wireless/wps.html"  },
+         "WMM": {"url":"../network/wireless/wmm.html"  },
+         "Scheduling": {"url":"../network/wireless/scheduling.html"  },
+         "Others": {"url":"../network/wireless/others.html"  }
+  }

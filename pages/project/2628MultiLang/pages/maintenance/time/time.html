@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<html>
+<head>
+<link href="../../../css/brick.css" rel="stylesheet" type="text/css" />
+</head>
+<body >
+
+<div class="unit_title" >Time Setting</div>
+<ul class="tabline"></ul>
+<div class="content_frame" >
+<!--Unit Explain start-->
+<div class="explain">
+<div><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b><b class="r4"></b></div>
+<div class="explain_text">You can adjust the time of the device with the following settings.</div>
+<div><b class="r4"></b><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></div></div>
+<!--Unit Explain End-->
+<div class="data_frame"><ul>
+<li class="set1"> 
+<div class="title">Current Date/Time</div>
+	<div class="w_text">
+  		<ul>
+			<li class="left_table">System Time  : </li>
+			<li class="right_table">
+				<INPUT 
+                        id=mtenCurrent_Hour 
+                        onfocus="if(this.form.mtenTimeServer.selectedIndex == 0) this.form.mtenNew_Hour.focus();" 
+                        readOnly maxLength=2 size=2 value=7 
+                        name=mtenCurrent_Hour> <INPUT id=mtenCurrent_Min 
+                        onfocus="if(this.form.mtenTimeServer.selectedIndex == 0) this.form.mtenNew_Min.focus();" 
+                        readOnly maxLength=2 size=2 value=23 
+                        name=mtenCurrent_Min> <INPUT id=mtenCurrent_Sec 
+                        onfocus="if(this.form.mtenTimeServer.selectedIndex == 0) this.form.mtenNew_Sec.focus();" 
+                        readOnly maxLength=2 size=2 value=42 
+                        name=mtenCurrent_Sec></span>			
+			</li>
+  		</ul>
+		<ul>
+			<li class="left_table">SNTP (RFC-1769)  : </li>
+			<li class="right_table">
+				<INPUT 
+                        id=mtenCurrent_Hour 
+                        onfocus="if(this.form.mtenTimeServer.selectedIndex == 0) this.form.mtenNew_Hour.focus();" 
+                        readOnly maxLength=2 size=2 value=7 
+                        name=mtenCurrent_Hour> <INPUT id=mtenCurrent_Min 
+                        onfocus="if(this.form.mtenTimeServer.selectedIndex == 0) this.form.mtenNew_Min.focus();" 
+                        readOnly maxLength=2 size=2 value=23 
+                        name=mtenCurrent_Min> <INPUT id=mtenCurrent_Sec 
+                        onfocus="if(this.form.mtenTimeServer.selectedIndex == 0) this.form.mtenNew_Sec.focus();" 
+                        readOnly maxLength=2 size=2 value=42 
+                        name=mtenCurrent_Sec></span>			
+			</li>
+  		</ul>
+	</div>
+</li>
+<li class="space"> </li>
+<li class="set1">
+<div class="title">Time and Date Setup </div>
+<div class="w_text">Get from Time Server</div>
+<div class="w_text">
+		<ul>
+			<li class="left_table">Time Protocol  :</li>
+			<li class="right_table">SNTP (RFC-1769) 
+			</li>
+		</ul>
+		<ul>
+			<li class="left_table">Third NTP time server :</li>
+			<li class="right_table">
+			  <input maxlength="31" value="europe.pool.ntp.org"  name="mtenTimeServerAddr" />
+			</li>
+		</ul>
+		
+		<ul>
+			<li class="left_table">Fifth NTP time server :</li>
+			<li class="right_table">
+				<select name='ntpServerSel5' id="ntpServerSel5" size="1">
+                </select>
+				<input type='text' name='ntpServerOther5' maxlength="29">
+			</li>
+		</ul>
+	</div>
+</li>
+<li class="space"> </li>
+<li class="set1">
+<div class="title">Time Zone</div>
+	<div class="w_text">Time Zone: <SELECT size=1 
+                        name=mtenTimeZone> <OPTION value=12>(GMT-12:00) 
+                          Eniwetok, Kwajalein</OPTION> <OPTION 
+                          value=11>(GMT-11:00) Midway Island, Samoa</OPTION> 
+                          <OPTION value=10>(GMT-10:00) Hawaii</OPTION> <OPTION 
+                          value=9>(GMT-09:00) Alaska</OPTION> <OPTION 
+                          value=8>(GMT-08:00) Pacific Time (US &amp; Canada), 
+                          Tijuana</OPTION> <OPTION value=7>(GMT-07:00) Mountain 
+                          Time (US &amp; Canada)</OPTION> <OPTION 
+                          value=6>(GMT-06:00) Central Time (US &amp; Canada), 
+                          Mexico City, Saskatchewan</OPTION> <OPTION 
+                          value=5>(GMT-05:00) Eastern Time (US &amp; Canada), 
+                          Indiana(East)</OPTION> <OPTION value=4>(GMT-04:00) 
+                          Altlantic Time (Canada), Caracas, La Poz</OPTION> 
+                          <OPTION value=3>(GMT-03:00) Newfoundland, Brasilia, 
+                          Buenos Aires, Georgetown</OPTION> <OPTION 
+                          value=2>(GMT-02:00) Mid-Atlantic</OPTION> <OPTION 
+                          value=1>(GMT-01:00) Azores, Cape Verde Is.</OPTION> 
+                          <OPTION value=0>(GMT) Greenwich Mean Time : Dublin, 
+                          Edinburgh, Lisbon, London</OPTION> <OPTION value=-1 
+                          selected>(GMT+01:00) Berlin, Stockholm, Rome, Bern, 
+                          Brussels, Vienna</OPTION> <OPTION value=-2>(GMT+02:00) 
+                          Athens, Helsinki, Istanbul, Cairo, Eastern Europe, 
+                          Israel</OPTION> <OPTION value=-3>(GMT+03:00) Baghdad, 
+                          Kuwait, Nairobi, Riyadh, Moscow</OPTION> <OPTION 
+                          value=-4>(GMT+04:00) Abu Dhabi, Muscat, Tbilisi, 
+                          Kazan, Volgograd</OPTION> <OPTION value=-5>(GMT+05:00) 
+                          Islamabad, Karachi, Ekaterinburg, Tashkent</OPTION> 
+                          <OPTION value=-6>(GMT+06:00) Almaty, Dhaka</OPTION> 
+                          <OPTION value=-7>(GMT+07:00) Bangkok, Jakarta, 
+                          Hanoi</OPTION> <OPTION value=-8>(GMT+08:00) Beijing, 
+                          Hong Kong, Perth, Singapore, Taipei</OPTION> <OPTION 
+                          value=-9>(GMT+09:00) Tokyo, Osaka, Sapporo, Seoul, 
+                          Yakutsk</OPTION> <OPTION value=-10>(GMT+10:00) 
+                          Brisbane, Canberra, Melbourne, Sydney, Hobart</OPTION> 
+                          <OPTION value=-11>(GMT+11:00) Magadan, Solomon Is., 
+                          New Caledonia</OPTION> <OPTION value=-12>(GMT+12:00) 
+                          Fiji, Kamchatka, Marshall Is., Wellington, 
+                          Auckland</OPTION></SELECT></div>
+
+	<div class="w_table">  Daylight Savings </div>
+
+	<div class="w_text">
+			Start Date 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <SELECT size=1 
+                        name=startWeek maxlength="15"> <OPTION 
+                          value=1>First<OPTION value=2>Second<OPTION 
+                          value=3>Third<OPTION value=4>Fourth<OPTION value=5 
+                          selected>Last</OPTION></SELECT> &nbsp; <SELECT size=1 
+                        name=startDay maxlength="63"> <OPTION value=0 
+                          selected>Sunday<OPTION value=1>Monday<OPTION 
+                          value=2>Tuesday<OPTION value=3>Wednesday<OPTION 
+                          value=4>Thursday<OPTION value=5>Friday<OPTION 
+                          value=6>Saturday</OPTION></SELECT> &nbsp;of&nbsp; 
+                        <SELECT size=1 name=startMonth maxlength="15"> <OPTION 
+                          value=1>January<OPTION value=2>February<OPTION value=3 
+                          selected>March<OPTION value=4>April<OPTION 
+                          value=5>May<OPTION value=6>June<OPTION 
+                          value=7>July<OPTION value=8>August<OPTION 
+                          value=9>September<OPTION value=10>October<OPTION 
+                          value=11>November<OPTION 
+                        value=12>December</OPTION></SELECT> 
+                        &nbsp;(2010-03-28)&nbsp;at&nbsp; <INPUT 
+                        onkeypress=checkKeyRange(0,23); maxLength=3 size=3 
+                        value=1 name=startTime> o'clock 
+        </div>
+			<div class="w_text">
+			End Date 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <SELECT 
+                        size=1 name=endWeek maxlength="15"> <OPTION 
+                          value=1>First<OPTION value=2>Second<OPTION 
+                          value=3>Third<OPTION value=4>Fourth<OPTION value=5 
+                          selected>Last</OPTION></SELECT> &nbsp; <SELECT size=1 
+                        name=endDay maxlength="15"> <OPTION value=0 
+                          selected>Sunday<OPTION value=1>Monday<OPTION 
+                          value=2>Tuesday<OPTION value=3>Wednesday<OPTION 
+                          value=4>Thursday<OPTION value=5>Friday<OPTION 
+                          value=6>Saturday</OPTION></SELECT> &nbsp;of&nbsp; 
+                        <SELECT size=1 name=endMonth maxlength="15"> <OPTION 
+                          value=1>January<OPTION value=2>February<OPTION 
+                          value=3>March<OPTION value=4>April<OPTION 
+                          value=5>May<OPTION value=6>June<OPTION 
+                          value=7>July<OPTION value=8>August<OPTION 
+                          value=9>September<OPTION value=10 
+                          selected>October<OPTION value=11>November<OPTION 
+                          value=12>December</OPTION></SELECT> 
+                        &nbsp;(2010-10-31)&nbsp;at&nbsp; <INPUT 
+                        onkeypress=checkKeyRange(0,23); maxLength=3 size=3 
+                        value=1 name=endTime> o'clock&nbsp;
+	</div>
+</li>
+<li class="space"> </li>
+<!--Button define start-->
+<li class="buttonframe"><div class="button_position">
+<input name="button" type="button"  value="Apply"/>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<input name="Cancel" value="Cancel" type="reset" /></div>
+</li>
+<!--Button define end-->
+</ul></div>
+<!--Set area end-->
+	</div>
+
+  <br/><br/>
+  </body>
+</html>

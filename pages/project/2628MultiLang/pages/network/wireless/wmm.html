@@ -1,0 +1,30 @@
+ <form action="/pages/tabFW/wmm.wl" method="post" onSubmit="return btnApply();">
+      <div class="content_frame"><div class="explain"><div> <b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b><b class="r4"></b></div> <div class="explain_text">Eabling Wi-Fi MultiMedia (WMM) will check the quality of wireless network on devices while transferring data.</div><div> <b class="r4"></b> <b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></div>
+         </div>
+         <div class="data_frame"><ul>
+            <li class="set1">
+               <div class="w_text">
+                  <ul>
+                     <li class="left_table">WMM :</li>
+                     <li class="right_table">
+                        <input name="wlWme" type="radio" value="1" onClick="wmeChange();" /> On
+                           &nbsp;&nbsp;
+                        <input name="wlWme" type="radio" value="0" onClick="wmeChange();" /> Off                     </li>
+                  </ul>
+                  <ul>
+                     <li class="left_table">WMM Power Save :</li>
+                     <li class="right_table">
+                        <input name="wlWmeApsd" type="radio" value="1" /> Enable
+                           &nbsp;&nbsp;
+                        <input name="wlWmeApsd" type="radio" value="0" /> Disable                     </li>
+                  </ul>
+               </div>
+            </li>
+            <li class="space"></li>
+            <li class="buttonframe"><div class="button_position"><input name="sysSubmit" value="Apply" type="button" onClick="doSubmit();" />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+    <input name="Cancel" value="Cancel" type="button" onClick='frmLoad();' />
+               </div>
+            </li>
+         </ul>
+         </div>
+      </div><br/><br/>
