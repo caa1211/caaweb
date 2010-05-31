@@ -506,7 +506,7 @@
                $.zyUiDialog({
                    width: 450,
                    height: 200,
-                   title: $lingoObj.getDictionary()['logout'],
+                   title: 'logout', //$lingoObj.getDictionary()['logout'],
                    buttons: {
 				       'Cancel': function(){ $(this).dialog('close');},
                        'OK': function(){
@@ -742,18 +742,20 @@
 	       $('#langSelector').change(function(){
 		        $.openLoadingMask();
                 CLingo = $(this).find(':selected').attr('lngID')
-                $lingoObj.updateLingo(CLingo, function(){
+               $lingoObj.updateLingo(CLingo, function(){
 			    var tabIndex;
                 if( $frameObj[0].contentWindow.tabApi!=undefined)
                 tabIndex =  $frameObj[0].contentWindow.tabApi.getIndex();
 			  //  activeItem(actionItemID, tabIndex);
 			  
 			 //$frameObj[0].contentWindow
-			 var subDomBody =   $frameObj.contents().find('body');
-			  $frameObj[0].contentWindow.$lingoObj.updateLingo(CLingo);
-			    $.closeLoadingMask();
+			    var subDomBody =   $frameObj.contents().find('body');
+			    $frameObj[0].contentWindow.$lingoObj.updateLingo(CLingo);
+			    
 				});
-           });       
+				
+				$.closeLoadingMask();
+           });      
 
 		 //multiLingo---E---------
 		

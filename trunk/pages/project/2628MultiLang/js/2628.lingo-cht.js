@@ -29,5 +29,7 @@
   "Cancel": "取消",
   
   //tooltip
-   "logo":"商標"
+   "logo":"商標",
+   
+   'vdTipOn': '開啟'
 }

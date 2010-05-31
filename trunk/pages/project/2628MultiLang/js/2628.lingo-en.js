@@ -30,5 +30,8 @@
   "Cancel": "Cancel",
   
   //tooltip
-  "logo":"logo"
+  "logo":"logo",
+  
+  
+  'vdTipOn': 'on'
 }
