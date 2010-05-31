@@ -33,5 +33,7 @@
   "logo":"logo",
   
   
-  'vdTipOn': 'on'
+  'vdTipOn': 'on',
+  
+  'No Security': 'No Security'
 }

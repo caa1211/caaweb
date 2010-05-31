@@ -31,5 +31,7 @@
   //tooltip
    "logo":"商標",
    
-   'vdTipOn': '開啟'
+   'vdTipOn': '開啟',
+   
+     'No Security': '無防護'
 }
