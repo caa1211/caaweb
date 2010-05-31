@@ -33,5 +33,7 @@
    
    'vdTipOn': '開啟',
    
-     'No Security': '無防護'
+     'No Security': '無防護',
+	 
+	 'sfd': '測式'
 }

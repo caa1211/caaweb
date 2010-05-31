@@ -11,6 +11,7 @@
  * $Rev: 001 $ add refreshLingo method
  * $Date: 2010-05-31 $
  * $Rev: 002 $ fix the tooltip do not be translated issue
+ * $Rev: 003 $ fix the input tag issue: use value to be key only when type =button, submit, reset
  */
 ;
 (function($)
@@ -91,9 +92,14 @@
 				{
 				var lingoText = dictionary[lngS];
 				if(lingoText==undefined)
-				lingoText = lngS
+				lingoText = text
 
-				    if($(this)[0].nodeName=="INPUT")
+				    if($(this)[0].nodeName=="INPUT" 
+					&& (
+					$(this).attr('type')=='button'
+					|| $(this).attr('type')=='submit' 
+					||$(this).attr('type')=='reset')
+					)
 					$(this).attr('lngType',CLingo).attr('value', lingoText);
 					else
 					 $(this).attr('lngType',CLingo).html(lingoText);
