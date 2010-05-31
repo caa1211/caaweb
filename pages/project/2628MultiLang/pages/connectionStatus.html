@@ -212,6 +212,7 @@ var updateViewStatus = function(view){
         $('#naviRText').attr('lingo', 'auto').html('Status'); 
 		$lingoObj.refreshLingo($('#naviRText'));
 
+			      $('#naviRText').attr('lingo', 'Status').html($lingoObj.getDict()['Status']); 
         modifyNetworkmapframeH();
 		
 		$('.viewModeHide, #viewModeicon').show();
@@ -320,9 +321,11 @@ $(function(){
 //please choice one of the VD as following to install in the page
 
 //VD for 2612 Begin----------------------------------------
+
+
 			//test data 1
 			  var VDdate1 = {
-				 dslline: {status: 'on', msg: 'dsl line on' },
+				 dslline: {status: 'on', msg: 'dsl line ' + $lingoObj.getDict()['vdTipOn'] },
 				 lan1: {status: 'off' },
 				 lan2: {status: 'on', msg: 'LAN2 on \n ip:192.168.0.1'},
 				 lan3: {status: 'off'},
@@ -354,10 +357,24 @@ $(function(){
 			  
 			  //for test!
 			  $VDObj2628.toggle(function(){
+			
 				   $VDObj2628.setValue(VDdate1);
 			  }, function(){
 				   $VDObj2628.setValue(VDdate2);
-			  })
+			  });
+			  
+			 $('body').bind('lingoChange', function(){ 
+				   VDdata1={
+					 dslline: {status: 'on', msg: 'dsl line ' + $lingoObj.getDictionary()['vdTipOn'] },
+					 lan1: {status: 'off' },
+					 lan2: {status: 'on', msg: 'LAN2 on \n ip:192.168.0.1'},
+					 lan3: {status: 'off'},
+					 lan4: {status: 'on', msg:'LAN4 \n on'},
+					 wan: {status: 'off' },
+					 wifiSignal: {status: 'on', msg: 'wifiSignal on'}
+				   } ;
+			  $VDObj2628.setValue(VDdata1);
+			  });
 //VD for 2612 End----------------------------------------
   
 //VD for 2812 Begin----------------------------------------
@@ -419,7 +436,7 @@ $(function(){
   <div class="i_left_arrow"></div>
   <!--map view start-->
   <div id="mapView"  class='naviView'> 
-    <div class="title" style=" position:absolute; top:0px; left:15px;" lingo="auto">Network Map</div>
+    <div class="title" style=" position:absolute; top:0px; left:15px;" lingoT='auto' title='Network Map' lingo="auto">Network Map</div>
     <div class="iconView">
       <ul>
         <li>
