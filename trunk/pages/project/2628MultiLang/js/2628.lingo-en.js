@@ -10,7 +10,7 @@
  
  
  //menu
- "logout" : "Logout",
+ "logout" : " Logout ",
  
  //tab
  "More AP": "More AP",
@@ -35,5 +35,9 @@
   
   'vdTipOn': 'on',
   
-  'No Security': 'No Security'
+  'No Security': 'No Security',
+  
+  'sfd':'sfd',
+  
+  'test': 'test'
 }
