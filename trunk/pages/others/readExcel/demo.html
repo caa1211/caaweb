@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+ <HEAD>
+  <TITLE> New Document </TITLE>
+  <META NAME="Generator" CONTENT="EditPlus">
+  <META NAME="Author" CONTENT="">
+  <META NAME="Keywords" CONTENT="">
+  <META NAME="Description" CONTENT="">
+  <script>
+ function readExcel()
+ {
+    var oXL = new ActiveXObject("Excel.Application");
+	debugger;
+ 
+var oWB = oXL.Workbooks.open("C:/lingo.xls");
+
+
+
+    var oSheet = oWB.ActiveSheet;
+    alert(oSheet.Cells(1,1).value);//cell的值
+    alert(oSheet.usedrange.rows.count);// 使用的行数
+    alert(oWB.Worksheets.count);//得到sheet的个数
+    oSheet=null;
+   oWB.close();
+   oXL=null;
+ 
+ 
+ 
+ }
+  </script>
+ </HEAD>
+
+ <BODY>
+  <input type="button" value="读取Excel" onclick="readExcel();">
+ </BODY>
+</HTML>
