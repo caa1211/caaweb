@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--common css-->
+    <link href="../../../css/themes/custom-theme/jquery-ui-1.7.2.custom.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/themes/myCustom.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/demos.css" rel="stylesheet" type="text/css" />
+    
+    
+    <!--common js-->
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript"></script>
+    <script src="../../../js/jquery-ui-1.7.2.custom.min.js" type="text/javascript"></script>
+    <script src="../../../js/zyJqFunctions.js" type="text/javascript"></script>
+   
+    <script type="text/javascript">
+  var oXL =new ActiveXObject("Excel.Application"); //创建excel应用程序对象
+  var oWB =oXL.Workbooks.Add();       //创建工作簿
+  var oSheet =oWB.ActiveSheet;        //获取当前活动的工作簿
+
+        $(function()
+        {
+        $.getJSON('2628.lingo-cht.js', function(data){
+        var keyCell =  oSheet.Cells(1,1)//设置标题的内容
+        var valueCell = oSheet.Cells(1,2)
+		
+		keyCell.Value ='KEY';  
+		valueCell.Value ='VALUE';  //设置标题的内容
+		keyCell.Font.Bold =true;   //加粗
+        valueCell.Font.Bold =true;   //加粗
+		
+		 keyCell.Borders(3).LineStyle = 1;
+	     valueCell.Borders(3).LineStyle = 1;
+		  keyCell.Interior.ColorIndex = 15;
+		  valueCell.Interior.ColorIndex = 15;
+		 
+		 //debugger;
+		  
+      var index=1;
+   $.each(data, function(ii, dd){
+
+          index++;
+		 
+          oSheet.Cells(index,1).Value =ii;  //设置标题的内容
+          oSheet.Cells(index,2).Value =dd;  //设置标题的内容
+		  })
+		     oXL.Visible = true;//设置Excel的属性
+  oXL.UserControl = true;
+   });
+ 
+        });
+  
+    </script> 
+
+</head>
+<body>
+
+
+ 
+
+
+</body>
+</html>
