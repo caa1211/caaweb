@@ -77,6 +77,9 @@
 		var dbParent = retMsg.parent('.ui-dialog');
 			dbParent.find('.ui-dialog-buttonpane button').attr('lingo','auto');
 			dbParent.find('.ui-dialog-title').attr('lingo','auto');
+			
+			if($lingoObj!=undefined && $lingoObj.refresh!=undefined)
+				$lingoObj.refresh(retMsg);
 	}
     
     $.extend({
@@ -99,6 +102,7 @@
 			
           if(msg.setting.multiLingo)
 			addLingoAttr(retMsg);
+
 			
            return retMsg
         }
