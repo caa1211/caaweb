@@ -39,7 +39,7 @@
 	  this.getLingo = function(){return CLingo;};
 	  this.getDict =function(){return dictionary;};
 	  this.getDictionary =function(){return dictionary;};
-	  this.refresh=function($obj){ this.refreshLingo(); };
+	  this.refresh=function($obj){ this.refreshLingo($obj); };
 	  this.refreshLingo =function($obj){ var $p = $obj==undefined ? $('body'):$obj.parent(); $p.find('[lngType]').removeAttr('lngType');  updateDomLang($p);};
 
 	  function updateDomLang_forTitle($targetObj)
@@ -74,11 +74,16 @@
              $('*['+  lAttr +']', $targetObj).each(function(){
 
 				  var text;
-				  if($(this)[0].nodeName=="INPUT")
-					 text =$(this).attr('value');
+				  if($(this)[0].nodeName=="INPUT"&& (
+					$(this).attr('type')=='button'
+					|| $(this).attr('type')=='submit' 
+					||$(this).attr('type')=='reset')
+					)
+					 text =$(this).attr('value').replace(/(^\s*)|(\s*$)/g, "");
 				  else
-					 text = $(this).html();
-					 
+					 text = $(this).html().replace(/(^\s*)|(\s*$)/g, "") ;
+					// if(text=='vm ')
+				//	 debugger;
 				  var lngS = $(this).attr(lAttr); 
                   if(lngS =='auto')
 				   {
@@ -92,7 +97,7 @@
 				{
 				var lingoText = dictionary[lngS];
 				if(lingoText==undefined)
-				lingoText = text
+				   return;
 
 				    if($(this)[0].nodeName=="INPUT" 
 					&& (
@@ -102,7 +107,7 @@
 					)
 					$(this).attr('lngType',CLingo).attr('value', lingoText);
 					else
-					 $(this).attr('lngType',CLingo).html(lingoText);
+					$(this).attr('lngType',CLingo).html(lingoText);
 				}
               });
 			  updateDomLang_forTitle($targetObj);
