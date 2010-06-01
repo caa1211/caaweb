@@ -159,6 +159,7 @@ $(function(){
                 'OK': function(){ db1.dialog('close')}
             }
         });
+		$lingoObj.refresh(db1);
         var link = 'pages/block.html';
         if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
         link='../'+link;
