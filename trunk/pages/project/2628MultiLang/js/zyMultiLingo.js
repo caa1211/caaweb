@@ -1,12 +1,7 @@
 /*
  * zyMultiLingo.js
- *
  * Copyright (c) 2010 
- * 
- *
  * licensed under the GPL (http://www.gnu.org/licenses/gpl.html)
- * 
- *
  * $Date: 2010-05-28 $
  * $Rev: 001 $ add refreshLingo method
  * $Date: 2010-05-31 $
@@ -129,7 +124,7 @@
 		
 		CLingo = targetLingo;
 	   
-		 $.ajaxSetup({async: false});
+	   $.ajaxSetup({async: false});
        $.getJSON(src,function(data){
 	             callbackRes=1;
 	             dictionary = data;
@@ -146,7 +141,6 @@
 		 
 		 return true;
        }
- 
 	  $(function(){$LingoObj.updateLingo(settings.DLingo, settings.initCompleted);});
       return this;
     };
