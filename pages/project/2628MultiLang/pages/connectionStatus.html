@@ -12,19 +12,20 @@
 <script src="VD/VDcomponent.js" type="text/javascript"></script>
 <script type="text/javascript" src="../js/jquery.getParams.js"></script>
 <script type="text/javascript" src="../js/zyMultiLingo.js"></script>
-<script type="text/javascript" src="../js/zyMultiLingo.js"></script>
 <script type="text/javascript">
 
 		//multiLingo---B---------
-		var CLingo ="EN";
-	    var lingoURLParam = $.getURLParam("lingo");
-        if (lingoURLParam != null)
-		CLingo = lingoURLParam;
         var lingoOption = {
-		DLingo: CLingo,
 		lingos:[{id : 'EN',src : "../js/2628.lingo-en.js"},
 		        {id :'CHT', src : "../js/2628.lingo-cht.js"}]
 		}
+		
+		//Current lingo setting get from url parameter, it also can change to by cookie
+		var lingoURLParam = $.getURLParam("lingo");
+		if (lingoURLParam != null)
+		$.extend(lingoOption, {DLingo:lingoURLParam});
+		
+		//apply lingo plugin
 		var $lingoObj = $.zyMultiLingo(lingoOption);
 		//multiLingo---E---------
 		

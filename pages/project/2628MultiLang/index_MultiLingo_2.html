@@ -27,18 +27,17 @@
     <script type="text/javascript">          
     		
 		//multiLingo---B---------
-		var CLingo ="EN";
-	    var lingoURLParam = $.getURLParam("lingo");
-        if (lingoURLParam != null)
-		CLingo = lingoURLParam;
         var lingoOption = {
-		DLingo: CLingo,
-		lingos:[
-			 {id : 'EN',src : "js/2628.lingo-en.js"},
-			 {id :'CHT', src : "js/2628.lingo-cht.js"}
-			 ]
+		lingos:[{id : 'EN',src : "js/2628.lingo-en.js"},
+		        {id :'CHT', src : "js/2628.lingo-cht.js"}]
 		}
-
+		
+		//Current lingo setting get from url parameter, it also can change to by cookie
+		var lingoURLParam = $.getURLParam("lingo");
+		if (lingoURLParam != null)
+		$.extend(lingoOption, {DLingo:lingoURLParam});
+		
+		//apply lingo plugin
 		var $lingoObj = $.zyMultiLingo(lingoOption);
 		//multiLingo---E---------
 
@@ -233,8 +232,8 @@
             tabIndexStr='tabIndex='+tabIndex;
          
             var lngStr = '';
-            if(CLingo != undefined)
-            lngStr= 'lingo='+CLingo;
+            if($lingoObj.getLingo() != undefined)
+            lngStr= 'lingo='+$lingoObj.getLingo();
             
             var urlStr= tabIndexStr==''? lngStr : tabIndexStr+'&' +lngStr;
             
@@ -715,35 +714,20 @@
            }    
            
            $('#homeBtn').click(function(){ activeItem(defaultPage);});
-           
-           //multiLingo---B---------
-		/*
-		var CLingo ="EN";
-	    var lingoURLParam = $.getURLParam("lingo");
-       if (lingoURLParam != null)
-	   CLingo = lingoURLParam;
-	
-		var $lingoObj = $.zyMultiLingo(
-		{
-			 DLingo: CLingo,
-			 lingos:[
-			 {id : 'EN',src : "js/2628.lingo-en.js"},
-			 {id :'CHT', src : "js/2628.lingo-cht.js"}
-			 ]
-		}
-		);*/
+
 
 	   $('#langSelector').children('option').each(function(i, item){
 		   $(item).removeAttr('selected');
 		   var lngID = $(this).attr('lngID');
-		   if(lngID==CLingo) 
+		   $lingoObj.getLingo()
+		   if(lngID== $lingoObj.getLingo()) 
 			$(item).attr('selected', 'selected');
 	   });
 	   
 	       $('#langSelector').change(function(){
 		        $.openLoadingMask();
-                CLingo = $(this).find(':selected').attr('lngID')
-               $lingoObj.updateLingo(CLingo, function(){
+                var lingo = $(this).find(':selected').attr('lngID')
+               $lingoObj.updateLingo(lingo, function(){
 			    var tabIndex;
                 if( $frameObj[0].contentWindow.tabApi!=undefined)
                 tabIndex =  $frameObj[0].contentWindow.tabApi.getIndex();
@@ -751,7 +735,7 @@
 			  
 			 //$frameObj[0].contentWindow
 			    var subDomBody =   $frameObj.contents().find('body');
-			    $frameObj[0].contentWindow.$lingoObj.updateLingo(CLingo);
+			    $frameObj[0].contentWindow.$lingoObj.updateLingo(lingo);
 			    
 				});
 				
