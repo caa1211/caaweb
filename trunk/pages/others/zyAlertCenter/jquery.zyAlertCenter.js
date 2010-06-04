@@ -51,17 +51,17 @@ jQuery.fx.step.delay = function() { };
             var arrow =  head.children('.arrow')
             if (arrow.hasClass('collapsed')) {
                arrow.removeClass('collapsed').addClass('expanded');
-                head.siblings('.list').slideDown(300, 'easeOutBack');
+                head.siblings('.list').slideDown('fast');
             }
             else{
              arrow.removeClass('expanded').addClass('collapsed');
-             $(this).siblings('.list').slideUp(300, 'easeInBack');
+             $(this).siblings('.list').slideUp('fast');
             }
         });
  
         $(this).append('<div class="alertCntr_live"><div class="list"></div></div>');
         var alertLive = $(this).children('.alertCntr_live');  
-      //  alertLive.slideUp(0);
+     //   alertLive.slideUp(0);
   
   
    function refreshStoreConut(){
@@ -69,16 +69,13 @@ jQuery.fx.step.delay = function() { };
         storeCount = alertStore.find('.list').children('.content').length;
 
         if (storeCount > 0) {
-            alertStore.find('.arrow').fadeIn();
             alertStore.slideDown(500, 'easeOutBack');
         }
         else 
             if (storeCount == 0) {
-                alertStore.find('.arrow').fadeOut();
                 alertStore.slideUp(500, 'easeInBack');
-                
-                   alertStore.children('.list').hide();
-                   alertStore.find('.head .arrow').removeClass('expanded').addClass('collapsed');
+                alertStore.children('.list').hide();
+                alertStore.find('.head .arrow').removeClass('expanded').addClass('collapsed');
             }
            
         if (settings.maxLength!=undefined && storeCount > settings.maxLength) {
@@ -107,10 +104,11 @@ jQuery.fx.step.delay = function() { };
             refreshStoreConut();
         }
         
-        alertLive.slideDown(0);
+       // alertLive.slideDown(0);
+        
         var liveAlert = storeObj.clone();
         alertLive.find('.list').append(liveAlert);
-        liveAlert.hide(0).fadeIn(300).delay(settings.stay, function(){$(this).fadeOut(300,function(){$(this).remove();});}); 
+        liveAlert.hide(0).slideDown(300).delay(settings.stay, function(){$(this).fadeOut(300,function(){ $(this).remove();});}); 
         
         return storeObj;
    };
