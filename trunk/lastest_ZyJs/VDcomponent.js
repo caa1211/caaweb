@@ -21,13 +21,16 @@
  * 
  * 2010/05/25
  * set title to the item, even if it be off.
+ * 
+ * 2010/06/04 
+ * set <br> to endline
  */
 ;
 (function($){
 
     $.fn.VDcomponent = function(settings){
          var _tipOption = {
-                showBody: "\n",
+                showBody: "<br>",
                 fade: 100,
                // opacity: 1,
                 track: true,
