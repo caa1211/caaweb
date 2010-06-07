@@ -30,12 +30,12 @@ jQuery.fx.step.delay = function() { };
        {
            maxLength:50,
            titleMsg: 'Alert Center',
-           stay: 2000
+           stay: 3000
        }
        
         settings = $.extend(defaultSetting , settings);
         
-        $(this).append('<div class="alertCntr_store"><div class="head">'+ settings.titleMsg  +': <span class="count">0</span><span class="arrow"></span></div><div class="list"></div></div>');
+        $(this).append('<div class="alertCntr_store"><div class="head">'+ settings.titleMsg  +':<span class="count">0</span><span class="arrow"></span></div><div class="list"></div></div>');
         var alertStore =  $(this).children('.alertCntr_store');
         var alertCount = alertStore.find('.count');
         
@@ -87,13 +87,14 @@ jQuery.fx.step.delay = function() { };
    }
    
    this.add = function(addObj /*{id:'a1', content:'<div>aaa</div>'}*/){
-       var storeObj = $('<div class="content">'+addObj.content+'</div>');
+       var storeObj = $('<div class="content"></div>');
+       storeObj.append(addObj.content);
        if (addObj.id != undefined) {
             var list =   alertStore.find('.list');
             var $this = this;
             list.children('.content').each(function(){
                 if( $(this).attr('id')== addObj.id)
-                $this.remove($(this));
+                $(this).empty().remove(); 
             })
             
             storeObj.attr('id', addObj.id);
@@ -106,7 +107,7 @@ jQuery.fx.step.delay = function() { };
         
        // alertLive.slideDown(0);
         
-        var liveAlert = storeObj.clone();
+        var liveAlert = storeObj.clone(true);
         alertLive.find('.list').append(liveAlert);
         liveAlert.hide(0).slideDown(300).delay(settings.stay, function(){$(this).fadeOut(300,function(){ $(this).remove();});}); 
         
