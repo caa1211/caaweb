@@ -1,14 +1,13 @@
 /*
- * emptyPlugin.js
+ * alertCenter plugin
  *
- * Copyright (c) 2010 
- * Caa Chang
+ * Copyright (c) zyxel, 2010 
+ * Joze Chang
  *
- * Dual licensed under the GPL (http://www.gnu.org/licenses/gpl.html)
- * and MIT (http://www.opensource.org/licenses/mit-license.php) licenses.
  *
- * $Date: 2010-02-04 $
+ * $Date: 2010-06-07 $
  * $Rev: 001 $
+ * Add bgiframe support.
  * 
  */
 
@@ -63,6 +62,8 @@ jQuery.fx.step.delay = function() { };
         var alertLive = $(this).children('.alertCntr_live');  
      //   alertLive.slideUp(0);
   
+   if($(this).bgiframe!=undefined)
+   $(this).bgiframe();
   
    function refreshStoreConut(){
         var storeCount=0;
@@ -84,7 +85,6 @@ jQuery.fx.step.delay = function() { };
         }
         alertCount.html(storeCount);
    }
-   
    
    this.add = function(addObj /*{id:'a1', content:'<div>aaa</div>'}*/){
        var storeObj = $('<div class="content">'+addObj.content+'</div>');

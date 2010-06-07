@@ -2,7 +2,8 @@
 .alertCntr_store {border: solid 1px red; width:150px;}
 .alertCntr_store .head{cursor:pointer; border: solid 1px black; width: 100px;}
 .alertCntr_store .list{border: solid 1px blue;}
-.alertCntr_store .list .content{}
+.alertCntr_store .list .content{background: #aaaaaa; border: solid 1px black;}
+
 .alertCntr_store .list .live{border: dashed 1px black;}
 
 .alertCntr_store .head .count{ color: red; border: solid 1px red;}
