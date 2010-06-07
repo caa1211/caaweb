@@ -16,6 +16,9 @@
 
        <link href="reset.css" rel="stylesheet" type="text/css" />
        <link href="jquery.zyAlertCenter.css" rel="stylesheet" type="text/css" />
+       
+    
+    <script src="jquery.bgiframe.min.js" type="text/javascript"></script>
     <script src="jquery.zyAlertCenter.js" type="text/javascript"></script>
 
     
@@ -32,7 +35,7 @@
 var count=0;
 $('#addAlert').click(function(){
     count++;
-   ACenter.add({id:'a'+count, content:'alert message   '+count});
+   ACenter.add({id:'a' + count, content:'alert message  <br/>asdfdsasdsdaasd '+count});
 });
 
 
@@ -52,7 +55,18 @@ $('#removeAlert').click(function(){
 <button id='addAlert'>Add</button>
 <button id='removeAlert'>Remove</button>
 
-<div id='alertCntr' style='position:absolute; top:0; right:100px;'>
+ <select style='position:relative; float: right;' >
+     <option>asdfagggggggggggggggggggggggggggf</option>
+          <option>asdfagggggggggggggggggggggggf</option>
+               <option>asdfgggggggggaf</option>
+                    <option>asdfaf</option>
+                         <option>asdfaf</option>
+                              <option>asdfaf</option>
+                              
+     </select>
+
+
+<div id='alertCntr' style='position:absolute; top:0; right:100px; background: yellow;'>
         <!--ul class='alertCntr_store'>
             <li class='alertCntr_head' style='border: solid 1px green;'>asdfasdfas</li>
             <li style='border: solid 1px red;'>asdfasdfas</li>
@@ -65,7 +79,6 @@ $('#removeAlert').click(function(){
         </ul-->
 </div>
  
-
 
 </body>
 </html>
