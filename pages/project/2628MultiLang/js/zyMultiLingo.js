@@ -108,7 +108,7 @@
 			  updateDomLang_forTitle($targetObj);
        }
 	 
-	   this.updateLingo= function(targetLingo, callback){
+	   this.updateLingo= function(targetLingo, callback, initflag){
        var src;
         $.each(settings.lingos, function(i, d){
 		  if(d.id==targetLingo)
@@ -128,6 +128,7 @@
        $.getJSON(src,function(data){
 	             callbackRes=1;
 	             dictionary = data;
+				 if(initflag==undefined)
             	 updateDomLang($body);
                 $body.unbind('ajaxComplete').unbind('ajaxError');
 				$body.bind('ajaxComplete', ajaxCompleteHandler).bind('ajaxError', ajaxErrorHandler);
@@ -141,7 +142,10 @@
 		 
 		 return true;
        }
-	  $(function(){$LingoObj.updateLingo(settings.DLingo, settings.initCompleted);});
+	   
+	   $LingoObj.updateLingo(settings.DLingo, settings.initCompleted , 'init');
+	   
+	  $(function(){$LingoObj.refresh();});
       return this;
     };
 })(jQuery);
