@@ -18,8 +18,7 @@ $(function(){
         var db1 = window.parent.$.zyUiDialog({
             width: 450,
             height: 190,
-			multiLingo: true,
-            title: $lingoObj.getDictionary()['Delete'],
+            title: 'Delete',
             buttons: {
                 'OK': function(){ db1.dialog('close')}
             }
@@ -27,14 +26,14 @@ $(function(){
 		var link = 'pages/delete.html';
         if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
         link='../../'+link;
-        db1.load(link, function(){  $(this).parent('.ui-dialog').find('.ui-dialog-buttonpane button').attr('lingo','auto'); });
+        db1.load(link);
         db1.dialog('open');
     });
 	
 	
 	$('button#test').click(function(){
-		$('.content_frame').append('<div lingo="auto">Modify</div>');
-		$lingoObj.refreshLingo($('.content_frame'));
+		$('.content_frame').append('<div lingo="Modify"></div>');
+		$lingoObj.refresh($('.content_frame'));
 	})
 	
 
@@ -61,7 +60,7 @@ $(function(){
                   <td class="top_font">Status</td>
                   <td class="top_font">SSID</td>
                   <td class="top_font">Security</td>
-                  <td lang='L_modify' width="60" class="top_font" style="border-right:0px;" lingo='auto'>Modify</td>
+                  <td lang='L_modify' width="60" class="top_font" style="border-right:0px;" lingo='Modify'></td>
                 </tr>
                 <tr align="center">
                   <td class="table_font">1</td>
@@ -88,6 +87,6 @@ $(function(){
          </ul></div>
       </div><br/><br/>
 	  
-<button id='test' LINGO='auto'>  <span lingo='auto'>test</span></button>
+<button id='test' LINGO='auto'>  <span lingo='test'></span></button>
 
 

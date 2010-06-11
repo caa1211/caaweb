@@ -15,6 +15,7 @@
 "logout" : "登出", 
 "More AP" : "更多AP", 
 "logoutMsg" : "你確定要登出嗎 ?", 
+"delMsg" : "你確定要刪除嗎？", 
 "Block" : "封鎖", 
 "test" : "測試", 
 "Delete" : "刪除", 

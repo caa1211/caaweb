@@ -76,13 +76,13 @@ var menu =
     '<li class="menutop">'+
     '</li>'+
          '<li>'+
-            '<a href="#" class="info" lingo="auto">Info</a>'+
+            '<a href="#" class="info" lingo="Info"></a>'+
          '</li>'+
          '<li>'+
-            '<a href="#" class="block" lingo="auto">Block</a>'+
+            '<a href="#" class="block" lingo="Block"></a>'+
          '</li>'+
          '<li >'+
-            '<a href="#" class="changename" lingo="auto">Change name/icon</a>'+
+            '<a href="#" class="changename" lingo="Change name/icon"></a>'+
          '</li>'+
    '<li class="menubottom">'+
    '</li>'+
@@ -160,7 +160,8 @@ $(function(){
                 'OK': function(){ db1.dialog('close')}
             }
         });
-		$lingoObj.refresh(db1);
+		
+		
         var link = 'pages/block.html';
         if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
         link='../'+link;
@@ -215,8 +216,8 @@ var updateViewStatus = function(view){
         case 'mapView':
 
         btnL.parent().addClass('disable');
-        $('#naviRText').attr('lingo', 'auto').html('Status'); 
-		$lingoObj.refreshLingo($('#naviRText'));
+        $('#naviRText').attr('lingo', 'Status');
+		$lingoObj.refresh($('#naviRText'));
 
 			  //    $('#naviRText').attr('lingo', 'Status').html($lingoObj.getDict()['Status']); 
         modifyNetworkmapframeH();
@@ -229,11 +230,11 @@ var updateViewStatus = function(view){
         btnR.parent().removeClass('disable');
         btnL.parent().removeClass('disable');
 		
-        $('#naviRText').attr('lingo', 'auto').html('Virtual device');
-		$lingoObj.refreshLingo($('#naviRText'));
+        $('#naviRText').attr('lingo', 'Virtual device');
+		$lingoObj.refresh($('#naviRText'));
 	
-		$('#naviLText').attr('lingo', 'auto').html('Network Map'); 
-        $lingoObj.refreshLingo($('#naviLText'));
+		$('#naviLText').attr('lingo', 'Network Map');
+        $lingoObj.refresh($('#naviLText'));
 		
 		
         modifyNetworkmapframeH();
@@ -244,8 +245,8 @@ var updateViewStatus = function(view){
         case 'VDView':
 
         btnR.parent().addClass('disable');
-        $('#naviLText').attr('lingo', 'auto').html('Status'); 
-		$lingoObj.refreshLingo($('#naviLText'));
+        $('#naviLText').attr('lingo', 'Status'); 
+		$lingoObj.refresh($('#naviLText'));
 		
         modifyNetworkmapframeH();
         break;
@@ -371,7 +372,7 @@ $(function(){
 			  
 			 $('body').bind('lingoChange', function(){ 
 				   VDdata1={
-					 dslline: {status: 'on', msg: 'dsl line ' + $lingoObj.getDictionary()['vdTipOn'] },
+					 dslline: {status: 'on', msg: 'dsl line ' + $lingoObj.getDict()['vdTipOn'] },
 					 lan1: {status: 'off' },
 					 lan2: {status: 'on', msg: 'LAN2 on \n ip:192.168.0.1'},
 					 lan3: {status: 'off'},
@@ -407,8 +408,6 @@ $(function(){
 		 $VDOther.setValue(date3);
 	*/
 //VD for 2812 End----------------------------------------
-	
-
 		
 });
        
@@ -418,31 +417,32 @@ $(function(){
 <body>
 <div class="content_frame2" >
 <div style="position:absolute; height:500px; width:100px; right:0px;">
-<div class="arrowbtnR"><a href="#" id="naviBtnL"></a> <span class="arrowbnText" id='naviLText' lingo="auto">Network Map</span></div>
-<div class="arrowbtnL"><a href="#" id="naviBtnR"></a> <span class="arrowbnText" id='naviRText'lingo="auto">Status</span> </div>
+<div class="arrowbtnR"><a href="#" id="naviBtnL"></a> <span class="arrowbnText" id='naviLText' lingo="Network Map"></span></div>
+<div class="arrowbtnL"><a href="#" id="naviBtnR"></a> <span class="arrowbnText" id='naviRText'lingo="Status"></span> </div>
 <div class="modesetting" id="modesetting_map"><ul><li style="margin-left:10px;"><div class="viewmode" id="viewModeicon">
             <ul>
-              <li class="iconmode"><a class="iconBtn highlight" title="Icon View" lingoT='auto'></a></li>
-              <li class="listmode"><a class="listBtn" title="List View"  lingoT='auto'></a></li>
+              <li class="iconmode"><a class="iconBtn highlight" lingoTitle='Icon View'></a></li>
+              <li class="listmode"><a class="listBtn" lingoTitle='List View'></a></li>
             </ul>
           </div></li>
-		  <li class="blod white_12 viewModeHide" style="margin-left:14px;" lingo='auto'>Viewing mode:</li>
-		  <li style="margin-left:10px;"><select name="Sys_RefreshList" size="1" onchange="resetInterval()">
-            <option value="00000000" selected="selected" lingo='auto'>None</option>
-            <option value="00000001" lingo='auto'>5 seconds </option>
-            <option value="00000002" lingo='auto'>10 seconds </option>
-            <option value="00000003" lingo='auto'>15 seconds </option>
-            <option value="00000004" lingo='auto'>20 seconds </option>
-            <option value="00000005" lingo='auto'>25 seconds </option>
-            <option value="00000006" lingo='auto'>30 seconds </option>
-          </select></li><li class="blod white_12" lingo='auto'>Refresh interval:</li></ul>
+		  <li class="blod white_12 viewModeHide" style="margin-left:14px;" lingo='Viewing mode'></li>
+		  <li style="margin-left:10px;">
+		  <select name="Sys_RefreshList" size="1" onchange="resetInterval()">
+            <option value="00000000" selected="selected" lingo='None'></option>
+            <option value="00000001" lingo='5 seconds'></option>
+            <option value="00000002" lingo='10 seconds'></option>
+            <option value="00000003" lingo='15 seconds'></option>
+            <option value="00000004" lingo='20 seconds'></option>
+            <option value="00000005" lingo='25 seconds'></option>
+            <option value="00000006" lingo='30 seconds'></option>
+          </select></li><li class="blod white_12" lingo='Refresh interval:'></li></ul>
     </div>
 </div>
 <div class="networkmapframe" style="overflow:hidden;">
   <div class="i_left_arrow"></div>
   <!--map view start-->
   <div id="mapView"  class='naviView'> 
-    <div class="title" style=" position:absolute; top:0px; left:15px;" lingoT='auto' title='Network Map' lingo="auto">Network Map</div>
+    <div class="title" style=" position:absolute; top:0px; left:15px;" lingoTitle='Network Map' lingo="Network Map"></div>
     <div class="iconView">
       <ul>
         <li>
@@ -453,7 +453,7 @@ $(function(){
                 <td width="190" valign="top"><!--Disconnect start-->
                     <div style="position:absolute; width:190px; ">
                       <div class="disconnect" >
-                        <div class="i_internet"><img src="../images/network/i_internet.gif" width="55" height="55" /><span style="display:block; text-align:center;" lingo='auto'>Internet</span>
+                        <div class="i_internet"><img src="../images/network/i_internet.gif" width="55" height="55" /><span style="display:block; text-align:center;" lingo='Internet'></span>
 						   <div class="i_modom_dline">
                             <div class="i_router"><img src="../images/network/i_router.gif"  /><span style="display:block; text-align:center;">P-26/28</span></div>
                           </div>
@@ -463,7 +463,7 @@ $(function(){
                     </div>
                   <!--Disconnect end-->
                   <div class="connect">
-                    <div class="i_internet"><img src="../images/network/i_internet.gif" width="55" height="55" /><span style="display:block; text-align:center;" lingo='auto'>Internet</span>
+                    <div class="i_internet"><img src="../images/network/i_internet.gif" width="55" height="55" /><span style="display:block; text-align:center;" lingo='Internet'></span>
 					  <div class="i_modom_line">
                       <div class="i_router"><img src="../images/network/i_router.gif"  /><span style="display:block; text-align:center;">P-26/28</span></div>
                     </div>
@@ -472,7 +472,7 @@ $(function(){
                     <div class="i_router_line"> </div>
                   </div></td>
                 <td width="7" valign="top" background="../images/network/i_green_line.gif"><span style="display:block;background:url(../images/center_bg.gif) left -60px; height:50px; width:7px; "></span>
-                    <div class="rightwirelessline"><span style="position:absolute; top:-15px; " lingo='auto'>Wireless</span></div></td>
+                    <div class="rightwirelessline"><span style="position:absolute; top:-15px; " lingo='Wireless'></span></div></td>
                 <td valign="top" ><div class="mapviewright">
                   <div class="wireless_frame">
                     <div class="iconviewbn">
@@ -600,7 +600,7 @@ $(function(){
               <tr>
                 <td width="190">&nbsp;</td>
                 <td width="7" height="50" valign="top" ><div style="position:relative;">
-                  <div class="rightwiredline"><span style="position:absolute; bottom:-15px; " lingo='auto'>Wired</span></div>
+                  <div class="rightwiredline"><span style="position:absolute; bottom:-15px; " lingo='Wired'></span></div>
                 </div></td>
                 <td valign="top" ></td>
               </tr>
@@ -631,11 +631,11 @@ $(function(){
                             <td><table width="100%" cellpadding="0" cellspacing="0" >
                               <tr align="center">
                                 <td width="5%" class="top_font">#</td>
-                                <td  class="top_font" lingo='auto'>Device Name</td>
-                                <td  class="top_font" lingo='auto'>IP Address</td>
-                                <td  class="top_font" lingo='auto'>MAC Address</td>
-                                <td class="top_font" lingo='auto'>Address Source</td>
-                                <td class="top_font" lingo='auto'>Connection Type</td>
+                                <td  class="top_font" lingo='Device Name'></td>
+                                <td  class="top_font" lingo='IP Address'></td>
+                                <td  class="top_font" lingo='MAC Address'></td>
+                                <td class="top_font" lingo='Address Source'></td>
+                                <td class="top_font" lingo='Connection Type'></td>
                               </tr>
                               <tr align="center">
                                 <td  class="table_font"><img src="../images/network/i_s_pc.gif" width="16" height="16" /></td>
@@ -725,7 +725,7 @@ $(function(){
   </div>
   <!--List view end-->
   <div id="statusView" class='naviView'  style="display:none;">
-    <div class="title" style="color:#CCC;">Status</div>
+    <div class="title" style="color:#CCC;" lingo='Status'></div>
     <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
       <tr>
         <td width="50%">&nbsp;</td>
@@ -951,7 +951,7 @@ $(function(){
     </table>
   </div>
  <div id='VDView' class='naviView' style=" display:none; width:100%;">
-  <div class="title" style=" position:absolute; top:0px; left:15px; color:#FFFFFF;" lingo='auto'>Virtual Device</div> 
+  <div class="title" style=" position:absolute; top:0px; left:15px; color:#FFFFFF;" lingo='Virtual Device'></div> 
     <div id='vd2628' style='position:relative; left:4%;right:4%; top:100px;'></div> 
   </div>
 </div>
@@ -961,7 +961,7 @@ $(function(){
   <div style=" position:absolute;width:100%; z-index:800; top:15px; left:10px;"><br/><br />
 <span lingo='tbmsg'>P-26/28 is disconnected from the internet. Please click “OK” to diagnose the internet connection status. <br /></span>
 </div></li></ul><div class="button_position" style=" position:absolute; top:65px; right:-5px;"><input name="New Message" type="button" id="checkPrbmBtn"
- value="OK" lingo='auto'/>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;</div></div>
+ value="OK" lingo='OK'/>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;</div></div>
 <!--Error Message End-->
 </div>
 </body>
