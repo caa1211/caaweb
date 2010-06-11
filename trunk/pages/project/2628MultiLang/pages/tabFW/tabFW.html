@@ -42,8 +42,8 @@
               var defaultIndex = 0;
               $.each(data, function(i, item){
                   if (i == "tabTitle") {
-                 $title.html(item);
-				 $title.attr('lingo', 'auto');
+               //  $title.html(item);
+				 $title.attr('lingo', item);
                       return true;
                   }
                   
@@ -90,7 +90,7 @@
       });
 	  
 	 $("ul.tabs li[tabid] span").each(function(){
-	    $(this).attr('lingo', 'auto');
+	    $(this).attr('lingo', $(this).html());
 	 })
 	  
   }

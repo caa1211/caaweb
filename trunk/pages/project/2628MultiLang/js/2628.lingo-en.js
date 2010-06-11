@@ -15,6 +15,7 @@
 "logout" : " Logout ", 
 "More AP" : "More AP", 
 "logoutMsg" : "Are you sure you want to logout ?", 
+"delMsg":  "Are you sure you want to delete ?",
 "Block" : "Block", 
 "test" : "test", 
 "Delete" : "Delete", 

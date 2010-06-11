@@ -317,7 +317,7 @@
                 $.each(item.submenu, function(i, item){
                     var $menuItemA = $('<a></a>');
                     $menuItemA.html(item.title);
-                    $menuItemA.attr('lingo', 'auto');
+                    $menuItemA.attr('lingo', item.title);
 					
                     var $menuItemLi = $('<li></li>');
                     $menuItemLi.attr('id', $targetID+'-'+i);
@@ -358,6 +358,7 @@
 
         //do mainMenu
         $.getJSON("menu.json", function(data){
+
              var $menuContainer =  $('<ul style=""></ul>');
              $menuContainer.addClass('items');
              menuJsonData = data;
@@ -369,7 +370,7 @@
              var $menuItemA = $('<a></a>'); 
                  $menuItemA.html(item.title);
 
-				 $menuItemA.attr('lingo', 'auto');
+				 $menuItemA.attr('lingo', item.title);
 				 
              var $menuItemLi = $('<li></li>');
                  $menuItemLi.attr('id', i);
@@ -743,7 +744,7 @@
            });      
 
 		 //multiLingo---E---------
-		
+
         });
       
         </script>
@@ -752,7 +753,7 @@
     <div class = "index">
     <div class="outer-north">
 <div class="header_position_index">
-    <div class="logo" ><img src="images/logo.gif" alt="" title="logo" lingoT="auto"/></div>
+    <div class="logo" ><img src="images/logo.gif" alt="" title="logo"/></div>
     <div class="model-name"> P-26/28</div>
     <div class="top_bg_style"></div>
     <ul class="header-right" style="position:absolute; top:0px; right:0px;">
@@ -768,11 +769,11 @@
             </select>
         </li>
         <li class='tiers-icon'></li>
-        <li class="text" id="2tiersBtn"><a href="#" lingo='auto'>Login Privilege</a></li>
+        <li class="text" id="2tiersBtn"><a href="#" lingo='Login Privilege'></a></li>
         <li class='wizard-icon'></li>
-        <li class="text" id="wizardBtn"><a href="#" lingo="auto">Quick Start</a></li>
+        <li class="text" id="wizardBtn"><a href="#" lingo="Quick Start"></a></li>
         <li class='logout-icon'></li>
-        <li class="text" id="logoutBtn"><a href="#" lingo="auto">Logout</a></li>
+        <li class="text" id="logoutBtn"><a href="#" lingo="Logout"></a></li>
     </ul>
 </div>
     </div> 

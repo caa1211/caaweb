@@ -22,7 +22,7 @@
             closeOnEscape: true,
             modal: true,
             autoOpen: false,
-			multiLingo: true,
+			lingoObj: $lingoObj,
             confirmDB: false, //no background, unresizable
             resizeConfirmDB: false, //no background, resizable
             close: null,
@@ -73,10 +73,18 @@
                 return {container: msgDiv, setting:_settings };
     }
     
-	function addLingoAttr(retMsg){
+	function addLingoAttr(lingoObj, retMsg){
 		var dbParent = retMsg.parent('.ui-dialog');
-			dbParent.find('.ui-dialog-buttonpane button').attr('lingo','auto');
-			dbParent.find('.ui-dialog-title').attr('lingo','auto');
+			dbParent.find('.ui-dialog-buttonpane button').each(function(){
+			
+			$(this).attr('lingo',$(this).html());
+			});
+			
+			dbParent.find('.ui-dialog-title').each(function(){
+			$(this).attr('lingo',$(this).html());
+			});	
+			
+			lingoObj.refresh(dbParent);
 	}
     
     $.extend({
@@ -84,8 +92,9 @@
             var msg = createContainer(settings);
 			var retMsg = msg.container.dialog(msg.setting);
 			
-			if(msg.setting.multiLingo)
-			addLingoAttr(retMsg);
+			
+		if(msg.setting.lingoObj!=undefined)
+		addLingoAttr(msg.setting.lingoObj, retMsg);
 			
 			return retMsg
         }
@@ -97,8 +106,8 @@
             var msg = createContainer(settings);
 		    var retMsg = msg.container.append($(this)).dialog(msg.setting);
 			
-          if(msg.setting.multiLingo)
-			addLingoAttr(retMsg);
+          if(msg.setting.lingoObj!=undefined)
+		  addLingoAttr( msg.setting.lingoObj, retMsg);
 
 			
            return retMsg
