@@ -80,21 +80,24 @@ $panel.append(textarea);
  
  function writeExcel(fileSrc)
  {
-   var oXL =new ActiveXObject("Excel.Application"); //创建excel应用程序对象
-   var oWB =oXL.Workbooks.Add();       //创建工作簿
-   var oSheet =oWB.ActiveSheet;        //获取当前活动的工作簿
+   var oXL =new ActiveXObject("Excel.Application"); 
+   var oWB =oXL.Workbooks.Add();     
+   var oSheet =oWB.ActiveSheet;  
  
     $.getJSON(fileSrc, function(data){
-        var keyCell =  oSheet.Cells(1,1)//设置标题的内容
+        var keyCell =  oSheet.Cells(1,1)
         var valueCell = oSheet.Cells(1,2)
 		
 		keyCell.Value ='KEY';  
-		valueCell.Value ='VALUE';  //设置标题的内容
-		keyCell.Font.Bold =true;   //加粗
-        valueCell.Font.Bold =true;   //加粗
+		valueCell.Value ='VALUE';
+		keyCell.Font.Bold =true;
+        valueCell.Font.Bold =true;
 		
-		 keyCell.Borders(3).LineStyle = 1;
-	     valueCell.Borders(3).LineStyle = 1;
+		 keyCell.Borders(2).LineStyle = 1;
+	     valueCell.Borders(2).LineStyle = 1;
+		 keyCell.Borders(4).LineStyle = 1;
+	     valueCell.Borders(4).LineStyle = 1;
+		 
 		  keyCell.Interior.ColorIndex = 15;
 		  valueCell.Interior.ColorIndex = 15;
 		 
@@ -105,10 +108,21 @@ $panel.append(textarea);
 
           index++;
 		 
-          oSheet.Cells(index,1).Value =ii;  //设置标题的内容
-          oSheet.Cells(index,2).Value =dd;  //设置标题的内容
+		keyCell =    oSheet.Cells(index,1);
+	    valueCell =  oSheet.Cells(index,2);
+        keyCell.Value =ii;  
+        valueCell.Value =dd;
+		  
+		 keyCell.Borders(2).LineStyle = 1;
+	     valueCell.Borders(2).LineStyle = 1;
+		 keyCell.Borders(4).LineStyle = 1;
+	     valueCell.Borders(4).LineStyle = 1;
+		 
+		 keyCell.Interior.ColorIndex = 19;
+
+		  
 		  })
-		     oXL.Visible = true;//设置Excel的属性
+		     oXL.Visible = true;
   oXL.UserControl = true;
    });
  

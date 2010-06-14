@@ -7,6 +7,8 @@
  * $Date: 2010-05-31 $
  * $Rev: 002 $ fix the tooltip do not be translated issue
  * $Rev: 003 $ fix the input tag issue: use value to be key only when type =button, submit, reset
+ * $Rev: 004 $ add T function to get translated string
+ * $Rev: 005 $ add error handler for loading lingo failed
  */
 ;
 (function($)
@@ -33,10 +35,17 @@
 	  var dictionary;
 	  this.getLingo = function(){return CLingo;};
 	  //this.getDict =function(){return dictionary;};
+	  this.T = function(str){
+	    if(str!=undefined)
+		{
+			var rStr = dictionary[str];
+			return rStr==undefined?str:rStr;
+		}
+	  }
 	  this.getDict =function(){return dictionary;};
 	  //this.refresh=function($obj){ this.refreshLingo($obj); };
 	  this.refresh =function($obj){ var $p = $obj==undefined ? $('body'):$obj.parent(); $p.find('[lngType]').removeAttr('lngType');  updateDomLang($p);};
-
+    
 	  function updateDomLang_forTitle($targetObj)
 	   {
 	     var lAttr = settings.lingoTitleAttr;
@@ -55,10 +64,8 @@
 	   
 	  function updateDomLang($targetObj){
 	         $targetObj = $targetObj==undefined ? $('body'):$targetObj;
-			// var count=0;
 	         var lAttr = settings.lingoAttr;
              $('*['+  lAttr +']', $targetObj).filter('[lngType!='+ CLingo +']').each(function(){
-			// count++;
 				  var text;
 				  if($(this)[0].nodeName=="INPUT"&& (
 					$(this).attr('type')=='button'
@@ -87,12 +94,17 @@
 
               });
 			  updateDomLang_forTitle($targetObj);
-			 // alert(count);
        }
 	 
+	   this.update= function(targetLingo, callback, init){ return  this.updateLingo(targetLingo, callback, init); };
+		
 	   this.updateLingo= function(targetLingo, callback, init){
+	   
+	    var loadRes = true;
 	    if(targetLingo!=undefined)
-	    loadLingo(targetLingo);
+	       loadRes =loadLingo(targetLingo);
+		   
+		if(loadRes==false) return false;
 		
 	    var $body = $('body');
 		function ajaxCompleteHandler(a, b , c){updateDomLang();/*if(c.dataType=='html')  updateDomLang($(b.responseText); */};
@@ -115,16 +127,27 @@
 			  if(d.id==targetLingo)
 			  src = d.src;
 			});
+			
 		if(src == undefined )
 		{alert('lingo package is not exist'); return false;}
 		
+		var getLingoFlag  = true;
+		var $body = $('body');
+		var errorHandler = function(){alert('lingo package is not exist'); getLingoFlag = false;};
+
 			$.ajaxSetup({async: false});
+			$body.bind('ajaxError', errorHandler);
+			 
 			$.getJSON(src,function(data){
-	             callbackRes=1;
 	             dictionary = data;
 				 CLingo = targetLingo;
             });
-			 $.ajaxSetup({async: true});
+			
+		    $body.unbind('ajaxError', errorHandler);
+			$.ajaxSetup({async: true});
+		
+			 
+			 return getLingoFlag;
 	   }
 	   
 	   loadLingo(settings.DLingo);
