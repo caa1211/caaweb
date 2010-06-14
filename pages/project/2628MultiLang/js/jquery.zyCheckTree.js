@@ -86,6 +86,7 @@
                 liNode.append(inputNode);
                 
                 var labelNode = $(' <LABEL>' + item.title + '</LABEL>');
+				labelNode.attr('lingo', item.title);
                 liNode.append(labelNode);
                 
                 if (item.submenu != undefined) {
