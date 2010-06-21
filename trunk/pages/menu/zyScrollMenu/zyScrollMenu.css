@@ -1,5 +1,15 @@
-﻿.scrollMenu {margin:0px; border: solid 3px blue; position:absolute; left:100px;}
-.scrollMenu li {list-style-type: none; border:0px;}
+﻿	div.pane{
+		//overflow:hidden;
+		clear:left;
+		border: solid 1px black;
+		
+		width:500px;
+		height:520px;
+	}
 
-.scrollMenu .menuItem{border: solid 1px red; width:100px; height:100px;}
-.scrollMenu .menuItem .subMenu{position:absolute; left:500px;}
+.scrollMenu {margin:0px; position: absolute;}
+.scrollMenu  .focusItem{border: solid 2px black;}
+
+.scrollMenu li {list-style-type: none; border:0px;position: relative;}
+
+.scrollMenu .menuItem{border: solid 1px red; width:100px; height:100px;position: relative;}
