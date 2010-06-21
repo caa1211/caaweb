@@ -1,0 +1,31 @@
+.page {border: solid 1px blue; width:400px; height:400px;}
+
+
+#wizard {   
+    background:#fff url(/img/global/gradient/h600.png) repeat scroll 0 0;
+    border:5px solid #789;
+    font-size:12px;
+    height:450px;
+    margin:20px auto;   
+    width:1000px;
+    overflow:hidden;
+    position:relative;
+    
+    /* rounded corners for modern browsers */
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+}  
+
+
+#wizard .items {
+    width:20000em;  
+    clear:both; 
+    position:absolute;  
+}
+
+/* single item */
+#wizard .page { 
+    padding:20px 30px;
+    width:500px;
+    float:left; 
+}

@@ -10,21 +10,22 @@
 <!--
     this file includes all tools together with the jQuery library
 -->
-<link rel="stylesheet" type="text/css" href="03.css"/>
-<script src="../../../js/jquery-1.3.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="04.css"/>
+<script src="jquery.1.4.2.js"></script>
+<!--script src="../../../js/jquery-1.3.2.min.js"></script-->
 <script src="jquery.tools.min.js"></script>
-<script src="jquery.easing.1.3.js"></script>
+
 
 <script>
 $(function() {
     
     var api = $("#wizard").scrollable({
-        size: 1,
+        
         clickable: false,
         next: '.forward',
         prev: '.backward',
 		circular : true,
-        easing: 'easeInBack',
+      //  easing: 'easeInBack',
         onSeek: function() { 
         //alert("current page is " + this.getPageIndex()); 
         }, 
@@ -56,9 +57,16 @@ $(function() {
   
     <div class="items">
   <!-- pages --> 
-            <div class="page" style="background-color:#AEF;">[1111111111 Any HTML content ]</div>
-            <div class="page" style="background-color:#FEA;">[2222222222 Any HTML content ]</div>
-            <div class="page" style="background-color:#FAA;">[3333333333 Any HTML content ]</div>
+  <div class="page" >
+            <div style="background-color:#AEF;">[1111111111 Any HTML content ]</div>
+            <div  style="background-color:#FEA;">[2222222222 Any HTML content ]</div>
+			<div  style="background-color:#FAA;">[3333333333 Any HTML content ]</div>
+  </div>
+			
+            
+		 <div class="page" >	
+			<div style="background-color:#FAA;">[3333333333 Any HTML content ]</div>
+	     </div>
     </div>
  
 </div> 
