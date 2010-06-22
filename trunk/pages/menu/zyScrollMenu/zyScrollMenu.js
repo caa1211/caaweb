@@ -15,25 +15,73 @@
             parseJson: 'menu.json',
 			itemsNumPerPage: 5
         }
-        
+        var menuContainer;
         var _settings = $.extend(_defaultSetting, settings);
         var itemAry = [];
 		var defaultPage;
+        this.scrollPrev = function(){
+             /*   $container.scrollTo( {top:'+='+itemH, left:'+=0'}, 800, function(){
+                  //  debugger;
+                   var firstItem= menuContainer.find('.menuItem:first-child')
+                   firstItem.empty().remove();
+                } );*/
+                  if(menuContainer.attr('isAnim')!=undefined && menuContainer.attr('isAnim')=='true')
+                   return;
+                  var firstItem= menuContainer.find('.menuItem:first-child');
+               
+                 
+                   
+                   menuContainer.attr('isAnim', 'true');
+                   
+                   firstItem.hide(300, function(){
+                       $(this).empty().remove();
+                       menuContainer.attr('isAnim', 'false');
+                       var lastItem= menuContainer.find('.menuItem:last-child');
+                       var itemIndex = parseInt(lastItem.attr('scrollIndex'));
+                       menuContainer.append(itemAry[(itemIndex+1) %itemAry.length].clone(true));
+                   })
+                
+        };
+        
+        this.scrollNext = function(){
+             var firstItem= menuContainer.find('.menuItem:first-child');
+ 
+                   var itemIndex = parseInt(firstItem.attr('scrollIndex'));
+                   var prependItem = itemAry[(itemIndex-1+itemAry.length)%itemAry.length].clone(true);
+                   prependItem.hide(0);
+                   menuContainer.prepend(prependItem);
+                   
+                   prependItem.attr('isAnim', 'true').show(300, function(){
+                          var lastItem= menuContainer.find('.menuItem:last-child');
+                       lastItem.empty().remove();
+                   });
+                /*   firstItem.hide(300, function(){
+                       $(this).empty().remove();
+                       var itemIndex = parseInt(lastItem.attr('scrollIndex'));
+                       menuContainer.append(itemAry[(itemIndex+1) %itemAry.length].clone());
+                   })*/
+                
+        };
+        
+        var itemW, itemH;
+       
+        var $container = $(this);
         var _handler = function(){
-            var $container = $(this);
+         
 			var dPageIndex = 0;
             $.ajaxSettings.async = false;
-			var menuContainer = $('<ul class="scrollMenu"></ul>');
+			menuContainer = $('<ul class="scrollMenu"></ul>');
 			
             $.getJSON(_settings.parseJson, function(data){
 
-	
+	              var indexCounter=0;
                   $.each(data, function(i, item){ 
                     if(i=='defaultPage') {defaultPage = item;return; }//set default page
                     
                     var menuItem =  $('<li class="menuItem"></li>');
 					menuItem.attr('id', i);
-					
+					menuItem.attr('scrollIndex', indexCounter);
+                    indexCounter++;
                     var menuItemA = $('<a></a>'); 
                     menuItemA.html(item.title);
                     //to do A link
@@ -73,7 +121,7 @@
 
 		//	debugger;
 			var bfr  = Math.min( parseInt(itemAry.length / 2), parseInt(_settings.itemsNumPerPage / 2) );
-			
+		
 			var itemLength =itemAry.length;
 			
 		    menuContainer.append(itemAry[dPageIndex]);
@@ -98,12 +146,14 @@
 			$container.append(menuContainer);
 			
 			
-			//var $scrollTarget = $container.find('li.menuItem:eq('+ bfr +')');
+			var $scrollTarget = $container.find('li.menuItem:eq('+ bfr +')');
 			//$scrollTarget.css('border', 'solid 2px black')
-			//$container.stop().scrollTo( $scrollTarget , 0 );
+            itemW = $scrollTarget.width();
+            itemH = $scrollTarget.height();
+			$container.stop().scrollTo( $scrollTarget , 0 );
 			//$container.height = 
-			var itemHeight = menuContainer.find('.menuItem').height();
-			menuContainer.stop().animate( { 'top': "-=" +itemHeight*bfr}, 800);
+			//var itemHeight = menuContainer.find('.menuItem').height();
+		//	menuContainer.stop().animate( { 'top': "-=" +itemHeight*bfr}, 0);
 			//menuContainer.animate({'top':'+=100px'}, 800)
 			
 			

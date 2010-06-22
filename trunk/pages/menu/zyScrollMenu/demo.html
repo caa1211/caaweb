@@ -16,7 +16,7 @@
         {
    
    
-        $('#scrollMenuContainer').zyScrollMenu();
+        var scrollMenuObj = $('#scrollMenuContainer').zyScrollMenu();
         
         $('#btn').click(function(){
 		
@@ -31,7 +31,18 @@
 		 $paneTarget.stop().scrollTo( $target , 800 );
 //$paneTarget.stop().scrollTo(/*{top:'+=100px', left:'+=0'}*/  /*'+=100px'*/ , 800 );
         })
-                
+             
+             
+             
+             $('#naviUp').click(function(){
+                 scrollMenuObj.scrollPrev();
+                 
+             }) ;
+             
+               $('#naviDown').click(function(){
+                 scrollMenuObj.scrollNext();
+                 
+             })     
         });
   
     </script> 
@@ -39,6 +50,8 @@
 </head>
 <body>
     <button id='btn' >scroll</button>
+     <button id='naviUp' >scroll Up</button>
+     <button id='naviDown' >scroll Down</button>
     <div id='scrollMenuContainer' class='pane'>
 			
 	
