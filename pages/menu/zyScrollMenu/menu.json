@@ -1,5 +1,5 @@
  {
- 'defaultPage':"menu1-sdf",
+ 'defaultPage':"menu3-sdf",
  "menu1": {
         "title": "1",
         "switchCls": {
