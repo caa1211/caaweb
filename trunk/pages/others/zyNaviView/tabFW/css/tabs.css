@@ -1,0 +1,34 @@
+@import url("../../../css/reset.css");
+
+/* root element for tabs  */
+ul.tabs {border-bottom:4px solid #d02f32;height:30px;font-size:12px;font-weight:bold;width:90%;position:relative;margin:0 auto;margin-top:5px;}
+
+/* single tab */
+ul.tabs li { float:left;text-indent:0;padding:0;margin:0 !important;list-style-image:none !important; }
+
+/* link inside the tab. uses a background image */
+ul.tabs a {background:url(../images/tab.gif) top left no-repeat;line-height:30px;text-decoration:none;color:#333;padding:0px;margin:0px;position:relative;top:1px;padding-top:8px;padding-bottom:8px;}
+/* IE6 image */
+*html ul.tabs a {background:url(../images/tab.gif) top left no-repeat;line-height:30px;text-decoration:none;color:#333;padding:0px;margin:0px;position:relative;top:1px;padding-top:8px;padding-bottom:8px;}
+
+
+/* when mouse enters the tab move the background image */
+ul.tabs a:hover {background-position:-420px -31px;color:#000;}
+/* active tab uses a class name "current". it's highlight is also done by moving the background image. */
+ul.tabs a.current, ul.tabs a.current:hover, ul.tabs li.current a {background-position: -420px -62px; cursor:default !important; color:#fff !important;}
+
+
+/* tab width */
+ul.tabs a {background-position: 0 -0px;padding-left:15px;}
+ul.tabs a span {background-position: 0 -0px;padding-right:15px;}
+ul.tabs a:hover {background-position: 0 -31px; }
+ul.tabs a.current, ul.tabs a.current:hover {background-position: 0 -62px;padding-top:0px \9;padding-bottom:0px \9;}
+ul.tabs a.current span, ul.tabs a.current:hover span {background-image:url(../images/tab.gif);background-position:bottom right;height:30px;padding-top:8px;padding-bottom:7px;}
+
+*html ul.tabs a span {margin-left:15px;}
+*html ul.tabs a.current { background-position:0 -62px;}
+*html ul.tabs a.current:hover { background-position:0 -62px; }
+
+
+/* initially all panes are hidden */ 
+div.panes div.pane {display:none;}
