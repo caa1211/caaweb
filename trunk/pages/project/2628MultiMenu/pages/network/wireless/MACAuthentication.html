@@ -1,0 +1,101 @@
+<script language="javascript">
+function addClick() {
+$('#addnewshareBtn').click(function(){
+    
+       var db1 = window.parent.$.zyUiDialog({
+            width: 400,
+            height: 190,
+            title: 'MAC Filter Configuration'
+        });
+		var link = 'pages/network/wireless/wlan_macfilter_add.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
+        db1.dialog('open');
+    });
+ $('#deleteBtn').click(function(){
+    
+        var db1 = window.parent.$.zyUiDialog({
+            width: 450,
+            height: 190,
+            title: 'Delete sample',
+            buttons: {
+                'OK': function(){ db1.dialog('close')}
+            }
+			
+        });
+		var link = 'pages/delete.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
+        db1.dialog('open');
+    });
+}
+
+</script>
+ <form action="#" method="post">
+<div class="content_frame">
+<!--Unit Explain start-->
+<div class="explain"><div> <b class="r1"></b><b class="r2"></b> <b class="r3"></b><b class="r4"></b><b class="r4"></b></div>
+<div class="explain_text">MAC Authentication can allow or block the access of the device(s) to your wireless network. Edit the list in the table to decide the rule of the access on device(s).</div><div><b class="r4"></b> <b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b> </div></div>
+<!--Unit Explain End-->
+ <div class="data_frame"><ul>
+  <li class="set1">
+  <div class="title">General</div>
+      <div class="w_text">
+        <ul>
+            <li class="left_table">SSID :</li>
+               <li class="right_table"><select name="wlSsidIdx"></select></li>
+                  </ul>
+                  <ul>
+                  <li class="left_table">MAC Restrict Mode :</li>
+                     <li class="right_table">
+                        <input name="wlFltMacMode" type="radio" value="disabled" />Disable
+                        <input name="wlFltMacMode" type="radio" value="allow" /> Allow
+                        <input name="wlFltMacMode" type="radio" value="deny" /> Deny  </li>
+                  </ul>
+               </div>
+            </li>
+			<li class="space"></li>
+            <li class="set1">
+			<div class="title">MAC address List</div>
+			 <div class="w_table"> <input type="button" name="sysAddUserBtn" value="Add new MAC address" id="addnewshareBtn" /> </div>
+              <div class="w_table">
+  <!--Table define start-->
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_frame">
+    <tr>
+      <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td><table width="100%" cellpadding="0" cellspacing="0" >
+                <tr align="center">
+                  <td width="5%"class="top_font">#</td>
+                  <td class="top_font">MAC Address</td>
+                  <td width="60" class="top_font" style="border-right:0px;">Modify</td>
+                </tr>
+                <tr align="center">
+                  <td class="table_font">1</td>
+                  <td class="table_font">&nbsp;</td>
+                  <td class="table_font"><div class="i_modify"><ul><li ><a href="#"  id='deleteBtn' class="delete" title="Delete"></a></li></ul></div></td>
+                  </tr>
+                
+              </table></td>
+            </tr>
+          </table></td>
+        </tr>
+      </table></td>
+    </tr>
+  </table>
+</div>
+ </li>
+ <li class="space"></li>
+<!--Button define start-->
+<li class="buttonframe">
+<div class="button_position"><input name="sysSubmit" value="Apply" type="button" />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<input name="Cancel" value="Cancel" type="button" /></div>
+</li>
+<!--Button define end-->
+ </ul>
+ </div>
+ </div>
+ <br/><br/>

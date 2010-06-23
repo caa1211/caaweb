@@ -1,0 +1,403 @@
+ <div class="popup_frame" >
+    <div class="data_frame2">
+      <ul>
+        <li class="set1"><div class="title"><span class="password_word">Please follow the guidance through step 1~4 to configure a QoS rule</span> </div></li>
+        <div class="space"></div>
+         <li class="set1"><div class="title">Step1: Class Configuration</div>
+        <div class="w_text">
+          <ul>
+            <li class="all_table"><input name="rulsEnbl" id="rulsEnbl" type="checkbox" />&nbsp;Active
+            </li>
+          </ul>
+          <ul>
+            <li class="left_table">Class Name :</li>
+            <li class="right_table"><input type="text" name="clsName" id="clsName" size="22"/></li>
+          </ul>
+          <ul>
+            <li class="left_table">Classificaiton Order :</li>
+            <li class="right_table">
+              <select name="rulsOrder" id="rulsOrder" >
+              </select>
+            </li>
+          </ul>
+        </div>
+		</li>
+        <li class="space"></li>
+		<li class="set1">
+        <div class="title">Step2: Criteria configuration</div>
+        <div class="w_text">Use the configurations below to specify the characteristics of a data flow need to be managed by this QoS rule</div></li>
+		<li class="set2">
+		<div class="title2"><span class="i_title2">Source</span></div>
+          <div class="w_text">
+          <ul>
+            <li class="left_table">From Interface :</li>
+            <li class="right_table">
+              <select name="classIfc" id="classIfc" onChange="changeClassIfc();">
+              </select>
+            </li>
+          </ul>
+          <ul>
+            <li class="left_table">To Interface:</li>
+            <li class="right_table">
+              <select name="classEgressIfc" id="classEgressIfc" onChange="changeClassIfc();">
+              </select>
+            </li>
+          </ul>
+          <ul>
+            <li class="left_table">Ether Type   :</li>
+            <li class="right_table">
+              <select name="etherType" id="etherType" onChange="changeEtherType();">
+                <option value='-1'> NA</option>
+                <option value='800'> IP (0x0800)</option>
+                <option value='806'> ARP (0x0806) </option>
+                <option value='8863'> PPPoE_DISC (0x8863)</option>
+                <option value='8864'> PPPoE_SES (0x8864)</option>
+                <option value='8100'> 802.1Q (0x8100)</option>
+              </select>
+            </li>
+          </ul>
+          <ul>
+            <li class="left_table">Ether Type   :</li>
+            <li class="right_table">
+              <select name="etherTypeRoute" id="etherTypeRoute" onChange="changeEtherType();">
+                <option value='-1'> NA</option>
+                <option value='800'> IP (0x0800)</option>
+                <option value='8100'> 802.1Q (0x8100)</option>
+              </select>
+            </li>
+          </ul>
+        </div>
+        <div class="title2"><span class="i_title2">Source</span></div>
+        <div class="w_text">
+          <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td>
+                <table width="100%" cellpadding="0" cellspacing="0" style="line-height:28px;"  >
+                  <tr >
+                    <td ><center><input type="checkbox" name="srcipenbl" id="srcipenbl" onClick="checkSrcExcl();"/></center></td>
+                    <td >Address </td>
+                    <td ><input type="text" name="srcAddr" id="srcAddr" size="16" maxlength="16"/> </td>
+                    <td >Subnet Netmask</td>
+                    <td ><input type="text" name="srcMask" id="srcMask" size="16" maxlength="16"/></td>
+                    <td ><center><input type="checkbox" name="srcIpExclude" id="srcIpExclude" /> Exclude</center></td>
+                  </tr>
+                  <tr >
+                    <td ><center><input type="checkbox" name="srcportenbl" id="srcportenbl" onClick="checkSrcExcl();" /></center></td>
+                    <td >Port Range</td>
+                    <td ><input type="text" name="srcstartport" id="srcstartport" size="5" maxlength="5" value=""/>~<input type="text" name="srcendport" id="srcendport" size="5" maxlength="5" value=""/></td>
+                    <td >&nbsp;</td>
+                    <td >&nbsp;</td>
+                    <td ><center><input type="checkbox" name="srcPortExclude" id="srcPortExclude" /> Exclude</center></td>
+                  </tr>
+                  <tr>
+                    <td ><center><input type="checkbox" name="srcmacenbl" id="srcmacenbl" onClick="checkSrcExcl();"/></center></td>
+                    <td >MAC</td>
+                    <td ><input name="srcMacAddr" id="srcMacAddr" type="text" size="17" maxlength="17" value=""/></td>
+                    <td >MAC Mask</td>
+                    <td ><input type="text" name="srcMacMask" id="srcMacMask" size="17" maxlength="17" value=""/></td>
+                    <td><center><input type="checkbox" name="srcMacExclude" id="srcMacExclude" /> Exclude</center></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="title2"><span class="i_title2">Destination</span></div>
+        <div class="w_text">
+          <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td>
+                <table width="100%" cellpadding="0" cellspacing="0" style="line-height:28px;"  >
+                  <tr >
+                    <td ><center><input type="checkbox" name="dstipenbl" id="dstipenbl" onClick="checkDstExcl();"/></center></td>
+                    <td >Address </td>
+                    <td ><input type="text" name="dstAddr" id="dstAddr" size="16" maxlength="16" value=""/></td>
+                    <td >Subnet Netmask</td>
+                    <td ><input type="text" name="dstMask" id="dstMask" size="16" maxlength="16" value=""/></td>
+                    <td ><center><input type="checkbox" name="dstIpExclude" id="dstIpExclude" /> Exclude</center></td>
+                  </tr>
+                  <tr>
+                    <td ><center><input type="checkbox" name="dstportenbl" id="dstportenbl" onClick="checkDstExcl();"/></center></td>
+                    <td >Port Range</td>
+                    <td ><input type="text" name="dststartport" id="dststartport" size="5" maxlength="5" value=""/>~
+                    <input type="text" name="dstendport" id="dstendport" size="5" maxlength="5" value=""/></td>
+                    <td >&nbsp;</td>
+                    <td >&nbsp;</td>
+                    <td ><center><input type="checkbox" name="dstPortExclude" id="dstPortExclude" /> Exclude</center></td>
+                  </tr>
+                  <tr>
+                    <td ><center><input type="checkbox" name="dstmacenbl" id="dstmacenbl" onClick="checkDstExcl();"/></center></td>
+                    <td >MAC</td>
+                    <td ><input name="dstMacAddr" id="dstMacAddr" type="text" size="17" maxlength="17" value=""/></td>
+                    <td >MAC Mask</td>
+                    <td ><input type="text" name="dstMacMask" id="dstMacMask" size="17" maxlength="17" value=""/></td>
+                    <td ><center><input type="checkbox" name="dstMacExclude" id="dstMacExclude" /> Exclude</center></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="title2"><span class="i_title2">Others</span></div>
+        <div class="w_text3">
+          <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+                <table width="100%" cellpadding="0" cellspacing="0" style="line-height:28px;" >
+                  <tr >
+                    <td width="4%" ><center><input type="checkbox" name="serviceTypeenbl" id="serviceTypeenbl" value="" onClick="checkServiceExcl();" /></center></td>
+                    <td width="15%" >Service </td>
+                    <td width="50%" >
+                      <select name="serviceType" id="serviceType" >
+                        <option value="Age of Empires"> Age of Empires</option>
+                        <option value="Age of Empires II"> Age of Empires II</option>
+                        <option value="Age of Empires III"> Age of Empires III</option>
+                        <option value="Age of Mythology"> Age of Mythology</option>
+                        <option value="Alien vs. Predator 2"> Alien vs. Predator 2</option>
+                        <option value="Asherons Call"> Asheron's Call</option>
+                        <option value="Baldurs Gate"> Baldur's Gate</option>
+                        <option value="Baldurs Gate II"> Baldur's Gate II</option>
+                        <option value="Battlefield 1942"> Battlefield 1942</option>
+                        <option value="Battlefield Vietnam"> Battlefield Vietnam</option>
+                        <option value="Battlestations Midway"> Battlestations Midway</option>
+                        <option value="Black and White"> Black and White</option>
+                        <option value="Call of Duty"> Call of Duty</option>
+                        <option value="Call of Duty - United Offensive"> Call of Duty - United Offensive</option>
+                        <option value="Call of Duty 2"> Call of Duty 2</option>
+                        <option value="Call of Duty 4"> Call of Duty 4</option>
+                        <option value="Civilization III"> Civilization III</option>
+                        <option value="Civilization IV"> Civilization IV</option>
+                        <option value="Close Combat"> Close Combat</option>
+                        <option value="Close Combat III: The Russian Front"> Close Combat III: The Russian Front</option>
+                        <option value="Close Combat IV"> Close Combat IV</option>
+                        <option value="Close Combat V"> Close Combat V</option>
+                        <option value="Command and Conquer 3 TW"> Command and Conquer 3 TW</option>
+                        <option value="Command and Conquer Generals"> Command and Conquer Generals</option>
+                        <option value="Dark Reign 2"> Dark Reign 2</option>
+                        <option value="Delta Force"> Delta Force</option>
+                        <option value="Delta Force II"> Delta Force II</option>
+                        <option value="Diablo"> Diablo</option>
+                        <option value="Diablo II"> Diablo II</option>
+                        <option value="DirecX 7-8 Games"> DirecX 7-8 Games</option>
+                        <option value="Doom I-II-III"> Doom I-II-III</option>
+                        <option value="Dune 2000"> Dune 2000</option>
+                        <option value="Dungeons and Dragons Online"> Dungeons & Dragons Online</option>
+                        <option value="F-16 Mig. 29"> F-16 Mig. 29</option>
+                        <option value="F-22 Lightning 3"> F-22 Lightning 3</option>
+                        <option value="F-22 Raptor"> F-22 Raptor</option>
+                        <option value="Fighter Ace II"> Fighter Ace II</option>
+                        <option value="Flight Simulator 2000 - 2002"> Flight Simulator 2000 - 2002</option>
+                        <option value="Flight Simulator 2004"> Flight Simulator 2004</option>
+                        <option value="GameSpy"> GameSpy</option>
+                        <option value="Ghost Recon: Advanced Warfighter 2"> Ghost Recon: Advanced Warfighter 2</option>
+                        <option value="GNUtella"> GNUtella</option>
+                        <option value="Guild Wars"> Guild Wars</option>
+                        <option value="Half Life"> Half Life</option>
+                        <option value="Half Life II"> Half Life II</option>
+                        <option value="Halo - Combat Evolved"> Halo - Combat Evolved</option>
+                        <option value="Heretic II"> Heretic II</option>
+                        <option value="Hexen II"> Hexen II</option>
+                        <option value="Kali"> Kali</option>
+                        <option value="KaZaA"> KaZaA</option>
+                        <option value="Lord of the Rings Online"> Lord of the Rings Online</option>
+                        <option value="Lord of the Rings: Battle for Middle Earth"> Lord of the Rings: Battle for Middle Earth</option>
+                        <option value="Lord of the Rings: Battle for Middle Earth 2"> Lord of the Rings: Battle for Middle Earth 2</option>
+                        <option value="Lord of the Rings: War of the Rings"> Lord of the Rings: War of the Rings</option>
+                        <option value="Madden 06"> Madden 06</option>
+                        <option value="Madden 07"> Madden 07</option>
+                        <option value="MechWarrior 4"> MechWarrior 4 - Black Knight / Mercenaries / Vengeance</option>
+                        <option value="MSN Gaming Zone"> MSN Gaming Zone</option>
+                        <option value="Need For Speed 3"> Need For Speed 3</option>
+                        <option value="Need for Speed Porsche"> Need for Speed Porsche</option>
+                        <option value="Outlaws"> Outlaws</option>
+                        <option value="Rainbow 6"> Rainbow 6</option>
+                        <option value="Rouge Spear"> Rouge Spear</option>
+                        <option value="Starcraft"> Starcraft</option>
+                        <option value="Star Wars"> Star Wars</option>
+                        <option value="Supreme Commander"> Supreme Commander</option>
+                        <option value="Tabula Rasa"> Tabula Rasa</option>
+                        <option value="Tiberian Sun"> Tiberian Sun</option>
+                        <option value="Ultima"> Ultima</option>
+                        <option value="Quake 3 Server"> Quake 3 Server</option>
+                        <option value="Quake 2 Server"> Quake 2 Server</option>
+                        <option value="World of Warcraft"> World of Warcraft</option>
+                        <option value="Sony PS-2 - PS-3"> Sony PS-2 / PS-3</option>
+                        <option value="Nintendo Wii"> Nintendo Wii</option>
+                        <option value="Xbox 360"> Xbox 360</option>
+                        <option value="DirecTV Receiver 1"> DirecTV Receiver 1</option>
+                        <option value="DirecTV Receiver 2"> DirecTV Receiver 2</option>
+                        <option value="DirecTV Receiver 3"> DirecTV Receiver 3</option>
+                        <option value="ITunes Music Share"> ITunes Music Share</option>
+                        <option value="Net2Phone"> Net2Phone</option>
+                        <option value="NetFone"> NetFone</option>
+                        <option value="Slingbox"> Slingbox</option>
+                        <option value="Quick Time 4 Server"> Quick Time 4 Server</option>
+                        <option value="Webphone"> Webphone</option>
+                        <option value="Gnutella"> Gnutella</option>
+                        <option value="PC Anywhere"> PC Anywhere</option>
+                        <option value="Remote Anything"> Remote Anything</option>
+                        <option value="Remote AnyWhere"> Remote AnyWhere</option>
+                        <option value="Remote Desktop Connection"> Remote Desktop Connection</option>
+                        <option value="Windows 2000 Terminal"> Windows 2000 Terminal</option>
+                        <option value="IPSec"> IPSec</option>
+                        <option value="L2TP"> L2TP</option>
+                        <option value="PPTP"> PPTP</option>
+                        <option value="Shiva VPN"> Shiva VPN</option>
+                        <option value="DNS Server"> DNS Server</option>
+                        <option value="FTP Server"> FTP Server</option>
+                        <option value="LDAP Server"> LDAP Server</option>
+                        <option value="POP2 Mail Server"> POP2 Mail Server</option>
+                        <option value="POP3 Mail Server"> POP3 Mail Server</option>
+                        <option value="NNTP Server"> NNTP Server</option>
+                        <option value="SMTP Mail Server"> SMTP Mail Server</option>
+                        <option value="Telnet Server"> Telnet Server</option>
+                        <option value="Web Server"> Web Server</option>
+                      </select>
+                    </td>
+                    <td>&nbsp</td>
+                    <td width="14%" ><center><input type="checkbox" name="serviceTypeExclude" id="serviceTypeExclude" />Exclude</center></td>
+                  </tr>
+                  <tr >
+                    <td><center><input type="checkbox" name="protenbl" id="protenbl" onclick="changeProtocol();" /></center></td>
+                    <td >IP protocol</td>
+                    <td >
+                      <select name="protocol" id="protocol" onchange="changeProtocol();">
+                        <option value='6' > TCP</option>
+                        <option value='17'> UDP</option>
+                        <option value='1'> ICMP</option>
+                        <option value='2'> IGMP</option>
+                        <option value='-2'>User Defined</option>
+                      </select>
+                      <input type="text" name="cfgprotocol" id="cfgprotocol" size="5" maxlength="5" value=""/>
+                    </td>
+                    <td >
+                      &nbsp
+                    </td>
+                    <td ><center><input type="checkbox" name="protExclude" id="protExclude" />Exclude</center></td>
+                  </tr>
+                  <tr ><td ><center><input type="checkbox" name="ipoptionlistenbl" id="ipoptionlistenbl" onClick="checkOthersExcl();"/></center></td>
+                    <td >DHCP </td>
+                    <td >
+                      <select name="ipOptionList" id="ipOptionList" >
+                      <option value='1'>Vendor Class ID (DHCP Option 60)</option>
+                      <option value='2'>User Class ID (DHCP option 77)</option>
+                      </select>
+                      <input type="text" name="ipOptionValue" id="ipOptionValue" size="10" maxlength="10"/></td>
+                    </td>
+                    <td>
+                      &nbsp
+                    <td ><center><input type="checkbox" name="ipOptionExclude" id="ipOptionExclude" /> Exclude</center></td>
+                  </tr>
+                  <tr >
+                    <td ><center><input type="checkbox" name="pktlenenbl" id="pktlenenbl" onClick="checkOthersExcl();"/></center></td>
+                    <td >Packet Length </td>
+                    <td ><input type="text" name="startpktlen" id="startpktlen" size="5" maxlength="5"/>~
+                    <input type="text" name="endpktlen" id="endpktlen" size="5" maxlength="5"/></td>
+                    <td >&nbsp </td>
+                    <td ><center><input type="checkbox" name="pktLenExclude" id="pktLenExclude" value="Active"/> Exclude</center></td>
+                  </tr>
+                  <tr>
+                    <td ><center><input type="checkbox" name="cfgdscpenbl" id="cfgdscpenbl"  onClick="checkOthersExcl();"/></center></td>
+                    <td >DSCP </td>
+                    <td ><input type="text" name="dscpCheck" id="dscpCheck" size="5" maxlength="2"/>(0~63)</td>
+                    <td >&nbsp </td>
+                    <td ><center><input type="checkbox" name="dscpExclude" id="dscpExclude" /> Exclude</center></td>
+                  </tr>
+                  <tr>
+                    <td ><center><input type="checkbox" name="vlan8021penbl" id="vlan8021penbl" onClick="checkOthersExcl();"/></center></td>
+                    <td >802.1P</td>
+                    <td >
+                      <select name="vlan8021p" id="vlan8021p">
+                        <option value='0' selected="selected">0 BE</option>
+                        <option value='1'>1 BK</option>
+                        <option value='2'>2 SPARE</option>
+                        <option value='3'>3 EE</option>
+                        <option value='4'>4 CL</option>
+                        <option value='5'>5 VI</option>
+                        <option value='6'>6 VO</option>
+                        <option value='7'>7 NC</option>
+                      </select>
+                    </td>
+                    <td >&nbsp </td>
+                    <td ><center><input type="checkbox" name="etherPrioExclude" id="etherPrioExclude" /> Exclude</center></td>
+                  </tr>
+                  <tr>
+                    <td ><center><input type="checkbox" name="vlanidenbl" id="vlanidenbl" onClick="checkOthersExcl();"/></center></td>
+                    <td >VLAN ID</td>
+                    <td ><input type="text" name="vlanID" id="vlanID" size="5" maxlength="4"/> 
+                    (1~4095)</td>
+                    <td >&nbsp </td>
+                    <td ><center><input type="checkbox" name="vlanIDExclude" id="vlanIDExclude" /> Exclude</center></td>
+                  </tr>
+                  <tr>
+                    <td ><center><input type="checkbox" name="tcpAck" id="tcpAck" onClick="checkOthersExcl();"/></center></td>
+                    <td >TCP ACK</td>
+                    <td >&nbsp;</td>
+                    <td >&nbsp </td>
+                    <td ><center><input type="checkbox" name="tcpAckExclude" id="tcpAckExclude" /> Exclude</center></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div></li>
+        <div class="space"></div>
+		<li class="set1">
+        <div class="title">Step3: Packet modification</div>
+        <div class="w_text">The content of the packet can be modified by applying the following settings:</div></li>
+        <li class="set2">
+		<div class="w_text">
+          <ul>
+            <li class="left_table">DSCP Mark   :</li>
+            <li class="right_table">
+              <select name="dscp" id="dscp" onChange="changeDscp();">
+                <option value="-1" selected="selected">Unchange</option>
+                <option value="-3">Mark</option>
+              </select>
+              <input type="text" name="dscpMark" id="dscpMark" size="5" maxlength="2" />
+              <font class="strNote">(0~63)</font>
+            </li>
+          </ul>
+          <ul>
+            <li class="left_table">802.1P Mark   :</li>
+            <li class="right_table">
+              <select name="wanVlan8021p" id="wanVlan8021p">
+                <option value='-1' selected="selected">Unchange</option>
+                <option value='0'>0 BE</option>
+                <option value='1'>1 BK</option>
+                <option value='2'>2 SPARE</option>
+                <option value='3'>3 EE</option>
+                <option value='4'>4 CL</option>
+                <option value='5'>5 VI</option>
+                <option value='6'>6 VO</option>
+                <option value='7'>7 NC</option>
+              </select>
+            </li>
+          </ul>
+          <ul>
+            <li class="left_table">VLAN ID   :</li>
+            <li class="right_table">
+              <select name="wanVlanIDList" id="wanVlanIDList" onChange="changeWanVlanIDlist();">
+                <option value="-1" selected="selected">Unchange </option>
+                <option value="2">Remark </option>
+                <option value="1" >Add </option>
+                <option value="3">Remove </option>
+              </select>
+              <input type="text" name="wanVlanID" id="wanVlanID" size="5" maxlength="4"/>
+              <font class="strNote">(1~4095)</font></li>
+          </ul>
+        </div></li>
+        <div class="space"></div>
+		 <li class="set1">
+        <div class="title">Step4: Outgoing queue selection</div>
+        <div class="w_text">Outgoing queue decide the priority of the traffic and how traffic should be shaped in the WAN inteface. Choose "None" if you don't want to apply outgoing queue</div>         </li>
+		<li class="set2">
+        <div class="w_text">
+          <ul>
+            <li class="left_table">To Queue Index  :</li>
+            <li class="right_table"><select name="queueKey" id="queueKey" > </select>
+            </li>
+          </ul>
+        </div></li>
+      </ul>
+    </div>
+  </div><br /><br />

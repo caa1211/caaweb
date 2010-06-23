@@ -1,0 +1,216 @@
+<div class="popup_frame" >
+<div class="data_frame2"><ul>
+<li class="set1"> 
+<div class="title">General</div>
+ <div class="w_text">
+			  <ul>
+				<li class="left_table"> Name :</li><li class="right_table"><input type="text" name="sysFirDNSAddr22" size="15" maxlength="15"/>
+				</li>
+			  </ul>
+			  <ul>
+				<li class="left_table"> Type :</li>
+				<li class="right_table">
+				  <select name="wan_Mode" size="1">
+					<option value="00000000" selected="selected">VDSL </option>
+					<option value="00000001">ADSL </option>
+					<option value="00000002">EtherWAN </option>
+				  </select>
+				</li>
+			  </ul>
+			  <ul>
+				<li class="left_table"> Mode :</li>
+				<li class="right_table">
+				  <select name="wan_Mode" size="1">
+					<option value="00000000" selected="selected">Routing </option>
+					<option value="00000001">Bridge </option>
+				  </select>
+				</li>
+			  </ul>
+			</div>
+	</li>
+<li class="space"></li>
+<li class="set1">
+  <div class="title">PPP Information</div>
+			<div class="w_text">
+			  <ul>
+				<li class="left_table">PPP User Name : </li>
+				<li class="right_table">
+				  <input type="text" name="sysPPPUsername" size="15" maxlength="15" value="cpesw1" />
+				</li>
+			  </ul>
+			  <ul>
+				<li class="left_table">PPP Password : </li>
+				<li class="right_table">
+				  <input type="text" name="sysPPPPwd" size="15" maxlength="15" value="1234" />
+				</li>
+			  </ul>
+			  <ul>
+				<li class="left_table">PPP Auto Connect : </li>
+				<li class="right_table">
+				  <input type="checkbox" name="autoconnect" />
+				</li>
+			  </ul>
+			  <ul>
+				<li class="left_table">IDLE Timeout [seconds]: </li>
+				<li class="right_table">
+				  <input type="text" name="sysidletimeout" size="15" maxlength="15" value="300" />
+				</li>
+			  </ul>
+			  <ul>
+				<li class="left_table">PPPoE Service Name : </li>
+				<li class="right_table">
+				  <input type="text" name="sysPPPServiceName" size="15" maxlength="15" value="MSGSW2" />
+				</li>
+			  </ul>
+			  <ul>
+				<li class="left_table">PPPoE Passthrough : </li>
+				<li class="right_table">
+				  <input type="checkbox" name="pppoepassthrough" />
+				</li>
+			  </ul>
+			</div></li>
+			<li class="space"></li>
+<li class="set1">  
+<div class="title">IP Address</div>
+<div class="w_text">
+  <ul>
+	<li class="all_table">
+	  <input type="radio" checked="checked" value="0"  name="WAN_IP_Auto" />
+	  &nbsp;Obtain an IP Address Automatically</li>
+  </ul>
+  <ul>
+	<li class="all_table">
+	  <input type="radio" value="1" name="WAN_IP_Auto" />
+	  &nbsp;Static IP Address</li>
+  </ul>
+  <ul>
+	<li class="left_table">IP Address : </li>
+	<li class="right_table">
+	  <input maxlength="15" size="15" value="0.0.0.0" name="WAN_IPAddr4" />
+	</li>
+  </ul>
+  <ul>
+	<li class="left_table">Subnet Mask  : </li>
+	<li class="right_table">
+	  <input  maxlength="15" size="15" value="0.0.0.0" name="WAN_IPAddr42" />
+	</li>
+  </ul>
+  <ul>
+	<li class="left_table">Gateway IP address : </li>
+	<li class="right_table">
+	  <input  maxlength="15" size="15" value="0.0.0.0" name="WAN_IPAddr432" />
+	</li>
+  </ul>
+</div>
+</li>
+<li class="space"></li>
+<li class="set1">
+<div class="title">Routing Feature</div>
+ <div class="w_text">
+			  <ul>
+				<li class="left_table">NAT Enable : </li>
+				<li class="right_table">
+				  <input type="checkbox" name="authenticate" />
+				</li>
+			  </ul>
+			  <ul>
+				<li class="left_table">IGMP Proxy Enable : </li>
+				<li class="right_table">
+				  <input type="checkbox" name="authenticate" />
+				</li>
+			  </ul>
+			  <ul>
+				<li class="left_table">Apply as Default Gateway : </li>
+				<li class="right_table">
+				  <input type="checkbox" name="sysdefaultgw" />
+				</li>
+			  </ul>
+			</div>
+</li>
+<li class="space"></li>
+<li class="set1"> 
+<div class="title">DNS server</div>
+<div class="w_text">
+			  <ul>
+				<li class="left_table">First DNS Server :</li>
+				<li class="right_table">
+				  <select name="WAN_sysFirstDNS" size="1" rpputtype="Function">
+					<option value="00000000" selected="selected">Obtained From ISP </option>
+					<option value="00000001">UserDefined </option>
+					<option value="00000002">None </option>
+				  </select>
+				  <input type="text" name="sysFirDNSAddr" size="15" maxlength="15" value="0.0.0.0" />
+				</li>
+			  </ul>
+			  <ul>
+				<li class="left_table">Second DNS Server :</li>
+				<li class="right_table">
+				  <select name="select2" size="1" rpputtype="Function" >
+					<option value="00000000" selected="selected">Obtained From ISP </option>
+					<option value="00000001">UserDefined </option>
+					<option value="00000002">None </option>
+				  </select>
+				  <input type="text" name="sysFirDNSAddr2" size="15" maxlength="15" value="0.0.0.0"  />
+				</li>
+			  </ul>
+			  <ul>
+				<li class="left_table">Third DNS Server :</li>
+				<li class="right_table">
+				  <select name="select3" size="1" rpputtype="Function">
+					<option value="00000000" selected="selected">Obtained From ISP </option>
+					<option value="00000001">UserDefined </option>
+					<option value="00000002">None </option>
+				  </select>
+				  <input type="text" name="sysFirDNSAddr3" size="15" maxlength="15" value="0.0.0.0" />
+				</li>
+			  </ul>
+			</div>
+</li>
+<li class="space"></li>
+<li class="set1"> 
+<div class="title">VLAN</div>
+<div class="w_text">
+			  <ul>
+				<li class="left_table">Active : </li>
+				<li class="right_table">
+				  <input type="checkbox" name="authenticate" />
+				</li>
+			  </ul>
+			  <ul>
+				<li class="left_table">802.1p :</li>
+				<li class="right_table">
+				  <select name="select4" size="1" rpputtype="Function">
+					<option selected="selected">0 </option>
+					<option>1 </option>
+					<option>2 </option>
+					<option>3 </option>
+					<option>4 </option>
+					<option>5 </option>
+					<option>6 </option>
+					<option>7 </option>
+				  </select>
+				</li>
+			  </ul>
+			  <ul>
+				<li class="left_table">802.1q :</li>
+				<li class="right_table">
+				  <input type="text" name="sysFirDNSAddr222" size="15" maxlength="15"/>
+				</li>
+			  </ul>
+			</div>
+</li>
+<li class="space"></li>
+<li class="set1"> 
+<div class="title">QoS</div>
+<div class="w_text">
+			<ul>
+			  <li class="left_table">Rate Limit :</li>
+			  <li class="right_table">
+				<input type="text" name="sysRateLimit22" size="15" maxlength="15" />
+				kbps</li>
+			</ul>
+		  </div>
+</li><li class="space"> </li>
+</ul>
+</div>
+</div>

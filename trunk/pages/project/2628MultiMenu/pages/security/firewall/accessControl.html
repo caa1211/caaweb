@@ -1,0 +1,95 @@
+<script type="text/javascript">
+$(function(){
+     $('input[name="Fw_Add"]').click(function(){
+
+        var db1 = window.parent.$.zyUiDialog({
+            width: 700,
+            height:350,
+            title: 'Add New ACL Rule'
+        });
+        var link = 'pages/security/firewall/accessControl_add.html';
+        db1.load(link);
+        db1.dialog('open');
+       });
+       
+       $('#editBtn').click(function(){
+
+        var db1 = window.parent.$.zyUiDialog({
+            width: 700,
+            height:350,
+            title: 'ACL Rule Edit'
+        });
+        var link = 'pages/security/firewall/accessControl_add.html';
+        db1.load(link);
+        db1.dialog('open');
+       });  
+})
+ </script>
+<div class="content_frame" >
+<!--Unit Explain start-->
+<div class="explain">
+<div><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b><b class="r4"></b></div>
+<div class="explain_text">An ACL rule is a manually defined rule to accept, reject, or drop the incoming or outgoing data of the your network.</div>
+<div><b class="r4"></b><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></div></div>
+<!--Unit Explain End-->
+<!--Set area start-->
+<div class="data_frame"><ul>
+<li class="set1">
+<div class="w_text">
+  <ul>
+    <li class="left_table">DoS Protection 
+          Blocking   :</li>
+    <li class="right_table">
+      <input  id="radio" type="radio" value="enable" checked="checked" />
+      Enable
+      <input  id="radio2" type="radio" value="disable" />
+      Disable (settings are invalid when disabled)</li>
+  </ul>
+</div>
+<li class="set1">
+  <div class="w_table"><input name="Fw_Add" id="Fw_Add" type="button" value="Add new ACL rule" /></div>
+<div class="w_table">
+  <!--Table define start--><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_frame">
+    <tr>
+      <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+
+			<td><table width="100%" cellpadding="0" cellspacing="0" id='tbl'>
+			<tr align="center">
+			<td width="5%" valign="top" class="top_font">#</td>
+			<td valign="top" class="top_font">Src IP</td>
+			<td valign="top" class="top_font">Dst IP</td>
+			<td valign="top" class="top_font">Protocol</td>
+			<td valign="top" class="top_font">Direction</td>
+			<td valign="top" class="top_font">Action</td>
+			<td class="top_font" width="60" style="border-right:0px;">Modify</td>
+			</tr>
+           <tr align="center">
+            <td class="table_font">1</td>
+            <td class="table_font">--</td>
+            <td class="table_font">--</td>
+            <td class="table_font">--</td>
+            <td class="table_font">--</td>
+            <td class="table_font">--</td>
+            <td class="table_font"><div class="i_modify"><ul><li ><a href="#"  id='editBtn' class="edit" title="edit"></a></li></ul></div></td>
+          </tr>
+
+              </table></td>
+            </tr>
+          </table></td>
+        </tr>
+      </table></td>
+    </tr>
+  </table>
+</div><!--Table define end-->
+</li>
+<li class="space"> </li>
+<!--Button define start-->
+<li class="buttonframe"><div class="button_position"><input name="sysSubmit" value="Apply" type="submit" />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<input name="Cancel" value="Cancel" type="reset" /></div></li>
+<!--Button define end-->
+</ul>
+</div>
+</div>
+<br /><br />

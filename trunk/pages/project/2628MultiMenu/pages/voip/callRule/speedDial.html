@@ -1,0 +1,119 @@
+<script type="text/javascript">
+$(function(){
+    $('#deleteBtn').click(function(){
+    
+        var db1 = window.parent.$.zyUiDialog({
+            width: 450,
+            height: 190,
+            title: 'Delete sample',
+            buttons: {
+                'OK': function(){ db1.dialog('close')}
+            }
+			
+        });
+		var link = 'pages/delete.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
+        db1.dialog('open');
+    });
+});
+ </script>
+<div class="content_frame" >
+<!--Unit Explain start-->
+<div class="explain">
+<div><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b><b class="r4"></b></div>
+<div class="explain_text">When certain phone numbers are dialed on a regular basis, Speed Dial accelerates dialing process. The following rules apply to all the phone device connected to this device.</div>
+<div><b class="r4"></b><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></div></div>
+<!--Unit Explain End-->
+<!--Set area start-->
+<div class="data_frame"><ul>
+<li class="set1">
+<div class="title">Speed Dial</div>
+<div class="w_table">
+  <!--Table define start-->
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_frame">
+    <tr>
+      <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" >
+        <tr>
+          <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td><table width="100%" cellpadding="0" cellspacing="0" style="table-layout:fixed;">
+                <tr align="center" valign="top">
+                  <td width="5%" class="top_font">#</td>
+                  <td class="top_font">Number</td>
+                  <td class="top_font">Description</td>
+                  <td width="10%"class="top_font">SIP Number</td>
+                  </tr>
+                <tr align="center">
+                  <td class="table_font"><select name="select2">
+                    <option>#01</option>
+                    <option>#02</option>
+                    <option>#03</option>
+                    <option>#04</option>
+                    <option>#05</option>
+                    <option>#06</option>
+                    <option>#07</option>
+                    <option>#08</option>
+                    <option>#09</option>
+                    <option>#10</option>
+                  </select></td>
+                  <td class="table_font"><input type="text" name="setDescription2"/></td>
+                  <td class="table_font"><input type="text" name="setDescription"/></td>
+                  <td class="table_font"><input type="submit" name="add" value="Add" /></td>
+                  </tr>
+                
+              </table></td>
+            </tr>
+          </table></td>
+        </tr>
+      </table></td>
+    </tr>
+  </table>
+</div></li>
+<li class="space"></li>
+<li class="set1">
+<div class="title">Phone Book</div>
+<div class="w_table">
+  <!--Table define start-->
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_frame">
+    <tr>
+      <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" >
+        <tr>
+          <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td><table width="100%" cellpadding="0" cellspacing="0" style="table-layout:fixed;">
+                <tr align="center" valign="top">
+                  <td width="5%" class="top_font">#</td>
+                  <td class="top_font">Number</td>
+                  <td class="top_font">Description</td>
+                  <td width="60"  class="top_font" style="border-right:0px;">Modify</td>
+                </tr>
+                <tr align="center">
+                  <td class="table_font">1</td>
+               <td  class="table_font">5001</td>
+                  <td  class="table_font">SIP-1 (1234567)</td>
+                  <td class="table_font"><div class="i_modify">
+                    <ul>
+                      <li><a href="#" class="edit" id='editBtn' title="Edit"></a></li>
+                      <li ><a href="#"  id='deleteBtn' class="delete" title="Delete"></a></li>
+                    </ul>
+                  </div></td>
+                </tr>
+              </table></td>
+            </tr>
+          </table></td>
+        </tr>
+      </table></td>
+    </tr>
+  </table>
+</div>
+</li>
+<li class="space"> </li>
+<!--Button define start-->
+<li class="buttonframe"><div class="button_position"><input name="sysSubmit" value="Apply" type="submit" />&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<input name="Cancel" value="Cancel" type="reset" /></div></li>
+<!--Button define end-->
+</ul>
+</div>
+</div>
+<br/><br/>

@@ -1,0 +1,37 @@
+
+<div class="popup_frame" >
+<div class="data_frame2"><ul>
+ <li class="set1">
+  <div class="title">Config </div> 
+   <div class="w_text">
+     <input type="checkbox" name="FWRCfg_Active" value="FWRCfg_Active" />
+     Active </div>
+   <div class="w_text">Action for Matched Packets :
+     <select name="FWRCfg_Action">
+         <option selected="selected">Permit</option>
+         <option>Drop</option>
+         <option>Reset</option>
+       </select>
+   </div>
+ </li>
+    <li class="space"></li>
+ <li class="set1">
+   <div class="title">Port Configuration </div> 
+   <div class="w_text">
+     <ul><li class="left_table">Type :</li>
+       <li class="right_table">
+         <input name="CustomConfigSingle" value="Single_0" checked="checked"  type="radio" />
+Single&nbsp;&nbsp;
+<input name="CustomConfigSingle" value="Single_1" type="radio" />Port Range</li>
+     </ul>
+     <ul>
+       <li class="left_table">Port Number :</li>
+       <li class="right_table">
+         From <input name="CustomConfigPort1" size="5" maxlength="5" value="0" onblur="decide_IPClick(this.form);" onkeypress="chk_num(event)" type="text" /> &nbsp; To&nbsp;
+<input name="CustomConfigPort2" size="5" maxlength="5" value="0" onfocus="RangeFocus(this.form);" onkeypress="chk_num(event)" type="text" /></li>
+     </ul>
+   </div>
+ </li>
+</ul>
+</div>
+</div>

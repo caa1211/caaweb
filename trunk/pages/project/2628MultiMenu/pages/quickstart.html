@@ -1,0 +1,219 @@
+<link rel="stylesheet" type="text/css" href="css/quickstart.css"></link>
+<script type="text/javascript">
+$(function(){
+  
+  function updateCheckRadio(){
+	var infoCheck = $('input[name=r1]:checked').val();
+	if (infoCheck == 'yes') {
+		$("#yesinfo").show();
+		$("#noinfo").hide();
+	} else if (infoCheck == 'no') {
+		$("#yesinfo").hide();
+		$("#noinfo").show();
+	}
+  }
+  
+  updateCheckRadio();
+  
+  $("input[name='r1']").click(function(){
+	updateCheckRadio();
+  });
+  
+  function checkSip2(){
+    $("#sip2").hide();
+	var sip2Select = $("#sip2Check").attr('checked');
+	if(sip2Select==true){
+	  $("#sip2").show();
+	} else {
+	  $("#sip2").hide();
+	}
+  }
+
+  checkSip2();
+  
+  $("#sip2Check").click(function() {
+	checkSip2();
+  });
+	 
+  $('#cancelBtn').click(function() {
+	 window.location='index.html';
+  });
+  
+  $('#closeBtn').click(function() {
+	 window.location='index.html';
+  });
+
+});
+-->
+</script>
+<div class="wrap">
+   <!-- Internet Setting Beginning -->
+   <div id="internetsetting" class='state'>
+     <div class="qs_headline">Internet Connection<div class="step">Step 1 of 3</div></div>
+     <div class="qs_content">
+       <div id="pppoe">
+         <p>The current connection type is set to PPPoE and needs a user name and password to get online.</p>
+         <table width="100%" border="0" cellspacing="0" cellpadding="0">
+           <tr>
+             <td width="40%">User Name:</td>
+             <td><input type="text" name="textfield" id="textfield" /></td>
+           </tr>
+           <tr>
+             <td>Password:</td>
+             <td><input type="password" name="textfield2" id="textfield2" /></td>
+           </tr>
+           <tr>
+             <td>Verify Password:</td>
+             <td><input type="password" name="textfield3" id="textfield3" /></td>
+           </tr>
+         </table>
+         <p>&nbsp;</p>
+         <p>Is there specific IP address information from your Internet Service Provider (ISP)?</p>
+       </div>
+       <div id="ethernet" style="display:none;">
+         <p>The current connection type is set to Ethernrt. Is there specific IP address information from your Internet Service Provider (ISP)?</p>
+       </div>
+       <p>
+         <input name="r1" type="radio" id="radio" value="yes" />
+         Yes &nbsp;&nbsp;&nbsp;&nbsp;
+         <input name="r1" type="radio" id="radio2" value="no" checked="checked" />
+         No</p>
+       <table width="100%" border="0" cellspacing="0" cellpadding="0" id="yesinfo">
+         <tr>
+           <td width="40%" class="indent">IP Address:</td>
+           <td><input type="text" name="textfield4" id="textfield4" /></td>
+         </tr>
+         <tr>
+           <td class="indent">Subnet Mask:</td>
+           <td><input type="password" name="textfield4" id="textfield5" /></td>
+         </tr>
+         <tr>
+           <td class="indent">Default Gateway:</td>
+           <td><input type="password" name="textfield4" id="textfield6" /></td>
+         </tr>
+         <tr>
+           <td class="indent">Primary DNS Server:</td>
+           <td><input type="password" name="textfield5" id="textfield7" /></td>
+         </tr>
+         <tr>
+           <td class="indent">Secondary DNS Server:</td>
+           <td><input type="password" name="textfield6" id="textfield8" /></td>
+         </tr>
+       </table>
+       <p class="indent" id="noinfo">Then the IP Address information will be dynamically assigned to you from your ISP.</p>
+     </div>
+   </div>
+   <!-- Internet Setting Ending -->
+   <!-- Wireless Setting Beginning -->
+   <div id="wirelesssetting" style="display:none;" class='state'>
+     <div class="qs_headline">Wireless Setting<div class="step">Step 2 of 3</div></div>
+     <div class="qs_content">
+       <p>The following settings are the current wireless settings which your wireless client devices need in order to get connected to this device.</p>
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td width="40%">Wireless Service:</td>
+           <td><input name="r2" type="radio" id="radio3" value="radio3" checked="checked" />
+             Enable &nbsp;&nbsp;&nbsp;&nbsp;
+              <input type="radio" name="r2" id="radio4" value="radio3" />
+              Disable</td>
+         </tr>
+         <tr>
+           <td>Wireless Network Name (SSID):</td>
+           <td>zyxel</td>
+         </tr>
+         <tr>
+           <td>Security:</td>
+           <td>WPA2</td>
+         </tr>
+         <tr>
+           <td>Password:</td>
+           <td>1234567</td>
+         </tr>
+       </table>
+     </div>
+   </div>
+   <!-- Wireless Setting Ending -->
+   <!-- VoIP Beginning -->
+   <div id="voipsetting" style="display:none;" class='state'>
+     <div class="qs_headline">Internet Phone Call (VoIP)<div class="step">Step 3 of 3</div></div>
+     <div class="qs_content">
+       <p>In order to make Internet calls, the following SIP and account information is essential. Consult your VoIPService Provider if you need any help.</p>
+       <p class="item">SIP1 Settings</p>
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td width="40%" class="indent">SIP Number:</td>
+           <td><input name="textfield9" type="text" id="textfield9" value="070123456789" /></td>
+         </tr>
+         <tr>
+           <td class="indent">SIP Server Address:</td>
+           <td><input name="textfield7" type="text" id="textfield10" value="0.0.0.0" /></td>
+         </tr>
+         <tr>
+           <td class="indent">SIP Service Domain:</td>
+           <td><input name="textfield8" type="text" id="textfield11" value="sip.aaa.ocm" /></td>
+         </tr>
+         <tr>
+           <td class="indent">User Name:</td>
+           <td><input name="textfield10" type="text" id="textfield12" value="zyxel" /></td>
+         </tr>
+         <tr>
+           <td class="indent">Password:</td>
+           <td><input name="textfield11" type="password" id="textfield13" value="1234" /></td>
+         </tr>
+       </table>
+       <p>&nbsp;</p>
+       <p class="item">
+         <input type="checkbox" name="checkbox" id="sip2Check" />
+         I want to configure SIP2 settings</p>
+       <table width="100%" border="0" cellspacing="0" cellpadding="0" id="sip2">
+         <tr>
+           <td width="40%" class="indent">SIP Number:</td>
+           <td><input name="textfield12" type="text" id="textfield14" value="070123456789" /></td>
+         </tr>
+         <tr>
+           <td class="indent">SIP Server Address:</td>
+           <td><input name="textfield12" type="text" id="textfield15" value="0.0.0.0" disabled="disabled" /></td>
+         </tr>
+         <tr>
+           <td class="indent">SIP Service Domain:</td>
+           <td><input name="textfield12" type="text" id="textfield16" value="sip.aaa.ocm" disabled="disabled" /></td>
+         </tr>
+         <tr>
+           <td class="indent">User Name:</td>
+           <td><input name="textfield12" type="text" id="textfield17" value="zyxel" /></td>
+         </tr>
+         <tr>
+           <td class="indent">Password:</td>
+           <td><input name="textfield12" type="password" id="textfield18" value="1234" /></td>
+         </tr>
+       </table>
+       <p>&nbsp;</p>
+     </div>
+   </div>
+   <!-- VoIP Ending -->
+   <!-- waiting Beginning -->
+   <div id="waiting" style="display:none;" class='state'>
+     <div class="qs_content">
+       <p style="display:block;height:110px;">&nbsp;</p>
+       <div class="waiting"></div>
+       <p style="font-weight:bold;text-align:center;">Saving and applying configurations, please wait.</p>
+     </div>
+   </div>
+   <!-- waiting Ending -->
+   <!-- result Beginning -->
+   <div id="result" class='state' style="display:none;" >
+     <div class="qs_headline">Result Summary</div>
+     <div class="qs_content">
+       <div id="success" style="display:none;">
+         <p>You have successfully walked through the Quick Start.</p>
+       </div>
+       <div id="fail">
+         <p>The following list describes the errors occurred when saving and applying configurations. You can retry the saving and applying step, restart the Quick Start, or close the window.</p>
+         <p class="fail">Unable to connect to the Internet</p>
+         <p class="fail">Unable to register &lt;SIP#&gt;</p>
+       </div>
+       <p>&nbsp;</p>
+     </div>
+   </div>
+   <!-- result Ending -->
+</div>

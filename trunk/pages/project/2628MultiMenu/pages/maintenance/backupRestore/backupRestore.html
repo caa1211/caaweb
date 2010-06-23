@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../../../css/brick.css" rel="stylesheet" type="text/css" />
+<link href="../../../css/popup/popup.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="unit_title" >Backup/Restore</div>
+<ul class="tabline"></ul>
+<div class="content_frame" >
+<!--Unit Explain start-->
+<div class="explain">
+<div><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b><b class="r4"></b></div>
+<div class="explain_text">You can save the current device settings in a backup file in your computer, or recover the system by restoring the backup file. You can also reset the device back to factory default.</div>
+<div><b class="r4"></b><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></div></div>
+<!--Unit Explain End-->
+<div class="data_frame"><ul>
+<li class="set1"> 
+<div class="title">Backup Configuration </div>
+<div class="w_text">Click Backup to save the current configuration of your system to your computer.</div>
+<div class="w_text"><span class="one_right" style="margin-left:0px;"><input name="Backup" value="Backup" id='BackupBtn' type="button" /></span></div></li>
+<li class="space"> </li>
+<li class="set1"> 
+<div class="title">Restore Configuration</div>
+<div class="w_text">Torestore a previously saved configuration file to your system, browse to the location of the configuration file and click Upload. </div>
+<div class="w_text">File Path :<span class="one_right"><input name="mtenRestoreCfg" size="20" maxlength="128" type="file" /><input name="RestoreCfg_Upload" value="Upload" type="submit" /></span></div></li>
+<li class="space"> </li>
+<li class="set1"> 
+<div class="title">Back to Factory Defaults</div>
+<div class="w_text">Click Reset to clear all user-entered configuration information and return to factory defaults. After resetting, the 
+<div style="padding:5px 0 5px 0;">- Password will be 1234 <br /> 
+- LAN IP address will be 192.168.1.1 <br /> 
+- DHCP will be reset to server</div>
+<div class="w_text"><span class="one_right" style="margin-left:0px;"><input name="RestoreCfg_Upload" value="Reset" type="submit" /></span></div>
+</li>
+<li class="space"> </li>
+</ul></div>
+<!--Set area end-->
+</div>
+<br/><br/>
+</body>
+</html>

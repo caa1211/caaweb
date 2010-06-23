@@ -1,0 +1,49 @@
+<div class="popup_frame" >
+<div class="data_frame2"><ul>
+<li class="set1">
+                  <div class="w_text">
+                     <ul>
+                        <li class="left_table">Protocol:</li>
+                        <li class="right_table">
+						  <select name='protocol' width='30'>
+						  <option value='TCP'>TCP</option>
+						  <option value='UDP'>UDP</option>
+						  <option value='ICMP'>ICMP</option>
+						  <option value='Other' selected>Other</option>
+						  </select>
+						</li>
+                     </ul>
+                     <ul>
+                        <li class="left_table">Protocol Number:</li>
+                        <li class="right_table">
+							<input type='textbox' size='20' name='prtcl_num'>&nbsp;(0-255)
+						</li>
+                     </ul>
+      <ul>	
+  <li class="left_table">Source Port:</li>
+  <li class="right_table">
+  <select name='prtcl_sel_src' width='30'>
+  <option value='any' selected>Any</option>
+  <option value='single'>Single</option>
+  <option value='range'>Range</option>  
+  </select>
+  &nbsp;&nbsp;
+  <input  name='srcPortStart' type='textbox' size='10'>
+  &nbsp;-&nbsp;<input  name='srcPortEnd' type='textbox' size='10'>
+  </li>
+</ul>
+<ul>	
+  <li class="left_table">Destination Port:</li>
+  <li class="right_table">
+  <select name='prtcl_sel_dst' width='30'>
+  <option value='any' selected>Any</option>
+  <option value='single'>Single</option>
+  <option value='range'>Range</option>  
+  </select>
+  &nbsp;&nbsp;
+  <input  name='dstPortStart' type='textbox' size='10'>
+  &nbsp;-&nbsp;<input  name='dstPortEnd' type='textbox' size='10'>
+  </li>
+</ul></div>
+</li>
+</ul></div></div>

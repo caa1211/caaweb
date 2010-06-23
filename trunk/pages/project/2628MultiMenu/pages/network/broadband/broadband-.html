@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../../../css/brick.css" rel="stylesheet" type="text/css" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+$(function(){
+    $('#editBtn').click(function(){
+        var db1 = window.parent.$.zyUiDialog({
+            width: 770,
+            height: 430,
+            title: 'WAN Interface Edit'
+        });
+		var link = 'pages/network/broadband/broadband_add.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
+        db1.dialog('open');
+    });
+    $('#addnewshareBtn').click(function(){
+    
+       var db1 = window.parent.$.zyUiDialog({
+            width: 770,
+            height: 430,
+            title: 'Add new WAN Interface'
+        });
+		var link = 'pages/network/broadband/broadband_add.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
+        db1.dialog('open');
+    });
+	
+    $('#deleteBtn').click(function(){
+    
+        var db1 = window.parent.$.zyUiDialog({
+            width: 450,
+            height: 190,
+            title: 'Delete',
+            buttons: {
+                'OK': function(){ db1.dialog('close')}
+            }
+			
+        });
+		var link = 'pages/delete.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
+        db1.dialog('open');
+    });
+});
+ </script>
+<title>Untitled Document</title>
+</head>
+<body>
+<div class="unit_title" >Broadband</div>
+<ul class="tabline"></ul>
+<div class="content_frame" >
+<!--Unit Explain start-->
+<div class="explain">
+<div><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b><b class="r4"></b></div>
+<div class="explain_text">Broadband configuration offers managements of WAN Interface.</div>
+<div><b class="r4"></b><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></div></div>
+<!--Unit Explain End-->
+<div class="data_frame"><ul>
+<li class="set1"><div class="w_table"> <input type="button" value="Add new WAN Interface" id='addnewshareBtn'></div></li>
+<li class="set1">
+<div class="w_table">
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_frame">
+    <tr>
+      <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" >
+        <tr>
+          <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td><table width="100%" cellpadding="0" cellspacing="0" style="table-layout:fixed;">
+                <tr align="center" valign="top">
+                  <td width="5%" class="top_font">#</td>
+                  <td class="top_font">Name</td>
+                  <td class="top_font">Type</td>
+                  <td class="top_font">Mode</td>
+                  <td class="top_font textOverflow">Encapsulation</td>
+                  <td class="top_font">802.1p</td>
+                  <td  class="top_font">802.1q</td>
+                  <td  class="top_font">IGMP Proxy</td>
+                  <td  class="top_font">NAT</td>
+                  <td  class="top_font">Default Gateway</td>
+                  <td width="60"  class="top_font" style="border-right:0px;">Modify</td>
+                </tr>
+                <tr align="center">
+                  <td class="table_font">1</td>
+                  <td class="table_font">WAN1</td>
+                  <td class="table_font">VDSL</td>
+                  <td class="table_font">Routing</td>
+                  <td class="table_font">ENET ENCAP</td>
+                  <td class="table_font">N/A</td>
+                  <td class="table_font">N/A</td>
+                  <td class="table_font">Enabled</td>
+                  <td class="table_font">Enabled</td>
+                  <td class="table_font">Y</td>
+                  <td class="table_font"><div class="i_modify">
+                    <ul>
+                      <li><a href="#" class="edit" id='editBtn' title="Edit"></a></li>
+                      <li ><a href="#"  id='deleteBtn' class="delete" title="Delete"></a></li>
+                    </ul>
+                  </div></td>
+                </tr>
+                <tr align="center">
+                  <td class="table_font">2</td>
+                  <td class="table_font">WAN2</td>
+                  <td class="table_font">ADSL</td>
+                  <td class="table_font">Bridge</td>
+                  <td class="table_font">Bridge</td>
+                  <td class="table_font">N/A</td>
+                  <td class="table_font">N/A</td>
+                  <td class="table_font">Enabled</td>
+                  <td class="table_font">Enabled</td>
+                  <td class="table_font">N</td>
+                  <td class="table_font"><div class="i_modify">
+                    <ul>
+                      <li><a href="#" class="edit" id='editBtn' title="Edit"></a></li>
+                      <li ><a href="#"  id='deleteBtn' class="delete" title="Delete"></a></li>
+                    </ul>
+                  </div></td>
+                </tr>
+                <tr align="center">
+                  <td class="table_font">3</td>
+                  <td class="table_font">WAN3</td>
+                  <td class="table_font textOverflow">EtherWAN</td>
+                  <td class="table_font">Routing</td>
+                  <td class="table_font">PPPoE</td>
+                  <td class="table_font">N/A</td>
+                  <td class="table_font">N/A</td>
+                  <td class="table_font">Enabled</td>
+                  <td class="table_font">Enabled</td>
+                  <td class="table_font">N</td>
+                  <td class="table_font"><div class="i_modify"><ul><li><a href="#" class="edit" id='editBtn' title="Edit"></a></li><li ><a href="#"  id='deleteBtn' class="delete" title="Delete"></a></li></ul></div></td>
+                  </tr>
+                
+              </table></td>
+            </tr>
+          </table></td>
+        </tr>
+      </table></td>
+    </tr>
+  </table>
+</div></li>
+<!--level 2 start--><!--Please add this tag--><!--Note define start-->
+<!--Button define start-->
+<li class="buttonframe"><div class="button_position"><input name="sysSubmit" value="Apply" type="submit" />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<input name="Cancel" value="Cancel" type="reset" /></div></li>
+<!--Button define end-->
+</ul>
+</div>
+<!--Set area end-->
+</div>
+</body>
+</html>
