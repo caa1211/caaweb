@@ -1,0 +1,14 @@
+div.scrollable { /* required settings */  position:relative;overflow:hidden; height:445px; margin: 0 auto; width: 110px; border: solid 1px green;} 
+div.scrollable ul.items { /* this cannot be too large */ width:110px; height: 20000em; margin-left:px;position:absolute; float:left; } 
+.menu_position{position:relative;background:url(../images/menu_bg.jpg);width:100%;margin:0 auto;border-left:#147fbf 4px solid;border-right:#147fbf 4px solid;border-bottom:#147fbf 4px solid;margin-top:0px;}
+.browse{position:relative; width:26px; height:26px; margin: 0 auto;}
+.browse.left{background:pink;   }
+.browse.right{background:yellow; }
+
+.outer-west{background:url(../images/center_bg.gif); }
+.header_position_index{position:relative;border-left:#147fbf 4px solid;border-right:#147fbf 4px solid;border-top:#147fbf 4px solid;width: 100%;margin: 0 auto;margin-top:30px;height:72px;background:url(../images/top_bg.gif);}
+/*Header end*/
+
+
+.menuItem .subMenuMark{position:absolute; background:url(../images/collapsed.gif); width:18px; height:18px; right:0px; margin-top:30px; cursor:default;}
+

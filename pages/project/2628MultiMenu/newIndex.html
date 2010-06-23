@@ -1,0 +1,680 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style='width:100%; height:100%;'>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <title id='title'>.::Welcome to the Web-Based Configurator::.</title>
+        <link type="text/css" href="css/basic.css" rel="stylesheet" />
+        <link type="text/css" href="css/iconDefine.css" rel="stylesheet" />
+        <link type="text/css" href="css/popup/popup.css" rel="stylesheet" />
+        
+        <link href="css/brick_West.css" rel="stylesheet" type="text/css" />
+
+        <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+        <script type="text/javascript" src="js/iframe.jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.layout.js"></script>
+        <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+        <script type="text/javascript" src="js/tools.scrollable-1.1.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+        <script type="text/javascript" src="js/jquery.getParams.js"></script>
+        <script type="text/javascript" src="js/popup/jquery-ui-1.7.2.custom.min.js"></script>
+        <script type="text/javascript" src="js/zyJqFunctions.js"></script>
+        <script type="text/javascript" src="js/zyUiDialog.js"></script>
+        <script type="text/javascript" src="js/jquery.simplemodal-1.3.min.js"></script>
+        <script type="text/javascript" src="js/zyMask.js"></script>
+        <script type="text/javascript" src="js/jquery.pngFix.pack.js"></script>
+        <script type="text/javascript" src="js/jquery.bgiframe.pack.js"></script>
+        
+        <script type="text/javascript" src="js/brickRichMenu_West.js"></script>
+        
+        
+    <script type="text/javascript">          
+    
+        $.fn.delay = function(time, callback){
+            // Empty function:jQuery.fx.step.delay = function() { };   
+            // You can set the second argument as CSS properties    
+            if (typeof callback == "object") {
+                var cssObj = callback;
+                callback = function(){
+                    $(this).css(cssObj);
+                }
+            }
+            
+            return this.animate({
+               delay: 1
+            }, time, callback);
+        }
+        
+        $.isSubFrame = function(){
+            return true;
+        } 
+        
+          $.openLoadingMask = function(flag){ 
+            var content;
+            var contentSize;
+            if (flag == undefined || flag == 1) {
+                content = '<div><img src="images/loading.gif" style="margin-Left:6px;" /> <div>Loading...<div></div>'
+                 contentSize = [55, 55];
+            }
+            else 
+                if (flag == 2) {
+                    content = '<div class="wait" ><table width="100%" border="0" cellspacing="3" cellpadding="2" ><tr><td align="center">&nbsp;</td><td class="w_red">&nbsp;</td></tr><tr><td width="3%" align="right" ><img src="images/loading.gif"  style="margin-right:10px;" /></td><td width="69%" class="w_red">Router is restarting now.Please wait ...</td></tr><tr><td colspan="2">&nbsp;</td></tr><tr><td colspan="2" class="white_12" >As there will be no indication of when the process is complete, please wait for one minute before attempting to access the router again. </td></tr><tr><td colspan="2" class="white_12" >&nbsp;</td></tr></table></div>';
+                    contentSize = [386, 182];
+                }
+                
+               $.zyMask(content, contentSize);
+        };
+        
+        $.closeLoadingMask = function(){
+             $.closezyMask();
+        };
+          
+         $.openTroubleShooting = function(src){
+           // var content = '<iframe frameborder=0 src="' + src + '" style=" width:700px; height:360px;">'
+           var content = '<div  id="emptyDiv" style=" width:700px; height:360px;"></div>'
+           var contentSize = [660, 420];
+           $.zyMask(content, contentSize, {onload: function(){
+                var modalContainer =  $('#emptyDiv');
+                    modalContainer.load(src, function(){
+                        $(this).pngFix();
+                    });
+           }});
+        };
+        
+        $.closeTroubleShooting = function(){
+             $.closezyMask();
+        };
+          
+        $(function(){
+        $(document).pngFix();
+        
+         $.zyBRMenu.modifyLayout();
+         
+        var $menuDiv = $('#menuDiv');
+        var $frameObj = $('#mainFrame');
+        var actionItemID = null;
+        var $subMenuDiv=$('#subMenuDiv');
+        var scrollApi;   
+        var menuJsonData;
+        var defaultPage = '';
+        var scrollSize = 5;
+        
+        this.activePage = function(menuData, tabIndex){
+            activeItem(menuData , tabIndex);
+        };
+        
+        this.initMainFrame = function(){
+           initMainFrame();
+        }
+        
+        function initMainFrame(){
+            $frameObj.contents().pngFix();
+            if ($frameObj.attr('src').indexOf('?tabJson') == -1) 
+                $.closeLoadingMask();
+        }
+
+        function openPage(url){
+            try {
+                $.openLoadingMask(1)
+                $frameObj.src(url);//, function(){$frameObj.fadeIn(300);}); 
+                
+                $frameObj[0][document.all ? "onreadystatechange" : "onload"] = function(){
+                    if (document.all && this.readyState != "loaded" && this.readyState != "complete") {
+                        return;
+                    }
+                    initMainFrame();
+                    $frameObj[0][document.all ? "onreadystatechange" : "onload"] = null;
+                }
+                
+            } 
+            catch (e) {
+                alert(e)
+            }
+        }
+        
+        function sliceString(str, clipIndex){
+            retStr = null;
+            var nn = str.indexOf(str.split('-')[clipIndex+1]);
+          
+            if (nn != -1) 
+                retStr = str.slice(nn);
+            
+            return retStr;
+        }
+        
+        function findJsonItemFromID(id, json){
+            if(json==undefined)
+            json = menuJsonData;
+           
+            var jsonItem = null;
+            var splitID = id.split('-')[0];
+            var retainID = null;
+            var nn = id.indexOf(id.split('-')[1]);
+            if (nn != -1) 
+                retainID = id.slice(nn);
+            
+            $.each(json, function(i, item){
+                if (i == splitID) 
+                    if (retainID != null) 
+                        jsonItem = findJsonItemFromID(retainID, item.submenu);
+                    else 
+                        jsonItem = item;
+            });
+            return jsonItem;
+        }
+
+        function activeItem(activeID, tabIndex){
+
+            var activeMainMenuID;
+            var previousJsonItem;
+            
+            if (actionItemID != null) {
+                activeMainMenuID = actionItemID.split('-')[0];
+                previousJsonItem = findJsonItemFromID(activeMainMenuID);
+                if (previousJsonItem != null && previousJsonItem.switchCls != undefined) {
+                    var previousItem =  $menuDiv.find('ul li[id=' + activeMainMenuID + ']');
+                    previousItem.removeClass(previousJsonItem.switchCls.on);
+                    previousItem.addClass(previousJsonItem.switchCls.off);
+                }
+            }
+            
+            actionItemID = activeID;
+   
+            activeMainMenuID = actionItemID.split('-')[0];
+            
+            var actionJsonItem = findJsonItemFromID(activeMainMenuID);
+            if (actionJsonItem != null && actionJsonItem.switchCls != undefined) {
+               var currentItem =  $menuDiv.find('ul li[id=' + activeMainMenuID + ']');
+               currentItem.removeClass(actionJsonItem.switchCls.off);
+               currentItem.addClass(actionJsonItem.switchCls.on);
+              
+               var i = currentItem.prevAll().length;
+               scrollApi.setPage(parseInt(i/scrollSize));
+            }
+
+            var tabStr = '';
+            if(tabIndex != undefined)
+
+            tabStr='&&tabIndex='+tabIndex;
+         
+		    var jsonItem = findJsonItemFromID(activeID) ;
+            if (jsonItem != null) {
+                var url = jsonItem.url;
+                if(url.indexOf('?tabJson')!=-1)
+                openPage(url + tabStr);
+                else
+                openPage(url);
+            }
+            else
+            alert("url error:  " + activeID);
+        }
+        
+        function hideSubMenuPanel(panel, liObj, delayTime){
+            
+            if (delayTime!=undefined && delayTime == 0) {
+                panel.attr('isAnimation', 'true');
+                panel.caaHide(0, function(){
+                    $(this).attr('isAnimation', 'false');
+                });
+                liObj.removeClass('hover');
+                return;
+            }
+            
+            panel.delay(50, function(){
+                panel.attr('isAnimation', 'true');
+                panel.caaHide(200, function(){
+                    $(this).attr('isAnimation', 'false');
+                    $(this).css('display', 'none');
+                });
+                liObj.removeClass('hover');
+            });
+        }
+        
+        function showSubMenuPanel(panel, liObj)
+        {
+            if (panel.attr('isAnimation') == undefined || panel.attr('isAnimation') == 'true') {
+                panel.stop(true, true);
+                panel.attr('isAnimation', 'true');
+                panel.css('display', 'block');
+                panel.caaShow(200, function(){
+                    $(this).attr('isAnimation', 'false');
+                });
+            }
+            else 
+                panel.stop(true, false).caaShow(0, function(){
+                    $(this).attr('isAnimation', 'false');
+                });;
+            
+            liObj.addClass('hover');
+        }
+      
+        function hideSubMenu($liObj, delayTime){//call this outer
+            var id = $liObj.attr('id');
+            var subMenu = $subMenuDiv.children('.subItems[targetID=' + id + ']');
+            hideSubMenuPanel(subMenu, $liObj, delayTime);
+        }    
+            
+        function showSubMenu($liObj){//call this outer
+            var id = $liObj.attr('id');
+            var subMenu = $subMenuDiv.children('.subItems[targetID=' + id + ']');
+                subMenu.bgiframe({opacity:false, left:3, width:160 , top:5, height: subMenu.height()-15, src:'bgiframe.htm' });
+
+            $.zyBRMenu.modifySubMenuPos(subMenu, $liObj);
+            showSubMenuPanel(subMenu, $liObj);
+        }
+        
+        function doSubMenu($liObj, item){
+            var subMenuMark = $('<span class="subMenuMark" style="position: absolute;"></span>')
+            $liObj.append(subMenuMark);
+            var $menuContainer =  $('<ul></ul>');
+                $menuContainer.css('display', 'none');
+                $menuContainer.css('position', 'absolute');
+                $menuContainer.addClass('subItems');
+            var $targetID =  $liObj.attr('id');
+                $menuContainer.attr('targetID', $targetID);
+                $menuContainer.append('<li class="submenuTop"></li>');
+                $.each(item.submenu, function(i, item){
+                    var $menuItemA = $('<a></a>');
+                    $menuItemA.html(item.title);
+                
+                    var $menuItemLi = $('<li></li>');
+                    $menuItemLi.attr('id', $targetID+'-'+i);
+                    $menuItemLi.addClass('subItem')
+                    if(item.switchCls!=undefined)
+                    $menuItemLi.addClass(item.switchCls.off)
+                
+                
+             $menuItemLi.append('<span class="arrow">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>');
+             $menuItemLi.append($menuItemA);
+             
+             $menuItemLi.hover(function(){
+                 $(this).css('cursor', 'pointer').addClass('hover');
+             }, function(){
+                 $(this).removeClass('hover');
+             }).click(function(){
+                 hideSubMenu($liObj, 0);
+                 activeItem($menuItemLi.attr('id'));
+             });
+                 
+             $menuContainer.append($menuItemLi);
+             
+                    });
+        
+            $menuContainer.append('<li class="submenuBottom"></li>');
+                  $subMenuDiv.append($menuContainer);
+            
+            
+                  $menuContainer.mouseenter(function(){
+                      showSubMenu($liObj);
+                  }).mouseleave(function(){
+                       hideSubMenu($liObj);
+                  });
+                  
+                 //  $menuContainer.css('top', $menuContainer.height()*-1);
+                 //  $menuContainer.caaHide(0);
+        }
+
+        //do mainMenu
+        $.getJSON("menu.json", function(data){
+             var $menuContainer =  $('<ul style=""></ul>');
+             $menuContainer.addClass('items');
+             menuJsonData = data;
+             
+             $.each(data, function(i, item){   
+             
+             if(i=='defaultPage') {defaultPage = item;return; }//set default page
+             
+             var $menuItemA = $('<a></a>'); 
+                 $menuItemA.html(item.title);
+             var $menuItemLi = $('<li></li>');
+                 $menuItemLi.attr('id', i);
+                 $menuItemLi.addClass('menuItem')
+                 if(item.switchCls!=undefined)
+                 $menuItemLi.addClass(item.switchCls.off)
+     
+            //set default
+         /*   if (item.defaultPage != undefined) {
+                activeItem( $menuItemLi.attr('id'));
+             }*/
+
+             
+             //has submenu
+             
+             if (item.submenu != undefined) {
+                 doSubMenu($menuItemLi, item);
+                 $menuItemLi.hover(function(){
+                     showSubMenu($(this));
+                 }, function(){
+                     hideSubMenu($(this));
+                 });
+             }
+             
+             if (item.url != undefined) {
+                 $menuItemLi.css('cursor', 'pointer').hover(function(){
+                     $(this).addClass('hover');
+                 }, function(){
+                     $(this).removeClass('hover');
+                 }).click(function(){
+                     activeItem($menuItemLi.attr('id'));
+                 });
+                 
+             }
+             
+             //behavior
+    
+             $menuItemLi.append($menuItemA);
+             $menuContainer.append($menuItemLi);
+           });
+            
+           var lessSize = $menuContainer.children('li').length % scrollSize;
+           var addNullLiSize = scrollSize - lessSize;
+           addNullLiSize = addNullLiSize % scrollSize;
+           for (var i = 0; i < addNullLiSize; i++) {
+               var $tempLi = $('<li style="height:0px;"></li>');
+               $menuContainer.append($tempLi);
+           }
+           
+             $menuDiv.append($menuContainer); 
+             parseMenuJsonCompleted();
+             modifySubmenuPosition();
+           });
+
+           function modifySubmenuPosition(){
+            var subMenuGroup =  $subMenuDiv.children('.subItems[targetID]');
+            $.each(subMenuGroup,
+             function(i, subMenu){
+                  var targetUL =  $('#'+$(subMenu).attr('targetID'));
+                  var position =  targetUL.position();
+                  var left = position.left + targetUL.parent().position().left;
+                  $(subMenu).css('left', left-30);
+              });
+           }
+
+           function setScrollable(){
+                   scrollApi = $("div.scrollable").scrollable($.zyBRMenu.getScrollOption(5));
+           }
+
+            $('html').css('overflow-y', 'hidden');
+            $('html').css('overflow-x', 'auto');
+            
+           
+            var outerLayout = $('div.index').layout($.zyBRMenu.layoutOption);
+          
+          //$('div.index').css('overflow', 'auto');
+         //  $subMenuDiv.css({'top': -1*$menuDiv.height(),'width':$menuDiv.width() });
+   
+          //mouse wheel
+          $('.outer-south').mousewheel(function(event, delta){
+               var index = scrollApi.getIndex();
+               var size = scrollApi.getSize();
+               var visibleSize = scrollApi.getVisibleItems().length;
+               
+               if (delta < 0 && index + visibleSize < size) {
+                   scrollApi.nextPage();
+                   $('.subItems').caaHide();
+               }
+               else 
+                   if (delta > 0 && index > 0) {
+                       scrollApi.prevPage();
+                         $('.subItems').caaHide();
+                   } 
+            });
+             
+           $('#logoutBtn').click(function(){
+               $.zyUiDialog({
+                   width: 450,
+                   height: 200,
+                   title: 'Logout',
+                   buttons: {
+				       'Cancel': function(){ $(this).dialog('close');},
+                       'OK': function(){
+                           window.location.href ='login.html';
+                           $(this).dialog('close')
+                       }
+
+                   }
+               }).load('passLogout.html').dialog('open');
+           })
+           
+           // 2 tiers interface
+           $('#2tiersBtn').click(function(){
+               $.zyUiDialog({
+                   width: 700,
+                   height: 500,
+                   title: 'Login Privilege',
+                   buttons: {
+				       'Close': function(){ $(this).dialog('close');},
+                       'Save': function(){
+                       }
+
+                   }
+               }).load('pages/2tiers.html').dialog('open');
+           })
+		   
+            // quick start
+            function nextWizardState(wizardDB, id){ 
+                var buttomPana = wizardDB.parents('.ui-dialog').find('.ui-dialog-buttonpane');
+                var titlePana = wizardDB.parents('.ui-dialog').find('.ui-dialog-titlebar');
+                switch (id) {
+                    case 'internetsetting':
+                        wizardDB.find('#internetsetting').hide(0);
+                        wizardDB.find('#wirelesssetting').show(0);
+                        wizardDB.find('#voipsetting').hide(0);
+                        wizardDB.find('#waiting').hide(0);
+                        wizardDB.find('#result').hide(0);
+                        
+                        buttomPana.children('Button:nth-child(3)').removeAttr('disabled');
+                        break;
+                                  
+                    case 'wirelesssetting': 
+                        wizardDB.find('#internetsetting').hide(0);
+                        wizardDB.find('#wirelesssetting').hide(0);
+                        wizardDB.find('#voipsetting').show(0);
+                        wizardDB.find('#waiting').hide(0);
+                        wizardDB.find('#result').hide(0);
+                        break;
+                                    
+                    case 'voipsetting': 
+                        wizardDB.find('#internetsetting').hide(0);
+                        wizardDB.find('#wirelesssetting').hide(0);
+                        wizardDB.find('#voipsetting').hide(0);
+                        wizardDB.find('#waiting').show(0);
+                        wizardDB.find('#result').hide(0);
+                        
+                        titlePana.children('.ui-dialog-titlebar-close').hide(0);
+                      
+                        buttomPana.children('Button:nth-child(1)').attr('disabled', 'disabled');
+                        buttomPana.children('Button:nth-child(2)').attr('disabled', 'disabled');
+                        buttomPana.children('Button:nth-child(3)').attr('disabled', 'disabled');
+                    
+                        window.setTimeout(function(){nextWizardState(wizardDB, 'waiting');}, 3000);
+                        break;
+                                  
+                    case 'waiting': 
+                        wizardDB.find('#internetsetting').hide(0);
+                        wizardDB.find('#wirelesssetting').hide(0);
+                        wizardDB.find('#voipsetting').hide(0);
+                        wizardDB.find('#waiting').hide(0);
+                        wizardDB.find('#result').show(0);
+                        
+                        titlePana.children('.ui-dialog-titlebar-close').show(0);
+                            
+                        buttomPana.children('Button:nth-child(1)').removeAttr('disabled').html('Close');
+                        buttomPana.children('Button:nth-child(2)').removeAttr('disabled').html('Retry');
+                        buttomPana.children('Button:nth-child(3)').removeAttr('disabled').html('Restart');
+                        break;
+                                    
+                    case 'result': 
+                        //wizardDB.dialog('close');
+                        wizardDB.find('#internetsetting').hide(0);
+                        wizardDB.find('#wirelesssetting').hide(0);
+                        wizardDB.find('#voipsetting').hide(0);
+                        wizardDB.find('#waiting').show(0);
+                        wizardDB.find('#result').hide(0);
+                        
+                        buttomPana.children('Button:nth-child(1)').attr('disabled', 'disabled').html('Close');
+                        buttomPana.children('Button:nth-child(2)').attr('disabled', 'disabled').html('Next');
+                        buttomPana.children('Button:nth-child(3)').attr('disabled', 'disabled').html('Back');
+                        
+                        titlePana.children('.ui-dialog-titlebar-close').hide(0);
+                        window.setTimeout(function(){nextWizardState(wizardDB, 'waiting');}, 3000);
+                        break;
+                                  
+                    default:
+                        wizardDB.dialog('close');
+                        break; 
+                }
+            }
+            
+            function backWizardState(db1, id){
+                var buttomPana = db1.parents('.ui-dialog').find('.ui-dialog-buttonpane');
+                var titlePana = db1.parents('.ui-dialog').find('.ui-dialog-titlebar');
+                switch (db1.find('.state:visible').attr('id')) {
+                    case 'wirelesssetting': 
+                    db1.find('#internetsetting').show(0);
+                    db1.find('#wirelesssetting').hide(0);
+                    db1.find('#voipsetting').hide(0);
+                    db1.find('#waiting').hide(0);
+                    db1.find('#result').hide(0);
+                                
+                    buttomPana.children('Button:nth-child(3)').attr('disabled', 'disabled');
+                    break;
+                                
+                    case 'voipsetting': 
+                    db1.find('#internetsetting').hide(0);
+                    db1.find('#wirelesssetting').show(0);
+                    db1.find('#voipsetting').hide(0);
+                    db1.find('#waiting').hide(0);
+                    db1.find('#result').hide(0);
+                    break;
+                              
+                    case 'waiting': 
+                    db1.find('#internetsetting').hide(0);
+                    db1.find('#wirelesssetting').hide(0);
+                    db1.find('#voipsetting').show(0);
+                    db1.find('#waiting').hide(0);
+                    db1.find('#result').hide(0);
+                    
+                    
+                    titlePana.children('.ui-dialog-titlebar-close').hide(0);
+                    break;
+                                
+                    case 'result': 
+                    db1.find('#internetsetting').show(0);
+                    db1.find('#wirelesssetting').hide(0);
+                    db1.find('#voipsetting').hide(0);
+                    db1.find('#waiting').hide(0);
+                    db1.find('#result').hide(0);
+                                
+                    buttomPana.children('Button:nth-child(1)').removeAttr('disabled').html('Close');
+                    buttomPana.children('Button:nth-child(2)').removeAttr('disabled').html('Next');
+                    buttomPana.children('Button:nth-child(3)').attr('disabled', 'disabled').html('Back');
+                    
+                    break;
+                              
+                    default:
+                    db1.dialog('close');
+                    break; 
+                }
+            }  
+           
+		   $('#wizardBtn').click(function(){
+                var db1 = $.zyUiDialog({
+                   width: 650,
+                   height: 450,
+                   title: 'Quick Start',
+                   buttons: {
+					'Close': function(e){$.cancelBubble(e);$(this).dialog('close');},
+					'Next': function(e){
+					    nextWizardState(db1, db1.find('.state:visible').attr('id'));
+					},
+					'Back': function(e){
+                        backWizardState(db1, db1.find('.state:visible').attr('id'));
+					}
+				  }
+               });
+			   db1.load('pages/quickstart.html', function(){
+                   var initCtrl = '<div style="padding-left:15px;margin-top:5px;"><input type="checkbox" /> I would manually run this Quick Start later.</div>'
+                   $(this).parent('.ui-dialog').append(initCtrl);
+               }
+               );
+			   db1.bind('dialogopen', function(){	$(this).parents('.ui-dialog').find('button:contains("Back")').attr('disabled', 'disabled');});
+			   db1.dialog('open');
+           })
+           //---------------------------temp
+           
+           $('.browse.right').click(function(){
+               scrollApi.nextPage(); 
+           });
+           
+           $('.browse.left').click(function(){
+               scrollApi.prevPage();
+           });
+           
+           function parseMenuJsonCompleted(){
+               setScrollable();
+               
+               if ($('.menuItem').length < scrollSize)
+               {
+                   var itemWidth = $('.menuItem').width() + 2; //+border
+                   $('div.scrollable').width($('.menuItem').length * itemWidth)
+                   $subMenuDiv = $('#subMenuDiv');
+                   $subMenuDiv.width($('.menuItem').length * itemWidth);
+               }
+               
+               if ($.getURLParam("menu") != null) {
+                   var menuData = $.getURLParam("menu");
+                   var tabIndex = $.getURLParam("tabIndex");
+                   activeItem(menuData, tabIndex);
+               }
+               else
+               activeItem(defaultPage);
+           }    
+           
+           $('#homeBtn').click(function(){ activeItem(defaultPage);});
+           
+           
+        });
+      
+        </script>
+    </head>
+    <body style="height:100%;">  
+    <div class = "index">
+    <div class="outer-north">
+<div class="header_position_index">
+    <div class="logo"><img src="images/logo.gif" alt="" /></div>
+    <div class="model-name"> P-26/28</div>
+    <div class="top_bg_style"></div>
+    <ul class="header-right" style="position:absolute; top:0px; right:0px;">
+        <li class='language-icon'> </li>
+        <li class='text'>
+            <select name="select">
+                <option value="english" selected="selected">English</option>
+                <option value="Deutsch">Deutsch</option>
+                <option value="Fran&ccedil;ais">Fran&ccedil;ais</option>
+                <option value="Espa&ntilde;ol">Espa&ntilde;ol</option>
+                <option value="&#32321;&#39636;&#20013;&#25991;">&#32321;&#39636;&#20013;&#25991;</option>
+                <option value="Italiano">Italiano</option>
+            </select>
+        </li>
+        <li class='tiers-icon'></li>
+        <li class="text" id="2tiersBtn"><a href="#">Login Privilege</a></li>
+        <li class='wizard-icon'></li>
+        <li class="text" id="wizardBtn"><a href="#">Quick Start</a></li>
+        <li class='logout-icon'></li>
+        <li class="text" id="logoutBtn"><a href="#">Logout</a></li>
+    </ul>
+</div>
+    </div> 
+    <div class="outer-center">
+       <div class='centerDiv'>
+         <iframe id="mainFrame"  style=" position:absolute;overflow-x:hidden;overflow-y:auto;overflow-x:hidden;left:-4px; z-index:2; width:100%; height:100%; border-left:4px #147fbf solid;border-right:4px #147fbf solid; " allowtransparency="true" frameborder="0" src="#"></iframe>
+       </div>  
+    </div>
+    <div class="outer-south"></div>
+    <div class='outer-west'></div>
+    <div class='outer-east'></div>    
+          
+      </div>
+    </body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../../css/brick.css" rel="stylesheet" type="text/css" />
+<title>Untitled Document</title>
+</head>
+<body>
+<div class="unit_title" >DNS</div>
+<ul class="tabline"></ul>
+<div class="content_frame">
+  <!--Unit Explain start-->
+  <div class="explain">
+    <div><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b><b class="r4"></b></div>
+    <div class="explain_text">Dynamic DNS can update your current dynamic IP into a hostname. Use the settings to set up dynamic DNS information.</div>
+    <div><b class="r4"></b><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></div>
+  </div>
+  <!--Unit Explain End-->
+  <div class="data_frame">
+    <ul>
+      <li class="set1">
+        <div class="title">Dynamic DNS Setup</div>
+        <div class="w_text">
+          <ul>
+            <li class="left_table" >Dynamic DNS</li>
+            <li class="right_table">
+              <input name="ssid_state" id="radio" type="radio" value="enable" checked="checked" />
+              Enable
+              <input name="ssid_state" id="radio2" type="radio" value="disable" />
+              Disable (settings are invalid when disabled)</li>
+          </ul>
+          <ul>
+            <li class="left_table">Service Provider  : </li>
+            <li class="right_table">
+              <select name="select" size="1">
+                <option value="00000000" selected="selected">WWW.DynDNS.ORG </option>
+              </select>
+            </li>
+          </ul>
+          <ul>
+            <li class="left_table">Dynamic DNS Type  : </li>
+            <li class="right_table">
+              <select name="sysDDNSType" size="1" >
+                <option value="00000000" selected="selected">Dynamic DNS </option>
+                <option value="00000001">Static DNS </option>
+                <option value="00000002">Custom DNS </option>
+              </select>
+            </li>
+          </ul>
+          <ul>
+            <li class="left_table">Host Name  : </li>
+            <li class="right_table">
+              <input type="text" name="dyndnsUsername" maxlength="32" />
+            </li>
+          </ul>
+          <ul>
+            <li class="left_table">Username  : </li>
+            <li class="right_table">
+              <input type="text" name="dyndnsUsername" maxlength="32" />
+            </li>
+          </ul>
+          <ul>
+            <li class="left_table">Password  : </li>
+            <li class="right_table">
+              <input type="password" name="dyndnsPassword" maxlength="32" />
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <input name="sysDNSWildCard" type="checkbox" />
+              Enable Wildcard Option</li>
+          </ul>
+          <ul>
+            <li>
+              <input name="sysDDNSOffLine" type="checkbox" />
+              Enable off line option (Only applies to custom DNS)</li>
+          </ul>
+        </div>
+      </li>
+      <li class="space"></li>
+      <li class="set1">
+        <div class="title">IP Address Update Policy</div>
+        <div class="w_text">
+          <ul>
+            <li>
+              <input name="DDNS_IP_ADDR_POLICY" value="0" checked="checked" onclick="do_Checked(this.form);" type="radio" />
+              Use WAN IP Address</li>
+          </ul>
+          <ul>
+            <li>
+              <input name="DDNS_IP_ADDR_POLICY" value="1" onclick="do_Checked(this.form);" type="radio" />
+              Dynamic DNS server auto detect IP Address</li>
+          </ul>
+          <ul>
+            <li>
+              <input name="DDNS_IP_ADDR_POLICY" value="2" onclick="do_Checked(this.form);" type="radio" />
+              Use specified IP Address
+              <input name="sysDDNSIPAddr" size="15" maxlength="15" value="0.0.0.0" onblur="checkIPRange(this)" type="text" />
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="space"></li>
+      <li class="buttonframe">
+        <div class="button_position">
+          <input name="sysSubmit" value="Apply" type="button" onclick='btnApply();' />
+          &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+          <input name="Cancel" value="Cancel" type="button" onclick="frmLoad();" />
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+
+  {
+         "tabTitle" : "QoS",
+         "General": {"url":"../network/qos/general.html"  },
+         "Queue Setup": {"url":"../network/qos/queue.html"  },
+         "Class Setup": {"url":"../network/qos/classSetup.html"  },
+         "Policer Setup": {"url":"../network/qos/policer.html"  },
+         "Monitor": {"url":"../network/qos/monitor.html"  }
+  }
+
+    

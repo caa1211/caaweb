@@ -1,0 +1,209 @@
+<script type="text/javascript">  
+          
+       $(function(){
+           
+           $('#btn_wepmore').toggle(
+           function(){
+             $(this).html('hide more');
+             $('#detailedInfo').slideDown(200);
+           }, function(){
+             $(this).html('more...');
+              $('#detailedInfo').slideUp(200);
+           });
+       });
+</script>
+<div class="content_frame" >
+<!--Unit Explain start-->
+<div class="explain">
+  <div><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b><b class="r4"></b> </div>
+  <div class="explain_text">The configurations below are the advanced wireless settings.</div>
+  <div><b class="r4"></b><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></div>
+</div>
+<!--Unit Explain End-->
+<div class="data_frame"><ul>
+<li class="set1">
+<div class="w_text">
+<ul>
+<li class="left_table">SIP Local Port : </li>
+<li class="right_table"><input name="sipLocalPort" type="text" id="sipLocalPort" value="5060" onchange="javascript:rangeCheck(1025,65535,5060,this,1,1)" size="10" disabled="disabled"/><span >(1025-65535)</span></li>
+</ul>
+<ul>
+<li class="left_table">SIP Server Address  : </li>
+<li class="right_table"><input type="text" id="sipServerAddr" name="sipServerAddr"/></li>
+</ul>
+<ul>
+<li class="left_table">SIP Server Port  : </li>
+<li class="right_table"><input id="sipServerPort" name="sipServerPort" type="text" size="10" value="5060" onchange="javascript:rangeCheck(1025,65535,5060,this,1,1)" disabled="disabled"/><span >(1025-65535)</span></li>
+</ul>
+<ul>
+<li class="left_table">REGISTER Server Address  : </li>
+<li class="right_table"><input type="text" id="registerServerAddr" name="registerServerAddr" onmousedown="javascript:cleanText(this)"/></li>
+</ul>
+<ul>
+<li class="left_table">REGISTER Server Port  : </li>
+<li class="right_table"><input id="sipServerPort2" name="sipServerPort2" type="text" size="10" value="5060" onchange="javascript:rangeCheck(1025,65535,5060,this,1,1)" disabled="disabled"/><span >(1025-65535)</span></li>
+</ul>
+<ul>
+<li class="left_table">SIP Service Domain  : </li>
+<li class="right_table"><input type="text" id="sipServerAddr2" name="sipServerAddr2"/></li>
+</ul>
+</div>
+</li>
+<li>
+<span class="linking moreBtn" id="btn_wepmore" style="float:right;">more...</span>
+</li>
+<li class="space"> </li>
+<div id='detailedInfo'  style="display:none; width:100%;">
+<li class="set1" >
+<div class="title" style="*text-indent:-15px;">RTP Port Range</div>
+<div class="w_text">
+  <ul>
+    <li class="left_table">Start Port : </li>
+    <li class="right_table">
+      <input id="rtpPortStart" name="rtpPortStart" type="text"  size="10" />(1025-65535)</li>
+  </ul>
+  <ul>
+    <li class="left_table">End Port : </li>
+    <li class="right_table">
+      <input id="rtpPortEnd" name="rtpPortEnd" type="text" size="10" />
+      <span >(1025-65535)</span></li>
+  </ul>
+</div>
+</li>
+<li class="space"></li>
+<li class="set1">
+<div class="title"  style="*text-indent:-15px;">DTMF Mode</div>
+<div class="w_text">
+<ul>
+<li class="left_table">DTMF Mode : </li>
+<li class="right_table">
+  <select id="dtmfSelect" name="dtmfSelect">
+    <option value="0" selected="selected">RFC 2833</option>
+    <option value="1">PCM</option>
+    <option value="2">SIP INFO</option>
+  </select>
+</li>
+</ul>
+</div>
+</li>
+<div class="space"></div>
+<li class="set1">
+<div class="title"  style="*text-indent:-15px;">Transport Type</div>
+<div class="w_text">
+<ul>
+<li class="left_table">Transport Type : </li>
+<li class="right_table">
+  <select id="transSelect" name="transSelect">
+    <option value="0" selected="selected">TCP</option>
+    <option value="1">UDP</option>
+    <option value="2">TLS</option>
+  </select>
+</li>
+</ul>
+</div>
+</li>
+<div class="space"></div>
+<li class="set1">
+<div class="title"  style="*text-indent:-15px;">FAX Option </div>
+<div class="w_text">
+  <ul>
+    <li class="left_table">
+      <input type="radio" name="VoIP_FaxRelay" value="0" />G.711 Fax Passthrough </li>
+    <li class="right_table">
+      <input type="radio" name="VoIP_FaxRelay" value="1" />T.38 Fax Relay </li>
+  </ul>
+</div>
+</li>
+<div class="space"></div>
+<li class="set1">
+<div class="title"  style="*text-indent:-15px;">Outbound Proxy </div>
+<div class="w_text"><input name="outBoundProxyEnable"  type="checkbox" value="outBoundProxyEnable" ##outBoundProxyEnable##/> Enable</div>
+<div class="w_text">
+  <ul>
+    <li class="left_table">Server Address : </li>
+    <li class="right_table">
+      <input type="text" id="outBoundProxyServerAddr" name="outBoundProxyServerAddr" value="" onmousedown="javascript:cleanText(this)"/>
+    </li>
+  </ul>
+  <ul>
+    <li class="left_table">Server Port : </li>
+    <li class="right_table">
+      <input type="text" id="outBoundProxyServerPort" name="outBoundProxyServerPort" value="" onchange="rangeCheck(1025,65535,1025,this,1,1)"/>
+      <span class="hint">(1025-65535)</span></li>
+  </ul>
+</div>
+</li>
+<div class="space"></div>
+<li class="set1">
+<div class="title"  style="*text-indent:-15px;">QoS Tag</div>
+<div class="w_text">
+  <ul>
+    <li class="left_table">SIP TOS Priority Setting  : </li>
+    <li class="right_table">
+      <input id="sipTosPriority" name="sipTosPriority" type="text"  size="10" /> 
+      (0-255)</li>
+  </ul>
+  <ul>
+    <li class="left_table">RTP TOS Priority Setting : </li>
+    <li class="right_table">
+      <input id="sipTosPriority2" name="sipTosPriority2" type="text"  size="10" /> 
+      (0-255)</li>
+  </ul>
+</div>
+</li>
+<div class="space"></div>
+<li class="set1">
+<div class="title"  style="*text-indent:-15px;">Timer Setting</div>
+<div class="w_text">
+<ul>
+<li class="left_table">Expiration Duration : </li>
+<li class="right_table"><input id="expirationDuration" name="expirationDuration" type="text" size="10" onchange="rangeCheck(1025,65535,3600,this,1,1)"/>
+<span > (20-65535) second</span></li>
+</ul>
+<ul>
+<li class="left_table">Register Re-send timer : </li>
+<li class="right_table"><input id="registerReSend" name="registerReSend" type="text" size="10" onchange="rangeCheck(1,65535,180,this,1,1)"/>
+<span > (1-65535) second </span></li>
+</ul>
+<ul>
+<li class="left_table">Session Expires : </li>
+<li class="right_table"><input id="sessionExpires" name="sessionExpires" type="text" size="10" onchange="rangeCheck(30,3600,180,this,1,1)"/>
+<span > (30-3600) second </span></li>
+</ul>
+<ul>
+<li class="left_table">Min-SE : </li>
+<li class="right_table"><input id="minSE" name="minSE" type="text" size="10"  onchange="rangeCheck(20,1800,30,this,1,1)"/>
+<span > (20-1800) second </span></li>
+</ul>
+</div>
+</li>
+<li class="space"></li>
+<li class="set1">
+<div class="title"  style="*text-indent:-15px;">Dialing Interval Selection</div>
+<div class="w_text">
+<ul>
+<li class="left_table">Dialing Interval Selection : </li>
+<li class="right_table">
+  <select id="select" name="select">
+    <option value="1" ##dialingIntervalTime1##>1</option>
+    <option value="2" ##dialingIntervalTime2##>2</option>
+    <option value="3" ##dialingIntervalTime3##>3</option>
+    <option value="4" ##dialingIntervalTime4##>4</option>
+    <option value="5" ##dialingIntervalTime5##>5</option>
+    <option value="6" ##dialingIntervalTime6##>6</option>
+    <option value="7" ##dialingIntervalTime7##>7</option>
+    <option value="8" ##dialingIntervalTime8##>8</option>
+    <option value="9" ##dialingIntervalTime9##>9</option>
+    <option value="10" ##dialingIntervalTime10##>10</option>
+  </select>  Second</li>
+</ul>
+</div>
+</li>
+</div>
+<li class="space"> </li>
+<!--Button define start-->
+<li class="buttonframe"><div class="button_position"><input name="sysSubmit" value="Apply" type="submit" />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<input name="Cancel" value="Cancel" type="reset" /></div></li>
+<!--Button define end-->
+</ul></div>
+</div>
+<br/><br/>

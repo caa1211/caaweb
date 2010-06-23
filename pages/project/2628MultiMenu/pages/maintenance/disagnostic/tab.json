@@ -1,0 +1,9 @@
+
+  {
+         "tabTitle" : "Diagnostic",
+         "Ping": {"url":"../maintenance/disagnostic/ping.html"  },
+         "Self Diagnostic": {"url":"../maintenance/disagnostic/selfDiagnostic.html"  },
+		 "DSL Line": {"url":"../maintenance/disagnostic/dslLine.html"  }
+  }
+
+    

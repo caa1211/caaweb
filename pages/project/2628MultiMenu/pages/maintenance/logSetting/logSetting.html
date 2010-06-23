@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../../../css/brick.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="unit_title" >Log Setting</div>
+<ul class="tabline"></ul>
+<div class="content_frame" >
+<!--Unit Explain start-->
+<div class="explain">
+<div><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b><b class="r4"></b></div>
+<div class="explain_text">Log Settings defines the level of logs to be recorded and where to send the log history. If the log mode is enabled, the system will begin to record selected logs.</div>
+<div><b class="r4"></b><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></div></div>
+<!--Unit Explain End-->
+<!--Set area start-->
+<div class="data_frame"><ul>
+<li class="set1">
+<div class="title">Syslog Logging</div>
+<div class="w_text">
+  <ul>
+    <li class="left_table" >Syslog Logging : </li>
+    <li class="right_table">
+      <input name="ssid_state" id="radio" type="radio" value="enable" checked="checked" />
+      Enable
+      <input name="ssid_state" id="radio2" type="radio" value="disable" />
+      Disable (settings are invalid when disabled)</li>
+  </ul>
+</div>
+<div class="w_text">
+<ul>
+<li class="left_table">Syslog Server : </li>
+<li class="right_table">
+  <input maxlength="65" size="15" value="0.0.0.0" 
+                        name="SysLogServerAddr" />
+&nbsp;(IP Address) </li>
+</ul>
+<ul>
+<li class="left_table">UDP Port : </li>
+<li class="right_table">
+  <input maxlength="6" size="6" value="514" 
+                        name="UDPPort" />
+&nbsp;(Server Port)</li>
+</ul>
+</div>
+</li>
+<li class="space"> </li>
+<li class="set1">
+<div class="title">Active Log and Select Level </div>
+  <div class="w_text"><table width="98%" border="0" cellpadding="0" cellspacing="2" >
+    <tr >
+      <td valign="top" width="35%" >
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr><td class="title3">Log Category </td></tr>
+          <tr>
+            <td height="20">VoIP</td>
+          </tr>
+          <tr><td height="25"><div class="w_text">
+            <input type="checkbox" 
+                        value="1" name="VoIPCallStatistics" />
+VoIP-Call Statistics</div></td></tr>
+          <tr><td height="25"><div class="w_text">
+            <input type="checkbox" value="1"  name="VoIPSIPCallSignaling" />
+VoIP-SIP Call  Signaling</span></div></td></tr>
+          <tr><td height="25"><div class="w_text"> <input type="checkbox" value="1"  name="VoIPSIPRegistrations" />
+VoIP-SIP  Registrations</div></td></tr>
+          <tr><td height="25"><div class="w_text"><input type="checkbox" value="1"  name="VoIPPhoneEvent" />
+VoIP-Phone Event</div></td></tr>
+          <tr><td height="25"><div class="w_text">
+            <input type="checkbox" value="1"  name="VoIPMisc" />
+VoIP-Misc</div></td></tr>
+        </table>      </td>
+      <td valign="top" width="30%" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="title3">Log Level</td>
+        </tr>
+        <tr>
+          <td height="20">&nbsp;</td>
+        </tr>
+        <tr>
+          <td height="25"><div class="w_text">
+            <select size="1" 
+                        name="VoIPCallStatisticsSelect">
+              <option value="8" 
+                          selected="selected">ALL</option>
+              <option 
+                          value="0">EMERG</option>
+              <option 
+                          value="1">ALERT</option>
+              <option 
+                          value="2">CRIT</option>
+              <option 
+                          value="3">ERROR</option>
+              <option 
+                          value="4">WARNING</option>
+              <option 
+                          value="5">NOTICE</option>
+              <option 
+                          value="6">INFO</option>
+              <option 
+                        value="7">DEBUG</option>
+            </select>
+          </div></td>
+        </tr>
+        <tr>
+          <td height="25"><div class="w_text">
+            <select size="1" 
+                        name="select">
+              <option value="8" 
+                          selected="selected">ALL</option>
+              <option 
+                          value="0">EMERG</option>
+              <option 
+                          value="1">ALERT</option>
+              <option 
+                          value="2">CRIT</option>
+              <option 
+                          value="3">ERROR</option>
+              <option 
+                          value="4">WARNING</option>
+              <option 
+                          value="5">NOTICE</option>
+              <option 
+                          value="6">INFO</option>
+              <option 
+                        value="7">DEBUG</option>
+            </select>
+          </div></td>
+        </tr>
+        <tr>
+          <td height="25"><div class="w_text">
+            <select size="1" 
+                        name="select2">
+              <option value="8" 
+                          selected="selected">ALL</option>
+              <option 
+                          value="0">EMERG</option>
+              <option 
+                          value="1">ALERT</option>
+              <option 
+                          value="2">CRIT</option>
+              <option 
+                          value="3">ERROR</option>
+              <option 
+                          value="4">WARNING</option>
+              <option 
+                          value="5">NOTICE</option>
+              <option 
+                          value="6">INFO</option>
+              <option 
+                        value="7">DEBUG</option>
+            </select>
+          </div></td>
+        </tr>
+        <tr>
+          <td height="25"><div class="w_text">
+            <select size="1" 
+                        name="select3">
+              <option value="8" 
+                          selected="selected">ALL</option>
+              <option 
+                          value="0">EMERG</option>
+              <option 
+                          value="1">ALERT</option>
+              <option 
+                          value="2">CRIT</option>
+              <option 
+                          value="3">ERROR</option>
+              <option 
+                          value="4">WARNING</option>
+              <option 
+                          value="5">NOTICE</option>
+              <option 
+                          value="6">INFO</option>
+              <option 
+                        value="7">DEBUG</option>
+            </select>
+          </div></td>
+        </tr>
+        <tr>
+          <td height="25"><div class="w_text">
+            <select size="1" 
+                        name="select4">
+              <option value="8" 
+                          selected="selected">ALL</option>
+              <option 
+                          value="0">EMERG</option>
+              <option 
+                          value="1">ALERT</option>
+              <option 
+                          value="2">CRIT</option>
+              <option 
+                          value="3">ERROR</option>
+              <option 
+                          value="4">WARNING</option>
+              <option 
+                          value="5">NOTICE</option>
+              <option 
+                          value="6">INFO</option>
+              <option 
+                        value="7">DEBUG</option>
+            </select>
+          </div></td>
+        </tr>
+      </table></td>
+      </tr>
+  </table></div>
+</li>
+<li class="buttonframe"><div class="button_position"><input value="Apply" type="button" />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<input value="Cancel" type="reset" /></div></li>
+</ul>
+</div>
+</div>
+<br/><br/>
+</body>
+</html>

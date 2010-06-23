@@ -1,0 +1,90 @@
+<div class="content_frame" >
+<!--Unit Explain start-->
+    <div class="explain"><div><b class="r1"></b><b class="r2"></b> <b class="r3"></b> <b class="r4"></b><b class="r4"></b></div>
+<div class="explain_text">Monitor shows the statistics of QoS on WAN/LAN interface and the status of Queue setup.</div><div><b class="r4"></b><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></div></div>
+<!--Unit Explain End-->
+  <div class="data_frame">
+    <ul>
+      <li class="set1">
+	  <div class="title">Monitor</div>
+        <div class="w_text">
+          <ul>
+            <li class="left_table">Refresh Interval  :</li>
+            <li class="right_table">
+              <select name="monitorRefresh" id="monitorRefresh" size="1" onchange="resetInterval(0);" onUnload="resetInterval(0);">
+                <option value="0" selected="selected" >No Refresh</option>
+                <option value="1" >5 sec</option>
+                <option value="2" >10 sec</option>
+                <option value="3" >30 sec</option>
+              </select>
+            </li>
+          </ul>
+        </div>
+      </li>
+	  <li class="space"></li>
+      <li class="set1"><div class="title">Status :</div></li>
+      <li class="set2">
+	  <div class="title2"><span class="i_title2">Interface Monitor</span></div>
+        <div class="w_table">
+          <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_frame">
+            <tr>
+              <td>
+                <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td>
+                      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td>
+                            <table id="qosInterfaceMonitorTable" width="100%" cellpadding="0" cellspacing="0">
+                              <tr align="center">
+                                <td width="5%" class="top_font">#</td>
+                                <td class="top_font">Name</td>
+                                <td class="top_font">Pass Rate(bps)</td>
+                                <td class="top_font">Drop Rate(bps)</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </li>
+      <li class="set2">
+	   <div class="title2"><span class="i_title2">Queue Monitor</span></div>
+        <div class="w_table">
+          <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_frame">
+            <tr>
+              <td>
+                <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td>
+                      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td>
+                            <table id="qosQueueMonitorTable" width="100%" cellpadding="0" cellspacing="0">
+                              <tr align="center">
+                                <td width="5%" class="top_font">#</td>
+                                <td class="top_font">Name</td>
+                                <td class="top_font">Pass Rate(bps)</td>
+                                <td class="top_font">Drop Rate(bps)</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div><br /><br />

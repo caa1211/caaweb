@@ -1,0 +1,531 @@
+<script language="javascript">
+  
+
+$(function(){
+   var silder;
+   var periousValue = 3;
+   var optionLength = 4;
+     $('#select_1').bind('selectMe', function(e){
+      $('#wepmode').fadeOut(0);
+      $('#secmode').fadeOut(0);
+     
+   });
+   $('#select_2').bind('selectMe', function(e){
+
+      $('#wepmode').fadeIn(0);
+      $('#secmode').fadeOut(0);
+   });
+   $('#select_3').bind('selectMe', function(e){
+      $('#wepmode').fadeOut(0);
+      $('#secmode').fadeIn(0);
+   });
+
+
+   function stopSilde(silderValue){
+   for (var x = 1; x <= optionLength - 1; x++) {
+      if (silderValue == x) {
+           $('#select_' + x).children('._on').attr('style', 'display:block');
+          continue;
+      }
+       $('#select_' + x).children('._on').attr('style', 'display:none');
+   }
+}
+
+   stopSilde(periousValue);
+
+   $("#wepmode").hide();
+   $("#secmode").hide();
+   $("#wepmore").hide();
+   
+  $('li.sliderBlock').each(function(i, d){
+        $(this).click(function(){
+            $("#silder").slider('value', i + 1); 
+            stopSilde(i + 1);
+        })
+    })
+    
+   function updateSliderHandlePQAAttr(value){
+       switch (value) {
+           case 1:
+               $('#silder .ui-slider-handle').attr('pqaattr', 'No Security');
+               break;
+           case 2:
+               $('#silder .ui-slider-handle').attr('pqaattr', 'Basic');
+               break;
+           case 3:
+               $('#silder .ui-slider-handle').attr('pqaattr', 'More Secure');
+               break;      
+       }
+   }
+    
+   silder = $("#silder").slider({
+      value: periousValue,
+      animate: true,
+      orientation: 'horizontal',
+      min: 1,
+      max: 3,
+      //handle: $('.draw_btn'),
+      step: 1,
+      stop: function(event, ui){
+         if (periousValue != ui.value) 
+            stopSilde(ui.value);
+      },
+      change: function(event, ui){
+         if (periousValue != ui.value) {
+            $('#select_' + ui.value).trigger('selectMe');
+             updateSliderHandlePQAAttr(ui.value);
+            periousValue = ui.value; 
+         }
+      }
+   });
+
+    $('#select_'+periousValue).trigger('selectMe');//define initial value 
+    
+  
+   //show/hide WEP more setting
+   $('#btn_wepmore').click(function(){
+      $('#wepmore').toggle(0);
+      $('#wepdesc').toggle(0);
+
+      if ($(this).html() == 'hide more')
+         $(this).html('more...');
+      else if ($(this).html() == 'more...')
+         $(this).html('hide more');
+   });
+
+   //show/hide WPA-PSK more setting
+   $('#btn_wpapskmore').click(function(){
+      $('#encryp').toggle(0);
+      $('#timer').toggle(0);
+
+      if ($(this).html() == 'hide more')
+         $(this).html('more...');
+      else if ($(this).html() == 'more...')
+         $(this).html('hide more');
+   });
+
+   //show/hide WPA-PSK more setting
+   $('#btn_wpa2pskmore').click(function(){
+      $('#pskcom').toggle(0);
+      $('#encryp').toggle(0);
+      $('#timer').toggle(0);
+
+      if ($(this).html() == 'hide more')
+         $(this).html('more...');
+      else if ($(this).html() == 'more...')
+         $(this).html('hide more');
+   });
+
+   //show/hide WPA more setting
+   $('#btn_wpamore').click(function(){
+      $('#encryp').toggle(0);
+      $('#timer').toggle(0);
+
+      if ($(this).html() == 'hide more') 
+         $(this).html('more...');
+      else if ($(this).html() == 'more...') 
+         $(this).html('hide more');
+   });
+
+   //show/hide WPA2 more setting
+   $('#btn_wpa2more').click(function(){
+      $('#encryp').toggle(0);
+      $('#timer').toggle(0);
+      $('#wpacom').toggle(0);
+      $('#wpa2').toggle(0);
+      $('#wpa2_reauth').toggle(0);
+
+      if ($(this).html() == 'hide more') 
+         $(this).html('more...');
+      else if ($(this).html() == 'more...') 
+         $(this).html('hide more');
+   });
+
+   $("#moreSecurity").change(function(){
+      $('.moreBtn').html('more...');
+      var secType = $(this).val();
+      if (secType == 'psk'){
+         $("#pwd").fadeIn(0);
+         $("#authserver").fadeOut(0);
+         $("#btn_wpapskmore").fadeIn(0);
+         $("#btn_wpa2pskmore").fadeOut(0);
+         $('#pskcom').hide(0);
+         $('#encryp').hide(0);
+         $('#timer').hide(0);
+         $('#wpacom').hide(0);
+         $('#wpa2').hide(0);
+      } else if (secType == 'psk2'){
+         $("#pwd").fadeIn(0);
+         $("#authserver").fadeOut(0);
+         $("#btn_wpapskmore").fadeOut(0);
+         $("#btn_wpa2pskmore").fadeIn(0);
+         $('#pskcom').hide(0);
+         $('#encryp').hide(0);
+         $('#timer').hide(0);
+         $('#wpacom').hide(0);
+         $('#wpa2').hide(0);
+      } else if (secType == 'wpa'){
+         $("#pwd").fadeOut(0);
+         $("#authserver").fadeIn(0);
+         $("#btn_wpamore").fadeIn(0);
+         $("#btn_wpa2more").fadeOut(0);
+         $('#pskcom').hide(0);
+         $('#encryp').hide(0);
+         $('#timer').hide(0);
+         $('#wpacom').hide(0);
+         $('#wpa2').hide(0);
+      } else if (secType == 'wpa2'){
+         $("#pwd").fadeOut(0);
+         $("#authserver").fadeIn(0);
+         $("#btn_wpamore").fadeOut(0);
+         $("#btn_wpa2more").fadeIn(0);
+         $('#pskcom').hide(0);
+         $('#encryp').hide(0);
+         $('#timer').hide(0);
+         $('#wpacom').hide(0);
+         $('#wpa2').hide(0);
+      }
+   });
+   
+  
+});
+</script>
+   
+      <input size="15" type="hidden" name="sessionKey" />
+      <input size="15" type="hidden" name="wlSyncNvram" value="1" />
+      <input size="15" type="hidden" name="wlHide" />
+      <input size="15" type="hidden" name="wlEnableWmf" />
+      <input size="15" type="hidden" name="wlSsidIdx" />
+      <input size="15" type="hidden" name="wlAuthMode" />
+      <input size="15" type="hidden" name="wlWep" />
+      <input size="15" type="hidden" name="wlAuth" />
+      <input size="15" type="hidden" name="wlKeyBit" />
+      <input size="15" type="hidden" name="wlKey1" />
+      <input size="15" type="hidden" name="wlKey2" />
+      <input size="15" type="hidden" name="wlKey3" />
+      <input size="15" type="hidden" name="wlKey4" />
+      <div class="popup_frame" >
+<!--Unit Explain start-->
+         <div class="explain">
+            <div>
+               <b class="r1"></b>
+               <b class="r2"></b>
+               <b class="r3"></b>
+               <b class="r4"></b>
+               <b class="r4"></b>
+            </div>
+            <div class="explain_text">Wireless security can protect the data from unauthorized access or damage via wireless network. You need a wireless network name (also known as SSID) and security mode to set up the wireless security.</div>
+            <div>
+               <b class="r4"></b>
+               <b class="r4"></b>
+               <b class="r3"></b>
+               <b class="r2"></b>
+               <b class="r1"></b>
+            </div>
+         </div>
+<!--Unit Explain End-->
+<!--Set area start-->
+         <div class="data_frame"><ul>
+            <li class="title">Wireless Network Setup</li>
+            <li class="set1"> 
+               <div class="w_text">
+                  <ul>
+                     <li class="left_table" >Wireless</li>
+                     <li class="right_table">
+                        <input name="wlEnbl" type="radio" value="1"/> Enable&nbsp;
+                        <input name="wlEnbl" type="radio" value="0"/> Disable (settings are invalid when disabled)
+                     </li>
+                  </ul>
+                  <br style="clear:both;" />
+               </div>
+            </li>
+            <div class="space"></div>
+            <li class="title">Wireless Network Settings</li>
+            <li class="set1"> 
+               <div class="w_text">
+                  <ul>
+                     <li class="left_table">Wireless Network Name<span class="right_table">(SSID)</span>:</li>
+                     <li class="right_table">
+                        <input type="text" name='wlSsid' maxlength="32" size="20" />
+                     </li>
+                  </ul>
+               </div>
+               <div class="w_text">
+                  <ul>
+                     <li class="left_table">&nbsp;</li>
+                     <li class="right_table">
+                        <input type="checkbox" name="wl_hide" /> Hide SSID
+                     </li>
+                  </ul>
+               </div>
+               <div class="w_text">
+                  <ul>
+                     <li class="left_table">&nbsp;</li>
+                     <li class="right_table">
+                        <input type="checkbox" name="wl_enablewmf" /> Multicast Forwarding
+                     </li>
+                  </ul>
+               </div>
+               <div id="WLBSSID" class="w_text">
+                  <ul>
+                     <li class="left_table">BSSID:</li>
+                     <li class="right_table"><%ejGetWl(wlBssid)%></li>
+                  </ul>
+               </div>
+            </li>
+            <div class="space"></div>
+            <li class="title">Security Level</li>
+            <div class="w_text">
+               <li class="set1"> 
+                  <div class="w_slider" style="margin-left:-50px; margin-top:20px;">
+                     <div class="i_wifi_img"></div>
+                     <div class="w_level_color">
+                        <ul>
+                           <li><img src="images/i_s_bar_left.gif" /></li>
+                           <li class="s01 sliderBlock" id='slider_none'><span class="triangle" style="margin-left:60px;"></span></li>
+                           <li class="s02 sliderBlock" id='slider_Basic'><span class="triangle"></span></li>
+                           <li class="s03 sliderBlock" id='slider_MoreSecure'><span class="triangle"></span></li>
+                           <li><img src="images/i_s_bar_right.gif" /></li>
+                        </ul>
+                     </div>
+                     <div class="w_draw">
+                        <div style="position:absolute; z-index:100; width:262px;  margin:0 auto; margin-top:10px; left: 60px; top: -10px;">
+                           <div id='silder' style='background-color:transparent; border:0;'><a href="#"></a></div>
+                        </div>
+                        <ul>
+                           <li class="w_draw_center" >&nbsp;</li>
+                        </ul>
+                     </div>
+                     <span id ='select_1'>
+                        <div id="w_no" class='_off'><ul><li>No Security</li></ul></div>
+                        <div id="w_no_on" class='_on' style="display:none;"><ul><li>No Security</li></ul></div>
+                     </span>
+                     <span id ='select_2'>
+                        <div id="w_basic" class='_off'><ul><li>Basic</li></ul></div>
+                        <div id="w_basic_on" style="display:none;" class='_on'><ul><li>Basic<span class="selectarrow"></span></li></ul></div>
+                     </span>
+                     <span id ='select_3'>
+                        <div id="w_more"  class='_off'><ul><li>More Secure<br />(Recommended)</li></ul></div>
+                        <div id="w_more_on"  style="display:none;" class='_on'><ul><li>More Secure<br />(Recommended)<span class="selectarrow" style="margin-left:5px;"></span></li></ul></div>
+                     </span>
+                  </div>
+               </li>
+            </div>
+<!--Basic start-->
+            <div id="wepmode" class="selectframe clearfix">
+               <li class="set1">
+                  <div class="w_text" style="*margin-left:-15px">
+                     <ul>
+                        <li class="left_table">Security Mode:</li>
+                        <li class="right_table">WEP</li>
+                     </ul>
+                  </div>
+                  <div class="space"></div>
+                  <div class="w_text" style="line-height:16px;">Enter 13 characters (a-z, A-Z, and 0-9). Spaces and underscores are not allowed.</div>
+                  <div class="w_text3" id="wepdesc" style="display:none;">Select one password as your active password.</div>
+                  <div class="w_text3">
+                     <ul>
+                        <li class="left_table">
+                           <input name="wlKeyIndex" type="radio" value="1" /> Password 1:
+                        </li>
+                        <li class="right_table">
+                           <input type="text" name="wlKeys" size='20' maxlength='26' /> <span class="linking moreBtn" id="btn_wepmore">more...</span>
+                        </li>
+                     </ul>
+                  </div>
+<!-- WEP more setting beginning -->
+                  <div id="wepmore" class="clearfix">
+                     <div class="w_text3">
+                        <ul>
+                           <li class="left_table">
+                              <input name="wlKeyIndex" type="radio" value="2" /> Password 2:
+                           </li>
+                           <li class="right_table">
+                              <input type="text" name="wlKeys" size='20' maxlength='26' />
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="w_text3">
+                        <ul>
+                           <li class="left_table">
+                              <input name="wlKeyIndex" type="radio" value="3" /> Password 3:
+                           </li>
+                           <li class="right_table">
+                              <input type="text" name="wlKeys" size='20' maxlength='26' />
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="w_text3">
+                        <ul>
+                           <li class="left_table">
+                              <input name="wlKeyIndex" type="radio" value="4" /> Password 4:
+                           </li>
+                           <li class="right_table">
+                              <input type="text" name="wlKeys" size='20' maxlength='26' />
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="w_text3">
+                        <ul>
+                           <li class="left_table">WEP Encryption:</li>
+                           <li class="right_table">
+                              <select name="wlWepEncryption">
+                                 <option value="0">128-bit</option>
+                                 <option value="1">64-bit</option>
+                              </select>
+                           </li>
+                        </ul>
+                        <div class="br"></div>
+                     </div>
+                  </div>
+<!-- WEP more setting ending -->
+               </li>
+            </div>
+<!--Basic end-->
+<!--More Security start-->
+            <div id="secmode" class="selectframe clearfix"><ul>
+               <li class="set1" >
+                  <div class="w_text">
+                     <ul>
+                        <li class="left_table" >Security Mode:</li>
+                        <li class="right_table">
+                           <select name="moreSecurity" id="moreSecurity">
+                               <option value='psk'>WPA-PSK</option>
+                               <option value = 'psk2'>WPA2 -PSK</option>
+                               <option value='wpa'>WPA</option>
+                               <option value='wpa2'>WPA2</option>
+                           </select>
+                        </li>
+                     </ul>
+                  </div>
+<!-- WPA-PSK/WPA2-PSK setting beginning -->
+                  <div class="space"></div>
+                  <div id="pwd">
+                     <div class="w_text" style="line-height:16px;">Enter 8-63 characters (a-z, A-Z, and 0-9). Spaces and underscores are not allowed.</div>
+                     <div class="w_text3">
+                        <ul>
+                           <li class="left_table">Password:</li>
+                           <li class="right_table">
+                              <input type="text" name="wlWpaPsk" size='20' maxlength='64' />
+                              <span class="linking moreBtn" id="btn_wpapskmore">more...</span>
+                              <span class="linking moreBtn" id="btn_wpa2pskmore" style="display:none;">more...</span>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+<!-- WPA-PSK/WPA2-PSK setting ending -->
+<!-- WPA/WPA2 setting beginning -->
+                  <div id="authserver" style="display:none;">
+                     <div class="w_text"> Authentication Server</div>
+                     <div class="w_text3" >
+                        <ul>
+                           <li class="left_table">&nbsp;&nbsp;IP Address:</li>
+                           <li class="right_table">
+                              <input type="text" name="wlRadiusServerIP" size='20' maxlength='15' />
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="w_text3" >
+                        <ul>
+                           <li class="left_table">&nbsp;&nbsp;Port Number:</li>
+                           <li class="right_table">
+                              <input type="text" name="wlRadiusPort" size='20' maxlength='5' />
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="w_text3" >
+                        <ul>
+                           <li class="left_table">&nbsp;&nbsp;Shared Secret:</li>
+                           <li class="right_table">
+                              <input type="text" name="wlRadiusKey" size='20' maxlength='80' />
+                              <span class="linking moreBtn" id="btn_wpamore">more...</span>
+                              <span class="linking moreBtn" id="btn_wpa2more">more...</span>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+<!-- WPA/WPA2 setting ending -->
+<!-- only for WPA2-PSK more setting beginning -->
+                  <div class="w_text3" id="pskcom" style="display:none; ">
+                     <ul>
+                        <li class="left_table">WPA-PSK Compatible:</li>
+                        <li class="right_table">
+                           <input name="WPAPSKCompatible" type="radio" value="1"/> Enable 
+                           <input type="radio" name="WPAPSKCompatible" value="0"/> Disable
+                        </li>
+                     </ul>
+                  </div>
+<!-- only for WPA2-PSK more setting ending -->
+<!-- only for WPA2 more setting beginning -->
+                  <div class="w_text3" id="wpacom" style="display:none;">
+                     <ul>
+                        <li class="left_table">WPA Compatible:</li>
+                        <li class="right_table">
+                           <input name="WPACompatible" type="radio" value="0"/> Enable
+                           <input type="radio" name="WPACompatible" value="1"/> Disable
+                        </li>
+                     </ul>
+                  </div>
+<!-- only for WPA2 more setting ending -->
+<!-- WPA-PSK/WPA2-PSK/WPA more setting beginning -->
+                  <div class="w_text3" id="encryp" style="display:none;">
+                     <ul>
+                        <li class="left_table">Encyption:</li>
+                        <li class="right_table">
+                           <select name="wlWpa" onChange="loadWpaEncryption(0);">
+                           </select>
+                        </li>
+                     </ul>
+                  </div>
+<!-- WPA-PSK/WPA2-PSK/WPA more setting ending -->
+<!-- only for WPA2 more setting beginning -->
+                  <div id="wpa2" style="display:none;">
+                     <div class="w_text3">
+                        <ul>
+                           <li class="left_table">WPA2 Pre-authentication:</li>
+                           <li class="right_table">
+                              <input name="wlPreauth" type="radio" value="1" /> Enable
+                              <input type="radio" name="wlPreauth" value="0" /> Disable
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="w_text3">
+                        <ul>
+                           <li class="left_table">Network Re-auth Interval:</li>
+                           <li class="right_table">
+                              <input type="text" name="wlNetReauth" size='20' maxlength='10' /> sec
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+<!-- only for WPA2 more setting ending -->
+<!-- WPA-PSK/WPA2-PSK/WPA more setting beginning -->
+                  <div id="timer" style="display:none;">
+                     <div class="w_text3">
+                        <ul>
+                           <li class="left_table">Group Key Update Timer:</li>
+                           <li class="right_table">
+                              <input type="text" name="wlWpaGtkRekey" size='20' maxlength='10' /> sec
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+<!-- WPA-PSK/WPA2-PSK/WPA more setting ending -->
+               </li>
+            </ul></div>
+<!--More Security end-->
+            <li class="space"></li>
+<!--Button define start-->
+            <li class="buttonframe">
+               <div class="button_position">
+                  <input name="sysSubmit" value="Apply" type="button"/>
+                     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                  <input name="Cancel" value="Cancel" type="button"/>
+               </div>
+            </li>
+<!--Button define end-->
+         </ul></div>
+<!--Set area end-->
+      </div>
+
+<br/><br/>

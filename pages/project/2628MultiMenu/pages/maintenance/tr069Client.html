@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../../css/brick.css" rel="stylesheet" type="text/css" />
+<title>Untitled Document</title>
+</head>
+<body>
+<div class="unit_title" >TR-069 Client </div>
+<ul class="tabline"></ul>
+<div class="content_frame" >
+  <!--Unit Explain start-->
+  <div class="explain">
+    <div><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b><b class="r4"></b></div>
+    <div class="explain_text"> TR069 is a remote management tool on your device. The operator can upgrade firmware, modify settings, and diagnose problems remotely when you enable TR069. </div>
+    <div><b class="r4"></b><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></div>
+  </div>
+  <!--Unit Explain End-->
+  <!--Set area start-->
+  <div class="data_frame">
+    <ul>
+      <li class="set1">
+        <div class="w_text">
+          <ul>
+            <li class="left_table">Inform</li>
+            <li class="right_table">
+              <input name='Inform' type='radio' />
+              Enable
+              <input name='Inform' type='radio' />
+              Disable </li>
+          </ul>
+        </div>
+      </li>
+      <br />
+      <li class="set1">
+        <div class="w_text">
+          <ul>
+            <li class="left_table">Inform Interval:</li>
+            <li class="right_table">
+              <input type='text' name='tr69cInformInterval' size="20" maxlength="256" />
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="set1">
+        <div class="w_text">
+          <ul>
+            <li class="left_table">ACS URL:</li>
+            <li class="right_table">
+              <input type='password' name='tr69cAcsPwd3' size="45" maxlength="256" />
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="set1">
+        <div class="w_text">
+          <ul>
+            <li class="left_table">ACS User Name:</li>
+            <li class="right_table">
+              <input type='password' name='tr69cAcsPwd2' size="45" maxlength="256" />
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="set1">
+        <div class="w_text">
+          <ul>
+            <li class="left_table">ACS Password:</li>
+            <li class="right_table">
+              <input type='password' name='tr69cAcsPwd' size="45" maxlength="256" />
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="set1">
+        <div class="w_text">
+          <ul>
+            <li class="left_table">WAN Interface used by TR-069 client:</li>
+            <li class="right_table" id="FUCK">
+              <select name='tr69cBoundIfName'>
+              </select>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <br />
+      <li class="set1">
+        <div class="w_text">
+          <ul>
+            <li class="left_table">Display SOAP messages on serial console</li>
+            <li class="right_table">
+              <input name='debug' type='radio' />
+              Enable
+              <input name='debug' type='radio' />
+              Disable </li>
+          </ul>
+        </div>
+      </li>
+      <br />
+      <li class="set1">
+        <div class="w_text">
+          <ul>
+            <li class="all_table">
+              <input type="checkbox" name="connReqAuth">
+              Connection Request Authentication </li>
+          </ul>
+        </div>
+      </li>
+      <li class="set1">
+        <div class="w_text">
+          <ul>
+            <li class="left_table">Connection Request User Name: </li>
+            <li class="right_table">
+              <input type='text' name='tr69cConnReqUser' size="45" maxlength="256" />
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="set1">
+        <div class="w_text">
+          <ul>
+            <li class="left_table">Connection Request Password:</li>
+            <li class="right_table">
+              <input type='password' name='tr69cAcsPwd4' size="45" maxlength="256" />
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="set1">
+        <div class="w_text">
+          <ul>
+            <li class="left_table">Connection Request URL:</li>
+            <li class="right_table"> adf </li>
+          </ul>
+        </div>
+      </li>
+      <br />
+      <li class="set1">
+        <div class="w_text">
+          <ul>
+            <li class="left_table">Local certificate used by TR-069 client:</li>
+            <li class="right_table">
+              <select name="tr69cBoundCertName">
+              </select>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="space"> </li>
+      <!--Button define start-->
+      <li class="buttonframe">
+        <div class="button_position">
+          <input name="button" type='button'  value='Apply' />
+          &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+          <input name="button" type='button'  value='Cancel' />
+        </div>
+      </li>
+      <!--Button define end-->
+    </ul>
+  </div>
+  <!--Set area end-->
+</div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+
+  {
+         "tabTitle" : "NAT",
+         "Port Forwarding": {"url":"../network/nat/portForwarding.html"  },
+         "Applications": {"url":"../network/nat/applications.html"  },
+         "Port Triggering": {"url":"../network/nat/portTriggering.html"  },
+         "DMZ": {"url":"../network/nat/dmz.html"  },
+         "ALG": {"url":"../network/nat/alg.html"  },
+         "Sessions": {"url":"../network/nat/sessions.html"  }
+  }
+
+    

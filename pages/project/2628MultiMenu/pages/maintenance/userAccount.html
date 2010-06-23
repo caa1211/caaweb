@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../../css/brick.css" rel="stylesheet" type="text/css" />
+<title>Untitled Document</title>
+</head>
+<body>
+<div class="unit_title" >User Account </div>
+<ul class="tabline"></ul>
+<div class="content_frame" >
+  <!--Unit Explain start-->
+  <div class="explain">
+    <div><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b><b class="r4"></b></div>
+    <div class="explain_text">Different groups of users are granted with different privileges to this device. You can create or manage the user accounts in this section.</div>
+    <div><b class="r4"></b><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></div>
+  </div>
+  <!--Unit Explain End-->
+  <!--Set area start-->
+  <div class="data_frame">
+    <ul>
+      <li class="set1">
+        <div class="w_text">
+          <ul>
+            <li class="left_table">User Name  : </li>
+            <li class="right_table">
+              <input disabled="disabled" size="30" value="admin"  name="UserName" />
+            </li>
+          </ul>
+          <ul>
+            <li class="left_table">Old Password   : </li>
+            <li class="right_table">
+              <input name="password" type="password" 
+                        size="30" maxlength="30"/>
+            </li>
+          </ul>
+          <ul>
+            <li class="left_table">New Password  : </li>
+            <li class="right_table">
+              <input name="password" type="password" 
+                        size="30" maxlength="30" />
+            </li>
+          </ul>
+          <ul>
+            <li class="left_table">Retype to confirm  : </li>
+            <li class="right_table">
+              <input name="password" type="password" 
+                        size="30" maxlength="30">
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="space"></li>
+      <li class="buttonframe">
+        <div class="button_position">
+          <input name="sysSubmit" value="Apply" type="button" onclick="doSubmit();" />
+          &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+          <input name="Cancel" value="Cancel" type="button" onclick='frmLoad();' />
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!--Set area end-->
+</div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<script type="text/javascript">
+$(function(){
+    $('#addnewshareBtn').click(function(){
+    
+       var db1 = window.parent.$.zyUiDialog({
+            width: 500,
+            height: 250,
+            title: 'Add New Application'
+        });
+		var link = 'pages/network/nat/applications_add.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
+        db1.dialog('open');
+    });
+	
+    $('#deleteBtn').click(function(){
+    
+        var db1 = window.parent.$.zyUiDialog({
+            width: 450,
+            height: 190,
+            title: 'Delete',
+            buttons: {
+                'OK': function(){ db1.dialog('close')}
+            }
+			
+        });
+		var link = 'pages/delete.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
+        db1.dialog('open');
+    });
+});
+ </script>
+<div class="content_frame">
+<!--Unit Explain start-->
+    <div class="explain"><div><b class="r1"></b><b class="r2"></b> <b class="r3"></b> <b class="r4"></b><b class="r4"></b></div>
+<div class="explain_text">Applications provides predefined common applications to let you set up the port forwarding easier. </div><div><b class="r4"></b><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></div></div>
+<!--Unit Explain End-->
+<div class="data_frame">
+		 <ul>
+		 <li class="set1"> <div class="w_table"><input type="button" value="Add new application" id='addnewshareBtn'/></div></li>
+            <li class="set1">
+              <div class="w_table">
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_frame">
+    <tr>
+      <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" >
+        <tr>
+          <td><table width="100%" bor+
+          der="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td><table width="100%" cellpadding="0" cellspacing="0" style="table-layout:fixed;">
+                <tr align="center" valign="top">
+                  <td width="5%" class="top_font ">#</td>
+                  <td class="top_font ">Application Forwarded</td>
+                  <td class="top_font ">WAN Interface</td>
+                  <td class="top_font ">Server IP Address</td>
+                  <td width="60"  class="top_font " style="border-right:0px;">Modify</td>
+                </tr>
+                <tr align="center">
+                  <td class="table_font ">1</td>
+                  <td class="table_font ">--</td>
+                  <td class="table_font ">--</td>
+                  <td class="table_font ">--</td>
+                  <td class="table_font "><div class="i_modify"><ul><li ><a href="#"  id='deleteBtn' class="delete" title="Delete"></a></li></ul></div></td>
+                  </tr>
+              </table></td>
+            </tr>
+          </table></td>
+        </tr>
+      </table></td>
+    </tr>
+  </table>
+</div>
+</li>
+<li class="space"> </li>
+<!--Note define start-->
+<li class="noteframe"> <div class="w_text"><span class="i_note">Note:</span></div><div class="note_text">&nbsp;&nbsp;The TCP port 30005 is reserved for TR069 connection request port .</div></li>  
+<li class="space"> </li>      
+</ul>
+</div><br /><br />

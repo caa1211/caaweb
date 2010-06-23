@@ -1,0 +1,63 @@
+<script type="text/javascript">
+$(function(){
+
+       $('#nBtn').click(function(){
+
+        var db1 = window.parent.$.zyUiDialog({
+            width: 500,
+            height:300,
+            title: 'Edit rule after rule number'
+        });
+        var link = 'pages/security/firewall/Firewall_CustomPortCfg.html';
+        db1.load(link);
+        db1.dialog('open');
+       }); 
+	   
+	   
+});
+ </script>
+<div class="popup_frame" >
+<!--Unit Explain start-->
+<!--Unit Explain End-->
+<!--Set area start-->
+<div class="data_frame"><ul>
+<li class="set1">
+
+<li class="set1">
+  <div class="w_table">
+  <!--Table define start--><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_frame">
+    <tr>
+      <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+
+			<td><table width="100%" cellpadding="0" cellspacing="0" id='tbl'>
+			<tr align="center">
+			<td width="5%" valign="top" class="top_font">#</td>
+			<td valign="top" class="top_font">Name</td>
+			<td valign="top" class="top_font">Protocol</td>
+			<td valign="top" class="top_font">Port </td>
+			</tr>
+           <tr align="center">
+            <td class="table_font"><a href="#" id="nBtn">1</a></td>
+            <td class="table_font">--</td>
+            <td class="table_font">--</td>
+            <td class="table_font">--</td>
+            </tr>
+
+              </table></td>
+            </tr>
+          </table></td>
+        </tr>
+      </table></td>
+    </tr>
+  </table>
+</div><!--Table define end-->
+</li>
+<li class="space"> </li>
+<!--Button define start-->
+<!--Button define end-->
+</ul>
+</div>
+</div>

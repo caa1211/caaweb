@@ -1,0 +1,8 @@
+
+  {
+         "tabTitle" : "Call Rule",
+         "Speed Dial": {"url":"../voip/callRule/speedDial.html"  },
+         "PSTN Call Through": {"url":"../voip/callRule/PSTNCallThrough.html"  }
+  }
+
+    

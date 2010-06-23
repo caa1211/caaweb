@@ -1,0 +1,49 @@
+<div class="content_frame" >
+<!--Unit Explain start-->
+ <div class="explain"><div> <b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b>
+<b class="r4"></b></div><div class="explain_text">Quality of Service (QoS) defines the traffic priority of Internet services to the home network. </div> <div><b class="r4"></b><b class="r4"></b><b class="r3"></b> <b class="r2"></b><b class="r1"></b></div></div>
+<!--Unit Explain End-->
+<div class="data_frame"> <ul>
+      <li class="set1">
+        <div class="w_text"><ul> <li class="left_table" >QoS</li><li class="right_table"><input name="ssid_state" id="radio" type="radio" value="enable" checked="checked" /> 
+Enable <input name="ssid_state" id="radio2" type="radio" value="disable" /> 
+Disable (settings are invalid when disabled)</li></ul></div>
+         <div class="w_text">
+		  <ul>
+            <li class="left_table">WAN Managed Upstream Bandwidth  :&nbsp;</li>
+            <li class="right_table"><input name="totalRate" type="text" size="7" /> &nbsp;(kbps)
+            </li>
+          </ul>
+          <ul>
+            <li class="left_table">Select Default DSCP Mark</li>
+            <li class="right_table">
+              <select name="dscpMark" id="dscpMark" >
+                <option value="-1"> No Change </option>
+                <option value="0"> Default </option>
+              </select>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="space"> </li>
+        <li class="space"> </li>
+<!--Note define start-->
+<li class="noteframe">
+          <div class="w_text"><span class="i_note">Note:</span>
+          </div>
+          <div class="note_text">&nbsp;&nbsp;You can assign the upstream bandwidth manually. If the field is empty, the CPE set the value automatically.
+          <br>If Enable QoS checkbox is selected, choose a default DSCP mark to automatically mark incoming traffic without reference to a particular classifier.
+          <br>If the setting of WAN managed upstream bandwidth is greater than current WAN interface linkup rate, then the WAN managed upstream bandwidth will become current WAN interface linkup rate.
+          </div>
+        </li>
+        <li class="space"> </li>
+        <li class="buttonframe">
+          <div class="button_position">
+            <input name="sysSubmit" value="Apply" type="button"/>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            <input name="Cancel" value="Cancel" type="reset" />
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<br /><br />

@@ -1,0 +1,196 @@
+<script type="text/javascript">
+$(function(){
+
+       $('#eidtBtn').click(function(){
+
+        var db1 = window.parent.$.zyUiDialog({
+            width: 600,
+            height:350,
+            title: 'Edit rule after rule number'
+        });
+        var link = 'pages/security/firewall/Firewall_CustomPort.html';
+        db1.load(link);
+        db1.dialog('open');
+       }); 
+	   
+	   
+});
+ </script>
+
+
+<div class="popup_frame" >
+<div class="data_frame2"><ul>
+ <li class="set1">
+ <div class="title">Edit Rule 1 </div> 
+ <div class="w_text"><input type="checkbox" name="FWRCfg_Active" value="FWRCfg_Active"> Active 
+ </div>
+ <div class="w_text">Action for Matched Packets : 
+		<select name="FWRCfg_Action">
+		<option selected>Permit</option>
+		<option>Drop</option>
+		<option>Reset</option>
+		</select> 
+</div></li>
+   <li class="space"></li>
+    <li class="set1">
+ <div class="title">Source Address </div> 
+<div class="w_table">
+  <table border="0" cellspacing="0" cellpadding="0" width="100%">
+    <tr>
+      <td colspan="4">&nbsp;</td>
+      <td width="45%">Source Address List </td>
+    </tr>
+    <tr>
+      <td align="left" colspan="2"> Address Type      </td>
+      <td align="left" width="21%">
+          <select name="FWRCfg_SrcAddrType" size="1" onchange="SourceIPTypeChange(this.form);">
+            <option>Any Address</option>
+            <option>Single Address</option>
+            <option>Range Address</option>
+            <option>Subnet Address</option>
+          </select>      </td>
+      <td align="left" width="16%">&nbsp;</td>
+      <td rowspan="4" width="45%" valign="bottom">
+        <select name="FWRCfg_SrcList" size="7" >
+          <option>255.255.255.255 - 255.255.255.255</option>
+          <option>111.255.255.255 - 255.255.255.255</option>
+        </select></td>
+    </tr>
+    <tr>
+      <td colspan="2">Start IP Addr.</td>
+      <td align="left" width="21%">
+          <input type="text" name="FWRCfg_SrcStartIP" size="16" maxlength="16" value="255.255.255.255"></td>
+      <td width="16%" align="center">
+          <input type="button" name="FWRCfg_SrcAdd2" value="Add &gt;&gt;" /> </td>
+    </tr>
+    <tr>
+      <td colspan="2"> End IP Addr.</td>
+      <td align="left" width="21%">
+          <input type="text" name="FWRCfg_SrcEndIP" size="16" maxlength="16" value="255.255.255.255"> </td>
+      <td width="16%" align="center"> <input type="button" name="FWRCfg_SrcEdit" value="Edit &lt;&lt;" onclick="SrcEditRule(this.form)" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">Subnet Mask </td>
+      <td align="left" width="21%">
+          <input type="text" name="FWRCfg_SrcSubnetMask" size="16" maxlength="16"  value="255.255.255.255" /></td>
+      <td width="16%" align="center">
+          <input type="button" name="FWRCfg_SrcDelete" value="Delete" > </td>
+    </tr>
+  </table>
+</div>
+</li>
+   <li class="space"></li>
+    <li class="set1">
+   <div class="title">Destination Address  </div>
+   <div class="w_table">
+     <table border="0" cellspacing="0" cellpadding="0" width="100%">
+       <tr>
+         <td colspan="4">&nbsp;</td>
+         <td width="45%"> Destination Address List </td>
+       </tr>
+       <tr>
+         <td align="left" colspan="2"> Address Type </td>
+         <td align="left" width="21%">
+             <select name="FWRCfg_DestAddrType" size="1" >
+               <option>Any Address</option>
+               <option>Single Address</option>
+               <option>Range Address</option>
+               <option>Subnet Address</option>
+             </select> </td>
+         <td align="left" width="16%">&nbsp;</td>
+         <td rowspan="4" width="45%" valign="bottom">
+           <select name="FWRCfg_DestList" size="7">
+             <option>255.255.255.255 - 255.255.255.255</option>
+             <option>111.255.255.255 - 255.255.255.255</option>
+           </select></td>
+       </tr>
+       <tr>
+         <td colspan="2"> Start IP Addr.</td>
+         <td align="left" width="21%">
+             <input type="text" name="FWRCfg_DestStartIP" size="16" maxlength="16" value="255.255.255.255"> </td>
+         <td width="16%" align="center">
+             <input type="button" name="FWRCfg_DestAdd" value="Add &gt;&gt;">           </td>
+       </tr>
+       <tr>
+         <td colspan="2">End IP Addr. </td>
+         <td align="left" width="21%"> <input type="text" name="FWRCfg_DestEndIP" size="16" maxlength="16" value="255.255.255.255"></td>
+         <td width="16%" align="center"><input type="button" name="FWRCfg_DestEdit" value="Edit &lt;&lt;" ></td>
+       </tr>
+       <tr>
+         <td colspan="2">Subnet Mask </td>
+         <td align="left" width="21%"><input type="text" name="FWRCfg_DestSubnetMask" size="16" maxlength="16"   value="255.255.255.255" /> </td>
+         <td width="16%" align="center"> <input type="button" name="FWRCfg_DestDelete" value="Delete" ></td>
+       </tr>
+     </table>
+   </div>
+</li>
+   <li class="space"></li>
+    <li class="set1">
+ <div class="title"><span class="cTitle">Services </span></div> 
+   <div class="w_table">
+     <table border="0" cellspacing="0" cellpadding="0" width="100%">
+       <tr>
+         <td colspan="4"> Available Service </td>
+         <td width="45%">Selected Services</td>
+       </tr>
+       <tr>
+         <td colspan="3" rowspan="2">
+             <select name="FWRCfg_ServiceSrc" size="5" >
+               <option value="0">BGP(TCP:179) </option>
+               <option value="1">BOOTP_CLIENT(UDP:68) </option>
+               <option value="3">BOOTP_SERVER(UDP:67) </option>
+               <option value="4">CU-SEEME(TCP/UDP:7648,24032) </option>
+               <option value="5">DNS(TCP/UDP:53) </option>
+               <option value="6">FINGER(TCP:79) </option>
+               <option value="7">FTP(TCP:20,21) </option>
+               <option value="8">H.323(TCP:1720) </option>
+               <option value="9">HTTP(TCP:80) </option>
+               <option value="10">HTTPS(TCP:443)</option>
+               <option value="11">IPSEC_TRANSPORT/TUNNEL(AH:0) </option>
+               <option value="12">IPSEC_TUNNEL(ESP:0) </option>
+               <option value="13">ICQ(UDP:4000) </option>
+               <option value="14">IKE(UDP:500) </option>
+               <option value="15">IRC(TCP/UDP:6667) </option>
+               <option value="16">MULTICAST(IGMP:0) </option>
+               <option value="17">MSN Messenger(TCP:1863) </option>
+               <option value="18">NEWS(TCP:144) </option>
+               <option value="19">NFS(UDP:2049) </option>
+               <option value="20">NNTP(TCP:119) </option>
+               <option value="21">PING(ICMP:0) </option>
+               <option value="22">POP3(TCP:110) </option>
+               <option value="23">PPTP(TCP:1723) </option>
+               <option value="24">PPTP_TUNNEL(GRE:0) </option>
+               <option value="25">RCMD(TCP:512) </option>
+               <option value="26">REAL-AUDIO(TCP:7070) </option>
+               <option value="27">REXEC(TCP:514) </option>
+               <option value="28">RLOGIN(TCP:513) </option>
+               <option value="29">RTELNET(TCP:107) </option>
+               <option value="30">RTSP(TCP/UDP:554) </option>
+             </select>
+ </td>
+         <td width="16%" align="center" valign="middle">
+             <input type="button" name="FWRCfg_ServiceAdd" value="Add &gt;&gt;"  />
+             <!-- RpEnd -->         </td>
+         <td rowspan="2" width="45%">
+             <select name="FWRCfg_ServiceDest" size="5"  >
+               <option value="2">x </option>
+             </select>
+ </td>
+       </tr>
+       <tr>
+         <td width="16%" align="center" valign="middle">
+             <input type="button" name="FWRCfg_ServiceDelete" value="Delete"   />
+             <!-- RpEnd -->         </td>
+       </tr>
+       <tr>
+         <td height="22" valign="middle" colspan="3"><a href="#" id='eidtBtn'> Edit Available Service</a></td>
+         <td width="16%">&nbsp;</td>
+         <td width="45%">&nbsp;</td>
+       </tr>
+     </table>
+   </div>
+</li>
+   <li class="space"></li>
+</ul>
+</div>
+</div>

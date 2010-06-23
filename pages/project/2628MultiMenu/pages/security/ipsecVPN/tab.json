@@ -1,0 +1,7 @@
+
+  {
+         "tabTitle" : "IPSec VPN",
+         "Setup": {"url":"../security/ipsecVPN/ipsecVPN.html"  },
+		 "Monitor": {"url":"../security/ipsecVPN/monitor.html" },
+         "VPN Global Setting": {"url":"../security/ipsecVPN/vpnGlobal.html" }
+  }

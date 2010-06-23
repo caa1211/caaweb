@@ -1,0 +1,174 @@
+<script type="text/javascript">
+$(function(){
+    $('#WPSBtn').click(function(){
+        var db1 = window.parent.$.zyUiDialog({
+            width: 450,
+            height: 200,
+            title: 'Adding a new device ',
+			buttons: {
+                'Cancel': function(){ db1.dialog('close')}
+            }
+        });
+		var link = 'pages/network/wireless/wpsinfo.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
+        db1.dialog('open');
+        
+        setTimeout(function(){
+                var link = 'pages/network/wireless/wpsinfo2.html';
+                if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+                link='../../'+link;
+                db1.fadeOut(0).load(link).fadeIn(400);
+        } ,2000 );
+        
+    });
+    
+    
+    
+	    $('#Register').click(function(){
+        var db1 = window.parent.$.zyUiDialog({
+            width: 450,
+            height: 200,
+            title: 'Adding a new device ',
+			buttons: {
+                'Cancel': function(){ db1.dialog('close')}
+            }
+        });
+		var link = 'pages/network/wireless/wpsinfo.html';
+        if(jQuery.browser.safari && parseInt(jQuery.browser.version)<=525 )
+        link='../../'+link;
+        db1.load(link);
+        db1.dialog('open');
+    });
+
+    $('input[type=radio]').click(function(e){
+        
+        var id = $(e.target).attr('id');
+        if(id=='enableWPS')
+        {
+          $('.hideWhenDisable').show();  }
+        else if(id=='disableWPS')
+        {
+          $('.hideWhenDisable').hide();         
+        }
+    });
+    
+        $('#disableWPS').attr('checked')==true ?  $('.hideWhenDisable').hide() :  $('.hideWhenDisable').show()
+});
+ </script>
+<div class="content_frame" >
+<!--Unit Explain start-->
+<div class="explain">
+<div><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b><b class="r4"></b></div>
+<div class="explain_text">Enabling Wi-Fi Protected Setup (WPS) lets you add new WPS-compatible devices to the wireless network with ease. Select one of the WPS methods and follow the instructions to establish WPS connection.</div>
+<div><b class="r4"></b><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></div></div>
+<!--Unit Explain End-->
+<!--Set area start-->
+<div class="data_frame"><ul>
+<li class="set1"> 
+<div class="title">General</div> 
+<div class="w_text">
+  <ul>
+    <li class="left_table">WPS  :</li>
+    <li class="right_table">
+      <input name="ssid_state" id="enableWPS" type="radio" value="enable" />
+      Enable
+      <input name="ssid_state" type="radio" id="disableWPS" value="disable" checked="checked" />
+      Disable  (settings are invalid when disabled)</li>
+  </ul>
+</div>
+</li>
+<li class="space"> </li>
+<div id="disableHide">
+<li class="set1 hideWhenDisable">
+<div class="title">Add a new device with WPS Method</div> 
+  <div class="wps"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td width="33%" class="wps_top" ><table width="92%" border="0" cellspacing="0" cellpadding="0" align="center">
+      <tr>
+        <td width="45" ><img src="../../images/wps_pic.gif" width="34" height="41" /></td>
+        <td class="Method">Method 1 PBC</td>
+      </tr>
+    </table>    </td>
+    <td width="34%" class="wps_top" style="border-left:1px #c6c6c6 solid;"><table width="92%" border="0" cellspacing="0" cellpadding="0" align="center">
+      <tr>
+        <td width="45" ><img src="../../images/wps_pic2.gif" width="34" height="41" /></td>
+        <td class="Method">Method 2 PIN </td>
+      </tr>
+    </table></td>
+    </tr>
+  <tr>
+    <td valign="top" ><span class="space"></span><table width="92%" border="0" cellspacing="0" cellpadding="0" align="center">
+      <tr>
+        <td>
+        <div class="w_text2"><span class="blod">Step 1. </span>Click WPS button <input name="WPS" value="WPS" id="WPSBtn" type="submit"/></div>
+        <div class="space"></div>
+		 <div class="w_text2"><span class="blod">Step 2.</span> Press the WPS button <span class="blod">on your new wireless client device</span> within 120 seconds</div>        </td>
+        </tr>
+    </table>    </td>
+    <td valign="top" style="border-left:1px #c6c6c6 solid;"><span class="space"></span><table width="92%" border="0" cellspacing="0" cellpadding="0" align="center">
+      <tr>
+        <td><div class="w_text2"><span class="blod">Step 1. </span>Enter the PIN of your new wireless client device and then click Register
+          <label>
+          <input name="textfield" type="text" value="Enter PIN here" size="15"/>
+          </label>
+          <input name="PBC" value="Register" type="submit" id="Register" />
+        </div>
+		        <div class="space"></div>
+            <div class="w_text2"><span class="blod">Step 2.</span> Press the WPS button <span class="blod">on your new wireless client device</span> within 120 seconds</div></td>
+      </tr>
+    </table></td>
+    </tr>
+  
+</table>
+</div></li>
+<li class="set1">
+<div class="title">WPS Configuration Summary</div> 
+</li>
+<li class="set2">
+<div class="w_text">
+  <ul>
+    <li class="left_table">AP PIN  :</li>
+    <li class="right_table w_blue">12015566 
+      <input name="Generate new PIN" type="submit" id="Generate new PIN" value="Generate new PIN" class='hideWhenDisable'/>
+    </li>
+  </ul>
+    <ul>
+    <li class="left_table">Status  :</li>
+    <li class="right_table w_blue">NOT Configured   <input name="Release Configuration" type="submit" id="Release Configuration" value="Release Configuration" class='hideWhenDisable'/></li>
+  </ul>
+</div>
+<div class="w_text" id="enableShow">
+  <ul>
+    <li class="left_table">802.11 Mode   :</li>
+    <li class="right_table">802.11 B/G/N mixed</li>
+  </ul>
+    <ul>
+    <li class="left_table">SSID  :</li>
+    <li class="right_table">ZyXEL_H4CPVN</li>
+  </ul>
+    <ul>
+    <li class="left_table">Security:  :</li>
+    <li class="right_table">WPA-PSK</li>
+  </ul>
+    <ul>
+    <li class="left_table">Pre-Shared Key  :</li>
+    <li class="right_table">123456789</li>
+  </ul>
+</div>
+</li>
+</div>
+<li class="space"> </li>
+<!--Note define start-->
+<li class="noteframe"> <div class="w_text"><span class="i_note">Note:</span></div><div class="note_text">&nbsp;&nbsp;1.If you enable WPS, it will turned on UPnP service automatically. 
+<br />
+&nbsp;&nbsp;2.This feature is available only when WPA-PSK, WPA2-PSK or No Security mode is configured.</div></li>
+<!--Note define end-->
+<li class="space"> </li>
+<!--Button define start-->
+<li class="buttonframe"><div class="button_position"><input name="sysSubmit" value="Apply" type="submit" />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<input name="Cancel" value="Cancel" type="reset" /></div></li>
+</ul></div>
+<!--Set area end-->
+</div>
+<br/><br/>
