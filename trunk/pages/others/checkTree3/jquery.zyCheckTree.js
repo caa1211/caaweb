@@ -16,7 +16,8 @@
             isParseTreeByJson: true,
             isCollapsble: true,
             loseControlOptions:[],//loseControlOptions:['0', '2_1'], 
-            canLabelCheck: true
+            canLabelCheck: true,
+            root: 'abc'
         }
         
         var _settings = $.extend(_defaultSetting, settings);
@@ -63,7 +64,7 @@
                         })
 
                    if (parentNode.siblings('.checkbox').length==0 || parentNode.siblings('.checkbox').hasClass('half_checked')) 
-                            checkedArray.push($(this).attr('id').split('node_')[1]);
+                            checkedArray.push($(this).attr('treeId').split('node_')[1]);
                 });
                  retArray.push(checkedArray);
             })
@@ -108,6 +109,20 @@
             return retArray.length==1?retArray[0]:retArray; 
         }
 
+        function append2Root(childObj){
+              var contenter = $('<ul class="tree"></ul>');
+              var liNode = $('<li></li>');
+              var inputNode = $('<div class="checkbox" treeId="node_root"></div>');
+              var labelNode = $(' <LABEL>' + 'adfasfsaf'+ '</LABEL>');
+              
+              
+              liNode.append(inputNode);
+              liNode.append(labelNode);
+              liNode.append(childObj);
+              contenter.append(liNode);
+              return contenter;
+        }
+        
         function createNode(data, recursiveCounter, targetIDStr){
             if (recursiveCounter == undefined) 
                 recursiveCounter = "";
@@ -128,7 +143,7 @@
                 IDStr = i; 
                 else
                 IDStr = targetIDStr + '-' + i;
-                var inputNode = $('<div class="checkbox" id="node' + nodeStr + '" targetID='+IDStr+'  ></div>');
+                var inputNode = $('<div class="checkbox" treeId="node' + nodeStr + '" targetID='+IDStr+'  ></div>');
                 liNode.append(inputNode);
                 
                 var labelNode = $(' <LABEL>' + item.title + '</LABEL>');
@@ -138,9 +153,11 @@
                     var subMenuContenter = createNode(item.submenu, nodeStr, IDStr);
                     liNode.append(subMenuContenter);
                 }
-                
                 contenter.append(liNode);
             });
+            
+           contenter = append2Root(contenter);
+            
             return contenter;
         }
 
@@ -215,7 +232,7 @@
         function applyExpandable($container){
           var arrow = $('<div class="arrow"></div>');
           $('.checkbox', $container).before(arrow);
-          
+       
           var allTreeNode = $('ul.tree', $container);
           var collapsableNode = allTreeNode.siblings('div.arrow')
           
@@ -234,10 +251,10 @@
             //for lose control   
             if(_settings.loseControlOptions.length != 0){
                 $.each(_settings.loseControlOptions, function(i, item){
-                     $('#node_'+ item, $container).addClass('loseControl').parent('li').addClass('loseControl');
+                     $($container).find('[treeId=node_'+item+ ']').addClass('loseControl').parent('li').addClass('loseControl');
                 });
             }
-            
+
            var controlableCheckBoxs = $container.find('ul.tree .checkbox').filter(function(){
                 var hasLoseControl =$(this).parents('.loseControl').length!=0
                 
@@ -273,6 +290,7 @@
                });
                $.ajaxSettings.async = true;
            }
+          
                doCheckBoxTreeCompleted($container);
         };
         var zyCheckTree = this.each(_handler);
