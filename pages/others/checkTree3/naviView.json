@@ -1,10 +1,8 @@
 
   {
-         "title": 'AAA',
-
-         "Internet": {"url":"content/01.html"  },
-         "Auto WAN Setting": {"url":"content/02.html" },
-         "MoCA": {"url":"content/03.html"}
+         "networkMap": {"title": "Network Map", "url":"content/networkMap.html"},
+         "status": {"title": "Status", "url":"content/status.html"},
+         "vd": {"title": "Virtual Device", "url":"content/vd.html"}
   }
 
     
