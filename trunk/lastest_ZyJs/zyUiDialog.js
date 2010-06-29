@@ -12,6 +12,7 @@
  * 090923 cancel event bubble from overlay to parent element
  * 091224 add css "position: relative" in container
  * 100528 add multi lingo config and addLingoAttr function
+ * 100624 set default width and height
  */
 
 (function($){
@@ -21,6 +22,8 @@
             bgiframe: true,
             closeOnEscape: true,
             modal: true,
+			width: 450,
+			height: 300,
             autoOpen: false,
 			multiLingo: true,
             confirmDB: false, //no background, unresizable
