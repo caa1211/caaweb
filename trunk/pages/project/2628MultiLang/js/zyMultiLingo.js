@@ -25,7 +25,8 @@
 			 {id :'CHT', src : "js/2628_lang_cht.js"}*/
 			 ],
 			 initCompleted: function(){},
-			 onChange: function(){}
+			 onChange: function(){},
+             subFrameSelector: '#mainFrame'
        }
        
       var settings = $.extend(defaultSetting , settings);
@@ -94,32 +95,51 @@
 
               });
 			  updateDomLang_forTitle($targetObj);
+  
+              var subFrame = $(settings.subFrameSelector , $targetObj);
+              if (subFrame.length != 0) {
+                  var subFrameBody = subFrame.contents().find('body');
+                  if (subFrameBody.length != 0) 
+                      updateDomLang(subFrameBody);
+              }
        }
 	 
-	   this.update= function(targetLingo, callback, init){ return  this.updateLingo(targetLingo, callback, init); };
+	   this.update= function(targetLingo, callback,  $targetObj){ return  this.updateLingo(targetLingo, callback, $targetObj); };
 		
-	   this.updateLingo= function(targetLingo, callback, init){
+	   this.updateLingo= function(targetLingo, callback, $targetObj){
 	   
 	    var loadRes = true;
 	    if(targetLingo!=undefined)
 	       loadRes =loadLingo(targetLingo);
 		   
 		if(loadRes==false) return false;
-		
-	    var $body = $('body');
-		function ajaxCompleteHandler(a, b , c){updateDomLang();/*if(c.dataType=='html')  updateDomLang($(b.responseText); */};
-         updateDomLang();
-         $body.unbind('ajaxComplete', ajaxCompleteHandler);
-		 $body.bind('ajaxComplete', ajaxCompleteHandler);
-				  
-		if(callback!=undefined)
-		   callback();
-      
-		 $body.trigger('lingoChange');
-		 settings.onChange();
-		 
+        
+	   if ($targetObj == undefined) 
+               $targetObj = $('body');
+
+         this.doInitLingo($targetObj);
+ 
+         
+         if (callback != undefined) 
+             callback();
+               
+         $targetObj.trigger('lingoChange');
+         settings.onChange();
 		 return true;
-       } 
+       }
+
+       
+       this.doInitLingo= function($targetObj){
+       
+           function ajaxCompleteHandler(a, b, c){
+               updateDomLang($targetObj);/*if(c.dataType=='html')  updateDomLang($(b.responseText); */
+           };
+
+           updateDomLang($targetObj);
+           
+           $targetObj.unbind('ajaxComplete', ajaxCompleteHandler);
+           $targetObj.bind('ajaxComplete', ajaxCompleteHandler);
+       };
 	   
 	   function loadLingo(targetLingo){
 			var src;
