@@ -1,0 +1,44 @@
+
+
+<script type="text/javascript">
+   
+$(function(){
+      
+var OkBtn = $('.ui-dialog-buttonpane').children("button:contains('OK')");
+db = $('#db_content').parent('.dialogContener');      //find db obj
+
+var buttons = db.dialog('option', 'buttons');
+
+
+$('#naviToBtn').click(function(){
+    
+    
+    db.naviTo('edit2.html',  
+    {       
+           'width':300,
+           'buttons':
+           { 
+           'aaa':function(){db.dialog('close')}
+           }
+    });
+    
+    
+    
+})
+
+
+
+OkBtn.click(function(e){
+    //db.trigger('dialogclose');           
+    db.dialog('close');
+    
+});
+    });
+
+</script>
+
+
+<div id='db_content'>other html s
+
+<button id='naviToBtn'>navi To</button>
+</div>

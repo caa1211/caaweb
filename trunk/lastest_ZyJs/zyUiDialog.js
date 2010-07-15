@@ -13,6 +13,8 @@
  * 091224 add css "position: relative" in container
  * 100528 add multi lingo config and addLingoAttr function
  * 100624 set default width and height
+ * 100707 add naviTo function
+ * 100712 auto modify height in ie6
  */
 
 (function($){
@@ -47,17 +49,22 @@
             buttons: {    
                 'Cancel': function(e){$.cancelBubble(e);$(this).dialog('close');},
 				'OK': function(){}
-            }
+            },
+            naviTo: function(){alert('');}
+      
         };
         
-        baseDiv.bind('dialogclose', function(event, ui){
-            baseDiv.remove();
-        });
+        if (baseDiv != null) {
+            baseDiv.bind('dialogclose', function(event, ui){
+               setTimeout(function(){baseDiv.remove();},300);
+               //baseDiv.remove();
+            });
+        }
         
 		if($.browser.msie&&($.browser.version == "6.0")&&!$.support.style )
 		{
-	    var ie6Setting = {  'margin-right': '18px' };
-		_defaultSettings.containerCss = $.extend(_defaultSettings.containerCss, ie6Setting);
+	    //var ie6Setting = {  'margin-right': '18px' };
+		//_defaultSettings.containerCss = $.extend(_defaultSettings.containerCss, ie6Setting);
 		}
 		
         return $.extend(_defaultSettings, settings);
@@ -73,6 +80,11 @@
             if (_settings.confirmDB) 
                  _settings.resizable = false;
                 
+                if ($.browser.msie && ($.browser.version == "6.0") && !$.support.style) {
+                    var dheight = _settings.height;
+                    _settings = $.extend(_settings, {height:dheight + 1});
+                }
+                
                 return {container: msgDiv, setting:_settings };
     }
     
@@ -86,7 +98,9 @@
         zyUiDialog: function(settings){
             var msg = createContainer(settings);
 			var retMsg = msg.container.dialog(msg.setting);
-			
+            
+			 //.naviTo = function(){alert('n')};
+             
 			if(msg.setting.multiLingo)
 			addLingoAttr(retMsg);
 			
@@ -99,7 +113,7 @@
         zyUiDialog: function(settings){
             var msg = createContainer(settings);
 		    var retMsg = msg.container.append($(this)).dialog(msg.setting);
-			
+			this.naviTo = function(){alert('n')}
           if(msg.setting.multiLingo)
 			addLingoAttr(retMsg);
 			
@@ -107,4 +121,15 @@
         }
     });
     
+    $.fn.extend({
+        naviTo: function(url, options, callback){
+            if (!url) 
+                return;
+            if(options!=undefined)
+              $(this).dialog("option", options);
+                
+            $(this).empty().load(url, callback);
+            return this;
+        }
+    });
 })(jQuery);
