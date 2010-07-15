@@ -17,7 +17,8 @@
             isCollapsble: true,
             loseControlOptions:[],//loseControlOptions:['0', '2_1'], 
             canLabelCheck: true,
-            root: 'abc'
+            root: null,
+            parseFn: function(i, item){return true;} //true:pass
         }
         
         var _settings = $.extend(_defaultSetting, settings);
@@ -42,9 +43,9 @@
         {
             this.each(function(){
                  $('.checkbox', this).removeClass('checked').removeClass('half_checked');
-                 
                   for (var j = 0; j < checkArray.length; j++) {
-                      var checkNode =$('#node_' + checkArray[j], this);
+                  
+                      var checkNode =$(this).find('[treeId=node_'+checkArray[j]+']');
                       nodeStatusUpdate(checkNode);
                   }
             })
@@ -109,11 +110,11 @@
             return retArray.length==1?retArray[0]:retArray; 
         }
 
-        function append2Root(childObj){
+        function append2Root(childObj, rootText){
               var contenter = $('<ul class="tree"></ul>');
               var liNode = $('<li></li>');
-              var inputNode = $('<div class="checkbox" treeId="node_root"></div>');
-              var labelNode = $(' <LABEL>' + 'adfasfsaf'+ '</LABEL>');
+              var inputNode = $('<div class="checkbox" treeId="node_root" targetId="root"></div>');
+              var labelNode = $(' <LABEL>' +  rootText + '</LABEL>');
               
               
               liNode.append(inputNode);
@@ -130,7 +131,10 @@
             var contenter = $('<ul class="tree"></ul>');
             var counter = 0;
             $.each(data, function(i, item){
-
+                
+                if (!_settings.parseFn(i, item))
+                return;
+                
                 if (item.title == undefined) 
                 return;
                 var liNode = $('<li></li>');
@@ -156,7 +160,8 @@
                 contenter.append(liNode);
             });
             
-           contenter = append2Root(contenter);
+           if(_settings.root!=null)
+           contenter = append2Root(contenter, _settings.root);
             
             return contenter;
         }

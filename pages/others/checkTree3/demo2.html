@@ -17,8 +17,12 @@
             
             //-----------------------------------------
             var checkTree1 = $('#treeA').zyCheckTree({
-              //  parseJson:'menu.json',
-                loseControlOptions: ['0', '2_1']
+                parseJson:'wizard.json'//,
+            //    loseControlOptions: ['0', '2_1'],
+                ,root:'setup wizard'
+                ,parseFn: function(i, item){
+                    return !(item.status!=undefined && item.status!='step');
+                    }
             });
             
             //set Data
