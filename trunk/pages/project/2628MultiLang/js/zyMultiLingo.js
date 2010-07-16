@@ -149,7 +149,7 @@
 			});
 			
 		if(src == undefined )
-		{alert('lingo package is not exist'); return false;}
+		{return false;}
 		
 		var getLingoFlag  = true;
 		var $body = $('body');
@@ -170,7 +170,7 @@
 			 return getLingoFlag;
 	   }
 	   
-	  
+	 
 
 	  $(function(){ loadLingo(settings.DLingo); $LingoObj.updateLingo(undefined,  settings.initCompleted );});
       return this;
