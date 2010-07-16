@@ -170,9 +170,9 @@
 			 return getLingoFlag;
 	   }
 	   
-	   loadLingo(settings.DLingo);
+	  
 
-	  $(function(){$LingoObj.updateLingo(undefined,  settings.initCompleted );});
+	  $(function(){ loadLingo(settings.DLingo); $LingoObj.updateLingo(undefined,  settings.initCompleted );});
       return this;
     };
 })(jQuery);
