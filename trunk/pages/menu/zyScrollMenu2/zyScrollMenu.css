@@ -1,0 +1,15 @@
+﻿	.pane{
+		overflow:hidden;
+		clear:left;
+        left:300px;
+        top:100px;
+		border: solid 1px black;
+		list-style-type: none;
+		width:350px;
+		height:500px;
+        position:relative;
+	}
+
+.scrollMenu {margin:0px;}
+.scrollMenu  .focusItem{border: solid 2px black;}
+.scrollMenu .menuItem{border: solid 1px red; width:100px; height:100px;position: absolute;}

@@ -1,0 +1,36 @@
+ {
+ 'defaultPage':"menu1-sdf",
+ "menu1": {
+        "title": "1",
+        "switchCls": {
+            "off": "m01_off",
+            "on": "m01_on"
+        },
+        "url": "pages/connectionStatus.html"
+    },
+   "menu2": {
+        "title": "2",
+        "switchCls": {
+            "off": "m01_off",
+            "on": "m01_on"
+        },
+        "url": "pages/connectionStatus.html"
+    },
+   "menu3": {
+        "title": "3",
+        "switchCls": {
+            "off": "m01_off",
+            "on": "m01_on"
+        },
+        "url": "pages/connectionStatus.html"
+    },
+   "menu4": {
+        "title": "4",
+        "switchCls": {
+            "off": "m01_off",
+            "on": "m01_on"
+        },
+        "url": "pages/connectionStatus.html"
+    }
+  
+ }
