@@ -14,7 +14,8 @@
         var _defaultSetting = {
             parseJson: 'menu.json',
             intervalTop: 100,
-            dur:200
+            dur:200,
+			height:'50%'
         }
         var beginIndex = 0;
         var _settings = $.extend(_defaultSetting, settings);
@@ -31,7 +32,7 @@
               var top = lastItem.position().top;
  
                  for (var i = 0; i < num; i++) {
-                     var aItem = itemAry[(lastindex + 1 + i) % itemLength].clone(true);
+                     var aItem = getScrollItem(lastindex + 1 + i).clone(true);
                      var atop = top + (i + 1) * _settings.intervalTop;
                      aItem.css('top', atop);
                      $container.append(aItem);
@@ -44,9 +45,7 @@
               var top = firstItem.position().top;
             
                  for (var i = 0; i < num; i++) {
-             
-                     var arrayIndex = (firstindex-1-i+itemLength) % itemLength;
-                     var aItem = itemAry[arrayIndex].clone(true);
+                     var aItem = getScrollItem(firstindex-1-i).clone(true);
                      var atop = top - (i +1)* _settings.intervalTop;
   
                      aItem.css('top', atop);
@@ -60,7 +59,8 @@
         
         var itemArryCounter=0;
         var dAryIndex;
-        
+        var selectedItem;
+		
         this.scrollPrev = function(num){
              if ($container.attr('isAnim') != undefined && $container.attr('isAnim') == 'true') 
                  return;
@@ -72,10 +72,13 @@
                }, dur, function(){
                
                    $container.attr('isAnim', 'false');
-                   
+                 
                    if ($(this).position().top + _settings.intervalTop < 0) 
                        $(this).empty().remove();
                }); 
+			   
+			   dAryIndex = getScrollItemIndex(dAryIndex +num);
+			   $container.trigger('scrollChange', this.getSelectedItem());
         };
         
         this.scrollNext = function(num){
@@ -93,50 +96,72 @@
                 if ($(this).position().top  > $container.height()) 
                     $(this).empty().remove();
             });
+			
+		
+			  dAryIndex = getScrollItemIndex(dAryIndex -num);
+			  $container.trigger('scrollChange', this.getSelectedItem());
         };
-
+		
+        function getScrollItem(index){
+                return itemAry[getScrollItemIndex(index)];
+		}
+		
+		this.getSelectedItem = function(){
+                return itemAry[getScrollItemIndex(dAryIndex)];
+		};
+		
+        function getScrollItemIndex(index){
+            var index;
+            while(index<0)
+            {
+                index =index+itemLength;
+            }
+           return index%itemLength
+        }
+        
         function buildScrollMenu(){  
           
-            itemLength = itemAry.length;
-         
+		    itemLength = itemAry.length;
+			 
+			if(_settings.height!=null)
+			 $container.css('height', _settings.height);
+		
+		    if(_settings.intervalTop*itemLength<$container.height())
+			  $container.css('height', _settings.intervalTop*itemLength);
+		
+
             var centerTop = parseInt($container.height()/2 - _settings.intervalTop /2);
          
-            centerTarget = itemAry[dAryIndex].clone(true);
+            centerTarget = getScrollItem(dAryIndex).clone(true);
             centerTarget.css('top', centerTop);
             $container.append(centerTarget);
             
             var tempTop = centerTop;
             var bfr = 0;
             while (tempTop > 0) {
-                tempTop = tempTop - i * _settings.intervalTop;
-                bfr++
+                tempTop = tempTop - _settings.intervalTop;
+                bfr++;
             }
-            bfr = bfr+1;
-           
+ 
           for(var i =0 ; i<bfr ; i++)
           {
-              var aItem = itemAry[(dAryIndex+1+i)%itemLength].clone(true);
+              var aItem = getScrollItem(dAryIndex+1+i).clone(true);
               var atop = centerTop + (i+1)* _settings.intervalTop;
               aItem.css('top', atop);
               $container.append(aItem);
      
-             var bItem = itemAry[(dAryIndex-1-i+itemLength)%itemLength].clone(true);
+             var bItem = getScrollItem(dAryIndex-1-i).clone(true);
              var btop = centerTop -(1+ i)* _settings.intervalTop;
              bItem.css('top', btop);
              
             $container.prepend(bItem);
-         }
-           
-           
+         } 
        /*    for(var i = 0; i < itemAry.length ; i++)
             {
                 var top = $container.children('.menuItem').length * _settings.intervalTop;
                 $container.append(itemAry[i]);
                  itemAry[i].css('top',top );
-            }*/
-            
-            
-            
+            }*/ 
         }
 
         var _handler = function(){
@@ -163,11 +188,16 @@
             });
             $.ajaxSettings.async = true;
             buildScrollMenu();
+			
+			$(window).resize(function(){
+		     $container.empty();
+		     buildScrollMenu();
+		    });
+			
+			
+			 $container.bind('scrollChange', function(e, item){$(e.currentTarget).children('.menuItem').removeClass('selected');    $(item).addClass('selected') });
+		   
         };
-        
-    
-        
-        
         var scrollMenu = this.each(_handler);
         return scrollMenu;
     };

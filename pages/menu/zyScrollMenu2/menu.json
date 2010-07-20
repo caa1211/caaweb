@@ -1,5 +1,5 @@
  {
- 'defaultPage':"menu1-sdf",
+ 'defaultPage':"menu5-sdf",
  "menu1": {
         "title": "1",
         "switchCls": {
@@ -26,6 +26,22 @@
     },
    "menu4": {
         "title": "4",
+        "switchCls": {
+            "off": "m01_off",
+            "on": "m01_on"
+        },
+        "url": "pages/connectionStatus.html"
+    },
+   "menu5": {
+        "title": "5",
+        "switchCls": {
+            "off": "m01_off",
+            "on": "m01_on"
+        },
+        "url": "pages/connectionStatus.html"
+    },
+   "menu6": {
+        "title": "6",
         "switchCls": {
             "off": "m01_off",
             "on": "m01_on"

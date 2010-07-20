@@ -1,4 +1,9 @@
-﻿	.pane{
+﻿	
+    body {
+        margin: 0px;
+        height:100%;
+}
+    .pane{
 		overflow:hidden;
 		clear:left;
         left:300px;
@@ -6,10 +11,11 @@
 		border: solid 1px black;
 		list-style-type: none;
 		width:350px;
-		height:500px;
-        position:relative;
+		/*height:50%;*/
+        position:absolute;
 	}
 
 .scrollMenu {margin:0px;}
 .scrollMenu  .focusItem{border: solid 2px black;}
 .scrollMenu .menuItem{border: solid 1px red; width:100px; height:100px;position: absolute;}
+.scrollMenu .menuItem.selected{border: solid 2px blue; width:100px; height:100px;position: absolute;}
