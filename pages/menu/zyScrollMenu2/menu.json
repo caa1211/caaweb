@@ -1,52 +1,200 @@
  {
- 'defaultPage':"menu5-sdf",
- "menu1": {
-        "title": "1",
+ 'defaultPage':"connectionStatus",
+ "connectionStatus": {
+        "title": "Connection Status",
         "switchCls": {
             "off": "m01_off",
             "on": "m01_on"
         },
         "url": "pages/connectionStatus.html"
     },
-   "menu2": {
-        "title": "2",
+ 
+    "network": {
+        "title": "Network Setting",
         "switchCls": {
-            "off": "m01_off",
-            "on": "m01_on"
+            "off": "m02_off",
+            "on": "m02_on"
         },
-        "url": "pages/connectionStatus.html"
+        "submenu": {
+               "broadband": {
+                   "title": "Broadband",
+                   "url": "pages/tabFW/tabFW.html?tabJson=../network/broadband/tab.json"
+               },
+               "wireless": {
+                   "title": "Wireless",
+                   "url": "pages/tabFW/tabFW.html?tabJson=../network/wireless/tab.json"
+               },
+               "homeNetworking": {
+                   "title": "Home Networking",
+                   "url": "pages/tabFW/tabFW.html?tabJson=../network/homeNetworking/tab.json"
+               },
+               "routing": {
+                   "title": "Static Route",
+                   "url": "pages/tabFW/tabFW.html?tabJson=../network/routing/tab.json"
+               },
+               "dnsroute": {
+                   "title": "DNS Route",
+                   "url": "pages/tabFW/tabFW.html?tabJson=../network/dnsroute/tab.json"
+               },
+               "qos": {
+                   "title": "QoS",
+                   "url": "pages/tabFW/tabFW.html?tabJson=../network/qos/tab.json"
+               },
+               "nat": {
+                   "title": "NAT",
+                   "url": "pages/tabFW/tabFW.html?tabJson=../network/nat/tab.json"
+               },
+               "dns": {
+                   "title": "DNS",
+                   "url": "pages/network/dynamicDNS.html"
+               }
+        }
+       
     },
-   "menu3": {
-        "title": "3",
+    
+    "security": {
+        "title": "Security",
         "switchCls": {
-            "off": "m01_off",
-            "on": "m01_on"
+            "off":"m03_off",
+            "on": "m03_on"
         },
-        "url": "pages/connectionStatus.html"
+        "submenu": {
+        
+               "firewall": {
+                   "title": "Firewall",
+                   "url": "pages/tabFW/tabFW.html?tabJson=../security/firewall/tab.json"
+               },
+               "macFilter": {
+                   "title": "MAC Filter",
+                   "url": "pages/security/macFilter/macFilter.html"
+               },
+               "parentalControl": {
+                   "title": "Parental Control",
+                   "url": "pages/security/parentalControl/parentalControl.html"
+               },
+                 "schedulerRule": {
+                   "title": "Scheduler Rule",
+                   "url": "pages/security/schedulerRule/schedulerRule.html"
+               },
+              
+               "certificates": {
+                   "title": "Certificates",
+                   "url": "pages/tabFW/tabFW.html?tabJson=../security/certificates/tab.json"
+               },
+               "ipsecVPN": {
+                   "title": "IPSec VPN",
+                   "url": "pages/tabFW/tabFW.html?tabJson=../security/ipsecVPN/tab.json"
+               }
+               
+        }
     },
-   "menu4": {
-        "title": "4",
+    
+    "voip": {
+        "title": "VoIP",
         "switchCls": {
-            "off": "m01_off",
-            "on": "m01_on"
+            "off": "m04_off",
+            "on": "m04_on"
         },
-        "url": "pages/connectionStatus.html"
+        "submenu": {
+               "sip": {
+                   "title": "SIP",
+                   "url": "pages/tabFW/tabFW.html?tabJson=../voip/sip/tab.json"
+               },
+               "phone": {
+                   "title": "Phone",
+                   "url": "pages/tabFW/tabFW.html?tabJson=../voip/phone/tab.json"
+               },
+               "callRule": {
+                   "title": "Call Rule",
+                   "url": "pages/tabFW/tabFW.html?tabJson=../voip/callRule/tab.json"
+               }
+        }
     },
-   "menu5": {
-        "title": "5",
+    "systemMonitoring": {
+        "title": "System Monitor",
         "switchCls": {
-            "off": "m01_off",
-            "on": "m01_on"
+            "off": "m06_off",
+            "on": "m06_on"
         },
-        "url": "pages/connectionStatus.html"
+        "submenu": {
+               "log": {
+                   "title": "Log",
+                   "url": "pages/tabFW/tabFW.html?tabJson=../systemMonitoring/log/tab.json"
+               },
+			    "trafficStatus": {
+                   "title": "Traffic Status",
+                   "url": "pages/tabFW/tabFW.html?tabJson=../systemMonitoring/trafficStatus/tab.json"
+               },
+               "voipStatus": {
+                   "title": "VoIP Status",
+                   "url": "pages/systemMonitoring/voipstatus/voipstatus.html"
+               }
+        }
     },
-   "menu6": {
-        "title": "6",
+    
+    "maintenance": {
+        "title": "Maintenance",
         "switchCls": {
-            "off": "m01_off",
-            "on": "m01_on"
+            "off": "m07_off",
+            "on": "m07_on"
         },
-        "url": "pages/connectionStatus.html"
+        "submenu": {
+		      "system": {
+                   "title": "System",
+                   "url": "pages/maintenance/system.html"
+               },
+               "userAccount": {
+                   "title": "User Account",
+                   "url": "pages/maintenance/userAccount.html"
+               },
+			      "RemoteMgmt": {
+                   "title": "Remote MGMT ",
+                   "url": "pages/maintenance/remoteMGMT.html"
+               },
+			   "tr069Client": {
+                   "title": "TR-069 Client ",
+                   "url": "pages/maintenance/tr069Client.html"
+               },
+                "time": {
+                   "title": "Time",
+                   "url": "pages/maintenance/time/time.html"
+               },
+                "logSetting": {
+                   "title": "Log Setting",
+                   "url": "pages/maintenance/logSetting/logSetting.html"
+               },
+               "firewareUpgrade": {
+                   "title": "Firmware Upgrade",
+                   "url": "pages/maintenance/firewareUpgrade/firewareUpgrade.html"
+               },
+               "backupRestore": {
+                   "title": "Backup/Restore",
+                   "url": "pages/maintenance/backupRestore/backupRestore.html"
+               },
+               "reboot": {
+                   "title": "Reboot",
+                   "url": "pages/maintenance/reboot/reboot.html"
+               },
+               "disagnostic": {
+                   "title": "Diagnostic",
+                   "url": "pages/tabFW/tabFW.html?tabJson=../maintenance/disagnostic/tab.json"
+               } 
+        }
+        
+    },
+	 
+	 "Template":{
+ "title": "template",
+
+          "submenu": {
+               "singlePage": {
+                   "title": "Single page",
+                   "url": "pages/template/template0.html"
+               },
+               "tabPage": {
+                   "title": "Tab page",
+                   "url": "pages/tabFW/tabFW.html?tabJson=../template/tabPages/tab.json"
+               }
     }
-  
+ }
  }

@@ -1,9 +1,13 @@
 ﻿	
+    ul{
+       list-style-type: none; 
+    }
+    
     body {
         margin: 0px;
         height:100%;
 }
-    .pane{
+    .scrollMenu{
 		overflow:hidden;
 		clear:left;
         left:300px;
@@ -11,11 +15,14 @@
 		border: solid 1px black;
 		list-style-type: none;
 		width:350px;
-		/*height:50%;*/
+		height:80%;
         position:absolute;
+        margin:0px;
 	}
 
-.scrollMenu {margin:0px;}
-.scrollMenu  .focusItem{border: solid 2px black;}
+.scrollMenu .focusItem{border: solid 2px black;}
 .scrollMenu .menuItem{border: solid 1px red; width:100px; height:100px;position: absolute;}
-.scrollMenu .menuItem.selected{border: solid 2px blue; width:100px; height:100px;position: absolute;}
+.scrollMenu .menuItem.selected{border: solid 2px blue; width:100px; height:100px;position: absolute; z-index:100;}
+
+.scrollMenu .menuItem .subMenuItems{border: solid 2px blue; display:none; left:500px; top:300px; position:fixed;}
+.scrollMenu .menuItem.selected .subMenuItems{display:block;}

@@ -10,6 +10,9 @@
     <script src="jquery.scrollTo.js" type="text/javascript"></script>
     
     <script src="zyScrollMenu.js" type="text/javascript"></script>
+    
+     <script src="jquery.mousewheel.js" type="text/javascript"></script>
+  
     <script type="text/javascript">
 
         $(function()
@@ -25,7 +28,22 @@
              
                $('#naviDown').click(function(){
                  scrollMenuObj.scrollNext(); 
-             });     
+             });   
+             
+             
+              $('#scrollMenuContainer').mousewheel(function(event, delta){
+          
+               if (delta < 0) {
+                  scrollMenuObj.scrollNext(); 
+               }
+               else 
+                   if (delta ) {
+                 scrollMenuObj.scrollPrev();
+                   } 
+            });
+             
+             
+               
         });
   
     </script> 
