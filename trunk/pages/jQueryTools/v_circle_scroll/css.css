@@ -1,0 +1,28 @@
+/* root element for scrollable */
+.scrollable {
+
+    /* required settings */
+    position:relative;
+    overflow:hidden;
+border: solid 1px gray;
+    /* vertical scrollables have typically larger height than width but not now */
+    height: 300px;
+    width: 700px;
+}
+
+/* root element for scrollable items */
+.scrollable .items {
+    position:absolute;
+
+    /* this time we have very large space for the height */
+    height:20000em;
+}
+
+
+
+.item {
+    height:100px; 
+    width:100px;
+    border: solid 1px red;
+}
+
