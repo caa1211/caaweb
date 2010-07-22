@@ -3,13 +3,13 @@ $(function(){
     root = {
         jquery: {
             dialog: {
-                basic: {
+                'basic': {
                     url: "pages/dialog/basic/basic.html"
                 },
-                withHtml: {
+                'withHtml': {
                     url: "pages/dialog/withHtml/01.html"
                 },
-                'navi to another HTML': {
+                'naviTo': {
                     url: "pages/dialog/naviTo/01.html"
                 }
             },
@@ -33,13 +33,18 @@ $(function(){
                 }
             },
             others: {
-               
                 'slider': {url: "pages/others/slider/demo.html"},
                 'table Sorting' : {url : "pages/others/tableSorting/demo.html"},
                 'text Overflow' : {url : "pages/others/textOverflow/demo.html"}, 
                 'zyMask': {url : "pages/others/zyMask/demo.html"},
 				'zyCheckTree':{url:"pages/others/checkTree3/demo.html"}
-            }
+            },
+			'not UI':{
+			  'getParam':{url: "pages/notUI/getParam/01.html"},
+			  'mouse wheel':{url: "pages/notUI/mouseWheel/01.html"},
+			  'bgiframe':{url: "pages/notUI/bgiframe/01.html"},
+			  'pngfix':{url: "pages/notUI/pngfix/01.html"}
+			}
         
         }
         
