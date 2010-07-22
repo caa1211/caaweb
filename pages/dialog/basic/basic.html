@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<!--common css-->
@@ -22,21 +22,22 @@
              
                  //DB Define
                  var db1 = $('<button id="msg">close</button>').zyUiDialog({
-                     title: 'Base Dialog',
-                     contenerCss: ''
+                     title: 'Base Dialog'
                  });
-                 //DB Open
-                 $('<div>message</div>').prependTo(db1);
-                 
-                 db1.bind('dialogopen', function(e){/*alert('open');*/$(e.target).parents('.ui-dialog').css('border',' solid 1px red'); });
+
                  db1.dialog('open');
-                  db1.bind('aaa', function(){alert('aaa')});
-                 //DB close
+
+				 //open event handler
+                 db1.bind('dialogopen', function(e){$(e.target).parents('.ui-dialog').css('border',' solid 1px red'); });
+				 //close event handler
+				 db1.bind('dialogclose', function(e){alert('close !')});
+				   
+				   
                  $('#msg').click(function(){
-                     //db1.dialog('close');
-                     db1.trigger('dialogclose');
-                   
+				     //close dialog
+                     db1.dialog('close');
                  });
+				
              });
              
              
@@ -44,10 +45,10 @@
      </SCRIPT>
      </head>
      <body>
-         <h2>Base Dialog
-             <br/>
-             <br/>
-         </h2>
+         <h2>Base Dialog</h2>
+		  <h3>基本的pop-up window 用法</h3>
+		 
+		
          <button id='openDB'>
              Open DB
          </button>

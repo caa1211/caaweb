@@ -14,6 +14,7 @@
  * 100528 add multi lingo config and addLingoAttr function
  * 100624 set default width and height
  * 100707 add naviTo function
+ * 100712 auto modify height in ie6
  */
 
 (function($){
@@ -55,14 +56,15 @@
         
         if (baseDiv != null) {
             baseDiv.bind('dialogclose', function(event, ui){
-                baseDiv.remove();
+               setTimeout(function(){baseDiv.remove();},300);
+               //baseDiv.remove();
             });
         }
         
 		if($.browser.msie&&($.browser.version == "6.0")&&!$.support.style )
 		{
-	    var ie6Setting = {  'margin-right': '18px' };
-		_defaultSettings.containerCss = $.extend(_defaultSettings.containerCss, ie6Setting);
+	    //var ie6Setting = {  'margin-right': '18px' };
+		//_defaultSettings.containerCss = $.extend(_defaultSettings.containerCss, ie6Setting);
 		}
 		
         return $.extend(_defaultSettings, settings);
@@ -77,6 +79,11 @@
                  
             if (_settings.confirmDB) 
                  _settings.resizable = false;
+                
+                if ($.browser.msie && ($.browser.version == "6.0") && !$.support.style) {
+                    var dheight = _settings.height;
+                    _settings = $.extend(_settings, {height:dheight + 1});
+                }
                 
                 return {container: msgDiv, setting:_settings };
     }
