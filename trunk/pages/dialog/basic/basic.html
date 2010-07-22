@@ -24,15 +24,12 @@
                  var db1 = $('<button id="msg">close</button>').zyUiDialog({
                      title: 'Base Dialog'
                  });
-
-                 db1.dialog('open');
-
-				 //open event handler
-                 db1.bind('dialogopen', function(e){$(e.target).parents('.ui-dialog').css('border',' solid 1px red'); });
+                  //open event handler
+                 db1.bind('dialogopen', function(){alert('db open handler !');  });
 				 //close event handler
-				 db1.bind('dialogclose', function(e){alert('close !')});
+				 db1.bind('dialogclose', function(e){alert('db close handler !')});
 				   
-				   
+				   	db1.dialog('open');
                  $('#msg').click(function(){
 				     //close dialog
                      db1.dialog('close');
