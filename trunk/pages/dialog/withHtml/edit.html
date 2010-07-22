@@ -2,19 +2,17 @@
 
 <script type="text/javascript">
    
-$(function(){
-      
-var OkBtn = $('.ui-dialog-buttonpane').children("button:contains('OK')");
-db = $(this).find('.dialogContener');      //find db obj
+var db = $('#root').parents('.dialogContener');
 
-    OkBtn.click(function(e){
-   //db.trigger('dialogclose');           
-   db.dialog('close');
-    
-    });
-    });
+
+$('#closeBtn').click(function(){
+db.dialog('close');
+})
 
 </script>
 
 
-<div>other html s</div>
+<div id='root'>other html
+<br>
+<button id='closeBtn'>close DB</button>
+</div>

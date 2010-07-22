@@ -76,7 +76,7 @@
         {
             if(this.isParseTreeByJson==false)
             return;
-            
+           
             this.each(function(){
                  $('.checkbox', this).removeClass('checked').removeClass('half_checked');
                   for (var j = 0; j < checkArray.length; j++) {

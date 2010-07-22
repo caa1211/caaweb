@@ -16,7 +16,10 @@
             "on": "m02_on"
         },
         "submenu": {
-              
+               "broadband": {
+                   "title": "Broadband",
+                   "url": "pages/tabFW/tabFW.html?tabJson=../network/broadband/tab.json"
+               },
                "wireless": {
                    "title": "Wireless",
                    "url": "pages/tabFW/tabFW.html?tabJson=../network/wireless/tab.json"
@@ -26,8 +29,12 @@
                    "url": "pages/tabFW/tabFW.html?tabJson=../network/homeNetworking/tab.json"
                },
                "routing": {
-                   "title": "Routing",
+                   "title": "Static Route",
                    "url": "pages/tabFW/tabFW.html?tabJson=../network/routing/tab.json"
+               },
+               "dnsroute": {
+                   "title": "DNS Route",
+                   "url": "pages/tabFW/tabFW.html?tabJson=../network/dnsroute/tab.json"
                },
                "qos": {
                    "title": "QoS",
@@ -39,7 +46,7 @@
                },
                "dns": {
                    "title": "DNS",
-                   "url": "pages/tabFW/tabFW.html?tabJson=../network/dns/tab.json"
+                   "url": "pages/network/dynamicDNS.html"
                }
         }
        
@@ -119,7 +126,7 @@
                    "url": "pages/tabFW/tabFW.html?tabJson=../systemMonitoring/trafficStatus/tab.json"
                },
                "voipStatus": {
-                   "title": "VOIP Status",
+                   "title": "VoIP Status",
                    "url": "pages/systemMonitoring/voipstatus/voipstatus.html"
                }
         }
@@ -132,9 +139,21 @@
             "on": "m07_on"
         },
         "submenu": {
-               "deviceConfiguration": {
-                   "title": "Device Configuration",
-                   "url": "pages/tabFW/tabFW.html?tabJson=../maintenance/deviceConfiguration/tab.json"
+		      "system": {
+                   "title": "System",
+                   "url": "pages/maintenance/system.html"
+               },
+               "userAccount": {
+                   "title": "User Account",
+                   "url": "pages/maintenance/userAccount.html"
+               },
+			      "RemoteMgmt": {
+                   "title": "Remote MGMT ",
+                   "url": "pages/maintenance/remoteMGMT.html"
+               },
+			   "tr069Client": {
+                   "title": "TR-069 Client ",
+                   "url": "pages/maintenance/tr069Client.html"
                },
                 "time": {
                    "title": "Time",

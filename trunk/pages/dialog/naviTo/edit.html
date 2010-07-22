@@ -7,7 +7,8 @@ $(function(){
 var OkBtn = $('.ui-dialog-buttonpane').children("button:contains('OK')");
 db = $('#db_content').parent('.dialogContener');      //find db obj
 
-var buttons = db.dialog('option', 'buttons');
+var view1_buttons = {'Cancel':function(){}, 'OK':function(){}};
+db.dialog('option', 'buttons', view1_buttons);
 
 
 $('#naviToBtn').click(function(){
@@ -15,11 +16,7 @@ $('#naviToBtn').click(function(){
     
     db.naviTo('edit2.html',  
     {       
-           'width':300,
-           'buttons':
-           { 
-           'aaa':function(){db.dialog('close')}
-           }
+           'width':300
     });
     
     
@@ -38,7 +35,8 @@ OkBtn.click(function(e){
 </script>
 
 
-<div id='db_content'>other html s
+<div id='db_content'>view1
+<br>
 
-<button id='naviToBtn'>navi To</button>
+<button id='naviToBtn'>navi To view2</button>
 </div>

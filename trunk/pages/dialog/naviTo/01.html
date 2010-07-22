@@ -15,11 +15,8 @@
      <SCRIPT type="text/javascript">
          
          $(function(){
-        
-		// $("#data1Btn",window.parent.document).css('border','solid 1px blue');
-		 
+
              $('#openDB').click(function(){
-             
                  var db1 = $.zyUiDialog({
                      width: 450,
                      height: 205,
@@ -28,18 +25,14 @@
                  
                  db1.load('edit.html');
                  db1.dialog('open');
-            
              });
-             
-             
          });
      </SCRIPT>
      </head>
      <body>
-         <h2>Dialog with html
-             <br/>
-             <br/>
-         </h2>
+        <h2>navigate dialog content</h2>
+		 <h3>在同一個dialog內切換內容，並允許更新dialog的設定值</h3>
+		 
          <button id='openDB'>
              Open DB
          </button>

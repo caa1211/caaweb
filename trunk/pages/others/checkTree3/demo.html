@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -17,7 +17,7 @@
             
             //-----------------------------------------
             var checkTree1 = $('#treeA').zyCheckTree({
-                parseJson:'naviView.json',
+                parseJson:'menu.json',
                 loseControlOptions: ['0', '2_1']
             });
             
@@ -93,6 +93,10 @@
 
 </head>
 <body>
+
+
+<div style='border: solid 1px red;'>
+tree 1: 
 <button id='clearAllBtn'>clear All</button>
 <button id='selectAllBtn'>select All</button>
 <button id='setSelectedItemBtn'>set SelectedItems</button>
@@ -100,35 +104,40 @@
 
 <button id='getSelectedJosnIDsBtn'>get Selected Json id</button>
 <button id='setSelectedJsonIDsBtn'>set Selected Json id</button>
+<div>
 
+
+<div style='border: solid 1px red;'>
+tree 2:
 <button id='collapseBtn'>collapse Btn</button>
 <button id='expandBtn'>expand Btn</button>
-
 <button id='getSelectedItemBtn2'>get SelectedItems 2</button>
+</div>
+
 
 <br/><br/>
 <div  style='border; solid 10px red;' id='treeA'>check tree 1</div>
 <!--div id='bb' style='border; solid 1px red;' class='treeA'></div-->
-<div id='treeB' style='position:absolute; top:50px; left: 300px;'> check tree 2
+<div id='treeB' style='position:absolute; top:100px; left: 300px;'> check tree 2
     <ul class='tree'>
         <li>
-            <div id='node_0' class='checkbox'></div>
+            <div treeId='node_0' class='checkbox'></div>
             <label>wizer</label>
             <ul class='tree'>
                 <li>
-                    <div id='node_0_0' class='checkbox'></div>
+                    <div treeId='node_0_0' class='checkbox'></div>
                     <label>wizer A</label>
                 </li>
                 <li>
-                    <div id='node_0_1' class='checkbox'></div>
+                    <div treeId='node_0_1' class='checkbox'></div>
                     <label> wizer B</label>
                     <ul class='tree'>
                          <li>
-                             <div id='node_0_1_1' class='checkbox'></div>
+                             <div treeId='node_0_1_1' class='checkbox'></div>
                              <label>wizer BA</label>
                          </li>
                          <li>
-                             <div id='node_0_1_2' class='checkbox'></div>
+                             <div treeId='node_0_1_2' class='checkbox'></div>
                              <label>wizer BB</label>
                          </li>
                      </ul>
