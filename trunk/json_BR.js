@@ -1,7 +1,14 @@
 $(function(){
 
     root = {
+
         jquery: {
+		 'Index':{
+		 'Index': {
+                    url: "init.html"
+                }
+		},
+		
             dialog: {
                 'basic': {
                     url: "pages/dialog/basic/basic.html"
