@@ -1,0 +1,27 @@
+﻿	
+    ul{
+       list-style-type: none; 
+    }
+    
+    body {
+        margin: 0px;
+        height:100%;
+}
+    .zyflow2{
+		overflow:hidden;
+		clear:left;
+        left:300px;
+        top:100px;
+		border: solid 1px black;
+		list-style-type: none;
+		width:350px;
+		height:80%;
+        position:absolute;
+        margin:0px;
+	}
+
+.zyflow2 .menuItem{border: solid 1px red; width:100px; height:100px;position: absolute; background-color:yellow}
+.zyflow2 .menuItem.selected{border: solid 2px blue; width:100px; height:100px;position: absolute; }
+
+.zyflow2 .menuItem .subMenuItems{border: solid 2px blue; display:none;}
+/*.zyflow2 .menuItem.selected .subMenuItems{display:block;}*/
