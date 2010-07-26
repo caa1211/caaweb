@@ -10,7 +10,8 @@
            activeIndex: 0,
            during: 200,
            middleOffset: 0,
-           naviCompleted: function(){}
+           naviCompleted: function(){},
+           vertical: false
      }
 
      var _settings = $.extend(_defaultSettings, settings);

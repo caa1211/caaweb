@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -52,7 +52,6 @@
          $('#viewPort').mousewheel(function(event, delta){
              // delta 若是負值是滾輪往下滾；反之則是滾輪往上滾
              var index = zyflow.activeIndex;
-             delta=delta<0?1:-1;
              temp = index - delta;
              if (temp <= zyflow.itemLength - 1 && temp >= 0) 
                  zyflow.naviTo(temp);
