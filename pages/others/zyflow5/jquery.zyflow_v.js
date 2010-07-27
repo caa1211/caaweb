@@ -6,7 +6,7 @@
      var _defaultSettings = {
            interval : 110,
            normalWidth : 100,
-           activeWidth: 250,
+           activeWidth: 150,
            activeIndex: 0,
            during: 200,
            middleOffset: 0,
@@ -18,7 +18,6 @@
 
      this.activeIndex =_settings.activeIndex;
      var flowObj = this;
-     var isV = _settings.vertical;
      
      var naviTo = function(ai,d){
          mo = _settings.middleOffset;
@@ -33,24 +32,34 @@
     
          if (d != undefined) 
              during = 0;
-             var aOption = isV ? {'top':middlePosition - itl * ai}: {'left':middlePosition - itl * ai};
-                  $('.flowContainer').animate(aOption,d);
+        
+                $('.flowContainer').animate({'top':middlePosition - itl * ai},d);
+
                 $this.children('.item').each(function(i, data){
                    //$(data).attr('flowId', i);
-                   if (i < ai) {
-                       var aOption = isV ? {'top': i * itl,'width': nw}: {'left': i * itl,'width': nw};
+               
+                   if (i < ai) 
+                        $(this).animate({
+                            'top': i * itl, 
+                            'width': nw
+                            
+                        }, d).children('img').animate({
+                            'width': nw
                           
-                       $(this).animate(aOption, d).children('img').animate({
-                           'width': nw
-                       }, d, function(){
-                           $(this).parent().children('.caption').hide();
-                           $(this).css('cursor', 'pointer')
-                       });
-                   } 
+                        }, d
+                        , function(){
+                             $(this).parent().children('.caption').hide(); 
+                             $(this).css('cursor', 'pointer')
+                        }
+                        );
+                       
                     if (i == ai)        //$(this).css('left',i*interval).children('img').css('width', middleInterval);
                     {
-                         var aOption = isV ? {'top': i * itl,'width': aw}: {'left': i * itl,'width': aw};
-                        $(this).animate(aOption, d).children('img').animate({
+                        $(this).animate({
+                            'top': i * itl, 
+                            'width': aw
+                         
+                        }, d).children('img').animate({
                             'width': aw
                         }, d
                         , function(){
@@ -65,8 +74,11 @@
                     }
                     if (i > ai)        //$(this).css('left',i*interval + middleInterval - width).children('img').css('width', width);
                     {
-                        var aOption = isV ? {'top': i * itl + (aw - nw),'width': nw }: {'left': i * itl + (aw - nw),'width': nw };
-                        $(this).animate(aOption, d).children('img').animate({
+                        $(this).animate({
+                            'top': i * itl + (aw - nw), 
+                            'width': nw
+                            
+                        }, d).children('img').animate({
                             'width': nw
                         }, d
                         , function(){
