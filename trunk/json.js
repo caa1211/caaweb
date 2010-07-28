@@ -130,6 +130,9 @@ $(function(){
                 },
                  'lava lamp menu':{
                     url:"pages/menu/lavaLampMenu/demo.html"
+                },
+                 'circle menu':{
+                    url:"pages/menu/zyFlow_new/demo_v.html"
                 }
                 },
             others: {
