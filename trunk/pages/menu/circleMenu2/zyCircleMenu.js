@@ -97,7 +97,7 @@
             return   $(this).children('.menuItem[circleIndex='+selectedIndex+']')
         };
         
-        this.naviTo = function(index, middleOffset, during){
+        this.naviTo = function(index){
              var num = parseInt(index+itemLength)%itemLength;
              $(this).children('.menuItem[circleIndex='+num+']').trigger('click');
         };
