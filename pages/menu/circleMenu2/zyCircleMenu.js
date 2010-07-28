@@ -128,7 +128,6 @@
                 var offset = param.offset == undefined ? (i - selectedIndex) : param.offset;
                 var end = param.end == undefined ? interval * offset + startAngle : param.end;
                 var origent = param.origent == undefined ? "CCW" : param.origent;
-                var triggerChange = param.triggerChange == undefined ? true : param.triggerChange;
                 var dur = settings.dur;
                 
                 var arc_params = $.extend(settings.circleParam,{
@@ -141,7 +140,7 @@
                 
                 $(this).attr('angle', parseFloat(arc_params.end + 360) % 360);
                 
-               if ( triggerChange&& $(this).attr('circleIndex') == selectedIndex) 
+               if ($(this).attr('circleIndex') == selectedIndex) 
                     thisObj.trigger('beforeCircleChange', $(this));
                     
                 var pathAry = new $.path.arc(arc_params);
@@ -152,7 +151,7 @@
                 $(this).stop().animate({
                     path: pathAry
                 }, dur, function(){
-                    if (triggerChange&&$(this).attr('circleIndex') == selectedIndex) {
+                    if ($(this).attr('circleIndex') == selectedIndex) {
                         thisObj.trigger('circleChange', $(this));
                         if(param.callback!=undefined)
                         param.callback();
@@ -174,8 +173,7 @@
                 sizeW = thisObj.width();
                 doCircleAnim({
                     items: items,
-                    offset: 0//,
-                   // triggerChange:false
+                    offset: 0
                 });
             });
 
