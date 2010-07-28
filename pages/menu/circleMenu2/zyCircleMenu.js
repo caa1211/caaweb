@@ -86,7 +86,7 @@
         var itemLength = $(this).find('.menuItem').length;
         var radius = parseFloat($('.menuItem').width() * itemLength /4);
         var interval = 360 / itemLength;
-        selectedIndex = settings.selectedIndex;
+        var selectedIndex = settings.selectedIndex;
          var thisObj = $(this);
             
         function parseFromJson(){
