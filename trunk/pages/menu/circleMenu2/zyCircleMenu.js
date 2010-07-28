@@ -89,7 +89,7 @@
         var selectedIndex = settings.selectedIndex;
         var thisObj = $(this);
             
-        
+        this.getIndex = function(){ return selectedIndex; };
         this.getActivedItem= function(){
             return   $(this).children('.menuItem[circleIndex='+selectedIndex+']')
         };
@@ -213,7 +213,7 @@
             return this;
         };
         
-        thisObj= this.each(_handler);
+       
         
         this.collapse = function(){
             doCircleAnim({
@@ -240,7 +240,7 @@
             $(item).addClass('selected')
         });
         
-        return this;
+        return  this.each(_handler);
     };
 })(jQuery);
 
