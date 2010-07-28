@@ -87,11 +87,8 @@
         var radius = parseFloat($('.menuItem').width() * itemLength /4);
         var interval = 360 / itemLength;
         var selectedIndex = settings.selectedIndex;
-         var thisObj = $(this);
+        var thisObj = $(this);
             
-        function parseFromJson(){
-        
-        }
         
         this.getActivedItem= function(){
             return   $(this).children('.menuItem[circleIndex='+selectedIndex+']')
@@ -163,7 +160,6 @@
         var sizeH = thisObj.height();
         var sizeW = thisObj.width();
         var _handler = function(){
-            parseFromJson();
             var items = $(this).children('.menuItem');
 
             $(window).resize(function(){
