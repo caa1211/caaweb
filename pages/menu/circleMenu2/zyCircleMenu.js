@@ -147,7 +147,7 @@
 
                 $(this).stop().animate({
                     path: pathAry
-                }, dur, function(){
+                }, dur/*,'easeOutBack'*/, function(){
                     if ($(this).attr('circleIndex') == selectedIndex) {
                         thisObj.trigger('circleChange', $(this));
                       
