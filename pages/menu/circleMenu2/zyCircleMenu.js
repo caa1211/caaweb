@@ -71,7 +71,7 @@
             selectedAngle: 90,
             selectedIndex: 3,
             radius: 'auto',
-            center: ['30%', '42%'],
+            center: ['20%', '42%'],
             circleParam:{
                xp:(2/5),
                yp:1.2 ,
@@ -175,8 +175,8 @@
                 sizeW = thisObj.width();
                 doCircleAnim({
                     items: items,
-                    offset: 0,
-                    triggerChange:false
+                    offset: 0//,
+                   // triggerChange:false
                 });
             });
 
