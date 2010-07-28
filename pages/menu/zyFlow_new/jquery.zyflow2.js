@@ -65,8 +65,14 @@
                         center[i] = parseInt(ary[0]);
                 }   
                 
+				//init position
                 if(param.init!=undefined)
-                thisObj.css({top:center[1], left: center[0]});
+                {
+					if(settings.vertical)
+					thisObj.css({top:center[1]+nw, left: center[0]});
+					else
+					thisObj.css({top:center[1], left: center[0]+nw});
+				}
               // thisObj.animate({'top':center[1]- selectedIndex*interval , 'left': center[0]},d);
               if (settings.vertical == false) {
                   thisObj.animate({
