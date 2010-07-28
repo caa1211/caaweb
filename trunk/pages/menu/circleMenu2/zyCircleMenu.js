@@ -66,7 +66,6 @@
  //--------------------------------- 
 
     $.fn.zyCycleMenu = function(settings){
-        var zyCycleMenu;
         var defaultSetting = {
             selectedAngle: 90,
             selectedIndex: 3,
