@@ -40,19 +40,21 @@
      while(this.start < this.end && this.dir < 0)
        this.end -= 360
 
-
      this.css = function(p) {
        var a = this.start * (p ) + this.end * (1-(p ))  
        a = a * 3.1415927 / 180 // to radians
 
-       var x = Math.sin(a) * this.radius + this.center[0];
-       var y = Math.cos(a) * this.radius + this.center[1];
-       var size = parseInt(x/4);
+       var x = Math.sin(a) * this.radius*this.xp + this.center[0];
+       var y = Math.cos(a) * this.radius*this.yp + this.center[1];
+       var size = parseInt(this.diff*Math.sin(a)+this.baseSize); //
 
-       return {top: y + "px", left: x*(2/5) + "px",
-        width:size+"px", height: size+"px", 'zIndex':size, 'opacity': size/100}
+       return {top: y + "px", left: x + "px",
+         width:size+"px",
+         height: size+"px", 
+         'zIndex':size, 
+         'opacity': size/100
+         }
      } 
-
    };
        
   $.fx.step.path = function(fx){
@@ -62,16 +64,20 @@
   }
   
  //--------------------------------- 
- 
- 
- 
+
     $.fn.zyCycleMenu = function(settings){
         var zyCycleMenu;
         var defaultSetting = {
             selectedAngle: 90,
-            selectedIndex: 0,
+            selectedIndex: 3,
             radius: 'auto',
-            center: [400, 300],
+            center: ['30%', '45%'],
+            circleParam:{
+               xp:(2/5),
+               yp:1.3 ,
+               diff:50,
+               baseSize:100
+            },
             naviCompleted: function(){
             },
             dur: 700
@@ -89,28 +95,56 @@
         }
         
         this.getActivedItem= function(){
-            return   $(this).children('.menuItem:nth-child('+ parseInt(selectedIndex+1) +')')
-        }
+            return   $(this).children('.menuItem[circleIndex='+selectedIndex+']')
+        };
         
+        this.naviTo = function(index, middleOffset, during){
+             var num = parseInt(index+itemLength)%itemLength;
+             $(this).children('.menuItem[circleIndex='+num+']').trigger('click');
+        };
     
-        function doCircleAnim(param/*items, origent, startAngle, offset, callback*/){     
+        this.next = function(){
+            this.naviTo(selectedIndex+1);
+        };
+        
+        this.prev = function(){
+             this.naviTo(selectedIndex-1);
+        };
+     
+        
+       function doCircleAnim(param/*items, origent, startAngle, offset, callback*/){  
+ 
+        var center = [];
+        for(var i=0; i<2; i++)
+        {
+            var ary =  settings.center[i].toString().split('%');
+             if ( ary.length != 1) {
+                 var target= i==0 ? thisObj.width(): thisObj.height();
+                 center[i]= target* (parseInt(ary[0])/100);
+             }  
+             else
+                center[i] = parseInt(ary[0]);
+        }
+
             param.items.each(function(i, item){
                 
                 var startAngle = param.startAngle == undefined ? parseFloat($(this).attr('angle')) : param.startAngle;
                 var offset = param.offset == undefined ? (i - selectedIndex) : param.offset;
                 var end = param.end == undefined ? interval * offset + startAngle : param.end;
                 var origent = param.origent == undefined ? "CCW" : param.origent;
-                var arc_params = {
-                    center: settings.center,
+                var triggerChange = param.triggerChange == undefined ? true : param.triggerChange;
+                
+                var arc_params = $.extend(settings.circleParam,{
+                    center:center,//settings.center,
                     radius: radius,
                     start: startAngle,
                     end: end,
                     dir: origent == "CCW" ? 1 : -1
-                };
+                });
                 
                 $(this).attr('angle', parseFloat(arc_params.end + 360) % 360);
                 
-               if ( $(this).attr('circleIndex') == selectedIndex) 
+               if ( triggerChange&& $(this).attr('circleIndex') == selectedIndex) 
                     thisObj.trigger('beforeCircleChange', $(this));
                     
                 var pathAry = new $.path.arc(arc_params);
@@ -118,7 +152,7 @@
                 $(this).stop().animate({
                     path: pathAry
                 }, settings.dur, function(){
-                    if ($(this).attr('circleIndex') == selectedIndex) {
+                    if (triggerChange&&$(this).attr('circleIndex') == selectedIndex) {
                         thisObj.trigger('circleChange', $(this));
                         if(param.callback!=undefined)
                         param.callback();
@@ -130,7 +164,15 @@
         var _handler = function(){
             parseFromJson();
             var items = $(this).children('.menuItem');
-            
+
+            $(window).resize(function(){
+                doCircleAnim({
+                    items: items,
+                    offset: 0,
+                    triggerChange:false
+                });
+            });
+
             items.each(function(i, d){
                 $(this).attr('circleIndex', i);
             });
@@ -151,7 +193,7 @@
                 if (selectedIndex == $(this).attr('circleIndex')) 
                     return;
                 
-                selectedIndex = $(this).attr('circleIndex');
+                selectedIndex = parseInt($(this).attr('circleIndex'));
 
                 var origent = ((itemLength + indexOffset) % itemLength < itemLength / 2) ? 'CCW' : 'CW';
                 
@@ -192,15 +234,12 @@
         });
         
         thisObj.bind('beforeCircleChange', function(e, item){
-          //  alert('');
             $(this).children('.menuItem').removeClass('selected');
             $(item).addClass('selected')
         });
         
         return this;
     };
-    
-    
 })(jQuery);
 
 
