@@ -10,7 +10,7 @@
            activeSize: 150,
            center: ['30%', '20%'],
            selectedIndex: 0,
-           dur: 200,
+           dur: 300,
            naviCompleted: function(){},
            vertical: true
          }
@@ -28,6 +28,8 @@
         
         }
         
+        this.getIndex = function(){ return selectedIndex; };
+            
         this.getActivedItem= function(){
             return   $(this).children('.menuItem[circleIndex='+selectedIndex+']')
         };
@@ -44,14 +46,14 @@
         this.prev = function(){
              this.naviTo(selectedIndex-1);
         };
-     
-        
-       function doCircleAnim(dur/*items, origent, startAngle, offset, callback*/){  
+
+       function doCircleAnim(param /*dur, init, callback*/){  
               
+                param= $.extend({},param);
                 var aw =settings.activeSize;
                 var nw = settings.normalSize;  
-                var d = dur==undefined? settings.dur : dur;
-                
+                var d = param.dur==undefined? settings.dur : param.dur;
+
                 var center = [];
                 for (var i = 0; i < 2; i++) {
                     var ary = settings.center[i].toString().split('%');
@@ -63,6 +65,8 @@
                         center[i] = parseInt(ary[0]);
                 }   
                 
+                if(param.init!=undefined)
+                thisObj.css({top:center[1], left: center[0]});
               // thisObj.animate({'top':center[1]- selectedIndex*interval , 'left': center[0]},d);
               if (settings.vertical == false) {
                   thisObj.animate({
@@ -161,7 +165,7 @@
                 return;       
                 sizeH = thisObj.height();
                 sizeW = thisObj.width();
-                doCircleAnim(0);
+                doCircleAnim({dur:0});
             });
 
             items.each(function(i, d){
@@ -170,9 +174,9 @@
             
             //initially animation
             //expandCircle;
-            thisObj.fadeOut(0);
-            doCircleAnim(10);
-            thisObj.fadeIn(300);
+           // thisObj.fadeOut(0);
+            doCircleAnim({init:true, dur:500});
+           // thisObj.fadeIn(300);
 
             //bind click event
             items.click(function(){
@@ -202,11 +206,8 @@
             $(item).addClass('selected')
         });
         
-        this.each(_handler);
-       
-       
         
-        return this;
+        return this.each(_handler);
     };
 })(jQuery);
 
