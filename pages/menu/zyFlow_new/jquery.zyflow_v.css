@@ -1,0 +1,15 @@
+
+
+.flowContainer {position: absolute; left:30%; }
+.flowContainer .item {position: absolute;  }
+/*.caption { font-size: 20px; text-align: center;}*/
+.flowItemTitle { font-size: 24px;  position: relative; top: 27%; left:50%; z-index:100; color: white;text-align: left;}
+
+
+/*sub menu*/
+.flowSubMenu {text-align:left; position:absolute; top:32%; left:50%;}
+.flowSubMenu div{margin:0 auto; border:solid 1px green; }
+
+.flowSubMenu div ul li{ height:34px; float:left; border: solid 1px red; width:120px;}
+.flowSubMenu div ul li a{ font-size:18px; color:#CCCCCC; font-weight:bold; text-decoration:none; text-align:left;width:120px; height:34px; display:block; line-height:34px;}
+.flowSubMenu div ul li a:hover{ background-image:url(images/btn.png); color:#ffffff;}
