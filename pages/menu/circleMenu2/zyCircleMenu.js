@@ -71,7 +71,7 @@
             selectedAngle: 90,
             selectedIndex: 3,
             radius: 'auto',
-            center: ['30%', '45%'],
+            center: ['30%', '42%'],
             circleParam:{
                xp:(2/5),
                yp:1.3 ,
@@ -161,11 +161,18 @@
             });
         }
         
+        var sizeH = thisObj.height();
+        var sizeW = thisObj.width();
         var _handler = function(){
             parseFromJson();
             var items = $(this).children('.menuItem');
 
             $(window).resize(function(){
+                if(sizeH==thisObj.height()&& sizeW==thisObj.width())
+                return;
+                                
+                sizeH = thisObj.height();
+                sizeW = thisObj.width();
                 doCircleAnim({
                     items: items,
                     offset: 0,
