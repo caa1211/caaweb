@@ -129,6 +129,7 @@
                 var end = param.end == undefined ? interval * offset + startAngle : param.end;
                 var origent = param.origent == undefined ? "CCW" : param.origent;
                 var triggerChange = param.triggerChange == undefined ? true : param.triggerChange;
+                var dur = settings.dur;
                 
                 var arc_params = $.extend(settings.circleParam,{
                     center:center,//settings.center,
@@ -145,9 +146,12 @@
                     
                 var pathAry = new $.path.arc(arc_params);
                 
+                if(end==startAngle)//resize
+                 dur =0;
+                 
                 $(this).stop().animate({
                     path: pathAry
-                }, settings.dur, function(){
+                }, dur, function(){
                     if (triggerChange&&$(this).attr('circleIndex') == selectedIndex) {
                         thisObj.trigger('circleChange', $(this));
                         if(param.callback!=undefined)
