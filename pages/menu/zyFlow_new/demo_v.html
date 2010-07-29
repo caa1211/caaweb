@@ -87,17 +87,14 @@
         
         //get active item
         var currentItem = obj.getActivedItem();
-        
-        
-        currentItem.addClass('on');
+
          obj.bind('beforeCircleChange', function(e, item){ 
-             currentItem.removeClass('on');
-            $(item).addClass('on');
             currentItem = $(item);
         });
 
         obj.bind('circleChange', function(e, item){
             $('.subMenu').hide();
+            
           //  $('#' + $(item).attr('subMenu')).show();
             var position = $(item).position();
 
@@ -125,12 +122,12 @@
 .menuItem.selected{cursor:default;}
 .menuItem.hover{}
 
-.menuItem .content{width:100%; height:100%; align:center; position:absolute;}
-.menuItem .caption{display:none;}
+.menuItem .img{width:100%; height:100%; align:center; position:absolute;}
 
-.menuItem .content.on{display:none;}
-.menuItem.on .content.on{display:block;}
-.menuItem.hover .content.on{display:block;}
+.menuItem .img.on{display:none;}
+.menuItem.selected .img.on{display:block;}
+
+.menuItem.hover .img.on{display:block;}
 
 .subMenu {text-align:left; position:absolute;}
 .subMenu {margin:0 auto; border:solid 1px green; display:none;}
@@ -152,41 +149,39 @@
   
 <div id='menu'>
    <a class="menuItem"  subMenu="music_SM">
-    <img class="content off" src="images/m_music_g.png"/>
-    <img class="content on" src="images/m_music.png"/>
+    <img class="img off" src="images/m_music_g.png"/>
+    <img class="img on" src="images/m_music.png"/>
   </a>
 
   <a class="menuItem"  subMenu="photo_SM">
-    <img class="content off" src="images/m_photo_g.png"/>
-    <img class="content on" src="images/m_photo.png"/>
+    <img class="img off" src="images/m_photo_g.png"/>
+    <img class="img on" src="images/m_photo.png"/>
   </a>
 
   <a class="menuItem" subMenu="video_SM">
-    <img class="content off" src="images/m_video_g.png"/>
-    <img class="content on" src="images/m_video.png"/>
+    <img class="img off" src="images/m_video_g.png"/>
+    <img class="img on" src="images/m_video.png"/>
   </a>
 
  <a class="menuItem"  subMenu="favorite_SM">
-   <img class="content off" src="images/m_favorite_g.png"/>
-   <img class="content on" src="images/m_favorite.png"/>
+   <img class="img off" src="images/m_favorite_g.png"/>
+   <img class="img on" src="images/m_favorite.png"/>
  </a>
 
  <a class="menuItem" subMenu="filebrowser_SM" >
-    <img class="content off" src="images/m_filebrowser_g.png"/>
-    <img class="content on" src="images/m_filebrowser.png"/>
+    <img class="img off" src="images/m_filebrowser_g.png"/>
+    <img class="img on" src="images/m_filebrowser.png"/>
  </a>
 
  <a class="menuItem" subMenu="application_SM">
-   <img class="content off" src="images/m_app_g.png"/>
-   <img class="content on" src="images/m_app.png"/>
+   <img class="img off" src="images/m_app_g.png"/>
+   <img class="img on" src="images/m_app.png"/>
  </a>
 
   <a class="menuItem" subMenu="setting_SM">
-    <img class="content off" src="images/m_setting_g.png"/>
-    <img class="content on" src="images/m_setting.png"/>
+    <img class="img off" src="images/m_setting_g.png"/>
+    <img class="img on" src="images/m_setting.png"/>
   </a>
-  
-  
   
 </div>
  
