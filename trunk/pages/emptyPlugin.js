@@ -1,4 +1,4 @@
-/*
+﻿/*
  * emptyPlugin.js
  *
  * Copyright (c) 2010 

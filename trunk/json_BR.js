@@ -47,7 +47,7 @@ $(function(){
 				'zyCheckTree':{url:"pages/others/checkTree3/demo.html"}
             },
 			'not UI':{
-			  'getParam':{url: "pages/notUI/getParam/01.html"},
+			  'getParam':{url: "pages/notUI/getParam/01.html?value=1111"},
 			  'mouse wheel':{url: "pages/notUI/mouseWheel/01.html"},
 			  'bgiframe':{url: "pages/notUI/bgiframe/01.html"},
 			  'pngfix':{url: "pages/notUI/pngfix/01.html"}
