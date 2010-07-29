@@ -1,0 +1,126 @@
+ {
+ 'default':"fileBrowser",
+ "music": {
+        "title": "Music",
+        "switchImg": {
+            "off": "images/m_music_g.png",
+            "on": "images/m_music.png"
+        },
+        'submenu':{
+            "folder": {
+                       "title": "Folder",
+                       "url": "#"
+                   },
+             "Album": {
+                       "title": "album",
+                       "url": "#"
+                   },
+             "artist": {
+                       "title": "Artist",
+                       "url": "#"
+                   },
+             "genre": {
+                       "title": "Genre",
+                       "url": "#"
+                   },
+             "all": {
+                       "title": "All",
+                       "url": "#"
+                   },
+             "nowPlaying": {
+                       "title": "Now Playing",
+                       "url": "#"
+                   }
+        }
+    },
+ "photo": {
+        "title": "Photo",
+        "switchImg": {
+            "off": "images/m_photo_g.png",
+            "on": "images/m_photo.png"
+        },
+        'submenu':{
+            "folder": {
+                       "title": "Folder",
+                       "url": "#"
+                   },
+             "year": {
+                       "title": "Year",
+                       "url": "#"
+                   },
+             "all": {
+                       "title": "All",
+                       "url": "#"
+                   }
+        }
+    },
+ "video": {
+        "title": "Video",
+        "switchImg": {
+            "off": "images/m_video_g.png",
+            "on": "images/m_video.png"
+        },
+        'submenu':{
+            "folder": {
+                       "title": "Folder",
+                       "url": "#"
+                   },
+             "all": {
+                       "title": "All",
+                       "url": "#"
+                   }
+        }
+    },
+ "favorite": {
+        "title": "Favorite",
+        "switchImg": {
+            "off": "images/m_favorite_g.png",
+            "on": "images/m_favorite.png"
+        },
+        'submenu':{
+            "playlist": {
+                       "title": "Playlist",
+                       "url": "#"
+                   }
+        }
+    },
+ "fileBrowser": {
+        "title": "File Browser",
+        "switchImg": {
+            "off": "images/m_filebrowser_g.png",
+            "on": "images/m_filebrowser.png"
+        },
+        'submenu':{
+            "fileBrowser": {
+                       "title": "File Browser",
+                       "url": "#"
+                   }
+        }
+    },
+ "application": {
+        "title": "Application",
+        "switchImg": {
+            "off": "images/m_app_g.png",
+            "on": "images/m_app.png"
+        },
+        'submenu':{
+            "management": {
+                       "title": "Management",
+                       "url": "#"
+                   }
+        }
+    },
+ "setting": {
+        "title": "Setting",
+        "switchImg": {
+            "off": "images/m_setting_g.png",
+            "on": "images/m_setting.png"
+        },
+        'submenu':{
+            "system": {
+                       "title": "System",
+                       "url": "#"
+                   }
+        }
+    }
+ }

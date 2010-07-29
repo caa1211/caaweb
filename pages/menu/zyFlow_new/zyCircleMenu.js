@@ -79,7 +79,8 @@
             },
             naviCompleted: function(){
             },
-            dur: 700
+            dur: 700,
+            invert: false //true- next is in up; false - next is in bottom
         }
         settings = $.extend(defaultSetting, settings);
         
@@ -87,6 +88,7 @@
         var radius = parseFloat(settings.circleParam.baseSize * itemLength /4);
         var interval = 360 / itemLength;
         var selectedIndex = settings.selectedIndex;
+        var invert = settings.invert?1:-1;
         var thisObj = $(this);
             
         this.getIndex = function(){ return selectedIndex; };
@@ -125,7 +127,7 @@
             param.items.each(function(i, item){
                 
                 var startAngle = param.startAngle == undefined ? parseFloat($(this).attr('angle')) : param.startAngle;
-                var offset = param.offset == undefined ? (i - selectedIndex) : param.offset;
+                var offset = param.offset == undefined ? invert*(i-selectedIndex) : param.offset;
                 var end = param.end == undefined ? interval * offset + startAngle : param.end;
                 var origent = param.origent == undefined ? "CCW" : param.origent;
                 var dur = param.dur==undefined? settings.dur: param.dur;
@@ -182,15 +184,16 @@
             
             //initially animation
             //expandCircle;
+            var origentA=settings.invert?'CCW':'CW';
             doCircleAnim({
                 items: items,
-                origent: 'CCW',
+                origent: origentA,
                 startAngle: settings.selectedAngle
             });
             
             //bind click event
             items.click(function(){
-                var indexOffset = selectedIndex - $(this).attr('circleIndex');
+                var indexOffset =  invert*(selectedIndex-$(this).attr('circleIndex'));
                 
                 if (selectedIndex == $(this).attr('circleIndex')) 
                     return;
