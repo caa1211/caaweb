@@ -84,7 +84,7 @@
         settings = $.extend(defaultSetting, settings);
         
         var itemLength = $(this).find('.menuItem').length;
-        var radius = parseFloat($('.menuItem').width() * itemLength /4);
+        var radius = parseFloat(settings.circleParam.baseSize * itemLength /4);
         var interval = 360 / itemLength;
         var selectedIndex = settings.selectedIndex;
         var thisObj = $(this);
@@ -216,6 +216,7 @@
        
         
         this.collapse = function(){
+            thisObj.stop();
             doCircleAnim({
                 items: $(this).children('.menuItem'),
                 end: settings.selectedAngle,
@@ -224,8 +225,10 @@
         }
         
         this.expand = function(){
+            var items = $(this).children('.menuItem');
+            items.attr('angle',  settings.selectedAngle);
             doCircleAnim({
-                items:  $(this).children('.menuItem'),
+                items:  items,
                 start: settings.selectedAngle
             })
         }
@@ -237,7 +240,7 @@
         
         thisObj.bind('beforeCircleChange', function(e, item){
             $(this).children('.menuItem').removeClass('selected');
-            $(item).addClass('selected')
+            $(item).addClass('selected');
         });
         
         return  this.each(_handler);
