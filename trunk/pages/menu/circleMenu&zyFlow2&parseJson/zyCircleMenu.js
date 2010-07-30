@@ -79,7 +79,7 @@
             },
             naviCompleted: function(){
             },
-            dur: 700,
+            dur: 900,
 			easing: 'easeOutBack',
             invert: false //true- next is in up; false - next is in bottom
         }
