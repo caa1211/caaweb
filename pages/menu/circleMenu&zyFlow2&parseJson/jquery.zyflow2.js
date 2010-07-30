@@ -10,7 +10,7 @@
            activeSize: 150,
            center: ['30%', '20%'],
            selectedIndex: 0,
-           dur: 300,
+           dur: 500,
            naviCompleted: function(){},
            vertical: true
          }
