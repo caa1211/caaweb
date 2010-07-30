@@ -110,17 +110,21 @@
                    }
         }
     },
- "setting": {
-        "title": "Setting",
+ "system": {
+        "title": "System",
         "switchImg": {
             "off": "images/m_setting_g.png",
             "on": "images/m_setting.png"
         },
         'submenu':{
-            "system": {
-                       "title": "System",
+            "settings": {
+                       "title": "Settings",
                        "url": "#"
-                   }
+            },
+            "administrator": {
+                       "title": "Administrator",
+                       "url": "#"
+            }
         }
     }
  }
