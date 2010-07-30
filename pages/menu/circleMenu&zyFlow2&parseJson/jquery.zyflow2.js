@@ -75,14 +75,14 @@
 				}
               // thisObj.animate({'top':center[1]- selectedIndex*interval , 'left': center[0]},d);
               if (settings.vertical == false) {
-                  thisObj.animate({
+                  thisObj.stop().animate({
                       'top': center[1],
                       'left': center[0] - selectedIndex * interval
                   }, d);
                   
                   thisObj.children('.menuItem').each(function(i, data){
                       if (i < selectedIndex) {
-                          $(this).animate({
+                          $(this).stop().animate({
                               'left': i * interval,
                               'width': nw,
                               'height': nw
@@ -94,7 +94,7 @@
                     {
                         thisObj.trigger('beforeCircleChange', $(this));
                         
-                        $(this).animate({
+                        $(this).stop().animate({
                             'left': i * interval,
                             'width': aw,
                             'height': aw
@@ -104,7 +104,7 @@
                     }
                     if (i > selectedIndex) //$(this).css('left',i*interval + middleInterval - width).children('img').css('width', width);
                     {
-                        $(this).animate({
+                        $(this).stop().animate({
                             'left': i * interval + (aw - nw),
                             'width': nw,
                             'height': nw
@@ -115,14 +115,14 @@
                 });
             }
            else{  //vertical
-                      thisObj.animate({
+                      thisObj.stop().animate({
                       'top': center[1] - selectedIndex * interval,
                       'left': center[0]
                   }, d);
                   
                   thisObj.children('.menuItem').each(function(i, data){
                       if (i < selectedIndex) {
-                          $(this).animate({
+                          $(this).stop().animate({
                               'top': i * interval,
                               'width': nw,
                               'height': nw
@@ -134,7 +134,7 @@
                     {
                         thisObj.trigger('beforeCircleChange', $(this));
                         
-                        $(this).animate({
+                        $(this).stop().animate({
                             'top': i * interval,
                             'width': aw,
                             'height': aw
@@ -144,7 +144,7 @@
                     }
                     if (i > selectedIndex) //$(this).css('left',i*interval + middleInterval - width).children('img').css('width', width);
                     {
-                        $(this).animate({
+                        $(this).stop().animate({
                             'top': i * interval + (aw - nw),
                             'width': nw,
                             'height': nw
