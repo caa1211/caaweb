@@ -20,7 +20,7 @@
  <script type="text/javascript">
      var parseObj = $.jsonParser();
      var htmlWrap= parseObj.getHtmlWrap();
-      $( function()
+     window.onload = function()
         { 
         
        $('#menuContainer').append(htmlWrap);
@@ -117,19 +117,20 @@
             });
             
             //mousewheel
-            $('#menuContainer').css('border', 'solid 1px red').mousewheel(function(event, delta){
+            $('#menuContainer').css('border', 'solid 0 red').mousewheel(function(event, delta){
                 delta < 0 ? obj.next() : obj.prev();
             });
         }
 
-        });
+        };
  </script>
 
-<style>
-    *html img {behavior:url("iepngfix.htc");}
-    body{height:100%; margin: 0px;}
-    #menuContainer{left:100px; height:80%; top:100px; overflow:hidden; width:80%; position:absolute;}
-    #menu{width:100%; height:100%; position:absolute;} 
+<style type="text/css">
+<!--
+*html img {behavior:url("iepngfix.htc");}
+body{height:100%;margin:0;background:#08090b url(images/bg.gif) top left no-repeat;font-family:arial;}
+#menuContainer{height:100%;overflow:hidden;width:100%;position:absolute;}
+#menu{width:100%; height:100%; position:absolute;} 
 .menuItem{width:100px;height:100px; position:absolute; cursor:pointer;}
 .menuItem.selected{cursor:default;}
 .menuItem.hover{}
@@ -142,25 +143,32 @@
 .menuItem.hover .img.on{display:block;}
 
 .subMenu {text-align:left; position:absolute;}
-.subMenu {margin:0 auto; border:solid 1px green; display:none;}
-.subMenu  ul li{ height:34px; float:left; border: solid 1px red; width:120px;}
-.subMenu  ul li a{ font-size:18px; color:#CCCCCC; font-weight:bold; text-decoration:none; text-align:left;width:120px; height:34px; display:block; line-height:34px;}
-.subMenu  ul li a:hover{ background-image:url(images/btn.png); color:#ffffff;}
+.subMenu {margin:0 auto; display:none;font-size:28px;color:#a8f0ff;font-weight:bold;text-transform:uppercase;}
+.subMenu  ul li{ height:34px; float:left; margin-right:25px;}
+.subMenu  ul li a{ font-size:16px; color:#fff; font-weight:bold; text-decoration:none; text-align:left;display:block;text-transform:none;padding:3px 8px;}
+.subMenu  ul li a:hover{ background:#000; color:#ffffff;-moz-border-radius:6px;-webkit-border-radius:6px;}
 
+.switch {position:absolute;bottom:0;right:0;z-index:10000;}
+
+-->
 </style>
 
 
 </head>
-<body >
+<body>
      <!--apply transparent-->
      <img src='blank.gif' style='display:none;'/>
-         
+     <div class="switch">   
      <!--button id='btn' >collapse</button>
      <button id='btn2' >expand</button-->
+     <button id='aaa'>circle</button>
+    <button id='bbb'>vertical flow</button>
+    <button id='ccc'>flow</button>
      <button id='btn3' >navi to 2</button>
      <button id='nextBtn' >next</button>
      <button id='prevBtn' >prev</button>
-
+     
+     </div>
 <div id='menuContainer'>   
   
 <!--div id='menu'>
@@ -243,9 +251,7 @@
 
 
 
-<button id='aaa'>circle</button>
-<button id='bbb'>vertical flow</button>
-<button id='ccc'>flow</button>
+
 
 </body>
 </html>

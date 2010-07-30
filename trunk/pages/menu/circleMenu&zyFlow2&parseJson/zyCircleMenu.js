@@ -80,6 +80,7 @@
             naviCompleted: function(){
             },
             dur: 700,
+			easing: 'easeOutBack',
             invert: false //true- next is in up; false - next is in bottom
         }
         settings = $.extend(defaultSetting, settings);
@@ -149,7 +150,7 @@
 
                 $(this).stop().animate({
                     path: pathAry
-                }, dur/*,'easeOutBack'*/, function(){
+                }, dur, settings.easing, function(){
                     if ($(this).attr('circleIndex') == selectedIndex) {
                         thisObj.trigger('circleChange', $(this));
                       

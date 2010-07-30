@@ -12,7 +12,8 @@
            selectedIndex: 0,
            dur: 500,
            naviCompleted: function(){},
-           vertical: true
+           vertical: true,
+		   easing: 'easeOutBack'
          }
      
      
@@ -98,7 +99,7 @@
                             'left': i * interval,
                             'width': aw,
                             'height': aw
-                        }, d, function(){
+                        }, d, settings.easing, function(){
                             thisObj.trigger('circleChange', $(this));
                         });
                     }
@@ -138,7 +139,7 @@
                             'top': i * interval,
                             'width': aw,
                             'height': aw
-                        }, d, function(){
+                        }, d,'easeOutBack', function(){
                             thisObj.trigger('circleChange', $(this));
                         });
                     }
