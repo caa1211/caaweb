@@ -14,15 +14,15 @@
 
 (function($)
 {
-    $.fn.jsonParser = function(settings){
-        
+    $.jsonParser = function(settings){
+     
        var defaultSetting = 
        {
            jsonUrl:'menu.json',
            menuId: 'menu'
            
        }
-       var thisObj = $(this);
+       var thisObj = $('<div></div>');
        var jsonObj;
         settings = $.extend(defaultSetting , settings);
 
@@ -71,15 +71,14 @@
             this.getIndex = function(){
                 return dIndex;
             }
-            
+        
         var _handler = function(){
             var parseCounter = 0;
-                     
             $.ajaxSettings.async = false;
             
             $.getJSON(settings.jsonUrl, function(data){
                 jsonObj=data;
-                
+         
                 var menuDiv = $('<div></div>');
                 menuDiv.attr('id', settings.menuId);
                 var subMenuGroup = $('<div></div>');
@@ -132,9 +131,11 @@
             $.ajaxSettings.async = true;
         };
       
-        
+       _handler();
       
-        return this.each(_handler);;
+       this.getHtmlWrap= function(){return thisObj.children();}
+      
+        return this;
     };
  
 

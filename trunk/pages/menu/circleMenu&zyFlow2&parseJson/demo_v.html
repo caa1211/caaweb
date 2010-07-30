@@ -19,15 +19,18 @@
    
  <script type="text/javascript">
      
+     var parseObj = $.jsonParser();
+     var htmlWrap= parseObj.getHtmlWrap();
+
       window.onload = function()
         { 
         
-      var parseObj= $('#menuContainer').jsonParser();
+       $('#menuContainer').append(htmlWrap);
   
         if (1) {
             
             //parseObj.getIndex(): get default index from parser; 
-            var obj = $('#menu').zyCycleMenu({selectedIndex:parseObj.getIndex()});
+            var obj = $('#menu').zyCycleMenu(parseObj.getIndex());
             
             //for change view mode 
             function initObj(){
