@@ -132,7 +132,7 @@ $(function(){
                     url:"pages/menu/lavaLampMenu/demo.html"
                 },
                  'circle menu':{
-                    url:"pages/menu/zyFlow_new/demo_v.html"
+                    url:"pages/menu/circleMenu&zyFlow2&parseJson/demo_v.html"
                 }
                 },
             others: {
