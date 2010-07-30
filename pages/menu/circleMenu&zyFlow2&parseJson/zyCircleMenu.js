@@ -67,7 +67,7 @@
 
     $.fn.zyCycleMenu = function(settings){
         var defaultSetting = {
-            selectedAngle: 90,
+            selectedAngle: 100,
             selectedIndex: 3,
             radius: 'auto',
             center: ['20%', '42%'],
@@ -75,7 +75,7 @@
                xp:(3/5),
                yp:1.2 ,
                diff:40,
-               baseSize:100
+               baseSize:130
             },
             naviCompleted: function(){
             },
@@ -85,7 +85,7 @@
         settings = $.extend(defaultSetting, settings);
         
         var itemLength = $(this).find('.menuItem').length;
-        var radius = parseFloat(settings.circleParam.baseSize * itemLength /3.5);
+        var radius = parseFloat(settings.circleParam.baseSize * itemLength /4);
         var interval = 360 / itemLength;
         var selectedIndex = settings.selectedIndex;
         var invert = settings.invert?1:-1;
