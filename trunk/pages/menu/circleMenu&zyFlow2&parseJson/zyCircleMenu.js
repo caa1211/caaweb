@@ -69,7 +69,8 @@
         var defaultSetting = {
             selectedAngle: 100,
             selectedIndex: 3,
-            radius: 'auto',
+            radiusRate: 0.25,
+			autoResize: false,
             center: ['20%', '42%'],
             circleParam:{
                xp:(3/5),
@@ -86,12 +87,15 @@
         settings = $.extend(defaultSetting, settings);
         
         var itemLength = $(this).find('.menuItem').length;
-        var radius = parseFloat(settings.circleParam.baseSize * itemLength /4);
+		var dradius = parseFloat(settings.circleParam.baseSize * itemLength * settings.radiusRate);
+		var dsize = settings.circleParam.baseSize;
+        var radius = dradius;
         var interval = 360 / itemLength;
         var selectedIndex = settings.selectedIndex;
         var invert = settings.invert?1:-1;
         var thisObj = $(this);
-            
+        var baseSize = settings.circleParam.baseSize;
+		
         this.getIndex = function(){ return selectedIndex; };
         this.getActivedItem= function(){
             return   $(this).children('.menuItem[circleIndex='+selectedIndex+']')
@@ -125,6 +129,12 @@
                 center[i] = parseInt(ary[0]);
         }
 
+		   if(settings.autoResize){
+		    baseSize = param.baseSize ==undefined? baseSize :param.baseSize ;
+			baseSize = baseSize<40 ? 40: baseSize
+	        radius =parseFloat(baseSize* itemLength * settings.radiusRate);
+		   }
+			
             param.items.each(function(i, item){
                 
                 var startAngle = param.startAngle == undefined ? parseFloat($(this).attr('angle')) : param.startAngle;
@@ -132,13 +142,14 @@
                 var end = param.end == undefined ? interval * offset + startAngle : param.end;
                 var origent = param.origent == undefined ? "CCW" : param.origent;
                 var dur = param.dur==undefined? settings.dur: param.dur;
-                
-                var arc_params = $.extend(settings.circleParam,{
+
+                var arc_params = $.extend({},settings.circleParam,{
                     center:center,//settings.center,
                     radius: radius,
                     start: startAngle,
                     end: end,
-                    dir: origent == "CCW" ? 1 : -1
+                    dir: origent == "CCW" ? 1 : -1,
+					baseSize: baseSize
                 });
                 
                 $(this).attr('angle', parseFloat(arc_params.end + 360) % 360);
@@ -169,13 +180,17 @@
             $(window).resize(function(){
                 if(sizeH==thisObj.height()&& sizeW==thisObj.width())
                 return;
-                                
+	
                 sizeH = thisObj.height();
                 sizeW = thisObj.width();
+				
+				var baseSizeM = parseInt(dsize * $(window).height()/854)
+					
                 doCircleAnim({
                     items: items,
                     offset: 0,
-                    dur:0
+                    dur:0,
+					baseSize: baseSizeM
                 });
             });
 
@@ -186,10 +201,14 @@
             //initially animation
             //expandCircle;
             var origentA=settings.invert?'CCW':'CW';
+			
+			var baseSizeM = parseInt(dsize * $(window).height()/854);
+
             doCircleAnim({
                 items: items,
                 origent: origentA,
-                startAngle: settings.selectedAngle
+                startAngle: settings.selectedAngle,
+					baseSize: baseSizeM
             });
             
             //bind click event
