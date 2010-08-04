@@ -7,13 +7,14 @@
          var _defaultSettings = {
            interval : 110,
            normalSize : 100,
-           activeSize: 150,
+           activeSize: 170,
            center: ['30%', '20%'],
            selectedIndex: 0,
            dur: 500,
            naviCompleted: function(){},
            vertical: true,
-		   easing: 'easeOutBack'
+		   easing: 'easeOutBack',
+           baseWH:854
          }
      
      
@@ -51,8 +52,10 @@
        function doCircleAnim(param /*dur, init, callback*/){  
               
                 param= $.extend({},param);
-                var aw =settings.activeSize;
-                var nw = settings.normalSize;  
+                
+                var aw =settings.activeSize*$(window).height()/settings.baseWH;
+                var nw = settings.normalSize*$(window).height()/settings.baseWH;
+                var interval = settings.interval*$(window).height()/settings.baseWH;
                 var d = param.dur==undefined? settings.dur : param.dur;
 
                 var center = [];

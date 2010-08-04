@@ -72,10 +72,11 @@
             radiusRate: 0.25,
 			autoResize: true,
             center: ['20%', '42%'],
+            baseWH:854,
             circleParam:{
-               xp:(3/5),
+               xp:(3.5/5),
                yp:1.2 ,
-               diff:40,
+               diff:65,
                baseSize:130
             },
             naviCompleted: function(){
@@ -131,7 +132,7 @@
 
 		   if(settings.autoResize){
 		    baseSize = param.baseSize ==undefined? baseSize :param.baseSize ;
-			baseSize = baseSize<40 ? 40: baseSize
+			baseSize = baseSize<settings.circleParam.diff ? settings.circleParam.diff: baseSize
 	        radius =parseFloat(baseSize* itemLength * settings.radiusRate);
 		   }
 			
@@ -184,7 +185,7 @@
                 sizeH = thisObj.height();
                 sizeW = thisObj.width();
 				
-				var baseSizeM = parseInt(dsize * $(window).height()/854)
+				var baseSizeM = parseFloat(dsize * $(window).height()/settings.baseWH)
 					
                 doCircleAnim({
                     items: items,
@@ -202,7 +203,7 @@
             //expandCircle;
             var origentA=settings.invert?'CCW':'CW';
 			
-			var baseSizeM = parseInt(dsize * $(window).height()/854);
+			var baseSizeM = parseFloat(dsize * $(window).height()/settings.baseWH);
 
             doCircleAnim({
                 items: items,

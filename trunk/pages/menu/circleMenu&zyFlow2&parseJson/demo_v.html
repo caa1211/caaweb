@@ -111,8 +111,8 @@
                 var position = $(item).position();
                 
                 $('#' + $(item).attr('subMenu')).css({
-                    left: position.left + 200 + obj.position().left,
-                    top: position.top + 30 + obj.position().top
+                    left: position.left + $(item).width()+40 + obj.position().left,
+                    top: position.top + parseInt($(item).height()/5) + obj.position().top
                 }).show();
             });
             
