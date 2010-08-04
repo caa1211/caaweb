@@ -74,7 +74,7 @@
             center: ['20%', '42%'],
             baseWH:854,
             circleParam:{
-               xp:(3.5/5),
+               xp:(3/5),
                yp:1.2 ,
                diff:65,
                baseSize:130
