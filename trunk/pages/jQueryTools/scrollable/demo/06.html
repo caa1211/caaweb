@@ -1,0 +1,117 @@
+﻿
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<!--
+    this file includes all tools together with the jQuery library
+-->
+<link rel="stylesheet" type="text/css" href="05.css"/>
+<script src="jquery-1.3.2.min.js"></script>
+<script src="jquery.tools.min.js"></script>
+<script src="jquery.easing.1.3.js"></script>
+
+
+<script>
+$(function(){
+    var root = $("div.scrollable").scrollable({
+        // vertical: true,
+        size: 5,
+        easing: 'easeOutElastic',
+        //api: true,
+        speed: 500,
+        hoverClass: 'caaHover',
+        activeClass: 'caaActive',
+        //clickable: false ,
+        onSeek: function(){
+            //  alert("current page is " + this.getPageIndex());
+        }
+        
+    }).navigator({
+        navi: 'div.navi',
+        naviItem: 'a',
+        activeClass: 'current'
+    });
+    
+    var api = root.scrollable();
+    $("#testBtn").click(function(){
+        api.next();
+    });
+    
+    //$('.page').click(function(e){alert('');return false;})
+    
+    
+});
+</script>
+
+
+<!-- without body tag IE may have unprodictable behaviours --> 
+<body>
+
+  <h2>scroller sample</h2>
+<h3>用於main menu的切換</h3>
+		 
+		 
+<!-- "previous page" action --> 
+<!--button class="prevPage browse left">prev</button--> 
+ <a class="prevPage browse left"></a>
+ 
+<!-- root element for scrollable --> 
+<div class="scrollable">     
+     
+    <!-- root element for the items --> 
+    <div class="items"> 
+     
+        <!-- 1-5 --> 
+       <div class='page' style='width:100px;height:100px;border:dashed 1px red;'>1</div>
+       <div class='page' style='width:100px;height:100px;border:dashed 1px red;'>2</div>
+       <div class='page' style='width:100px;height:100px;border:dashed 1px red;'>3</div>
+       <div class='page' style='width:100px;height:100px;border:dashed 1px red;'>4</div>
+       <div class='page' style='width:100px;height:100px;border:dashed 1px red;'>5</div>  
+        <!-- 5-10 --> 
+       <div class='page' style='width:100px;height:100px;border:dashed 1px red;'>6</div>
+       <div class='page' style='width:100px;height:100px;border:dashed 1px red;'>7</div>
+       <div class='page' style='width:100px;height:100px;border:dashed 1px red;'>8</div>
+       <div class='page' style='width:100px;height:100px;border:dashed 1px red;'>9</div>
+       <div class='page' style='width:100px;height:100px;border:dashed 1px red;'>10</div> 
+         
+        <!-- 10-15 --> 
+       <div class='page' style='width:100px;height:100px;border:dashed 1px red;'>11</div>
+       <div class='page' style='width:100px;height:100px;border:dashed 1px red;'>12</div>
+       <div class='page' style='width:100px;height:100px;border:dashed 1px red;'>13</div>
+  
+    </div> 
+     
+</div> 
+ 
+ 
+ <div class="navi"> 
+    <a href="#" class="active">1</a> 
+    <a href="#" >2</a> 
+    <a href="#" >3</a> 
+</div>
+
+
+
+<!-- "next page" action --> 
+<!--button class="nextPage browse right">next</button-->
+
+<a class="nextPage browse right"></a>
+
+<button id='testBtn'>next</button>
+
+
+<!--web link-->
+<br/><br/><br/>
+<a href='http://flowplayer.org/tools/scrollable/index.html#' 
+class='ui-state-default ui-corner-all' 
+target='_blank'>reference</a>
+
+
+</body>
+
+

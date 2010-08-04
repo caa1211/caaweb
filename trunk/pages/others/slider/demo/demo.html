@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>jQuery UI Slider - Snap to increments</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--common css-->
+    <link href="custom-theme/jquery-ui-1.7.2.custom.css" rel="stylesheet" type="text/css"/>
+
+    <!--common js-->
+    <script src="jquery-1.3.2.min.js" type="text/javascript"></script>
+    <script src="jquery-ui-1.7.2.custom.min.js" type="text/javascript"></script>
+
+    
+    <script type="text/javascript">
+    $(function() {
+        
+
+        for (var x = 1; x <= $('.selectSpan').length ; x++) {
+			$('#select_' + x).addClass('ui-state-default');
+            $('#select_' + x).bind('selectMe', function(e){
+                //apply  select style
+				$('span.ui-state-active').removeClass('ui-state-active');
+                $(e.target).addClass('ui-state-active');
+                $("#amount").val($("#slider").slider("value"));
+            }).click(function(){
+				var index =  $(this).attr('id').split('_')[1];
+				$('span.ui-state-active').removeClass('ui-state-active');
+                $(this).addClass('ui-state-active');
+				$("#slider").slider('value', index);
+			});
+        }
+        
+
+        var sliderObj = $("#slider").slider({
+            value:1,
+            animate:true,
+            orientation: x,
+            min: 1,
+            max: 10,
+            step: 1,
+            //stop: function(event, ui){ },
+            change: function(event, ui) {
+                $('#select_'+ui.value).trigger('selectMe');
+            }
+        });
+           
+		   $('#select_1').trigger('selectMe');      
+        //$("#amount").val($("#slider").slider("value"));
+    
+    });
+    
+    </script>
+</head>
+<body>
+
+<div class="demo">
+
+<p>
+<label for="amount">you selected:</label>
+<input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;" />
+</p>
+
+<li id="slider"></li>
+
+</div><!-- End demo -->
+
+<div id='optionContenter' class='selectBorder'>
+<span id='select_1' class='selectSpan'>01</span>
+<span id='select_2' class='selectSpan'>02</span>
+<span id='select_3' class='selectSpan'>03</span>
+<span id='select_4' class='selectSpan'>04</span>
+<span id='select_5' class='selectSpan'>05</span>
+<span id='select_6' class='selectSpan'>06</span>
+<span id='select_7' class='selectSpan'>07</span>
+<span id='select_8' class='selectSpan'>08</span>
+<span id='select_9' class='selectSpan'>09</span>
+<span id='select_10' class='selectSpan'>10</span>
+</div>
+
+
+<!--web link-->
+<br/><br/><br/>
+<a href='http://jqueryui.com/demos/slider/' 
+class='ui-state-default ui-corner-all' 
+target='_blank'>reference</a>
+
+</body>
+</html>

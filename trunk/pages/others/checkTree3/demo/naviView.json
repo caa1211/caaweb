@@ -1,0 +1,8 @@
+
+  {
+         "networkMap": {"title": "Network Map", "url":"content/networkMap.html"},
+         "status": {"title": "Status", "url":"content/status.html"},
+         "vd": {"title": "Virtual Device", "url":"content/vd.html"}
+  }
+
+    

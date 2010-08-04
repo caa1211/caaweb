@@ -1,0 +1,26 @@
+
+
+<script type="text/javascript">
+   
+db = $('#db_root').parent('.dialogContener');      //find db obj
+
+var view1_buttons = {'OK':function(){}};
+db.dialog('option', 'buttons', view1_buttons);
+
+
+$('#naviToBtn').click(function(){
+    
+    db.naviTo('edit.html',  
+    {
+           'width':600
+    });
+})
+
+</script>
+
+
+<div id='db_root'>
+view2
+<br>
+<button id='naviToBtn'>navi back view1</button>
+</div>
