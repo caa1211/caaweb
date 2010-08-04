@@ -70,7 +70,7 @@
             selectedAngle: 100,
             selectedIndex: 3,
             radiusRate: 0.25,
-			autoResize: false,
+			autoResize: true,
             center: ['20%', '42%'],
             circleParam:{
                xp:(3/5),
