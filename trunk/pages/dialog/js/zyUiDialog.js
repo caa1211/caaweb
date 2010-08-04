@@ -15,10 +15,20 @@
  * 100624 set default width and height
  * 100707 add naviTo function
  * 100712 auto modify height in ie6
+ * 100804 add cancel Bubble.
  */
 
-(function($){
-
+;(function($){
+    
+    $.cancelBubble = function(evt){
+        //cancel bubble event
+        if (window.event) //for IE       
+            window.event.cancelBubble = true;
+        else 
+            //for Firefox        
+            evt.stopPropagation();
+    };
+    
     function applyDefault(baseDiv, settings){
         var _defaultSettings = {
             bgiframe: true,
