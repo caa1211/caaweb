@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--common css-->
+
+    
+    
+    <!--common js-->
+    <script src="jquery-1.3.2.min.js" type="text/javascript"></script>
+   
+   <script src="jquery.getParams.js" type="text/javascript"></script>
+
+
+    <script type="text/javascript">
+
+        $(function()
+        {
+   
+   $('#btn').click(function(){
+      var value =   $.getURLParam("value");
+       alert(value);
+   })
+        
+
+        });
+  
+    </script> 
+
+</head>
+<body>
+
+<h1>得到URL所帶的參數</h1>
+   <h3>例：本頁url為：pages/notUI/getParam/01.html?value=1111， $(document).getUrlParam("value"); 會取得參數 1111  </h3> 
+   
+   
+   
+   <button id='btn'>get urlParam</button>
+<!--web link-->
+<br/><br/><br/>
+<a href='http://www.mathias-bank.de/2007/04/21/jquery-plugin-geturlparam-version-2/' 
+class='ui-state-default ui-corner-all' 
+target='_blank'>reference</a>
+
+
+</body>
+</html>

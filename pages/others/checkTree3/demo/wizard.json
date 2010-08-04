@@ -1,0 +1,10 @@
+
+  {
+         "step1": {"title": "Internet Connection", "url":"pages/wizard/content/W_internet.html", 'status':'step' },
+         "step2": {"title": "Wireless Setting", "url":"pages/wizard/content/W_wireless.html", 'status':'step' },
+         "step3": {"title": "Internet Phone Call(VoIP)", "url":"pages/wizard/content/W_voip.html", 'status':'step'},
+         "waiting": { "url":"pages/wizard/content/W_waiting.html" , 'status':'waiting'},
+         "result":{"title": "Result Summary", "url":"pages/wizard/content/W_result.html" , 'status':'result'}
+  }
+
+    

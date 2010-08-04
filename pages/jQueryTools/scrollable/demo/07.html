@@ -1,0 +1,189 @@
+﻿
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<!--
+    this file includes all tools together with the jQuery library
+-->
+
+<link rel="stylesheet" type="text/css" href="reset.css"/>
+
+<link rel="stylesheet" type="text/css" href="07.css"/>
+<script src="jquery-1.3.2.min.js"></script>
+<script src="jquery.tools.min.js"></script>
+<script src="jquery.easing.1.3.js"></script>
+
+
+
+<script>
+$(function(){
+   
+  // var isSeek = false;
+   var scrollSize = 1;
+    var root = $("div.scrollable").scrollable({
+        vertical: true,
+        size: scrollSize,
+        easing: 'easeOutElastic',
+       // api: true,
+        speed: 600,
+        activeClass: 'caaActive',
+       keyboard: false, 
+       clickable: false ,
+       onSeek: function(e){
+		/*
+		var pageIndex= this.getPageIndex();
+		pageIndex = pageIndex +1;
+		alert(pageIndex);
+		
+		isSeek=true;
+		$('.items ul:nth-child('+ parseInt(pageIndex,10)+') li:first-child a ').focus();	
+		*/
+        }
+    }).navigator({
+        navi: 'div.navi',
+        naviItem: 'a',
+        activeClass: 'current'
+    });
+    
+    var api = root.scrollable();
+$('#highlight').focus();
+
+
+
+function focusPage(index){
+	if ($(this).attr('id') != 'highlight') {
+        $('.scrollable').scrollTo(0, 20, {
+            queue: true
+        });
+   
+     if (index != api.getPageIndex()) {
+         api.setPage(index);
+     }
+
+    }  
+}
+
+
+
+$('.items ul').each(function(i, d){
+    
+    $(d).bind('focusPage', function(){ focusPage(i);} ); 
+    
+    $(this).find('li:first-child a').bind('focus', function(){
+       $(d).trigger('focusPage'); 
+    });
+    
+     $(this).find('li:last-child a').bind('focus', function(){
+       $(d).trigger('focusPage'); 
+    });
+    
+} )
+
+
+//li:first-child a').bind('focus', focusNextPage);
+
+
+//$('.items ul li:last-child a').bind('focus', focusNextPage);
+
+$('#nextBtn').click(function(){
+	   api.nextPage();	
+});	
+
+$('#prevBtn').click(function(){
+       api.prevPage();  
+});
+
+   
+});
+</script>
+
+
+<!-- without body tag IE may have unprodictable behaviours --> 
+<body>
+
+  <h2>scroller sample</h2>
+<h3>用於main menu的切換</h3>
+
+<!-- "previous page" action --> 
+<!--button class="prevPage browse left">prev</button--> 
+ <a class="prevPage browse left" id='prevPage'></a>
+
+<button id='prevBtn'>prevBtn</button>
+<button id='nextBtn'>nextBtm</button>
+
+	
+<!-- root element for scrollable --> 
+<div class="scrollable vertical" style=' autoScroll: false;'>     
+     
+    <!-- root element for the items --> 
+
+     
+	 
+     <div class="items" style='font-size:16px; '>
+
+        <ul>
+         <li><a id='highlight' href='#'>1 aaaaaaaaaaaaaaaa</a></li>
+         <li><a href='#'>2 aaaaaaaaaaaaaaaa </a></li>
+         <li><a href='#'>3 aaaaaaaaaaaaaaaa</a></li>
+         <li><a href='#'>4 aaaaaaaaaaaaaaaa</a></li>
+         <li><a href='#'>5 aaaaaaaaaaaaaaaa</a></li>
+         <li><a href='#'>6 aaaaaaaaaaaaaaaa</a></li>
+          <li><a href='#'>7 aaaaaaaaaaaaaaaa</a></li>
+         <li><a href='#'>8 aaaaaaaaaaaaaaaa</a></li>
+         <li><a href='#'>9 aaaaaaaaaaaaaaaa</a></li>
+       </ul>
+		
+	  <ul >
+		 <li><a href='#'>10 aaaaaaaaaaaaaaaa</a></li>
+         <li><a href='#'>11 aaaaaaaaaaaaaaaa</a></li>
+         <li><a href='#'>12 aaaaaaaaaaaaaaaa</a></li>
+          <li><a href='#'>13 aaaaaaaaaaaaaaaa</a></li>
+         <li><a href='#'>14 aaaaaaaaaaaaaaaa</a></li>
+         <li><a href='#'>15 aaaaaaaaaaaaaaaa</a></li>
+         <li><a href='#'>16 aaaaaaaaaaaaaaaa</a></li>
+         <li><a href='#'>17 aaaaaaaaaaaaaaaa</a></li>
+          <li><a href='#'>18 aaaaaaaaaaaaaaaa</a></li>
+      </ul>
+ 
+       <ul>
+		
+         <li><a href='#'>19 aaaaaaaaaaaaaaaa</a></li>
+         <li><a href='#'>20 aaaaaaaaaaaaaaaa</a></li>
+	   </ul>
+
+		
+    </div>
+     
+     
+</div> 
+ 
+ 
+ <div class="navi"> 
+    <a href="#" class="active">1</a> 
+    <a href="#" >2</a> 
+    <a href="#" >3</a> 
+</div>
+
+
+
+<!-- "next page" action --> 
+<!--button class="nextPage browse right">next</button-->
+
+<a class="nextPage browse right" id='nextPage'></a>
+
+
+<!--web link-->
+<br/><br/><br/>
+<a href='http://flowplayer.org/tools/scrollable/index.html#' 
+class='ui-state-default ui-corner-all' 
+target='_blank'>reference</a>
+
+
+</body>
+
+
