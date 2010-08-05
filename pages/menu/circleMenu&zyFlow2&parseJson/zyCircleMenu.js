@@ -74,9 +74,9 @@
             center: ['20%', '42%'],
             baseWH:854,
             circleParam:{
-               xp:(3/5),
+               xp:(3.5/5),
                yp:1.2 ,
-               diff:65,
+               diff:40,
                baseSize:130
             },
             naviCompleted: function(){
