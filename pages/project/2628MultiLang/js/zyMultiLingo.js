@@ -96,12 +96,15 @@
               });
 			  updateDomLang_forTitle($targetObj);
   
-              var subFrame = $(settings.subFrameSelector , $targetObj);
-              if (subFrame.length != 0) {
-                  var subFrameBody = subFrame.contents().find('body');
-                  if (subFrameBody.length != 0) 
-                      updateDomLang(subFrameBody);
-              }
+              if(settings.subFrameSelector!='')
+			  {
+				  var subFrame = $(settings.subFrameSelector , $targetObj);
+				  if (subFrame.length != 0) {
+					  var subFrameBody = subFrame.contents().find('body');
+					  if (subFrameBody.length != 0) 
+						  updateDomLang(subFrameBody);
+				  }
+			  }
        }
 	 
 	   this.update= function(targetLingo, callback,  $targetObj){ return  this.updateLingo(targetLingo, callback, $targetObj); };
