@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Grid</title>
+        <link rel="stylesheet" type="text/css" href="../ext/resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="../css/zyxel/zycss.css" />
+        <link rel="stylesheet" type="text/css" href="../css/zyxel/zytheme.css" />
+        <script type="text/javascript" src="../ext/adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="../ext/ext-all-debug.js"></script>
+        <script type="text/javascript" src="../common/zyVType.js"></script>
+        <script type="text/javascript" src="../common/zyFunction.js"></script>
+        <script type="text/javascript" src="zyComponent.js"></script>
+        <script type="text/javascript" src="../common/zyExtend.js"></script>
+        <script type="text/javascript" src="../common/zyDebug.js"></script>
+  
+        <script type="text/javascript" src="zyHCIComponent.js"></script>
+        <script type="text/javascript">
+            
+//------------------------------HAHA.js-------------------------------
+            Ext.namespace('Ext.ux');
+            
+            Ext.ux.OnDemandLoad = function(){
+            
+                loadComponent = function(component, callback){
+                    var fileType = component.substring(component.lastIndexOf('.'));
+                    var head = document.getElementsByTagName("head")[0];
+                    var done = false;
+                    if (fileType === ".js") {
+                        var fileRef = document.createElement('script');
+                        fileRef.setAttribute("type", "text/javascript");
+                        fileRef.setAttribute("src", component);
+                        fileRef.onload = fileRef.onreadystatechange = function(){
+                            if (!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")) {
+                                done = true;
+                                
+                                if (typeof callback == "function") {
+                                    if (document.all) {
+                                        callback();
+                                    }
+                                    else {
+                                        callback.defer(50);
+                                    }
+                                };
+                                
+                                head.removeChild(fileRef);
+                            }
+                        };
+                    }
+                    else 
+                        if (fileType === ".css") {
+                            var fileRef = document.createElement("link");
+                            fileRef.setAttribute("type", "text/css");
+                            fileRef.setAttribute("rel", "stylesheet");
+                            fileRef.setAttribute("href", component);
+                        }
+                    if (typeof fileRef != "undefined") {
+                        head.appendChild(fileRef);
+                    }
+                };
+                
+                return {
+                    load: function(components, callback){
+                        Ext.each(components, function(component){
+                            loadComponent(component, callback);
+                        });
+                    }
+                };
+            }();
+//------------
+
+
+
+
+
+            Ext.onReady(function(){
+                Ext.ux.OnDemandLoad.load('jquery-1.3.2.min.js', jsCallBack);
+                    debugger;
+            function jsCallBack(){
+                //debugger;
+                  alert('css ready');
+                }
+                
+               Ext.ux.OnDemandLoad.load('01.css', cssCallBack);
+                    function cssCallBack(){
+                    alert('css ready');
+                }
+                
+                
+                
+
+});
+        </script>
+    </head>
+    <body>
+        <div>M</div>
+    </body>
+</html>
