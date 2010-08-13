@@ -5,11 +5,10 @@
  * Joze.chang@zyxel.com.tw
  * http://www.zyxel.com
  */
-
 Ext.namespace("Ext.hci");
 //---
     Ext.hci.onDemandLoad = function(){
-    loadComponent = function(component, callback, syncFlag){
+    loadComponent = function(component, callback){
         handleSuccess = function(response, options) {
             var type = component.substring(component.lastIndexOf('.'));
             var head = document.getElementsByTagName("head")[0];
@@ -20,7 +19,6 @@ Ext.namespace("Ext.hci");
                 if (!document.all) {
                     js.innerHTML = response.responseText;
                 }
-
                 head.appendChild(js);
             }
 
@@ -37,20 +35,21 @@ Ext.namespace("Ext.hci");
             alert('Dynamic load script: [' + component + '] failed!');
         };
 
-        Ext.Ajax.request({
+        ajaxOption = {
             url: component,
-            method: 'GET',
+            method: 'GET',sync:true,
             success: handleSuccess,
             failure: handleFailure,
-            sync:syncFlag==undefined?true:syncFlag,
             disableCaching : false
-        });
+        };
+
+        Ext.Ajax.request(ajaxOption);
     };
 
     return {
-        load: function(components, callback, syncFlag){
+        load: function(components, callback){
             Ext.each(components, function(component){
-                loadComponent(component, callback, syncFlag);
+                loadComponent(component, callback);
             });
         }
     };

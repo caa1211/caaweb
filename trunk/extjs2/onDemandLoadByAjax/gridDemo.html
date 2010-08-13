@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Grid</title>
+        <link rel="stylesheet" type="text/css" href="../ext/resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="../css/zyxel/zycss.css" />
+        <link rel="stylesheet" type="text/css" href="../css/zyxel/zytheme.css" />
+        <script type="text/javascript" src="../ext/adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="../ext/ext-all-debug.js"></script>
+        <script type="text/javascript" src="../common/zyVType.js"></script>
+        <script type="text/javascript" src="../common/zyFunction.js"></script>
+        <script type="text/javascript" src="zyComponent.js"></script>
+        <script type="text/javascript" src="../common/zyExtend.js"></script>
+        <script type="text/javascript" src="../common/zyDebug.js"></script>
+  
+        <script type="text/javascript" src="zyHCIComponent.js"></script>
+        <script type="text/javascript">
+        
+
+                Ext.onReady(function(){
+                    
+                Ext.hci.onDemandLoad.load('jquery-1.3.2.min.js', jsCallBack);
+                function jsCallBack(){ 
+                    alert('js ready');
+                    debugger;
+                }
+                          
+                Ext.hci.onDemandLoad.load('01.css', cssCallBack);
+                    function cssCallBack(){ 
+                    alert('css ready');
+                }
+
+
+
+
+});
+        </script>
+    </head>
+    <body>
+        <div>M</div>
+    </body>
+</html>
