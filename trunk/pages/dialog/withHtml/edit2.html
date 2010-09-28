@@ -1,0 +1,27 @@
+
+
+<script type="text/javascript">
+    
+    
+var dbRoot = $('#testBtn').parents('.dialogContener');
+
+
+
+$('#testBtn').bind('click',function(){
+    alert(dbRoot.length)
+   
+//var db = $('#dbRoot').parents('.dialogContener');
+dbRoot.empty().load('edit.html').css('border', 'solid 1px red');
+
+
+});
+
+
+
+</script>
+db2
+<div id='dbRoot'></div>
+
+<button id='testBtn'>test</button>
+
+

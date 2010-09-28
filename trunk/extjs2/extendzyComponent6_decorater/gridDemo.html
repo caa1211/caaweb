@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Grid</title>
+        <link rel="stylesheet" type="text/css" href="../ext/resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="../css/zyxel/zycss.css" />
+        <link rel="stylesheet" type="text/css" href="../css/zyxel/zytheme.css" />
+        <script type="text/javascript" src="../ext/adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="../ext/ext-all-debug.js"></script>
+        <script type="text/javascript" src="../common/zyVType.js"></script>
+        <script type="text/javascript" src="../common/zyFunction.js"></script>
+        <script type="text/javascript" src="zyComponent.js"></script>
+        <script type="text/javascript" src="../common/zyExtend.js"></script>
+        <script type="text/javascript" src="../common/zyDebug.js"></script>
+  
+        <script type="text/javascript" src="zyHCIComponent.js"></script>
+        <script type="text/javascript">
+            
+            Ext.onReady(function(){
+            var store = new Ext.data.GroupingStore({
+        reader: new Ext.data.ArrayReader({}, [
+            {name: '_name'},
+            {name: '_dept'},
+            {name: '_ext'},
+            {name: '_home'},
+            {name: '_mobile'},
+            {name: '_email'}
+        ]),
+        data: [
+            ['2500','','2500','','',''],
+            ['2501','','2501','','',''],
+            ['2502','','2502','','',''],
+            ['2503','','2503','','',''],
+            ['2504','','2504','','',''],
+            ['2505','','2505','','',''],
+            ['2500','','2500','','',''],
+            ['2501','','2501','','',''],
+            ['2502','','2502','','',''],
+            ['2503','','2503','','',''],
+            ['2504','','2504','','',''],
+            ['2505','','2505','','',''],
+            ['2500','','2500','','',''],
+            ['2501','','2501','','',''],
+            ['2502','','2502','','',''],
+            ['2503','','2503','','',''],
+            ['2504','','2504','','',''],
+            ['2505','','2505','','',''],
+            ['2500','','2500','','',''],
+            ['2501','','2501','','',''],
+            ['2502','','2502','','',''],
+            ['2503','','2503','','','']
+        
+        ]
+    });
+    
+    //FIXME : this is demo purpose, you MUST use corresponding store and decide which field, e.g. '_ip', to be sorted
+    store.sort("_name", "ASC");
+    
+    //FIXME : this is demo purpose, you MUST modify 'header' and 'dataIndex' if merge
+    var cm = new Ext.grid.ColumnModel([
+        {header: "Name", width: 150, sortable: true, dataIndex: '_name'},
+        {header: "Depatrment", width: 200, sortable: true, dataIndex: '_dept'},
+        {header: "Extension", width: 150, sortable: true, dataIndex: '_ext'},
+        {header: "Home", width: 150, sortable: true, dataIndex: '_home'},
+        {header: "Mobile", width: 150, sortable: true, dataIndex: '_mobile'},
+        {header: "E-Mail", width: 250, sortable: true, dataIndex: '_email'}
+    ]);
+    
+    //FIXME : this is demo purpose. If Grid don't need filter plugin, you can remove those filter code
+    // grid filter icon
+    Ext.menu.RangeMenu.prototype.icons = 
+    {
+        gt: '../../images/usg/filter/greater_then.png', 
+        lt: '../../images/usg/filter/less_then.png',
+        eq: '../../images/usg/filter/equals.png'
+    };
+    Ext.grid.filter.StringFilter.prototype.icon = '../../images/usg/filter/find.png';
+    
+    var filters = new Ext.zyGridFilters({
+        //FIXME : this is demo purpose, you MUST modify 'dataIndex','local' if merge.
+        local:true,
+        filters:[
+            {type: 'string', dataIndex: '_name'}
+        ]
+    }); 
+
+    var grid = new Ext.zyGridPanel({
+        store: store, //FIXME : this is demo purpose, please use corresponding store if merge.
+        cm: cm,
+        id:'grid',
+        plugins: filters,
+
+		drawIcon: false,
+        drawActiveIcon: false,
+        drawInActiveIcon: false,
+        listeners:{
+            'resize': function(){
+                Ext.zyGridPanel.superclass.onResize.call(this);
+            }
+        },
+		onAdd: function(){alert('');}
+    });
+    
+    
+     var extraButtons = [{
+            text: "Dial Now",
+            tooltip: 'Dialadfadf',
+            iconCls: 'dial',
+            mode: ['singleOn'], //emptyOn, singleOn, multiOn
+            index: 1, 
+            handler:function(){}
+        }];
+    
+    
+     grid = Ext.hci.gridBtnDecorator(grid, extraButtons);
+
+    
+    
+           
+                var form = new Ext.FormPanel({
+                    items: [grid]
+                });
+                
+                var viewport = new Ext.Viewport({
+                    layout: 'fit',
+                    items: [form]
+                });
+                
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

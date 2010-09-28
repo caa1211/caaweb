@@ -42,12 +42,9 @@
  
                 if(! $.browser.msie )
                 menuItems.css('opacity', 1)
-           
-                obj.stop().css({
-                    top: 0,
-                    left: 0
-                });
-                $(window).unbind('resize');
+
+                obj.destory();
+                
                 $('.subMenu').hide();
             }
             

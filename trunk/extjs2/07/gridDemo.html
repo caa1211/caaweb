@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Grid</title>
+        <link rel="stylesheet" type="text/css" href="../ext/resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="../css/zyxel/zycss.css" />
+        <link rel="stylesheet" type="text/css" href="../css/zyxel/zytheme.css" />
+        <script type="text/javascript" src="../ext/adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="../ext/ext-all-debug.js"></script>
+        <script type="text/javascript" src="../common/zyVType.js"></script>
+        <script type="text/javascript" src="../common/zyFunction.js"></script>
+        <script type="text/javascript" src="zyComponent.js"></script>
+        <script type="text/javascript" src="../common/zyExtend.js"></script>
+        <script type="text/javascript" src="../common/zyDebug.js"></script>
+  
+        <script type="text/javascript" src="zyHCIComponent.js"></script>
+        <script type="text/javascript">
+            
+            Ext.onReady(function(){
+  //FIXME : this is demo purpose, you MUST remove it if merge
+        var record1 = Ext.data.Record.create([
+            {name: '_key'},
+            {name: '_action'},
+            {name: '_ext'},
+            {name: '_desc'},
+            {name: '_id', type: 'int'},
+            {name: '_parent', type: 'auto'},
+            {name: '_is_leaf', type: 'bool'}
+        ]);
+    
+        var store1 = new Ext.zyTreeGrid.AdjacencyListStore({
+            autoLoad : true,
+            reader: new Ext.data.JsonReader(
+                {
+                    id: '_id'
+                }, 
+                record1
+            ),
+            data: [
+                {"_key":"1","_action":"Forward to a skill","_ext":"11111/Product","_desc":"","_id":1,"_parent":null,"_is_leaf":false},
+                {"_key":"0","_action":"Forward to a skill","_ext":"11111/Product","_desc":"","_id":2,"_parent":1,"_is_leaf":true},
+                {"_key":"2","_action":"Forward to a skill","_ext":"11111/Product","_desc":"","_id":3,"_parent":null,"_is_leaf":false},
+                {"_key":"1","_action":"Forward to a skill","_ext":"11111/Product","_id":4,"_parent":3,"_is_leaf":true},
+                {"_key":"0","_action":"Forward to a skill","_ext":"11111/Product","_desc":"","_id":5,"_parent":null,"_is_leaf":false},
+                {"_key":"1","_action":"Forward to a skill","_ext":"11111/Product","_desc":"","_id":6,"_parent":5,"_is_leaf":false},
+                {"_key":"2","_action":"Forward to a skill","_ext":"11111/Product","_desc":"","_id":7,"_parent":6,"_is_leaf":true},
+                {"_key":"3","_action":"Forward to a skill","_ext":"11111/Product","_desc":"","_id":8,"_parent":null,"_is_leaf":true}
+            ]
+        });
+
+        var grid = new Ext.zyTreeGrid.GridPanel({
+            store: store1,
+            master_column_id : '_key',
+            columns: [
+                {id:'_key',header: "Key", width: 90, dataIndex: '_key'},
+                {header: "Action", width: 100, sortable: true, dataIndex: '_action'},
+                {header: "Extension", width: 100, sortable: true, dataIndex: '_ext'},
+                {header: "Description", width: 100, sortable: true, dataIndex: '_desc'}
+            ]
+            , tbar:[]
+        });
+        
+
+          var extraButtons= [
+           {
+                text: "Dial Now",
+                tooltip: 'Dialadfadf',
+                iconCls: 'dial',
+                mode: ['singleOn'], //emptyOn, singleOn, multiOn
+                handler: function(){
+                }
+            }
+              /*  ,new Ext.hci.gridBtn.add(
+                
+                function(){alert('Add!');
+                
+                }),
+                
+                new Ext.hci.gridBtn.edit(
+                
+                function(){alert('Add!');
+                
+                })*/
+                
+            
+            ];
+  
+             grid = Ext.hci.gridBtnDecorator(grid, extraButtons);
+                
+                
+                
+                
+                
+                
+                
+                var form = new Ext.FormPanel({
+                    items: [grid]
+                });
+                
+                var viewport = new Ext.Viewport({
+                    layout: 'fit',
+                    items: [form]
+                });
+                
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
