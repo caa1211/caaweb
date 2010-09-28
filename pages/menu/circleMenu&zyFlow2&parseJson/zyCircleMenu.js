@@ -86,15 +86,15 @@
             invert: false //true- next is in up; false - next is in bottom
         }
         settings = $.extend(defaultSetting, settings);
-        
-        var itemLength = $(this).find('.menuItem').length;
+        var thisObj = $(this);
+        var items = thisObj.children('.menuItem');
+        var itemLength = items.length;
 		var dradius = parseFloat(settings.circleParam.baseSize * itemLength * settings.radiusRate);
 		var dsize = settings.circleParam.baseSize;
         var radius = dradius;
         var interval = 360 / itemLength;
         var selectedIndex = settings.selectedIndex;
         var invert = settings.invert?1:-1;
-        var thisObj = $(this);
         var baseSize = settings.circleParam.baseSize;
 		
         this.getIndex = function(){ return selectedIndex; };
@@ -175,25 +175,41 @@
         
         var sizeH = thisObj.height();
         var sizeW = thisObj.width();
-        var _handler = function(){
-            var items = $(this).children('.menuItem');
 
-            $(window).resize(function(){
-                if(sizeH==thisObj.height()&& sizeW==thisObj.width())
+        var baseSizeM = parseFloat(dsize * $(window).height() / settings.baseWH);
+
+        function resizeHandler(){
+      
+            if (sizeH == thisObj.height() && sizeW == thisObj.width()) 
                 return;
-	
-                sizeH = thisObj.height();
-                sizeW = thisObj.width();
-				
-				var baseSizeM = parseFloat(dsize * $(window).height()/settings.baseWH)
-					
-                doCircleAnim({
-                    items: items,
-                    offset: 0,
-                    dur:0,
-					baseSize: baseSizeM
-                });
+            
+            sizeH = thisObj.height();
+            sizeW = thisObj.width();
+            
+            baseSizeM = parseFloat(dsize * $(window).height() / settings.baseWH)
+            
+            doCircleAnim({
+                items: items,
+                offset: 0,
+                dur: 0,
+                baseSize: baseSizeM
             });
+        }
+        
+        var timeoutID;
+        function doNResize(){
+            if (timeoutID != undefined) 
+                clearTimeout(timeoutID)
+            timeoutID = setTimeout(function(){
+                $(window).trigger('dResize')
+                
+            }, 100);
+        }  
+            
+        var _handler = function(){
+            
+            $(window).bind('resize', doNResize);
+            $(window).bind('dResize', resizeHandler);
 
             items.each(function(i, d){
                 $(this).attr('circleIndex', i);
@@ -203,7 +219,7 @@
             //expandCircle;
             var origentA=settings.invert?'CCW':'CW';
 			
-			var baseSizeM = parseFloat(dsize * $(window).height()/settings.baseWH);
+		    baseSizeM = parseFloat(dsize * $(window).height()/settings.baseWH);
 
             doCircleAnim({
                 items: items,
@@ -237,19 +253,23 @@
             return this;
         };
         
-       
+       this.destory = function(){
+            this.stop().css({top: 0,left: 0});
+            $(window).unbind('resize', doNResize);
+            $(window).unbind('dResize', resizeHandler);
+       }
+        
         
         this.collapse = function(){
             thisObj.stop();
             doCircleAnim({
-                items: $(this).children('.menuItem'),
+                items: items,
                 end: settings.selectedAngle,
                 origent: "CW"
             })
         }
         
         this.expand = function(){
-            var items = $(this).children('.menuItem');
             items.attr('angle',  settings.selectedAngle);
             doCircleAnim({
                 items:  items,

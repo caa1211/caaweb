@@ -2,11 +2,33 @@
 
 <script type="text/javascript">
    
-var db = $('#root').parents('.dialogContener');
+var db = $('#closeBtn').parents('.dialogContener');
+
+db.dialog('option', {
+    buttons:{
+        'aaa':function(){}
+    }
+});
+
+
+var OkBtn = db.parents('.ui-dialog').find('.ui-dialog-buttonpane').children('Button:nth-child(1)')
+OkBtn.click(function(){alert('adsfas');})
+
+
+
 
 
 $('#closeBtn').click(function(){
-db.dialog('close');
+
+    
+    var db1 = $.zyUiDialog({
+                     width: 450,
+                     height: 205,
+                     title: 'edit'
+                 });
+                 db1.load('edit2.html');
+                 db1.dialog('open');
+                 
 })
 
 </script>

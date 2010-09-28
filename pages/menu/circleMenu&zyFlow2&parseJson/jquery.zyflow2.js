@@ -1,4 +1,17 @@
- 
+ /*
+ * zyflow2.js
+ *
+ * Copyright (c) 2010
+ * zyxel.com
+ *
+ * Dual licensed under the GPL (http://www.gnu.org/licenses/gpl.html)
+ * and MIT (http://www.opensource.org/licenses/mit-license.php) licenses.
+ *
+ * $Date: 2010-07-27 $
+ * $Rev: 001 $
+ * $Date: 2010-09-03 $
+ * $Rev: 002 $
+ */
  
 ;(function($){
     
@@ -119,7 +132,7 @@
                 });
             }
            else{  //vertical
-                      thisObj.stop().animate({
+                  thisObj.stop().animate({
                       'top': center[1] - selectedIndex * interval,
                       'left': center[0]
                   }, d);
@@ -164,19 +177,33 @@
         
         var sizeH = thisObj.height();
         var sizeW = thisObj.width();
-        
+
+        function resizeHandler(){
+            if (sizeH == thisObj.height() && sizeW == thisObj.width()) 
+                return;
+            sizeH = thisObj.height();
+            sizeW = thisObj.width();
+            doCircleAnim({
+                dur: 0
+            });
+        }
+          
+        var timeoutID;
+        function doNResize(){
+            if (timeoutID != undefined) 
+                clearTimeout(timeoutID)
+            timeoutID = setTimeout(function(){
+                $(window).trigger('dResize')
+                
+            }, 100);
+        }
         
         var _handler = function(){
 
             var items = $(this).children('.menuItem');
 
-            $(window).resize(function(){
-                if(sizeH==thisObj.height()&& sizeW==thisObj.width())
-                return;       
-                sizeH = thisObj.height();
-                sizeW = thisObj.width();
-                doCircleAnim({dur:0});
-            });
+            $(window).bind('resize', doNResize);
+            $(window).bind('dResize', resizeHandler);
 
             items.each(function(i, d){
                 $(this).attr('circleIndex', i);
@@ -205,6 +232,12 @@
             })
             return this;
         };
+        
+        this.destory = function(){
+              this.stop().css({top: 0,left: 0});
+              $(window).unbind('resize', doNResize);
+              $(window).unbind('dResize', resizeHandler);
+        }
         
          thisObj.bind('circleChange', function(e, item){
             $(item).css('z-Index', 500);
