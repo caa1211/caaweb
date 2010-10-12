@@ -1,0 +1,55 @@
+/* Demo 3 - returnDelay Demo */
+#lavaLampBorderOnly {
+position: relative;
+width: 100%;
+background-color: white;
+/*padding: 15px;
+margin: 10px 0;*/
+overflow: hidden;
+border: 1px solid #CC6600;
+}
+#lavaLampBorderOnly li {
+float: left;
+display:inline;
+list-style: none;
+}
+#lavaLampBorderOnly li.backLava {
+border: 1px dashed #003399;
+background-color:#99CCCC;
+width: 9px;
+z-index: 8;
+position: absolute;
+}
+#lavaLampBorderOnly li a {
+   
+font: bold 14px arial;
+text-decoration: none;
+color: #000;
+outline: none;
+text-align: center;
+padding: 5px 20px;
+text-transform: uppercase;
+letter-spacing: 0;
+z-index: 10;
+display: block;
+float: left;
+position: relative;
+overflow: hidden;
+/*margin: auto 10px;*/
+}
+
+.menuItem{
+    
+    border-right:solid 1px black;
+}
+.subMenu{
+    height:30px;
+width:599px;
+top:25px;
+}
+.subMenu li{
+ float: left;
+ display:inline;
+list-style: none;
+position:relative;
+}
