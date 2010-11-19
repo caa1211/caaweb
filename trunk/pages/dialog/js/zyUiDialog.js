@@ -16,11 +16,12 @@
  * 100707 add naviTo function
  * 100712 auto modify height in ie6
  * 100804 add cancel Bubble.
+ * 101119 add btnAttr in each dialog button
  */
 
-;(function($){
-    
-    $.cancelBubble = function(evt){
+(function($){
+
+ $.cancelBubble = function(evt){
         //cancel bubble event
         if (window.event) //for IE       
             window.event.cancelBubble = true;
@@ -28,7 +29,7 @@
             //for Firefox        
             evt.stopPropagation();
     };
-    
+	
     function applyDefault(baseDiv, settings){
         var _defaultSettings = {
             bgiframe: true,
@@ -140,6 +141,15 @@
                 
             $(this).empty().load(url, callback);
             return this;
-        }
+        },
+		setBtnAttr:function(ary){
+		    if(ary != undefined)
+			{
+			    $(this).parents('.ui-dialog').find('.ui-dialog-buttonpane').children('button').each(function(i,d){
+					$(d).attr('btnAttr', ary[i]);
+				});
+			}
+			return this;
+		}
     });
 })(jQuery);
