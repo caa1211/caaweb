@@ -17,6 +17,7 @@
  * 100712 auto modify height in ie6
  * 100804 add cancel Bubble.
  * 101119 add btnAttr in each dialog button
+ * 101122 add getBtnByAttr, getBtnByText, getBtnByIndex
  */
 
 (function($){
@@ -150,6 +151,15 @@
 				});
 			}
 			return this;
-		}
+		},
+        getBtnByAttr: function(attr){
+            return  $(this).parents('.ui-dialog').find('.ui-dialog-buttonpane').children('button[btnAttr='+attr+']');
+        },
+        getBtnByText: function(text){
+            return  $(this).parents('.ui-dialog').find('.ui-dialog-buttonpane').children('button:contains('+text+')');
+        },
+        getBtnByIndex:function(index){
+            return  $(this).parents('.ui-dialog').find('.ui-dialog-buttonpane').children('button:nth-child('+ index +')');
+        }
     });
 })(jQuery);
