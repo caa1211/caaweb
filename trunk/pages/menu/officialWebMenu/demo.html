@@ -23,17 +23,19 @@
         $(function()
         {
    
-            $('#lavaLampBorderOnly').lavaLamp({
+           /* $('#lavaLampBorderOnly').lavaLamp({
                 target:'.menuItem', 
                 //setOnClick:true,
-                // homeTop:50, homeLeft:0, homeHeight:5, homeWidth:600 ,
+                  homeTop:50, homeLeft:0, homeHeight:5, homeWidth:600 ,
               //  fx: 'easeOutBack',
                 speed: 300,
                 startItem :'2',
               //  autoSize:false,
                  autoReturn: true//,
               //  returnHome:true 
-            });
+            });*/
+            
+            jQuery("#lavaLampBorderOnly").lavaLamp({ target:'.menuItem', homeTop:0, homeLeft:10, homeHeight:0, homeWidth:600 });
             
 $('.subMenu').hide();
   
