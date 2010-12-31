@@ -203,6 +203,15 @@ $(function(){
                 'coverFlow 3':
                 {
                    url:"flash/pages/3D/coverFlow3/01.html", index: 'flash3DcoverFlow2'
+                },
+                officialWebsitAD: {
+                    url:"http://pv3dproject.googlecode.com/svn/trunk/webSiteAD/webSiteAD/testPage_Btn.html"
+                },
+                sonyX10: {
+                    url:"http://pv3dproject.googlecode.com/svn/trunk//44/bin/01.html"
+                },
+                HTC: {
+                    url:"http://pv3dproject.googlecode.com/svn/trunk//45/bin/01.html"
                 }
 				
             },
