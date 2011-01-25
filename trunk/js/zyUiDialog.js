@@ -15,10 +15,23 @@
  * 100624 set default width and height
  * 100707 add naviTo function
  * 100712 auto modify height in ie6
+ * 100804 add cancel Bubble.
+ * 101119 add btnAttr in each dialog button
+ * 101122 add getBtnByAttr, getBtnByText, getBtnByIndex
+ * 110111 add autoClose attribute
  */
 
 (function($){
 
+ $.cancelBubble = function(evt){
+        //cancel bubble event
+        if (window.event) //for IE       
+            window.event.cancelBubble = true;
+        else 
+            //for Firefox        
+            evt.stopPropagation();
+    };
+	
     function applyDefault(baseDiv, settings){
         var _defaultSettings = {
             bgiframe: true,
@@ -27,10 +40,11 @@
 			width: 450,
 			height: 300,
             autoOpen: false,
+			autoClose: true,
 			multiLingo: true,
             confirmDB: false, //no background, unresizable
             resizeConfirmDB: false, //no background, resizable
-            close: null,
+            close: function(){},
             open: function(e){
                 $(e.target).parents('.ui-dialog').click(function(e){
                     $.cancelBubble(e);
@@ -76,7 +90,9 @@
             
             if(!_settings.resizeConfirmDB&&!_settings.confirmDB)
                  msgDiv.css(_settings.containerCss);
-                 
+            
+			msgDiv.attr('autoClose', _settings.autoClose);
+			
             if (_settings.confirmDB) 
                  _settings.resizable = false;
                 
@@ -130,6 +146,24 @@
                 
             $(this).empty().load(url, callback);
             return this;
+        },
+		setBtnAttr:function(ary){
+		    if(ary != undefined)
+			{
+			    $(this).parents('.ui-dialog').find('.ui-dialog-buttonpane').children('button').each(function(i,d){
+					$(d).attr('btnAttr', ary[i]);
+				});
+			}
+			return this;
+		},
+        getBtnByAttr: function(attr){
+            return  $(this).parents('.ui-dialog').find('.ui-dialog-buttonpane').children('button[btnAttr='+attr+']');
+        },
+        getBtnByText: function(text){
+            return  $(this).parents('.ui-dialog').find('.ui-dialog-buttonpane').children('button:contains('+text+')');
+        },
+        getBtnByIndex:function(index){
+            return  $(this).parents('.ui-dialog').find('.ui-dialog-buttonpane').children('button:nth-child('+ index +')');
         }
     });
 })(jQuery);
