@@ -18,6 +18,7 @@
  * 100804 add cancel Bubble.
  * 101119 add btnAttr in each dialog button
  * 101122 add getBtnByAttr, getBtnByText, getBtnByIndex
+ * 110111 add autoClose attribute
  */
 
 (function($){
@@ -39,10 +40,11 @@
 			width: 450,
 			height: 300,
             autoOpen: false,
+			autoClose: true,
 			multiLingo: true,
             confirmDB: false, //no background, unresizable
             resizeConfirmDB: false, //no background, resizable
-            close: null,
+            close: function(){},
             open: function(e){
                 $(e.target).parents('.ui-dialog').click(function(e){
                     $.cancelBubble(e);
@@ -88,7 +90,9 @@
             
             if(!_settings.resizeConfirmDB&&!_settings.confirmDB)
                  msgDiv.css(_settings.containerCss);
-                 
+            
+			msgDiv.attr('autoClose', _settings.autoClose);
+			
             if (_settings.confirmDB) 
                  _settings.resizable = false;
                 
