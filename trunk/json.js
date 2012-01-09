@@ -241,6 +241,9 @@ $(function(){
 			  allEditRow: {url: "extjs2/GridDemo/allEditRow.html"},
 			  hideTBbar: {url: "extjs2/GridDemo/hideTBbar.html"}
 			},
+			Chart:{
+			  base: {url: "extjs/pages/flotChart/flot/page9_PQA.html"}
+			},
             VD: {
                // withJQueryVD: {url: "extjs/pages/VD/複製 -複製 -03-03-02.html"},
                 withJQueryVD: {url: "extjs/pages/twiceVD/page.html", index: 'extjsWithJQueryVD'}
