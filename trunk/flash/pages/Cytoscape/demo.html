@@ -140,15 +140,13 @@
 
 		var visual_style = {
 			global : {
-				backgroundColor : "#ABCFD6"
+				backgroundColor : "#AAA000"
 			},
 			nodes : {
 				shape : "RECTANGLE",
 				borderWidth : 3,
-				//image: "images/2.jpg",
 				width : 50,
-				height : 50,
-				// borderColor: "#000000",                        
+				height : 50,                    
 				size : {
 					defaultValue : 25,
 					continuousMapper : {
@@ -157,7 +155,6 @@
 						maxValue : 75
 					}
 				}
-
 			},
 			color : {
 				discreteMapper : {
@@ -284,17 +281,13 @@
 			}
 		};
 		
-		var xml2 = '\                <graphml>\
+		var xml211 = '\                <graphml>\
             <key id="label" for="all" attr.name="label" attr.type="string"/>\
             <key id="weight" for="node" attr.name="weight" attr.type="double"/>\
-			 <key id="shape" for="node" attr.name="shape" attr.type="string">\
-		      <default>DIAMOND</default>\
-		    </key>\
             <graph edgedefault="directed">\
               <node id="1">\
                   <data key="label">A</data>\
-                  <data key="weight">2.0</data>\
-                  <data key="shape">TRIANGLE</data>\
+                  <data key="weight">10.0</data>\
               </node>\                    <node id="2">\
                   <data key="label">B</data>\
                   <data key="weight">1.5</data>\
@@ -329,12 +322,96 @@
           
 		// init and draw
 
+		
+			var visual_style2 = {
+			global : {
+				backgroundColor : "#ABCFD6"
+			},
+			nodes : {
+				image:{
+					continuousMapper : {
+						attrName : "image"
+					}
+				},
+				shape : "OCTAGON",
+				borderWidth : 3,
+				borderColor : "#ffffff",
+				size : {
+					defaultValue : 25,
+					continuousMapper : {
+						attrName : "weight",
+						minValue : 25,
+						maxValue : 75
+					}
+				},
+				color : {
+					discreteMapper : {
+						attrName : "id",
+						entries : [ {
+							attrValue : "n1",
+							value : "#0B94B1"
+						}, {
+							attrValue : 2,
+							value : "#9A0B0B"
+						}, {
+							attrValue : 3,
+							value : "#dddd00"
+						} ]
+					}
+				},
+				labelHorizontalAnchor : "center"
+			},
+			edges : {
+				width : 3,
+				color : "#0B94B1"
+			}
+		};
+		
+		
+		  var xml222 = '\                <graphml>\
+                  <key id="label" for="all" attr.name="label" attr.type="string"/>\
+                  <key id="weight" for="node" attr.name="weight" attr.type="double"/>\
+                  <graph edgedefault="directed">\
+                    <node id="1">\
+                        <data key="label">A</data>\
+                        <data key="weight">2.0</data>\
+                    </node>\                    <node id="2">\
+                        <data key="label">B</data>\
+                        <data key="weight">1.5</data>\
+                    </node>\                    <node id="3">\
+                        <data key="label">C</data>\
+                        <data key="weight">1.0</data>\
+                    </node>\
+                    <edge source="1" target="2">\
+                        <data key="label">A to B</data>\
+                    </edge>\
+                    <edge source="1" target="3">\
+                        <data key="label">A to C</data>\
+                    </edge>\                  </graph>\
+                </graphml>\                ';          
+                
+        var jsonxxx = {
+        		dataSchema: {
+                    nodes: [ {id:"label", name: "label", type: "string" },
+                             {id:"weight",  name: "weight", type: "double" },
+                             {id:"image",  name: "image", type: "string" }
+                             ], 
+                    edges:[{id:"label", name: "label", type: "string" }]
+        		},
+                    data: {   
+      				nodes: [ { id: "n1", label: "Node 1", weight: 2.1, image: "images/1.png"},
+                             { id: "n2", label: "Node 2", weight: 1.1},
+                             { id: "n3", label: "Node 3", weight: 1.1 } ],                 
+                    edges: [ { id: "e1",  source: "n1", target: "n3" },
+                             { id: "e2",source:"n2", target:"n1"} ]
+                }	
+        }       ; 
 		var vis = new org.cytoscapeweb.Visualization("cytoscapeweb", options);
 		vis.draw({
-			network : xml2,
+			network : jsonxxx,
 			edgeLabelsVisible : true,
-			layout : myD//,
-			//visualStyle : visual_style
+			//layout : myD,
+			visualStyle : visual_style2
 		//panZoomControlVisible: false 
 		});
 
