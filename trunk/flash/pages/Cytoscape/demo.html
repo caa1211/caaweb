@@ -105,10 +105,12 @@
 				backgroundColor : "#ABCFD6"
 			},
 			nodes: {                        
-				shape: "OCTAGON",
+				shape: "ELLIPSE",
 				borderWidth: 3,
-				
-                borderColor: "#ffffff",                        
+				image: "images/2.jpg",
+				width:50,
+				height:50,
+                borderColor: "#000000",                        
                 size: {
                       defaultValue: 25,
                       continuousMapper: { attrName: "weight", minValue: 25, maxValue: 75 }
@@ -134,7 +136,7 @@
 		// init and draw
 		var vis = new org.cytoscapeweb.Visualization("cytoscapeweb", options);
 		vis.draw({
-			network : xml,
+			network : network_json2,
 			edgeLabelsVisible: true, 
 			layout : "CompoundSpringEmbedder",
 			visualStyle : visual_style,
