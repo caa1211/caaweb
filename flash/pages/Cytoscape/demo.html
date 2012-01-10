@@ -250,8 +250,7 @@
 				//	image: "images/2.jpg"
 				}, {
 					id : "2",
-					parent : "1",
-					shape:"ROUNDRECT"
+					parent : "1"
 				}, {
 					id : "3",
 					parent : "1"
@@ -280,16 +279,22 @@
 					target : "11",
 					source : "12"
 				} ]
+			,
+			shape:"ROUNDRECT"
 			}
 		};
 		
 		var xml2 = '\                <graphml>\
             <key id="label" for="all" attr.name="label" attr.type="string"/>\
             <key id="weight" for="node" attr.name="weight" attr.type="double"/>\
+			 <key id="shape" for="node" attr.name="shape" attr.type="string">\
+		      <default>DIAMOND</default>\
+		    </key>\
             <graph edgedefault="directed">\
               <node id="1">\
                   <data key="label">A</data>\
                   <data key="weight">2.0</data>\
+                  <data key="shape">TRIANGLE</data>\
               </node>\                    <node id="2">\
                   <data key="label">B</data>\
                   <data key="weight">1.5</data>\
@@ -305,13 +310,31 @@
               </edge>\                  </graph>\
           </graphml>\                ';
 
+          
+   
+  		
+          var network = {    dataSchema: {
+              nodes: [ { name: "label", type: "string" },
+                       { name: "score", type: "number" },   {id:"shape", name: "shape", type: "string" },{ name:"color", type:"string"}],                 
+              edges: [ { name: "label", type: "string" },
+                       { name: "weight", type: "number" },
+                       { name: "directed", type: "boolean", defValue: true} ]    },
+              data: {   
+				nodes: [ { id: "n1", label: "Node 1", score: 1.0, shape:"OCTAGON"},
+                       { id: "n2", label: "Node 2", score: 2.2 },
+                       { id: "n3", label: "Node 3", score: 3.5 } ],                 
+              edges: [ { id: "e1", label: "Edge 1", weight: 1.1, source: "n1", target: "n3" },
+                       { id: "e2", label: "Edge 2", weight: 3.3, source:"n2", target:"n1"} ]
+          }};
+          
 		// init and draw
+
 		var vis = new org.cytoscapeweb.Visualization("cytoscapeweb", options);
 		vis.draw({
-			network : network_json3,
+			network : xml2,
 			edgeLabelsVisible : true,
-			layout : myD,
-			visualStyle : visual_style,
+			layout : myD//,
+			//visualStyle : visual_style
 		//panZoomControlVisible: false 
 		});
 
