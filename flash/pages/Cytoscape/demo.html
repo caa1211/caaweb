@@ -21,7 +21,7 @@
 	$(function() {
 
 		var options = {
-			swfPath : "swf/CytoscapeWeb",
+			swfPath : "swf/ttt",
 			flashInstallerPath : "swf/playerProductInstall",
 			flashAlternateContent : "Le Flash Player est nécessaire."
 		};
@@ -328,7 +328,15 @@
 				backgroundColor : "#ABCFD6"
 			},
 			nodes : {
-				image:"images/1.png",
+				//image:"images/1.png",
+				image:{
+					discreteMapper : {
+						attrName : "id",
+						entries : [ {
+							attrValue : "n1",
+							value : "image/1.png"
+						}]}
+				},
 				shape : "OCTAGON",
 				borderWidth : 3,
 				borderColor : "#ffffff",
@@ -358,9 +366,25 @@
 				labelHorizontalAnchor : "center"
 			},
 			edges : {
-				width : 3,
+				width :	{
+					discreteMapper : {
+					attrName : "id",
+					entries : [ {
+						attrValue : "e1",
+						value : 10
+					}, {
+						attrValue : "e2",
+						value : 1
+					}, {
+						attrValue : 3,
+						value : 6
+					} ]
+				}},
+				
 				color : "#0B94B1"
-			}
+			
+			
+		}
 		};
 		
 		
@@ -389,8 +413,7 @@
         var jsonxxx = {
         		dataSchema: {
                     nodes: [ {id:"label", name: "label", type: "string" },
-                             {id:"weight",  name: "weight", type: "double" },
-                             {id:"image",  name: "image", type: "string" }
+                             {id:"weight",  name: "weight", type: "double" }
                              ], 
                     edges:[{id:"label", name: "label", type: "string" }]
         		},
