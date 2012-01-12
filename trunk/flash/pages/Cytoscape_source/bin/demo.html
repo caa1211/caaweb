@@ -1,0 +1,555 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!--common js-->
+
+
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+
+
+<script type="text/javascript" src="js/AC_OETags.min.js"></script>
+<script type="text/javascript" src="js/json2.min.js"></script>
+<script type="text/javascript" src="js/cytoscapeweb.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+	$(function() {
+
+		var options = {
+			swfPath : "swf/fdProject",
+			flashInstallerPath : "swf/playerProductInstall",
+			flashAlternateContent : "Le Flash Player est nécessaire."
+		};
+
+		/*
+		var xml = '\
+		<graphml>\
+		  <graph>\
+		    <node id="1"/>\
+		    <node id="2"/>\
+		    <node id="3"/>\
+		    <edge target="1" source="2"/>\
+		  </graph>\
+		</graphml>\
+		';
+		 */
+
+		var networ_json = {
+			data : {
+				nodes : [ {
+					id : "1"
+
+				}, {
+					id : "2"
+				} ],
+				edges : [ {
+					id : "2to1",
+					target : "1",
+					source : "2"
+				} ]
+			}
+		};
+
+		var network_json2 = {
+			// NOTE the parent attribute
+			data : {
+				nodes : [ {
+					id : "1"
+				}, {
+					id : "2",
+					parent : "1"
+				}, {
+					id : "3",
+					parent : "1"
+				}, {
+					id : "4",
+					parent : "2"
+				}, {
+					id : "5",
+					parent : "6"
+				}, {
+					id : "6"
+				}, {
+					id : "7"
+				}, {
+					id : "8",
+					parent : "1"
+				} ],
+				edges : [ {
+					target : "3",
+					source : "5"
+				}, {
+					target : "3",
+					source : "5"
+				}, {
+					target : "3",
+					source : "8"
+				}, {
+					target : "2",
+					source : "7"
+				} ]
+			}
+		};
+
+		var xml = '\                <graphml>\
+             <key id="label" for="all" attr.name="label" attr.type="string"/>\
+             <key id="weight" for="node" attr.name="weight" attr.type="double"/>\
+             <graph edgedefault="directed">\
+               <node id="1">\
+                   <data key="label">A</data>\
+                   <data key="weight">2.0</data>\
+               </node>\                    <node id="2">\
+                   <data key="label">B</data>\
+                   <data key="weight">1.5</data>\
+               </node>\                    <node id="3">\
+                   <data key="label">C</data>\
+                   <data key="weight">1.0</data>\
+               </node>\
+               <edge source="1" target="2">\
+                   <data key="label">A to B</data>\
+               </edge>\
+               <edge source="1" target="3">\
+                   <data key="label">A to C</data>\
+               </edge>\                  </graph>\
+           </graphml>\                ';
+
+		var node1 = {
+			group : "nodes",
+			shape : "TRIANGLE",
+			size : 20,
+			color : "0000ff", // etc...   
+			data : {
+				id : 11
+			}
+		};
+
+		var node2 = {
+			group : "nodes",
+			//shape: "TRIANGLE",    
+			size : 20,
+			color : "0000ff", // etc...  
+			data : {
+				id : 22
+			}
+		};
+
+		var visual_style = {
+			global : {
+				backgroundColor : "#AAA000"
+			},
+			nodes : {
+				shape : "RECTANGLE",
+				borderWidth : 3,
+				width : 50,
+				height : 50,                    
+				size : {
+					defaultValue : 25,
+					continuousMapper : {
+						attrName : "weight",
+						minValue : 25,
+						maxValue : 75
+					}
+				}
+			},
+			color : {
+				discreteMapper : {
+					attrName : "id",
+					entries : [ {
+						attrValue : 1,
+						value : "#0B94B1"
+					}, {
+						attrValue : 2,
+						value : "#9A0B0B"
+					}, {
+						attrValue : 3,
+						value : "#dddd00"
+					} ]
+				}
+			},
+			labelHorizontalAnchor : "center",
+			edges : {
+				width : 3,
+				color : "#0B94B1"
+			}
+		};
+
+		var layout = {
+			name : "CompoundSpringEmbedder"//,
+			,
+			options : {
+				smartDistance : false,
+				uniformLeafNodeSizes : true,
+				multiLevelScaling : true,
+				tension : 50,
+				restLength : 100,
+				compoundCentralGravityDistance : 200,
+			}
+		//	options: { angleWidth: 180, radius: 80 }
+		};
+
+		var myD = {
+			name : "ForceDirected",
+			options : {
+				mass : 10,
+				gravitation : 10,
+				drag : 10,
+				autoStabilize : false
+			}
+		};
+
+		var nodett = {
+		//group: "nodes",    
+		//shape: "TRIANGLE",    
+		//size: 20,
+		// color: "0000ff",    // etc...  
+		//data: {       
+		//id: 22  
+		//}
+
+		};
+
+		var network_json3 = {
+			dataSchema : {
+				nodes : [ {
+					name : "label",
+					type : "string"
+				}, {
+					name : "score",
+					type : "number"
+				} ],
+				edges : [ {
+					name : "shape",
+					type : "string"
+				}, {
+					name : "weight",
+					type : "number"
+				}, {
+					name : "directed",
+					type : "boolean",
+					defValue : true
+				},
+				 {
+					name : "image",
+					type : "string"
+				}
+				]
+			},
+
+			// NOTE the parent attribute
+			data : {
+				nodes : [ {
+					id : "1"//,
+				//	image: "images/2.jpg"
+				}, {
+					id : "2",
+					parent : "1"
+				}, {
+					id : "3",
+					parent : "1"
+				}, {
+					id : "8",
+					parent : "1"
+				}, {
+					id : "11"
+				}, {
+					id : "12"
+				}
+
+				],
+				edges : [ {
+					target : "11",
+					source : "2",
+					weight : 10.1
+				}, {
+					target : "11",
+					source : "3",
+					weight : 1.1
+				}, {
+					target : "11",
+					source : "8"
+				}, {
+					target : "11",
+					source : "12"
+				} ]
+			,
+			shape:"ROUNDRECT"
+			}
+		};
+		
+		var xml211 = '\                <graphml>\
+            <key id="label" for="all" attr.name="label" attr.type="string"/>\
+            <key id="weight" for="node" attr.name="weight" attr.type="double"/>\
+            <graph edgedefault="directed">\
+              <node id="1">\
+                  <data key="label">A</data>\
+                  <data key="weight">10.0</data>\
+              </node>\                    <node id="2">\
+                  <data key="label">B</data>\
+                  <data key="weight">1.5</data>\
+              </node>\                    <node id="3">\
+                  <data key="label">C</data>\
+                  <data key="weight">1.0</data>\
+              </node>\
+              <edge source="1" target="2">\
+                  <data key="label">A to B</data>\
+              </edge>\
+              <edge source="1" target="3">\
+                  <data key="label">A to C</data>\
+              </edge>\                  </graph>\
+          </graphml>\                ';
+
+          
+   
+  		
+          var network = {    dataSchema: {
+              nodes: [ { name: "label", type: "string" },
+                       { name: "score", type: "number" },   {id:"shape", name: "shape", type: "string" },{ name:"color", type:"string"}],                 
+              edges: [ { name: "label", type: "string" },
+                       { name: "weight", type: "number" },
+                       { name: "directed", type: "boolean", defValue: true} ]    },
+              data: {   
+				nodes: [ { id: "n1", label: "Node 1", score: 1.0, shape:"OCTAGON"},
+                       { id: "n2", label: "Node 2", score: 2.2 },
+                       { id: "n3", label: "Node 3", score: 3.5 } ],                 
+              edges: [ { id: "e1", label: "Edge 1", weight: 1.1, source: "n1", target: "n3" },
+                       { id: "e2", label: "Edge 2", weight: 3.3, source:"n2", target:"n1"} ]
+          }};
+          
+		// init and draw
+
+		
+			var visual_style2 = {
+			global : {
+				backgroundColor : "#ABCFD6"
+			},
+			nodes : {
+				//image:"images/1.png",
+				image:{
+					discreteMapper : {
+						attrName : "id",
+						entries : [ {
+							attrValue : "n1",
+							value : "images/1.png"
+						}]}
+				},
+				shape : "OCTAGON",
+				borderWidth : 3,
+				borderColor : "#ffffff",
+				size : {
+					defaultValue : 25,
+					continuousMapper : {
+						attrName : "weight",
+						minValue : 25,
+						maxValue : 75
+					}
+				},
+				color : {
+					discreteMapper : {
+						attrName : "id",
+						entries : [ {
+							attrValue : "n1",
+							value : "#0B94B1"
+						}, {
+							attrValue : 2,
+							value : "#9A0B0B"
+						}, {
+							attrValue : 3,
+							value : "#dddd00"
+						} ]
+					}
+				},
+				labelHorizontalAnchor : "center"
+			},
+			edges : {
+				width :	{
+					discreteMapper : {
+					attrName : "id",
+					entries : [ {
+						attrValue : "e1",
+						value : 10
+					}, {
+						attrValue : "e2",
+						value : 1
+					}, {
+						attrValue : 3,
+						value : 6
+					} ]
+				}},
+				
+				color : "#0B94B1"
+			
+			
+		}
+		};
+		
+		
+		  var xml222 = '\                <graphml>\
+                  <key id="label" for="all" attr.name="label" attr.type="string"/>\
+                  <key id="weight" for="node" attr.name="weight" attr.type="double"/>\
+                  <graph edgedefault="directed">\
+                    <node id="1">\
+                        <data key="label">A</data>\
+                        <data key="weight">2.0</data>\
+                    </node>\                    <node id="2">\
+                        <data key="label">B</data>\
+                        <data key="weight">1.5</data>\
+                    </node>\                    <node id="3">\
+                        <data key="label">C</data>\
+                        <data key="weight">1.0</data>\
+                    </node>\
+                    <edge source="1" target="2">\
+                        <data key="label">A to B</data>\
+                    </edge>\
+                    <edge source="1" target="3">\
+                        <data key="label">A to C</data>\
+                    </edge>\                  </graph>\
+                </graphml>\                ';          
+                
+        var jsonxxx = {
+        		dataSchema: {
+                    nodes: [ {id:"label", name: "label", type: "string" },
+                             {id:"weight",  name: "weight", type: "double" }
+                             ], 
+                    edges:[{id:"label", name: "label", type: "string" }]
+        		},
+                    data: {   
+      				nodes: [ { id: "n1", label: "Node 1", weight: 2.1},
+                             { id: "n2", label: "Node 2", weight: 1.1},
+                             { id: "n3", label: "Node 3", weight: 1.1 } ],                 
+                    edges: [ { id: "e1",  source: "n1", target: "n3" },
+                             { id: "e2",source:"n2", target:"n1"} ]
+                }	
+        }       ; 
+		var vis = new org.cytoscapeweb.Visualization("cytoscapeweb", options);
+		vis.draw({
+			network : jsonxxx,
+			edgeLabelsVisible : true,
+			//layout : myD,
+			visualStyle : visual_style2
+		//panZoomControlVisible: false 
+		});
+
+		var debugDiv = $("#debugDiv");
+
+		function print(str) {
+			debugDiv.append("<p>" + str + "</p>");
+		}
+		function clear() {
+			debugDiv.empty();
+		}
+
+		// callback when Cytoscape Web has finished drawing
+		vis.ready(function() {
+			// add a listener for when nodes and edges are clicked
+			vis.addListener("click", "nodes", function(event) {
+				handle_click(event);
+			})
+
+			vis.addListener("click", "edges", function(event) {
+				handle_click(event);
+			});
+
+			function handle_click(event) {
+
+				var target = event.target;
+				clear();
+
+				print("event.group = " + event.group);
+				for ( var i in target.data) {
+					var variable_name = i;
+					var variable_value = target.data[i];
+					print("event.target.data." + variable_name + " = "
+							+ variable_value);
+				}
+
+				/*
+				// 1. Add a new node to the network (here we assume that the data fields for
+				// "label" and "weight" already exists in the node schema):
+				var data = { id: "n4",            
+				label: "MYO2 (Yeast)",
+				weight: 0.54 };
+				var node1 = vis.addNode(240, 360, data, true);
+				// 2. Add a new node as a child of another (compound) node:
+				//var node222 = vis.addNode(node222.x, node222.y, { parent: "n4" }, true);
+				 */
+
+				 /*
+				var data = {
+					// group: "edges",
+					id : "e10",
+					source : "8",
+					target : "3",
+					directed : false,
+					//label: "Co-expression"//,
+					weight :8.88
+				};
+*/
+		  	 var edge1 = vis.addEdge(data, true);
+
+				var edge22 = {
+					group : "edges",
+					merged : false,
+					opacity : 0.8,
+					color : "333333",
+					width : 2, // etc...    
+					data : {
+						id : "ee1",
+						source : 2,
+						target : 3,
+						weight : 0.5
+					}
+				};
+
+				var edge2 = vis.addEdge(edge22, true);
+
+			}
+
+		}); // draw options
+
+		//vis.addNode(node);
+	});
+</script>
+<style>
+/* The Cytoscape Web container must have its dimensions set. */
+html,body {
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+//
+#cytoscapeweb {
+	width: 100%;
+	height: 100%;
+}
+
+#cytoscapeweb {
+	width: 500px;
+	height: 500px;
+	border: solid 1px black;
+}
+</style>
+
+
+</head>
+<body>
+	<div id="cytoscapeweb"></div>
+
+	<div id='debugDiv'></div>
+
+	<!--web link-->
+	<br />
+	<br />
+	<br />
+	<a href='aaaaa' class='ui-state-default ui-corner-all'
+		target='http://cytoscapeweb.cytoscape.org/'>reference</a>
+
+
+</body>
+</html>
