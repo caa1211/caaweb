@@ -59,8 +59,6 @@
 		var counter = 1;
 		
 		$("#drawbtn").click(function(){	
-		
-		
 		var dataSchema = {
                     nodes: [ {id: "type", name: "type", type: "string" }]
         		};
@@ -78,28 +76,25 @@
 				]
 			}
 		};
-
+		
 		newData=$.extend(newData, {dataSchema:dataSchema});
-		
 		var newOption = $.extend(drawOption, {network:newData});
-	 //vis.draw(newOption);  
-	 //vis.removeElements();
-
-		//	debugger;
-			x = vis.node("1").x +50 ;
-			y = vis.node("1").y;
-		var newNode = [
-			  { group: "nodes", x:x, y:y, data: { id: "n01" } },
-             // { group: "nodes", data: { id: "n02" } },
-              { group: "edges", data: { source: "n01", target: "1" } } ];
-
-		vis.addElements(newNode);
-		
-		vis.removeNode("n01");
-	//vis.draw(newOption);
-		//debugger;
+//		vis.removeNode("n01");
+		vis.draw(newOption);
 		});
 
+
+				$("#addbtn").click(function(){	
+					y = vis.node("1").y;
+					x = vis.node("1").x +50 ;
+					var newNode = [
+					{ group: "nodes", x:x, y:y, data: { id: "n01" } },
+					// { group: "nodes", data: { id: "n02" } },
+					{ group: "edges", data: { source: "n01", target: "1" } } ];
+
+					vis.addElements(newNode);
+				});
+		
 	});
 </script>
 <style>
@@ -131,7 +126,7 @@ html,body {
 
 	<div id='debugDiv'></div>
 	<button id='drawbtn'>draw</button>
-	
+	<button id='addbtn'>add</button>
 	<!--web link-->
 	<br />
 	<br />
