@@ -22,6 +22,12 @@
 		};
 
 		var json = {
+		dataSchema: 
+					{
+              nodes: [
+						{ name: "label", type: "string" },
+						{ name: "type", type: "string" }
+                     ]},     
 			data : {
 				nodes : [ 
 				{id : "1"}, {id : "2"} 
@@ -41,7 +47,8 @@
 			};
 			
 		var layout = {
-			name : "Tree"
+			name : "Tree",
+			options:{orientation : "leftToRight"}
 		};
 		
 		var vis = new org.cytoscapeweb.Visualization("cytoscapeweb", options);
@@ -56,6 +63,8 @@
 		vis.draw(drawOption);
 		
 		
+		vis.ready(function () {});
+		
 		var counter = 1;
 		
 		$("#drawbtn").click(function(){	
@@ -64,11 +73,13 @@
         		};
 				
 		var newData = {
+		    
 			data : {
 				nodes : [ 
-				{id : "1", type:"storage"}, 
-				{id : "2"},
-				{id : "3"} 				
+				{id : "0"}, 
+				{id : "1", type:"storage", parent: "0"}, 
+				{id : "2", parent: "0"},
+				{id : "3", parent: "0"} 				
 				],
 				edges : [
 				{id : "2to1",target : "1",source : "2"} ,
@@ -90,10 +101,21 @@
 					var newNode = [
 					{ group: "nodes", x:x, y:y, data: { id: "n01" } },
 					// { group: "nodes", data: { id: "n02" } },
-					{ group: "edges", data: { source: "n01", target: "1" } } ];
+					{ group: "edges", data: { source: "n01", target: "1" } },
+					{ group: "edges", data: { source: "n01", target: "2" } } 
+					];
 
 					vis.addElements(newNode);
 				});
+				
+				
+					$("#getPos").click(function(){	
+					y = vis.node("1").y;
+					x = vis.node("1").x ;
+				
+				alert( "x:"+x +", y:" +y);
+				});
+				
 		
 	});
 </script>
@@ -127,6 +149,7 @@ html,body {
 	<div id='debugDiv'></div>
 	<button id='drawbtn'>draw</button>
 	<button id='addbtn'>add</button>
+	<button id='getPos'>getPos</button>
 	<!--web link-->
 	<br />
 	<br />

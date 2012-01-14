@@ -1,0 +1,377 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
+
+
+<script type="text/javascript" src="../js/AC_OETags.min.js"></script>
+<script type="text/javascript" src="../js/json2.min.js"></script>
+<script type="text/javascript" src="../js/cytoscapeweb.min.js"></script>
+
+
+<script type="text/javascript">
+	$(function() {
+	
+		var options = {
+			swfPath : "../swf/CytoscapeWeb",
+			flashInstallerPath : "../swf/playerProductInstall",
+			flashAlternateContent : "Le Flash Player est nécessaire."
+		};
+
+		var json = {
+			data : {
+				nodes : [ 
+				{id : "1"}, {id : "2"} 
+				],
+				edges : [
+				{id : "2to1",target : "1",source : "2"} 
+				]
+			}
+		};
+
+	
+		var layout = {
+			name : "CompoundSpringEmbedder",
+			orientation : "leftToRight"
+			
+		};
+		
+		var initJson = {  
+			dataSchema: 
+					{
+              nodes: [
+						{ name: "label", type: "string" },
+						{ name: "x", type: "Number" },
+						{ name: "type", type: "string" },
+						{ name: "device", type: "string" }
+                     ],                 
+              edges: [
+						{ name: "label", type: "string" },
+						{ name: "type", type: "string" }
+					 ]    
+					},
+			  data:{nodes:[
+					/*	{ id: "cParent", type:"parent"}, {id:"nParent", type:"parent"}, {id:"sParent", type:"parent"}*/
+					],edges:[]}
+			  };
+			  
+		var visual_style = {
+			global : {
+				backgroundColor : "#EEEEEE"
+			},
+		
+			nodes : {
+				color : {
+					discreteMapper : {
+						attrName : "type",
+						entries : [ {
+							attrValue : "network",
+							value : "#0B94B1"
+						}, {
+							attrValue : "parent",
+							value : "#eaeaea"
+						}, {
+							attrValue : "3",
+							value : "#dddd00"
+						} ]
+					}
+				},
+				shape:{
+					discreteMapper : {
+						attrName : "type",
+						entries : [ {
+							attrValue : "parent",
+							value : "ROUNDRECT"
+						}]
+						}
+				}
+				,
+			//	 shape: "DIAMOND",
+						compoundShape: "ROUNDRECT",
+                       label: { passthroughMapper: { attrName: "id" } } ,
+                      //  compoundLabel: { passthroughMapper: { attrName: "id" } } ,
+                        borderWidth: 2,
+                        compoundBorderWidth: 1,
+                        borderColor: "#666666",
+                        compoundBorderColor: "#999999",
+                        size: 25,                      
+						//color: "#ffffff",
+                        compoundColor: "#eaeaea"   
+			},
+			edges: {}
+			};
+			
+			
+		var define = {
+			centerPos:{x:0, y:0},
+			offset:{x:10, y:100}
+		};
+		
+		var vis = new org.cytoscapeweb.Visualization("cytoscapeweb", options);
+
+		var drawOption = {
+			network : initJson,
+			edgeLabelsVisible : true,
+			visualStyle : visual_style,
+			layout : layout
+		};
+		
+		vis.draw(drawOption);
+		var initGroup = [
+					{ group: "nodes", x:0, y:0, data: { id: "cParent", type:"parent"} },
+					{ group: "nodes", x:0, y:100, data: { id: "nParent", type:"parent"} },
+					{ group: "nodes", x:0, y:200, data: { id: "sParent", type:"parent"} }
+					];
+		
+		vis.ready(function () {
+		
+		
+		
+				
+				
+		//-----------
+		vis.addListener("zoom", function(evt) {
+			scale = evt.value;
+		});
+		//debugger;
+		
+			
+			//modifyPosition(newGroup);
+			vis.addElements(initGroup);
+			vis.panToCenter();
+			vis.zoomToFit();
+	//	debugger;
+		//vis.panToCenter();
+		
+		//-----------
+		});
+		
+		var counter = 1;
+		
+		
+		
+		
+		$("#drawbtn").click(function(){	
+			var newGroup = [
+					{ group: "nodes", data: { id: "c01", device:"C250 M2", type:"compute"} },
+					{ group: "nodes", data: { id: "c02", device:"C250 M2", type:"compute"} },
+					{ group: "nodes", data: { id: "c03", device:"C250 M2", type:"compute"} },
+					{ group: "nodes", data: { id: "n01", device:"C250 M2", type:"network", label:"network"} },
+					{ group: "nodes", data: { id: "s01", device:"VNXe 3300", type:"storage", label:"storage"} },
+					{ group: "edges", data: { source: "n01", target: "c01" } },
+					{ group: "edges", data: { source: "n01", target: "c02" } } ,
+					{ group: "edges", data: { source: "n01", target: "c03" } } ,
+					{ group: "edges", data: { source: "s01", target: "n01" } } 
+					];
+		
+	
+		//	modifyPosition(newGroup);
+		    vis.removeElements();
+			vis.addElements(initGroup);
+				vis.panToCenter();
+				
+			addElements(newGroup);
+			//vis.addElements(newGroup, true);
+
+			
+			vis.panToCenter();
+			vis.zoomToFit();
+			
+			
+			
+		});
+
+		function addElements(group){
+			$.each(group, function(i, t){
+			    addElement(this);
+			/*
+				if(this.group =="nodes")
+				{
+				setNodePos(this);
+				vis.addNode(this.x, this.y, this.data, true);
+				}
+				else if(this.group =="edges")
+				vis.addEdge(this.data, true);*/
+			});
+		}
+		
+		function addElement(element){
+		
+				if(element.group =="nodes")
+				{
+				setNodePos(element);
+				vis.addNode(element.x, element.y, element.data, true);
+				}
+				else if(element.group =="edges")
+				vis.addEdge(element.data, true);
+		
+		
+	
+		vis.panToCenter();
+		vis.zoomToFit();
+		}
+		
+		var scale = 1;
+		
+		
+		function modifyPosition(obj){
+			$.each(obj, function(i, t){
+				if(this.group=="nodes")
+					setNodePos(this);
+					//alert(this.data.id);
+			});
+		}
+		
+		var counter = 0;
+		var tmpCounter = 0;
+		function setNodePos(node)
+		{
+		var type = node.data.type;
+		var x = 0;
+		var y = 0;
+		var parentType;
+		var parentNode;
+		  switch(type){
+			  case "compute":
+			/*   pos = {x: vis.node("cParent").x+100*counter, y: vis.node("cParent").y};
+				counter++;
+				parentType = "cParent";*/
+					
+				parentType = "cParent";
+			  break;
+			  case "network":
+			    //pos = {x:0, y:0}
+				//parentNode = vis.node("nParent");
+				 /*  coount = vis.node("cParent").nodesCount ; 
+				   x = vis.node("nParent").x + coount * define.offset.x;
+				   y = vis.node("nParent").y + coount * define.offset.y;*/
+				//counter++;
+					parentType = "nParent";
+			  break;
+			  case "storage":
+			  parentNode = vis.node("sParent");
+			 /* coount = vis.node("cParent").nodesCount ; 
+			   x = vis.node("sParent").x + coount * define.offset.x;
+			   y = vis.node("sParent").y + coount * define.offset.y;*/
+			    //pos = {x:0, y:100}
+					parentType = "sParent";
+			  break;
+		  }
+		  
+		    parentNode = vis.node(parentType);
+			var childcount = parentNode.nodesCount; 
+			 x = parentNode.x + (childcount%2==0?-1:1) * (parentNode.width *0.5 + define.offset.x) *scale;
+			 y = parentNode.y ;
+		
+		
+	//	debugger;
+		//--for parent pos
+		//vis.addNode( x = parentNode.x - (parentNode.width*0.5 ), parentNode.y, {id:"tmpNode" +tmpCounter}, true);
+	//	tmpCounter++;
+		
+		//--
+		
+		//vis.addElements(newNode);
+		
+		
+		 $.extend(node, {x:x, y:y});
+
+		 $.extend(node.data, {parent:parentType});
+		}
+
+		
+		var addCounter = 0;
+				$("#addbtn").click(function(){	
+				
+					var newNode = [
+						{ group: "nodes", data: { id: "t" + addCounter , type:"compute"} },
+						{ group: "edges", data: { source: "n01", target: "t" + addCounter } }
+					];
+
+					modifyPosition(newNode);
+					//debugger;
+					//vis.addElements(newNode);
+					addElements(newNode);
+					addCounter++;
+				});
+		
+		
+		
+		$("#testbtn").click(function(){
+				var newNode = [
+						{ group: "nodes", data: { id: "t" + addCounter , type:"network"} },
+						{ group: "edges", data: { source: "n01", target: "t" + addCounter } }
+					];
+
+					modifyPosition(newNode);
+					//debugger;
+					//vis.addElements(newNode);
+					addElements(newNode);
+					addCounter++;
+		});
+		
+		
+		
+		$("#addNet").click(function(){
+			var newNode = [
+						{ group: "nodes", data: { id: "t" + addCounter , type:"network"} },
+						{ group: "edges", data: { source: "c01", target: "t" + addCounter }}, 
+						{ group: "edges", data: { source: "c02", target: "t" + addCounter }}
+					];
+
+					modifyPosition(newNode);
+					//debugger;
+					//vis.addElements(newNode);
+					addElements(newNode);
+					addCounter++;
+		});
+		
+	});
+</script>
+<style>
+/* The Cytoscape Web container must have its dimensions set. */
+html,body {
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+#cytoscapeweb {
+	width: 50%;
+	height: 50%;
+	border: solid 1px red;
+}
+/*
+#cytoscapeweb {
+	width: 500px;
+	height: 500px;
+	border: solid 1px black;
+}*/
+</style>
+
+
+</head>
+<body>
+	<div id="cytoscapeweb"></div>
+
+	<div id='debugDiv'></div>
+	<button id='drawbtn'>draw</button>
+	<button id='addbtn'>add</button>
+	
+		<button id='testbtn'>testbtn</button>
+		<button id='addNet'>addNet</button>
+		
+	<!--web link-->
+	<br />
+	<br />
+	<br />
+	<a href='aaaaa' class='ui-state-default ui-corner-all'
+		target='http://cytoscapeweb.cytoscape.org/'>reference</a>
+
+
+</body>
+</html>
