@@ -25,10 +25,21 @@
 			data : {
 				nodes : [ 
 				{id : "1"}, 
-				{id : "2"} ],
+				{id : "2"}, 
+				{id : "3"}, 
+				{id : "4"},
+				{id : "5"}, 	
+				{id : "6"},
+{id : "11"}				
+				],
 				edges : [ 
-				{id : "2to1",target : "1",source : "2"}
-
+				{id : "2to1",target : "1",source : "2"},
+				{id : "e2",target : "1",source : "3"},
+				{id : "e3",target : "1",source : "4"},
+				{id : "e3",target : "1",source : "5"},
+				{id : "e3",target : "5",source : "6"},
+					{id : "e3",target : "11",source : "3"},
+						{id : "e3",target : "11",source : "4"}
 				]
 			}
 		};
@@ -42,7 +53,11 @@
 			};
 			
 		var layout = {
-			name : "Tree"
+			name : "CompoundSpringEmbedder",
+			options:{
+			//orientation : "leftToRight"
+			angleWidth :100
+			}
 		};
 		
 		var vis = new org.cytoscapeweb.Visualization("cytoscapeweb", options);
