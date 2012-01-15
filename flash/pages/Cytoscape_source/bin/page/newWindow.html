@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
+
+
+<script type="text/javascript">
+$(function(){
+
+$("#drawbtn").click(function(){
+
+window.opener.$("#drawbtn").click();
+});
+
+
+});
+</script>
+<style>
+/* The Cytoscape Web container must have its dimensions set. */
+html,body {
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+#cytoscapeweb {
+	width: 50%;
+	height: 50%;
+	border: solid 1px red;
+}
+/*
+#cytoscapeweb {
+	width: 500px;
+	height: 500px;
+	border: solid 1px black;
+}*/
+
+.menuCls {
+   border: solid 1px green;
+   background: gray;
+   position:absolute;
+
+</style>
+
+
+</head>
+<body>
+	
+
+	
+	<button id='drawbtn'>draw</button>
+	
+	<a href='aaaaa' class='ui-state-default ui-corner-all'
+		target='http://cytoscapeweb.cytoscape.org/'>reference</a>
+
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+﻿<script language="javascript">
+//首先寫一個名為openDependentWindow()函數，此一函數會開啟一個子視窗;
+
+var newWinObj=new Array();
+function openDependentWindow(url,winname,winfeatures,replacebool){
+ if(!url) url="";
+ if(!winname) winname="";
+ if(!winfeatures) winfeatures="";
+
+ var newWinObj2=new Array();
+ for(var i=0;i<newWinObj.length;i++){
+  if(!newWinObj[i].closed) newWinObj2[newWinObj2.length]=newWinObj[i];
+ }
+ newWinObj=newWinObj2;
+
+ var DWinObj=window.open(url,winname,winfeatures, (!!replacebool) );
+ newWinObj[newWinObj.length]=DWinObj;
+ return DWinObj;
+}
+</script> <META HTTP-EQUIV='Content-Type' CONTENT='text/html;CHARSET=big5'>
+	
+	<html >
+	<head>
+	<title>跟隨父視窗一起關閉的子視窗範例網頁</title>
+	<base href='http://dob.tnc.edu.tw/authorHD/9385/'>
+	<script language='JavaScript'>
+	function CloseClicked()
+	{
+	  window.returnValue = '';
+	  window.close()
+	}
+	</script>
+	
+	</head>
+	
+	<body >
+	開啟一個可以跟隨父視窗一起關閉的子視窗。當父視窗的網頁離開時，子視窗也會被關閉。這是模擬 IE 裏的 window.showModelessDialog()函數，和 Netscape 裏的 window.open()函數把dependent設成yes的情況。這個非常適合於一些經常用跳窗來顯示公告的網頁。 
+	<p>
+	<center><form onsubmit="return false"></center><p><br><b>範例</b><p align=left>按下第一個按鈕會執行openDependentWindow()函數，<br>按下第二個按鈕會執行window.open()函數，<br>此兩個函數都會開啟一個視窗；嘗試多按幾個視窗出來；當本視窗被關閉後，所有經由openDependentWindow()函數開啟的視窗也會一起被關閉，而由window.open()函數的視窗則不會。
+<p align=left><input type="button" value="執行openDependentWindow()函數" onclick="openDependentWindow('about:blank','','width=200,height=100');newWinObj[newWinObj.length-1].window.document.write('&lt;font face=新細明體&gt;這是由openDependentWindow()函數開啟的視窗');newWinObj[newWinObj.length-1].document.title='openDependentWindow()';" ondblclick=this.onclick()> <br>
+<input type="button" value="執行window.open()函數" ondblclick=this.onclick() onclick="var newWinOpen=window.open('about:blank','','width=200,height=100');newWinOpen.window.document.write('&lt;font face=新細明體&gt;這是由window.open()函數開啟的視窗');newWinOpen.document.title='open()';"><p align=left>openDependentWindow()函數使用方法和window.open()一樣，只是用window.open()的視窗不會因主視窗的消失而關閉。</form>
+<script language="javascript">
+window.moveTo(100,100);
+window.resizeTo(600,500);
+</script> </center>
+	
+	<p align='center'><input type='button' value='關閉此視窗' onClick='CloseClicked()'></p>
+	</body>
+</html>
+<script language="javascript">
+if(!!window.onunload){
+ window.onUnloadDWinObj=window.onunload;
+}else{
+ window.onUnloadDWinObj=function(){}
+}
+
+window.onunload=function(){
+ window.onUnloadDWinObj();
+ for(var i=0;i<newWinObj.length;i++){
+  if(!newWinObj[i].closed){
+   newWinObj[i].window.close();
+  }
+ }
+}
+
+if(!!window.onbeforeunload){
+ window.onbeforeUnloadDWinObj=window.onbeforeunload;
+}else{
+ window.onbeforeUnloadDWinObj=function(){}
+}
+
+window.onbeforeunload=function(){
+ window.onbeforeUnloadDWinObj();
+ for(var i=0;i<newWinObj.length;i++){
+  if(!newWinObj[i].closed){
+   newWinObj[i].window.close();
+  }
+ }
+}
+</script> 
