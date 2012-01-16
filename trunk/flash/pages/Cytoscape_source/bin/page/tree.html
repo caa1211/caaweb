@@ -30,7 +30,7 @@
 				{id : "4"},
 				{id : "5"}, 	
 				{id : "6"},
-{id : "11"}				
+				{id : "11"}				
 				],
 				edges : [ 
 				{id : "2to1",target : "1",source : "2"},
@@ -38,8 +38,9 @@
 				{id : "e3",target : "1",source : "4"},
 				{id : "e3",target : "1",source : "5"},
 				{id : "e3",target : "5",source : "6"},
-					{id : "e3",target : "11",source : "3"},
-						{id : "e3",target : "11",source : "4"}
+				{id : "e3",target : "11",source : "3"},
+				{id : "e3",target : "11",source : "4"}
+				
 				]
 			}
 		};
@@ -48,12 +49,13 @@
 			global : {
 				backgroundColor : "#FFFFFF"
 			},
-			nodes : {},
-			edges: {}
+			nodes : {			    label: { passthroughMapper: { attrName: "id" } } },
+			edges: {},
+
 			};
 			
 		var layout = {
-			name : "CompoundSpringEmbedder",
+			name : "ForceDirected",
 			options:{
 			//orientation : "leftToRight"
 			angleWidth :100

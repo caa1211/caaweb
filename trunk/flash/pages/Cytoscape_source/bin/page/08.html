@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="../js/AC_OETags.min.js"></script>
+<script type="text/javascript" src="../js/json2.min.js"></script>
+<script type="text/javascript" src="../js/cytoscapeweb.min.js"></script>
+
+<script type="text/javascript" src="../js/itriTopology.js"></script>
+
+<script type="text/javascript">
+ 
+ $(function(){
+	 var $topology = $("#cytoscapeweb").itriTopology(
+		 {
+				swfPath : "../swf/CytoscapeWeb",
+				flashInstallerPath : "../swf/playerProductInstall",
+				flashAlternateContent : "Le Flash Player est nécessaire.", 
+				groupNodes :
+				[
+						/*
+						{ x:0, y:0,   data: { id: "super_group", type:"supergroup"} },
+						{ x:0, y:0,   data: { parent:"super_group", containType: "compute", type:"group", posAlgorithm: "circle"} }, //linear, circle, spiral, vlinear
+						{ x:0, y:0,   data: { parent:"super_group", containType: "network", type:"group"} },
+						{ x:600, y:0, data: { parent:"super_group", containType: "storage", type:"group", posAlgorithm: "circle"} }	
+						*/
+						{ x:0, y:0,   data: { containType: "compute", type:"group", posAlgorithm: "spiral"} }, //linear, circle, spiral, vlinear
+						{ x:0, y:0,   data: { containType: "network", type:"group"} },
+						{ x:0, y:200, data: { containType: "storage", type:"group", posAlgorithm: "linear"} }	
+				],
+				drawGroupNodes: false
+		 }
+	 );
+	 
+	 
+	 $("#drawbtn").click(function(){
+			
+		var basedata = {
+				nodes : [
+				{id : "1", type: "compute" }, 
+				{id : "2", type: "network" },
+				{id : "3", type: "storage" }
+				],
+				edges : [
+				{id : "2to1",target : "1",source : "2"},
+				{id : "3to2",target : "3",source : "2"}
+				]
+			}
+			
+		var data2 = {
+					nodes:[
+					{id : "network", type: "network" }],
+					 edges:[]};
+
+		for(var i=0;i<50;i++)
+		{
+			var node = {id : "c"+i, type:"compute"};
+			var edge = {id : "networkToC" + i , target:"network", source:"c"+i}
+			data2.nodes.push(node);
+			data2.edges.push(edge);
+		}		
+			
+		for(var i=0;i<10;i++)
+		{
+			var node = {id : "s"+i, type:"storage"};
+			var edge = {id : "networkTos" + i , target:"network", source:"s"+i}
+			data2.nodes.push(node);
+			data2.edges.push(edge);
+		}	
+		
+		
+		$topology.draw(basedata);
+			
+	 });
+	
+ 
+ });
+ 
+
+</script>
+<style>
+/* The Cytoscape Web container must have its dimensions set. */
+html,body {
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+#cytoscapeweb {
+	width: 50%;
+	height: 50%;
+	border: solid 1px red;
+}
+/*
+#cytoscapeweb {
+	width: 500px;
+	height: 500px;
+	border: solid 1px black;
+}*/
+
+.menuCls {
+   border: solid 1px green;
+   background: gray;
+   position:absolute;
+
+</style>
+
+
+</head>
+<body>
+	<div id="cytoscapeweb"></div>
+	
+	<button id='drawbtn'>draw</button>
+	<button id='addbtn'>add</button>
+	
+		<button id='testbtn'>testbtn</button>
+		<button id='addNet'>addNet</button>
+			<button id='debugger'>debugger</button>
+			
+			
+				<button id='clearAll'>clearAll</button>
+					<button id='reDraw'>reDraw</button>
+					
+						<button id="deleteNode">deleteNode</button>
+						
+			<div id='debugDiv'></div>
+			
+			<input id='dataArea' />
+			<button id='drawData'>drawData</button>
+			<button id='addData'>addData</button>
+	<!--web link-->
+	<br />
+	<br />
+	<br />
+	<a href='aaaaa' class='ui-state-default ui-corner-all'
+		target='http://cytoscapeweb.cytoscape.org/'>reference</a>
+
+
+</body>
+</html>
