@@ -361,7 +361,7 @@
 			*/
 			//--
 			this.getVis = function(){return vis};
-			var thisOBj = this;
+			var thisObj = this;
 
 			this.drawData = {nodes : [],edges : []};
 			
@@ -380,8 +380,7 @@
 				)
 			settings.drawOption.network.dataSchema = settings.dataSchema;
 			
-			
-			
+
 			function doDraw(_settings) {
 					
 					//vis.removeElements();
@@ -394,7 +393,7 @@
 					if(_settings.groupOption.drawGroupNodes)
 					vis.addElements(_settings.groupOption.groupNodes);
 				
-					var elements =  modeifyElements(thisOBj.drawData);
+					var elements =  modeifyElements(thisObj.drawData);
 					vis.addElements(elements);
 				}
 				
@@ -404,28 +403,37 @@
 						vis.zoomToFit();
 			}
 				
-		
-			this.draw = function(networkData, layoutType, option){
-
-			 var _settings = $.extend({},settings);
-			 var groupOptionEnable = true;
-						
+									
 			function registerEvent(vis){
 			
 			
-				vis.addListener("click", "nodes", function(event){$(thisOBj).trigger("click", event);});
-				vis.addListener("click", "edges", function(event){$(thisOBj).trigger("click", event);});
-				vis.addListener("click", "none",  function(event){$(thisOBj).trigger("click", event);});
-				vis.addListener("select", "none", function(event){$(thisOBj).trigger("deselect", event);});
-				vis.addListener("deselect", "none", function(event){$(thisOBj).trigger("select", event);});
-				vis.addListener("dragstart", "nodes", function(event){$(thisOBj).trigger("dragstart", event);});
-				vis.addListener("zoom", "none", function(event){$(thisOBj).trigger("zoom", event);});
+				vis.addListener("click", "nodes", function(event){$(thisObj).trigger("click", event);});
+				vis.addListener("click", "edges", function(event){$(thisObj).trigger("click", event);});
+				vis.addListener("click", "none",  function(event){$(thisObj).trigger("click", event);});
+				vis.addListener("select", "none", function(event){$(thisObj).trigger("deselect", event);});
+				vis.addListener("deselect", "none", function(event){$(thisObj).trigger("select", event);});
+				vis.addListener("dragstart", "nodes", function(event){$(thisObj).trigger("dragstart", event);});
+				vis.addListener("zoom", "none", function(event){$(thisObj).trigger("zoom", event);});
 				
 				
 			//	vis.addListener("select", "edges", function(event){$(thisOBj).trigger("deselect", event);});
 			//	vis.addListener("deselect", "edges", function(event){$(thisOBj).trigger("select", event);});	
 			}
-						
+					
+			
+			function doReady(vis){
+				pan_zoom(vis);
+				registerEvent(vis);
+				$(thisObj).trigger("ready");
+			}
+			
+		
+			this.draw = function(networkData, layoutType, option){
+
+			 var _settings = $.extend({},settings);
+			 var groupOptionEnable = true;
+				$(thisObj).trigger("drawStart");
+			
 				if(layoutType!=undefined)
 				{
 				 if(layoutType == "Group")
@@ -449,7 +457,7 @@
 				else
 				layoutType="ForceDirected";
 				
-				thisOBj.drawData = networkData;
+				thisObj.drawData = networkData;
 
 				/*
 				//add schema
@@ -468,7 +476,7 @@
 				}
 				*/
 				
-				vis = new org.cytoscapeweb.Visualization($(thisOBj).attr("id"), _settings.pathOption);
+				vis = new org.cytoscapeweb.Visualization($(thisObj).attr("id"), _settings.pathOption);
 				
 				if(groupOptionEnable)
 				{
@@ -478,8 +486,7 @@
 		
 				vis.ready(function(){
 					doDraw(_settings);
-					pan_zoom(vis);
-					registerEvent(vis);
+					doReady(vis);
 				});
 				}
 				else
@@ -488,8 +495,7 @@
 				 $.extend(_settings.drawOption.layout, {name:layoutType, option:option==undefined?{}:option});
 				 vis.draw(_settings.drawOption);
 					vis.ready(function(){
-								pan_zoom(vis);
-								registerEvent(vis);
+						doReady(vis);
 					});
 				
 				
