@@ -360,7 +360,7 @@
 			vis.ready(doDraw);
 			*/
 			//--
-			
+			this.getVis = function(){return vis};
 			var thisOBj = this;
 
 			this.drawData = {nodes : [],edges : []};
@@ -381,9 +381,9 @@
 			settings.drawOption.network.dataSchema = settings.dataSchema;
 			
 			
+			
 			function doDraw(_settings) {
-			debugger;
-					vis.panEnabled(true);
+					
 					//vis.removeElements();
 					$.each(_settings.groupOption.groupNodes, function(i, t){
 					if(t.data.containGroup!=undefined)
@@ -396,16 +396,35 @@
 				
 					var elements =  modeifyElements(thisOBj.drawData);
 					vis.addElements(elements);
-					
+				}
+				
+		    function pan_zoom(vis) {
+					//	vis.panEnabled(true);
 						vis.panToCenter();
 						vis.zoomToFit();
-				}
+			}
 				
 		
 			this.draw = function(networkData, layoutType, option){
 
 			 var _settings = $.extend({},settings);
 			 var groupOptionEnable = true;
+						
+			function registerEvent(vis){
+			
+			
+				vis.addListener("click", "nodes", function(event){$(thisOBj).trigger("click", event);});
+				vis.addListener("click", "edges", function(event){$(thisOBj).trigger("click", event);});
+				vis.addListener("click", "none",  function(event){$(thisOBj).trigger("click", event);});
+				vis.addListener("select", "none", function(event){$(thisOBj).trigger("deselect", event);});
+				vis.addListener("deselect", "none", function(event){$(thisOBj).trigger("select", event);});
+				vis.addListener("dragstart", "nodes", function(event){$(thisOBj).trigger("dragstart", event);});
+				vis.addListener("zoom", "none", function(event){$(thisOBj).trigger("zoom", event);});
+				
+				
+			//	vis.addListener("select", "edges", function(event){$(thisOBj).trigger("deselect", event);});
+			//	vis.addListener("deselect", "edges", function(event){$(thisOBj).trigger("select", event);});	
+			}
 						
 				if(layoutType!=undefined)
 				{
@@ -457,7 +476,11 @@
 				//_settings.drawOption.network.data.edges=new Array();
 				vis.draw(_settings.drawOption);
 		
-				vis.ready(function(){doDraw(_settings)});
+				vis.ready(function(){
+					doDraw(_settings);
+					pan_zoom(vis);
+					registerEvent(vis);
+				});
 				}
 				else
 				{
@@ -465,9 +488,8 @@
 				 $.extend(_settings.drawOption.layout, {name:layoutType, option:option==undefined?{}:option});
 				 vis.draw(_settings.drawOption);
 					vis.ready(function(){
-								vis.panEnabled(true);
-								vis.panToCenter();
-								vis.zoomToFit();
+								pan_zoom(vis);
+								registerEvent(vis);
 					});
 				
 				
@@ -490,6 +512,11 @@
 		this.draw = function(obj, layoutType, option)
 		{	
 			this.each(function(){  this.draw(obj, layoutType, option); });
+		};
+		
+		this.getVis = function()
+		{	
+			this.each(function(){  this.vis(); });
 		};
 		
       
