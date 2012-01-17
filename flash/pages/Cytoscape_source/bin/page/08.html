@@ -132,15 +132,9 @@
 	function nodeClickHandler(event){
 	 if(event == null)
 		return;
-		
-	 var target = event.target;
-
-		
-	      switch(event.group)
-		  {
-		  case "nodes":
-		  	
-		      removeMenu();
+	 var target = event.target; 
+	 
+	 removeMenu();
 		  if(target.data.type == "group")
 			return;
 	
@@ -152,18 +146,10 @@
 			  menuObj.find("li.selection").each(function(i, t){
 			  $(this).click(
 				  function(){
-				  printData(target.data.id +" selection:" + (i+1));
+				  printData(target.data.id + " " + $(this).html());
 				  removeMenu();
 				  });
 			  });
-		  break;
-		  case "edges":
-		  
-		  break;
-		  case "none":
-		       removeMenu();
-		  break;
-		  }
 	 }
 	 
 	 $topology.bind("ready", function(e, vis){
