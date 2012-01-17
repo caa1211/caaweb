@@ -49,12 +49,22 @@
 								{ name: "type", type: "Number" }
 							]   
 	 //--
-				}
+				},
+				popMenu:[
+					{
+						label:"selection 1", 
+						callback: function(e, data){}
+					},
+					{
+						label:"selection 2", 
+						callback: function(e, data){}
+					}
+				]
+				
 		 }
 	 );
 	 
-	 
-	 
+ 
 	 var menu = 
       '<ul class="menu">'+
          '<li>'+
@@ -71,9 +81,9 @@
 	 function removeMenu(){
 	  $('body').find(".menu").unbind().fadeOut(100, function(){ $(this).remove() });
 	 }
+	 
+	 /*
 	 $topology.bind("click", function(e,event){
-
-	
 	 if(event == null)
 		return;
 		
@@ -114,9 +124,55 @@
 		removeMenu();
 	 }).bind('drawStart', function(e, event){
 		removeMenu();
+	 }).bind("ready", function(e, vis){
+		//vis.addListener("click", "nodes", function(event){});
 	 });
-
+	*/
 	
+	function nodeClickHandler(event){
+	 if(event == null)
+		return;
+		
+	 var target = event.target;
+
+		
+	      switch(event.group)
+		  {
+		  case "nodes":
+		  	
+		      removeMenu();
+		  if(target.data.type == "group")
+			return;
+	
+			 var menuObj =  $(menu);
+		      menuObj.appendTo("body").hide();
+			  menuObj.find('.title').html(target.data.id);
+			  menuObj.css({left: target.x+15, top: target.y+5});
+			  menuObj.slideDown(100);
+			  menuObj.find("li.selection").each(function(i, t){
+			  $(this).click(
+				  function(){
+				  printData(target.data.id +" selection:" + (i+1));
+				  removeMenu();
+				  });
+			  });
+		  break;
+		  case "edges":
+		  
+		  break;
+		  case "none":
+		       removeMenu();
+		  break;
+		  }
+	 }
+	 
+	 $topology.bind("ready", function(e, vis){
+		removeMenu();
+		vis.addListener("click", "nodes", nodeClickHandler);
+		vis.addListener("click", "none", removeMenu);
+		vis.addListener("dragstart", "nodes", removeMenu);
+		vis.addListener("zoom", "none", removeMenu);
+	 });
 	 
 
 	 
@@ -171,9 +227,9 @@
 				var groupOption = {
 				groupNodes :
 				[
-						{ x:200, y:0,   data: { containGroup: "compute", type:"group", posAlgorithm: "vlinear"} }, //linear, circle, spiral, vlinear
-						{ x:100, y:0,  data: { containGroup: "network", type:"group", posAlgorithm: "vlinear"} },
-						{ x:0, y:-30, data: { containGroup: "storage", type:"group", posAlgorithm: "linear"} }	
+						{ x:200, y:0, data: { containGroup: "compute", type:"group", posAlgorithm: "vlinear"} }, //linear, circle, spiral, vlinear
+						{ x:100, y:0, data: { containGroup: "network", type:"group", posAlgorithm: "vlinear"} },
+						{ x:0, y:-30, data: { containGroup: "storage", type:"group", posAlgorithm: "vlinear"} }	
 				],
 				groupBy:"type", 
 				drawGroupNodes:true
@@ -230,7 +286,6 @@
  
  
   $("#realdata0").click(function(){
-  
 			var groupOption = {
 			groupNodes:[
 						{ x:0, y:0,   data: { containGroup: "sw", type:"group", posAlgorithm: "circle"} }, //linear, circle, spiral, vlinear
@@ -250,13 +305,22 @@
  });
  
  
-  $("#realdata").click(function(){
+  $("#realdataForceDirected").click(function(){
   
 			$.getJSON("topologyJson.js", function(json){  
 				var drawJson = {nodes:json.nodes, edges:json.links};
 				$topology.draw(drawJson, "ForceDirected");
             })   
  });
+ 
+  $("#realdataTree").click(function(){
+  
+			$.getJSON("topologyJson.js", function(json){  
+				var drawJson = {nodes:json.nodes, edges:json.links};
+				$topology.draw(drawJson, "Tree");
+            })   
+ });
+ 
  
  
  
@@ -265,7 +329,11 @@
  });
  
  
+ $("#addbtn").click(function(){
  
+ var vis = $topology.getVis();
+
+ });
  
  
  
@@ -360,20 +428,20 @@ cursor:default;
 <body>
 	<div id="cytoscapeweb"></div>
 	
-	<button id='drawbtn1'>draw 1</button>
-	
+	 simple data:<button id='drawbtn1'>draw 1</button>
 	<br>
-		<button id='drawbtn2'>draw 2</button>
-			<button id='drawbtn3'>draw 3</button>
+	 test data:<button id='drawbtn2'>group 1</button>
+			<button id='drawbtn3'>group 2</button>
 			
-	<button id='drawbtn4'>draw forcedirected</button>
+	<button id='drawbtn4'>forcedirected</button>
 <br>
 
-<button id='realdata0'>real Data with group</button>
 
-<button id='realdata'>real Data with forcedirected</button>
-
-
+real data:<button id='realdata0'>group</button>
+<button id='realdataForceDirected'>forcedirected</button>
+<button id='realdataTree'>Tree</button>
+<br>
+<br>
 	<button id='addbtn'>add</button>
 	
 		
