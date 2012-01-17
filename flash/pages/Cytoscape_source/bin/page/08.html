@@ -19,20 +19,35 @@
 				swfPath : "../swf/CytoscapeWeb",
 				flashInstallerPath : "../swf/playerProductInstall",
 				flashAlternateContent : "Le Flash Player est nécessaire.",
-				groupNodes :
-				[
-						/*
-						{ x:0, y:0,   data: { id: "super_group", type:"supergroup"} },
-						{ x:0, y:0,   data: { parent:"super_group", containType: "compute", type:"group", posAlgorithm: "circle"} }, //linear, circle, spiral, vlinear
-						{ x:0, y:0,   data: { parent:"super_group", containType: "network", type:"group"} },
-						{ x:600, y:0, data: { parent:"super_group", containType: "storage", type:"group", posAlgorithm: "circle"} }	
-						*/
-						{ x:0, y:0,   data: { containGroup: "1", type:"group", posAlgorithm: "circle"} }, //linear, circle, spiral, vlinear
-						{ x:0, y:0,   data: { containGroup: "2", type:"group"} },
-						{ x:0, y:400, data: { containGroup: "3", type:"group", posAlgorithm: "linear"} }	
-				],
-				drawGroupNodes: false, 
-				groupBy: "g"
+				groupOption:{
+					groupNodes :
+					[
+							/*
+							{ x:0, y:0,   data: { id: "super_group", type:"supergroup"} },
+							{ x:0, y:0,   data: { parent:"super_group", containType: "compute", type:"group", posAlgorithm: "circle"} }, //linear, circle, spiral, vlinear
+							{ x:0, y:0,   data: { parent:"super_group", containType: "network", type:"group"} },
+							{ x:600, y:0, data: { parent:"super_group", containType: "storage", type:"group", posAlgorithm: "circle"} }	
+							*/
+							{ x:0, y:0,   data: { containGroup: "1", type:"group"} }, //linear, circle, spiral, vlinear
+							{ x:50, y:100,   data: { containGroup: "2", type:"group"} },
+							{ x:100, y:200, data: { containGroup: "3", type:"group"} }	
+					],
+					drawGroupNodes: true, 
+					groupBy: "g"
+				},
+				dataSchema: {
+					nodes: [
+								{ name: "g", type: "string" },
+								{ name: "label", type: "string" },
+								{ name: "deviceType", type: "string" },
+								{ name: "weight", type: "Number" }
+						   ],
+					edges:
+							[
+								{ name: "type", type: "Number" }
+							]   
+	 //--
+				}
 		 }
 	 );
 	 
@@ -77,43 +92,87 @@
 	 //--
 	 
 	  $("#drawbtn1").click(function(){
-		$topology.draw(data);
+
+			$topology.draw(data, "Group");
 			printData(JSON.stringify(data));	
+			
 	 });
 	 
 	 
 	 $("#drawbtn2").click(function(){
 	 
-		var option = {
+		var groupOption = {
 				groupNodes :
 				[
 						{ x:0, y:0,   data: { containGroup: "1", type:"group", posAlgorithm: "circle"} }, //linear, circle, spiral, vlinear
 						{ x:0, y:0,   data: { containGroup: "2", type:"group"} },
 						{ x:0, y:400, data: { containGroup: "3", type:"group", posAlgorithm: "linear"} }	
 				],
-				groupBy:"g"
+				groupBy:"g", 
+				drawGroupNodes:false
 				};
 				
-		$topology.draw(data2, option);
+		$topology.draw(data2,"Group", groupOption);
 				printData(JSON.stringify(data2));	
 	 });
 	
  
 		
  $("#drawbtn3").click(function(){
- 	var option = {
+ 	var groupOption = {
 			groupNodes:[
 						{ x:0, y:0,   data: { containGroup: "compute", type:"group", posAlgorithm: "spiral"} }, //linear, circle, spiral, vlinear
 						{ x:0, y:0,   data: { containGroup: "network", type:"group"} },
 						{ x:500, y:0, data: { containGroup: "storage", type:"group", posAlgorithm: "vlinear"} }	
 			
 			],
-			groupBy:"type"
+			groupBy:"type", 
+			drawGroupNodes:false
 			};
 			
-	$topology.draw(data2, option);
+	$topology.draw(data2,"Group", groupOption);
 			printData(JSON.stringify(data2));
  });
+ 
+ 
+ 		
+ $("#drawbtn4").click(function(){
+	$topology.draw(data2, "ForceDirected");
+			printData(JSON.stringify(data2));
+ });
+ 
+ 
+ 
+  $("#realdata0").click(function(){
+  
+			var groupOption = {
+			groupNodes:[
+						{ x:0, y:0,   data: { containGroup: "sw", type:"group", posAlgorithm: "circle"} }, //linear, circle, spiral, vlinear
+						{ x:500, y:0,   data: { containGroup: "cht", type:"group"} },
+						{ x:0, y:0, data: { containGroup: "server", type:"group", posAlgorithm: "circle2"} }	
+			
+			],
+			groupBy:"deviceType", 
+			drawGroupNodes:false
+			};
+
+			$.getJSON("topologyJson.js", function(json){  
+			
+			var drawJson = {nodes:json.nodes, edges:json.links};
+			$topology.draw(drawJson, "Group", groupOption);
+            })   
+ });
+ 
+ 
+  $("#realdata").click(function(){
+  
+			$.getJSON("topologyJson.js", function(json){  
+			
+			var drawJson = {nodes:json.nodes, edges:json.links};
+			$topology.draw(drawJson, "ForceDirected");
+            })   
+ });
+ 
  
  
   $("#reDraw").click(function(){
@@ -163,9 +222,19 @@ html,body {
 	<div id="cytoscapeweb"></div>
 	
 	<button id='drawbtn1'>draw 1</button>
+	
+	<br>
 		<button id='drawbtn2'>draw 2</button>
 			<button id='drawbtn3'>draw 3</button>
-	<button id='testbtn'>draw 2</button>
+			
+	<button id='drawbtn4'>draw forcedirected</button>
+<br>
+
+<button id='realdata0'>real Data with group</button>
+
+<button id='realdata'>real Data with forcedirected</button>
+
+
 	<button id='addbtn'>add</button>
 	
 		

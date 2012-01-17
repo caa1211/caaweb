@@ -7,15 +7,21 @@
 {
     $.fn.itriTopology = function(settings){
         
+		var defaultSchema = 
+						{
+							nodes: [
+							{ name: "label", type: "string" },
+							{ name: "type", type: "string" },
+							{ name: "containGroup", type: "string" },
+							{ name: "posAlgorithm", type: "string" }
+							],
+							edges:[]
+						}
+						
 		var json = {
 		dataSchema: {
-            nodes: [
-						{ name: "label", type: "string" },
-						{ name: "type", type: "string" },
-						{ name: "containGroup", type: "string" },
-						{ name: "posAlgorithm", type: "string" }//,
-						//{ name: "group", type: "string" }
-                    ]	 
+            nodes: [], 
+			edges: []
 			},     
 			data : {
 				nodes : [ 
@@ -98,7 +104,7 @@
 			};
 			
 		var layout = {
-			name : "Preset",
+			name : "ForceDirected",
 			options:{orientation : "leftToRight"}
 		};
 		
@@ -115,7 +121,7 @@
 				visualStyle : style,
 				layout : layout
 			},
-			groupNodes:{} //linearPosition
+			groupOption:{} //linearPosition
        }
        
        var settings = $.extend(defaultSetting , settings);
@@ -123,7 +129,7 @@
 	
 	   function findGroupNode(type){
 		   var groupNode = null;
-			$.each(settings.groupNodes, function (i, t){
+			$.each(settings.groupOption.groupNodes, function (i, t){
 			  if(t.data.containGroup == type )
 			  {
 				groupNode = t;
@@ -140,7 +146,7 @@
 		function posAlgorithm(node){
 	
 	
-			var type = node.data[settings.groupBy];
+			var type = node.data[settings.groupOption.groupBy];
             var pos = {x:0, y:0};
 			var groupId = type + "_group";
 			
@@ -150,8 +156,13 @@
 			switch(parentNode.data.posAlgorithm){
 			
 			case "circle":
+			   pos = circlePos1(parentNode);
+			break;
+			
+				case "circle2":
 			   pos = circlePos2(parentNode);
 			break;
+			
 			
 			case "spiral":
 			   pos = spiralPos(parentNode);
@@ -170,7 +181,7 @@
 			
 			$.extend(node, pos);
 			
-			if(settings.drawGroupNodes)
+			if(settings.groupOption.drawGroupNodes)
 			$.extend(node.data, {parent: groupId });
 			
 		
@@ -221,7 +232,7 @@
 			return i;
 		}
 		
-		function circlePos2(pNode)
+		function circlePos1(pNode)
 		{
 			var bstep = 10;
 			
@@ -230,6 +241,24 @@
 			var step = bstep + adding*cNum;
 			
 		    var radius = 50 + 30*cNum;
+
+			var cx = pNode.x;
+			var cy = pNode.y;
+				
+			 var x = (cx + radius * Math.cos(( 2 * Math.PI * pNode.childCount / step)   /*angle offset*/) );  
+			 var y = (cy + radius * Math.sin(( 2 * Math.PI * pNode.childCount / step)   /*angle offset*/) );
+		    return {x:x, y:y};
+		}
+		
+		function circlePos2(pNode)
+		{
+			var bstep = 10;
+			
+			var adding = 4;
+			var cNum = cCounter(bstep, adding, pNode.childCount);
+			var step = bstep + adding*cNum;
+			
+		    var radius = 400 + 30*cNum;
 
 			var cx = pNode.x;
 			var cy = pNode.y;
@@ -289,9 +318,7 @@
 						{
 						
 							$.each(t, function(ii, tt){
-							//debugger;
 								var element = {group:"nodes", x:0, y:0, data:{}};
-							//	debugger;
 								$.extend(element.data, this);
 								        posAlgorithm(element);
 										ary.push(element);
@@ -302,7 +329,6 @@
 					else if(i=="edges")
 					{
 						$.each(t, function(ii, tt){
-						//debugger;
 								var element = {group:"edges", data:{}};
 								$.extend(element.data, this);
 									ary.push(element);
@@ -326,7 +352,7 @@
 	
         var _handler = function(){
 			var vis;
-				
+			
 			//--
 		   /* 
 			vis = new org.cytoscapeweb.Visualization($(this).attr("id"), settings.pathOption);
@@ -336,20 +362,37 @@
 			//--
 			
 			var thisOBj = this;
+
 			this.drawData = {nodes : [],edges : []};
 			
+		//add dataSchema
+				//nodes
+				$.each(defaultSchema.nodes, function(i, t)
+				{
+					settings.dataSchema.nodes.push(t);
+				})
+				//edges
+				$.each(defaultSchema.edges, function(i, t)
+				{
+					settings.dataSchema.edges.push(t);
+				}
+				
+				)
+			settings.drawOption.network.dataSchema = settings.dataSchema;
 			
-			function doDraw() {
+			
+			function doDraw(_settings) {
+			debugger;
 					vis.panEnabled(true);
 					//vis.removeElements();
-					$.each(settings.groupNodes, function(i, t){
+					$.each(_settings.groupOption.groupNodes, function(i, t){
 					if(t.data.containGroup!=undefined)
 					 $.extend(t.data, {id: t.data.containGroup + "_group"} );
 					 $.extend(t, {childCount: 0, group: "nodes"});
 					 });
 					 
-					if(settings.drawGroupNodes)
-					vis.addElements(settings.groupNodes);
+					if(_settings.groupOption.drawGroupNodes)
+					vis.addElements(_settings.groupOption.groupNodes);
 				
 					var elements =  modeifyElements(thisOBj.drawData);
 					vis.addElements(elements);
@@ -358,47 +401,42 @@
 						vis.zoomToFit();
 				}
 				
-			this.draw = function(obj){
-			
-			
-				thisOBj.drawData = obj;
-				
-				//add schema
-				/*
-				var ret = 0;
-				$.each( settings.drawOption.network.dataSchema.nodes, function(i, t){
-						if(t.name == settings.groupBy)
-							{
-							ret = 1;
-							return false;
-							}
-				});
-				if(ret == 1)
+		
+			this.draw = function(networkData, layoutType, option){
+
+			 var _settings = $.extend({},settings);
+			 var groupOptionEnable = true;
+						
+				if(layoutType!=undefined)
 				{
-				var newNodeSchema = { name: settings.groupBy, type: "string" }
-				settings.drawOption.network.dataSchema.nodes.push(newNodeSchema);
+				 if(layoutType == "Group")
+					{ 
+					groupOptionEnable = true;
+					if(option!=undefined)
+					 $.extend(_settings.groupOption , option);
+				
+					}
+				 else
+					groupOptionEnable = false;
+				/*
+				if(typeof(groupOption) == "object")
+					settings = $.extend(settings , {groupOption:groupOption});
+				else if(typeof(groupOption) =="string")
+					{
+					groupOptionEnable = false;
+					}
+					*/
 				}
-				*/
+				else
+				layoutType="ForceDirected";
 				
-				vis = new org.cytoscapeweb.Visualization($(thisOBj).attr("id"), settings.pathOption);
-				vis.draw(settings.drawOption);
-				vis.ready(doDraw);
-				
+				thisOBj.drawData = networkData;
+
 				/*
-				vis.removeElements();
-				doDraw();
-				*/
-			};
-			
-			this.draw = function(obj, option){
-				settings = $.extend(settings , option);
-				thisOBj.drawData = obj;
-				
 				//add schema
-				/*
 				var ret = 0;
 				$.each( settings.drawOption.network.dataSchema.nodes, function(i, t){
-						if(t.name == settings.groupBy)
+						if(t.name == settings.groupOption.groupBy)
 							{
 							ret = 1;
 							return false;
@@ -406,37 +444,53 @@
 				});
 				if(ret == 0)
 				{
-				var newNodeSchema = { name: settings.groupBy, type: "string" }
+				var newNodeSchema = { name: settings.groupOption.groupBy, type: "string" }
 				settings.drawOption.network.dataSchema.nodes.push(newNodeSchema);
 				}
 				*/
 				
-
-				vis = new org.cytoscapeweb.Visualization($(thisOBj).attr("id"), settings.pathOption);
-				vis.draw(settings.drawOption);
-				vis.ready(doDraw);
+				vis = new org.cytoscapeweb.Visualization($(thisOBj).attr("id"), _settings.pathOption);
+				
+				if(groupOptionEnable)
+				{
+				_settings.drawOption.network.data={nodes:[], edges:[]};
+				//_settings.drawOption.network.data.edges=new Array();
+				vis.draw(_settings.drawOption);
+		
+				vis.ready(function(){doDraw(_settings)});
+				}
+				else
+				{
+				 $.extend(_settings.drawOption.network.data, networkData)
+				 $.extend(_settings.drawOption.layout, {name:layoutType, option:option==undefined?{}:option});
+				 vis.draw(_settings.drawOption);
+					vis.ready(function(){
+								vis.panEnabled(true);
+								vis.panToCenter();
+								vis.zoomToFit();
+					});
+				
+				
+				}
+				
+				
 			};
         };
 		
 		this.updateOptions = function(obj)
 		{
 			  settings = $.extend(settings , obj);
-		}
+		};
 		
 		this.redraw = function()
 		{
 		  this.each(function(){   this.draw(this.drawData); });
-		}
-		
-		this.draw = function(obj)
+		};
+			
+		this.draw = function(obj, layoutType, option)
 		{	
-			this.each(function(){  this.draw(obj); });
-		}
-		
-		this.draw = function(obj, option)
-		{	
-			this.each(function(){  this.draw(obj, option); });
-		}
+			this.each(function(){  this.draw(obj, layoutType, option); });
+		};
 		
       
         var itriTopologyObj = this.each(_handler);
