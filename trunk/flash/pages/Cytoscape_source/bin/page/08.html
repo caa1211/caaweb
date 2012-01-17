@@ -61,15 +61,15 @@
             '<li class="title">first option</li>'+
          '</li>'+
          '<li>'+
-            '<li">Subitem two</li>'+
+            '<li class="selection">selection one</li>'+
          '</li>'+
          '<li>'+
-            'Subitem three'+
+           '<li class="selection">selection two</li>'+
          '</li>'+
       '</ul>';
 	 
 	 function removeMenu(){
-	  $('body').find(".menu").fadeOut(100, function(){ $(this).remove() });
+	  $('body').find(".menu").unbind().fadeOut(100, function(){ $(this).remove() });
 	 }
 	 $topology.bind("click", function(e,event){
 
@@ -89,13 +89,17 @@
 			return;
 	
 			 var menuObj =  $(menu);
-		      menuObj.appendTo("body");
-			  menuObj.hide();
+		      menuObj.appendTo("body").hide();
 			  menuObj.find('.title').html(target.data.id);
-			  menuObj.css("left",target.x+5);
-			  menuObj.css("top", target.y-5);
-			  menuObj.fadeIn(200);
-		
+			  menuObj.css({left: target.x+15, top: target.y+5});
+			  menuObj.slideDown(100);
+			  menuObj.find("li.selection").each(function(i, t){
+			  $(this).click(
+				  function(){
+				  printData(target.data.id +" selection:" + (i+1));
+				  removeMenu();
+				  });
+			  });
 		  break;
 		  case "edges":
 		  
