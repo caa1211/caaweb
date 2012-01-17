@@ -73,15 +73,21 @@
 	 }
 	 $topology.bind("click", function(e,event){
 
+	
 	 if(event == null)
 		return;
 		
 	 var target = event.target;
-	 	
+
+		
 	      switch(event.group)
 		  {
 		  case "nodes":
+		  	
 		      removeMenu();
+		  if(target.data.type == "group")
+			return;
+	
 			 var menuObj =  $(menu);
 		      menuObj.appendTo("body");
 			  menuObj.hide();
@@ -311,9 +317,9 @@ html,body {
 	//width: 100%;/*and again*/
 }
 
-.menu li
+.menu li li
 {
-
+	margin: auto 0;
 	position: relative;
 	padding: 0 -20px 0 2px;
 	/*white-space: nowrap; does not really work in ie */
