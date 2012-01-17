@@ -10,7 +10,7 @@
 <script type="text/javascript" src="../js/cytoscapeweb.min.js"></script>
 
 <script type="text/javascript" src="../js/itriTopology.js"></script>
-
+<script type="text/javascript" src="../js/debug.js"></script>
 <script type="text/javascript">
  
  $(function(){
@@ -18,7 +18,7 @@
 		 {
 				swfPath : "../swf/CytoscapeWeb",
 				flashInstallerPath : "../swf/playerProductInstall",
-				flashAlternateContent : "Le Flash Player est nécessaire.", 
+				flashAlternateContent : "Le Flash Player est nécessaire.",
 				groupNodes :
 				[
 						/*
@@ -27,22 +27,22 @@
 						{ x:0, y:0,   data: { parent:"super_group", containType: "network", type:"group"} },
 						{ x:600, y:0, data: { parent:"super_group", containType: "storage", type:"group", posAlgorithm: "circle"} }	
 						*/
-						{ x:0, y:0,   data: { containType: "compute", type:"group", posAlgorithm: "spiral"} }, //linear, circle, spiral, vlinear
-						{ x:0, y:0,   data: { containType: "network", type:"group"} },
-						{ x:0, y:200, data: { containType: "storage", type:"group", posAlgorithm: "linear"} }	
+						{ x:0, y:0,   data: { containGroup: "1", type:"group", posAlgorithm: "circle"} }, //linear, circle, spiral, vlinear
+						{ x:0, y:0,   data: { containGroup: "2", type:"group"} },
+						{ x:0, y:400, data: { containGroup: "3", type:"group", posAlgorithm: "linear"} }	
 				],
-				drawGroupNodes: false
+				drawGroupNodes: false, 
+				groupBy: "g"
 		 }
 	 );
 	 
 	 
-	 $("#drawbtn").click(function(){
-			
-		var basedata = {
+	 //--test data
+	 var data = {
 				nodes : [
-				{id : "1", type: "compute" }, 
-				{id : "2", type: "network" },
-				{id : "3", type: "storage" }
+				{id : "1", type: "compute",  g:"1" }, 
+				{id : "2", type: "network",  g:"2" },
+				{id : "3", type: "storage",  g:"3" }
 				],
 				edges : [
 				{id : "2to1",target : "1",source : "2"},
@@ -52,30 +52,78 @@
 			
 		var data2 = {
 					nodes:[
-					{id : "network", type: "network" }],
+					{id : "network", type: "network", g:"2"}],
 					 edges:[]};
 
-		for(var i=0;i<50;i++)
+		for(var i=0;i<200;i++)
 		{
-			var node = {id : "c"+i, type:"compute"};
+			var node = {id : "c"+i, type:"compute",  g:"1"};
 			var edge = {id : "networkToC" + i , target:"network", source:"c"+i}
 			data2.nodes.push(node);
 			data2.edges.push(edge);
-		}		
+		}	
+		
 			
 		for(var i=0;i<10;i++)
 		{
-			var node = {id : "s"+i, type:"storage"};
+			var node = {id : "s"+i, type:"storage" , g:"3"};
 			var edge = {id : "networkTos" + i , target:"network", source:"s"+i}
 			data2.nodes.push(node);
 			data2.edges.push(edge);
 		}	
 		
-		
-		$topology.draw(basedata);
-			
+	 
+	 
+	 //--
+	 
+	  $("#drawbtn1").click(function(){
+		$topology.draw(data);
+			printData(JSON.stringify(data));	
+	 });
+	 
+	 
+	 $("#drawbtn2").click(function(){
+	 
+		var option = {
+				groupNodes :
+				[
+						{ x:0, y:0,   data: { containGroup: "1", type:"group", posAlgorithm: "circle"} }, //linear, circle, spiral, vlinear
+						{ x:0, y:0,   data: { containGroup: "2", type:"group"} },
+						{ x:0, y:400, data: { containGroup: "3", type:"group", posAlgorithm: "linear"} }	
+				],
+				groupBy:"g"
+				};
+				
+		$topology.draw(data2, option);
+				printData(JSON.stringify(data2));	
 	 });
 	
+ 
+		
+ $("#drawbtn3").click(function(){
+ 	var option = {
+			groupNodes:[
+						{ x:0, y:0,   data: { containGroup: "compute", type:"group", posAlgorithm: "spiral"} }, //linear, circle, spiral, vlinear
+						{ x:0, y:0,   data: { containGroup: "network", type:"group"} },
+						{ x:500, y:0, data: { containGroup: "storage", type:"group", posAlgorithm: "vlinear"} }	
+			
+			],
+			groupBy:"type"
+			};
+			
+	$topology.draw(data2, option);
+			printData(JSON.stringify(data2));
+ });
+ 
+ 
+  $("#reDraw").click(function(){
+	$topology.redraw();
+ });
+ 
+ 
+ 
+ 
+ 
  
  });
  
@@ -114,10 +162,13 @@ html,body {
 <body>
 	<div id="cytoscapeweb"></div>
 	
-	<button id='drawbtn'>draw</button>
+	<button id='drawbtn1'>draw 1</button>
+		<button id='drawbtn2'>draw 2</button>
+			<button id='drawbtn3'>draw 3</button>
+	<button id='testbtn'>draw 2</button>
 	<button id='addbtn'>add</button>
 	
-		<button id='testbtn'>testbtn</button>
+		
 		<button id='addNet'>addNet</button>
 			<button id='debugger'>debugger</button>
 			
