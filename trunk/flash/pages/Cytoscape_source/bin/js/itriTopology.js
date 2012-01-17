@@ -360,7 +360,7 @@
 			vis.ready(doDraw);
 			*/
 			//--
-			this.getVis = function(){return vis};
+
 			var thisObj = this;
 
 			this.drawData = {nodes : [],edges : []};
@@ -424,12 +424,14 @@
 			function doReady(vis){
 				pan_zoom(vis);
 				registerEvent(vis);
-				$(thisObj).trigger("ready");
+				$(thisObj).trigger("ready", vis);
 			}
 			
 		
+		this.getVis = function(){
+		return vis;
+		}
 			this.draw = function(networkData, layoutType, option){
-
 			 var _settings = $.extend({},settings);
 			 var groupOptionEnable = true;
 				$(thisObj).trigger("drawStart");
@@ -493,6 +495,7 @@
 				{
 				 $.extend(_settings.drawOption.network.data, networkData)
 				 $.extend(_settings.drawOption.layout, {name:layoutType, option:option==undefined?{}:option});
+	
 				 vis.draw(_settings.drawOption);
 					vis.ready(function(){
 						doReady(vis);
@@ -522,10 +525,20 @@
 		
 		this.getVis = function()
 		{	
-			this.each(function(){  this.vis(); });
+		    var visAry = new Array();
+			
+			this.each(function(){  
+			
+			visAry.push(this.getVis());
+
+			});
+			
+			if(visAry.length ==1)
+			return visAry[0];
+			else
+			return visAry;
 		};
-		
-      
+
         var itriTopologyObj = this.each(_handler);
       
         return itriTopologyObj;
