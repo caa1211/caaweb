@@ -445,7 +445,15 @@
 	 
 	 
 //	src='data:image/png;base64," + $('#'+src)[0].get_img_binary() + "'
-			   viewObj.append("<img width='100%' height='100%' src='../images/allView.jpg'/>");
+	vis.exportNetwork('png', 'http://localhost/export2.php?type=png'); 
+ viewObj.append("<img id='img' width='100%' height='100%' src='http://localhost/randName.png'/>");
+ 
+setInterval(function(){
+
+ $('#img').attr("src","http://localhost/randName.png?"+Math.random());
+}, 2000);
+		
+
 				$("#radarView").append(radarSelector);
 				
 				var offsetX = 0;
@@ -459,6 +467,12 @@
 					radarSelector.css({width: viewObj.width()*1/scale, height:viewObj.height()*1/scale});
 					radarSelector.css({left: offsetX+ 1/2*(viewObj.width() - radarSelector.width()) , top: offsetY+ 1/2*(viewObj.height() - radarSelector.height()) });
 				});
+				
+				vis.addListener("dragstop", "nodes", function(evt){
+					vis.exportNetwork('png', 'http://localhost/export2.php?type=png'); 
+				});
+				
+				
 				
 				var px=0;
 				var py=0;
