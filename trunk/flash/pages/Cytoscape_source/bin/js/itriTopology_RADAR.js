@@ -421,7 +421,8 @@
 				//vis.zoom(1);
 			}
 			
-			
+			var radarViewtimer;
+		
 			function createRadarView(){
 		   var initscale = vis.zoom()-1;
 		   var scale = 1;
@@ -450,14 +451,32 @@
 	 
 	 
 //	src='data:image/png;base64," + $('#'+src)[0].get_img_binary() + "'
-	vis.exportNetwork('png', 'http://localhost/export2.php?type=png'); 
- viewObj.append("<img id='img' width='100%' height='100%' src='http://localhost/randName.png?'+Math.random()/>");
- 
-setInterval(function(){
-
+ vis.exportNetwork('png', 'http://localhost/export2.php?type=png'); 
+ viewObj.append("<img id='radarViewImg' width='100%' height='100%' />");
+ var imgObj = $("#radarViewImg");
+ /*
+ var timerCounter = 0;
+ var timer = setInterval(
+ function(){
  $('#img').attr("src","http://localhost/randName.png?"+Math.random());
-}, 3000);
+ timerCounter++;
+ if(timerCounter>5)
+ timer.clearInterval();
+ }, 2000);
+	*/	
 		
+var timerCounter = 0;
+clearTimeout(radarViewtimer);
+function GetNewImg()
+{
+timerCounter = timerCounter+1;
+　  imgObj.attr("src","http://localhost/randName.png?"+Math.random());
+if(timerCounter<3)
+　 radarViewtimer=setTimeout(GetNewImg, 2000);
+}
+ radarViewtimer = setTimeout(GetNewImg, 2000);
+
+
 
 				$("#radarView").append(radarSelector);
 				
