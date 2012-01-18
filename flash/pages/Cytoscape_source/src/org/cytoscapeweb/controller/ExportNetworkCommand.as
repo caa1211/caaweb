@@ -38,6 +38,10 @@ package org.cytoscapeweb.controller {
     public class ExportNetworkCommand extends BaseSimpleCommand {
     	
         override public function execute(notification:INotification):void {
+			
+			 trace("[caa]==ExportNetworkCommand");
+			 
+			 
             try {
                 var body:Object = notification.getBody();
                 var format:String = StringUtil.trim((""+body.format).toLowerCase());
@@ -54,7 +58,7 @@ package org.cytoscapeweb.controller {
 
                 if (format === "pdf" || format === "png" || format === "svg") {
                     // Get the image bytes from the graph mediator class:
-                    data = appMediator.getGraphImage(format, w, h);
+                    data = appMediator.getGraphImage(format, 1000, 1000);
                 } else {
                     // Get the text:
                     var viewCenter:Point = graphMediator.getViewCenter();

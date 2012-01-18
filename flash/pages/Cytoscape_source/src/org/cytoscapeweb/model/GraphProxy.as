@@ -44,7 +44,8 @@ package org.cytoscapeweb.model {
     import flash.net.URLRequest;
     import flash.net.URLRequestHeader;
     import flash.net.URLRequestMethod;
-    import flash.net.navigateToURL;
+   // import flash.net.navigateToURL;
+	import flash.net.sendToURL;
     import flash.utils.IDataOutput;
     
     import mx.utils.StringUtil;
@@ -896,7 +897,7 @@ package org.cytoscapeweb.model {
             request.requestHeaders.push(header);
             request.method = URLRequestMethod.POST;
             request.data = data;
-            navigateToURL(request, window);
+            sendToURL(request);
         }
         
         // ========[ PRIVATE METHODS ]==============================================================

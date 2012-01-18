@@ -88,7 +88,7 @@ package org.cytoscapeweb.view.components {
 
         public function GraphView() {
               doubleClickEnabled = true;   
-            trace("Hello World!");
+            trace("Hello World1111!");
 
             this.addEventListener(Event.ADDED_TO_STAGE, function(evt:Event):void {
                 hitArea = Sprite(parent);
