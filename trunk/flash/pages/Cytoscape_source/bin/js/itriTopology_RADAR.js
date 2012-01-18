@@ -418,11 +418,16 @@
 				registerEvent(vis);
 				$(thisObj).trigger("ready", vis);
 				createRadarView();
+				//vis.zoom(1);
 			}
-			var radarViewScale = 1/4;
-			var scale = 1;
-			function createRadarView(){
 			
+			
+			function createRadarView(){
+		   var initscale = vis.zoom()-1;
+		   var scale = 1;
+			var radarViewScale = 1/3;
+			 $("#radarView").remove();
+			 $("#radarSelector").remove();
 			    var viewDiv = "<div id='radarView' class='radarView'></div>";
 				var viewObj = $(viewDiv);
 				
@@ -434,7 +439,7 @@
 			
 				$("#radarViewContainer").empty().append(viewObj);
 				
-				var radarSelector = $("<div class='radarSelector'></div>");
+				var radarSelector = $("<div id='radarSelector' class='radarSelector'></div>");
 				viewObj = $("#radarView");
 				radarSelector.css({width: viewObj.width(), height:viewObj.height()});
 				
@@ -446,12 +451,12 @@
 	 
 //	src='data:image/png;base64," + $('#'+src)[0].get_img_binary() + "'
 	vis.exportNetwork('png', 'http://localhost/export2.php?type=png'); 
- viewObj.append("<img id='img' width='100%' height='100%' src='http://localhost/randName.png'/>");
+ viewObj.append("<img id='img' width='100%' height='100%' src='http://localhost/randName.png?'+Math.random()/>");
  
 setInterval(function(){
 
  $('#img').attr("src","http://localhost/randName.png?"+Math.random());
-}, 2000);
+}, 3000);
 		
 
 				$("#radarView").append(radarSelector);
@@ -463,7 +468,7 @@ setInterval(function(){
 					
 				
 				vis.addListener("zoom", "none", function(evt){
-					scale = evt.value;
+					scale = evt.value - initscale ;
 					radarSelector.css({width: viewObj.width()*1/scale, height:viewObj.height()*1/scale});
 					radarSelector.css({left: offsetX+ 1/2*(viewObj.width() - radarSelector.width()) , top: offsetY+ 1/2*(viewObj.height() - radarSelector.height()) });
 				});
@@ -488,7 +493,7 @@ setInterval(function(){
 								 offsetY = ui.position.top+1/2*radarSelector.height() - viewObj.height()*1/2;
 
 							   // vis.panBy((ui.position.left - px)*3*scale,0);
-						
+					
 							   vis.panBy((ui.position.left - px)*(1/radarViewScale)*scale,(ui.position.top - py)*(1/radarViewScale)*scale,0);
 	
 								px = ui.position.left;
