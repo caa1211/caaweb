@@ -121,7 +121,16 @@
 				visualStyle : style,
 				layout : layout
 			},
-			groupOption:{} //linearPosition
+			groupOption : {
+				groupNodes :
+				[
+						{ x:200, y:0, data: { containGroup: "compute", type:"group", posAlgorithm: "vlinear"} }, //linear, circle, spiral, vlinear
+						{ x:100, y:0, data: { containGroup: "network", type:"group", posAlgorithm: "vlinear"} },
+						{ x:0,   y:0, data: { containGroup: "storage", type:"group", posAlgorithm: "vlinear"} }	
+				],
+				groupBy:"type", 
+				drawGroupNodes:false
+				}
        }
        
        var settings = $.extend(defaultSetting , settings);
