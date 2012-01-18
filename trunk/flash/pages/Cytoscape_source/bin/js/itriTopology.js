@@ -134,7 +134,7 @@
        }
        
        var settings = $.extend(defaultSetting , settings);
-    
+	   var redraw = false; //true: vis.draw in each draw function; false: vis.draw only in init
 	
 	   function findGroupNode(type){
 		   var groupNode = null;
@@ -147,7 +147,7 @@
 			
 			});
 			if(groupNode == null)
-			alert("failed! there are no group node");
+			alert("failed! there are no group node; type:" + type);
 			
 			return groupNode;
 	   }
@@ -315,8 +315,7 @@
 		}
 
 	//---
-	
-	
+
 		function modeifyElements(rawGroup){
 			
 				var ary=new Array();
@@ -357,18 +356,11 @@
 				
 		}
 
-		
 	
         var _handler = function(){
 			var vis;
 			
-			//--
-		   /* 
 			vis = new org.cytoscapeweb.Visualization($(this).attr("id"), settings.pathOption);
-			vis.draw(settings.drawOption);
-			vis.ready(doDraw);
-			*/
-			//--
 
 			var thisObj = this;
 
@@ -414,19 +406,7 @@
 				
 									
 			function registerEvent(vis){
-			
-			
-				vis.addListener("click", "nodes", function(event){$(thisObj).trigger("click", event);});
-				vis.addListener("click", "edges", function(event){$(thisObj).trigger("click", event);});
-				vis.addListener("click", "none",  function(event){$(thisObj).trigger("click", event);});
-				vis.addListener("select", "none", function(event){$(thisObj).trigger("deselect", event);});
-				vis.addListener("deselect", "none", function(event){$(thisObj).trigger("select", event);});
-				vis.addListener("dragstart", "nodes", function(event){$(thisObj).trigger("dragstart", event);});
-				vis.addListener("zoom", "none", function(event){$(thisObj).trigger("zoom", event);});
-				
-				
-			//	vis.addListener("select", "edges", function(event){$(thisOBj).trigger("deselect", event);});
-			//	vis.addListener("deselect", "edges", function(event){$(thisOBj).trigger("select", event);});	
+
 			}
 					
 			
@@ -440,6 +420,10 @@
 		this.getVis = function(){
 		return vis;
 		}
+		
+		if(!redraw)
+		vis.draw(settings.drawOption);
+		
 			this.draw = function(networkData, layoutType, option){
 			 var _settings = $.extend({},settings);
 			 var groupOptionEnable = true;
@@ -456,49 +440,39 @@
 					}
 				 else
 					groupOptionEnable = false;
-				/*
-				if(typeof(groupOption) == "object")
-					settings = $.extend(settings , {groupOption:groupOption});
-				else if(typeof(groupOption) =="string")
-					{
-					groupOptionEnable = false;
-					}
-					*/
+					
 				}
 				else
 				layoutType="ForceDirected";
 				
+				
+				if(!redraw)
+				{
+				vis.removeElements();
+				vis.zoom(1);
+				}
 				thisObj.drawData = networkData;
 
-				/*
-				//add schema
-				var ret = 0;
-				$.each( settings.drawOption.network.dataSchema.nodes, function(i, t){
-						if(t.name == settings.groupOption.groupBy)
-							{
-							ret = 1;
-							return false;
-							}
-				});
-				if(ret == 0)
-				{
-				var newNodeSchema = { name: settings.groupOption.groupBy, type: "string" }
-				settings.drawOption.network.dataSchema.nodes.push(newNodeSchema);
-				}
-				*/
-				
-				vis = new org.cytoscapeweb.Visualization($(thisObj).attr("id"), _settings.pathOption);
-				
 				if(groupOptionEnable)
 				{
-				_settings.drawOption.network.data={nodes:[], edges:[]};
-				//_settings.drawOption.network.data.edges=new Array();
-				vis.draw(_settings.drawOption);
-		
-				vis.ready(function(){
+								
+					_settings.drawOption.network.data={nodes:[], edges:[]};
+
+				if(!redraw)
+				{
 					doDraw(_settings);
 					doReady(vis);
-				});
+				}
+				 else
+				 {
+				 	vis.draw(_settings.drawOption);
+				 	vis.ready(function(){
+						doDraw(_settings);
+						doReady(vis);
+					});
+				 }
+					
+					
 				}
 				else
 				{
@@ -509,11 +483,7 @@
 					vis.ready(function(){
 						doReady(vis);
 					});
-				
-				
 				}
-				
-				
 			};
         };
 		

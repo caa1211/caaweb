@@ -24,8 +24,11 @@
 	 //--test data
 		var data2 = {
 					nodes:[
-					{id : "network", type: "network", g:"2"}],
-					 edges:[]};
+					{id : "network", type: "network", g:"2"},
+					{id : "network2", type: "network", g:"4"}],
+					 edges:[
+					  {id : "networkEdge", target:"network", source:"network2"}
+					 ]};
 
 		for(var i=0;i<200;i++)
 		{
@@ -36,10 +39,10 @@
 		}	
 		
 			
-		for(var i=0;i<5;i++)
+		for(var i=0;i<50;i++)
 		{
 			var node = {id : "s"+i, type:"storage" , g:"3"};
-			var edge = {id : "networkTos" + i , target:"network", source:"s"+i}
+			var edge = {id : "networkTos" + i , target:"network2", source:"s"+i}
 			data2.nodes.push(node);
 			data2.edges.push(edge);
 		}	
