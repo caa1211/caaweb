@@ -239,16 +239,20 @@ package org.cytoscapeweb.view {
                 }
                 
                 // Draw the image:
-                var color:uint = configProxy.config.visualStyle.getValue(VisualProperties.BACKGROUND_COLOR);
-                var source:BitmapData = new BitmapData(graphView.width, graphView.height, false, color);
-                var matrix:Matrix = new Matrix();
-				matrix.translate( -2*bounds.x , -2*bounds.y );
-				trace("-bounds.x" + ( -bounds.x));
-				trace("-bounds.y" + ( -bounds.y));
-               // matrix.scale(f, f);
-               // source.draw(graphView.vis, matrix);
-			   
-				matrix = new Matrix();
+				
+				var color:uint = configProxy.config.visualStyle.getValue(VisualProperties.BACKGROUND_COLOR);
+				/*
+                var source:BitmapData = new BitmapData(w, h, false, color);
+                var matrix:Matrix = new Matrix(1, 0, 0, 1, -bounds.x, -bounds.y);
+                matrix.scale(f, f);
+                source.draw(graphView.vis, matrix);
+				*/
+				
+			    var source:BitmapData = new BitmapData(graphView.width, graphView.height, false, color);
+				
+				var matrix:Matrix = new Matrix(1, 0, 0, 1, graphView.width*(1-scale), graphView.height*(1-scale));
+				matrix.scale(scale, scale);
+				//matrix.translate(-graphView.width*1/2*scale, -graphView.height*1/scale)
  source.draw(graphView, matrix);
  
                 var encoder:PNGEncoder = new PNGEncoder();
