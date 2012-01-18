@@ -1,10 +1,11 @@
-﻿	var debugDiv ;
+﻿	var debugDiv 
+	var	timeDiv;
 $(function(){
 
 
 	debugDiv = $("#debugDiv");
 
-	
+		timeDiv = $("#timeDiv");
 		
 		
 		});
@@ -20,3 +21,19 @@ $(function(){
 			clear();
 			debugDiv.append("<p>" + str + "</p>");
 		}
+		
+		
+		
+			
+			
+		function timeclear() {
+			timeDiv.empty();
+		}
+		
+		
+		function printTime(str) {
+			timeclear();
+			timeDiv.append("<p>" + str + "</p>");
+		}
+		
+		
