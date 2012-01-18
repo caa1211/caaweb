@@ -134,10 +134,8 @@
        }
        
        var settings = $.extend(defaultSetting , settings);
-	   
-	   var redraw = true; //true: vis.draw in each draw function; false: vis.draw only in init and use removeElements in each redraw
-	   var renew = false; //true: new vis in each draw function;
-		
+    
+	
 	   function findGroupNode(type){
 		   var groupNode = null;
 			$.each(settings.groupOption.groupNodes, function (i, t){
@@ -149,7 +147,7 @@
 			
 			});
 			if(groupNode == null)
-			alert("failed! there are no group node; type:" + type);
+			alert("failed! there are no group node");
 			
 			return groupNode;
 	   }
@@ -358,11 +356,16 @@
 				
 		}
 
+		
 	
         var _handler = function(){
 			var vis;
 			
+			//--
+		   
 			vis = new org.cytoscapeweb.Visualization($(this).attr("id"), settings.pathOption);
+			
+			//--
 
 			var thisObj = this;
 
@@ -423,12 +426,10 @@
 		return vis;
 		}
 		
-		if(!redraw)
+		
 		vis.draw(settings.drawOption);
 		
 			this.draw = function(networkData, layoutType, option){
-			
-			
 			 var _settings = $.extend({},settings);
 			 var groupOptionEnable = true;
 				$(thisObj).trigger("drawStart");
@@ -450,42 +451,18 @@
 				layoutType="ForceDirected";
 				
 				
-				if(!redraw)
-				{
 				vis.removeElements();
 				vis.zoom(1);
-				}
 				thisObj.drawData = networkData;
 
 				if(groupOptionEnable)
 				{
-								
 					_settings.drawOption.network.data={nodes:[], edges:[]};
-
-				if(!redraw)
-				{
 					doDraw(_settings);
 					doReady(vis);
 				}
-				 else
-				 {
-				 if(renew)
-				 	vis = new org.cytoscapeweb.Visualization($(this).attr("id"), _settings.pathOption);
-					
-				 	vis.draw(_settings.drawOption);
-				 	vis.ready(function(){
-						doDraw(_settings);
-						doReady(vis);
-					});
-				 }
-					
-					
-				}
 				else
 				{
-				 if(renew)
-				 	vis = new org.cytoscapeweb.Visualization($(this).attr("id"), _settings.pathOption);
-					
 				 $.extend(_settings.drawOption.network.data, networkData)
 				 $.extend(_settings.drawOption.layout, {name:layoutType, option:option==undefined?{}:option});
 	
@@ -493,7 +470,11 @@
 					vis.ready(function(){
 						doReady(vis);
 					});
+				
+				
 				}
+				
+				
 			};
         };
 		
