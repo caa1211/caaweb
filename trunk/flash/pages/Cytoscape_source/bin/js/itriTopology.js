@@ -130,7 +130,8 @@
 				],
 				groupBy:"type", 
 				drawGroupNodes:false
-				}
+				},
+			defaultLayout: "ForceDirected"
        }
        
        var settings = $.extend(defaultSetting , settings);
@@ -430,7 +431,15 @@
 			
 			
 			 var _settings = $.extend({},settings);
-			 var groupOptionEnable = true;
+			 
+			 var groupOptionEnable;
+			 
+			 if(_settings.defaultLayout == "Group")
+			   groupOptionEnable = true;
+			 else
+			   groupOptionEnable = false;
+			  
+			 
 				$(thisObj).trigger("drawStart");
 			
 				if(layoutType!=undefined)
@@ -447,7 +456,7 @@
 					
 				}
 				else
-				layoutType="ForceDirected";
+				layoutType=_settings.defaultLayout;
 				
 				
 				if(!redraw)

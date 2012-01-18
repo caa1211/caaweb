@@ -77,4 +77,33 @@ cursor:default;
 
 }
 
+.radarView{
+margin:0 0 0 0;
+padding:0 0 0 0;
+ background:gray;
+ position:relative;
+ overflow:hidden;
+ 
+}
+img
+{
+
+left:0px;
+top:0px;
+z-index:-1;
+} 
+
+
+.radarSelector{
+z-index:100;
+margin:0 0 0 0;
+padding:0 0 0 0;
+background:url(../images/b.gif);
+cursor: move;
+
+
+border: solid 1px red;
+position:absolute;
+}
+
 #timeDiv{color:red;}

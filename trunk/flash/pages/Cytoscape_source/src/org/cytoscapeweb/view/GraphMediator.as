@@ -780,9 +780,12 @@ package org.cytoscapeweb.view {
             
             sendNotification(ApplicationFacade.DRAG_STOP_EVENT, { target: evt.node });
         }
-        
-        private function onDragNode(evt:DragEvent):void {
-            var target:NodeSprite = evt.node;
+        //--caa
+		private function DragNode(target:NodeSprite, amountX:Number, amountY:Number):void {
+			
+		 trace("[caa log]======"+amountX);
+		 
+		//var target:NodeSprite = evt.node;
             var nodes:*;
             var children:Array = new Array();
             
@@ -807,8 +810,8 @@ package org.cytoscapeweb.view {
             
             updateCursor();
             
-            var amountX:Number = evt.amountX;
-            var amountY:Number = evt.amountY;
+           // var amountX:Number = evt.amountX;
+            //var amountY:Number = evt.amountY;
             
             var ns:CompoundNodeSprite;
             var n:CompoundNodeSprite;
@@ -880,6 +883,11 @@ package org.cytoscapeweb.view {
             }
             
             if (_draggingComponent) vis.updateDragRectangle(amountX, amountY);
+			}
+		
+		//--
+        private function onDragNode(evt:DragEvent):void {
+            DragNode(evt.node, evt.amountX, evt.amountY);
         }
         
         private function onSelect(evt:SelectionEvent):void {
