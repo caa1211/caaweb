@@ -602,6 +602,9 @@ if(timerCounter<3)
 				 	vis = new org.cytoscapeweb.Visualization($(this).attr("id"), _settings.pathOption);
 					
 				 $.extend(_settings.drawOption.network.data, networkData)
+				 
+				 //if(layoutType=="ForceDirected")
+				// option={seed:11};
 				 $.extend(_settings.drawOption.layout, {name:layoutType, option:option==undefined?{}:option});
 	
 				 vis.draw(_settings.drawOption);
