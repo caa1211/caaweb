@@ -1,0 +1,51 @@
+	var switchOption = {
+				id: "vSwitch0",
+				type: "switch",
+				label: "vSwitch0",
+				VM_Port_Group:
+				{
+					label:"Virtual Machine Port Group",
+					type: "port_group",
+					id: vm_network,
+					label: VM Network,
+					type: "vmn",
+								child:[
+								  {
+									  id: "vCenterWine2K3",
+									  label: "vCenterWine2K3",
+									  type: "vnm",
+									  status: "on"
+								  },
+								  {
+									  id: "vCenterMobileAccess",
+									  label: "vCenterMobileAccess",
+									  type: "vnm",
+									  status: "on"
+								  }, 
+								  //... a lot of vm (yes)
+								]
+				},
+				VMkernel_port:
+				{
+						label: "VMkernel port,
+						type: "VMKernelPort",
+						id:"ManagementNetwork",
+						label:"Management Network", //"VMKernel"
+						type: "ManagementNetwork",
+										child:[
+											{
+												id:"vmk0",
+												label: "vmk0",
+												type: "VMkernel",
+												ip: "172.101.35.3"
+												//status : (?) 
+											},
+											//...a lot of  vmk (yes)
+										]
+				}, 
+								//... a lot of  (?)
+					// if only two: VM port group and VMKernel port (?)
+			};
+
+		$("#switch0").vlanTable(switchOption);
+ 
