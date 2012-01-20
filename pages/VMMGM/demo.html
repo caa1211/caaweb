@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--common css-->
+	
+	    <link href="../../css/reset.css" rel="stylesheet" type="text/css"/>
+	
+    <link href="../../css/themes/custom-theme/jquery-ui-1.7.2.custom.css" rel="stylesheet" type="text/css"/>
+    <link href="../../css/themes/myCustom.css" rel="stylesheet" type="text/css"/>
+    <link href="../../css/demos.css" rel="stylesheet" type="text/css" />
+    
+    
+    <!--common js-->
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript"></script>
+
+
+    
+    <script type="text/javascript">
+
+        $(function()
+        {
+   var gg =  $(".subGroup") ;
+   $("#btn").toggle(
+   
+   function(){ gg.slideUp(300) ;}, 
+   function(){ gg.slideDown(300);}
+   
+   )
+   
+        
+
+        });
+  
+    </script> 
+
+</head>
+<style>
+
+.vlanTable { left:100px; width:50%;  position:relative; margin-top:30px;}
+.vlanTable ul, li{position:relative;}
+.vlanTable h1{ font-weight:550; font-size:14px; margin-top:5px; margin-left:10px;}
+.vlanTable .dotline{ display:block; width:100%;margin:0 auto; line-height:10px; margin-bottom:15px; border-bottom:#999 2px dotted; padding-bottom:5px;}
+.vlanTable .dotline_s{ display:block; width:100%;margin:0 auto; line-height:10px; margin-bottom:2px; border-bottom:#999 1px dotted; padding-bottom:5px;}
+.vlanTable li {}
+
+table,th {valign:top; border: 0px;}
+.vmk_port{}
+.vm_port_group{}
+.cPanel{width:30px;}
+
+/*title*/
+.vlanTable {color:#40404f;  white-space:nowrap; overflow:auto;}
+
+.vlanTable .group{position:relative; border: solid 1px #d3d3d3;  margin:0 auto; margin-bottom:15px; padding: 10px 5px 10px 5px;}
+.vlanTable h2{position:absolute; z-index:10; color:#72726c;font-weight:600; background:#fff;left:10px; top:-20px; padding-left:5px; padding-right:5px;}
+.vlanTable h3{font-size:14px;padding-top:0px; font-weight:600; }
+.vlanTable h4{font-size:12px;padding-top:5px; font-weight:600; color:#72726c;}
+.vlanTable h5{font-size:13px;padding-top: 12px; font-weight:600;}
+.vlanTable .map{background:#cccccc; border: solid 2px #5b5b5b; margin:0px 3px 0px 3px; height:183px; display:block;}
+
+
+.vlanTable .subGroup{ }
+.vlanTable .i_network{ position:absolute; background:url(images/network.png); width:32px; height:32px; right:0px; top:0px;}
+ //.vlanTable .i_network {position:absolute;background:url(images/adapter.png) no-repeat; width:32px; height:32px; right:-5px; top:0px;}
+ .vlanTable .rightPanel {}
+ //.vlanTable .paGroup {display:table-cell; vertical-align:middle;}
+.vlanTable .rightPanel h3 {font-size:13px;padding-top:10px;padding-bottom:6px; font-weight:600; white-space:nowrap; }
+
+.vlanTable .i_adapter{width:32px;height:32px; background:url(images/adapter.png) no-repeat 0px 0px;float:left; margin-left:15px; margin-right:5px;}
+
+.vlanTable .i_line{width:32px;height:32px; background:url(images/adapter.png) no-repeat 0px 0px;float:left;}
+.vlanTable .i_vm{ position:absolute; background:url(images/vm.jpg); width:32px; height:32px; right:0px; top:0px; }
+.vlanTable .line{ background:#949494;}
+</style>
+<body>
+<div class="vlanTable">
+<div class="vlanTableHeader"><h1>Standard Switch: vSwitch0</h1></div>
+<div class="dotline"></div>
+<table border="1" style="width:90%;margin:0 auto;">
+<tr class= "trPanel" valign=top>
+	<th class="leftPanel">
+		
+		<ul class="group">
+			<li class="groupT"><h2>Virtual Machine Port Group</h2></li>
+			<li >
+				<ul>
+						<li><h3>VM Network</h3> <span class="i_network">
+							<span style="position:absolute">
+							<!--img src="images/line.gif" style="margin-top:16px; margin-left:33px; width:20px; height:2px;"/-->
+							<div class="line" style="margin-top:16px; margin-left:33px; width:20px; height:2px;"></div>
+							</span>
+						</span> 	
+					
+						</li>
+						<li><h4>2 virtual machine(s)</h4></li>
+						
+						<li>
+							<ul class="subGroup" style=""><div class="dotline_s"></div>
+								<li><h5>vCenterWin2K3</h5> 
+								<span class="i_vm">
+								<!--img src="images/line.gif" style="margin-top:16px; margin-left:33px; width:20px; height:2px;"/-->
+								<div class="line" style="margin-top:16px; margin-left:33px; width:20px; height:2px;"></div>
+
+								</span></li>
+								<li><h5>vCenterMobileAccess</h5> 
+								<span class="i_vm">
+								<!--img src="images/line.gif" style="margin-top:16px; margin-left:33px; width:20px; height:2px;"/-->
+										<div class="line" style="margin-top:16px; margin-left:33px; width:20px; height:2px;"></div>
+								</span></li>
+							</ul>
+						</li>
+				</ul>
+
+			</li>
+		</ul>
+		<ul class="group">
+			<li class="groupT"><h2>Virtual Machine Port Group</h2><span class="i_network">
+			<span style="position:absolute">
+			<!--img src="images/line.gif" style="margin-top:16px; margin-left:33px; width:20px; height:2px;"/-->
+			 <div class="line" style="margin-top:16px; margin-left:33px; width:20px; height:2px;"></div>
+			</span>
+			</span></li>
+			<li>
+				<ul>
+						<li><h3>Management Network</h3></li>
+						<li><h4>vmk0 : 172.101.35.3</h4></li>
+					
+				</ul>
+
+			</li>
+		</ul>
+
+	</th>
+	 <th class="centerPanel" style="width:30px;">
+		<div class="map" >
+		    <div class="line" style="margin-top:25px; margin-left:10px; width:2px; height:140px; background:gray;"></div>
+			<!--img src="images/line.gif" style="margin-top:25px; margin-left:10px; width:2px; height:140px;"/-->
+		</div>
+	 </th>
+	<th class="rightPanel" style="width:40%;">
+		
+		<ul class="group">
+			<li class="groupT"><h2>Physical Adapters</h2></li>
+			<li>
+			
+				<ul class="paGroup">
+						<li><span class="i_adapter">
+						 <div class="line" style="margin-top:16px; margin-left:-35px; width:35px; height:2px;"></div>
+						 
+						<!--img src="images/line.gif" style="margin-top:16px; margin-left:-35px; width:35px; height:2px;"/-->
+						</span><h3>vmnic0  1000  Full</h3></li>
+						
+						
+						<li>
+						<span class="i_adapter">
+						<!--img src="images/line.gif" style="margin-top:16px; margin-left:-15px; width:15px; height:2px;"/>
+						<img src="images/line.gif" style="margin-top:-20px; margin-left:-18px; width:2px; height:32px;"/-->
+						 <div class="line" style="margin-top:16px; margin-left:-15px; width:15px; height:2px;"></div>
+						 <div class="line" style="margin-top:-32px; margin-left:-15px; width:2px; height:32px;"></div>
+						</span><h3>vmnic2  1000  Full</h3>
+						</li>
+						
+						
+						<li>
+						<span class="i_adapter">
+						<!--img src="images/line.gif" style="margin-top:16px; margin-left:-15px; width:15px; height:2px;"/>
+						<img src="images/line.gif" style="margin-top:-20px; margin-left:-18px; width:2px; height:32px;"/-->
+						 <div class="line" style="margin-top:16px; margin-left:-15px; width:15px; height:2px;"></div>
+						 <div class="line" style="margin-top:-32px; margin-left:-15px; width:2px; height:32px;"></div>
+						 
+						</span><h3>vmnic3  1000  Full</h3>
+						</li>
+						
+					   <!--table style="width:100%;margin:0 auto;border:0px;">
+								  <th width=32 >
+										<span class="i_adapter"></span>
+										<span class="i_line"></span><span class="i_adapter">
+								  </th>
+									
+								  <th width=32 >
+									   	<span class="i_adapter"></span>
+										<span class="i_line"></span><span class="i_adapter">
+								  </th >
+								
+								 <th >
+									  <h3>vmnic0  1000  Full</h3>
+									  <h3>vmnic2  1000  Full</h3>
+								  </th>
+						  
+					   </table-->
+				</ul>
+
+			</li>
+		</ul>
+	</th>	
+</tr>
+</table>
+</div>
+
+
+
+
+ <button id="btn"> test </button>
+<!--web link-->
+<br/><br/><br/>
+<a href='aaaaa' 
+class='ui-state-default ui-corner-all' 
+target='_blank'>reference</a>
+
+
+</body>
+</html>
