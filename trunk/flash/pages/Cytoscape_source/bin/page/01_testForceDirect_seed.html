@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
+
+
+<script type="text/javascript" src="../js/AC_OETags.min.js"></script>
+<script type="text/javascript" src="../js/json2.min.js"></script>
+<script type="text/javascript" src="../js/cytoscapeweb.min.js"></script>
+
+
+<script type="text/javascript">
+	$(function() {
+	
+	
+		var options = {
+			swfPath : "../swf/CytoscapeWeb",
+			flashInstallerPath : "../swf/playerProductInstall",
+			flashAlternateContent : "Le Flash Player est nécessaire."
+		};
+
+		var json = {
+		dataSchema: 
+					{
+            nodes: [
+						{ name: "label", type: "string" },
+						{ name: "type", type: "string" }
+                     ]},     
+			data : {
+				nodes : [ 
+						{id : "n0"}, {id : "root"}, {id : "t0"}
+				],
+				edges : [
+					{id : "ee1",target : "n0",source : "root"} ,
+					{id : "ee2",target : "root",source : "t0"} 
+					
+				]
+			}
+		};
+
+		
+		var counter = 5;
+		for(var i = 1; i<=counter; i++)
+		{
+		json.data.nodes.push({id:"n"+i});
+		json.data.edges.push({id:"e"+i, target:"n0", source:"n"+i});
+		}
+		
+		var visual_style = {
+			global : {
+				backgroundColor : "#FFFFFF"
+			},
+			nodes : {
+			 label: { passthroughMapper: { attrName: "id" } }
+			
+			},
+			edges: {}
+			};
+			
+		var layout = {
+			name : "ForceDirected"
+			
+			,options:{seed : 2}
+		};
+		
+		var vis = new org.cytoscapeweb.Visualization("cytoscapeweb", options);
+	//vis.ready(function () {alert("aa")});
+		var drawOption = {
+			network : json,
+			edgeLabelsVisible : true,
+			visualStyle : visual_style,
+			layout : layout
+		};
+		
+		vis.draw(drawOption);
+		
+		
+		$("#drawbtn").click(function(){	
+	
+		
+			vis.draw(drawOption);
+		
+		});
+
+
+				$("#addbtn1").click(function(){	
+					counter++;
+				
+					json.data.nodes.push({id:"n"+counter});
+					json.data.edges.push({id:"e"+counter, target:"n0", source:"n"+counter});
+					
+					vis.draw(drawOption);
+				});
+				
+				
+				var counter2 = 0;
+				$("#addbtn2").click(function(){	
+					counter2++;
+					json.data.nodes.push({id:"t"+counter2});
+					json.data.edges.push({id:"et"+counter2, target:"t0", source:"t"+counter2});
+					
+					vis.draw(drawOption);
+				});
+				
+				
+					
+				
+		
+	});
+</script>
+<style>
+/* The Cytoscape Web container must have its dimensions set. */
+html,body {
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+#cytoscapeweb {
+	width: 50%;
+	height: 50%;
+	border: solid 1px red;
+}
+/*
+#cytoscapeweb {
+	width: 500px;
+	height: 500px;
+	border: solid 1px black;
+}*/
+</style>
+
+
+</head>
+<body>
+	<div id="cytoscapeweb"></div>
+
+	<div id='debugDiv'></div>
+	<button id='drawbtn'>draw</button>
+	<button id='addbtn1'>add n</button>
+	<button id='addbtn2'>add t</button>
+	
+	<button id='getPos'>getPos</button>
+	<!--web link-->
+	<br />
+	<br />
+	<br />
+	<a href='aaaaa' class='ui-state-default ui-corner-all'
+		target='http://cytoscapeweb.cytoscape.org/'>reference</a>
+
+
+</body>
+</html>
