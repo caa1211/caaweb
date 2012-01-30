@@ -6,6 +6,7 @@
 (function($)
 {
   $.extend({
+
     itriTopology : function(id, settings){
        
 	   	var groupLayoutSchema = {
@@ -128,6 +129,10 @@
 	   }
 	   
 	   
+			
+	   	function doGroup(drawData) {
+		
+		
 	   //posAlgorithm	
 		function vlinearPos(pNode)
 		{
@@ -324,8 +329,6 @@
 				if(_settings.drawOptions.layout.options.drawGroupNodes)
 				$.extend(node.data, {parent: groupId });
 			}
-			
-	   	function doGroup(drawData) {
 
 			if(_settings.drawOptions.layout.options == undefined)
 			{

@@ -37,7 +37,7 @@
  	//var vis = new org.cytoscapeweb.Visualization("cytoscapeweb", options);
 	var $vis =$.itriTopology("cytoscapeweb", options);
 
-	$vis.onReady(function(){alert("111")})
+	$vis.onReady(function(){})
 
 
 
@@ -50,6 +50,50 @@
 	});
 	*/
 	
+	 $("#test0").click(function(){
+	 
+	 	var visual_style = {
+							global : {
+								backgroundColor : "#FFFFFF"
+							},
+							nodes : {},
+							edges: {}
+							};
+							
+						var layout = {
+							name : "Tree",
+							options:{orientation : "leftToRight"}
+						};
+						
+						var json = {
+						dataSchema: 
+									{
+							  nodes: [
+										{ name: "label", type: "string" },
+										{ name: "type", type: "string" },
+										{id: "type", name: "type", type: "string" }
+									 ]},     
+							data : {
+								nodes : [ 
+								{id : "1"}, {id : "2"} , {id : "3"}
+								],
+								edges : [
+								{id : "2to1",target : "1",source : "2"} 
+								]
+							}
+						};
+						
+					 
+						var drawOptions = {
+							network : json,
+							edgeLabelsVisible : true,
+							visualStyle : visual_style,
+							layout : layout
+						};
+						$vis.draw(drawOptions);
+	 });
+	 
+	 
 	 $("#test").click(function(){
 					//-------------------------
 					/*
@@ -233,6 +277,7 @@
 					$vis.updateOptions({
 						drawOptions:{
 						   layout:{name:"Group", options:groupOption}
+						
 						}
 					});
 				
@@ -244,6 +289,30 @@
 	
 	
 		
+		 $("#realdataForceDirected").click(function(){
+			$.getJSON("topologyJson.js", function(json){  
+				var drawJson = {nodes:json.nodes, edges:json.links};
+				
+				$vis.updateOptions({
+						drawOptions:{
+						   layout:{name:"ForceDirected", options:{seed:2}},
+						   network:{
+						   dataSchema: 
+								{
+								nodes: [
+											{ name: "deviceType", type: "string" },
+											{ name: "weight", type: "Number" },
+											{ name: "label", type: "string" }
+										]
+								}
+						   }
+						}
+				});
+
+				$vis.drawData(drawJson);
+            })   
+		});
+
  });
  
 
@@ -254,6 +323,7 @@
 </head>
 <body>
 	<div id="cytoscapeweb"></div>
+	<button id='test0'>btn0</button>
 	<button id='test'>btn</button>
 		<button id='test2'>btn2</button>
 	<button id='test3'>btn3</button>	
