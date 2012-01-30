@@ -214,22 +214,21 @@
 				$vis.updateOptions({
 						drawOptions:{
 							layout:{
-							name: "Group", 
-							options:{
-								groupNodes :
-								[
-										{ x:200, y:0, data: { containGroup: "compute", type:"group", posAlgorithm: "vlinear"} }, //linear, circle, spiral, vlinear
-										{ x:100, y:0, data: { containGroup: "network", type:"group", posAlgorithm: "vlinear"} },
-										{ x:0, y:-30, data: { containGroup: "storage", type:"group", posAlgorithm: "vlinear"} }	
-								],
-								groupBy:"type", 
-								drawGroupNodes:true
-								}
+								name: "Group", 
+								options:{
+									groupNodes :
+									[
+											{ x:200, y:0, data: { containGroup: "compute", type:"group", posAlgorithm: "vlinear"} }, //linear, circle, spiral, vlinear
+											{ x:100, y:0, data: { containGroup: "network", type:"group", posAlgorithm: "vlinear"} },
+											{ x:0, y:-30, data: { containGroup: "storage", type:"group", posAlgorithm: "vlinear"} }	
+									],
+									groupBy:"type", 
+									drawGroupNodes:true
+									}
 							},
 							network:{
 								dataSchema:{ 
 										nodes: [
-											{ name: "gg", type: "string" },
 											{ name: "type", type: "string" }
 										]
 									}
@@ -239,7 +238,7 @@
 				
 				$vis.drawData({
 						nodes : [ 
-									{id : "1" , type:"compute"}, {id : "2", type:"compute", gg:"aa"} 
+									{id : "1" , type:"compute"}, {id : "2", type:"compute"} 
 								],
 						edges : [
 									{id : "2to1",target : "1",source : "2"} 
@@ -276,7 +275,7 @@
 						{ x:0, y:-30, data: { containGroup: "storage", type:"group", posAlgorithm: "vlinear"} }	
 				],
 				groupBy:"type", 
-				drawGroupNodes:true
+				drawGroupNodes:false
 				};
 				
 				
@@ -286,6 +285,7 @@
 						
 						}
 					});
+				
 				
 				$vis.drawData(data);
 		
