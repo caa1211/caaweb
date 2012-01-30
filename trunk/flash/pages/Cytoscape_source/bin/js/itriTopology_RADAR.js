@@ -493,7 +493,7 @@ if(timerCounter<3)
 				});
 				
 				vis.addListener("dragstop", "nodes", function(evt){
-					vis.exportNetwork('png', 'http://localhost/export2.php?type=png'); 
+					//vis.exportNetwork('png', 'http://localhost/export2.php?type=png'); 
 				});
 				
 				
