@@ -22,40 +22,30 @@
  	var options = {
 			swfPath : "../swf/CytoscapeWeb",
 			flashInstallerPath : "../swf/playerProductInstall",
-			flashAlternateContent : "Le Flash Player est nécessaire.",
-			drawOptions:{
-						network:{
-							dataSchema:{ 
-									nodes: [
-												{id: "type", name: "type", type: "string" }
-										   ]
-									}
-						}
-					}		
+			flashAlternateContent : "Le Flash Player est nécessaire."
 		};
 		
  	//var vis = new org.cytoscapeweb.Visualization("cytoscapeweb", options);
 	var $vis =$.itriTopology("cytoscapeweb", options);
 
 	var time1;
-	$vis.onReady(function(){
+	$vis.ready(function(){
 		printTime("time cost :"+ (new Date - time1) +"ms");
 	
 	});
-	$vis.onDrawStart(function(){;
+	$vis.drawStart(function(){;
 		timeclear();
 	    time1 = new Date; 
 	})
 
-
-/*
 	$vis.addListener("click", "nodes", function(event){
+	
 	 if(event == null)
 		return;
 	 var target = event.target; 
 	 alert(target.data.id )
 	});
-	*/
+	
 	
 	 $("#test0").click(function(){
 	 
