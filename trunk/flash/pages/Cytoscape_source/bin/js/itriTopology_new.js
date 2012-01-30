@@ -116,7 +116,8 @@
 	   var _settings = $.extend(true, defaultSetting, settings);
 		
 	   var vis = new org.cytoscapeweb.Visualization(id, _settings);
-	   
+ 
+		
 	   this.updateOptions = function(newOptions){
 			$.extend(true, _settings, newOptions);
 	   }
@@ -130,8 +131,8 @@
 	   }
 	   
 	   
-			
-	   	function doGroup(drawData) {
+		//-----group layout begin	
+	   	function doGroup(drawData, drawOption) {
 		
 		
 	   //posAlgorithm	
@@ -277,7 +278,7 @@
 			
 			function findGroupNode(type){
 			var groupNode = null;
-			$.each(_settings.drawOptions.layout.options.groupNodes, function (i, t){
+			$.each(drawOption.layout.options.groupNodes, function (i, t){
 			  if(t.data.containGroup == type )
 			  {
 				groupNode = t;
@@ -293,7 +294,7 @@
 			
 			//---positonAlgorithm
 			function posAlgorithm(node){
-				var type = node.data[_settings.drawOptions.layout.options.groupBy];
+				var type = node.data[drawOption.layout.options.groupBy];
 				var pos = {x:0, y:0};
 				var groupId = type + "_group";
 				
@@ -327,17 +328,17 @@
 
 				$.extend(node, pos);
 				
-				if(_settings.drawOptions.layout.options.drawGroupNodes)
+				if(drawOption.layout.options.drawGroupNodes)
 				$.extend(node.data, {parent: groupId });
 			}
 
-			if(_settings.drawOptions.layout.options == undefined)
+			if(drawOption.layout.options == undefined)
 			{
 				alert("Group layout must have options");
 				return;
 			}
 			
-			if(_settings.drawOptions.layout.options.groupNodes == undefined)
+			if(drawOption.layout.options.groupNodes == undefined)
 			{
 				alert("Group layout must have groupNodes options");
 				return;
@@ -345,53 +346,37 @@
 
 		
 					//vis.removeElements();
-					$.each(_settings.drawOptions.layout.options.groupNodes, function(i, t){
+					$.each(drawOption.layout.options.groupNodes, function(i, t){
 						if(t.data.containGroup!=undefined)
 						 $.extend(t.data, {id: t.data.containGroup + "_group"} );
 						 $.extend(t, {childCount: 0, group: "nodes"});
 					 });
 					 
-					if(_settings.drawOptions.layout.options.drawGroupNodes)
-						vis.addElements(_settings.drawOptions.layout.options.groupNodes);
+					if(drawOption.layout.options.drawGroupNodes)
+						vis.addElements(drawOption.layout.options.groupNodes);
 				
 					var elements =  modeifyElements(drawData);
 				
 					vis.addElements(elements);
 		}
-			
+	   //-----group layout end
+	   
 			function pan_zoom() {
 					//	vis.panEnabled(true);
 						vis.panToCenter();
 						vis.zoomToFit();
 			}
-			
-			function doReady(){
-				pan_zoom();
-				_settings.onReady();
-			}		
 
-		this.onReady = function(fn){  
-			if (!fn) { _settings.onReady = function () {/*do nothing*/}; }
-            else { 
-			_settings.onReady = fn;
-			}
-		}
-		
-		this.onDrawStart = function(fn){  
-			if (!fn) { _settings.onDrawStart = function () {/*do nothing*/}; }
-            else { 
-			_settings.onDrawStart = fn;
-			}
-		}
-		
-		vis.ready(function(){doReady();});
-		
-	   this.drawData = function(data){
+	   this.drawData = function(data, opt){
+		   var drawOptions = _settings.drawOptions;
+			if(opt!=null)
+			drawOptions = opt;
+			
 			_settings.onDrawStart();
 			
-			if(_settings.drawOptions.layout.name == "Group")
+			if(drawOptions.layout.name == "Group")
 			{
-				var newOption = $.extend({}, _settings.drawOptions);
+				var newOption = $.extend({}, drawOptions);
 				newOption.layout.name = "Tree";
 				
 				$.each(groupLayoutSchema.nodes, function(i, t)
@@ -404,34 +389,59 @@
 					newOption.network.dataSchema.edges.push(t);
 				});
 				newOption.network.data={nodes:[], edges:[]};
-				vis.draw(newOption);
-				vis.ready(
+				vis.baseDraw(newOption);
+				vis.baseReady(
 					function(){		
 						doGroup(data, newOption);
-						doReady();
+						pan_zoom();
+						_settings.onReady();
 					}
 				);
 			}
 			else
 			{
-				var newOption = $.extend({}, _settings.drawOptions);
+				var newOption = $.extend({}, drawOptions);
 				$.extend(newOption.network.data, data);
-				vis.draw(newOption);
-				vis.ready(
-				function(){
-						doReady();
-					}
+				vis.baseDraw(newOption);
+				vis.baseReady(
+					function(){
+							_settings.onReady();
+						}
 				);
 			}
 			
 			
 	   };
-	   
 
-	this.ready = vis.ready;
-	this.draw=function(opt){ _settings.onDrawStart(); vis.draw(opt);};
+	 //ovarride draw()
+	this.base = {};
+	this.base.draw = vis.draw;
+	this.baseDraw = vis.draw;  
+	this.draw=function(opt){
+	    var data = opt.network.data;
+		this.drawData(data, opt);
+	};
 	
-	var ret = $.extend({}, vis, this);
+	
+	this.drawStart = function(fn){  
+		if (!fn) { _settings.onDrawStart = function () {/*do nothing*/}; }
+        else { 
+			_settings.onDrawStart = fn;
+		}
+	}
+
+	//ovarride ready()
+	this.baseReady = vis.ready;  
+	this.ready=function(fn){
+	    if (!fn) { _settings.onReady = function () {/*do nothing*/}; }
+        else { 
+			_settings.onReady = fn;
+		}
+	};
+
+	//this.ready = vis.ready;
+	
+	var ret = $.extend(vis, this);
 	
 	return ret;	  
     }
