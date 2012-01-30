@@ -37,11 +37,9 @@
  	//var vis = new org.cytoscapeweb.Visualization("cytoscapeweb", options);
 	var $vis =$.itriTopology("cytoscapeweb", options);
 
-	/*
-$vis.ready(
-function(){alert("aa")}
-);
-*/
+	$vis.onReady(function(){alert("111")})
+
+
 
 /*
 	$vis.addListener("click", "nodes", function(event){
@@ -142,8 +140,42 @@ function(){alert("aa")}
 				});
 				*/
 				
+
+				$vis.updateOptions($vis.getDefaultOptions());
+				
+				$vis.drawData({
+						nodes : [ 
+									{id : "3"}, {id : "4"} 
+								],
+						edges : [
+									{id : "111",target : "3",source : "4"} 
+								]
+						});
+						
+						
+								
+			});
+			
+			
+			
+		$("#test2").click(function(){
+		
 				$vis.updateOptions({
 						drawOptions:{
+							layout:{
+							name: "Group", 
+							options:{
+								groupNodes :
+								[
+										{ x:200, y:0, data: { containGroup: "compute", type:"group", posAlgorithm: "vlinear"} }, //linear, circle, spiral, vlinear
+										{ x:100, y:0, data: { containGroup: "network", type:"group", posAlgorithm: "vlinear"} },
+										{ x:0, y:-30, data: { containGroup: "storage", type:"group", posAlgorithm: "vlinear"} }	
+								],
+								groupBy:"type", 
+								drawGroupNodes:true
+							}
+							
+							},
 							network:{
 								dataSchema:{ 
 										nodes: [
@@ -157,16 +189,61 @@ function(){alert("aa")}
 				
 				$vis.drawData({
 						nodes : [ 
-									{id : "1"}, {id : "2", type:"aa", gg:"aa"} 
+									{id : "1" , type:"compute"}, {id : "2", type:"compute", gg:"aa"} 
 								],
 						edges : [
 									{id : "2to1",target : "1",source : "2"} 
 								]
 						});
-						
-						
+				
+				
+		});	
+			
+		
+		$("#test3").click(function(){
+		
+		$vis.updateOptions($vis.getDefaultOptions());
+				
+				$vis.drawData({
+						nodes : [ 
 								
-			});
+								],
+						edges : [
+									
+								]
+						});
+						
+		});		
+		
+
+		$("#drawbtn2").click(function(){
+	 
+		var groupOption = {
+				groupNodes :
+				[
+						{ x:200, y:0, data: { containGroup: "compute", type:"group", posAlgorithm: "vlinear"} }, //linear, circle, spiral, vlinear
+						{ x:100, y:0, data: { containGroup: "network", type:"group", posAlgorithm: "vlinear"} },
+						{ x:0, y:-30, data: { containGroup: "storage", type:"group", posAlgorithm: "vlinear"} }	
+				],
+				groupBy:"type", 
+				drawGroupNodes:false
+				};
+				
+				
+					$vis.updateOptions({
+						drawOptions:{
+						   layout:{name:"Group", options:groupOption}
+						}
+					});
+				
+				$vis.drawData(data);
+		
+				//--debug
+				printData(JSON.stringify(data));	
+		});
+	
+	
+		
  });
  
 
@@ -178,6 +255,8 @@ function(){alert("aa")}
 <body>
 	<div id="cytoscapeweb"></div>
 	<button id='test'>btn</button>
+		<button id='test2'>btn2</button>
+	<button id='test3'>btn3</button>	
 	 <br>
 	 simple data:<button id='drawbtn1'>group</button>
 	 <button id='drawTree1'>Tree</button>

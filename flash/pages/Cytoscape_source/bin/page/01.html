@@ -53,7 +53,7 @@
 		};
 		
 		var vis = new org.cytoscapeweb.Visualization("cytoscapeweb", options);
-
+	vis.ready(function () {alert("aa")});
 		var drawOption = {
 			network : json,
 			edgeLabelsVisible : true,
@@ -64,7 +64,7 @@
 		vis.draw(drawOption);
 		
 		
-		vis.ready(function () {});
+	
 		
 		var counter = 1;
 		
