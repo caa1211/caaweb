@@ -37,8 +37,15 @@
  	//var vis = new org.cytoscapeweb.Visualization("cytoscapeweb", options);
 	var $vis =$.itriTopology("cytoscapeweb", options);
 
-	$vis.onReady(function(){})
-
+	var time1;
+	$vis.onReady(function(){
+		printTime("time cost :"+ (new Date - time1) +"ms");
+	
+	});
+	$vis.onDrawStart(function(){;
+		timeclear();
+	    time1 = new Date; 
+	})
 
 
 /*
