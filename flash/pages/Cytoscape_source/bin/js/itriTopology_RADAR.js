@@ -111,7 +111,7 @@
        var defaultSetting = 
        {
 	       pathOption:{
-				swfPath : "../swf/CytoscapeWeb",
+				swfPath : "../swf/CytoscapeWeb_radar",
 				flashInstallerPath : "../swf/playerProductInstall",
 				flashAlternateContent : "Le Flash Player est nécessaire."
 			},
