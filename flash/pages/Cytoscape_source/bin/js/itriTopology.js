@@ -131,7 +131,8 @@
 				groupBy:"type", 
 				drawGroupNodes:false
 				},
-			defaultLayout: "ForceDirected"
+			defaultLayout: "ForceDirected",
+			dataSchema:{nodes:[], edges:[]}
        }
        
        var settings = $.extend(defaultSetting , settings);
