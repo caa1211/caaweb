@@ -109,7 +109,8 @@
 				visualStyle : style,
 				layout : layout
 			},
-			onReady: function(){}
+			onReady: function(){},
+			onDrawStart: function(){}
        };
 	   
 	   var _settings = $.extend(true, defaultSetting, settings);
@@ -375,9 +376,19 @@
 			_settings.onReady = fn;
 			}
 		}
-			
+		
+		this.onDrawStart = function(fn){  
+			if (!fn) { _settings.onDrawStart = function () {/*do nothing*/}; }
+            else { 
+			_settings.onDrawStart = fn;
+			}
+		}
+		
+		vis.ready(function(){doReady();});
+		
 	   this.drawData = function(data){
-
+			_settings.onDrawStart();
+			
 			if(_settings.drawOptions.layout.name == "Group")
 			{
 				var newOption = $.extend({}, _settings.drawOptions);
@@ -418,7 +429,11 @@
 	   
 
 	this.ready = vis.ready;
-	return $.extend(vis, this);	  
+	this.draw=function(opt){ _settings.onDrawStart(); vis.draw(opt);};
+	
+	var ret = $.extend({}, vis, this);
+	
+	return ret;	  
     }
 	
    });
