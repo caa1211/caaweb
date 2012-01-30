@@ -379,11 +379,13 @@
 				var newOption = $.extend({}, drawOptions);
 				newOption.layout.name = "Tree";
 				
+				if(groupLayoutSchema.nodes != undefined)
 				$.each(groupLayoutSchema.nodes, function(i, t)
 				{
 					newOption.network.dataSchema.nodes.push(t);
 				});
 				//edges
+				if(groupLayoutSchema.edges != undefined)
 				$.each(groupLayoutSchema.edges, function(i, t)
 				{
 					newOption.network.dataSchema.edges.push(t);
@@ -413,6 +415,31 @@
 			
 	   };
 
+	 this.addSchema = function(addSchema){
+				//nodes
+			if(addSchema.nodes != undefined)
+				$.each(addSchema.nodes, function(i, t)
+				{
+							_settings.drawOptions.network.dataSchema.nodes.push(t);
+				});
+				//edges
+			if(addSchema.edges != undefined)
+				$.each(addSchema.edges, function(i, t)
+				{
+					_settings.drawOptions.dataSchema.edges.push(t);
+				});
+	 };
+	 
+	 this.getSchema = function(){
+			return _settings.drawOptions.dataSchema;
+	 };
+	 
+	 this.newSchema = function(newSchema){
+			if(newSchema!=undefined)
+			_settings.drawOptions.dataSchema = newSchema;
+	 };
+	 
+	 
 	 //ovarride draw()
 	this.base = {};
 	this.base.draw = vis.draw;

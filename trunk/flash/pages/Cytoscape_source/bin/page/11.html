@@ -291,7 +291,8 @@
 				
 				$vis.updateOptions({
 						drawOptions:{
-						   layout:{name:"ForceDirected", options:{seed:2}},
+						   layout:{name:"ForceDirected", options:{seed:2}}
+						  /* ,
 						   network:{
 						   dataSchema: 
 								{
@@ -301,10 +302,18 @@
 											{ name: "label", type: "string" }
 										]
 								}
-						   }
+						   }*/
 						}
 				});
 
+				$vis.addSchema( {
+								nodes: [
+											{ name: "deviceType", type: "string" },
+											{ name: "weight", type: "Number" },
+											{ name: "label", type: "string" }
+										]
+							   });
+								
 				$vis.drawData(drawJson);
             })   
 		});
