@@ -192,7 +192,7 @@
 				*/
 				
 
-				$vis.updateOptions($vis.getDefaultOptions());
+				$vis.updateOptions(options);
 				
 				$vis.drawData({
 						nodes : [ 
@@ -224,8 +224,7 @@
 								],
 								groupBy:"type", 
 								drawGroupNodes:true
-							}
-							
+								}
 							},
 							network:{
 								dataSchema:{ 
@@ -253,7 +252,7 @@
 		
 		$("#test3").click(function(){
 		
-		$vis.updateOptions($vis.getDefaultOptions());
+		$vis.updateOptions(options);
 				
 				$vis.drawData({
 						nodes : [ 
@@ -277,7 +276,7 @@
 						{ x:0, y:-30, data: { containGroup: "storage", type:"group", posAlgorithm: "vlinear"} }	
 				],
 				groupBy:"type", 
-				drawGroupNodes:false
+				drawGroupNodes:true
 				};
 				
 				
