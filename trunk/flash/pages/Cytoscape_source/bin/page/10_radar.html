@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link href="../css/reset.css" rel="stylesheet" type="text/css" />
+ <link href="../css/page.css" rel="stylesheet" type="text/css" />
+
+ 
+<script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="../js/AC_OETags.min.js"></script>
+<script type="text/javascript" src="../js/json2.min.js"></script>
+<script type="text/javascript" src="../js/cytoscapeweb.min.js"></script>
+
+<script type="text/javascript" src="../js/itriTopology.js"></script>
+<script type="text/javascript" src="../js/testData.js"></script>
+<script type="text/javascript" src="../js/jquery-ui-1.7.3.custom.min.js"></script>
+<script type="text/javascript" src="../js/itriTopology_RADAR.js"></script>
+
+
+<script type="text/javascript" src="../js/debug.js"></script>
+
+
+<script type="text/javascript">
+ 
+ $(function(){
+ 
+     //init plugin
+	 var $topology = $("#cytoscapeweb").itriTopology(
+		 {
+				swfPath : "../swf/CytoscapeWeb",
+				flashInstallerPath : "../swf/playerProductInstall",
+				flashAlternateContent : "Le Flash Player est nécessaire.",
+				dataSchema: {
+					nodes: [
+								{ name: "g", type: "string" },
+								{ name: "label", type: "string" },
+								{ name: "deviceType", type: "string" },
+								{ name: "weight", type: "Number" }
+						   ],
+					edges:
+							[
+								{ name: "type", type: "Number" }
+							]   
+				}
+		 }
+	 );
+	 
+ 
+	 var menu = 
+      '<ul class="menu">'+
+         '<li>'+
+            '<li class="title">first option</li>'+
+         '</li>'+
+         '<li>'+
+            '<li class="selection">selection one</li>'+
+         '</li>'+
+         '<li>'+
+           '<li class="selection">selection two</li>'+
+         '</li>'+
+      '</ul>';
+	 
+	 function removeMenu(){
+	  $('body').find(".menu").unbind().fadeOut(100, function(){ $(this).remove() });
+	 }
+	 
+	function nodeClickHandler(event){
+	 if(event == null)
+		return;
+	 var target = event.target; 
+	 
+	 removeMenu();
+		  if(target.data.type == "group")
+			return;
+	
+			 var menuObj =  $(menu);
+		      menuObj.appendTo("body").hide();
+			  menuObj.find('.title').html(target.data.id);
+			  menuObj.css({left: target.x+15, top: target.y+5});
+			  menuObj.slideDown(100);
+			  menuObj.find("li.selection").each(function(i, t){
+			  $(this).click(
+				  function(){
+				  printData(target.data.id + " " + $(this).html());
+				  removeMenu();
+				  });
+			  });
+	 }
+	 
+	 var time1;
+
+	 
+	 $topology.bind("drawStart", function(e){
+	 
+	 //--
+	    timeclear();
+	    time1 = new Date; 
+	//--	
+		removeMenu();
+	 }).bind("ready", function(e, vis){
+	 
+	 //--
+		printTime("time cost :"+ (new Date - time1) +"ms");
+ 	//--
+	 	vis.addListener("click", "nodes", nodeClickHandler);
+		vis.addListener("click", "none", removeMenu);
+		vis.addListener("dragstart", "nodes", removeMenu);
+		vis.addListener("zoom", "none", removeMenu);
+	 });
+
+	 
+	  $("#drawbtn1").click(function(){
+
+				var groupOption = {
+				groupNodes :
+				[
+						{ x:200, y:0, data: { containGroup: "compute", type:"group", posAlgorithm: "vlinear"} }, //linear, circle, spiral, vlinear
+						{ x:100, y:0, data: { containGroup: "network", type:"group", posAlgorithm: "vlinear"} },
+						{ x:0, y:-30, data: { containGroup: "storage", type:"group", posAlgorithm: "vlinear"} }	
+				],
+				groupBy:"type", 
+				drawGroupNodes:true
+				};
+				
+			$topology.draw(data, "Group", groupOption);
+			
+			//--debug
+			printData(JSON.stringify(data));	
+	
+	 });
+	 
+	 
+	  
+	  $("#drawTree1").click(function(){
+
+			$topology.draw(data, "Tree");
+			
+			//--debug
+			printData(JSON.stringify(data));	
+	 });
+	 
+	 $("#drawCircle1").click(function(){
+			$topology.draw(data, "Circle");
+			printData(JSON.stringify(data));	
+	 });
+	 
+	 $("#drawRadial").click(function(){
+			$topology.draw(data, "Radial");
+			printData(JSON.stringify(data));	
+	 });
+	 
+	 $("#drawPreset").click(function(){
+			$topology.draw(data, "Preset");
+			printData(JSON.stringify(data));	
+	 });
+	 
+	  $("#drawCompoundSpringEmbedder").click(function(){
+			$topology.draw(data, "CompoundSpringEmbedder");
+			printData(JSON.stringify(data));	
+	 });
+	 
+	  $("#drawForceDirected").click(function(){
+			$topology.draw(data, "ForceDirected");
+			printData(JSON.stringify(data));	
+	 });
+	 
+	 
+	 $("#drawbtn2").click(function(){
+	 
+		var groupOption = {
+				groupNodes :
+				[
+						{ x:0, y:0,   data: { containGroup: "1", type:"group", posAlgorithm: "circle"} }, //linear, circle, spiral, vlinear
+						{ x:0, y:0,   data: { containGroup: "2", type:"group"} },
+						{ x:0, y:500, data: { containGroup: "3", type:"group", posAlgorithm: "spiral"} },
+						{ x:0, y:500, data: { containGroup: "4", type:"group"}	}					
+				],
+				groupBy:"g", 
+				drawGroupNodes:false
+				};
+				
+		$topology.draw(data2,"Group", groupOption);
+		
+				//--debug
+				printData(JSON.stringify(data2));	
+	 });
+	
+ 
+		
+ $("#drawbtn3").click(function(){
+ 	var groupOption = {
+			groupNodes:[
+						{ x:0, y:0,   data: { containGroup: "1", type:"group", posAlgorithm: "spiral"} }, //linear, circle, spiral, vlinear
+						{ x:0, y:0,   data: { containGroup: "2", type:"group", posAlgorithm: "vlinear"} },
+						{ x:500, y:0, data: { containGroup: "3", type:"group", posAlgorithm: "spiral"}},
+						{ x:500, y:0, data: { containGroup: "4", type:"group"}}
+			],
+			groupBy:"g", 
+			drawGroupNodes:false
+			};
+			
+	
+	$topology.draw(data2,"Group", groupOption);
+	
+			//--debug
+			printData(JSON.stringify(data2));
+ });
+ 
+ 
+ 		
+ $("#drawbtn4").click(function(){
+	$topology.draw(data2, "ForceDirected");
+			printData(JSON.stringify(data2));
+ });
+ 
+ 
+ 
+  $("#realdata0").click(function(){
+			var groupOption = {
+			groupNodes:[
+						{ x:0, y:0,   data: { containGroup: "sw", type:"group", posAlgorithm: "circle"} }, //linear, circle, spiral, vlinear
+						{ x:500, y:0,   data: { containGroup: "cht", type:"group"} },
+						{ x:0, y:0, data: { containGroup: "server", type:"group", posAlgorithm: "circle2"} }	
+			
+			],
+			groupBy:"deviceType", 
+			drawGroupNodes:false
+			};
+
+			$.getJSON("topologyJson.js", function(json){  
+			
+			var drawJson = {nodes:json.nodes, edges:json.links};
+			$topology.draw(drawJson, "Group", groupOption);
+            })   
+ });
+ 
+ 
+  $("#realdataForceDirected").click(function(){
+  
+			$.getJSON("topologyJson.js", function(json){  
+				var drawJson = {nodes:json.nodes, edges:json.links};
+				
+				$topology.draw(drawJson, "ForceDirected");
+            })   
+ });
+ 
+  $("#realdataTree").click(function(){
+  
+			$.getJSON("topologyJson.js", function(json){  
+				var drawJson = {nodes:json.nodes, edges:json.links};
+				
+				$topology.draw(drawJson, "Tree");
+            })   
+ });
+
+
+  $("#reDraw").click(function(){
+
+
+
+ });
+ 
+ 
+ $("#addbtn").click(function(){
+ 
+var vis =  $topology.getVis()
+ vis.panBy(0, 10);
+
+ });
+ 
+ 
+  
+ $("#exportBtn").click(function(){
+ 
+var vis =  $topology.getVis()
+vis.exportNetwork('png', 'http://localhost/export2.php?type=png'); 
+
+
+ });
+ 
+ 
+ });
+ 
+
+</script>
+<style></style>
+
+
+</head>
+<body>
+	<div id="cytoscapeweb"></div>
+	<div id="radarViewContainer"></div>
+	
+	 simple data:<button id='drawbtn1'>group</button>
+	 <button id='drawTree1'>Tree</button>
+	 <button id='drawCircle1'>Circle</button>
+	 <button id='drawRadial'>Radial</button>
+	 <button id='drawPreset'>Preset</button>
+	 <button id='drawCompoundSpringEmbedder'>CompoundSpringEmbedder</button>
+	 <button id='drawForceDirected'>ForceDirected </button>
+	 
+	<br>
+	 test data:<button id='drawbtn2'>group 1</button>
+			<button id='drawbtn3'>group 2</button>
+			
+	<button id='drawbtn4'>forcedirected</button>
+<br>
+
+
+real data:<button id='realdata0'>group</button>
+<button id='realdataForceDirected'>forcedirected</button>
+<button id='realdataTree'>Tree</button>
+<br>
+<br>
+	<button id='addbtn'>add</button>
+	
+		
+		<button id='addNet'>addNet</button>
+			<button id='debugger'>debugger</button>
+			
+			
+				<button id='clearAll'>clearAll</button>
+					<button id='reDraw'>reDraw</button>
+					
+						<button id="deleteNode">deleteNode</button>
+			
+			<div id='timeDiv'></div>
+			<div id='debugDiv'></div>
+
+			<input id='dataArea' />
+			<button id='drawData'>drawData</button>
+			<button id='addData'>addData</button>
+			
+			<button id='exportBtn'>export</button>
+	<!--web link-->
+	<br />
+	<br />
+	<br />
+	<a href='aaaaa' class='ui-state-default ui-corner-all'
+		target='http://cytoscapeweb.cytoscape.org/'>reference</a>
+
+
+</body>
+</html>
