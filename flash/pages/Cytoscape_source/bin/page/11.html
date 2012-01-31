@@ -269,14 +269,12 @@
 				};
 				
 				
-					$vis.updateOptions({
-						drawOptions:{
+					$vis.updateDrawOptions({
 						   layout:{name:"Group", options:groupOption}
 						
 						}
-					});
-				
-				
+					);
+					
 				$vis.drawData(data);
 		
 				//--debug
@@ -317,6 +315,12 @@
 				$vis.drawData(drawJson);
             })   
 		});
+		
+		
+		$("#debugBtn").click(function(){
+		
+		debugger;
+		})
 
  });
  
@@ -354,7 +358,7 @@ real data:<button id='realdata0'>group</button>
 <button id='realdataTree'>Tree</button>
 <br>
 <br>
-	<button id='addbtn'>add</button>
+	<button id='debugBtn'>debugBtn</button>
 	
 		
 		<button id='addNet'>addNet</button>
