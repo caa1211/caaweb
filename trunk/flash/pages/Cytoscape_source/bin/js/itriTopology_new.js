@@ -433,7 +433,7 @@
 			if(addSchema.edges != undefined)
 				$.each(addSchema.edges, function(i, t)
 				{
-					_settings.drawOptions.dataSchema.edges.push(t);
+					_settings.drawOptions.network.dataSchema.edges.push(t);
 				});
 	 };
 	 
@@ -443,7 +443,7 @@
 	 
 	 this.newSchema = function(newSchema){
 			if(newSchema!=undefined)
-			_settings.drawOptions.dataSchema = newSchema;
+			_settings.drawOptions.network.dataSchema = newSchema;
 	 };
 	 
 	 
