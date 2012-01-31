@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+
+
+<script type="text/javascript" src="js/AC_OETags.min.js"></script>
+<script type="text/javascript" src="js/json2.min.js"></script>
+<script type="text/javascript" src="js/cytoscapeweb.min.js"></script>
+
+<script type="text/javascript" src="js/itriTopology_new.js"></script>
+
+<script type="text/javascript">
+	$(function() {
+	
+
+		var options = {
+			swfPath : "swf/CytoscapeWeb",
+			flashInstallerPath : "swf/playerProductInstall",
+			flashAlternateContent : "Le Flash Player est nécessaire."
+		};
+
+		var json = {
+		dataSchema: 
+					{
+              nodes: [
+						{ name: "label", type: "string" },
+						{ name: "type", type: "string" }
+                     ]},     
+			data : {
+				nodes : [ 
+				{id : "1"}, {id : "2"} 
+				],
+				edges : [
+				{id : "2to1",target : "1",source : "2"} 
+				]
+			}
+		};
+
+		var visual_style = {
+			global : {
+				backgroundColor : "#FFFFFF"
+			},
+			nodes : {},
+			edges: {}
+			};
+			
+		var layout = {
+			name : "Tree",
+			options:{orientation : "leftToRight"}
+		};
+		
+
+		var drawOption = {
+			network : json,
+			edgeLabelsVisible : true,
+			visualStyle : visual_style,
+			layout : layout
+		};
+		
+		//var vis = new org.cytoscapeweb.Visualization("cytoscapeweb", options);
+		//vis.draw(drawOption);
+		//
+		var $vis =$.itriTopology("cytoscapeweb", options);
+		$vis.draw(drawOption);
+		
+		$vis.ready(function () {
+
+		});
+			
+	});
+</script>
+<style>
+/* The Cytoscape Web container must have its dimensions set. */
+html,body {
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+#cytoscapeweb {
+	width: 50%;
+	height: 50%;
+	border: solid 1px red;
+}
+/*
+#cytoscapeweb {
+	width: 500px;
+	height: 500px;
+	border: solid 1px black;
+}*/
+</style>
+
+
+</head>
+<body>
+	<div id="cytoscapeweb"></div>
+
+	<!--web link-->
+	<br />
+	<br />
+	<br />
+	<a href='aaaaa' class='ui-state-default ui-corner-all'
+		target='http://cytoscapeweb.cytoscape.org/'>reference</a>
+
+
+</body>
+</html>
