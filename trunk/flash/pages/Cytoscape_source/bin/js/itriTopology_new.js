@@ -438,7 +438,7 @@
 	 };
 	 
 	 this.getSchema = function(){
-			return _settings.drawOptions.dataSchema;
+			return _settings.drawOptions.network.dataSchema;
 	 };
 	 
 	 this.newSchema = function(newSchema){
