@@ -122,6 +122,10 @@
 			$.extend(true, _settings, newOptions);
 	   }
 	   
+	   this.updateDrawOptions = function(newOptions){
+			$.extend(true, _settings.drawOptions, newOptions);
+	   }
+
 	   this.getDefaultOptions = function(){
 			return defaultSetting;
 	   }
