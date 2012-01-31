@@ -9,6 +9,7 @@
 
     itriTopology : function(id, settings){
        
+	     // default setting----------------------------------------------------------
 	   	var groupLayoutSchema = {
 							nodes: [
 							{ name: "label", type: "string" },
@@ -112,6 +113,9 @@
 			onReady: function(){},
 			onDrawStart: function(){}
        };
+	   
+	   //----------------------------------------------------------
+	   
 	   
 	   var _settings = $.extend(true, defaultSetting, settings);
 		
