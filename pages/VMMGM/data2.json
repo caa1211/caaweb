@@ -1,6 +1,6 @@
 	{
-				id: "vSwitch0",
-				label: "Standard Switch: vSwitch0",
+				id: "vSwitch1",
+				label: "Standard Switch: vSwitch1",
 				
 				vm_port_group:
 				{

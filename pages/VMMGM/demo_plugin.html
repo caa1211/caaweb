@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--common css-->
+	
+	    <link href="../../css/reset.css" rel="stylesheet" type="text/css"/>
+	
+    <link href="../../css/themes/custom-theme/jquery-ui-1.7.2.custom.css" rel="stylesheet" type="text/css"/>
+    <link href="../../css/themes/myCustom.css" rel="stylesheet" type="text/css"/>
+    <link href="../../css/demos.css" rel="stylesheet" type="text/css" />
+    
+    
+    <!--common js-->
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript"></script>
+	<script src="itriVlanTopology.js" type="text/javascript"></script>
+
+    
+    <script type="text/javascript">
+
+        $(function()
+        {
+		
+			var $vlanContainer =   $("#vSwitchArea").itriVlanTopologyContainer();
+			
+			
+		$("#btn").click(function(){
+		
+		
+	
+		  
+		   $.getJSON("data.json", function(jsonObj){
+		   
+			  $vlanContainer.add(jsonObj);
+			  
+		   });      
+
+		   
+		   $.getJSON("data2.json", function(jsonObj){
+		   
+			  $vlanContainer.add(jsonObj);
+			  
+		   });  
+		   
+		   
+		   
+		   /*
+		     $vlanContainer.removeById("vSwitch0");
+			 
+			 $vlanContainer.clear();
+			 
+			 $vlanContainer.updateById("vSwitch0", jsonObj);
+			 
+			 
+			var switch =  $vlanContainer.getSwitchById("vSwitch0");
+			
+			  
+		   */
+			 
+			 
+				
+		
+		});
+       
+			
+		$("#testbtn").click(function(){
+		 $vlanContainer.removeById("vSwitch0");
+
+		});
+        
+
+		
+		$("#debugbtn").click(function(){
+          debugger;
+		});
+		
+        });
+  
+    </script> 
+
+</head>
+<style>
+#vSwitchArea{border: solid 2px black;}
+
+.vlanTable { left:100px; width:50%;  position:relative; margin-top:30px; border: solid 1px red;}
+.vlanTable ul, li{position:relative;}
+.vlanTable h1{ font-weight:550; font-size:14px; margin-top:5px; margin-left:10px;}
+.vlanTable .dotline{ display:block; width:100%;margin:0 auto; line-height:10px; margin-bottom:20px; border-bottom:#999 2px dotted; padding-bottom:10px;}
+.vlanTable .dotline_s{ display:block; width:100%;margin:0 auto; line-height:10px; margin-bottom:2px; border-bottom:#999 1px dotted; padding-bottom:5px;}
+.vlanTable li {}
+
+table,th {valign:top; border: 0px;}
+.vmk_port{}
+.vm_port_group{}
+
+.vlanTable .group{position:relative; border: solid 1px #d3d3d3;  margin:0 auto; margin-bottom:15px; padding: 10px 5px 10px 5px;}
+.vlanTable h2{position:absolute; z-index:10; color:#72726c;font-weight:600; background:#fff;left:10px; top:-20px; padding-left:5px; padding-right:5px;  white-space:nowrap;}
+.vlanTable h3{font-size:14px;padding-top:0px; font-weight:600; }
+.vlanTable h4{font-size:12px;padding-top:5px; font-weight:600; color:#72726c;}
+.vlanTable h5{font-size:13px;padding-top: 12px; font-weight:600;}
+.vlanTable .map{background:#cccccc; border: solid 2px #5b5b5b; margin:0px 3px 0px 3px; height:183px; display:block;}
+.vlanTable .subGroup{ }
+.vlanTable .i_network{ position:absolute; background:url(images/network.png); width:32px; height:32px; right:0px; top:0px;}
+ .vlanTable .rightPanel {}
+.vlanTable .rightPanel h3 {font-size:13px;padding-top:10px;padding-bottom:6px; font-weight:600; white-space:nowrap; }
+.vlanTable .i_adapter{width:32px;height:32px; background:url(images/adapter.png) no-repeat 0px 0px;float:left; margin-left:15px; margin-right:5px;}
+.vlanTable .i_line{width:32px;height:32px; background:url(images/adapter.png) no-repeat 0px 0px;float:left;}
+.vlanTable .i_vm{ position:absolute; width:32px;height:32px;  right:0px; top:0px; }
+
+.vlanTable .i_vm.enable{  background:url(images/vmStart.png) no-repeat 0px 0px; }
+.vlanTable .i_vm.disable{ background:url(images/vmStop.png) no-repeat 0px 0px; }
+
+.vlanTable .line{ background:#949494;}
+.vlanTable .dot_c {width:12px; height:12px; top:11px; left:-16px;  position:absolute;}
+.vlanTable .dot_l {top:10px; left:36px; width: 12px; height:12px; position:absolute;}
+.vlanTable .dot_r {width:12px; height:12px; top:11px; left:6px;  position:absolute;}
+
+.vlanTable .centerPanel {width:30px;}
+.vlanTable .rightPanel {width:40%;}
+
+</style>
+<body>
+
+
+<div id="vSwitchArea">
+
+</div>
+
+
+
+
+ <button id="btn"> get data </button>
+ 
+ 
+ <button id="testbtn"> test </button>
+  <button id="debugbtn"> debug </button>
+<!--web link-->
+<br/><br/><br/>
+<a href='aaaaa' 
+class='ui-state-default ui-corner-all' 
+target='_blank'>reference</a>
+
+
+</body>
+</html>
