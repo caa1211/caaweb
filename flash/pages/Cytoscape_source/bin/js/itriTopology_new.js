@@ -133,7 +133,10 @@
 	   this.getCurrentOptions = function(){
 			return _settings;
 	   }
-	   
+
+	   this.getDrawOptions = function(){
+			return _settings.drawOptions;
+	   }
 	   
 		//-----group layout begin	
 	   	function doGroup(drawData, drawOption) {
@@ -380,7 +383,7 @@
 			
 			if(drawOptions.layout.name == "Group")
 			{
-				var newOption = $.extend({}, drawOptions);
+				var newOption = $.extend(true, {}, drawOptions);
 				newOption.layout.name = "Tree";
 				
 				if(groupLayoutSchema.nodes != undefined)
