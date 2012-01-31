@@ -1,10 +1,12 @@
-	{
+﻿	var switchOption = {
+	
 				id: "vSwitch0",
 				label: "Standard Switch: vSwitch0",
 				
-				vm_port_group:
+				VM_Port_Group:
 				{
 					groupLabel:"Virtual Machine Port Group",
+					id: "vm_network",
 					label: "VM Network",
 					children:[
 						{
@@ -20,9 +22,10 @@
 								
 					    ]
 				},
-				vmKernel_port_group:
+				VMkernel_Port_Group:
 				{
 						groupLabel: "VMkernel Port",
+						id: "management_network",
 						label:"Management Network",
 						children:[
 							{
@@ -31,9 +34,10 @@
 							}
 							]
 				},
-				physical_adapters:
+				Physical_Adapters:
 				{
 						groupLabel: "Physical Adapters",
+						id: "physical_Adapters",
 						children:[
 							{
 									id:"vmnic0",
@@ -46,6 +50,7 @@
 							]
 				}
 
-	}
+			};
 
+$("#switch0").vlanTable(switchOption);
  

@@ -74,14 +74,19 @@ table,th {valign:top; border: 0px;}
 .vlanTable .i_line{width:32px;height:32px; background:url(images/adapter.png) no-repeat 0px 0px;float:left;}
 .vlanTable .i_vm{ position:absolute; width:32px;height:32px;  right:0px; top:0px; }
 
-.vlanTable .i_vm.enable{  background:url(images/vm.jpg) no-repeat 0px 0px; }
-.vlanTable .i_vm.disable{ background:url(images/vm.jpg) no-repeat 0px 0px; }
+.vlanTable .i_vm.enable{  background:url(images/vmStart.png) no-repeat 0px 0px; }
+.vlanTable .i_vm.disable{ background:url(images/vmStop.png) no-repeat 0px 0px; }
 
 .vlanTable .line{ background:#949494;}
 .vlanTable .dot_c {width:12px; height:12px; top:11px; left:-16px;  position:absolute;}
 .vlanTable .dot_l {top:10px; left:36px; width: 12px; height:12px; position:absolute;}
 .vlanTable .dot_r {width:12px; height:12px; top:11px; left:6px;  position:absolute;}
 
+.vlanTable .leftPanel { height:20px;}
+.vlanTable .centerPanel {width:30px;}
+.vlanTable .rightPanel {width:40%;}
+
+ 
 </style>
 <body>
 <div class="vlanTable">
@@ -109,7 +114,7 @@ table,th {valign:top; border: 0px;}
 						<li>
 							<ul class="subGroup" style=""><div class="dotline_s"></div>
 								<li><h5>vCenterWin2K3</h5> 
-								<span class="i_vm enable">
+								<span class="i_vm disable">
 								<!--img src="images/line.gif" style="margin-top:16px; margin-left:33px; width:20px; height:2px;"/-->
 								<div class="line" style="margin-top:16px; margin-left:33px; width:20px; height:2px;">
 									<img src="images/dot.png" style="" class="dot_l"/>	
@@ -155,7 +160,7 @@ table,th {valign:top; border: 0px;}
 		</ul>
 
 	</th>
-	 <th class="centerPanel" style="width:30px;">
+	 <th class="centerPanel">
 		<div class="map" >
 		    <div class="line" style="margin-top:25px; margin-left:10px; width:2px; height:140px; background:gray;">
 
@@ -163,7 +168,7 @@ table,th {valign:top; border: 0px;}
 			<!--img src="images/line.gif" style="margin-top:25px; margin-left:10px; width:2px; height:140px;"/-->
 		</div>
 	 </th>
-	<th class="rightPanel" style="width:40%;">
+	<th class="rightPanel">
 		
 		<ul class="group">
 			<li class="groupT"><h2>Physical Adapters</h2></li>
