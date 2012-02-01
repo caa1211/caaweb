@@ -12,7 +12,7 @@
 							{
 										  id: "vCenterWine2K3",
 										  label: "vCenterWine2K3",
-										  status: "on"
+										  status: "off"
 							 },
 							{
 										  id: "vCenterMobileAccess",

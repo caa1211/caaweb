@@ -4,36 +4,38 @@
 				
 				vm_port_group:
 				{
-					groupLabel:"Virtual Machine Port Group",
+					title: "Virtual Machine Port Group",
 					label: "VM Network",
+					descLabel: "virtual machine(s)",
 					children:[
-						{
-									  id: "vCenterWine2K3",
-									  label: "vCenterWine2K3",
-									  status: "on"
-						 },
-						{
-									  id: "vCenterMobileAccess",
-									  label: "vCenterMobileAccess",
-									  status: "on"
-						 }
+					
+							{
+										  id: "vCenterWine2K3",
+										  label: "vCenterWine2K3",
+										  status: "on"
+							 },
+							{
+										  id: "vCenterMobileAccess",
+										  label: "vCenterMobileAccess",
+										  status: "on"
+							 }
 								
 					    ]
 				},
 				vmKernel_port_group:
 				{
-						groupLabel: "VMkernel Port",
+						title: "VMkernel Port",
 						label:"Management Network",
 						children:[
-							{
-									id:"vmk0",
-								    label: "vmk0 : 172.101.35.3"
-							}
+								{
+										id:"vmk0",
+										label: "vmk0 : 172.101.35.3"
+								}
 							]
 				},
 				physical_adapters:
 				{
-						groupLabel: "Physical Adapters",
+						title: "Physical Adapters",
 						children:[
 							{
 									id:"vmnic0",

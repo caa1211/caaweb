@@ -12,6 +12,27 @@
  * 
  */
 
+ 
+function RemoveArray(array,attachId)
+{
+    for(var i=0,n=0;i<array.length;i++)
+    {
+        if(array[i]!=attachId)
+        {
+            array[n++]=array[i]
+        }
+    }
+    array.length -= 1;
+}
+
+Array.prototype.remove = function (obj) {
+    return RemoveArray(this,obj);
+};
+
+function isArray(o) {   
+  return Object.prototype.toString.call(o) === '[object Array]';    
+} 
+	
 (function($)
 {
 
@@ -35,22 +56,113 @@
 			var rightPanel = $("<th class=\"rightPanel\"></th>");
 			trPanel.append(leftPanel, centerPanel, rightPanel);
 			var groupStr = "<ul class=\"group\"></ul>";		
+			var iNetworkStr = "<span class=\"i_network\">"	+	
+								" <div class=\"line\" style=\"margin-top:16px; margin-left:33px; width:20px; height:2px;\">" +
+									"<img src=\"images/dot.png\" class=\"dot_l\"/>" +
+								" </div>" +
+							  "</span>";
+			
 		    //left Panel		
 			var $vmportGroup;
+			
+			
+			var getGroupTitleStr = function(title){
+					return 	"<li class=\"groupT\"><h2>"+ title +"</h2></li>";
+			};
+			
+			var getGroupLabelStr = function(label){			
+			 return 	"<li><h3>"+label+"</h3>" +
+							"<span class=\"i_network\">"+
+								 "<div class=\"line\" style=\"margin-top:16px; margin-left:33px; width:20px; height:2px;\">"+
+									"<img src=\"images/dot.png\" class=\"dot_l\"/>"	+
+								 "</div>"+
+							"</span>"+
+						"</li>";
+			};
+			
+						
+			var getPAChildListStr = function(ary){
+				var str = "";
+				var header = 	"<li><ul class=\"paGroup\">";
+				var bottom = 	"</ul></li>";
+				var firstLine =  '<div class="line" style="margin-top:16px; margin-left:-35px; width:35px; height:2px;">'+
+										'<img src="images/dot.png"  class="dot_c" style=""/>'+
+										'<img src="images/dot.png"  class="dot_r" style=""/>'+
+								'</div>';
+				
+				var otherLine =  '<div class="line" style="margin-top:16px; margin-left:-15px; width:15px; height:2px;">'+
+										'<img src="images/dot.png"  class="dot_r" style=""/>'+
+								 '</div>'+
+								 '<div class="line" style="margin-top:-32px; margin-left:-15px; width:2px; height:32px;"></div>';
+								
+				for(var i=0; i<ary.length; i++)
+					{
+					  var lineStr = i==0 ? firstLine : otherLine;
+					  var tmpstr =	'<li id="'+  ary[i].id  +'"><span class="i_adapter">'+
+									 lineStr +
+									'</span><h3>'+ ary[i].label +'</h3></li>';
+					
+					  str = str + "" +tmpstr;
+					}
+				return header+""+str+""+bottom;
+			}
+
+			var getVMChildListStr = function(childAry){
+				var str = "";
+				var header = 	"<li><ul class=\"subGroup\"><div class=\"dotline_s\"></div>";
+				var bottom = 	"</ul></li>";
+				
+					for(var i=0; i<childAry.length; i++)
+					{
+					  var status = childAry[i].status =="on" ? "enable" : "disable";
+					  
+					  var tmpstr ="<li id='"+childAry[i].id+"'><h5>"+ childAry[i].label +"</h5>"+
+									"<span class=\"i_vm "+status+"\">"+
+									"<div class=\"line\" style=\"margin-top:16px; margin-left:33px; width:20px; height:2px;\">"+
+										"<img src=\"images/dot.png\"  class=\"dot_l\"/>"+
+									"</div>"+
+									"</span>"+
+									"</li>";
+					
+					  str = str + "" +tmpstr;
+					}
+				
+				return header+""+str+""+bottom;
+			}
+
+			var getGroupDescStr = function(ary){
+				var str = ""; 
+				for(var i=0; i< ary.length; i++)
+				{
+				
+					tmpstr = "<li id='"+ ary[i].id +"'><h4>"+ ary[i].label +"</h4></li>";
+					str = str + tmpstr;
+				}
+				return str;
+			}
+			
 			if(jsonObj.vm_port_group !=undefined)
 			{
 				var vmpData = jsonObj.vm_port_group;
 				$vmportGroup = $(groupStr);
-				$vmportGroup.append("<li class=\"groupT\"><h2>"+ vmpData.groupLabel +"</h2></li>");
-					
-						$vmportGroup.append("<div>asdfadfasfasf</div>");
-						$vmportGroup.append("<div>asdfadfasfasf</div>");
-							$vmportGroup.append("<div>asdfadfasfasf</div>");
-								$vmportGroup.append("<div>asdfadfasfasf</div>");
-									$vmportGroup.append("<div>asdfadfasfasf</div>");
-									
-									
-									
+				
+				//group Title
+				var groupT = getGroupTitleStr(vmpData.title);
+				$vmportGroup.append(groupT);
+				//group Label
+				var groupL = getGroupLabelStr(vmpData.label);
+				$vmportGroup.append(groupL);
+				//group Desc
+				var childLen= vmpData.children == undefined ? 0 :  vmpData.children.length
+				var groupDesc = getGroupDescStr([{ id: thisObj.id+"_vmCount" , label: childLen+"  "+vmpData.descLabel }]);
+				$vmportGroup.append(groupDesc);
+				
+				if(vmpData.children!=undefined)
+				{
+				var childListStr = getVMChildListStr(vmpData.children);
+				$vmportGroup.append(childListStr);
+				}
+				
 				leftPanel.append($vmportGroup);
 
 			}
@@ -59,17 +171,19 @@
 			{
 			    var vmkpData = jsonObj.vmKernel_port_group;
 				$vmkernelportGroup = $(groupStr);
-				$vmkernelportGroup.append("<li class=\"groupT\"><h2>"+ vmkpData.groupLabel +"</h2></li>");
-				
-				
-						$vmkernelportGroup.append("<div>asdfadfasfasf</div>");
-						$vmkernelportGroup.append("<div>asdfadfasfasf</div>");
-							$vmkernelportGroup.append("<div>asdfadfasfasf</div>");
-								$vmkernelportGroup.append("<div>asdfadfasfasf</div>");
-									$vmkernelportGroup.append("<div>asdfadfasfasf</div>");
-								
-									
-									
+				//group Title
+				var groupT = getGroupTitleStr(vmkpData.title);
+				$vmkernelportGroup.append(groupT);
+				//group label
+				var groupL = getGroupLabelStr(vmkpData.label);
+				$vmkernelportGroup.append(groupL);
+				//group Desc
+				if(vmkpData.children!=undefined)
+				{
+					var groupDesc = getGroupDescStr(vmkpData.children);
+					$vmkernelportGroup.append(groupDesc);
+				}
+					
 				leftPanel.append($vmkernelportGroup);
 			}
 			
@@ -88,63 +202,37 @@
 			{
 				var paData = jsonObj.physical_adapters;
 				$adapterGroup = $(groupStr);
-				$adapterGroup.append("<li class=\"groupT\"><h2>"+ paData.groupLabel +"</h2></li>");
+				//group Title
+				var groupT = getGroupTitleStr(paData.title);;
+				$adapterGroup.append(groupT);
 				
-				/*
-						$adapterGroup.append("<div>asdfadfasfasf</div>");
-						$adapterGroup.append("<div>asdfadfasfasf</div>");
-							$adapterGroup.append("<div>asdfadfasfasf</div>");
-								$adapterGroup.append("<div>asdfadfasfasf</div>");
-									$adapterGroup.append("<div>asdfadfasfasf</div>");
-						
-		$adapterGroup.append("<div>asdfadfasfasf</div>");
-						$adapterGroup.append("<div>asdfadfasfasf</div>");
-							$adapterGroup.append("<div>asdfadfasfasf</div>");
-								$adapterGroup.append("<div>asdfadfasfasf</div>");
-									$adapterGroup.append("<div>asdfadfasfasf</div>");
-									
-		$adapterGroup.append("<div>asdfadfasfasf</div>");
-						$adapterGroup.append("<div>asdfadfasfasf</div>");
-							$adapterGroup.append("<div>asdfadfasfasf</div>");
-								$adapterGroup.append("<div>asdfadfasfasf</div>");
-									$adapterGroup.append("<div>asdfadfasfasf</div>");
-									
-		$adapterGroup.append("<div>asdfadfasfasf</div>");
-						$adapterGroup.append("<div>asdfadfasfasf</div>");
-							$adapterGroup.append("<div>asdfadfasfasf</div>");
-								$adapterGroup.append("<div>asdfadfasfasf</div>");
-									$adapterGroup.append("<div>asdfadfasfasf</div>");
-								*/										
-									
-									
+				
+				if(paData.children!=undefined)
+				{
+				 var childListStr = getPAChildListStr(paData.children);
+				$adapterGroup.append(childListStr);
+				}
+				
+				
+				
 				rightPanel.append($adapterGroup);
+	
 			}
 			
-			
-			
-			
-			
-	
-			
-			
-			
+
 			//--
 			$thisObj.append(panelTable);
 			
 			
 			
 			//adjust map height
-
-			
 			 var leftH = $vmportGroup.innerHeight() + $vmkernelportGroup.innerHeight() +15 ;
 			 var rightH = $adapterGroup.innerHeight() + -2;
 			 var h = leftH > rightH ? leftH: rightH;
 		
-		     centerPanel.children(".map").height(h).children(".line").height(h-50);
+		     centerPanel.children(".map").height(h).children(".line").height(h-52);
 			//  centerPanel.children(".map").children(".line").height(h);
-			
-			
-			
+
 		};
 
 		
@@ -162,7 +250,7 @@ $.fn.itriVlanTopologyContainer = function(settings){
        };
        
 	    var $parent = $(this);
-		
+		var parent = this;
         var _settings = $.extend({}, defaultSetting, settings);
 		
 		var switchAry;
@@ -172,32 +260,76 @@ $.fn.itriVlanTopologyContainer = function(settings){
           switchAry = new Array();
         };
 		
-		this.add = function(jsonObj){
-		    var $vlanTableDiv = $("<div id='"+ jsonObj.id +"' class=\"vlanTable\"></div>");
-			$parent.append($vlanTableDiv);
-			var $vlanTplg = $vlanTableDiv.vlanTopology(jsonObj);
 
-			switchAry.push($vlanTplg);
-	
+		this.addElement = function(jsonObj)
+		{
+		var modifyFlag = 0;
+		for(var i=0; i< switchAry.length; i++)
+		{
+			if(switchAry[i]!=undefined && switchAry[i].id == jsonObj.id)
+			{
+			  modifyFlag = 1;
+			  break;
+			}
 		}
 		
-		this.removeById = function(id){
+		var $vlanTableDiv = $("<div id='"+ jsonObj.id +"' class=\"vlanTable\"></div>");
 		
+			if(modifyFlag==1)
+			{
+			  var befortObj = $parent.find(("#"+jsonObj.id));
+			  $vlanTableDiv.insertAfter(befortObj);
+			  befortObj.remove();
+			  //$parent.append($vlanTableDiv);
+			  $vlanTableDiv.vlanTopology(jsonObj);
+			}
+			else
+			{
+				$parent.prepend($vlanTableDiv);
+				var $vlanTplg = $vlanTableDiv.vlanTopology(jsonObj);
+				
+				$vlanTplg.hide();
+				switchAry.push($vlanTplg);
+				$vlanTplg.slideDown(300);
+			}
+		};
+		
+		
+		this.add = function(jsonObj){
+			if(isArray(jsonObj))
+			{
+				$.each(jsonObj, function(i, t){
+					parent.addElement(t)
+				});
+			}
+			else
+			this.addElement(jsonObj)
+		}
+		
+		this.remove = function(id){
 			if(id==undefined)
+			{
+			alert("[itriVlanTopology remove()]: please give the id of element");
 			return;
+			}
 			
 			$.each(switchAry, function(i, t){
 			
 				if(t.id == id)
 				{
 				$parent.find("#"+id).slideUp(300, function(){$(this).remove();});
-				switchAry.pop(t);
+				switchAry.remove(t);
 				return false;
 				}
 				
 			});
 			
 		}
+
+		this.clear = function(){
+			switchAry.length = 0;
+			$parent.children(".vlanTable").slideUp(300, function(){$(this).remove();});
+		};
 		
 		this.getAllVlanTopologys = function(){
 		
