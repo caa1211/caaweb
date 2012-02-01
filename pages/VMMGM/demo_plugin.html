@@ -21,68 +21,72 @@
         $(function()
         {
 		
-			var $vlanContainer =   $("#vSwitchArea").itriVlanTopologyContainer();
-			
-			
-		$("#btn").click(function(){
-		
-		
-	
-		  
-		   $.getJSON("data.json", function(jsonObj){
-		   
-			  $vlanContainer.add(jsonObj);
-			  
-		   });      
+		var $vlanContainer =   $("#vSwitchContainer").itriVlanTopologyContainer().css("border", "solid 1px blue");
 
-		   
-		   $.getJSON("data2.json", function(jsonObj){
-		   
-			  $vlanContainer.add(jsonObj);
-			  
-		   });  
-		   
-		   
-		   
-		   /*
-		     $vlanContainer.removeById("vSwitch0");
-			 
-			 $vlanContainer.clear();
-			 
-			 $vlanContainer.updateById("vSwitch0", jsonObj);
-			 
-			 
-			var switch =  $vlanContainer.getSwitchById("vSwitch0");
-			
-			  
-		   */
-			 
-			 
 				
-		
+		$("#getSwitch0").click(function(){
+		   $.getJSON("switch0.json", function(jsonObj){
+			  $vlanContainer.add(jsonObj);
+		   });      
 		});
-       
+		
+		$("#getSwitch1").click(function(){
+		   $.getJSON("switch1.json", function(jsonObj){
+			  $vlanContainer.add(jsonObj);
+		   });      
+		});
+		
+		$("#getSwitchAry").click(function(){
+		   $.getJSON("switchAry.json", function(jsonObj){
+					$vlanContainer.add(jsonObj);
+		   });      
+		});
+		
+		
+		$("#removeSwitch0").click(function(){
+  
+			$vlanContainer.remove("vSwitch0");
+		});
+		
+		$("#removeSwitch1").click(function(){
+			$vlanContainer.remove("vSwitch1");
+		});
+		
+		$("#clearBtn").click(function(){
+			$vlanContainer.clear();
+		});
+		
+		
 			
-		$("#testbtn").click(function(){
-		 $vlanContainer.removeById("vSwitch0");
+					$("#btn").click(function(){
+			  
+					   $.getJSON("switch1.json", function(jsonObj){
+						  $vlanContainer.add(jsonObj);
+					   });      
 
-		});
-        
+					   
+					   $.getJSON("data2.json", function(jsonObj){
+						  $vlanContainer.add(jsonObj);
+					   });  
 
-		
-		$("#debugbtn").click(function(){
-          debugger;
-		});
-		
+					});
+
+					$("#testbtn").click(function(){
+					 $vlanContainer.removeById("vSwitch0");
+
+					});
+					$("#debugbtn").click(function(){
+					  debugger;
+					});
+					
         });
   
     </script> 
 
 </head>
 <style>
-#vSwitchArea{border: solid 2px black;}
-
-.vlanTable { left:100px; width:50%;  position:relative; margin-top:30px; border: solid 1px red;}
+#vSwitchContainer {width:550px; margin-left:100px;}
+.vlanTable { width:100%; margin:0 auto;  position:relative; margin-top:30px; border: solid 1px red;}
 .vlanTable ul, li{position:relative;}
 .vlanTable h1{ font-weight:550; font-size:14px; margin-top:5px; margin-left:10px;}
 .vlanTable .dotline{ display:block; width:100%;margin:0 auto; line-height:10px; margin-bottom:20px; border-bottom:#999 2px dotted; padding-bottom:10px;}
@@ -115,23 +119,31 @@ table,th {valign:top; border: 0px;}
 .vlanTable .dot_l {top:10px; left:36px; width: 12px; height:12px; position:absolute;}
 .vlanTable .dot_r {width:12px; height:12px; top:11px; left:6px;  position:absolute;}
 
+.vlanTable .leftPanel { height:20px;}
 .vlanTable .centerPanel {width:30px;}
 .vlanTable .rightPanel {width:40%;}
-
 </style>
 <body>
 
 
-<div id="vSwitchArea">
+<div id="vSwitchContainer">
 
 </div>
 
 
 
-
- <button id="btn"> get data </button>
- 
- 
+  <br>
+  <button id="getSwitch0"> get switch0</button>
+  <button id="getSwitch1"> get switch1</button>
+  <button id="getSwitchAry"> get switch2, 3, 4</button>
+   
+  <br>
+  <button id="removeSwitch0"> remove switch0</button>
+  <button id="removeSwitch1"> remove switch1</button>
+   <br>
+  <button id="clearBtn"> clear </button>
+  <br>
+   <br>
  <button id="testbtn"> test </button>
   <button id="debugbtn"> debug </button>
 <!--web link-->

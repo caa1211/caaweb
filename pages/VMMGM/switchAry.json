@@ -1,0 +1,176 @@
+	[
+	{
+				id: "vSwitch2",
+				label: "Standard Switch: vSwitch2",
+				
+				vm_port_group:
+				{
+					title: "Virtual Machine Port Group",
+					label: "VM Network",
+					descLabel: "virtual machine(s)",
+					children:[
+					
+							{
+										  id: "vCenterWine2K3",
+										  label: "vCenterWine2K3",
+										  status: "off"
+							 },
+							{
+										  id: "vCenterMobileAccess",
+										  label: "vCenterMobileAccess",
+										  status: "off"
+							 },
+							 {
+										  id: "vCenterMobileAccess2",
+										  label: "adfafd",
+										  status: "off"
+							 }
+								
+					    ]
+				},
+				vmKernel_port_group:
+				{
+						title: "VMkernel Port",
+						label:"Management Network",
+						children:[
+								{
+										id:"vmk0",
+										label: "vmk0 : 172.101.35.3"
+								}
+							]
+				},
+				physical_adapters:
+				{
+						title: "Physical Adapters",
+						children:[
+							{
+									id:"vmnic0",
+									label: "vmnic0  1000  Full"	
+							},
+							{
+									id:"vmnic2",
+									label: "vmnic2  1000  Full"	
+							}
+							]
+				}
+
+	},
+	{
+				id: "vSwitch3",
+				label: "Standard Switch: vSwitch3",
+				
+				vm_port_group:
+				{
+					title: "Virtual Machine Port Group",
+					label: "VM Network",
+					descLabel: "virtual machine(s)",
+					children:[
+					
+							{
+										  id: "vCenterWine2K3",
+										  label: "vCenterWine2K3",
+										  status: "off"
+							 },
+							{
+										  id: "vCenterMobileAccess",
+										  label: "vCenterMobileAccess",
+										  status: "off"
+							 },
+							 {
+										  id: "vCenterMobileAccess2",
+										  label: "adfafd",
+										  status: "off"
+							 }
+								
+					    ]
+				},
+				vmKernel_port_group:
+				{
+						title: "VMkernel Port",
+						label:"Management Network",
+						children:[
+								{
+										id:"vmk0",
+										label: "vmk0 : 172.101.35.3"
+								}
+							]
+				},
+				physical_adapters:
+				{
+						title: "Physical Adapters",
+						children:[
+							{
+									id:"vmnic0",
+									label: "vmnic0  1000  Full"	
+							},
+							{
+									id:"vmnic2",
+									label: "vmnic2  1000  Full"	
+							}
+							]
+				}
+
+	},
+	{
+				id: "vSwitch4",
+				label: "Standard Switch: vSwitch4",
+				
+				vm_port_group:
+				{
+					title: "Virtual Machine Port Group",
+					label: "VM Network",
+					descLabel: "virtual machine(s)",
+					children:[
+					
+							{
+										  id: "vCenterWine2K3",
+										  label: "vCenterWine2K3",
+										  status: "off"
+							 },
+							{
+										  id: "vCenterMobileAccess",
+										  label: "vCenterMobileAccess",
+										  status: "off"
+							 },
+							 {
+										  id: "vCenterMobileAccess2",
+										  label: "adfafd",
+										  status: "off"
+							 }
+								
+					    ]
+				},
+				vmKernel_port_group:
+				{
+						title: "VMkernel Port",
+						label:"Management Network",
+						children:[
+								{
+										id:"vmk0",
+										label: "vmk0 : 172.101.35.3"
+								}
+							]
+				},
+				physical_adapters:
+				{
+						title: "Physical Adapters",
+						children:[
+							{
+									id:"vmnic0",
+									label: "vmnic0  1000  Full"	
+							},
+							{
+									id:"vmnic2",
+									label: "vmnic2  1000  Full"	
+							}
+							]
+				}
+
+	}
+	
+	
+	]
+	
+	
+
+ 

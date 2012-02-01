@@ -1,6 +1,6 @@
 	{
-				id: "vSwitch0",
-				label: "Standard Switch: vSwitch0",
+				id: "vSwitch1",
+				label: "Standard Switch: vSwitch1",
 				
 				vm_port_group:
 				{
@@ -12,17 +12,12 @@
 							{
 										  id: "vCenterWine2K3",
 										  label: "vCenterWine2K3",
-										  status: "on"
+										  status: "off"
 							 },
 							{
 										  id: "vCenterMobileAccess",
 										  label: "vCenterMobileAccess",
-										  status: "off"
-							 },
-							 {
-										  id: "vCenterMobileAccess2",
-										  label: "adfafd",
-										  status: "off"
+										  status: "on"
 							 }
 								
 					    ]
@@ -49,6 +44,10 @@
 							{
 									id:"vmnic2",
 									label: "vmnic2  1000  Full"	
+							},
+							{
+									id:"vmnic3",
+									label: "vmnic3  1000  Full"	
 							}
 							]
 				}
