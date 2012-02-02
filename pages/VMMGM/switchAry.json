@@ -1,176 +1,240 @@
-	[
-	{
-				id: "vSwitch2",
-				label: "Standard Switch: vSwitch2",
-				
-				vm_port_group:
-				{
-					title: "Virtual Machine Port Group",
-					label: "VM Network",
-					descLabel: "virtual machine(s)",
-					children:[
-					
-							{
-										  id: "vCenterWine2K3",
-										  label: "vCenterWine2K3",
-										  status: "off"
-							 },
-							{
-										  id: "vCenterMobileAccess",
-										  label: "vCenterMobileAccess",
-										  status: "off"
-							 },
-							 {
-										  id: "vCenterMobileAccess2",
-										  label: "adfafd",
-										  status: "off"
-							 }
-								
-					    ]
-				},
-				vmKernel_port_group:
-				{
-						title: "VMkernel Port",
-						label:"Management Network",
-						children:[
-								{
-										id:"vmk0",
-										label: "vmk0 : 172.101.35.3"
-								}
-							]
-				},
-				physical_adapters:
-				{
-						title: "Physical Adapters",
-						children:[
-							{
-									id:"vmnic0",
-									label: "vmnic0  1000  Full"	
-							},
-							{
-									id:"vmnic2",
-									label: "vmnic2  1000  Full"	
-							}
-							]
-				}
-
-	},
+[
 	{
 				id: "vSwitch3",
 				label: "Standard Switch: vSwitch3",
-				
-				vm_port_group:
-				{
-					title: "Virtual Machine Port Group",
-					label: "VM Network",
-					descLabel: "virtual machine(s)",
-					children:[
-					
+				leftChildren:[
+						{
+							title: "VM Network1",
+							label: "virtual machine(s)",
+							type: "vlan",
+							children:[
+							
+									{
+												  id: "vCenterWine2K3",
+												  label: "vCenterWine2K3",
+												  status: "off"
+									 },
+									{
+												  id: "vCenterMobileAccess",
+												  label: "vCenterMobileAccess",
+												  status: "off"
+									 },
+									 {
+												  id: "vCenterMobileAccess2",
+												  label: "adfafd",
+												  status: "off"
+									 }
+										
+								]
+						},
+						{
+							title: "VM Network2",
+							label: "virtual machine(s)",
+							type: "vlan",
+							children:[
+							
+									{
+												  id: "vCenterWine2K3_2",
+												  label: "vCenterWine2K3",
+												  status: "off"
+									 },
+									{
+												  id: "vCenterMobileAccess_2",
+												  label: "vCenterMobileAccess",
+												  status: "off"
+									 },
+									 {
+												  id: "vCenterMobileAccess2_2",
+												  label: "adfafd",
+												  status: "off"
+									 }
+										
+								]
+						}
+						
+				],
+				rightChildren:[
 							{
-										  id: "vCenterWine2K3",
-										  label: "vCenterWine2K3",
-										  status: "off"
-							 },
-							{
-										  id: "vCenterMobileAccess",
-										  label: "vCenterMobileAccess",
-										  status: "off"
-							 },
-							 {
-										  id: "vCenterMobileAccess2",
-										  label: "adfafd",
-										  status: "off"
-							 }
-								
-					    ]
-				},
-				vmKernel_port_group:
-				{
-						title: "VMkernel Port",
-						label:"Management Network",
-						children:[
-								{
-										id:"vmk0",
-										label: "vmk0 : 172.101.35.3"
-								}
-							]
-				},
-				physical_adapters:
-				{
-						title: "Physical Adapters",
-						children:[
-							{
-									id:"vmnic0",
-									label: "vmnic0  1000  Full"	
-							},
-							{
-									id:"vmnic2",
-									label: "vmnic2  1000  Full"	
+								title: "Physical Adapters",
+								type: "adapter",
+								children:[
+									{
+											id:"vmnic0",
+											label: "vmnic0  1000  Full"	
+									},
+									{
+											id:"vmnic2",
+											label: "vmnic2  1000  Full"	
+									},
+									{
+											id:"vmnic3",
+											label: "vmnic3  1000  Full"	
+									}
+								]
 							}
-							]
-				}
-
-	},
-	{
-				id: "vSwitch4",
-				label: "Standard Switch: vSwitch4",
-				
-				vm_port_group:
-				{
-					title: "Virtual Machine Port Group",
-					label: "VM Network",
-					descLabel: "virtual machine(s)",
-					children:[
-					
-							{
-										  id: "vCenterWine2K3",
-										  label: "vCenterWine2K3",
-										  status: "off"
-							 },
-							{
-										  id: "vCenterMobileAccess",
-										  label: "vCenterMobileAccess",
-										  status: "off"
-							 },
-							 {
-										  id: "vCenterMobileAccess2",
-										  label: "adfafd",
-										  status: "off"
-							 }
-								
-					    ]
-				},
-				vmKernel_port_group:
-				{
-						title: "VMkernel Port",
-						label:"Management Network",
-						children:[
-								{
-										id:"vmk0",
-										label: "vmk0 : 172.101.35.3"
-								}
-							]
-				},
-				physical_adapters:
-				{
-						title: "Physical Adapters",
-						children:[
-							{
-									id:"vmnic0",
-									label: "vmnic0  1000  Full"	
-							},
-							{
-									id:"vmnic2",
-									label: "vmnic2  1000  Full"	
-							}
-							]
-				}
+				]
 
 	}
-	
-	
-	]
-	
-	
+
+ ,
+ 
+ 	{
+				id: "vSwitch4",
+				label: "Standard Switch: vSwitch4",
+				leftChildren:[
+						{
+							title: "VM Network1",
+							label: "virtual machine(s)",
+							type: "vlan",
+							children:[
+							
+									{
+												  id: "vCenterWine2K3",
+												  label: "vCenterWine2K3",
+												  status: "off"
+									 },
+									{
+												  id: "vCenterMobileAccess",
+												  label: "vCenterMobileAccess",
+												  status: "off"
+									 },
+									 {
+												  id: "vCenterMobileAccess2",
+												  label: "adfafd",
+												  status: "off"
+									 }
+										
+								]
+						},
+						{
+							title: "VM Network2",
+							label: "virtual machine(s)",
+							type: "vlan",
+							children:[
+							
+									{
+												  id: "vCenterWine2K3_2",
+												  label: "vCenterWine2K3",
+												  status: "off"
+									 },
+									{
+												  id: "vCenterMobileAccess_2",
+												  label: "vCenterMobileAccess",
+												  status: "off"
+									 },
+									 {
+												  id: "vCenterMobileAccess2_2",
+												  label: "adfafd",
+												  status: "off"
+									 }
+										
+								]
+						}
+						
+				],
+				rightChildren:[
+							{
+								title: "Physical Adapters",
+								type: "adapter",
+								children:[
+									{
+											id:"vmnic0",
+											label: "vmnic0  1000  Full"	
+									},
+									{
+											id:"vmnic2",
+											label: "vmnic2  1000  Full"	
+									},
+									{
+											id:"vmnic3",
+											label: "vmnic3  1000  Full"	
+									}
+								]
+							}
+				]
+
+	}
+
+ ,
+ 
+ 	{
+				id: "vSwitch5",
+				label: "Standard Switch: vSwitch5",
+				leftChildren:[
+						{
+							title: "VM Network1",
+							label: "virtual machine(s)",
+							type: "vlan",
+							children:[
+							
+									{
+												  id: "vCenterWine2K3",
+												  label: "vCenterWine2K3",
+												  status: "off"
+									 },
+									{
+												  id: "vCenterMobileAccess",
+												  label: "vCenterMobileAccess",
+												  status: "off"
+									 },
+									 {
+												  id: "vCenterMobileAccess2",
+												  label: "adfafd",
+												  status: "off"
+									 }
+										
+								]
+						},
+						{
+							title: "VM Network2",
+							label: "virtual machine(s)",
+							type: "vlan",
+							children:[
+							
+									{
+												  id: "vCenterWine2K3_2",
+												  label: "vCenterWine2K3",
+												  status: "off"
+									 },
+									{
+												  id: "vCenterMobileAccess_2",
+												  label: "vCenterMobileAccess",
+												  status: "off"
+									 },
+									 {
+												  id: "vCenterMobileAccess2_2",
+												  label: "adfafd",
+												  status: "off"
+									 }
+										
+								]
+						}
+						
+				],
+				rightChildren:[
+							{
+								title: "Physical Adapters",
+								type: "adapter",
+								children:[
+									{
+											id:"vmnic0",
+											label: "vmnic0  1000  Full"	
+									},
+									{
+											id:"vmnic2",
+											label: "vmnic2  1000  Full"	
+									},
+									{
+											id:"vmnic3",
+											label: "vmnic3  1000  Full"	
+									}
+								]
+							}
+				]
+
+	}
 
  
+
+
+]
