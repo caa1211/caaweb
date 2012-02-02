@@ -1,56 +1,58 @@
 	{
 				id: "vSwitch1",
-				label: "Standard Switch: vSwitch1",
-				
-				vm_port_group:
-				{
-					title: "Virtual Machine Port Group",
-					label: "VM Network",
-					descLabel: "virtual machine(s)",
-					children:[
-					
+				label: "VDS Switch: vSwitch1",
+				leftChildren:[
+						{
+							title: "VM Network1",
+							label: "virtual machine(s)",
+							type: "vlan",
+							children:[
+							
+									{
+												  id: "vCenterWine2K3",
+												  label: "vCenterWine2K3",
+												  status: "on"
+									 },
+									{
+												  id: "vCenterMobileAccess",
+												  label: "vCenterMobileAccess",
+												  status: "off"
+									 }
+								]
+						},
+						{
+							title: "VM Network2",
+							label: "virtual machine(s)",
+							type: "vlan",
+							children:[
+							
+									{
+												  id: "vCenterWine2K3_2",
+												  label: "vCenterWine2K3",
+												  status: "on"
+									 }
+									
+										
+								]
+						}
+						
+				],
+				rightChildren:[
 							{
-										  id: "vCenterWine2K3",
-										  label: "vCenterWine2K3",
-										  status: "off"
-							 },
-							{
-										  id: "vCenterMobileAccess",
-										  label: "vCenterMobileAccess",
-										  status: "on"
-							 }
-								
-					    ]
-				},
-				vmKernel_port_group:
-				{
-						title: "VMkernel Port",
-						label:"Management Network",
-						children:[
-								{
-										id:"vmk0",
-										label: "vmk0 : 172.101.35.3"
-								}
-							]
-				},
-				physical_adapters:
-				{
-						title: "Physical Adapters",
-						children:[
-							{
-									id:"vmnic0",
-									label: "vmnic0  1000  Full"	
-							},
-							{
-									id:"vmnic2",
-									label: "vmnic2  1000  Full"	
-							},
-							{
-									id:"vmnic3",
-									label: "vmnic3  1000  Full"	
+								title: "Physical Machines",
+								type: "pm",
+								children:[
+									{
+											id:"pm1",
+											label: "IP (192.168.1.1)"	
+									},
+									{
+											id:"pm2",
+											label: "IP (192.168.1.2)"	
+									}
+								]
 							}
-							]
-				}
+				]
 
 	}
 
