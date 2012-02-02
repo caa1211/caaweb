@@ -112,6 +112,7 @@ function isArray(o) {
 			
 		function createElement(jsonObj, childListStrFn, type){
 				var $group = $(groupStr);
+				$group.attr("id", jsonObj.id);
 				$group.addClass(jsonObj.type);
 				//group Title
 				if(jsonObj.title!=undefined)
