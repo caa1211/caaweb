@@ -212,7 +212,7 @@ function isArray(o) {
 		     centerPanel.children(".map").height(h).children(".line").height(h-52);
 			*/
 			 var h = leftH;// > rightH ? leftH: rightH;
-		     centerPanel.children(".map").height(h).children(".line").height(h-44);
+		     centerPanel.children(".map").height(h).children(".line").height(h-43);
 			 
 		}
 		
