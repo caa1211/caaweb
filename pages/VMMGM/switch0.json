@@ -5,9 +5,9 @@
 						{
 							title: "VM Network1",
 							label: "virtual machine(s)",
+							id: "vlan1",
 							type: "vlan",
 							children:[
-							
 									{
 												  id: "vCenterWine2K3",
 												  label: "vCenterWine222",
@@ -20,8 +20,8 @@
 							title: "VM Network2",
 							label: "virtual machine(s)",
 							type: "vlan",
+							id: "vlan2",
 							children:[
-							
 									{
 												  id: "vCenterWine2K3_2",
 												  label: "vCenterWine2K3",
@@ -30,12 +30,7 @@
 									{
 												  id: "vCenterMobileAccess_2",
 												  label: "vCenterMobileAccess",
-												  status: "off"
-									 },
-									 {
-												  id: "vCenterMobileAccess2_2",
-												  label: "adfafd",
-												  status: "off"
+												  status: "on"
 									 }
 										
 								]
@@ -46,6 +41,7 @@
 							{
 								title: "Physical Adapters",
 								type: "adapter",
+								id : "pa1",
 								children:[
 									{
 											id:"vmnic0",
@@ -61,6 +57,7 @@
 									}
 								]
 							}
+							
 				]
 
 	}

@@ -5,33 +5,38 @@
 						{
 							title: "VM Network1",
 							label: "virtual machine(s)",
+							id: "vlan1",
 							type: "vlan",
 							children:[
-							
 									{
 												  id: "vCenterWine2K3",
-												  label: "vCenterWine2K3",
-												  status: "on"
-									 },
-									{
-												  id: "vCenterMobileAccess",
-												  label: "vCenterMobileAccess",
+												  label: "vCenterWine222",
 												  status: "off"
 									 }
+										
 								]
 						},
 						{
 							title: "VM Network2",
 							label: "virtual machine(s)",
 							type: "vlan",
+							id: "vlan2",
 							children:[
-							
 									{
 												  id: "vCenterWine2K3_2",
 												  label: "vCenterWine2K3",
-												  status: "on"
+												  status: "off"
+									 },
+									{
+												  id: "vCenterMobileAccess_2",
+												  label: "vCenterMobileAccess",
+												  status: "off"
+									 },
+									 {
+												  id: "vCenterMobileAccess2_2",
+												  label: "adfafd",
+												  status: "off"
 									 }
-									
 										
 								]
 						}
@@ -41,14 +46,15 @@
 							{
 								title: "Physical Machines",
 								type: "pm",
+								id : "pa1",
 								children:[
 									{
-											id:"pm1",
-											label: "IP (192.168.1.1)"	
+											id:"pm0",
+											label: "ip (192.168.1.1)"	
 									},
 									{
-											id:"pm2",
-											label: "IP (192.168.1.2)"	
+											id:"pm1",
+											label: "ip (192.168.1.2)"
 									}
 								]
 							}
