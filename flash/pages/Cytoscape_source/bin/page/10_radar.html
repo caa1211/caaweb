@@ -106,8 +106,18 @@
 		vis.addListener("click", "none", removeMenu);
 		vis.addListener("dragstart", "nodes", removeMenu);
 		vis.addListener("zoom", "none", removeMenu);
+		
+		
+		
+
+	// vis.panZoomControlVisible(false); 
+	 
+	 
 	 });
 
+	 
+
+	 
 	 
 	  $("#drawbtn1").click(function(){
 
@@ -272,9 +282,27 @@ var vis =  $topology.getVis()
   
  $("#exportBtn").click(function(){
  
+ 
 var vis =  $topology.getVis()
-vis.exportNetwork('png', 'http://localhost/export2.php?type=png'); 
 
+/*
+var imgObj = $("#radarViewContainer").find("img");
+vis.exportNetwork('png', 'http://localhost/export2.php?type=png'); 
+	var radarViewtimer;
+	var timerCounter = 0;
+	clearTimeout(radarViewtimer);
+		function GetNewImg()
+		{
+		timerCounter = timerCounter+1;
+		　  imgObj.attr("src","http://localhost/randName.png?"+Math.random());
+		if(timerCounter<3)
+		　 radarViewtimer=setTimeout(GetNewImg, 2000);
+		}
+		 radarViewtimer = setTimeout(GetNewImg, 2000);
+ */
+ $topology.createRadarView()
+ 
+ 
 
  });
  
@@ -290,7 +318,8 @@ vis.exportNetwork('png', 'http://localhost/export2.php?type=png');
 <body>
 	<div id="cytoscapeweb"></div>
 	<div id="radarViewContainer"></div>
-	
+	<button id='exportBtn'>capture image</button>
+	<br>
 	 simple data:<button id='drawbtn1'>group</button>
 	 <button id='drawTree1'>Tree</button>
 	 <button id='drawCircle1'>Circle</button>
@@ -331,7 +360,7 @@ real data:<button id='realdata0'>group</button>
 			<button id='drawData'>drawData</button>
 			<button id='addData'>addData</button>
 			
-			<button id='exportBtn'>export</button>
+			
 	<!--web link-->
 	<br />
 	<br />
