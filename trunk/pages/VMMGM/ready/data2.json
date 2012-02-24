@@ -1,0 +1,53 @@
+	{
+				id: "vSwitch1",
+				label: "Standard Switch: vSwitch1",
+				
+				vm_port_group:
+				{
+					title: "Virtual Machine Port Group",
+					label: "VM Network",
+					descLabel: "virtual machine(s)",
+					children:[
+					
+							{
+										  id: "vCenterWine2K3",
+										  label: "vCenterWine2K3",
+										  status: "on"
+							 },
+							{
+										  id: "vCenterMobileAccess",
+										  label: "vCenterMobileAccess",
+										  status: "on"
+							 }
+								
+					    ]
+				},
+				vmKernel_port_group:
+				{
+						title: "VMkernel Port",
+						label:"Management Network",
+						children:[
+								{
+										id:"vmk0",
+										label: "vmk0 : 172.101.35.3"
+								}
+							]
+				},
+				physical_adapters:
+				{
+						title: "Physical Adapters",
+						children:[
+							{
+									id:"vmnic0",
+									label: "vmnic0  1000  Full"	
+							},
+							{
+									id:"vmnic2",
+									label: "vmnic2  1000  Full"	
+							}
+							]
+				}
+
+	}
+
+ 
