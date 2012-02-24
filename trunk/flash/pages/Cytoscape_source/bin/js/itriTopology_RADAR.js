@@ -412,18 +412,18 @@
 
 			}
 					
-			
+			var thisObj = this;
 			function doReady(vis){
 				pan_zoom(vis);
 				registerEvent(vis);
 				$(thisObj).trigger("ready", vis);
-				createRadarView();
+				thisObj.createRadarView();
 				//vis.zoom(1);
 			}
 			
 			var radarViewtimer;
 		
-			function createRadarView(){
+			this.createRadarView = function(){
 		   var initscale = vis.zoom()-1;
 		   var scale = 1;
 			var radarViewScale = 1/3;
@@ -646,6 +646,13 @@ if(timerCounter<3)
 			return visAry;
 		};
 
+		this.createRadarView = function()
+		{	
+		    
+			
+			 this.each(function(){   this.createRadarView(); });
+		};
+		
         var itriTopologyObj = this.each(_handler);
       
         return itriTopologyObj;
