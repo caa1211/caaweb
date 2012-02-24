@@ -172,6 +172,9 @@ $(function(){
               'project': {
                   'verizon': {
                       url: "pages/project/verizon/index.html"
+                  },
+                  'vlan topology':{
+                    url:"pages/VMMGM/ready/demo.html"
                   }
               }
         
