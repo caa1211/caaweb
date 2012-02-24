@@ -1,0 +1,65 @@
+	{
+				id: "vSwitch1",
+				label: "VDS Switch: vSwitch1",
+				leftChildren:[
+						{
+							title: "VM Network1",
+							label: "virtual machine(s)",
+							id: "vlan1",
+							type: "vlan",
+							children:[
+									{
+												  id: "vCenterWine2K3",
+												  label: "vCenterWine222",
+												  status: "off"
+									 }
+										
+								]
+						},
+						{
+							title: "VM Network2",
+							label: "virtual machine(s)",
+							type: "vlan",
+							id: "vlan2",
+							children:[
+									{
+												  id: "vCenterWine2K3_2",
+												  label: "vCenterWine2K3",
+												  status: "off"
+									 },
+									{
+												  id: "vCenterMobileAccess_2",
+												  label: "vCenterMobileAccess",
+												  status: "off"
+									 },
+									 {
+												  id: "vCenterMobileAccess2_2",
+												  label: "adfafd",
+												  status: "off"
+									 }
+										
+								]
+						}
+						
+				],
+				rightChildren:[
+							{
+								title: "Physical Machines",
+								type: "pm",
+								id : "pa1",
+								children:[
+									{
+											id:"pm0",
+											label: "ip (192.168.1.1)"	
+									},
+									{
+											id:"pm1",
+											label: "ip (192.168.1.2)"
+									}
+								]
+							}
+				]
+
+	}
+
+ 

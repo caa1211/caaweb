@@ -1,0 +1,53 @@
+﻿
+#vSwitchContainer {width:60%; margin-left:100px;}
+.vlanTable { width:100%; margin:0 auto;  position:relative; margin-top:30px;}
+.vlanTable ul, li{position:relative;}
+.vlanTable h1{ font-weight:550; font-size:14px; margin-top:5px; margin-bottom:-5px; margin-left:10px;}
+.vlanTable .dotline{ display:block; width:100%;margin:0 auto; line-height:10px; margin-bottom:20px; border-bottom:#999 2px dotted; padding-bottom:10px;}
+.vlanTable  .vlan .dotline_s{ display:block; width:100%;margin:0 auto; line-height:10px; margin-bottom:2px; border-bottom:#999 1px dotted; padding-bottom:5px;}
+.vlanTable li {}
+
+table,th {valign:top; border: 0px;}
+.vmk_port{}
+.vm_port_group{}
+
+.vlanTable .group{position:relative; border: solid 1px #d3d3d3;  margin:0 auto; margin-bottom:15px; padding: 10px 5px 10px 5px;}
+.vlanTable .group.select{border: solid 2px #7199c6;}
+
+.vlanTable h2{font-size:12px; position:absolute; z-index:10; color:#000000;font-weight:600; background:#fff;left:10px; top:-20px; padding-left:0px; padding-right:5px;  white-space:nowrap;}
+.vlanTable h3{font-size:13px; padding-top:10px;padding-bottom:6px; font-weight:600; white-space:nowrap; color:#72726c;}
+.vlanTable h4{font-size:12px;padding-top:0px; font-weight:600; color:#72726c;}
+.vlanTable h5{font-size:12px;padding-top: 12px; font-weight:600; padding-left:10px;}
+.vlanTable .map{background:#cccccc; border: solid 2px #5b5b5b; margin:0px 3px 0px 3px; height:183px; display:block;}
+.vlanTable .subGroup{ }
+.vlanTable .i_network{ position:absolute; background:url(../images/network.png); width:32px; height:32px; right:0px; top:0px;}
+ .vlanTable .rightPanel {}
+
+ .vlanTable .rightPanel .i_icon{width:32px;height:32px;float:left; margin-left:15px; margin-right:5px; position:absolute;}
+ .vlanTable .rightPanel  h3 {padding-left:50px;}
+.vlanTable .rightPanel .adapter .i_icon{background:url(../images/adapter.png) no-repeat 0px 0px;}
+.vlanTable .rightPanel .pm .i_icon{background:url(../images/pm.png) no-repeat 5px 0px; }
+//.vlanTable .rightPanel .i_icon{width:32px;height:32px; background:url(images/adapter.png) no-repeat 0px 0px;float:left; margin-left:15px; margin-right:5px;}
+
+.vlanTable .i_vm{ position:absolute; width:32px;height:32px;  right:0px; top:0px; }
+
+.vlanTable .i_vm.enable{  background:url(../images/vmStart.png) no-repeat 6px 0px; }
+.vlanTable .i_vm.disable{ background:url(../images/vmStop.png) no-repeat 6px 0px; }
+.vlanTable .i_vm .line {margin-top:16px; margin-left:-33px; width:20px; height:2px;}
+
+.vlanTable .line{ background:#949494;}
+.vlanTable .dot_c {width:12px; height:12px; top:11px; left:-31px;  position:absolute;}
+.vlanTable .dot_l {top:10px; left:36px; width: 12px; height:12px; position:absolute;}
+.vlanTable .dot_r {width:12px; height:12px; top:11px; left:-7px;  position:absolute;}
+
+.vlanTable .leftPanel { height:20px;}
+.vlanTable .centerPanel {width:30px;}
+.vlanTable .rightPanel {width:40%;}
+
+.vlanTable .leftPanel .label{ margin-left:5px;}
+.vlanTable  .childCount{ color: #727272;}
+
+.vlanTable  .leftPanel .line{margin-top:16px; margin-left:33px; width:20px; height:2px;}
+.vlanTable  .leftPanel .dot{top:10px; left:36px; width: 12px; height:12px; position:absolute;}
+
+.vlanTable  .rightPanel .i_network{display:none;}
