@@ -33,6 +33,9 @@ table,th {valign:top; border: 0px;}
 
 .vlanTable .i_vm.enable{  background:url(../images/vmStart.png) no-repeat 6px 0px; }
 .vlanTable .i_vm.disable{ background:url(../images/vmStop.png) no-repeat 6px 0px; }
+.vlanTable .i_vm.on{  background:url(../images/vmStart.png) no-repeat 6px 0px; }
+.vlanTable .i_vm.off{ background:url(../images/vmStop.png) no-repeat 6px 0px; }
+.vlanTable .i_vm.pause{ background:url(../images/vmPause.png) no-repeat 6px 0px; }
 .vlanTable .i_vm .line {margin-top:16px; margin-left:-33px; width:20px; height:2px;}
 
 .vlanTable .line{ background:#949494;}
