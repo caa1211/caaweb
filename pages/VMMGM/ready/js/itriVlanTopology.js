@@ -68,7 +68,7 @@ function isArray(o) {
 				
 					for(var i=0; i<childAry.length; i++)
 					{
-					  var status = childAry[i].status =="on" ? "enable" : "disable";
+					  var status = childAry[i].status;
 					  
 					  var tmpstr ="<li id='"+childAry[i].id+"'><h5>"+ childAry[i].label +"</h5>"+
 									"<span class=\"i_vm "+status+"\">"+
@@ -277,7 +277,7 @@ $.fn.itriVlanTopologyContainer = function(settings){
 				
 				$vlanTplg.hide();
 				switchAry.push($vlanTplg);
-				$vlanTplg.show(300, function(){alert()});
+				$vlanTplg.fadeIn(300);
 			}
 		};
 		
