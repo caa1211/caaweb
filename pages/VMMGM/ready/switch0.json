@@ -7,10 +7,11 @@
 							label: "virtual machine(s)",
 							id: "vlan1",
 							type: "vlan",
+                            select: true,
 							children:[
 									{
 												  id: "vCenterWine2K3",
-												  label: "vCenterWine222",
+												  label: "vCenterWine2222222",
 												  status: "off"
 									 }
 										
