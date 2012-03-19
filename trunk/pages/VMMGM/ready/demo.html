@@ -21,10 +21,12 @@
 		var $vlanContainer =   $("#vSwitchContainer").itriVlanTopologyContainer().css("border", "solid 1px blue");
 
 				
+              var timeout= ''//setInterval(function(){alert("ok")}, 2000)
 		$("#getSwitch0").click(function(){
-		   $.getJSON("switch0.json", function(jsonObj){
+                clearTimeout(timeout);
+		   /*$.getJSON("switch0.json", function(jsonObj){
 			  $vlanContainer.add(jsonObj);
-		   });      
+		   }); */     
 		});
 		
 		$("#getSwitch1").click(function(){

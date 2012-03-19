@@ -277,7 +277,7 @@ $.fn.itriVlanTopologyContainer = function(settings){
 				
 				$vlanTplg.hide();
 				switchAry.push($vlanTplg);
-				$vlanTplg.fadeIn(300);
+				$vlanTplg.show(300, function(){alert()});
 			}
 		};
 		
