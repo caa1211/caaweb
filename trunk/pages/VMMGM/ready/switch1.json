@@ -45,12 +45,16 @@
 				rightChildren:[
 							{
 								title: "Physical Machines",
-								type: "pm",
+								type: "adapter dss",
 								id : "pa1",
 								children:[
 									{
 											id:"pm0",
-											label: "ip (192.168.1.1)"	
+											label: "ip (192.168.1.1)",
+                                            children:[
+                                            {name:"AA", id:"AA"},
+                                            {name:"BB", id:"BB"}
+                                            ]
 									},
 									{
 											id:"pm1",

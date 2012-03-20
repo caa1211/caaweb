@@ -42,6 +42,9 @@ table,th {valign:top; border: 0px;}
 .vlanTable .dot_c {width:12px; height:12px; top:11px; left:-31px;  position:absolute;}
 .vlanTable .dot_l {top:10px; left:36px; width: 12px; height:12px; position:absolute;}
 .vlanTable .dot_r {width:12px; height:12px; top:11px; left:-7px;  position:absolute;}
+.vlanTable .dot_r {background:url(../images/dot.png);}
+.vlanTable .dss .dot_r {background:url(../images/port.png);}
+
 
 .vlanTable .leftPanel { height:20px;}
 .vlanTable .centerPanel {width:30px;}
@@ -54,3 +57,5 @@ table,th {valign:top; border: 0px;}
 .vlanTable  .leftPanel .dot{top:10px; left:36px; width: 12px; height:12px; position:absolute;}
 
 .vlanTable  .rightPanel .i_network{display:none;}
+
+

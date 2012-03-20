@@ -89,14 +89,17 @@ function isArray(o) {
 				var bottom = 	"</ul></li>";
 				var firstLine =  '<div class="line" style="margin-top:16px; margin-left:-35px; width:35px; height:2px;">'+
 										'<img src="../images/dot.png"  class="dot_c" style=""/>'+
-										'<img src="../images/dot.png"  class="dot_r" style=""/>'+
+										//'<img src="../images/dot.png"  class="dot_r" style=""/>'+
+                                        '<span  class="dot_r"></span>'+
 								'</div>';
 				
 				var otherLine =  '<div class="line" style="margin-top:16px; margin-left:-15px; width:15px; height:2px;">'+
-										'<img src="../images/dot.png"  class="dot_r" style=""/>'+
+										//'<img src="../images/dot.png"  class="dot_r" style=""/>'+
+                                        '<span  class="dot_r"></span>'+
 								 '</div>'+
 								 '<div class="line" style="margin-top:-32px; margin-left:-15px; width:2px; height:32px;"></div>';
-								
+				
+                            
 				for(var i=0; i<ary.length; i++)
 					{
 					  var lineStr = i==0 ? firstLine : otherLine;
@@ -105,6 +108,24 @@ function isArray(o) {
 									'</span><h3>'+ ary[i].label +'</h3></li>';
 					
 					  str = str + "" +tmpstr;
+                      
+                      if(ary[i].children!=undefined){
+                        var subAdAry = ary[i].children;
+                        var uul="<ul>";
+                         for(var j=0;j<subAdAry.length; j++)
+                         {
+                            var id = subAdAry[j].id==undefined ? "subAd_"+j: subAdAry[j].id;
+                            var subAdStr ='<li style="position:relative;" id="'+id+'"> '+
+                                    '<div class="line" style="position:absolute;width:2px; height:32px; top:-15px;"></div>'+
+                                    '<span style="margin-left:25px;color:#72726c;">'+subAdAry[j].name+'</span>'+
+                                    '</li>';
+                            uul = uul +""+ subAdStr;
+                         }
+                         
+                         var bul="</ul>";
+                        var subStr = uul+ "" + bul;
+                        str = str + subStr;
+                      }
 					}
 				return header+""+str+""+bottom;
 			}
