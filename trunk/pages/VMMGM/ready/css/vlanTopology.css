@@ -25,10 +25,10 @@ table,th {valign:top; border: 0px;}
 
  .vlanTable .rightPanel .i_icon{width:32px;height:32px;float:left; margin-left:15px; margin-right:5px; position:absolute;}
  .vlanTable .rightPanel  h3 {padding-left:50px;}
-.vlanTable .rightPanel .adapter .i_icon{background:url(../images/adapter.png) no-repeat 0px 0px;}
+.vlanTable .rightPanel .adapter .i_icon{background:url(../images/adapter.png) no-repeat 0px 0px; top:0px;}
 .vlanTable .rightPanel .pm .i_icon{background:url(../images/pm.png) no-repeat 5px 0px; }
-//.vlanTable .rightPanel .i_icon{width:32px;height:32px; background:url(images/adapter.png) no-repeat 0px 0px;float:left; margin-left:15px; margin-right:5px;}
-
+//.vlanTable .rightPanel .i_icon{width:32px;height:32px; background:url(images/adapter.png) no-repeat 0px 0px;float:left; margin-left:15px; margin-right:5px; }
+.paGroup li.pali {top:-10px; margin-top:-10px; position:relative;}
 .vlanTable .i_vm{ position:absolute; width:32px;height:32px;  right:0px; top:0px; }
 
 .vlanTable .i_vm.enable{  background:url(../images/vmStart.png) no-repeat 6px 0px; }
@@ -39,9 +39,9 @@ table,th {valign:top; border: 0px;}
 .vlanTable .i_vm .line {margin-top:16px; margin-left:-33px; width:20px; height:2px;}
 
 .vlanTable .line{ background:#949494;}
-.vlanTable .dot_c {width:12px; height:12px; top:11px; left:-31px;  position:absolute;}
+.vlanTable .dot_c {width:12px; height:12px; top:-5px; left:-16px;  position:absolute;}
 .vlanTable .dot_l {top:10px; left:36px; width: 12px; height:12px; position:absolute;}
-.vlanTable .dot_r {width:12px; height:12px; top:11px; left:-7px;  position:absolute;}
+.vlanTable .dot_r {width:12px; height:12px; top:-5px; left:5px;  position:absolute;}
 .vlanTable .dot_r {background:url(../images/dot.png);}
 .vlanTable .dss .dot_r {background:url(../images/port.png);}
 
@@ -57,5 +57,9 @@ table,th {valign:top; border: 0px;}
 .vlanTable  .leftPanel .dot{top:10px; left:36px; width: 12px; height:12px; position:absolute;}
 
 .vlanTable  .rightPanel .i_network{display:none;}
+
+.arrow {position:absolute; width:16px;height:16px;padding:0;margin:0;cursor:default;float:left;background:transparent no-repeat 0 0px; top:10px;left:-15px;}
+.collapsed {cursor:pointer;background-image:url(../images/collapsed.gif);}
+.expanded {cursor:pointer;background-image: url(../images/expanded.gif);}
 
 

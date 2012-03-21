@@ -40,14 +40,15 @@ function isArray(o) {
 		this.id = "";
 		var thisObj = this;
 		var $thisObj = $(this);
-		var groupStr = "<ul class=\"group\"></ul>";	
+		var groupStr = "<ul class=\"group gg\"></ul>";	
 		
 		var getGroupTitleStr = function(title){
 					return 	"<li class=\"groupT\"><h2>"+ title +"</h2></li>";
 			};
 			
-		var getGroupLabelStr = function(label){			
-			 return 	"<li class=\"label\"><h3>"+label+"</h3>" +
+		var getGroupLabelStr = function(label, childLen){	
+             var collapseStr = childLen!=undefined && childLen>0 ?"arrow":"";
+			 return 	"<li class=\"label\"><div class='"+collapseStr+" collapsed'></div><h3>"+label+"</h3>" +
 							"<span class=\"i_network\">"+
 								 "<div class=\"line\">"+
 									"<img src=\"../images/dot.png\" class=\"dot\"/>"	+
@@ -63,8 +64,8 @@ function isArray(o) {
 			}
 		var getVMChildListStr = function(childAry){
 				var str = "";
-				var header = 	"<li><ul class=\"subGroup\">";
-				var bottom = 	"</ul></li>";
+				var header = 	"<ul class=\"subGroup\">";
+				var bottom = 	"</ul>";
 				
 					for(var i=0; i<childAry.length; i++)
 					{
@@ -87,45 +88,49 @@ function isArray(o) {
 				var str = "";
 				var header = 	"<li><ul class=\"paGroup\">";
 				var bottom = 	"</ul></li>";
-				var firstLine =  '<div class="line" style="margin-top:16px; margin-left:-35px; width:35px; height:2px;">'+
-										'<img src="../images/dot.png"  class="dot_c" style=""/>'+
+				var firstLine =  '<div class="line" style="margin-top:16px; margin-left:-20px; width:35px; height:2px;">'+
+										'<img src="../images/dot.png"  class="dot_c"/>'+
 										//'<img src="../images/dot.png"  class="dot_r" style=""/>'+
                                         '<span  class="dot_r"></span>'+
 								'</div>';
 				
-				var otherLine =  '<div class="line" style="margin-top:16px; margin-left:-15px; width:15px; height:2px;">'+
+				var otherLine =  '<div class="line" style="position:relative;margin-top:16px; margin-left:0px; width:15px; height:2px;">'+
 										//'<img src="../images/dot.png"  class="dot_r" style=""/>'+
-                                        '<span  class="dot_r"></span>'+
+                                        '<span  class="dot_r" ></span>'+
 								 '</div>'+
-								 '<div class="line" style="margin-top:-32px; margin-left:-15px; width:2px; height:32px;"></div>';
+								 '<div class="line" style="margin-top:-40px; margin-left:0px; width:2px; height:40px;"></div>';
 				
                             
 				for(var i=0; i<ary.length; i++)
 					{
 					  var lineStr = i==0 ? firstLine : otherLine;
-					  var tmpstr =	'<li id="'+  ary[i].id  +'"><span class="i_icon">'+
-									 lineStr +
-									'</span><h3>'+ ary[i].label +'</h3></li>';
+                      var collapseStr = ary[i].children!=undefined && ary[i].children.length>0?"arrow":"";
+					  var tmpstr =	 lineStr +'<li id="'+  ary[i].id  +'" class="pali">'+
+                     '<span ><span class="i_icon" style="margin-left:25px;"></span><h3 style="margin-left:5px;">'+ ary[i].label +'</h3></span>'+
+                     '<div class="'+collapseStr+' collapsed" style="left:15px;top:12px;"></div>'+
+                     '</li>';
 					
-					  str = str + "" +tmpstr;
-                      
+					
+                      subStr = "";
                       if(ary[i].children!=undefined){
                         var subAdAry = ary[i].children;
-                        var uul="<ul>";
+                        var uul="<ul style='top:-5px;' class='subGroup' >";
                          for(var j=0;j<subAdAry.length; j++)
                          {
                             var id = subAdAry[j].id==undefined ? "subAd_"+j: subAdAry[j].id;
-                            var subAdStr ='<li style="position:relative;" id="'+id+'"> '+
-                                    '<div class="line" style="position:absolute;width:2px; height:32px; top:-15px;"></div>'+
-                                    '<span style="margin-left:25px;color:#72726c;">'+subAdAry[j].name+'</span>'+
-                                    '</li>';
+                            var subGroupLin = i==ary.length-1?"":  '<div class="line" style="position:absolute;width:2px; height:35px; top:-18px;"></div>';
+                            var subAdStr ='<li id="'+id+'" style="position:relative;"> '+
+                                subGroupLin+
+                                '<span style="margin-left:35px;color:#72726c;">'+subAdAry[j].name+'</span>'+
+                                '</li>';
                             uul = uul +""+ subAdStr;
                          }
                          
-                         var bul="</ul>";
-                        var subStr = uul+ "" + bul;
-                        str = str + subStr;
+                        var bul="</ul>";
+                        subStr = uul+ "" + bul;
                       }
+                      
+                      str = str + "<ul class='gg'>" +tmpstr + "" + subStr+"</ul>";
 					}
 				return header+""+str+""+bottom;
 			}
@@ -154,7 +159,7 @@ function isArray(o) {
 					
 					}
 					
-					var groupL = getGroupLabelStr(label);
+					var groupL = getGroupLabelStr(label, childLen);
 					$group.append(groupL);
 					
 				}
@@ -176,7 +181,9 @@ function isArray(o) {
 		}
 		
 		
-		
+		var leftPanel;
+        var rightPanel;
+        var centerPanel;
 		var _handler = function(){
 			thisObj.id = jsonObj.id;
 
@@ -188,9 +195,9 @@ function isArray(o) {
 			var trPanel = $("<tr class= \"trPanel\" valign=\"top\"></tr>");
 			panelTable.append(trPanel);
 			
-			var leftPanel = $("<th class=\"leftPanel\"></th>");
-			var centerPanel = $("<th class=\"centerPanel\"></th>");
-			var rightPanel = $("<th class=\"rightPanel\"></th>");
+			leftPanel = $("<th class=\"leftPanel\"></th>");
+			centerPanel = $("<th class=\"centerPanel\"></th>");
+			rightPanel = $("<th class=\"rightPanel\"></th>");
 			trPanel.append(leftPanel, centerPanel, rightPanel);
 			
 			//center
@@ -219,30 +226,40 @@ function isArray(o) {
 				    rightPanel.append(element);
 				});
 			}
-			
-			
-			
-			$thisObj.append(panelTable);
-	  var leftH = leftPanel.height() -19;
-	  var rightH = rightPanel.height();
-			/*
-			leftPanel.css("border", "solid 1px red")
-			//adjust map height
-			 var leftH = $vmportGroup.innerHeight() + $vmkernelportGroup.innerHeight() +15 ;
-			 var rightH = $adapterGroup.innerHeight() + -2;
-			 var h = leftH > rightH ? leftH: rightH;
-		
-		     centerPanel.children(".map").height(h).children(".line").height(h-52);
-			*/
-			 var h = leftH;// > rightH ? leftH: rightH;
-		     var mapObj = centerPanel.children(".map");
-             if(mapObj.length!=0)
-             {
-                 mapObj.height(h);
-                 mapObj.children(".line").height(h-43);
-             }
+
+			 $thisObj.append(panelTable);
+
+              thisObj.countMapHeight();  
 		}
-		
+        
+        this.countMapHeight= function(){
+                  var leftH = leftPanel.height() ;
+                  var rightH = rightPanel.height();
+                  
+                  leftH=-18;
+                  var offset = 15;
+                  leftPanel.find('.group').each(function(){
+                    leftH = leftH + $(this).outerHeight()+offset;
+                  });
+                 if(leftH<0)
+                 leftH = 0
+                    /*
+                    leftPanel.css("border", "solid 1px red")
+                    //adjust map height
+                     var leftH = $vmportGroup.innerHeight() + $vmkernelportGroup.innerHeight() +15 ;
+                     var rightH = $adapterGroup.innerHeight() + -2;
+                     var h = leftH > rightH ? leftH: rightH;
+                
+                     centerPanel.children(".map").height(h).children(".line").height(h-52);
+                    */
+                     var h = leftH;// > rightH ? leftH: rightH;
+                     var mapObj = centerPanel.children(".map");
+                     if(mapObj.length!=0)
+                     {
+                         mapObj.height(h);
+                         mapObj.children(".line").height(h-43);
+                     }
+              };      
 		
 		_handler();
 	 
@@ -254,7 +271,7 @@ $.fn.itriVlanTopologyContainer = function(settings){
         
        var defaultSetting = 
        {
-           
+           collapseCtl: true
        };
        
 	    var $parent = $(this);
@@ -283,23 +300,66 @@ $.fn.itriVlanTopologyContainer = function(settings){
 		
 		var $vlanTableDiv = $("<div id='"+ jsonObj.id +"' class=\"vlanTable\"></div>");
 		
+        var $vlanTplg;
 			if(modifyFlag==1)
 			{
 			  var befortObj = $parent.find(("#"+jsonObj.id));
 			  $vlanTableDiv.insertAfter(befortObj);
 			  befortObj.remove();
 			  //$parent.append($vlanTableDiv);
-			  $vlanTableDiv.vlanTopology(jsonObj);
+			  $vlanTplg=$vlanTableDiv.vlanTopology(jsonObj);
 			}
 			else
 			{
 				$parent.prepend($vlanTableDiv);
-				var $vlanTplg = $vlanTableDiv.vlanTopology(jsonObj);
+				$vlanTplg = $vlanTableDiv.vlanTopology(jsonObj);
 				
 				$vlanTplg.hide();
 				switchAry.push($vlanTplg);
 				$vlanTplg.fadeIn(300);
+
 			}
+            
+            
+            //collapse
+            function collapseHandler(){
+                var sg = $(this).parents('.gg').children('ul.subGroup');
+                 var tObj = $(this);    
+                     if($(this).hasClass('collapsed'))
+                     {
+                      sg.slideDown(300, function(){tObj.removeClass('collapsed').addClass('expanded'); $vlanTplg.countMapHeight();});
+                     }
+                     else
+                     {
+                      sg.slideUp(300, function(){tObj.removeClass('expanded').addClass('collapsed'); $vlanTplg.countMapHeight();});
+                     }
+            }
+            
+             $vlanTplg.find('div.arrow').each(function(){
+                if(_settings.collapseCtl)
+                {
+                var sg = $(this).parents('.gg').children('ul.subGroup');
+                if($(this).hasClass('collapsed'))
+                sg.hide(10, function(){ $vlanTplg.countMapHeight();});
+                else
+                sg.show(10, function(){ $vlanTplg.countMapHeight();}); 
+                $(this).unbind('collapseHandler').bind('click',collapseHandler);
+                }
+                else
+                $(this).hide();
+             });
+             
+            // setTimeout(function(){alert('');collapseHandler()}, 1000);
+             
+            /*
+             $vlanTplg.find('div.arrow').each(function(){
+             $(this).parents('.group').children('ul.')
+             
+             })
+                $vlanTplg.find('div.arrow').click(function(){
+                 $(this).parents('.group').
+              
+                });*/
 		};
 		
 		
@@ -307,7 +367,7 @@ $.fn.itriVlanTopologyContainer = function(settings){
 			if(isArray(jsonObj))
 			{
 				$.each(jsonObj, function(i, t){
-					parent.addElement(t)
+					parent.addElement(t);
 				});
 			}
 			else

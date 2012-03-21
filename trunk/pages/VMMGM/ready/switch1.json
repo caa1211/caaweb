@@ -39,7 +39,56 @@
 									 }
 										
 								]
+						},
+						{
+							title: "VM Network2",
+							label: "virtual machine(s)",
+							type: "vlan",
+							id: "vlanqweq",
+							children:[
+									{
+												  id: "vCenterWine2K3_2",
+												  label: "vCenterWine2K3",
+												  status: "off"
+									 },
+									{
+												  id: "vCenterMobileAccess_2",
+												  label: "vCenterMobileAccess",
+												  status: "off"
+									 },
+									 {
+												  id: "vCenterMobileAccess2_2",
+												  label: "adfafd",
+												  status: "off"
+									 }
+										
+								]
+						},
+						{
+							title: "VM Network2",
+							label: "virtual machine(s)",
+							type: "vlan",
+							id: "vlanqweq",
+							children:[
+									{
+												  id: "vCenterWine2K3_2",
+												  label: "vCenterWine2K3",
+												  status: "off"
+									 },
+									{
+												  id: "vCenterMobileAccess_2",
+												  label: "vCenterMobileAccess",
+												  status: "off"
+									 },
+									 {
+												  id: "vCenterMobileAccess2_2",
+												  label: "adfafd",
+												  status: "off"
+									 }
+										
+								]
 						}
+						
 						
 				],
 				rightChildren:[
@@ -53,12 +102,22 @@
 											label: "ip (192.168.1.1)",
                                             children:[
                                             {name:"AA", id:"AA"},
+                                            {name:"AA", id:"AA"},
+                                            {name:"AA", id:"AA"},
+                                            {name:"AA", id:"AA"},
                                             {name:"BB", id:"BB"}
                                             ]
 									},
 									{
 											id:"pm1",
-											label: "ip (192.168.1.2)"
+											label: "ip (192.168.1.2)",
+                                            children:[
+                                            {name:"AA", id:"AA"},
+                                            {name:"AA", id:"AA"},
+                                            {name:"AA", id:"AA"},
+                                            {name:"AA", id:"AA"},
+                                            {name:"BB", id:"BB"}
+                                            ]
 									}
 								]
 							}
