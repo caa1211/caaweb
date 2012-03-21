@@ -21,6 +21,11 @@
 		var $vlanContainer =   $("#vSwitchContainer").itriVlanTopologyContainer().css("border", "solid 1px blue");
 
 				
+                  $.getJSON("switch1.json", function(jsonObj){
+			  $vlanContainer.add(jsonObj);
+		   });    
+           
+           
               var timeout= ''//setInterval(function(){alert("ok")}, 2000)
 		$("#getSwitch0").click(function(){
                 clearTimeout(timeout);
@@ -71,8 +76,8 @@
 					});
 
 					$("#testbtn").click(function(){
-					 $vlanContainer.removeById("vSwitch0");
-
+					// $vlanContainer.removeById("vSwitch0");
+                                            $('.subGroup').slideUp(300);
 					});
 					$("#debugbtn").click(function(){
 					  debugger;
