@@ -12,28 +12,17 @@
  * 
  */
 
-function CRemoveArray(array,attachId)
-{
-    for(var i=0,n=0;i<array.length;i++)
-    {
-        if(array[i]!=attachId)
-        {
-            array[n++]=array[i]
-        }
-    }
-    array.length -= 1;
-}
-
-Array.prototype.c_remove = function (obj) {
-    return CRemoveArray(this,obj);
-};
-
-function isArray(o) {   
-  return Object.prototype.toString.call(o) === '[object Array]';    
-} 
-	
 (function($)
 {
+    function isArray(o) {   
+      return Object.prototype.toString.call(o) === '[object Array]';    
+    } 
+	
+    $.removeFromArray = function(value, arr) {
+        return jQuery.grep(arr, function(elem, index) {
+            return elem !== value;
+        });
+    };
 
 	 $.fn.vlanTopology = function(jsonObj){
 	 
@@ -238,11 +227,19 @@ function isArray(o) {
                   
                   leftH=-18;
                   var offset = 15;
-                  leftPanel.find('.group').each(function(){
+                  leftPanel.children().each(function(){
                     leftH = leftH + $(this).outerHeight()+offset;
                   });
                  if(leftH<0)
                  leftH = 0
+                 
+                  rightH=-18;
+                  rightPanel.children().each(function(){
+                    rightH = rightH + $(this).outerHeight()+offset;
+                  });
+                  
+                 // var rightH = rightPanel.height();
+               //  leftH = leftPanel.children().height();
                     /*
                     leftPanel.css("border", "solid 1px red")
                     //adjust map height
@@ -252,12 +249,13 @@ function isArray(o) {
                 
                      centerPanel.children(".map").height(h).children(".line").height(h-52);
                     */
-                     var h = leftH;// > rightH ? leftH: rightH;
+                     var h = leftH > rightH ? leftH: rightH;
                      var mapObj = centerPanel.children(".map");
                      if(mapObj.length!=0)
                      {
                          mapObj.height(h);
-                         mapObj.children(".line").height(h-43);
+                         var lineH = leftH<80?2:leftH-44;
+                         mapObj.children(".line").height(lineH);
                      }
               };      
 		
@@ -327,11 +325,11 @@ $.fn.itriVlanTopologyContainer = function(settings){
                  var tObj = $(this);    
                      if($(this).hasClass('collapsed'))
                      {
-                      sg.slideDown(300, function(){tObj.removeClass('collapsed').addClass('expanded'); $vlanTplg.countMapHeight();});
+                      sg.slideDown(200, function(){tObj.removeClass('collapsed').addClass('expanded'); $vlanTplg.countMapHeight();});
                      }
                      else
                      {
-                      sg.slideUp(300, function(){tObj.removeClass('expanded').addClass('collapsed'); $vlanTplg.countMapHeight();});
+                      sg.slideUp(200, function(){tObj.removeClass('expanded').addClass('collapsed'); $vlanTplg.countMapHeight();});
                      }
             }
             
@@ -386,7 +384,7 @@ $.fn.itriVlanTopologyContainer = function(settings){
 				if(t.id == id)
 				{
 				$parent.find("#"+id).slideUp(300, function(){$(this).remove();});
-				switchAry.c_remove(t);
+                $.removeFromArray(t, switchAry);
 				return false;
 				}
 				
