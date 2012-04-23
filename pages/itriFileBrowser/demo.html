@@ -6,70 +6,264 @@
 
     <link href="css/reset.css" rel="stylesheet" type="text/css" />
     <link href="css/itriFileBrowser.css" rel="stylesheet" type="text/css" />
-    
+    <link href="css/blue/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/ui-lightness/jquery-ui-1.8.19.custom.css" rel="stylesheet" type="text/css" />
     <!--common js-->
     <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
-    <script src="js/itriFileBrowser.js" type="text/javascript"></script>
-   
+    <script src="js/jquery.tablesorter.js" type="text/javascript"></script>
+    <script src="js/jquery-ui-1.8.19.custom.min.js" type="text/javascript"></script>
+   <script src="js/itriFileBrowser.js" type="text/javascript"></script>
+
 
     
     <script type="text/javascript">
 
         $(function()
         {
-   
-   
-        
+            var generator = {
+             idCounter: 0,
+             id: function(){
+                 this.idCounter ++;
+                 return this.idCounter;
+             }
+            }
 
+            var mode = {
+                select: false
+            };
+            
+            function _L(str){
+                console.log(str);
+            }
+            
+            var sel = {
+                first:null,
+                addFirst : function(){
+                    sel.first.addClass('select');
+                },
+                add : function(obj, dragFlag){ 
+                    if(dragFlag && ( $("#fileList tr.select").length == 0 && sel.first!=null));
+                    {
+                        sel.addFirst(); 
+                    }                       
+                    obj.addClass('select');
+                },
+                clear: function(){  $("#fileList tr").removeClass('select'); },
+                onMouseup: function(){
+   
+                    if($(this)[0]==sel.first[0])
+                      sel.add($(this));
+                    
+                    $("#fileList tr").unbind('mouseenter', sel.onMouseenter);
+                    mode.select = false;
+                    sel.first = null;
+                }, 
+                onMouseenter: function(){
+                
+                  if($(this)[0]==sel.first[0])
+                    sel.clear();
+                    
+                    sel.add($(this));
+                    
+                },
+                shift: false,
+                ctrl: false,
+                all: function(){
+                  $("#fileList tr").addClass('select');
+                
+                }
+            };
+            
+
+        	$("#fileList").tablesorter({debug: false});
+                $("table tr").mouseleave(function(){
+                $(this).removeClass('hover');
+            });
+            
+                        
+          
+            var drag={
+              onMouseup: function(){                    
+              if($(this)[0]==drag.first[0])
+                    { 
+_L("tttttt")
+                      sel.clear();
+                    }
+                       sel.add($(this));
+                       
+                          drag.first = null;
+                      },
+              first: null
+            };
+            
+            
+            //$("table tr:odd").addClass('odd')
+            $("table tr").mouseenter(function(){
+                $(this).addClass('hover');
+                /*
+                if(  mode.select )
+                    {
+                      sel.add($(this), true);
+                    }*/
+            })
+
+   
+
+            $("table tr").mousedown(function(){
+              
+               // sel.first  = $(this);
+              //  drag.first  = $(this);
+               //  $("table tr").unbind('mouseup', sel.onMouseup);
+               //  $("table tr").unbind('mouseup', drag.onMouseup);
+                 
+                 
+                if($(this).hasClass('select')){
+                   mode.drag = true;
+                 //  drag.init();
+                  drag.first  = $(this);
+                   $("table tr").bind('mouseup', drag.onMouseup);
+                }
+                else{
+                    sel.first  = $(this);
+                    mode.select = true;
+                    sel.clear();
+                    $("table tr").unbind('mouseup', sel.onMouseup);
+                    $("table tr").unbind('mouseenter', sel.onMouseenter);
+                    $("table tr").bind('mouseenter', sel.onMouseenter);
+                    $("table tr").bind('mouseup', sel.onMouseup);
+                }
+            })
+            
+           
+             
+            $("table").click(function(){return false;})
+            
+
+            $(this).keydown(function(e,a){ 
+            _L(e.which)
+              if(e.shiftKey) {
+                sel.shift=true;
+              }
+              else if(e.ctrlKey) {
+                  if(e.which==65)
+                    sel.all();
+                  else
+                    sel.ctrl=true;
+              }
+            }).keyup(function(e,a){ 
+              if(e.shiftKey) {
+                sel.shift=false;
+              }
+              else if(e.ctrlKey) {
+               sel.ctrl=false;
+              }
+            });
+            
+            
+            
+            $(this).click(function(){sel.clear();});
         });
   
     </script> 
 
+    <style>
+    
+::selection {
+	background: none; /* Safari */
+	}
+::-moz-selection {
+	background: none; /* Firefox */
+}
+::-webkit-selection {
+	background:none;
+	/*color:none;*/
+}
+
+
+    .wrapDiv{border: solid 1px red; width:80%; margin:0 auto;}
+    .fileList tbody tr.hover td {
+        background-color:#F0F0F6;
+    }
+    .fileList tbody tr.select td {
+        background-color:#eaeaea;
+    }
+    
+    .fileList tbody tr span.type {
+        background-color:#eaeaea;
+
+      
+    }
+    
+   .fileList tbody tr {  color: #000000; font-size: 13px;    line-height: 32px;}
+        line-height: 32px;
+    }
+    
+    .fileList tbody tr div.name{  color: #000000; font-size: 13px;   }
+    
+    .fileList.tablesorter tbody td {
+        border-bottom: solid 1px #eaeaea;
+    }
+    
+    
+    .fileList.tablesorter tbody td {
+        border-bottom: solid 1px #eaeaea;
+    }
+    
+
+    .type .img.folder{ background: url('imgs/folder2.png'); width:32px; height:32px; position: absolute;}
+    .type .img.file{ background: url('imgs/file.png'); width:32px; height:32px; position: absolute;}
+    .type .name{ margin-left: 40px;}
+    </style>
 </head>
 <body>
 
-
- <table id="myTable" class="tablesorter"> 
+<div class='wrapDiv'>
+ <table id="fileList" class="tablesorter fileList"> 
 <thead> 
 <tr> 
-    <th>Last Name</th> 
-    <th>First Name</th> 
-    <th>Email</th> 
-    <th>Due</th> 
-    <th>Web Site</th> 
+    <th>Name</th> 
+    <th>Size</th> 
+    <th>LastModified</th> 
+
 </tr> 
 </thead> 
-<tbody> 
+<tbody > 
 <tr> 
-    <td>Smith</td> 
-    <td>John</td> 
-    <td>jsmith@gmail.com</td> 
-    <td>$50.00</td> 
-    <td>http://www.jsmith.com</td> 
+    <td class='type'><div class='img folder'></div><div class='name'>AA</div></td>
+    <td>310.7 MB</td> 
+    <td>--</td> 
+
 </tr> 
 <tr> 
-    <td>Bach</td> 
-    <td>Frank</td> 
-    <td>fbach@yahoo.com</td> 
-    <td>$50.00</td> 
-    <td>http://www.frank.com</td> 
+     <td class='type'><div class='img folder'></div><div class='name'>BB</div></td>
+    <td>310.7 MB</td> 
+    <td>--</td> 
 </tr> 
 <tr> 
-    <td>Doe</td> 
-    <td>Jason</td> 
-    <td>jdoe@hotmail.com</td> 
-    <td>$100.00</td> 
-    <td>http://www.jdoe.com</td> 
+     <td class='type'><div class='img folder'></div><div class='name'>BB</div></td>
+    <td>310.7 MB</td> 
+    <td>--</td> 
 </tr> 
 <tr> 
-    <td>Conway</td> 
-    <td>Tim</td> 
-    <td>tconway@earthlink.net</td> 
-    <td>$50.00</td> 
-    <td>http://www.timconway.com</td> 
+     <td class='type'><div class='img folder'></div><div class='name'>BB</div></td>
+    <td>310.7 MB</td> 
+    <td>--</td> 
+</tr> 
+<tr> 
+      <td class='type'><div class='img file'></div><div class='name'>CC</div></td>
+    <td>310.7 MB</td> 
+    <td>--</td> 
+
+</tr> 
+<tr> 
+     <td class='type'><div class='img file'></div><div class='name'>DD</div></td>
+    <td>310.7 MB</td> 
+    <td>--</td> 
+
 </tr> 
 </tbody> 
 </table> 
+</div>
 
 </body>
 </html>
