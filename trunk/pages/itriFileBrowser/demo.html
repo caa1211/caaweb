@@ -38,25 +38,61 @@
             
             var sel = {
                 first:null,
+                last: null,
                 addFirst : function(){
                     sel.first.addClass('select');
                 },
-                add : function(obj, dragFlag){ 
+                add : function(obj, dragFlag, updateLast){ 
+                
+                    if(dragFlag == undefined){
+                        dragFlag = false;
+                    }
+                    if(updateLast== undefined){
+                        updateLast = true;
+                    }
                     if(dragFlag && ( $("#fileList tr.select").length == 0 && sel.first!=null));
                     {
                         sel.addFirst(); 
                     }                       
                     obj.addClass('select');
+                    
+                    if(updateLast!=false)
+                     sel.last = obj;
                 },
                 clear: function(){  $("#fileList tr").removeClass('select'); },
-                onMouseup: function(){
-   
+                addRange: function(start,end){
+                
+              //  _L("range : " + start +" , " + end);
+                   var e = start - end > 0 ? start: end;
+                   var s = start - end > 0 ? end : start;
+                    _L("range : " + s +" , " + e);
+                    
+                    for(var i=s; i<= e ; i++)
+                    {
+                     _L("i : " + i);
+                  //  $("#fileList tr:nth-child("+i+")")
+                     sel.add($("#fileList tr:nth-child("+i+")"), false, false);
+                    }
+                
+                },
+                onMouseup: function(e){  
+                
+                    $("#fileList tr").unbind('mouseenter', sel.onMouseenter);
+                    $("#fileList tr").unbind('mouseup', sel.onMouseup);
+                    mode.select = false;
+                    
+                    if (e.shiftKey && sel.last != null) { //select
+                       sel.clear()
+                       sel.addRange( $("#fileList tr").index(sel.last),  $("#fileList tr").index($(this)));
+                       return;
+                    }
+                    
                     if($(this)[0]==sel.first[0])
                       sel.add($(this));
-                    
-                    $("#fileList tr").unbind('mouseenter', sel.onMouseenter);
-                    mode.select = false;
+
                     sel.first = null;
+                    
+                    //_L('last index:' +    $("#fileList tr").index(sel.last));
                 }, 
                 onMouseenter: function(){
                 
@@ -66,11 +102,8 @@
                     sel.add($(this));
                     
                 },
-                shift: false,
-                ctrl: false,
                 all: function(){
                   $("#fileList tr").addClass('select');
-                
                 }
             };
             
@@ -84,14 +117,14 @@
           
             var drag={
               onMouseup: function(){                    
-              if($(this)[0]==drag.first[0])
+              /*if($(this)[0]==drag.first[0])
                     { 
-_L("tttttt")
+                        _L("tttttt")
                       sel.clear();
                     }
                        sel.add($(this));
                        
-                          drag.first = null;
+                          drag.first = null;*/
                       },
               first: null
             };
@@ -109,7 +142,7 @@ _L("tttttt")
 
    
 
-            $("table tr").mousedown(function(){
+            $("table tr").mousedown(function(e){
               
                // sel.first  = $(this);
               //  drag.first  = $(this);
@@ -117,51 +150,55 @@ _L("tttttt")
                //  $("table tr").unbind('mouseup', drag.onMouseup);
                  
                  
-                if($(this).hasClass('select')){
-                   mode.drag = true;
+                if($(this).hasClass('select')){//drag
+                    mode.drag = true;
                  //  drag.init();
-                  drag.first  = $(this);
-                   $("table tr").bind('mouseup', drag.onMouseup);
+                    drag.first  = $(this);
+                    $("table tr").bind('mouseup', drag.onMouseup);
                 }
-                else{
+                else{//select
                     sel.first  = $(this);
                     mode.select = true;
-                    sel.clear();
+                    if (e.ctrlKey) {
+                    }
+                    else{
+                      sel.clear();
+                    }
+
                     $("table tr").unbind('mouseup', sel.onMouseup);
                     $("table tr").unbind('mouseenter', sel.onMouseenter);
                     $("table tr").bind('mouseenter', sel.onMouseenter);
                     $("table tr").bind('mouseup', sel.onMouseup);
+                    
+                    e.preventDefault(); 
                 }
             })
             
-           
-             
             $("table").click(function(){return false;})
             
 
             $(this).keydown(function(e,a){ 
-            _L(e.which)
-              if(e.shiftKey) {
-                sel.shift=true;
-              }
-              else if(e.ctrlKey) {
-                  if(e.which==65)
+                  if(e.which==65 && e.ctrlKey)
                     sel.all();
-                  else
-                    sel.ctrl=true;
-              }
-            }).keyup(function(e,a){ 
-              if(e.shiftKey) {
-                sel.shift=false;
-              }
-              else if(e.ctrlKey) {
-               sel.ctrl=false;
-              }
             });
             
             
-            
             $(this).click(function(){sel.clear();});
+            
+            /*
+            $('table').mousedown(function (e) {
+                if (e.ctrlKey) {
+                 alert('c')
+                 e.preventDefault();
+                }
+                if (e.shiftKey) {
+                alert('s')
+                 e.preventDefault();
+                }
+                
+            });*/
+
+
         });
   
     </script> 
@@ -181,17 +218,17 @@ _L("tttttt")
 
 
     .wrapDiv{border: solid 1px red; width:80%; margin:0 auto;}
-    .fileList tbody tr.hover td {
-        background-color:#F0F0F6;
-    }
+
     .fileList tbody tr.select td {
         background-color:#eaeaea;
     }
-    
+    .fileList tbody tr.hover td {
+        background-color:#F0F0CC;
+    }
+
     .fileList tbody tr span.type {
         background-color:#eaeaea;
 
-      
     }
     
    .fileList tbody tr {  color: #000000; font-size: 13px;    line-height: 32px;}
@@ -209,10 +246,11 @@ _L("tttttt")
         border-bottom: solid 1px #eaeaea;
     }
     
-
-    .type .img.folder{ background: url('imgs/folder2.png'); width:32px; height:32px; position: absolute;}
-    .type .img.file{ background: url('imgs/file.png'); width:32px; height:32px; position: absolute;}
-    .type .name{ margin-left: 40px;}
+    .nameArea img {width:32px; height:32px; position: absolute;}
+    .nameArea img.folder{}
+    .nameArea img.file{}
+    
+    .nameArea .name{ margin-left: 40px;}
     </style>
 </head>
 <body>
@@ -229,34 +267,34 @@ _L("tttttt")
 </thead> 
 <tbody > 
 <tr> 
-    <td class='type'><div class='img folder'></div><div class='name'>AA</div></td>
+    <td class='nameArea'><img src='imgs/folder2.png' class='folder'/><div class='name'>AA</div></td>
     <td>310.7 MB</td> 
     <td>--</td> 
 
 </tr> 
 <tr> 
-     <td class='type'><div class='img folder'></div><div class='name'>BB</div></td>
+     <td class='nameArea'><img src='imgs/folder2.png' class='folder'/><div class='name'>BB</div></td>
     <td>310.7 MB</td> 
     <td>--</td> 
 </tr> 
 <tr> 
-     <td class='type'><div class='img folder'></div><div class='name'>BB</div></td>
+     <td class='nameArea'><img src='imgs/folder2.png' class='folder'/></div><div class='name'>BB</div></td>
     <td>310.7 MB</td> 
     <td>--</td> 
 </tr> 
 <tr> 
-     <td class='type'><div class='img folder'></div><div class='name'>BB</div></td>
+     <td class='nameArea'><img src='imgs/folder2.png' class='folder'/><div class='name'>BB</div></td>
     <td>310.7 MB</td> 
     <td>--</td> 
 </tr> 
 <tr> 
-      <td class='type'><div class='img file'></div><div class='name'>CC</div></td>
+      <td class='nameArea'><img src='imgs/file.png' class='file'/><div class='name'>CC</div></td>
     <td>310.7 MB</td> 
     <td>--</td> 
 
 </tr> 
 <tr> 
-     <td class='type'><div class='img file'></div><div class='name'>DD</div></td>
+     <td class='nameArea'><img src='imgs/file.png' class='file'/><div class='name'>DD</div></td>
     <td>310.7 MB</td> 
     <td>--</td> 
 
