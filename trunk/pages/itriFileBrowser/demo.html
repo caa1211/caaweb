@@ -44,21 +44,34 @@
 
     <style>
     
-::selection {
+*::selection {
 	background: none; /* Safari */
 	}
-::-moz-selection {
+*::-moz-selection {
 	background: none; /* Firefox */
 }
-::-webkit-selection {
+*::-webkit-selection {
+	background:none;
+	/*color:none;*/
+}
+*::-o-selection {
 	background:none;
 	/*color:none;*/
 }
 
+img {
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-o-user-select: none;
+user-select: none;
+}
 
 
-    .wrapDiv{border: solid 1px red; width:80%; margin:0 auto;}
 
+
+   /* .wrapDiv{border: solid 1px red; width:80%; margin:0 auto; height:300px; overflow: auto;}*/
+   
     .fileList tbody tr.select td {
         background-color:#eaeaea;
     }
@@ -86,11 +99,27 @@
         border-bottom: solid 1px #eaeaea;
     }
     
-    .nameArea img {width:32px; height:32px; position: absolute;}
-    .nameArea img.folder{}
-    .nameArea img.file{}
+    .nameArea img {width:32px; height:32px; float:left;}
+
     
-    .nameArea .name{ margin-left: 40px;}
+    .nameArea .name{ margin-left: 40px; }
+    
+    /*.not-drop {cursor: url(imgs/not-drop.cur), default;}*/
+    
+    .allow-drop {cursor: default}
+    
+    .fileList tbody tr.allow-drop td {
+        background-color:#fcfff6;
+    }
+    
+    .fileList tbody tr.allow-drop.hover td {
+        background-color:#fcffd1;
+    }
+    
+    .selThumbs{position:absolute; }
+    .selThumbs .thumbCounter{ background: url(imgs/thumbCbg.png); width:20px; height:20px; left:15px; top:-7px; position:absolute; z-index:102; }
+    .selThumbs .thumbCounter span{  margin:0 auto; width:9px; display:block; margin-top:2px; color: #5a5afa;}
+    
     </style>
 </head>
 <body>
@@ -106,42 +135,68 @@
 </tr> 
 </thead> 
 <tbody > 
-<tr> 
-    <td class='nameArea'><img src='imgs/folder2.png' class='folder'/><div class='name'>AA</div></td>
+<tr  class='listItem folder'> 
+    <td class='nameArea'><img src='imgs/folder2.png'/><div class='name'>A</div></td>
     <td>310.7 MB</td> 
     <td>--</td> 
 
 </tr> 
-<tr> 
-     <td class='nameArea'><img src='imgs/folder2.png' class='folder'/><div class='name'>BB</div></td>
+<tr class='listItem folder'> 
+     <td class='nameArea'><img src='imgs/folder2.png' /><div class='name'>B</div></td>
     <td>310.7 MB</td> 
     <td>--</td> 
 </tr> 
-<tr> 
-     <td class='nameArea'><img src='imgs/folder2.png' class='folder'/></div><div class='name'>BB</div></td>
+<tr  class='listItem folder'> 
+     <td class='nameArea'><img src='imgs/folder2.png'/></div><div class='name'>C</div></td>
     <td>310.7 MB</td> 
     <td>--</td> 
 </tr> 
-<tr> 
-     <td class='nameArea'><img src='imgs/folder2.png' class='folder'/><div class='name'>BB</div></td>
+<tr  class='listItem folder'> 
+     <td class='nameArea'><img src='imgs/folder2.png'/><div class='name'>D</div></td>
     <td>310.7 MB</td> 
     <td>--</td> 
 </tr> 
-<tr> 
-      <td class='nameArea'><img src='imgs/file.png' class='file'/><div class='name'>CC</div></td>
+<tr  class='listItem file'> 
+      <td class='nameArea'><img src='imgs/file.png'/><div class='name'>e</div></td>
     <td>310.7 MB</td> 
     <td>--</td> 
 
 </tr> 
-<tr> 
-     <td class='nameArea'><img src='imgs/file.png' class='file'/><div class='name'>DD</div></td>
+<tr class='listItem file'> 
+     <td class='nameArea'><img src='imgs/file.png' /><div class='name'>f</div></td>
+    <td>310.7 MB</td> 
+    <td>--</td> 
+
+</tr> 
+<tr class='listItem file'> 
+     <td class='nameArea'><img src='imgs/file.png' /><div class='name'>g</div></td>
+    <td>310.7 MB</td> 
+    <td>--</td> 
+
+</tr> 
+<tr class='listItem file'> 
+     <td class='nameArea'><img src='imgs/file.png' /><div class='name'>h</div></td>
+    <td>310.7 MB</td> 
+    <td>--</td> 
+
+</tr> 
+<tr class='listItem file'> 
+     <td class='nameArea'><img src='imgs/file.png' /><div class='name'>i</div></td>
+    <td>310.7 MB</td> 
+    <td>--</td> 
+
+</tr> 
+<tr class='listItem file'> 
+     <td class='nameArea'><img src='imgs/file.png' /><div class='name'>j</div></td>
     <td>310.7 MB</td> 
     <td>--</td> 
 
 </tr> 
 </tbody> 
 </table> 
-</div>
 
+
+</div>
+<div id='debugDiv'></div>
 </body>
 </html>
