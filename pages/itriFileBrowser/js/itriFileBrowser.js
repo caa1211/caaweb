@@ -16,20 +16,50 @@
 (function($)
 {
      
-
-    $.fn.itriFileBrowser = function(settings){
-        
+             
        function _L(str){
      
-                console.log(str);
+     $("#debugDiv").html(str)
+               // console.log(str);
        }
             
        var defaultSetting = 
        {
            
-       }
+       };
        
-       settings = $.extend(defaultSetting , settings);
+       
+    $.fn.thumbnails = function(settings){
+       var $thisObj = $(this);
+       var defaultSetting = 
+       {
+           imgs:null
+       };
+       
+       var _settings = $.extend({}, defaultSetting , settings);
+       var len = _settings.imgs.length;
+       function modifyImgPos(){
+       
+       var offset=0;
+       $.each(_settings.imgs, function(){
+         $(this).css("position", "absolute").css("left", offset*3).css("top", offset*6).css("z-index", 100-offset);
+         offset++;
+        });
+       }
+
+       var thumbCWidth =  9+Math.floor(len/10)*5 ;
+       //_L(thumbCWidth)
+       modifyImgPos();
+       $thisObj.prepend("<div class='thumbCounter'><span style='width:"+ thumbCWidth +"px;'>"+len+"</span></div>");
+       
+       $thisObj.append(_settings.imgs);
+       return this;
+    }
+   
+   
+    $.fn.itriFileBrowser = function(settings){
+
+       var _settings = $.extend({}, defaultSetting , settings);
        var $thisObj = $(this);
        var $childList = $thisObj.children('tbody').children('tr');
        var sel = {
@@ -100,21 +130,113 @@
                 }
             };
     
+        var drag = {
+            first: null,
+            selecitons: null,
+            selThumbs: null,
+            dropTargets: null,
+            dragging: false,
+            onMouseup: function(e){
+               $childList.removeClass("allow-drop").removeClass("not-drop");
+               $childList.unbind('mouseenter', drag.onMouseenter);
+               $childList.unbind('mouseup', drag.onMouseup);
+               $childList.unbind('mousemove', drag.onInit);
+               $childList.unbind('mousemove', drag.onMousemove);
+               if(drag.selThumbs != null)
+                {
+                drag.selThumbs.empty().remove();
+                drag.selThumbs = null;
+                }
+ 
+            if(drag.dragging == false) //click self
+              {
+                sel.clear();
+                sel.first = $(this);
+                sel.add($(this));
+              }
+               e.preventDefault(); 
+            },
+            onMouseenter: function(e){
+              /* if($(this).hasClass('folder') && !$(this).hasClass('select'))
+                $(this).addClass("allow-drop");
+               else
+                $(this).addClass("not-drop");*/
+                 e.preventDefault(); 
+            },
+            onMousemove: function(e){ 
+                //_L("move " + e.pageY);
+                //e = $.event.fix(e);
+                drag.dragging = true;
+                drag.selThumbs.css('left',e.pageX +10).css('top',e.pageY+10);
+                e.preventDefault(); 
+            },
+            onDrop: function(){
+              drag.dropTargets.unbind('mouseup', drag.onDrop);
+             
+              sel.clear();
+              drag.onDropDone($(this));
+              //_L("drop" + selStr + " to "+ $(this).find(".name").html())
+ 
+            },
+            onDropDone: function(target){
+              var selStr =" [ "; 
+              drag.selecitons.each(function(){
+              selStr = selStr + ", " +$(this).find(".name").html();
+              })
+              selStr = selStr + " ] ";
+               _L("drop" + selStr + " to "+ target.find(".name").html())
+            },
+            dragFilter: function(){
+                   if($(this).hasClass('folder') && !$(this).hasClass('select'))
+                    {
+                      $(this).addClass("allow-drop");
+                      return true;
+                    }
+                   else
+                    {
+                      $(this).addClass("not-drop");
+                      return false;
+                    }
+            },
+            onInit: function(e){
+               $childList.unbind('mousemove', drag.onInit);
+               drag.selThumbs = $("<div id='selThumbs' class='selThumbs'></div>");
+               $("body").append(drag.selThumbs);
+               drag.selThumbs.thumbnails({imgs: $childList.filter('.select').find('img').clone()});
+               drag.dropTargets = $childList.filter(drag.dragFilter).bind('mouseup', drag.onDrop);
+             
+            }
+        }
         //sorting
     	$thisObj.tablesorter({debug: false});
-        $childList.mouseleave(function(){
+        $childList.mouseleave(function(e){
             $(this).removeClass('hover');
-        }).mouseenter(function(){
+               e.preventDefault(); 
+        }).mouseenter(function(e){
             $(this).addClass('hover');
+               e.preventDefault(); 
         }).mousedown(function(e){
-            if($(this).hasClass('select')){//drag
-                    //drag.first  = $(this);
+                if($(this).hasClass('select')){//drag
+                    drag.first  = $(this);
+                    drag.selecitons = $childList.filter('.select');
+                    
+                    $childList.unbind('mouseup', drag.onMouseup);
+                    $childList.unbind('mouseenter', drag.onMouseenter);
+                    $childList.unbind('mousemove', drag.onMousemove);
+                    $childList.unbind('mousemove', drag.onInit);
+                    
+                    $childList.bind('mouseenter', drag.onMouseenter);
+                    $childList.bind('mousemove', drag.onInit);
+                    $childList.bind('mousemove', drag.onMousemove);
+                    $childList.bind('mouseup', drag.onMouseup);
+                  
                 }
                 else{//select
                     sel.first  = $(this);
                     if (e.ctrlKey) {
                     }
                     else if (e.shiftKey) {
+                    sel.clear();
                     }
                     else{
                       sel.clear();
