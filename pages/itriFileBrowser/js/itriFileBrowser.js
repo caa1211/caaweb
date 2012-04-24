@@ -106,6 +106,13 @@
                     $childList.unbind('mouseenter', sel.onMouseenter);
                     $childList.unbind('mouseup', sel.onMouseup);
                     
+                    if (e.ctrlKey) {
+                   /*  if($(this).hasClass('select')){
+                        $(this).removeClass('select');
+                        return;
+                        }*/
+                    }
+                    
                     if (e.shiftKey && sel.last != null) { //select
                        sel.addRange( $childList.index(sel.last),  $childList.index($(this)));
                        return;
@@ -150,11 +157,17 @@
  
             if(drag.dragging == false) //click self
               {
-                sel.clear();
-                sel.first = $(this);
-                sel.add($(this));
+                 if (e.ctrlKey && $(this).hasClass('select')) {
+                     $(this).removeClass('select');
+                }
+                else{    
+                    sel.clear();
+                    sel.first = $(this);
+                    sel.add($(this));
+                }
               }
-               e.preventDefault(); 
+              drag.dragging = false;
+              e.preventDefault(); 
             },
             onMouseenter: function(e){
               /* if($(this).hasClass('folder') && !$(this).hasClass('select'))
@@ -232,6 +245,7 @@
                   
                 }
                 else{//select
+                  
                     sel.first  = $(this);
                     if (e.ctrlKey) {
                     }
@@ -253,7 +267,14 @@
 
          $thisObj.click(function(){return false;});
             
-
+            /*
+        function preventDef(e){
+         e.preventDefault(); 
+         return false;
+        }
+         $thisObj.mouseenter(preventDef).mouseup(preventDef).mousemove(preventDefault);
+         */
+         
         $(window).keydown(function(e,a){ 
                   if(e.which==65 && e.ctrlKey)
                     sel.all();
