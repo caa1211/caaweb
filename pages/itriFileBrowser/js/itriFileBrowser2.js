@@ -333,7 +333,11 @@
                   if(e.which==65 && e.ctrlKey)
                     _sel.selectAll();
                        e.stopPropagation();   
-       }).click(function(){_sel.clear();});
+       }).click(function(){
+                  var childList = $thisObj.children('tbody').children('tr');
+                  _sel.setList(childList)
+                  _sel.clear();
+       });
         
        return this;
     };
