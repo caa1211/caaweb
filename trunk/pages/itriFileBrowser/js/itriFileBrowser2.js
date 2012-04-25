@@ -15,8 +15,7 @@
 
 (function($)
 {
-     
-             
+
        function _L(str){
         var debugDiv =  $("#debugDiv");
          if( debugDiv.length != 0){
@@ -60,23 +59,22 @@
    
     $.fn.itriFileBrowser = function(settings){
 
+       var defaultSetting = {};
        var _settings = $.extend({}, defaultSetting , settings);
        var $thisObj = $(this);
        var $childList = $thisObj.children('tbody').children('tr');
                
-       function dragHelper(){
-            
-         
-            return this;
-       };
-        
-       function selHelper(targetList){
+
+       function selHelper(){
             this.first = null;
             this.last = null;
             var sel  = this;
             this.onMouseenter = function(e){
                   sel.clear();
                   sel.addRange( targetList.index(sel.first),  targetList.index($(this)));
+            };
+            this.setList= function(list){
+               targetList = list;
             };
             this.onMouseup = function(e){   
                 if (e.shiftKey && sel.last != null) { //select
@@ -125,7 +123,7 @@
             }
             
             this.addRange = function(s, e){
-              //_L("add : s " + s + ", e " + e)
+              _L("add : s " + s + ", e " + e)
               if(e>s){
                   for(var i=s; i<=e; i++)
                   {
@@ -147,13 +145,124 @@
                 targetList.removeClass('select');
             };
             
+            this.selectAll = function(){
+                 targetList.addClass('select');
+            };
+            
+            this.getSelections = function(){
+             return targetList.filter('.select');;
+            }
             this.endHandler = function(){};//overrided by caller
          
             return this;
        };
          
-        var _selHelper = new selHelper($childList);
+       function dragHelper(){
+            var drag  = this;
+            var sel = null
+            var selections = null;
+            var dragging = false;
+            this.setSelectItems = function(selobj){
+               sel = selobj;
+            };
+ 
+            this.onMouseenter = function(e){
+            
+            };
+            
+            this.setList= function(list){
+               targetList = list;
+            };
+            
+            this.onInitmove = function(e){
+               drag.dragging = true;
+               selections = sel.getSelections();
+               targetList.unbind('mousemove', drag.onInitmove);
+               drag.selThumbs = $("<div id='selThumbs' class='selThumbs'></div>");
+               $("body").append(drag.selThumbs);
+               drag.selThumbs.thumbnails({imgs: selections.find('img').clone()});
+               drag.dropTargets = targetList.filter(drag.dragFilter);
+               drag.dropTargets.bind('mouseup', drag.onDrop);
+            };
+            
+            this.onDrop = function(){
+              drag.dropTargets.unbind('mouseup', drag.onDrop);
+              sel.clear();
+              drag.onDropDone($(this));
+            };
+            
+            this.onDropDone = function(target){
+              var selStr =" [ "; 
+              selections.each(function(){
+                selStr = selStr + ", " +$(this).find(".name").html();
+              })
+              selStr = selStr + " ] ";
+               _L("drop" + selStr + " to "+ target.find(".name").html())
+               
+              selections.empty().remove();
+            };
+            
+            this.onMousemove = function(e){
+                //_L("move " + e.pageY);
+                if(drag.selThumbs!=null)
+                   drag.selThumbs.css('left',e.pageX +10).css('top',e.pageY+10);
+            };
+            this.onMouseup = function(e){
+               targetList.removeClass("allow-drop").removeClass("not-drop");
+               drag.endHandler();
+               
+               if(drag.dropTargets!=undefined && drag.dropTargets!=null){
+                 drag.dropTargets.unbind('mouseup', drag.onDrop);
+               }
+               
+               if(drag.selThumbs != null)
+                {
+                drag.selThumbs.empty().remove();
+                drag.selThumbs = null;
+                }
+ 
+            if(drag.dragging == false) //click self
+              {
+                 if (e.ctrlKey && $(this).hasClass('select')) {
+                     $(this).removeClass('select');
+                }
+                else{    
+                    sel.clear();
+                    sel.first = $(this);
+                    sel.add($(this));
+                }
+              }   
+              drag.dragging = false;              
+            };
+            this.endHandler = function(){};
+            
+            this.dragFilter = function(){
+                   if($(this).hasClass('folder') && !$(this).hasClass('select'))
+                    {
+                      $(this).addClass("allow-drop");
+                      return true;
+                    }
+                   else
+                    {
+                      $(this).addClass("not-drop");
+                      return false;
+                    }
+            };
+            
+            return this;
+       };
         
+        
+        var _sel = new selHelper();
+        var _drag = new dragHelper();
+        
+        function unbindDragEvent(items, helper){
+            items.unbind('mouseenter', helper.onMouseenter);
+            items.unbind('mousemove', helper.onInitmove);
+            items.unbind('mouseup', helper.onMouseup);
+            $('body').unbind('mousemove', _drag.onMousemove);
+        }
+
         function unbindSelEvent(items, helper){
             items.unbind('mouseenter', helper.onMouseenter);
             items.unbind('mouseup', helper.onMouseup);
@@ -161,29 +270,37 @@
 
         $childList.mousedown(
             function(e){
+                var childList = $thisObj.children('tbody').children('tr');
                 if($(this).hasClass('select')){//drag
-                   
-                   
+                    _drag.setSelectItems(_sel);
+                    _drag.setList(childList);
+                    childList.bind('mouseenter', _drag.onMouseenter);
+                    childList.bind('mousemove', _drag.onInitmove);
+                    childList.bind('mouseup', _drag.onMouseup);
+                    $('body').bind('mousemove', _drag.onMousemove);
+                    _drag.endHandler = function(){
+                        unbindDragEvent(childList, _drag);
+                    };
                 }
                 else{//select
-                   //initSelEvent($childList, _selHelper);
-                    
+                   //initSelEvent(childList, _selHelper);
+                    _drag.setList(childList);
                     if (e.ctrlKey) {
-                      _selHelper.first = $(this);
+                      _sel.first = $(this);
                     }
                     else if (e.shiftKey) {
-                      //_selHelper.clear();
+                      //_sel.clear();
                     }
                     else{
-                      _selHelper.first = $(this);
-                      _selHelper.clear();
+                      _sel.first = $(this);
+                      _sel.clear();
                     }
                 
-                   $childList.bind('mouseenter', _selHelper.onMouseenter);
-                   $childList.bind('mouseup', _selHelper.onMouseup);
+                   childList.bind('mouseenter', _sel.onMouseenter);
+                   childList.bind('mouseup', _sel.onMouseup);
                     
-                   _selHelper.endHandler = function(){
-                        unbindSelEvent($childList, _selHelper);
+                   _sel.endHandler = function(){
+                        unbindSelEvent(childList, _sel);
                    };
                 }
 
@@ -199,12 +316,22 @@
                e.preventDefault(); 
         });
 
-       
        function preventDefault(e){
-         e.preventDefault(); 
+          e.preventDefault(); 
        };
         
-       $thisObj.mousedown(preventDefault);
+       function stopPropagation(e){
+          e.stopPropagation();  
+       };
+       $thisObj.mousedown(preventDefault).mouseup(preventDefault).mousemove(preventDefault).mouseenter(preventDefault)
+       .keydown(preventDefault).click(stopPropagation);
+       $('body').mousemove(preventDefault);
+       $('body').keydown(function(e,a){ 
+                    var childList = $thisObj.children('tbody').children('tr');
+                    _sel.setList(childList)
+                  if(e.which==65 && e.ctrlKey)
+                    _sel.selectAll();
+       }).click(function(){_sel.clear();});
         
        return this;
     };
