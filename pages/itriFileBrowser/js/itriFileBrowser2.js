@@ -318,19 +318,21 @@
 
        function preventDefault(e){
           e.preventDefault(); 
-       };
+       }
         
        function stopPropagation(e){
           e.stopPropagation();  
-       };
+       }
+       
        $thisObj.mousedown(preventDefault).mouseup(preventDefault).mousemove(preventDefault).mouseenter(preventDefault)
        .keydown(preventDefault).click(stopPropagation);
-       $('body').mousemove(preventDefault);
-       $('body').keydown(function(e,a){ 
-                    var childList = $thisObj.children('tbody').children('tr');
-                    _sel.setList(childList)
+       $(document).mousemove(preventDefault);
+       $(document).keydown(function(e,a){ 
+                  var childList = $thisObj.children('tbody').children('tr');
+                  _sel.setList(childList)
                   if(e.which==65 && e.ctrlKey)
                     _sel.selectAll();
+                       e.stopPropagation();   
        }).click(function(){_sel.clear();});
         
        return this;
