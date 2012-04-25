@@ -132,15 +132,30 @@
               
             var fileBor = $("#fileList").tablesorter({
                 debug: false,
-                sortList: [[0,0],[2,0]],
+                //sortList: [[0,0],[1,0]],
                 headers: { 
-                    1: { 
+                    "1": { 
                         sorter:'mbsorter' 
-                    } 
+                    }
                 } 
                 
             })
-            .itriFileBrowser();                  
+            .itriFileBrowser(); 
+            
+            //$('body').click(function(){
+            //    $("#myTable").trigger({type:'update', resort:true});
+            //});
+            /*
+            fileBor.trigger("update")
+           
+           $('body').click(function(){
+           
+               fileBor.trigger({type:'update', callback : function(config){
+                    $(this).trigger("sorton", [[0,0],[1,0]])
+                }});
+
+           })*/
+
                     //sorting
     	    //  fileBor.tablesorter({debug: false});
 
