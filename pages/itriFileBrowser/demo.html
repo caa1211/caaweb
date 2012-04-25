@@ -46,8 +46,101 @@
             
             });
             */
-            
-            var fileBor = $("#fileList").tablesorter({debug: false}).itriFileBrowser();                  
+
+        
+            // add parser through the tablesorter addParser method 
+            $.tablesorter.addParser({ 
+                // set a unique id 
+                id: 'mbsorter', 
+                is: function(s) { 
+                    // return false so this parser is not auto detected 
+                    return false; 
+                }, 
+                format: function(s) { 
+                    var num = parseFloat(s);
+                    if(isNaN(num))
+                        num = 0;
+                    return num; 
+                }, 
+                // set type, either numeric or text 
+                type: 'numeric' 
+            }); 
+    
+        $.tablesorter.addParser({
+            id: "customDate",
+            is: function(s) {
+                //return false;
+                //use the above line if you don't want table sorter to auto detected this parser
+                //else use the below line.
+                //attention: doesn't check for invalid stuff
+                //2009-77-77 77:77:77.0 would also be matched
+                //if that doesn't suit you alter the regex to be more restrictive
+                return /\d{1,4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}:\d{1,2}\.\d+/.test(s);
+            },
+            format: function(s) {
+                s = s.replace(/\-/g," ");
+                s = s.replace(/:/g," ");
+                s = s.replace(/\./g," ");
+                s = s.split(" ");
+                return $.tablesorter.formatFloat(new Date(s[0], s[1]-1, s[2], s[3], s[4], s[5]).getTime()+parseInt(s[6]));
+            },
+            type: "numeric"
+        });
+
+        //January 6, 1978 9:12 AM or Jan. 6, 2001 9:12 AM
+        var monthNames = {};
+        monthNames["Jan"] = "01";
+        monthNames["Feb"] = "02";
+        monthNames["Mar"] = "03";
+        monthNames["Apr"] = "04";
+        monthNames["May"] = "05";
+        monthNames["Jun"] = "06";
+        monthNames["Jul"] = "07";
+        monthNames["Aug"] = "08";
+        monthNames["Sep"] = "09";
+        monthNames["Oct"] = "10";
+        monthNames["Nov"] = "11";
+        monthNames["Dec"] = "12";
+        
+        $.tablesorter.addParser({
+          id: 'monthDayYear',
+          is: function(s) {
+              return false;
+          },
+          format: function(s) {
+              var date = s.match(/^(\w{3})[ ](\d{1,2}),[ ](\d{4})$/);
+              var m = monthNames[date[1]];
+              var d = String(date[2]);
+              if (d.length == 1) {d = "0" + d;}
+              var y = date[3];
+              return '' + y + m + d;
+          },
+          type: 'numeric'
+        });
+        
+        
+
+            var $childList =$("#fileList").children('tbody').children('tr');
+              $childList.each( function(){
+               if( $(this).hasClass("folder")){
+                  $(this).find('.name').before('<span class="type">1</span>');
+                  }
+               else{
+                  $(this).find('.name').before('<span class="type">2</span>'); 
+                  }
+              })
+              
+            var fileBor = $("#fileList").tablesorter({
+                debug: true,
+                sortList: [[0,0],[2,0]],
+                headers: { 
+                    1: { 
+                        sorter:'mbsorter' 
+                    } 
+                } 
+                
+            })
+            .itriFileBrowser();                  
                     //sorting
     	    //  fileBor.tablesorter({debug: false});
 
@@ -124,7 +217,7 @@ user-select: none;
 
     
     .nameArea .name{ margin-left: 40px; }
-    
+    .nameArea .type{ display:none; }
     .not-drop {cursor: url(imgs/not-drop.cur), default;}
     
     .allow-drop {cursor: default}
@@ -159,59 +252,58 @@ user-select: none;
 <tbody > 
 <tr  class='listItem folder'> 
     <td class='nameArea'><img src='imgs/folder2.png'/><div class='name'>A</div></td>
-    <td>310.7 MB</td> 
     <td>--</td> 
-
+    <td>--</td> 
 </tr> 
 <tr class='listItem folder'> 
-     <td class='nameArea'><img src='imgs/folder2.png' /><div class='name'>B</div></td>
-    <td>310.7 MB</td> 
+     <td class='nameArea'><img src='imgs/folder2.png' /><div class='name'>z</div></td>
+    <td>--</td> 
     <td>--</td> 
 </tr> 
 <tr  class='listItem folder'> 
-     <td class='nameArea'><img src='imgs/folder2.png'/></div><div class='name'>C</div></td>
-    <td>310.7 MB</td> 
+     <td class='nameArea'><img src='imgs/folder2.png'/></div><div class='name'>c</div></td>
+    <td>--</td> 
     <td>--</td> 
 </tr> 
 <tr  class='listItem folder'> 
      <td class='nameArea'><img src='imgs/folder2.png'/><div class='name'>D</div></td>
-    <td>310.7 MB</td> 
+    <td>--</td> 
     <td>--</td> 
 </tr> 
 <tr  class='listItem file'> 
-      <td class='nameArea'><img src='imgs/file.png'/><div class='name'>e</div></td>
-    <td>310.7 MB</td> 
-    <td>--</td> 
+    <td class='nameArea'><img src='imgs/file.png'/><div class='name'>e</div></td>
+    <td>330.7 MB</td> 
+    <td>Jan. 6, 2012 9:12 AM</td> 
 
 </tr> 
 <tr class='listItem file'> 
-     <td class='nameArea'><img src='imgs/file.png' /><div class='name'>f</div></td>
-    <td>310.7 MB</td> 
-    <td>--</td> 
+    <td class='nameArea'><img src='imgs/file.png' /><div class='name'>f</div></td>
+    <td>410.7 MB</td> 
+    <td>Jan. 6, 2001 6:12 AM</td> 
 
 </tr> 
 <tr class='listItem file'> 
-     <td class='nameArea'><img src='imgs/file.png' /><div class='name'>g</div></td>
-    <td>310.7 MB</td> 
-    <td>--</td> 
+    <td class='nameArea'><img src='imgs/file.png' /><div class='name'>g</div></td>
+    <td>3510.7 MB</td> 
+    <td>Jan. 6, 2011 9:12 AM</td> 
 
 </tr> 
 <tr class='listItem file'> 
-     <td class='nameArea'><img src='imgs/file.png' /><div class='name'>h</div></td>
-    <td>310.7 MB</td> 
-    <td>--</td> 
+    <td class='nameArea'><img src='imgs/file.png' /><div class='name'>h</div></td>
+    <td>390.7 MB</td> 
+    <td>Jan. 16, 2001 9:12 AM</td> 
 
 </tr> 
 <tr class='listItem file'> 
-     <td class='nameArea'><img src='imgs/file.png' /><div class='name'>i</div></td>
-    <td>310.7 MB</td> 
-    <td>--</td> 
+    <td class='nameArea'><img src='imgs/file.png' /><div class='name'>i</div></td>
+    <td>3410.7 MB</td> 
+    <td>Jan. 7, 2001 9:12 AM</td> 
 
 </tr> 
 <tr class='listItem file'> 
-     <td class='nameArea'><img src='imgs/file.png' /><div class='name'>j</div></td>
-    <td>310.7 MB</td> 
-    <td>--</td> 
+    <td class='nameArea'><img src='imgs/file.png' /><div class='name'>j</div></td>
+    <td>3780.7 MB</td> 
+    <td>Jan. 5, 2001 9:12 AM</td> 
 
 </tr> 
 </tbody> 
