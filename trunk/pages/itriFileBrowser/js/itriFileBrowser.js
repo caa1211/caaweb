@@ -18,9 +18,11 @@
      
              
        function _L(str){
-     
-     $("#debugDiv").html(str)
+        var debugDiv =  $("#debugDiv");
+         if( debugDiv.length != 0){
+            $("#debugDiv").html(str)
                // console.log(str);
+            }
        }
             
        var defaultSetting = 
@@ -85,7 +87,12 @@
                     if(updateLast!=false)
                      sel.last = obj;
                 },
-                clear: function(){_L("dd"); $childList.removeClass('select'); },
+                clear: function(cobj){
+                   if(cobj == undefined || cobj) {
+                   cobj = $childList;
+                   }
+                  cobj.removeClass('select'); 
+                },
                 addRange: function(start,end){
                 
                 _L("range : " + start +" , " + end);
@@ -97,7 +104,8 @@
                     {
                      _L("i : " + i);
                   //  $("#fileList tr:nth-child("+i+")")
-                     sel.add($thisObj.find("tr:nth-child("+(i+1)+")"), false, false);
+                     var range = $thisObj.find("tr:nth-child("+(i+1)+")");
+                     sel.add(range, false, false);
                     }
                 
                 },
@@ -114,6 +122,8 @@
                     }
                     
                     if (e.shiftKey && sel.last != null) { //select
+                    
+                       //sel.clear();
                        sel.addRange( $childList.index(sel.last),  $childList.index($(this)));
                        return;
                     }
@@ -127,10 +137,14 @@
                     //_L('last index:' +    $("#fileList tr").index(sel.last));
                 }, 
                 onMouseenter: function(){
-                  if($(this)[0]==sel.first[0]){
+                  /*if($(this)[0]==sel.first[0]){
                     sel.clear();
                   }
                   sel.add($(this));
+                  */
+                  sel.clear();
+                  sel.addRange( $childList.index(sel.first),  $childList.index($(this)));
+                  
                 },
                 all: function(){
                  $childList.addClass('select');
@@ -149,6 +163,9 @@
                $childList.unbind('mouseup', drag.onMouseup);
                $childList.unbind('mousemove', drag.onInit);
                $childList.unbind('mousemove', drag.onMousemove);
+               $(window).unbind('mousemove', drag.onMousemove);
+               drag.dropTargets.unbind('mouseup', drag.onDrop);
+               
                if(drag.selThumbs != null)
                 {
                 drag.selThumbs.empty().remove();
@@ -166,6 +183,7 @@
                     sel.add($(this));
                 }
               }
+              
               drag.dragging = false;
               e.preventDefault(); 
             },
@@ -198,6 +216,8 @@
               })
               selStr = selStr + " ] ";
                _L("drop" + selStr + " to "+ target.find(".name").html())
+               
+                 drag.selecitons.empty().remove();
             },
             dragFilter: function(){
                    if($(this).hasClass('folder') && !$(this).hasClass('select'))
@@ -220,8 +240,17 @@
              
             }
         }
-        //sorting
-    	$thisObj.tablesorter({debug: false});
+        
+        function initEventBinding(){
+            $childList.unbind('mouseup', drag.onMouseup);
+            $childList.unbind('mouseenter', drag.onMouseenter);
+            $childList.unbind('mousemove', drag.onMousemove);
+            $childList.unbind('mousemove', drag.onInit);
+            $childList.unbind('mouseup', sel.onMouseup);
+            $childList.unbind('mouseenter', sel.onMouseenter);
+            $(window).unbind('mousemove', drag.onMousemove);
+        }
+
         $childList.mouseleave(function(e){
             $(this).removeClass('hover');
                e.preventDefault(); 
@@ -229,20 +258,16 @@
             $(this).addClass('hover');
                e.preventDefault(); 
         }).mousedown(function(e){
+        
+                initEventBinding();
+                
                 if($(this).hasClass('select')){//drag
                     drag.first  = $(this);
                     drag.selecitons = $childList.filter('.select');
-                    
-                    $childList.unbind('mouseup', drag.onMouseup);
-                    $childList.unbind('mouseenter', drag.onMouseenter);
-                    $childList.unbind('mousemove', drag.onMousemove);
-                    $childList.unbind('mousemove', drag.onInit);
-                    
                     $childList.bind('mouseenter', drag.onMouseenter);
                     $childList.bind('mousemove', drag.onInit);
-                    $childList.bind('mousemove', drag.onMousemove);
+                    $(window).bind('mousemove', drag.onMousemove);
                     $childList.bind('mouseup', drag.onMouseup);
-                  
                 }
                 else{//select
                   
@@ -250,14 +275,12 @@
                     if (e.ctrlKey) {
                     }
                     else if (e.shiftKey) {
-                    sel.clear();
+                      sel.clear();
                     }
                     else{
                       sel.clear();
                     }
 
-                    $childList.unbind('mouseup', sel.onMouseup);
-                    $childList.unbind('mouseenter', sel.onMouseenter);
                     $childList.bind('mouseenter', sel.onMouseenter);
                     $childList.bind('mouseup', sel.onMouseup);
                     

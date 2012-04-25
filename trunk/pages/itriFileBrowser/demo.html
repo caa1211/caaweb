@@ -20,6 +20,7 @@
 
         $(function()
         {
+        /*
             var generator = {
              idCounter: 0,
              id: function(){
@@ -35,8 +36,10 @@
             function _L(str){
                 console.log(str);
             }
-            
-            var fileBor = $("#fileList").itriFileBrowser();
+            */
+            var fileBor = $("#fileList").tablesorter({debug: false}).itriFileBrowser();                  
+                    //sorting
+    	    //  fileBor.tablesorter({debug: false});
 
         });
   
@@ -112,7 +115,7 @@ user-select: none;
     
     .nameArea .name{ margin-left: 40px; }
     
-    /*.not-drop {cursor: url(imgs/not-drop.cur), default;}*/
+    .not-drop {cursor: url(imgs/not-drop.cur), default;}
     
     .allow-drop {cursor: default}
     
