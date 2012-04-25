@@ -12,7 +12,7 @@
     <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
     <script src="js/jquery.tablesorter.js" type="text/javascript"></script>
     <script src="js/jquery-ui-1.8.19.custom.min.js" type="text/javascript"></script>
-   <script src="js/itriFileBrowser.js" type="text/javascript"></script>
+   <script src="js/itriFileBrowser2.js" type="text/javascript"></script>
 
 
     
@@ -37,6 +37,16 @@
                 console.log(str);
             }
             */
+            /*
+            $.ajax({
+                url:"",
+                success: function(res){
+                      var fileBor = $("#fileList").parse(res).tablesorter({debug: false}).itriFileBrowser();   
+                }
+            
+            });
+            */
+            
             var fileBor = $("#fileList").tablesorter({debug: false}).itriFileBrowser();                  
                     //sorting
     	    //  fileBor.tablesorter({debug: false});
