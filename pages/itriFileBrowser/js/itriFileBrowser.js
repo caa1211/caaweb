@@ -164,7 +164,8 @@
                $childList.unbind('mousemove', drag.onInit);
                $childList.unbind('mousemove', drag.onMousemove);
                $(window).unbind('mousemove', drag.onMousemove);
-               drag.dropTargets.unbind('mouseup', drag.onDrop);
+               if(drag.dropTargets!=undefined && drag.dropTargets!=null)
+                drag.dropTargets.unbind('mouseup', drag.onDrop);
                
                if(drag.selThumbs != null)
                 {
