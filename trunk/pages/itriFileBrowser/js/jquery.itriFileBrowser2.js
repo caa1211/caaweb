@@ -193,18 +193,19 @@ function _L(str){
             this.setSelectItems = function(selobj){
                sel = selobj;
             };
+            var selThumbs = null;
             this.onMouseenter = function(e){
             
             };
             
             this.onInitmove = function(e){
                var targetList = getChildList();
-               drag.dragging = true;
+               dragging = true;
                selections = sel.getSelections();
                targetList.unbind('mousemove', drag.onInitmove);
-               drag.selThumbs = $("<div id='selThumbs' class='selThumbs'></div>");
-               $("body").append(drag.selThumbs);
-               drag.selThumbs.thumbnails({imgs: selections.find('img').clone()});
+               selThumbs = $("<div id='selThumbs' class='selThumbs'></div>");
+               $("body").append(selThumbs);
+               selThumbs.thumbnails({imgs: selections.find('img').clone()});
                drag.dropTargets = targetList.filter(drag.dragFilter);
                drag.dropTargets.bind('mouseup', drag.onDrop);
             };
@@ -221,8 +222,9 @@ function _L(str){
             
             this.onMousemove = function(e){
                 //_L("move " + e.pageY);
-                if(drag.selThumbs!=null)
-                   drag.selThumbs.css('left',e.pageX +10).css('top',e.pageY+10);
+                if(selThumbs!=null){
+                   selThumbs.css('left',e.pageX +10).css('top',e.pageY+10);
+                   }
             };
             this.onMouseup = function(e){
                var targetList = getChildList();
@@ -235,13 +237,12 @@ function _L(str){
                    }
                }, 1);
 
-               if(drag.selThumbs != null)
-                {
-                drag.selThumbs.empty().remove();
-                drag.selThumbs = null;
+               if(selThumbs != null){
+                selThumbs.empty().remove();
+                selThumbs = null;
                 }
- 
-            if(drag.dragging == false) //click self
+                
+            if(dragging == false) //click self
               {
               
                 if (e.ctrlKey && $(this).hasClass('select')) {
@@ -254,7 +255,7 @@ function _L(str){
                     sel.add($(this));
                 }
               }   
-              drag.dragging = false;              
+              dragging = false;              
             };
             
             this.onDocMouseup = function(){
@@ -268,13 +269,12 @@ function _L(str){
                    }
                }, 1);
 
-               if(drag.selThumbs != null)
-                {
-                drag.selThumbs.empty().remove();
-                drag.selThumbs = null;
+               if(selThumbs != null){
+                    selThumbs.empty().remove();
+                    selThumbs = null;
                 }
                 
-                drag.dragging = false;      
+                dragging = false;      
             }
             
             this.endHandler = function(){};
@@ -391,7 +391,7 @@ function _L(str){
        $(document).keydown(function(e,a){ 
                   if(e.which==65 && e.ctrlKey)
                     _sel.selectAll();
-                       e.stopPropagation();   
+                   e.stopPropagation();   
        }).click(function(){
                   _sel.clear();
        });
