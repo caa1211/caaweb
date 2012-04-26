@@ -1,1 +1,84 @@
-﻿
+﻿*::selection {
+	background: none; /* Safari */
+	}
+*::-moz-selection {
+	background: none; /* Firefox */
+}
+*::-webkit-selection {
+	background:none;
+	/*color:none;*/
+}
+*::-o-selection {
+	background:none;
+	/*color:none;*/
+}
+
+img {
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-o-user-select: none;
+user-select: none;
+}
+
+table {
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-o-user-select: none;
+user-select: none;
+}
+
+
+
+
+    .wrapDiv{border: solid 2px gray; width:80%; margin:0 auto;  overflow: auto;}
+   
+    .fileList tbody tr.select td {
+        background-color:#eaeaea;
+    }
+    .fileList tbody tr.hover td {
+        background-color:#F0F0CC;
+    }
+
+    .fileList tbody tr span.type {
+        background-color:#eaeaea;
+
+    }
+    
+   .fileList tbody tr {  color: #000000; font-size: 13px;    line-height: 32px;}
+        line-height: 32px;
+    }
+    
+    .fileList tbody tr div.name{  color: #000000; font-size: 13px;   }
+    
+    .fileList tbody td {
+        border-bottom: solid 1px #eaeaea;
+    }
+    
+    
+    .fileList tbody td {
+        border-bottom: solid 1px #eaeaea;
+    }
+    
+    .nameArea img {width:32px; height:32px; float:left;}
+
+    
+    .nameArea .name{ margin-left: 45px; }
+    .nameArea .type{ display:none; }
+    /*.not-drop {cursor: url(imgs/not-drop.cur), default;}*/
+    .not-drop {cursor: default}
+    .allow-drop {cursor: default}
+    
+    .fileList tbody tr.allow-drop td {
+        background-color:#fcfff6;
+    }
+    
+    .fileList tbody tr.allow-drop.hover td {
+        background-color:#fcffd1;
+    }
+    
+    .selThumbs{position:absolute; }
+    .selThumbs .thumbCounter{ background: url(../imgs/thumbCbg.png); width:20px; height:20px; left:15px; top:-7px; position:absolute; z-index:102; }
+    .selThumbs .thumbCounter span{  margin:0 auto; width:9px; display:block; margin-top:2px; color: #5a5afa;}
+    
