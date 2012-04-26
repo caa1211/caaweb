@@ -33,7 +33,7 @@
         type: 'fileBrowser',
         typeAry : ["folder", "file"],
         imgSrc:{//refer to parseNameExtension()
-            folder: "imgs/flavour-extended-png/folder_blue.png",
+            folder: "imgs/flavour-extended-png/folder_blue_stuffed.png",
             png: "imgs/flavour-extended-png/file_png.png",
             jpg: "imgs/flavour-extended-png/file_jpg.png",
             jpeg: "imgs/flavour-extended-png/file_jpg.png",
