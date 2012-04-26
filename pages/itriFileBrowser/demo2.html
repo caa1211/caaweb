@@ -41,7 +41,37 @@
                 type: 'numeric' 
             });
             
-
+        //January 6, 1978 9:12 AM or Jan. 6, 2001 9:12 AM
+        var monthNames = {};
+        monthNames["Jan"] = "01";
+        monthNames["Feb"] = "02";
+        monthNames["Mar"] = "03";
+        monthNames["Apr"] = "04";
+        monthNames["May"] = "05";
+        monthNames["Jun"] = "06";
+        monthNames["Jul"] = "07";
+        monthNames["Aug"] = "08";
+        monthNames["Sep"] = "09";
+        monthNames["Oct"] = "10";
+        monthNames["Nov"] = "11";
+        monthNames["Dec"] = "12";
+        
+        $.tablesorter.addParser({
+          id: 'monthDayYear',
+          is: function(s) {
+              return false;
+          },
+          format: function(s) {debugger;
+              var date = s.match(/^(\w{3})[ ](\d{1,2}),[ ](\d{4})$/);
+              var m = monthNames[date[1]];
+              var d = String(date[2]);
+              if (d.length == 1) {d = "0" + d;}
+              var y = date[3];
+              return '' + y + m + d;
+          },
+          type: 'numeric'
+        });
+        
         function loadFileData(){
         
             $.itriCSSJsonParser({
@@ -52,14 +82,19 @@
                 
                    $("#wrapDiv").append(elements);
                    
-                   $("#fileList2").tablesorter({
-                        //sortList: [[0,0],[1,0]],
+                   var $fileBrowser = $("#fileList2")
+                   .tablesorter({
+                        sortList: [[0,0],[1,0]],
                         headers: { 
                             "1": { 
                                 sorter:'mbsorter' 
-                            }
+                            }/*,
+                            "2": { 
+                                sorter:'monthDayYear' 
+                            }*/
                         } 
-                    }).itriFileBrowser({
+                    })
+                    .itriFileBrowser({
                             onDrop: function(selections, target){
                                       var selStr =" [ "; 
                                       selections.each(function(){
@@ -69,9 +104,18 @@
                                       _L("drop" + selStr + " to "+ target.find(".name").html())
                                        
                                       selections.empty().remove();
-                                    }
+                            },
+                            onAfterSelect: function(selections){
+                                $("#selNum").html(selections.length)
+                            },
+                            onSelect: function(selections){
+                                $("#liveSelNum").html(selections.length)
+                            }
                     
                     });
+                    
+                    
+                   $fileBrowser.selectAll()
                 }
             });
             
@@ -120,76 +164,9 @@
 </head>
 <body tabindex="0">
 <button id="testBtn">refresh</button>
-
+<div>select number: <span id="selNum">0</span></div>
+<div>live select number: <span id="liveSelNum">0</span></div>
 <div id='wrapDiv' class='wrapDiv'>
- <table id="fileList" class="tablesorter fileList"> 
-<thead> 
-<tr> 
-    <th>Name</th> 
-    <th>Size</th> 
-    <th>LastModified</th> 
-
-</tr> 
-</thead> 
-<tbody > 
-<tr  class='listItem folder'> 
-    <td class='nameArea'><img src='imgs/folder2.png'/><div class='name'><a href="#">A</a></div></td>
-    <td>--</td> 
-    <td>--</td> 
-</tr> 
-<tr class='listItem folder'> 
-     <td class='nameArea'><img src='imgs/folder2.png' /><div class='name'><a href="#">C</a></div></td>
-    <td>--</td> 
-    <td>--</td> 
-</tr> 
-<tr  class='listItem folder'> 
-     <td class='nameArea'><img src='imgs/folder2.png'/></div><div class='name'><a href="#">z</a></div></td>
-    <td>--</td> 
-    <td>--</td> 
-</tr> 
-<tr  class='listItem folder'> 
-     <td class='nameArea'><img src='imgs/folder2.png'/><div class='name'><a href="#">b</a></div></td>
-    <td>--</td> 
-    <td>--</td> 
-</tr> 
-<tr  class='listItem file'> 
-    <td class='nameArea'><img src='imgs/file.png'/><div class='name'>e</div></td>
-    <td>330.7 MB</td> 
-    <td>Jan. 6, 2012 9:12 AM</td> 
-
-</tr> 
-<tr class='listItem file'> 
-    <td class='nameArea'><img src='imgs/file.png' /><div class='name'>f</div></td>
-    <td>410.7 MB</td> 
-    <td>Jan. 6, 2001 6:12 AM</td> 
-
-</tr> 
-<tr class='listItem file'> 
-    <td class='nameArea'><img src='imgs/file.png' /><div class='name'>g</div></td>
-    <td>3510.7 MB</td> 
-    <td>Jan. 6, 2011 9:12 AM</td> 
-
-</tr> 
-<tr class='listItem file'> 
-    <td class='nameArea'><img src='imgs/file.png' /><div class='name'>h</div></td>
-    <td>390.7 MB</td> 
-    <td>Jan. 16, 2001 9:12 AM</td> 
-
-</tr> 
-<tr class='listItem file'> 
-    <td class='nameArea'><img src='imgs/file.png' /><div class='name'>i</div></td>
-    <td>3410.7 MB</td> 
-    <td>Jan. 7, 2001 9:12 AM</td> 
-
-</tr> 
-<tr class='listItem file'> 
-    <td class='nameArea'><img src='imgs/file.png' /><div class='name'><a>j</a></div></td>
-    <td>3780.7 MB</td> 
-    <td>Jan. 5, 2001 9:12 AM</td> 
-
-</tr> 
-</tbody> 
-</table> 
 
 
 </div>
