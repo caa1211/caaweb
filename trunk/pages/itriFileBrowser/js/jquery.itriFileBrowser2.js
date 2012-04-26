@@ -211,10 +211,12 @@
                targetList.removeClass("allow-drop").removeClass("not-drop");
                drag.endHandler();
                
-               if(drag.dropTargets!=undefined && drag.dropTargets!=null){
-                 drag.dropTargets.unbind('mouseup', drag.onDrop);
-               }
-               
+               setTimeout(function(){
+                   if(drag.dropTargets!=undefined && drag.dropTargets!=null){
+                     drag.dropTargets.unbind('mouseup', drag.onDrop);
+                   }
+               }, 1);
+
                if(drag.selThumbs != null)
                 {
                 drag.selThumbs.empty().remove();

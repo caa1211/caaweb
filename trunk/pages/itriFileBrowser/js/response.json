@@ -4,35 +4,70 @@
     id: 'A',
     name : 'A',
     action: '#',
+    size: 13000000,
+    lastMod: 'Jan. 6, 2001 6:12 AM',
     type: '0'
 },{
     id: 'B',
     name : 'B',
     action: '#',
+    size: 10000000,
+    lastMod: 'Jan. 6, 2001 6:12 AM',
     type: '0'
 },{
     id: 'C',
     name : 'C',
     action: '#',
+    size: 10000000,
+    lastMod: 'Jan. 6, 2001 6:12 AM',
     type: '0'
 },{
     id: 'e',
     name : 'e.jpg',
     action: '#',
+    size: 10000000,
+    lastMod: 'Jan. 6, 2001 6:12 AM',
     type: '1'
 },{
     id: 'f',
     name : 'f.pdf',
     action: '#',
+    size: 10000000,
+    lastMod: 'Jan. 6, 2001 6:12 AM',
     type: '1'
 },{
     id: 'g',
     name : 'g.jpg',
     action: '#',
+    size: 14000000,
+    lastMod: 'Jan. 6, 2001 6:12 AM',
     type: '1'
 },{
     id: 'h',
     name : 'h.doc',
     action: '#',
+    size: 10000000,
+    lastMod: 'Jan. 6, 2001 6:12 AM',
+    type: '1'
+},{
+    id: 'i',
+    name : 'i.mp3',
+    action: '#',
+    size: 10300000,
+    lastMod: 'Jan. 6, 2001 6:12 AM',
+    type: '1'
+},{
+    id: 'j',
+    name : 'j.doc',
+    action: '#',
+    size: 10100000,
+    lastMod: 'Jan. 6, 2001 6:12 AM',
+    type: '1'
+},{
+    id: 'k',
+    name : 'k.txt',
+    action: '#',
+    size: 10200000,
+    lastMod: 'Jan. 6, 2001 6:12 AM',
     type: '1'
 }]
