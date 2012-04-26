@@ -48,14 +48,17 @@
             });
             */
 
-           
+            
+            
+        function loadFileData(){
+        
             $.itriCSSJsonParser({
                 url:'js/response.json',
                 type: 'fileBrowser',
                 rootId: "fileList2",
                 callback: function(elements){
                    $("#wrapDiv").append(elements);
-                   $("#fileList2").itriFileBrowser().tablesorter({
+                   $("#fileList2").tablesorter({
                         //debug: false,
                         sortList: [[0,0],[1,0]],
                         headers: { 
@@ -63,9 +66,22 @@
                                 sorter:'mbsorter' 
                             }
                         } 
+                    }).itriFileBrowser({
+
                     });
                 }
             });
+            
+       } 
+       
+       loadFileData();
+             
+       $('#testBtn').click(function(){
+           $("#wrapDiv").empty();
+          loadFileData();
+        });
+
+        
         
             // add parser through the tablesorter addParser method 
             $.tablesorter.addParser({ 
@@ -139,9 +155,6 @@
         });
         
         
-        $('#testBtn').click(function(){
-        
-        });
 
             var $childList =$("#fileList").children('tbody').children('tr');
               $childList.each( function(){
