@@ -78,23 +78,26 @@ function _L(str){
         onClear: function(obj){}
        
        };
+    
        var _settings = $.extend({}, defaultSetting , settings);
        var $thisObj = $(this);
-       var $childList = $thisObj.children('tbody').children('tr');
-               
+       var getChildList = function(){
+           return  $thisObj.children('tbody').children('tr');
+       };
+       var $childList =  getChildList();
 
        function selHelper(){
             this.first = null;
             this.last = null;
             var sel  = this;
+            
             this.onMouseenter = function(e){
+                  var targetList = getChildList();
                   sel.clear();
                   sel.addRange( targetList.index(sel.first),  targetList.index($(this)));
             };
-            this.setList= function(list){
-               targetList = list;
-            };
             this.onMouseup = function(e){   
+                var targetList = getChildList();
                 if (e.shiftKey && sel.last != null) { //select
                     sel.removeRange( targetList.index(sel.first), targetList.index(sel.last))
                     sel.addRange( targetList.index(sel.first),  targetList.index($(this)));
@@ -140,6 +143,7 @@ function _L(str){
               }
             };
             function findChildByIndex(idx){
+             var targetList = getChildList();
              return targetList.filter("tr:nth-child("+(idx)+")");
             }
             
@@ -162,17 +166,19 @@ function _L(str){
             };
 
             this.clear = function(){
-                //_L("clear")
+                var targetList = getChildList();
                 targetList.removeClass('select');
                 _settings.onClear();
             };
             
             this.selectAll = function(){
+                 var targetList = getChildList();
                  targetList.addClass('select');
             };
             
             this.getSelections = function(){
-             return targetList.filter('.select');;
+                 var targetList = getChildList();
+                 return targetList.filter('.select');
             }
             this.endHandler = function(){};//overrided by caller
          
@@ -187,16 +193,12 @@ function _L(str){
             this.setSelectItems = function(selobj){
                sel = selobj;
             };
- 
             this.onMouseenter = function(e){
             
             };
             
-            this.setList= function(list){
-               targetList = list;
-            };
-            
             this.onInitmove = function(e){
+               var targetList = getChildList();
                drag.dragging = true;
                selections = sel.getSelections();
                targetList.unbind('mousemove', drag.onInitmove);
@@ -223,6 +225,7 @@ function _L(str){
                    drag.selThumbs.css('left',e.pageX +10).css('top',e.pageY+10);
             };
             this.onMouseup = function(e){
+               var targetList = getChildList();
                targetList.removeClass("allow-drop").removeClass("not-drop");
                drag.endHandler();
                
@@ -255,6 +258,7 @@ function _L(str){
             };
             
             this.onDocMouseup = function(){
+               var targetList = getChildList();
                targetList.removeClass("allow-drop").removeClass("not-drop");
                drag.endHandler();
                
@@ -293,9 +297,7 @@ function _L(str){
         
         
         var _sel = new selHelper();
-        _sel.setList($childList);
         var _drag = new dragHelper();
-        _drag.setList($childList);
         
         function unbindDragEvent(items, helper){
             items.unbind('mouseenter', helper.onMouseenter);
@@ -315,7 +317,6 @@ function _L(str){
                 var childList = $thisObj.children('tbody').children('tr');
                 if($(this).hasClass('select')){//drag
                     _drag.setSelectItems(_sel);
-                    _drag.setList(childList);
                     childList.bind('mouseenter', _drag.onMouseenter);
                     childList.bind('mousemove', _drag.onInitmove);
                     childList.bind('mouseup', _drag.onMouseup);
@@ -327,7 +328,6 @@ function _L(str){
                 }
                 else{//select
                    //initSelEvent(childList, _selHelper);
-                    _sel.setList(childList);
                     if (e.ctrlKey) {
                       _sel.first = $(this);
                     }
@@ -376,6 +376,9 @@ function _L(str){
          _sel.selectAll();
        }
        
+       this.getSelections = function(){
+         _sel.getSelections();
+       }
 
        
        this.getDragDropHelper = function(){
@@ -386,14 +389,10 @@ function _L(str){
        .keydown(preventDefault).click(stopPropagation);
        $(document).mousemove(preventDefault);
        $(document).keydown(function(e,a){ 
-                  var childList = $thisObj.children('tbody').children('tr');
-                  _sel.setList(childList)
                   if(e.which==65 && e.ctrlKey)
                     _sel.selectAll();
                        e.stopPropagation();   
        }).click(function(){
-                  var childList = $thisObj.children('tbody').children('tr');
-                  _sel.setList(childList)
                   _sel.clear();
        });
         

@@ -88,10 +88,7 @@
                         headers: { 
                             "1": { 
                                 sorter:'mbsorter' 
-                            }/*,
-                            "2": { 
-                                sorter:'monthDayYear' 
-                            }*/
+                            }
                         } 
                     })
                     .itriFileBrowser({
@@ -106,16 +103,17 @@
                                       selections.empty().remove();
                             },
                             onAfterSelect: function(selections){
-                                $("#selNum").html(selections.length)
+                                $("#selNum").html(selections.length);
+                                
                             },
                             onSelect: function(selections){
-                                $("#liveSelNum").html(selections.length)
+                                $("#liveSelNum").html(selections.length);
                             }
                     
                     });
                     
+                  $fileBrowser.getSelections();
                     
-                  // $fileBrowser.selectAll()
                 }
             });
             
@@ -129,7 +127,7 @@
         });
 
         
-        
+        /*
             $("#fileList").tablesorter({
                         //sortList: [[0,0],[1,0]],
                         headers: { 
@@ -150,7 +148,7 @@
                                     }
                     
                     });
-                    
+                */    
                     
         });
   
