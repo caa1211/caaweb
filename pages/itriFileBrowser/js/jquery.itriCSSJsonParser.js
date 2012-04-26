@@ -48,9 +48,9 @@
            
             unknow: "imgs/flavour-extended-png/document_blank.png"
         },
-        callback: function(e){
-                
-        }
+        success: function(e, data, textStatus, jqXHR){},
+        error: function(jqXHR, textStatus, errorThrown){},
+        complete: function(jqXHR, textStatus){}
        };
        
        var _settings = $.extend({}, defaultSetting , settings);
@@ -203,7 +203,7 @@
           
         return tRoot;
        }
-       
+       /*
        $.getJSON(_settings.url, function(response){
             var res = "";
             if(_settings.type=='fileBrowser'){
@@ -212,7 +212,25 @@
             
             _settings.callback(res);
        });
-       
+       */
+       $.ajax({
+          url: _settings.url,
+          dataType: 'json',
+          //data: data,
+          success: function(data, textStatus, jqXHR){
+                var res = "";
+                if(_settings.type=='fileBrowser'){
+                   res = buildFileBrowser(data);
+                }
+                _settings.success(res, data, textStatus, jqXHR);
+           },
+           error : function(jqXHR, textStatus, errorThrown){
+               _settings.error(jqXHR, textStatus, errorThrown);
+           },
+           complete : function(jqXHR, textStatus){
+               _settings.complete(jqXHR, textStatus);
+           }
+        });
        
     
         

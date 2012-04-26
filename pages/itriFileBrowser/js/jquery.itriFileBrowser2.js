@@ -224,7 +224,7 @@ function _L(str){
                 //_L("move " + e.pageY);
                 if(selThumbs!=null){
                    selThumbs.css('left',e.pageX +10).css('top',e.pageY+10);
-                   }
+                  }
             };
             this.onMouseup = function(e){
                var targetList = getChildList();
