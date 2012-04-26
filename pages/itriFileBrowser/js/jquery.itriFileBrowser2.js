@@ -12,17 +12,19 @@
  * 
  *depend on jquery.tablesorter.js
  */
+ 
+function _L(str){
+        var debugDiv =  $("#debugDiv");
+        if( debugDiv.length != 0){
+            $("#debugDiv").append("<div>"+str+"</div>")
+               // console.log(str);
+        }
+}
 
 (function($)
 {
 
-       function _L(str){
-        var debugDiv =  $("#debugDiv");
-         if( debugDiv.length != 0){
-            $("#debugDiv").append("<div>"+str+"</div>")
-               // console.log(str);
-            }
-       }
+
             
        var defaultSetting = 
        {
@@ -59,7 +61,19 @@
    
     $.fn.itriFileBrowser = function(settings){
 
-       var defaultSetting = {};
+       var defaultSetting = {
+        onDrop: function(selections, target){
+                      var selStr =" [ "; 
+                      selections.each(function(){
+                        selStr = selStr +$(this).find(".name a").html() + ", ";
+                      })
+                      selStr = selStr + " ] ";
+                       _L("drop" + selStr + " to "+ target.find(".name").html())
+                       
+                      selections.empty().remove();
+                }
+       
+       };
        var _settings = $.extend({}, defaultSetting , settings);
        var $thisObj = $(this);
        var $childList = $thisObj.children('tbody').children('tr');
@@ -123,7 +137,7 @@
             }
             
             this.addRange = function(s, e){
-              _L("add : s " + s + ", e " + e)
+              //_L("add : s " + s + ", e " + e)
               if(e>s){
                   for(var i=s; i<=e; i++)
                   {
@@ -192,14 +206,7 @@
             };
             
             this.onDropDone = function(target){
-              var selStr =" [ "; 
-              selections.each(function(){
-                selStr = selStr + ", " +$(this).find(".name").html();
-              })
-              selStr = selStr + " ] ";
-               _L("drop" + selStr + " to "+ target.find(".name").html())
-               
-              selections.empty().remove();
+              _settings.onDrop(selections, target);
             };
             
             this.onMousemove = function(e){
@@ -261,8 +268,8 @@
         function unbindDragEvent(items, helper){
             items.unbind('mouseenter', helper.onMouseenter);
             items.unbind('mousemove', helper.onInitmove);
-            items.unbind('mouseup', helper.onMouseup);
-            $('body').unbind('mousemove', _drag.onMousemove);
+            $(document).unbind('mouseup', helper.onMouseup);
+            $(document).unbind('mousemove', _drag.onMousemove);
         }
 
         function unbindSelEvent(items, helper){
@@ -278,8 +285,8 @@
                     _drag.setList(childList);
                     childList.bind('mouseenter', _drag.onMouseenter);
                     childList.bind('mousemove', _drag.onInitmove);
-                    childList.bind('mouseup', _drag.onMouseup);
-                    $('body').bind('mousemove', _drag.onMousemove);
+                    $(document).bind('mouseup', _drag.onMouseup);
+                    $(document).bind('mousemove', _drag.onMousemove);
                     _drag.endHandler = function(){
                         unbindDragEvent(childList, _drag);
                     };
