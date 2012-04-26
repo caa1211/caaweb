@@ -63,10 +63,10 @@
                             onDrop: function(selections, target){
                                       var selStr =" [ "; 
                                       selections.each(function(){
-                                        selStr = selStr +$(this).find(".name a").html() + ", ";
+                                        selStr = selStr +$(this).find(".name").html() + ", ";
                                       })
                                       selStr = selStr + " ] ";
-                                      _L("drop" + selStr + " to "+ target.find(".name a").html())
+                                      _L("drop" + selStr + " to "+ target.find(".name").html())
                                        
                                       selections.empty().remove();
                                     }
@@ -77,7 +77,7 @@
             
        } 
        
-       //loadFileData();
+       loadFileData();
              
        $('#testBtn').click(function(){
            $("#wrapDiv").empty();
@@ -97,10 +97,10 @@
                             onDrop: function(selections, target){
                                       var selStr =" [ "; 
                                       selections.each(function(){
-                                        selStr = selStr +$(this).find(".name a").html() + ", ";
+                                        selStr = selStr +$(this).find(".name").html() + ", ";
                                       })
                                       selStr = selStr + " ] ";
-                                      _L("drop" + selStr + " to "+ target.find(".name a").html())
+                                      _L("drop" + selStr + " to "+ target.find(".name").html())
                                        
                                       selections.empty().remove();
                                     }
