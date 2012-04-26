@@ -1,6 +1,38 @@
-﻿{
-    'id': 'A',
-    'name' : 'A',
-    'action': '#',
-    'type': '0'
-}
+﻿
+
+[{
+    id: 'A',
+    name : 'A',
+    action: '#',
+    type: '0'
+},{
+    id: 'B',
+    name : 'B',
+    action: '#',
+    type: '0'
+},{
+    id: 'C',
+    name : 'C',
+    action: '#',
+    type: '0'
+},{
+    id: 'e',
+    name : 'e.jpg',
+    action: '#',
+    type: '1'
+},{
+    id: 'f',
+    name : 'f.pdf',
+    action: '#',
+    type: '1'
+},{
+    id: 'g',
+    name : 'g.jpg',
+    action: '#',
+    type: '1'
+},{
+    id: 'h',
+    name : 'h.doc',
+    action: '#',
+    type: '1'
+}]
