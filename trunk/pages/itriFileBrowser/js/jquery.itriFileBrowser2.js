@@ -244,13 +244,15 @@ function _L(str){
                 
             if(dragging == false) //click self
               {
-              
                 if (e.ctrlKey && $(this).hasClass('select')) {
-                     $(this).removeClass('select');
+                     sel.remove($(this));
+                }
+                else if (e.shiftKey) {
+                    sel.removeRange( targetList.index(sel.first), targetList.index(sel.last))
+                    sel.addRange( targetList.index(sel.first),  targetList.index($(this)));
                 }
                 else{    
                     sel.clear();
-                  
                     sel.first = $(this);
                     sel.add($(this));
                 }
