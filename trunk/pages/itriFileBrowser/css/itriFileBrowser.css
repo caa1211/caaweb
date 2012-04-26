@@ -79,6 +79,6 @@ user-select: none;
     }
     
     .selThumbs{position:absolute; }
-    .selThumbs .thumbCounter{ background: url(../imgs/thumbCbg.png); width:20px; height:20px; left:15px; top:-7px; position:absolute; z-index:102; }
+    .selThumbs .thumbCounter{ background: url(../imgs/thumbCbg.png); width:20px; height:20px; left:15px; top:-12px; position:absolute; z-index:102; }
     .selThumbs .thumbCounter span{  margin:0 auto; width:9px; display:block; margin-top:2px; color: #5a5afa;}
     
