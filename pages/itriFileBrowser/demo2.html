@@ -108,15 +108,17 @@
                                   {
                                       $infoObj.empty();
                                       $.each(selData, function(i, t){
-                                        var dataDiv = 
+                                        var dataDivStr = 
                                         "<div class='item'>"+
                                         "<div> id:"+t.id+"</div>"+
                                         "<div> name:"+t.name+"</div>"+
                                         "<div> size:"+t.size+"</div>"+
                                         "<div> type:"+t.type+"</div>"+
                                         "<\div>";
-                                        $infoObj.append(dataDiv);
+                                        //var $dataDiv = $(dataDivStr);
+                                        $infoObj.append(dataDivStr);
                                       });
+                       
                                   }
                             }
                     
