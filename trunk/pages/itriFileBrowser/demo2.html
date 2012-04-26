@@ -102,12 +102,8 @@
                                        
                                       selections.empty().remove();
                             },
-                            onAfterSelect: function(selections){
-                                $("#selNum").html(selections.length);
-                                
-                            },
-                            onSelect: function(selections){
-                                $("#liveSelNum").html(selections.length);
+                            onUpdateSel: function(selections, obj, isAdd){
+                                  $("#selNum").html(selections.length);
                             }
                     
                     });
@@ -163,7 +159,7 @@
 <body tabindex="0">
 <button id="testBtn">refresh</button>
 <div>select number: <span id="selNum">0</span></div>
-<div>live select number: <span id="liveSelNum">0</span></div>
+
 <div id='wrapDiv' class='wrapDiv'>
 
 
