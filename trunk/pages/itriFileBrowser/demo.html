@@ -12,7 +12,7 @@
     <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
     <script src="js/jquery.tablesorter.js" type="text/javascript"></script>
     <script src="js/jquery-ui-1.8.19.custom.min.js" type="text/javascript"></script>
-   <script src="js/itriFileBrowser2.js" type="text/javascript"></script>
+   <script src="js/jquery.itriFileBrowser2.js" type="text/javascript"></script>
 
 
     
@@ -47,6 +47,9 @@
             });
             */
 
+            $.getJSON('js/response.json', function(resObj){
+                    alert('rr')
+            });
         
             // add parser through the tablesorter addParser method 
             $.tablesorter.addParser({ 
