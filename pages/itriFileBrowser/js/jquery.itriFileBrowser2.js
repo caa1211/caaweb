@@ -65,7 +65,7 @@ function _L(str){
         onDrop: function(selections, target){
                       var selStr =" [ "; 
                       selections.each(function(){
-                        selStr = selStr +$(this).find(".name a").html() + ", ";
+                        selStr = selStr +$(this).find(".name").html() + ", ";
                       })
                       selStr = selStr + " ] ";
                        _L("drop" + selStr + " to "+ target.find(".name").html())
