@@ -142,6 +142,7 @@
         for(var i=0; i < jsonObj.length; i++)
         {
            var trObj = $(trStr);
+           trObj.attr('dataIndex', i);
            trObj.attr('id', jsonObj[i].id);
            trObj.addClass(_settings.typeAry[jsonObj[i].type]);
            //Name

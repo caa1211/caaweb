@@ -62,7 +62,8 @@ function _L(str){
     $.fn.itriFileBrowser = function(settings){
 
        var defaultSetting = {
-        onDrop: function(selections, target){
+        rawData: null,
+        onDrop: function(sel, target, selData, targetData){
                       var selStr =" [ "; 
                       selections.each(function(){
                         selStr = selStr +$(this).find(".name").html() + ", ";
@@ -72,17 +73,20 @@ function _L(str){
                        
                       selections.empty().remove();
                 },
-        onUpdateSel: function(sels, obj, isAdd){},
-       
+        onUpdateSel: function(sels, selsData, isAdd){},
        };
-    
+
        var _settings = $.extend({}, defaultSetting , settings);
        var $thisObj = $(this);
        var getChildList = function(){
            return  $thisObj.children('tbody').children('tr');
        };
        var $childList =  getChildList();
-
+        
+       this.getRawData = function(){
+            return _settings.rawData;
+       };
+       
        function selHelper(){
             this.first = null;
             this.last = null;
@@ -113,12 +117,13 @@ function _L(str){
             
             this.add = function(obj){
                 obj.addClass('select');
-                _settings.onUpdateSel(sel.getSelections(), obj, true);
+                _settings.onUpdateSel(sel.getSelections(), sel.getSelectionsData(), true);
             };
             
-            this.remove = function(obj){
+            this.remove = function(obj, fireEvent){
                 obj.removeClass('select');
-                _settings.onUpdateSel(sel.getSelections(), obj, false);
+                if(fireEvent==true)//only press ctrl+click
+                  _settings.onUpdateSel(sel.getSelections(), sel.getSelectionsData(), false);
             };
             
             this.removeRange = function(s, e){
@@ -161,22 +166,39 @@ function _L(str){
               }
             };
 
-            this.clear = function(){
+            this.clear = function(fireEvent){
                 var targetList = getChildList();
                 targetList.removeClass('select');
-                _settings.onUpdateSel(sel.getSelections(), null, false);
+                if(fireEvent == true) //only click spack area
+                _settings.onUpdateSel(sel.getSelections(), sel.getSelectionsData(), false);
             };
             
             this.selectAll = function(){
                  var targetList = getChildList();
                  targetList.addClass('select');
-                 _settings.onUpdateSel(sel.getSelections(), null, true);
+                 _settings.onUpdateSel(sel.getSelections(), sel.getSelectionsData(), true);
             };
             
             this.getSelections = function(){
                  var targetList = getChildList();
                  return targetList.filter('.select');
+            };
+            
+            this.getSelectionsData = function(){
+                 var targetList = getChildList();
+                 var domAry = targetList.filter('.select');
+                 var dataAry = [];
+                 $.each(domAry, function(){
+                    var data = _settings.rawData[$(this).attr('dataIndex')];
+                    dataAry.push(data);
+                 })
+                 return dataAry;
             }
+            
+            this.getDataAt = function(index){
+                return _settings.rawData[index];
+            };
+
             this.endHandler = function(){};//overrided by caller
          
             return this;
@@ -209,12 +231,14 @@ function _L(str){
             
             this.onDrop = function(){
               drag.dropTargets.unbind('mouseup', drag.onDrop);
-              sel.clear();
+              //sel.clear();
               drag.onDropDone($(this));
             };
             
             this.onDropDone = function(target){
-              _settings.onDrop(selections, target);
+              //_settings.onDrop(selections, target);
+              _settings.onDrop(selections, target, sel.getSelectionsData(), sel.getDataAt(target.attr('dataIndex')));
+              
             };
             
             this.onMousemove = function(e){
@@ -242,7 +266,7 @@ function _L(str){
             if(dragging == false) //click self
               {
                 if (e.ctrlKey && $(this).hasClass('select')) {
-                     sel.remove($(this));
+                     sel.remove($(this), true);
                 }
                 else if (e.shiftKey) {
                     sel.removeRange( targetList.index(sel.first), targetList.index(sel.last))
@@ -392,7 +416,7 @@ function _L(str){
                     _sel.selectAll();
                    e.stopPropagation();   
        }).click(function(){
-                  _sel.clear();
+                  _sel.clear(true);
        });
         
        return this;

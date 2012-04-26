@@ -78,10 +78,8 @@
                 url:'js/response.json',
                 type: 'fileBrowser',
                 rootId: "fileList2",
-                success: function(elements){
-                
+                success: function(elements, rawData){
                    $("#wrapDiv").append(elements);
-                   
                    var $fileBrowser = $("#fileList2")
                    .tablesorter({
                         sortList: [[0,0],[1,0]],
@@ -92,18 +90,34 @@
                         } 
                     })
                     .itriFileBrowser({
-                            onDrop: function(selections, target){
+                            rawData: rawData,
+                            onDrop: function(sel, target, selData, targetData){
                                       var selStr =" [ "; 
-                                      selections.each(function(){
+                                      sel.each(function(){
                                         selStr = selStr +$(this).find(".name").html() + ", ";
                                       })
                                       selStr = selStr + " ] ";
                                       _L("drop" + selStr + " to "+ target.find(".name").html())
                                        
-                                      selections.empty().remove();
+                                      sel.empty().remove();
                             },
-                            onUpdateSel: function(selections, obj, isAdd){
-                                  $("#selNum").html(selections.length);
+                            onUpdateSel: function(sel, selData, isAdd){
+                                  $("#selNum").html(selData.length);
+                                  var $infoObj = $("#info");
+                                  if(selData.length!=0)
+                                  {
+                                      $infoObj.empty();
+                                      $.each(selData, function(i, t){
+                                        var dataDiv = 
+                                        "<div class='item'>"+
+                                        "<div> id:"+t.id+"</div>"+
+                                        "<div> name:"+t.name+"</div>"+
+                                        "<div> size:"+t.size+"</div>"+
+                                        "<div> type:"+t.type+"</div>"+
+                                        "<\div>";
+                                        $infoObj.append(dataDiv);
+                                      });
+                                  }
                             }
                     
                     });
@@ -154,11 +168,15 @@
     body{width:100%; height:100%; }
     #debugDiv{width:50%; margin: 0 auto; height:100px; border: solid 1px #000; margin-top:10px; overflow: auto; }
     #debugDiv div{background: #c0c0c0; margin: 0 auto; border: solid 1px #000; margin-top:3px;}
+    #info{position: absolute;}
+    #info .item{border: solid 1px #000;}
+   
     </style>
 </head>
 <body tabindex="0">
 <button id="testBtn">refresh</button>
 <div>select number: <span id="selNum">0</span></div>
+<div>information: <div id="info"></div></div>
 
 <div id='wrapDiv' class='wrapDiv'>
 
