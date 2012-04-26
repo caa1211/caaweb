@@ -72,10 +72,7 @@ function _L(str){
                        
                       selections.empty().remove();
                 },
-        onAfterSelect: function(selections){},
-        onSelect: function(selections){},
-        onRemove: function(obj){},
-        onClear: function(obj){}
+        onUpdateSel: function(sels, obj, isAdd){},
        
        };
     
@@ -111,18 +108,17 @@ function _L(str){
                 if(!$(this).hasClass('select'))
                     sel.add($(this));
                 
-                _settings.onAfterSelect(sel.getSelections());
                 sel.endHandler();      
             };
             
             this.add = function(obj){
                 obj.addClass('select');
-                _settings.onSelect(sel.getSelections());
+                _settings.onUpdateSel(sel.getSelections(), obj, true);
             };
             
             this.remove = function(obj){
                 obj.removeClass('select');
-                _settings.onRemove(obj);
+                _settings.onUpdateSel(sel.getSelections(), obj, false);
             };
             
             this.removeRange = function(s, e){
@@ -168,12 +164,13 @@ function _L(str){
             this.clear = function(){
                 var targetList = getChildList();
                 targetList.removeClass('select');
-                _settings.onClear();
+                _settings.onUpdateSel(sel.getSelections(), null, false);
             };
             
             this.selectAll = function(){
                  var targetList = getChildList();
                  targetList.addClass('select');
+                 _settings.onUpdateSel(sel.getSelections(), null, true);
             };
             
             this.getSelections = function(){
