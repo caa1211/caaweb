@@ -71,7 +71,11 @@ function _L(str){
                        _L("drop" + selStr + " to "+ target.find(".name").html())
                        
                       selections.empty().remove();
-                }
+                },
+        onAfterSelect: function(selections){},
+        onSelect: function(selections){},
+        onRemove: function(obj){},
+        onClear: function(obj){}
        
        };
        var _settings = $.extend({}, defaultSetting , settings);
@@ -104,15 +108,18 @@ function _L(str){
                 if(!$(this).hasClass('select'))
                     sel.add($(this));
                 
+                _settings.onAfterSelect(sel.getSelections());
                 sel.endHandler();      
             };
             
             this.add = function(obj){
                 obj.addClass('select');
+                _settings.onSelect(sel.getSelections());
             };
             
             this.remove = function(obj){
                 obj.removeClass('select');
+                _settings.onRemove(obj);
             };
             
             this.removeRange = function(s, e){
@@ -157,6 +164,7 @@ function _L(str){
             this.clear = function(){
                 //_L("clear")
                 targetList.removeClass('select');
+                _settings.onClear();
             };
             
             this.selectAll = function(){
@@ -263,7 +271,9 @@ function _L(str){
         
         
         var _sel = new selHelper();
+        _sel.setList($childList);
         var _drag = new dragHelper();
+        _drag.setList($childList);
         
         function unbindDragEvent(items, helper){
             items.unbind('mouseenter', helper.onMouseenter);
@@ -293,7 +303,7 @@ function _L(str){
                 }
                 else{//select
                    //initSelEvent(childList, _selHelper);
-                    _drag.setList(childList);
+                    _sel.setList(childList);
                     if (e.ctrlKey) {
                       _sel.first = $(this);
                     }
@@ -331,6 +341,14 @@ function _L(str){
         
        function stopPropagation(e){
           e.stopPropagation();  
+       }
+       
+       this.selectAll = function(){
+         _sel.selectAll();
+       }
+  
+       this.getDragDropHelper = function(){
+        return _drag;
        }
        
        $thisObj.mousedown(preventDefault).mouseup(preventDefault).mousemove(preventDefault).mouseenter(preventDefault)
