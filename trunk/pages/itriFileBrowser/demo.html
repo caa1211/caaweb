@@ -53,17 +53,17 @@
                 url:'js/response.json',
                 type: 'fileBrowser',
                 rootId: "fileList2",
-                callback: function(element){
-                   $("#wrapDiv").append(element);
-                   $("#fileList2").tablesorter({
-                        debug: false,
+                callback: function(elements){
+                   $("#wrapDiv").append(elements);
+                   $("#fileList2").itriFileBrowser().tablesorter({
+                        //debug: false,
                         sortList: [[0,0],[1,0]],
                         headers: { 
                             "1": { 
                                 sorter:'mbsorter' 
                             }
                         } 
-                    }).itriFileBrowser();
+                    });
                 }
             });
         
