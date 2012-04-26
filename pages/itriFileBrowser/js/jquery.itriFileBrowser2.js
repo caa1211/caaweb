@@ -240,17 +240,39 @@ function _L(str){
  
             if(drag.dragging == false) //click self
               {
-                 if (e.ctrlKey && $(this).hasClass('select')) {
+              
+                if (e.ctrlKey && $(this).hasClass('select')) {
                      $(this).removeClass('select');
                 }
                 else{    
                     sel.clear();
+                  
                     sel.first = $(this);
                     sel.add($(this));
                 }
               }   
               drag.dragging = false;              
             };
+            
+            this.onDocMouseup = function(){
+               targetList.removeClass("allow-drop").removeClass("not-drop");
+               drag.endHandler();
+               
+               setTimeout(function(){
+                   if(drag.dropTargets!=undefined && drag.dropTargets!=null){
+                     drag.dropTargets.unbind('mouseup', drag.onDrop);
+                   }
+               }, 1);
+
+               if(drag.selThumbs != null)
+                {
+                drag.selThumbs.empty().remove();
+                drag.selThumbs = null;
+                }
+                
+                drag.dragging = false;      
+            }
+            
             this.endHandler = function(){};
             
             this.dragFilter = function(){
@@ -278,7 +300,8 @@ function _L(str){
         function unbindDragEvent(items, helper){
             items.unbind('mouseenter', helper.onMouseenter);
             items.unbind('mousemove', helper.onInitmove);
-            $(document).unbind('mouseup', helper.onMouseup);
+            items.unbind('mouseup', helper.onMouseup);
+            $(document).unbind('mouseup', helper.onDocMouseup);
             $(document).unbind('mousemove', _drag.onMousemove);
         }
 
@@ -295,7 +318,8 @@ function _L(str){
                     _drag.setList(childList);
                     childList.bind('mouseenter', _drag.onMouseenter);
                     childList.bind('mousemove', _drag.onInitmove);
-                    $(document).bind('mouseup', _drag.onMouseup);
+                    childList.bind('mouseup', _drag.onMouseup);
+                    $(document).bind('mouseup', _drag.onDocMouseup);
                     $(document).bind('mousemove', _drag.onMousemove);
                     _drag.endHandler = function(){
                         unbindDragEvent(childList, _drag);
@@ -343,10 +367,17 @@ function _L(str){
           e.stopPropagation();  
        }
        
+       function preventDefaultAndStopPropagation(e){
+          e.preventDefault(); 
+          e.stopPropagation();  
+       }
+
        this.selectAll = function(){
          _sel.selectAll();
        }
-  
+       
+
+       
        this.getDragDropHelper = function(){
         return _drag;
        }
