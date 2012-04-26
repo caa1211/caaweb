@@ -786,7 +786,7 @@
                     });
                     // apply easy methods that trigger binded events
                     $this.bind("update", function (e) {
-                       
+                       /* 
                         var me = this;
                         setTimeout(function () {
                             // rebuild parsers.
@@ -795,8 +795,8 @@
                             // rebuild the cache map
                             cache = buildCache(me);
                         }, 1);
+                        */
                         
-                        /*
                         var me = this;
                         setTimeout(function () {
                         // rebuild parsers.
@@ -805,7 +805,7 @@
                         cache = buildCache(me);
                         if(e.resort||e.re_sort) { $(me).trigger("sorton", [config.sortList]); }
                         if(e.callback) { e.callback.call(me, config); }
-                        }, 1);*/
+                        }, 1);
                         
                     }).bind("updateCell", function (e, cell) {
                         var config = this.config;
