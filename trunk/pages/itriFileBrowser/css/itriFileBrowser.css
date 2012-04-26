@@ -61,7 +61,7 @@ user-select: none;
         border-bottom: solid 1px #eaeaea;
     }
     
-    .nameArea img {width:32px; height:32px; float:left;}
+    .nameArea img {width:36px; height:36px; float:left;}
 
     
     .nameArea .name{ margin-left: 45px; }
