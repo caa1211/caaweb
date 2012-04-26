@@ -60,6 +60,7 @@
                     var num = parseFloat(s);
                     if(isNaN(num))
                         num = 0;
+                        
                     return num; 
                 }, 
                 // set type, either numeric or text 
@@ -135,12 +136,26 @@
               
             var fileBor = $("#fileList").tablesorter({
                 debug: false,
-                //sortList: [[0,0],[1,0]],
+                sortList: [[0,0],[1,0]],
                 headers: { 
                     "1": { 
                         sorter:'mbsorter' 
                     }
                 } 
+               /* ,
+                textExtraction: function(n,b){
+                    
+                        if($(n).hasClass('nameArea'))
+                            return $(n).find('.type').text() + $(n).find('.name').text();
+                        else{
+                        
+                         if (n.childNodes[0] && n.childNodes[0].hasChildNodes()) {
+                                    text = n.childNodes[0].innerHTML;
+                                } else {
+                                    text = n.innerHTML;
+                                }
+                    }
+                }*/
                 
             })
             .itriFileBrowser(); 
@@ -269,22 +284,22 @@ user-select: none;
 </thead> 
 <tbody > 
 <tr  class='listItem folder'> 
-    <td class='nameArea'><img src='imgs/folder2.png'/><div class='name'><a href="a">A</a></div></td>
+    <td class='nameArea'><img src='imgs/folder2.png'/><div class='name'><a href="#">A</a></div></td>
     <td>--</td> 
     <td>--</td> 
 </tr> 
 <tr class='listItem folder'> 
-     <td class='nameArea'><img src='imgs/folder2.png' /><div class='name'>z</div></td>
+     <td class='nameArea'><img src='imgs/folder2.png' /><div class='name'><a href="#">C</a></div></td>
     <td>--</td> 
     <td>--</td> 
 </tr> 
 <tr  class='listItem folder'> 
-     <td class='nameArea'><img src='imgs/folder2.png'/></div><div class='name'>c</div></td>
+     <td class='nameArea'><img src='imgs/folder2.png'/></div><div class='name'><a href="#">z</a></div></td>
     <td>--</td> 
     <td>--</td> 
 </tr> 
 <tr  class='listItem folder'> 
-     <td class='nameArea'><img src='imgs/folder2.png'/><div class='name'>D</div></td>
+     <td class='nameArea'><img src='imgs/folder2.png'/><div class='name'><a href="#">b</a></div></td>
     <td>--</td> 
     <td>--</td> 
 </tr> 
