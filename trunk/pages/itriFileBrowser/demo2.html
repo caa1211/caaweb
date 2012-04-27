@@ -128,9 +128,9 @@
                             onUpdateSel: function(sel, selData, isAdd){
                                   $("#selNum").html(selData.length);
                                   var $infoObj = $("#info");
+                                  $infoObj.empty();
                                   if(selData.length!=0)
                                   {
-                                      $infoObj.empty();
                                       $.each(selData, function(i, t){
                                         var dataDivStr = 
                                         "<div class='item'>"+
