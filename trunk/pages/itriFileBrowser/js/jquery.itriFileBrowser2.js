@@ -45,7 +45,7 @@ function _L(str){
        
        var offset=0;
        $.each(_settings.imgs, function(){
-         $(this).css("position", "absolute").css("left", offset*-3).css("top", offset*7).css("z-index", 100-offset);
+         $(this).css("position", "absolute").css("left", offset*+3).css("top", offset*7).css("z-index", 100-offset);
          offset++;
         });
        }
