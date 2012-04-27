@@ -45,7 +45,7 @@ function _L(str){
        
        var offset=0;
        $.each(_settings.imgs, function(){
-         $(this).css("position", "absolute").css("left", offset*3).css("top", offset*6).css("z-index", 100-offset);
+         $(this).css("position", "absolute").css("left", offset*-3).css("top", offset*7).css("z-index", 100-offset);
          offset++;
         });
        }
@@ -53,7 +53,7 @@ function _L(str){
        var thumbCWidth =  9+Math.floor(len/10)*5 ;
        modifyImgPos();
        $thisObj.prepend("<div class='thumbCounter'><span style='width:"+ thumbCWidth +"px;'>"+len+"</span></div>");
-       
+       //_settings.imgs.css({"width": "45", "height":"45"});
        $thisObj.append(_settings.imgs);
        return this;
     }
@@ -224,6 +224,7 @@ function _L(str){
                targetList.unbind('mousemove', drag.onInitmove);
                selThumbs = $("<div id='selThumbs' class='selThumbs'></div>");
                $("body").append(selThumbs);
+               var $img =  selections.find('img').clone();
                selThumbs.thumbnails({imgs: selections.find('img').clone()});
                drag.dropTargets = targetList.filter(drag.dragFilter);
                drag.dropTargets.bind('mouseup', drag.onDrop);

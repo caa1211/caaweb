@@ -21,6 +21,17 @@
 
         $(function()
         {
+
+        function diskSizeRenderer(value){
+          var bytes = parseInt(value);
+          if(isNaN(bytes)){
+            return "";
+          }
+            
+          var s = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
+          var e = Math.floor(Math.log(bytes)/Math.log(1024));
+          return (bytes/Math.pow(1024, Math.floor(e))).toFixed(2)+" "+s[e];
+        }
         
         // add parser through the tablesorter addParser method 
             $.tablesorter.addParser({ 
@@ -30,11 +41,18 @@
                     // return false so this parser is not auto detected 
                     return false; 
                 }, 
-                format: function(s) { 
+                format: function(s, b, c) {
+                   //render
+                   var rawValue = parseInt($(c).html());
+                   if(!isNaN(rawValue)){
+                    $(c).html(diskSizeRenderer(rawValue));  
+                    }
+            
                     var num = parseFloat(s);
                     if(isNaN(num))
                         num = 0;
-                        
+                    
+    
                     return num; 
                 }, 
                 // set type, either numeric or text 
@@ -61,7 +79,7 @@
           is: function(s) {
               return false;
           },
-          format: function(s) {debugger;
+          format: function(s) {
               var date = s.match(/^(\w{3})[ ](\d{1,2}),[ ](\d{4})$/);
               var m = monthNames[date[1]];
               var d = String(date[2]);
@@ -79,7 +97,9 @@
                 type: 'fileBrowser',
                 rootId: "fileList2",
                 success: function(elements, rawData){
+                
                    $("#wrapDiv").append(elements);
+                   
                    var $fileBrowser = $("#fileList2")
                    .tablesorter({
                         sortList: [[0,0],[1,0]],
@@ -137,30 +157,7 @@
            $("#wrapDiv").empty();
            loadFileData();
         });
-
-        
-        /*
-            $("#fileList").tablesorter({
-                        //sortList: [[0,0],[1,0]],
-                        headers: { 
-                            "1": { 
-                                sorter:'mbsorter' 
-                            }
-                        } 
-                    }).itriFileBrowser({
-                            onDrop: function(selections, target){
-                                      var selStr =" [ "; 
-                                      selections.each(function(){
-                                        selStr = selStr +$(this).find(".name").html() + ", ";
-                                      })
-                                      selStr = selStr + " ] ";
-                                      _L("drop" + selStr + " to "+ target.find(".name").html())
-                                       
-                                      selections.empty().remove();
-                                    }
-                    
-                    });
-                */    
+ 
                     
         });
   

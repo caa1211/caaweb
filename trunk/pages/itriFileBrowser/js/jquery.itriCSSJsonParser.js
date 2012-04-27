@@ -85,18 +85,7 @@
                     "</thead>";
            return res;
        }
-       
-       
-        function diskSizeRenderer(value){
-          var bytes = parseInt(value);
-          if(isNaN(bytes)){
-            return "";
-          }
-            
-          var s = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
-          var e = Math.floor(Math.log(bytes)/Math.log(1024));
-          return (bytes/Math.pow(1024, Math.floor(e))).toFixed(2)+" "+s[e];
-        }
+
 
        function parseNameExtension(name){
         
@@ -181,7 +170,8 @@
            trObj.append(nametd);
            //Size
            var sizetd = $(tdStr);
-           sizetd.html(diskSizeRenderer(jsonObj[i].size))
+           //sizetd.html(diskSizeRenderer(jsonObj[i].size))
+           sizetd.html(jsonObj[i].size)
            trObj.append(sizetd);
             
            //LastModify
