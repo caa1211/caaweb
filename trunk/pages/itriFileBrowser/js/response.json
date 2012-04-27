@@ -4,83 +4,83 @@
     "name" : "A",
     "action": "#",
     "size": -1,
-    "lastMod": "Jan. 6, 2001 6:12 AM",
+    "lastMod": "--",
     "type": "0"
 },{
     "id": "B",
     "name" : "B",
     "action": "#",
     "size": -1,
-    "lastMod": "Jan. 6, 2011 6:12 AM",
+    "lastMod": "--",
     "type": "0"
 },{
     "id": "C",
     "name" : "C",
     "action": "#",
     "size": -1,
-    "lastMod": "Jan. 11, 2001 6:12 AM",
+    "lastMod": "--",
     "type": "0"
 },{
     "id": "C",
     "name" : "c.pdf",
     "action": "#",
     "size": 50000,
-    "lastMod": "Jan. 16, 2001 6:12 AM",
+    "lastMod": "2011-11-07 10:55",
     "type": "1"
 },{
     "id": "D",
     "name" : "D",
     "action": "#",
     "size": -1,
-    "lastMod": "Jan. 6, 2001 3:12 AM",
+    "lastMod": "--",
     "type": "0"
 },{
     "id": "e",
     "name" : "e.jpg",
     "action": "#",
     "size": "3000000",
-    "lastMod": "Jan. 6, 2001 6:13 AM",
+    "lastMod": "2010-04-12 11:55",
     "type": "1"
 },{
     "id": "f",
     "name" : "f.doc",
     "action": "#",
     "size": "20000",
-    "lastMod": "Jan. 6, 2001 6:34 AM",
+    "lastMod": "2011-01-13 01:55",
     "type": "1"
 },{
     "id": "g",
     "name" : "g.txt",
     "action": "#",
     "size": "44000000",
-    "lastMod": "Jan. 6, 2001 6:46 AM",
+    "lastMod": "2012-02-12 02:55",
     "type": "1"
 },{
     "id": "h",
     "name" : "h.png",
     "action": "#",
     "size": "50000",
-    "lastMod": "Jan. 6, 2001 6:12 PM",
+    "lastMod": "2012-02-12 12:55",
     "type": "1"
 },{
     "id": "i",
     "name" : "i.wav",
     "action": "#",
     "size": "677700000",
-    "lastMod": "Jan. 6, 2001 6:42 AM",
+    "lastMod": "2012-04-11 12:55",
     "type": "1"
 },{
     "id": "k",
     "name" : "k.mp3",
     "action": "#",
     "size": "677700000",
-    "lastMod": "Jan. 6, 2001 6:42 AM",
+    "lastMod": "2012-04-12 12:55",
     "type": "1"
 },{
     "id": "l",
     "name" : "l.gif",
     "action": "#",
     "size": "1123",
-    "lastMod": "Jan. 6, 2001 6:42 PM",
+    "lastMod": "2012-04-13 12:55",
     "type": "1"
 }]
