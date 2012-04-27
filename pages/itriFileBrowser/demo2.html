@@ -42,18 +42,20 @@
                     return false; 
                 }, 
                 format: function(s, b, c) {
-                   //render
+                   //for render
                    var rawValue = parseInt($(c).html());
-                   if(!isNaN(rawValue)){
-                    $(c).html(diskSizeRenderer(rawValue));  
+                   //for sorting
+                   var num = 0; 
+                   if(rawValue > 0&&!isNaN(rawValue)){
+                    $(c).html(diskSizeRenderer(rawValue));
+                    num = rawValue;                    
                     }
-            
-                    var num = parseFloat(s);
-                    if(isNaN(num))
-                        num = 0;
-                    
-    
-                    return num; 
+                   else{
+                     $(c).html("--");  
+                     num = 0;
+                   }
+
+                   return num; 
                 }, 
                 // set type, either numeric or text 
                 type: 'numeric' 
