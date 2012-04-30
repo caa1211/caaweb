@@ -5,6 +5,7 @@ var MM_swapImgRestore = function(){ //v3.0
 }
 
 var MM_preloadImages = function(){ //v3.0
+
     var d = document;
     if (d.images) {
         if (!d.MM_p) 

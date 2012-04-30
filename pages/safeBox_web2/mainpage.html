@@ -11,24 +11,39 @@
         </script>
         <script type="text/javascript" src="js/jquery-ui-1.8.19.custom.min.js">
         </script>
+        <script type="text/javascript" src="js/utils.js"></script>
         <script type="text/javascript" src="js/safeboxComponents.js">
         </script>
         <script>
             $(function(){
-              $( "#tabs" ).tabs({
-			ajaxOptions: {
-				error: function( xhr, status, index, anchor ) {
-					$( anchor.hash ).html(
-						"Couldn't load this tab. We'll try to fix this as soon as possible. " +
-						"If this wouldn't be a demo." );
-				}
-			}
-		});
-        
-        
-            });
             
-           
+                 // utils.buildTab2Element($("#wrap"));
+                  utils.buildTab2Element($("#tabs"));  
+                  utils.tabMgr = $( "#tabs" ).tabs({
+                    ajaxOptions: {
+                        error: function( xhr, status, index, anchor ) {
+                            $( anchor.hash ).html("Couldn't load this tab." );
+                        },
+                        success: function(){
+                          /*  var selected =  utils.tabMgr.tabs( "option", "selected" );
+                            $( "tabs-"+selected ).children('table').trigger("onload");
+                            */
+                        }
+                    },
+                    select:function(event, ui){
+                       if( utils.tabContents == null ){//cache tab contents
+                         utils.tabContents = $('.ui-tabs-panel');
+                        }
+                      utils.tabContents.empty();
+                    },
+                    show: function(event, ui){
+                     
+                    }
+                });
+                
+             
+            
+            });
         </script>
     </head>
     <body>
@@ -61,19 +76,17 @@
                     &nbsp;
                 </td>
                 <td colspan="2" height="100%" valign="top">
-                    <div id="wrap">
+                    <div id="wrap" class='demo'>
                     
-<div id="tabs">
-	<ul>
-		<li><a href="#tabs-1">Preloaded</a></li>
-		<li><a href="pages/account.html">Tab 1</a></li>
-		<li><a href="ajax/content2.html">Tab 2</a></li>
-		<li><a href="ajax/content3-slow.php">Tab 3 (slow)</a></li>
-		<li><a href="ajax/content4-broken.php">Tab 4 (broken)</a></li>
-	</ul>
-	<div id="tabs-1">
-		<p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
-	</div>
+<div id="tabs" style="height:auto;">
+	<!--ul>
+		<li><a href="tabs/account.html">Account</a></li>
+		<li><a href="tabs/files.html">Files</a></li>
+		<li><a href="tabs/event.html">Event</a></li>
+		<li><a href="tabs/apiVersion.html">API version</a></li>
+		<li><a href="tabs/help.html">Help</a></li>
+	</ul-->
+
 </div>
                     
                     </div>
