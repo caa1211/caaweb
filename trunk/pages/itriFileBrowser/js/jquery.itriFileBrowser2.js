@@ -73,7 +73,7 @@ function _L(str){
                        
                       selections.empty().remove();
                 },
-        onUpdateSel: function(sels, selsData, isAdd){},
+        onUpdateSel: function(sels, selsData, isAdd){}
        };
 
        var _settings = $.extend({}, defaultSetting , settings);
