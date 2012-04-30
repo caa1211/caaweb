@@ -7,7 +7,8 @@ tabDef: [
 {id:'files', label: 'Files', href: "tabs/files.html"},
 {id:'event', label: 'Event', href: "tabs/event.html"},
 {id:'apiVersion', label: 'API version', href: "tabs/apiVersion.html"},
-{id:'help', label: 'Help', href: "tabs/help.html"}
+{id:'help', label: 'Help', href: "tabs/help.html"},
+{id:'empty', label: 'Empty', href: "tabs/empty.html"}
 ],
 buildTab2Element: function(obj){
 /*

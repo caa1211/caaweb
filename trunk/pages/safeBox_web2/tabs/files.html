@@ -9,6 +9,140 @@ utils.swapImg($("#delBtn"), 'images/img/icon_search_over.png');
 utils.swapImg($("#downloadBtn"), 'images/img/icon_search_over.png');
 utils.swapImg($("#uploadBtn"), 'images/img/icon_search_over.png');
 
+        function diskSizeRenderer(value){
+          var bytes = parseInt(value);
+          if(isNaN(bytes)){
+            return "";
+          }
+            
+          var s = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
+          var e = Math.floor(Math.log(bytes)/Math.log(1024));
+          return (bytes/Math.pow(1024, Math.floor(e))).toFixed(2)+" "+s[e];
+        }
+        
+        //yyyy-MM-dd HH:mms
+
+        // add parser through the tablesorter addParser method 
+            $.tablesorter.addParser({ 
+                // set a unique id 
+                id: 'mbsorter', 
+                is: function(s) { 
+                    // return false so this parser is not auto detected 
+                    return false; 
+                }, 
+                format: function(s, b, c) {
+                   //for render
+                   var rawValue = parseInt($(c).html());
+                   //for sorting
+                   var num = 0; 
+                   if(rawValue > 0&&!isNaN(rawValue)){
+                    $(c).html(diskSizeRenderer(rawValue));
+                    num = rawValue;                    
+                    }
+                   else{
+                     $(c).html("--");  
+                     num = 0;
+                   }
+
+                   return num; 
+                }, 
+                // set type, either numeric or text 
+                type: 'numeric' 
+            });
+            
+        //January 6, 1978 9:12 AM or Jan. 6, 2001 9:12 AM
+        var monthNames = {};
+        monthNames["Jan"] = "01";
+        monthNames["Feb"] = "02";
+        monthNames["Mar"] = "03";
+        monthNames["Apr"] = "04";
+        monthNames["May"] = "05";
+        monthNames["Jun"] = "06";
+        monthNames["Jul"] = "07";
+        monthNames["Aug"] = "08";
+        monthNames["Sep"] = "09";
+        monthNames["Oct"] = "10";
+        monthNames["Nov"] = "11";
+        monthNames["Dec"] = "12";
+        
+        $.tablesorter.addParser({
+          id: 'monthDayYear',
+          is: function(s) {
+              return false;
+          },
+          format: function(s) {
+              var date = s.match(/^(\w{3})[ ](\d{1,2}),[ ](\d{4})$/);
+              var m = monthNames[date[1]];
+              var d = String(date[2]);
+              if (d.length == 1) {d = "0" + d;}
+              var y = date[3];
+              return '' + y + m + d;
+          },
+          type: 'numeric'
+        });
+        
+        function loadFileData(){
+        
+            $.itriCSSJsonParser({
+                url:'js/response.json',
+                type: 'fileBrowser',
+                rootId: "fileList2",
+                success: function(elements, rawData){
+                
+                   $("#wrapDiv").append(elements);
+                   
+                   var $fileBrowser = $("#fileList2")
+                   .tablesorter({
+                        sortList: [[0,0],[1,0]],
+                        headers: { 
+                            "1": { 
+                                sorter:'mbsorter' 
+                            }
+                        } 
+                    })
+                    .itriFileBrowser({
+                            rawData: rawData,
+                            onDrop: function(sel, target, selData, targetData){
+                                      var selStr =" [ "; 
+                                      sel.each(function(){
+                                        selStr = selStr +$(this).find(".name").html() + ", ";
+                                      })
+                                      selStr = selStr + " ] ";
+                                      _L("drop" + selStr + " to "+ target.find(".name").html())
+                                       
+                                      sel.empty().remove();
+                            },
+                            onUpdateSel: function(sel, selData, isAdd){
+                                  $("#selNum").html(selData.length);
+                                  var $infoObj = $("#info");
+                                  $infoObj.empty();
+                                  if(selData.length!=0)
+                                  {
+                                      $.each(selData, function(i, t){
+                                        var dataDivStr = 
+                                        "<div class='item'>"+
+                                        "<div> id:"+t.id+"</div>"+
+                                        "<div> name:"+t.name+"</div>"+
+                                        "<div> size:"+t.size+"</div>"+
+                                        "<div> type:"+t.type+"</div>"+
+                                        "<\div>";
+                                        //var $dataDiv = $(dataDivStr);
+                                        $infoObj.append(dataDivStr);
+                                      });
+                       
+                                  }
+                            }
+                    
+                    });
+                    
+                  $fileBrowser.getSelections();
+                    
+                }
+            });
+            
+       } 
+
+       loadFileData();
 </script>
 
 
@@ -26,8 +160,8 @@ utils.swapImg($("#uploadBtn"), 'images/img/icon_search_over.png');
 <tr class="tableTitle" id="tableTitleTr" align="middle" ></tr>
 <tr class="tableContent" id="tableContent" align="middle" >
 <td>
-<div id="" class="innerTableDiv">
-    
+<div id="wrapDiv" class="innerTableDiv wrapDiv">
+
 </div>
 </td>
 </tr>
