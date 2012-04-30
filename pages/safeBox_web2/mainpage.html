@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <title>SafeBox</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <link type="text/css" rel="stylesheet" href="css/cupertino/jquery-ui-1.8.19.custom.css" />
+        <link type="text/css"href="Scripts/safebox_css.css" rel="stylesheet">
+        <!--
+        <link rel="stylesheet" href="css/demos.css">
+        -->
+        <script type="text/javascript" src="js/jquery-1.7.2.js">
+        </script>
+        <script type="text/javascript" src="js/jquery-ui-1.8.19.custom.min.js">
+        </script>
+        <script type="text/javascript" src="js/safeboxComponents.js">
+        </script>
+        <script>
+            $(function(){
+              $( "#tabs" ).tabs({
+			ajaxOptions: {
+				error: function( xhr, status, index, anchor ) {
+					$( anchor.hash ).html(
+						"Couldn't load this tab. We'll try to fix this as soon as possible. " +
+						"If this wouldn't be a demo." );
+				}
+			}
+		});
+        
+        
+            });
+            
+           
+        </script>
+    </head>
+    <body>
+        <!--<table style="position: absolute; z-index:12;"border="0" width="99%" height="700px"><tr><td >&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td width="300px">
+        <div class="dialogClass"></div>
+        </td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table>-->
+        <table border="0" width="100%" height="100%">
+            <tr>
+                <td>
+                </td>
+                <td height="80">
+                    <img src="images/img/logo.png">
+                </td>
+                <td align="right">
+                    <span class="logotxt">Welcome!</span>&nbsp;<strong><span class="hint">Username</span></strong>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td align="right" colspan="3">
+                    <span class="logotxt">v1.12&nbsp;&nbsp;&nbsp;</span>
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                <td colspan="2" height="100%" valign="top">
+                    <div id="wrap">
+                    
+<div id="tabs">
+	<ul>
+		<li><a href="#tabs-1">Preloaded</a></li>
+		<li><a href="pages/account.html">Tab 1</a></li>
+		<li><a href="ajax/content2.html">Tab 2</a></li>
+		<li><a href="ajax/content3-slow.php">Tab 3 (slow)</a></li>
+		<li><a href="ajax/content4-broken.php">Tab 4 (broken)</a></li>
+	</ul>
+	<div id="tabs-1">
+		<p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+	</div>
+</div>
+                    
+                    </div>
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td width="450">
+                </td>
+                <td width="450">
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <hr>
+                </td>
+            </tr>
+        </table><!-- End demo -->
+    </body>
+</html>
