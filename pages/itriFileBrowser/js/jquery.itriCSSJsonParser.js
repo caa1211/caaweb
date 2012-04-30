@@ -56,9 +56,9 @@
        var _settings = $.extend({}, defaultSetting , settings);
        
        function imgPreload(imgSrc){
-           $.each(imgSrc, function(){
+           $.each(imgSrc, function(i, t){
                     var imageObj = new Image();
-                   imageObj.src = $(this);
+                   imageObj.src = t;
            });
        }
        imgPreload(_settings.imgSrc);
