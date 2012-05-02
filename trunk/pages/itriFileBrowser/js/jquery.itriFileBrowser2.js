@@ -64,6 +64,7 @@ function _L(str){
        var defaultSetting = {
         rawData: null,
         scrollSensitivity:50,
+        bottomOffset: 100,
         onDrop: function(sel, target, selData, targetData){
                       var selStr =" [ "; 
                       selections.each(function(){
@@ -339,14 +340,15 @@ function _L(str){
             
             this.onMousemove = function(e){
                //_L("move " + e.pageY);
-               var x = e.pageX +10;
-               var y = e.pageY+10;
-        
-               if(y> docHeight - 100)
-                 y= docHeight- 100;
+               var x = e.pageX;
+               var y = e.pageY;
+    
+               var offset = (selThumbs.children().length-1)*7 + _settings.bottomOffset;
+               if(y> docHeight - offset)
+                 y= docHeight- offset;
                  
                if(selThumbs!=null){
-                   selThumbs.css('left',x).css('top',y);
+                   selThumbs.css('left',x+10).css('top',y+10);
                  } 
             };
             this.onMouseup = function(e){
