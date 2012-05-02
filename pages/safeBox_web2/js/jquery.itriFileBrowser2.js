@@ -269,7 +269,7 @@ function _L(str){
                 var scrollUpArea = $("<div id='scrollUpArea' class='scrollArea'></div>")
                 scrollUpArea.css({
                     "position": "fixed",
-                    "background": "red",
+                    //"background": "red",
                     "up": "0em",
                     "z-Index": 1000
                     
