@@ -28,7 +28,7 @@ function _L(str){
             
        var defaultSetting = 
        {
-           
+       
        };
        
        
@@ -63,6 +63,7 @@ function _L(str){
 
        var defaultSetting = {
         rawData: null,
+        scrollSensitivity:50,
         onDrop: function(sel, target, selData, targetData){
                       var selStr =" [ "; 
                       selections.each(function(){
@@ -86,7 +87,7 @@ function _L(str){
        this.getRawData = function(){
             return _settings.rawData;
        };
-       
+
        function selHelper(){
             this.first = null;
             this.last = null;
@@ -203,7 +204,8 @@ function _L(str){
          
             return this;
        };
-         
+       
+       
        function dragHelper(){
             var drag  = this;
             var sel = null
@@ -216,7 +218,8 @@ function _L(str){
             this.onMouseenter = function(e){
             
             };
-            
+            var docHeight= $(document).height();
+            var docWidth= $(document).width();
             this.onInitmove = function(e){
                var targetList = getChildList();
                dragging = true;
@@ -228,10 +231,102 @@ function _L(str){
                selThumbs.thumbnails({imgs: selections.find('img').clone()});
                drag.dropTargets = targetList.filter(drag.dragFilter);
                drag.dropTargets.bind('mouseup', drag.onDrop);
+   
+              docHeight= $(document).height() ;
+              var st = $(window).scrollTop();
+              if( docHeight> st+$(window).height()){
+                //auto scroll down
+                $("#scrollDownArea").remove();
+                var scrollDownArea = $("<div id='scrollDownArea' class='scrollArea'></div>")
+                scrollDownArea.css({
+                    "position": "fixed",
+                    //"background": "blue",
+                    "bottom": "0em",
+                    "z-Index": 1000
+                });
+                scrollDownArea.width($(window).width());
+                scrollDownArea.height(_settings.scrollSensitivity);
+                $('body').append(scrollDownArea);
+                   var downTimer= null;
+                   scrollDownArea.bind('mouseover', function(){
+                   downTimer = setInterval(function(){
+                         var st = $(window).scrollTop();
+                         if( docHeight > st+$(window).height()){
+                           $(window).scrollTop(st+30)
+                         }
+                      }, 50);
+                   
+                   }).bind('mouseout', function(){
+                      clearInterval(downTimer);
+                   }).bind('destroy', function(){
+                     $(this).unbind();
+                     clearInterval(downTimer);
+                   });
+                }
+                
+                //auto scroll up
+                $("#scrollUpArea").remove();
+                var scrollUpArea = $("<div id='scrollUpArea' class='scrollArea'></div>")
+                scrollUpArea.css({
+                    "position": "fixed",
+                    "background": "red",
+                    "up": "0em",
+                    "z-Index": 1000
+                    
+                });
+                scrollUpArea.width($(window).width());
+                scrollUpArea.height(_settings.scrollSensitivity);
+                $('body').prepend(scrollUpArea);
+
+                   var upTimer= null;
+                   scrollUpArea.bind('mouseover', function(){
+                   upTimer = setInterval(function(){
+                         var st = $(window).scrollTop();
+                         if( st > 0){
+                           $(window).scrollTop(st-30)
+                         }
+                      }, 50);
+                   
+                   }).bind('mouseout', function(){
+                      clearInterval(upTimer);
+                   }).bind('destroy', function(){
+                     $(this).unbind();
+                     clearInterval(upTimer);
+                   });
+               
+                /*
+                scrollDownArea.bind('mousemove', function(){
+                 var st = $(window).scrollTop();
+                 if( docHeight+scrollDownOffset > st+$(window).height()){
+                   $(window).scrollTop(st+3)
+                   }
+                });
+                
+                scrollUpArea.bind('mousemove', function(){
+                 var st = $(window).scrollTop();
+                 if( st > 0){
+                   $(window).scrollTop(st-3)
+                   }
+                });
+                */
+
+                /*
+                var ph = $(window).height() + $(window).scrollTop();
+                if( ph -(e.pageY) < 10 &&  ph -(e.pageY) >0 && docHeight> $(window).height()){
+                    
+                    _L("scrollDown")
+                }
+                  
+                if(e.pageY  - $(window).scrollTop() <10 && e.pageY  - $(window).scrollTop()>0 && $(window).scrollTop() >0){
+                
+                  _L("scrollUp")
+                }
+                */
             };
             
             this.onDrop = function(){
               drag.dropTargets.unbind('mouseup', drag.onDrop);
+
               //sel.clear();
               drag.onDropDone($(this));
             };
@@ -243,46 +338,36 @@ function _L(str){
             };
             
             this.onMousemove = function(e){
-                //_L("move " + e.pageY);
-                if(selThumbs!=null){
-                   selThumbs.css('left',e.pageX +10).css('top',e.pageY+10);
-                  }
+               //_L("move " + e.pageY);
+               var x = e.pageX +10;
+               var y = e.pageY+10;
+        
+               if(y> docHeight - 100)
+                 y= docHeight- 100;
+                 
+               if(selThumbs!=null){
+                   selThumbs.css('left',x).css('top',y);
+                 } 
             };
             this.onMouseup = function(e){
-               var targetList = getChildList();
-               targetList.removeClass("allow-drop").removeClass("not-drop");
-               drag.endHandler();
-               
-               setTimeout(function(){
-                   if(drag.dropTargets!=undefined && drag.dropTargets!=null){
-                     drag.dropTargets.unbind('mouseup', drag.onDrop);
-                   }
-               }, 1);
-
-               if(selThumbs != null){
-                selThumbs.empty().remove();
-                selThumbs = null;
-                }
-                
-            if(dragging == false) //click self
-              {
-                if (e.ctrlKey && $(this).hasClass('select')) {
-                     sel.remove($(this), true);
-                }
-                else if (e.shiftKey) {
-                    sel.removeRange( targetList.index(sel.first), targetList.index(sel.last))
-                    sel.addRange( targetList.index(sel.first),  targetList.index($(this)));
-                }
-                else{    
-                    sel.clear();
-                    sel.first = $(this);
-                    sel.add($(this));
-                }
-              }   
-              dragging = false;              
+                if(dragging == false) //click self
+                  {
+                    if (e.ctrlKey && $(this).hasClass('select')) {
+                         sel.remove($(this), true);
+                    }
+                    else if (e.shiftKey) {
+                        sel.removeRange( targetList.index(sel.first), targetList.index(sel.last))
+                        sel.addRange( targetList.index(sel.first),  targetList.index($(this)));
+                    }
+                    else{    
+                        sel.clear();
+                        sel.first = $(this);
+                        sel.add($(this));
+                    }
+                  }   
+               drag.endDrag();          
             };
-            
-            this.onDocMouseup = function(){
+            this.endDrag = function(){
                var targetList = getChildList();
                targetList.removeClass("allow-drop").removeClass("not-drop");
                drag.endHandler();
@@ -297,8 +382,18 @@ function _L(str){
                     selThumbs.empty().remove();
                     selThumbs = null;
                 }
+
+                dragging = false;  
                 
-                dragging = false;      
+                //remove autoscroll area--
+                $("#scrollDownArea").trigger('destroy');
+                $("#scrollDownArea").remove();
+                $("#scrollUpArea").trigger('destroy');
+                $("#scrollUpArea").remove();
+                
+            },
+            this.onDocMouseup = function(){
+                drag.endDrag();
             }
             
             this.endHandler = function(){};
