@@ -285,7 +285,7 @@ function _L(str){
                 $('body').prepend(scrollUpArea);
 
                    var upTimer= null;
-                   scrollUpArea.bind('mouseover', function(){
+                   scrollUpArea.bind('mouseover', function(e){
                    upTimer = setInterval(function(){
                          var st = $(window).scrollTop();
                          if( st > 0){
@@ -347,7 +347,11 @@ function _L(str){
                //_L("move " + e.pageY);
                var x = e.pageX;
                var y = e.pageY;
-    
+               moveThumbnail(x, y);
+
+            };
+            
+            function moveThumbnail(x, y){
                var offset = (selThumbs.children().length-1)*7 + _settings.bottomOffset;
                if(y> docHeight - offset)
                  y= docHeight- offset;
@@ -355,7 +359,8 @@ function _L(str){
                if(selThumbs!=null){
                    selThumbs.css('left',x+10).css('top',y+10);
                  } 
-            };
+            }
+            
             this.onMouseup = function(e){
                 if(dragging == false) //click self
                   {
