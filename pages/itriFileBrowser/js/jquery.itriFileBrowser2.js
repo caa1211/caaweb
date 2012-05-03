@@ -369,6 +369,7 @@ function _L(str){
                          sel.remove($(this), true);
                     }
                     else if (e.shiftKey) {
+                        var targetList = getChildList();
                         sel.removeRange( targetList.index(sel.first), targetList.index(sel.last))
                         sel.addRange( targetList.index(sel.first),  targetList.index($(this)));
                     }
