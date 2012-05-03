@@ -65,6 +65,7 @@ function _L(str){
         rawData: null,
         scrollSensitivity:50,
         bottomOffset: 100,
+        showScrollArea: false,
         onDrop: function(sel, target, selData, targetData){
                       var selStr =" [ "; 
                       selections.each(function(){
@@ -238,13 +239,15 @@ function _L(str){
               if( docHeight> st+$(window).height()){
                 //auto scroll down
                 $("#scrollDownArea").remove();
-                var scrollDownArea = $("<div id='scrollDownArea' class='scrollArea'></div>")
+                var scrollDownArea = $("<div id='scrollDownArea' class='scrollDownArea'></div>")
                 scrollDownArea.css({
                     "position": "fixed",
-                    //"background": "blue",
                     "bottom": "0em",
                     "z-Index": 1000
                 });
+                if(!_settings.showScrollArea){
+                    scrollDownArea.css("background", "none");
+                }
                 scrollDownArea.width($(window).width());
                 scrollDownArea.height(_settings.scrollSensitivity);
                 $('body').append(scrollDownArea);
@@ -267,14 +270,16 @@ function _L(str){
                 
                 //auto scroll up
                 $("#scrollUpArea").remove();
-                var scrollUpArea = $("<div id='scrollUpArea' class='scrollArea'></div>")
+                var scrollUpArea = $("<div id='scrollUpArea' class='scrollUpArea'></div>")
                 scrollUpArea.css({
                     "position": "fixed",
-                    //"background": "red",
                     "up": "0em",
                     "z-Index": 1000
                     
                 });
+                if(!_settings.showScrollArea){
+                    scrollUpArea.css("background", "none");
+                }
                 scrollUpArea.width($(window).width());
                 scrollUpArea.height(_settings.scrollSensitivity);
                 $('body').prepend(scrollUpArea);

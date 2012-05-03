@@ -86,5 +86,8 @@ user-select:text;
         background-color:#eaeaea;
     }
     
+    div.scrollDownArea{background: red;}
+    div.scrollUpArea{background: blue;}
+    
  
     

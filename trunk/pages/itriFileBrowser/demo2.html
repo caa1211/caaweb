@@ -14,7 +14,7 @@
     <script src="js/jquery-ui-1.8.19.custom.min.js" type="text/javascript"></script>
    <script src="js/jquery.itriCSSJsonParser.js" type="text/javascript"></script>
    <script src="js/jquery.itriFileBrowser2.js" type="text/javascript"></script>
-
+<script src="js/zyInlineEdit.js" type="text/javascript"></script>
 
     
     <script type="text/javascript">
@@ -94,9 +94,10 @@
           type: 'numeric'
         });
         
+        var $jsonParser = null;
         function loadFileData(){
         
-            $.itriCSSJsonParser({
+            $jsonParser = $.itriCSSJsonParser({
                 url:'js/response.json',
                 type: 'fileBrowser',
                 rootId: "fileList2",
@@ -115,6 +116,7 @@
                     })
                     .itriFileBrowser({
                             rawData: rawData,
+                            //showScrollArea: true,
                             onDrop: function(sel, target, selData, targetData){
                                       var selStr =" [ "; 
                                       sel.each(function(){
@@ -159,22 +161,21 @@
              
 
    $('.testBtn').click(function(){
-   /*alert('')
-  var div = $(window);
-   $(window).scrollTop(50)*/
-$(window).animate({scrollTop: '+=1px'}, 1000)
-  /*
-    // increase the scroll position by 10 px every 10th of a second
-    setInterval(function() { 
-        // make sure it's not at the bottom
-        if (div.scrollTop < div.scrollHeight - div.clientHeight)
-            div.scrollTop += 10; // move down
-    }, 100); // 100 milliseconds
-
-           });   
-*/
- });
+    $("#wrapDiv").remove()
+   loadFileData();
+    });
            
+        
+    $('#addBtn').click(function(){
+       // $fileBrowser.deSelections();
+         // $('.inlineEdit').width(300).css('border','solid 1px red').inlineEdit().trigger('click');
+        $jsonParser.addFolder("new Folder", function(){
+        
+        });
+    });
+
+    
+        
         });
   
     </script> 
@@ -189,15 +190,18 @@ $(window).animate({scrollTop: '+=1px'}, 1000)
     </style>
 </head>
 <body tabindex="0">
+
+<div id='debugDiv' style='position:relative;'>Log:</div>
 <button class="testBtn">refresh</button>
+<button id="addBtn">addBtn</button>
 <div>select number: <span id="selNum">0</span></div>
+<div class="inlineEdit"><a href="#">5678</a></div>
 <div>information: <div id="info"></div></div>
-<button class="testBtn">refresh</button>
-<div id='debugDiv' style='position:absolute;'>Log:</div>
+
+
 <div id='wrapDiv' class='wrapDiv'>
-
-
 </div>
+
 
 </body>
 </html>
