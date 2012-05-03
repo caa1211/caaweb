@@ -65,6 +65,7 @@ function _L(str){
         rawData: null,
         scrollSensitivity:50,
         bottomOffset: 100,
+        showScrollArea: false,
         onDrop: function(sel, target, selData, targetData){
                       var selStr =" [ "; 
                       selections.each(function(){
@@ -238,13 +239,15 @@ function _L(str){
               if( docHeight> st+$(window).height()){
                 //auto scroll down
                 $("#scrollDownArea").remove();
-                var scrollDownArea = $("<div id='scrollDownArea' class='scrollArea'></div>")
+                var scrollDownArea = $("<div id='scrollDownArea' class='scrollDownArea'></div>")
                 scrollDownArea.css({
                     "position": "fixed",
-                    //"background": "blue",
                     "bottom": "0em",
                     "z-Index": 1000
                 });
+                if(!_settings.showScrollArea){
+                    scrollDownArea.css("background", "none");
+                }
                 scrollDownArea.width($(window).width());
                 scrollDownArea.height(_settings.scrollSensitivity);
                 $('body').append(scrollDownArea);
@@ -267,14 +270,16 @@ function _L(str){
                 
                 //auto scroll up
                 $("#scrollUpArea").remove();
-                var scrollUpArea = $("<div id='scrollUpArea' class='scrollArea'></div>")
+                var scrollUpArea = $("<div id='scrollUpArea' class='scrollUpArea'></div>")
                 scrollUpArea.css({
                     "position": "fixed",
-                    //"background": "red",
                     "up": "0em",
                     "z-Index": 1000
                     
                 });
+                if(!_settings.showScrollArea){
+                    scrollUpArea.css("background", "none");
+                }
                 scrollUpArea.width($(window).width());
                 scrollUpArea.height(_settings.scrollSensitivity);
                 $('body').prepend(scrollUpArea);
@@ -474,45 +479,52 @@ function _L(str){
        //hover
         $childList.mouseleave(function(e){
             $(this).removeClass('hover');
-               e.preventDefault(); 
+               //e.preventDefault(); 
         }).mouseenter(function(e){
             $(this).addClass('hover');
-               e.preventDefault(); 
+              // e.preventDefault(); 
         });
 
        function preventDefault(e){
+          if($(e.target)[0].tagName == "INPUT")
+            return;
           e.preventDefault(); 
-       }
+       };
         
        function stopPropagation(e){
+          if($(e.target)[0].tagName == "INPUT")
+            return;
           e.stopPropagation();  
-       }
+       };
        
        function preventDefaultAndStopPropagation(e){
+          if($(e.target)[0].tagName == "INPUT")
+            return;
           e.preventDefault(); 
           e.stopPropagation();  
-       }
+       };
 
        this.selectAll = function(){
          _sel.selectAll();
-       }
+       };
        
        this.getSelections = function(){
          _sel.getSelections();
-       }
+       };
 
        
        this.getDragDropHelper = function(){
         return _drag;
-       }
+       };
        
-       $thisObj.mousedown(preventDefault).mouseup(preventDefault).mousemove(preventDefault).mouseenter(preventDefault)
-       .keydown(preventDefault).click(stopPropagation);
+       $thisObj.mousedown(preventDefault).mouseup(preventDefault).mousemove(preventDefault)
+       .mouseenter(preventDefault).mouseleave(preventDefault).keydown(preventDefault).click(stopPropagation);
        $(document).mousemove(preventDefault);
        $(document).keydown(function(e,a){ 
-                  if(e.which==65 && e.ctrlKey)
+                  if(e.which==65 && e.ctrlKey){
                     _sel.selectAll();
-                   e.stopPropagation();   
+                  }
+                  stopPropagation(e);
        }).click(function(){
                   _sel.clear(true);
        });
