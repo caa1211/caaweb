@@ -41,13 +41,12 @@ function _L(str){
        
        var _settings = $.extend({}, defaultSetting , settings);
        var len = _settings.imgs.length;
-       function modifyImgPos(){
-       
-       var offset=0;
-       $.each(_settings.imgs, function(){
-         $(this).css("position", "absolute").css("left", offset*+3).css("top", offset*7).css("z-index", 100-offset);
-         offset++;
-        });
+       function modifyImgPos(){       
+           var offset=0;
+           $.each(_settings.imgs, function(){
+             $(this).css("position", "absolute").css("left", offset*+3).css("top", offset*7).css("z-index", 100-offset);
+             offset++;
+            });
        }
 
        var thumbCWidth =  9+Math.floor(len/10)*5 ;
@@ -108,25 +107,29 @@ function _L(str){
                 }
                 else{
                   sel.first = $(this);
-               }
+                }
                 
                 sel.last = $(this);
 
-                if(!$(this).hasClass('select'))
+                if(!$(this).hasClass('select')){
                     sel.add($(this));
+                }
                 
                 sel.endHandler();      
             };
             
             this.add = function(obj){
                 obj.addClass('select');
-                _settings.onUpdateSel(sel.getSelections(), sel.getSelectionsData(), true);
+                var selDomAry = sel.getSelections();
+                _settings.onUpdateSel(selDomAry, sel.getSelectionsData(selDomAry), true);
             };
             
             this.remove = function(obj, fireEvent){
                 obj.removeClass('select');
-                if(fireEvent==true)//only press ctrl+click
-                  _settings.onUpdateSel(sel.getSelections(), sel.getSelectionsData(), false);
+                if(fireEvent==true){//only press ctrl+click
+                   var selDomAry = sel.getSelections();
+                   _settings.onUpdateSel(selDomAry, sel.getSelectionsData(selDomAry), false);
+                  }
             };
             
             this.removeRange = function(s, e){
@@ -172,14 +175,17 @@ function _L(str){
             this.clear = function(fireEvent){
                 var targetList = getChildList();
                 targetList.removeClass('select');
-                if(fireEvent == true) //only click spack area
-                _settings.onUpdateSel(sel.getSelections(), sel.getSelectionsData(), false);
+                if(fireEvent == true){ //only click space area
+                 var selDomAry = sel.getSelections();
+                 _settings.onUpdateSel(selDomAry, sel.getSelectionsData(selDomAry), false);
+                }
             };
             
             this.selectAll = function(){
                  var targetList = getChildList();
                  targetList.addClass('select');
-                 _settings.onUpdateSel(sel.getSelections(), sel.getSelectionsData(), true);
+                 var selDomAry = sel.getSelections();
+                 _settings.onUpdateSel(selDomAry, sel.getSelectionsData(selDomAry), true);
             };
             
             this.getSelections = function(){
@@ -187,9 +193,7 @@ function _L(str){
                  return targetList.filter('.select');
             };
             
-            this.getSelectionsData = function(){
-                 var targetList = getChildList();
-                 var domAry = targetList.filter('.select');
+            this.getSelectionsData = function(domAry){
                  var dataAry = [];
                  $.each(domAry, function(){
                     var data = _settings.rawData[$(this).attr('dataIndex')];
@@ -220,6 +224,7 @@ function _L(str){
             this.onMouseenter = function(e){
             
             };
+            
             var docHeight= $(document).height();
             var docWidth= $(document).width();
             this.onInitmove = function(e){
@@ -259,7 +264,6 @@ function _L(str){
                            $(window).scrollTop(st+30)
                          }
                       }, 50);
-                   
                    }).bind('mouseout', function(){
                       clearInterval(downTimer);
                    }).bind('destroy', function(){
@@ -338,9 +342,7 @@ function _L(str){
             };
             
             this.onDropDone = function(target){
-              //_settings.onDrop(selections, target);
-              _settings.onDrop(selections, target, sel.getSelectionsData(), sel.getDataAt(target.attr('dataIndex')));
-              
+              _settings.onDrop(selections, target, sel.getSelectionsData(selections), sel.getDataAt(target.attr('dataIndex')));
             };
             
             this.onMousemove = function(e){
@@ -348,7 +350,6 @@ function _L(str){
                var x = e.pageX;
                var y = e.pageY;
                moveThumbnail(x, y);
-
             };
             
             function moveThumbnail(x, y){
@@ -379,6 +380,7 @@ function _L(str){
                   }   
                drag.endDrag();          
             };
+            
             this.endDrag = function(){
                var targetList = getChildList();
                targetList.removeClass("allow-drop").removeClass("not-drop");
@@ -406,7 +408,7 @@ function _L(str){
             },
             this.onDocMouseup = function(){
                 drag.endDrag();
-            }
+            };
             
             this.endHandler = function(){};
             
