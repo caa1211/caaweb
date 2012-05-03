@@ -1,17 +1,8 @@
-﻿*::selection {
-	background: none; /* Safari */
-	}
-*::-moz-selection {
-	background: none; /* Firefox */
-}
-*::-webkit-selection {
-	background:none;
-	/*color:none;*/
-}
-*::-o-selection {
-	background:none;
-	/*color:none;*/
-}
+﻿/* *::selection {background: none;}*/
+/* *::-moz-selection {background: none;} */
+/* *::-webkit-selection {background:none;}*/
+/* *::-o-selection {background:none;}*/
+/* *::-ms-selection {background:none;}*/
 
 img {
 -webkit-user-select: none;
@@ -22,17 +13,26 @@ user-select: none;
 }
 
 table {
--webkit-user-select: none;
--khtml-user-select: none;
--moz-user-select: none;
--o-user-select: none;
-user-select: none;
+/*-webkit-user-select: none;*/
+/*-khtml-user-select: none;*/
+/*-moz-user-select: none;*/
+/*-o-user-select: none;*/
+-ms-user-select: none;  
+/*user-select: none;*/
+}
+
+input{
+-webkit-user-select:text;
+-khtml-user-select: text;
+-moz-user-select: text;
+-o-user-select:text;
+-ms-user-select: text;  
+user-select:text;
 }
 
 
 
-
-    .wrapDiv{border: solid 1px gray; width:100%; margin:0 auto;  overflow: auto;}
+    .wrapDiv{border: solid 2px gray; width:100%; margin:0 auto;  overflow: auto;}
    
     .fileList tbody tr.select td {
         background-color:#eaeaea;
@@ -66,8 +66,8 @@ user-select: none;
     
     .nameArea .name{ margin-left: 45px; }
     .nameArea .type{ display:none; }
-    /*.not-drop {cursor: url(imgs/not-drop.cur), default;}*/
-    .not-drop {cursor: default}
+    .not-drop {cursor: url(../imgs/not-drop.cur), default;}
+    /*.not-drop {cursor: default}*/
     .allow-drop {cursor: default}
     
     .fileList tbody tr.allow-drop td {
@@ -81,4 +81,13 @@ user-select: none;
     .selThumbs{position:absolute; }
     .selThumbs .thumbCounter{ background: url(../imgs/thumbCbg.png); width:20px; height:20px; left:15px; top:-12px; position:absolute; z-index:102; }
     .selThumbs .thumbCounter span{  margin:0 auto; width:9px; display:block; margin-top:2px; color: #5a5afa;}
+    
+    .fileList tbody tr.edit td {
+        background-color:#eaeaea;
+    }
+    
+    div.scrollDownArea{background: red;}
+    div.scrollUpArea{background: blue;}
+    
+ 
     
