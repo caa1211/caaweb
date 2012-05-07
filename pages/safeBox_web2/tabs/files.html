@@ -80,7 +80,7 @@ utils.swapImg($("#uploadBtn"), 'images/img/icon_upload_over.png');
           },
           type: 'numeric'
         });
-        
+        var $fileBrowser;
         function loadFileData(){
         
             $.itriCSSJsonParser({
@@ -91,7 +91,7 @@ utils.swapImg($("#uploadBtn"), 'images/img/icon_upload_over.png');
                 
                    $("#wrapDiv").append(elements);
                    
-                   var $fileBrowser = $("#fileList2")
+                   $fileBrowser = $("#fileList2")
                    .tablesorter({
                         sortList: [[0,0],[1,0]],
                         headers: { 
@@ -143,6 +143,16 @@ utils.swapImg($("#uploadBtn"), 'images/img/icon_upload_over.png');
        } 
 
        loadFileData();
+       
+      $('#addBtn').click(function(){
+        $fileBrowser.addFolder({
+            img: "imgs/flavour-extended-png/folder_blue_stuffed.png",
+            name: " New Folder",
+            callback: function(){
+            }
+            });
+        });
+    
 </script>
 
 
