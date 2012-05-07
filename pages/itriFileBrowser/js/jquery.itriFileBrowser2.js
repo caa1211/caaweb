@@ -31,7 +31,6 @@ function _L(str){
        
        };
        
-       
     $.fn.thumbnails = function(settings){
        var $thisObj = $(this);
        var defaultSetting = 
@@ -56,14 +55,97 @@ function _L(str){
        $thisObj.append(_settings.imgs);
        return this;
     }
-   
-   
+    
+    $.fn.editAble = function(settings){
+       var $thisObj = $(this);
+       
+       var defaultSetting = 
+       {
+            onChange: function(newValue){},
+            onCancel: function(){},
+            onCompleted: function(){}
+       };
+       
+       var _settings = $.extend({}, defaultSetting , settings);
+       
+       this.leaveEditMode = function(){
+           $thisObj.find('.editAble').each(function(i, t){
+               var inputFiled = $(this).parent().children('input.editField');
+               var cText = inputFiled.val();
+               var editItem = $(this);
+               checkChange(editItem, cText);
+               destroy(inputFiled, editItem, cText);
+           });
+       };
+       
+       function stopPropagation(e){
+          e.stopPropagation();  
+       };
+       
+       var $editItem = $thisObj.find('.editAble');
+
+       function destroy(inputField, editItem, text){
+          inputField.unbind().empty().remove();
+          _settings.onCompleted(editItem, text);
+          editItem.removeClass('editAble');
+          editItem.show();
+       }
+       
+       function checkChange(editItem, text){
+           var orgText = editItem.text();
+           if(orgText == text){
+                _settings.onCancel(editItem, text);
+           }
+           else{
+                editItem.text(text);
+                _settings.onChange(editItem, text);
+           }
+       }
+       
+        $editItem.each(function(i, t){
+             var editItem = $(this);
+             editItem.hide();
+             var $inputFiled = $("<input class='editField'/>");
+             editItem.before($inputFiled);
+             $inputFiled.val($editItem.text());
+             $inputFiled.select();
+
+             
+             $inputFiled.blur(function(){
+                  var cText = $(this).val();
+                  checkChange(editItem, cText);
+                  destroy($inputFiled, editItem, cText);
+             }).keydown(function(e){
+                var cText = $(this).val();
+                //esc
+                if(e.keyCode == 27){
+                   _settings.onCancel($(this), cText);
+                   destroy($inputFiled, editItem, cText);
+                }
+                //enter
+                else if(e.keyCode == 13){
+                   checkChange(editItem, cText);
+                   destroy($inputFiled, editItem, cText);
+                }
+             })
+             .bind('click', stopPropagation)
+             .bind('mousemove', stopPropagation)
+             .bind('mouseup', stopPropagation)
+             .bind('mousedown', stopPropagation)
+             .bind('mouseenter', stopPropagation)
+             .bind('mouseleave', stopPropagation);
+        });
+       
+       return this;
+    }
+
     $.fn.itriFileBrowser = function(settings){
 
        var defaultSetting = {
         rawData: null,
         scrollSensitivity:50,
         bottomOffset: 100,
+        onRename: function(){},
         showScrollArea: false,
         onDrop: function(sel, target, selData, targetData){
                       var selStr =" [ "; 
@@ -197,7 +279,8 @@ function _L(str){
                  var dataAry = [];
                  $.each(domAry, function(){
                     var data = _settings.rawData[$(this).attr('dataIndex')];
-                    dataAry.push(data);
+                    if(data!=undefined)
+                        dataAry.push(data);
                  })
                  return dataAry;
             }
@@ -445,10 +528,16 @@ function _L(str){
             items.unbind('mouseenter', helper.onMouseenter);
             items.unbind('mouseup', helper.onMouseup);
         }
-
-        $childList.mousedown(
-            function(e){
+        
+       var $editObj = null;
+        
+        function mousedownHandler(e){
                 var childList = $thisObj.children('tbody').children('tr');
+                
+                if($editObj!=null){
+                    $editObj.leaveEditMode();
+                }
+                
                 if($(this).hasClass('select')){//drag
                     _drag.setSelectItems(_sel);
                     childList.bind('mouseenter', _drag.onMouseenter);
@@ -480,44 +569,91 @@ function _L(str){
                         unbindSelEvent(childList, _sel);
                    };
                 }
+        }
+        
+        $childList.bind('mousedown', mousedownHandler);
 
-            }
-        );
-       
        //hover
         $childList.mouseleave(function(e){
             $(this).removeClass('hover');
-               //e.preventDefault(); 
         }).mouseenter(function(e){
             $(this).addClass('hover');
-              // e.preventDefault(); 
         });
 
        function preventDefault(e){
-          if($(e.target)[0].tagName == "INPUT")
+          if($editObj!=null)
             return;
           e.preventDefault(); 
        };
         
        function stopPropagation(e){
-          if($(e.target)[0].tagName == "INPUT")
+          if($editObj!=null)
             return;
           e.stopPropagation();  
        };
        
        function preventDefaultAndStopPropagation(e){
-          if($(e.target)[0].tagName == "INPUT")
+          if($editObj!=null)
             return;
           e.preventDefault(); 
           e.stopPropagation();  
        };
 
+       
+       
+       this.addFolder = function(param){
+          var l = $thisObj.find(".nameArea > .name").children('a:contains("'+param.name+'")').length;
+          var $tr = $("<tr id='newFolder_'"+l+" class='listItem folder edit'></tr>");
+          var $td = $("<td class='nameArea'><img src='"+param.img+"'/><span class='type'>1</span><div class='name'><a class='editAble' href='#'>"+ param.name+" ("+l+")" +"</a></div></td>")
+          $tr.append($td);
+          $tr.append("<td>--</td>");
+          $tr.append("<td>--</td>");
+          $thisObj.prepend($tr);
+
+         $editObj = $tr.editAble({
+            onChange: function(obj, text){  },
+            onCancel: function(){},
+            onCompleted: function(obj, text){
+               $editObj=null;
+               $tr.removeClass("edit")
+               param.callback(text);
+               
+               $childList.unbind();
+               $childList.removeClass('hover').removeClass('select');
+               var childList = $thisObj.children('tbody').children('tr');
+               childList.bind('mousedown', mousedownHandler);
+            }
+          });
+       };
+
+       this.rename = function(param){
+         var selAry = _sel.getSelections();
+        // $childList.unbind();
+         
+         if(selAry.length>0){
+             $tr = $("#"+ selAry[0].id); 
+             $a = $tr.find('a');
+             $a.addClass('editAble');
+             $editObj = $tr.editAble({
+              onCompleted: function(obj, text){
+ 
+               // $childList.bind('mousedown', mousedownHandler);
+                _settings.onRename();
+                $editObj=null;
+               }
+              
+             });
+         }
+       };
+       
+       var thisObj = this;
+              
        this.selectAll = function(){
          _sel.selectAll();
        };
        
        this.getSelections = function(){
-         _sel.getSelections();
+         return _sel.getSelections();
        };
 
        
@@ -531,6 +667,9 @@ function _L(str){
        $(document).keydown(function(e,a){ 
                   if(e.which==65 && e.ctrlKey){
                     _sel.selectAll();
+                  }
+                  if(e.which==113){
+                     thisObj.rename();
                   }
                   stopPropagation(e);
        }).click(function(){
