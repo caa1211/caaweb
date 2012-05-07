@@ -1,8 +1,8 @@
-﻿/* *::selection {background: none;}*/
-/* *::-moz-selection {background: none;} */
-/* *::-webkit-selection {background:none;}*/
-/* *::-o-selection {background:none;}*/
-/* *::-ms-selection {background:none;}*/
+﻿ *::selection {background: none;}
+ *::-moz-selection {background: none;} 
+ *::-webkit-selection {background:none;}
+ *::-o-selection {background:none;}
+ *::-ms-selection {background:none;}
 
 img {
 -webkit-user-select: none;
