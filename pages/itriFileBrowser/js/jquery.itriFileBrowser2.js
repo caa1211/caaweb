@@ -602,8 +602,8 @@ function _L(str){
        
        
        this.addFolder = function(param){
-          var l = $thisObj.find(".nameArea > .name").children('a:contains("'+param.name+'")').length;
-          var $tr = $("<tr id='newFolder_'"+l+" class='listItem folder edit'></tr>");
+          var l = $thisObj.children('tbody').children('.newFolder').length;
+          var $tr = $("<tr id='newFolder_'"+l+" class='listItem folder edit newFolder'></tr>");
           var $td = $("<td class='nameArea'><img src='"+param.img+"'/><span class='type'>1</span><div class='name'><a class='editAble' href='#'>"+ param.name+" ("+l+")" +"</a></div></td>")
           $tr.append($td);
           $tr.append("<td>--</td>");
