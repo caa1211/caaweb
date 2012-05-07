@@ -14,7 +14,6 @@
     <script src="js/jquery-ui-1.8.19.custom.min.js" type="text/javascript"></script>
    <script src="js/jquery.itriCSSJsonParser.js" type="text/javascript"></script>
    <script src="js/jquery.itriFileBrowser2.js" type="text/javascript"></script>
-<script src="js/zyInlineEdit.js" type="text/javascript"></script>
 
     
     <script type="text/javascript">
@@ -95,6 +94,7 @@
         });
         
         var $jsonParser = null;
+        var $fileBrowser = null;
         function loadFileData(){
         
             $jsonParser = $.itriCSSJsonParser({
@@ -105,7 +105,7 @@
                 
                    $("#wrapDiv").append(elements);
                    
-                   var $fileBrowser = $("#fileList2")
+                   $fileBrowser = $("#fileList2")
                    .tablesorter({
                         sortList: [[0,0],[1,0]],
                         headers: { 
@@ -128,12 +128,14 @@
                                       sel.empty().remove();
                             },
                             onUpdateSel: function(sel, selData, isAdd){
+                    
                                   $("#selNum").html(selData.length);
                                   var $infoObj = $("#info");
                                   $infoObj.empty();
                                   if(selData.length!=0)
                                   {
                                       $.each(selData, function(i, t){
+                                        
                                         var dataDivStr = 
                                         "<div class='item'>"+
                                         "<div> id:"+t.id+"</div>"+
@@ -150,7 +152,7 @@
                     
                     });
                     
-                  $fileBrowser.getSelections();
+                 
                     
                 }
             });
@@ -169,14 +171,26 @@
     $('#addBtn').click(function(){
        // $fileBrowser.deSelections();
          // $('.inlineEdit').width(300).css('border','solid 1px red').inlineEdit().trigger('click');
-        $jsonParser.addFolder("new Folder", function(){
         
+         //$jsonParser.addFolder("adf", function(){});
+        
+        $fileBrowser.addFolder({
+            img: "imgs/flavour-extended-png/folder_blue_stuffed.png",
+            name: " New Folder",
+            callback: function(){
+            
+            }
         });
+        
+        
     });
 
     
+    $('#renameBtn').click(function(){
+            $fileBrowser.rename();
+       });
         
-        });
+ });
   
     </script> 
 
@@ -193,7 +207,8 @@
 
 <div id='debugDiv' style='position:relative;'>Log:</div>
 <button class="testBtn">refresh</button>
-<button id="addBtn">addBtn</button>
+<button id="addBtn">add Folder</button>
+<button id="renameBtn">Rename</button>
 <div>select number: <span id="selNum">0</span></div>
 <div class="inlineEdit"><a href="#">5678</a></div>
 <div>information: <div id="info"></div></div>
