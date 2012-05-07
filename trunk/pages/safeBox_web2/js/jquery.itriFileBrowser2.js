@@ -31,7 +31,6 @@ function _L(str){
        
        };
        
-       
     $.fn.thumbnails = function(settings){
        var $thisObj = $(this);
        var defaultSetting = 
@@ -41,13 +40,12 @@ function _L(str){
        
        var _settings = $.extend({}, defaultSetting , settings);
        var len = _settings.imgs.length;
-       function modifyImgPos(){
-       
-       var offset=0;
-       $.each(_settings.imgs, function(){
-         $(this).css("position", "absolute").css("left", offset*+3).css("top", offset*7).css("z-index", 100-offset);
-         offset++;
-        });
+       function modifyImgPos(){       
+           var offset=0;
+           $.each(_settings.imgs, function(){
+             $(this).css("position", "absolute").css("left", offset*+3).css("top", offset*7).css("z-index", 100-offset);
+             offset++;
+            });
        }
 
        var thumbCWidth =  9+Math.floor(len/10)*5 ;
@@ -57,14 +55,97 @@ function _L(str){
        $thisObj.append(_settings.imgs);
        return this;
     }
-   
-   
+    
+    $.fn.editAble = function(settings){
+       var $thisObj = $(this);
+       
+       var defaultSetting = 
+       {
+            onChange: function(newValue){},
+            onCancel: function(){},
+            onCompleted: function(){}
+       };
+       
+       var _settings = $.extend({}, defaultSetting , settings);
+       
+       this.leaveEditMode = function(){
+           $thisObj.find('.editAble').each(function(i, t){
+               var inputFiled = $(this).parent().children('input.editField');
+               var cText = inputFiled.val();
+               var editItem = $(this);
+               checkChange(editItem, cText);
+               destroy(inputFiled, editItem, cText);
+           });
+       };
+       
+       function stopPropagation(e){
+          e.stopPropagation();  
+       };
+       
+       var $editItem = $thisObj.find('.editAble');
+
+       function destroy(inputField, editItem, text){
+          inputField.unbind().empty().remove();
+          _settings.onCompleted(editItem, text);
+          editItem.removeClass('editAble');
+          editItem.show();
+       }
+       
+       function checkChange(editItem, text){
+           var orgText = editItem.text();
+           if(orgText == text){
+                _settings.onCancel(editItem, text);
+           }
+           else{
+                editItem.text(text);
+                _settings.onChange(editItem, text);
+           }
+       }
+       
+        $editItem.each(function(i, t){
+             var editItem = $(this);
+             editItem.hide();
+             var $inputFiled = $("<input class='editField'/>");
+             editItem.before($inputFiled);
+             $inputFiled.val($editItem.text());
+             $inputFiled.select();
+
+             
+             $inputFiled.blur(function(){
+                  var cText = $(this).val();
+                  checkChange(editItem, cText);
+                  destroy($inputFiled, editItem, cText);
+             }).keydown(function(e){
+                var cText = $(this).val();
+                //esc
+                if(e.keyCode == 27){
+                   _settings.onCancel($(this), cText);
+                   destroy($inputFiled, editItem, cText);
+                }
+                //enter
+                else if(e.keyCode == 13){
+                   checkChange(editItem, cText);
+                   destroy($inputFiled, editItem, cText);
+                }
+             })
+             .bind('click', stopPropagation)
+             .bind('mousemove', stopPropagation)
+             .bind('mouseup', stopPropagation)
+             .bind('mousedown', stopPropagation)
+             .bind('mouseenter', stopPropagation)
+             .bind('mouseleave', stopPropagation);
+        });
+       
+       return this;
+    }
+
     $.fn.itriFileBrowser = function(settings){
 
        var defaultSetting = {
         rawData: null,
         scrollSensitivity:50,
         bottomOffset: 100,
+        onRename: function(){},
         showScrollArea: false,
         onDrop: function(sel, target, selData, targetData){
                       var selStr =" [ "; 
@@ -108,25 +189,29 @@ function _L(str){
                 }
                 else{
                   sel.first = $(this);
-               }
+                }
                 
                 sel.last = $(this);
 
-                if(!$(this).hasClass('select'))
+                if(!$(this).hasClass('select')){
                     sel.add($(this));
+                }
                 
                 sel.endHandler();      
             };
             
             this.add = function(obj){
                 obj.addClass('select');
-                _settings.onUpdateSel(sel.getSelections(), sel.getSelectionsData(), true);
+                var selDomAry = sel.getSelections();
+                _settings.onUpdateSel(selDomAry, sel.getSelectionsData(selDomAry), true);
             };
             
             this.remove = function(obj, fireEvent){
                 obj.removeClass('select');
-                if(fireEvent==true)//only press ctrl+click
-                  _settings.onUpdateSel(sel.getSelections(), sel.getSelectionsData(), false);
+                if(fireEvent==true){//only press ctrl+click
+                   var selDomAry = sel.getSelections();
+                   _settings.onUpdateSel(selDomAry, sel.getSelectionsData(selDomAry), false);
+                  }
             };
             
             this.removeRange = function(s, e){
@@ -172,14 +257,17 @@ function _L(str){
             this.clear = function(fireEvent){
                 var targetList = getChildList();
                 targetList.removeClass('select');
-                if(fireEvent == true) //only click spack area
-                _settings.onUpdateSel(sel.getSelections(), sel.getSelectionsData(), false);
+                if(fireEvent == true){ //only click space area
+                 var selDomAry = sel.getSelections();
+                 _settings.onUpdateSel(selDomAry, sel.getSelectionsData(selDomAry), false);
+                }
             };
             
             this.selectAll = function(){
                  var targetList = getChildList();
                  targetList.addClass('select');
-                 _settings.onUpdateSel(sel.getSelections(), sel.getSelectionsData(), true);
+                 var selDomAry = sel.getSelections();
+                 _settings.onUpdateSel(selDomAry, sel.getSelectionsData(selDomAry), true);
             };
             
             this.getSelections = function(){
@@ -187,13 +275,12 @@ function _L(str){
                  return targetList.filter('.select');
             };
             
-            this.getSelectionsData = function(){
-                 var targetList = getChildList();
-                 var domAry = targetList.filter('.select');
+            this.getSelectionsData = function(domAry){
                  var dataAry = [];
                  $.each(domAry, function(){
                     var data = _settings.rawData[$(this).attr('dataIndex')];
-                    dataAry.push(data);
+                    if(data!=undefined)
+                        dataAry.push(data);
                  })
                  return dataAry;
             }
@@ -220,6 +307,7 @@ function _L(str){
             this.onMouseenter = function(e){
             
             };
+            
             var docHeight= $(document).height();
             var docWidth= $(document).width();
             this.onInitmove = function(e){
@@ -259,7 +347,6 @@ function _L(str){
                            $(window).scrollTop(st+30)
                          }
                       }, 50);
-                   
                    }).bind('mouseout', function(){
                       clearInterval(downTimer);
                    }).bind('destroy', function(){
@@ -285,7 +372,7 @@ function _L(str){
                 $('body').prepend(scrollUpArea);
 
                    var upTimer= null;
-                   scrollUpArea.bind('mouseover', function(){
+                   scrollUpArea.bind('mouseover', function(e){
                    upTimer = setInterval(function(){
                          var st = $(window).scrollTop();
                          if( st > 0){
@@ -338,16 +425,17 @@ function _L(str){
             };
             
             this.onDropDone = function(target){
-              //_settings.onDrop(selections, target);
-              _settings.onDrop(selections, target, sel.getSelectionsData(), sel.getDataAt(target.attr('dataIndex')));
-              
+              _settings.onDrop(selections, target, sel.getSelectionsData(selections), sel.getDataAt(target.attr('dataIndex')));
             };
             
             this.onMousemove = function(e){
                //_L("move " + e.pageY);
                var x = e.pageX;
                var y = e.pageY;
-    
+               moveThumbnail(x, y);
+            };
+            
+            function moveThumbnail(x, y){
                var offset = (selThumbs.children().length-1)*7 + _settings.bottomOffset;
                if(y> docHeight - offset)
                  y= docHeight- offset;
@@ -355,7 +443,8 @@ function _L(str){
                if(selThumbs!=null){
                    selThumbs.css('left',x+10).css('top',y+10);
                  } 
-            };
+            }
+            
             this.onMouseup = function(e){
                 if(dragging == false) //click self
                   {
@@ -363,6 +452,7 @@ function _L(str){
                          sel.remove($(this), true);
                     }
                     else if (e.shiftKey) {
+                        var targetList = getChildList();
                         sel.removeRange( targetList.index(sel.first), targetList.index(sel.last))
                         sel.addRange( targetList.index(sel.first),  targetList.index($(this)));
                     }
@@ -374,6 +464,7 @@ function _L(str){
                   }   
                drag.endDrag();          
             };
+            
             this.endDrag = function(){
                var targetList = getChildList();
                targetList.removeClass("allow-drop").removeClass("not-drop");
@@ -401,7 +492,7 @@ function _L(str){
             },
             this.onDocMouseup = function(){
                 drag.endDrag();
-            }
+            };
             
             this.endHandler = function(){};
             
@@ -437,10 +528,16 @@ function _L(str){
             items.unbind('mouseenter', helper.onMouseenter);
             items.unbind('mouseup', helper.onMouseup);
         }
-
-        $childList.mousedown(
-            function(e){
+        
+       var $editObj = null;
+        
+        function mousedownHandler(e){
                 var childList = $thisObj.children('tbody').children('tr');
+                
+                if($editObj!=null){
+                    $editObj.leaveEditMode();
+                }
+                
                 if($(this).hasClass('select')){//drag
                     _drag.setSelectItems(_sel);
                     childList.bind('mouseenter', _drag.onMouseenter);
@@ -472,44 +569,91 @@ function _L(str){
                         unbindSelEvent(childList, _sel);
                    };
                 }
+        }
+        
+        $childList.bind('mousedown', mousedownHandler);
 
-            }
-        );
-       
        //hover
         $childList.mouseleave(function(e){
             $(this).removeClass('hover');
-               //e.preventDefault(); 
         }).mouseenter(function(e){
             $(this).addClass('hover');
-              // e.preventDefault(); 
         });
 
        function preventDefault(e){
-          if($(e.target)[0].tagName == "INPUT")
+          if($editObj!=null)
             return;
           e.preventDefault(); 
        };
         
        function stopPropagation(e){
-          if($(e.target)[0].tagName == "INPUT")
+          if($editObj!=null)
             return;
           e.stopPropagation();  
        };
        
        function preventDefaultAndStopPropagation(e){
-          if($(e.target)[0].tagName == "INPUT")
+          if($editObj!=null)
             return;
           e.preventDefault(); 
           e.stopPropagation();  
        };
 
+       
+       
+       this.addFolder = function(param){
+          var l = $thisObj.find(".nameArea > .name").children('a:contains("'+param.name+'")').length;
+          var $tr = $("<tr id='newFolder_'"+l+" class='listItem folder edit'></tr>");
+          var $td = $("<td class='nameArea'><img src='"+param.img+"'/><span class='type'>1</span><div class='name'><a class='editAble' href='#'>"+ param.name+" ("+l+")" +"</a></div></td>")
+          $tr.append($td);
+          $tr.append("<td>--</td>");
+          $tr.append("<td>--</td>");
+          $thisObj.prepend($tr);
+
+         $editObj = $tr.editAble({
+            onChange: function(obj, text){  },
+            onCancel: function(){},
+            onCompleted: function(obj, text){
+               $editObj=null;
+               $tr.removeClass("edit")
+               param.callback(text);
+               
+               $childList.unbind();
+               $childList.removeClass('hover').removeClass('select');
+               var childList = $thisObj.children('tbody').children('tr');
+               childList.bind('mousedown', mousedownHandler);
+            }
+          });
+       };
+
+       this.rename = function(param){
+         var selAry = _sel.getSelections();
+        // $childList.unbind();
+         
+         if(selAry.length>0){
+             $tr = $("#"+ selAry[0].id); 
+             $a = $tr.find('a');
+             $a.addClass('editAble');
+             $editObj = $tr.editAble({
+              onCompleted: function(obj, text){
+ 
+               // $childList.bind('mousedown', mousedownHandler);
+                _settings.onRename();
+                $editObj=null;
+               }
+              
+             });
+         }
+       };
+       
+       var thisObj = this;
+              
        this.selectAll = function(){
          _sel.selectAll();
        };
        
        this.getSelections = function(){
-         _sel.getSelections();
+         return _sel.getSelections();
        };
 
        
@@ -523,6 +667,9 @@ function _L(str){
        $(document).keydown(function(e,a){ 
                   if(e.which==65 && e.ctrlKey){
                     _sel.selectAll();
+                  }
+                  if(e.which==113){
+                     thisObj.rename();
                   }
                   stopPropagation(e);
        }).click(function(){
