@@ -80,28 +80,35 @@ utils.swapImg($("#uploadBtn"), 'images/img/icon_upload_over.png');
           },
           type: 'numeric'
         });
-        var $fileBrowser;
-        function loadFileData(){
         
-            $.itriCSSJsonParser({
+        var $jsonParser = null;
+        var $tableSorter = null;
+        var $fileBrowser = null;
+        
+        function loadFileData(){
+            //--itriCSSJsonParser plugin
+            $jsonParser = $.itriCSSJsonParser({
                 url:'js/response.json',
                 type: 'fileBrowser',
-                rootId: "fileList2",
+                rootId: "fileList",
                 success: function(elements, rawData){
-                
+                   //append result to Div
                    $("#wrapDiv").append(elements);
                    
-                   $fileBrowser = $("#fileList2")
-                   .tablesorter({
-                        sortList: [[0,0],[1,0]],
+                   //--table sorter plugin
+                   $tableSorter = $("#fileList").tablesorter({
+                        sortList: [[0,0], [1,0], [2,0]],
                         headers: { 
                             "1": { 
                                 sorter:'mbsorter' 
                             }
                         } 
-                    })
-                    .itriFileBrowser({
+                    });  
+                    
+                    //--itriFileBrowser plugin
+                    $fileBrowser = $("#fileList").itriFileBrowser({
                             rawData: rawData,
+                            //showScrollArea: true,
                             onDrop: function(sel, target, selData, targetData){
                                       var selStr =" [ "; 
                                       sel.each(function(){
@@ -132,15 +139,11 @@ utils.swapImg($("#uploadBtn"), 'images/img/icon_upload_over.png');
                        
                                   }
                             }
-                    
                     });
-                    
-                  $fileBrowser.getSelections();
-                    
+                    //--
                 }
-            });
-            
-       } 
+            });  
+        } 
 
        loadFileData();
        
