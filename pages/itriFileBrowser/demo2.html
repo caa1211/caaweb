@@ -7,13 +7,11 @@
     <link href="css/reset.css" rel="stylesheet" type="text/css" />
     <link href="css/itriFileBrowser.css" rel="stylesheet" type="text/css" />
     <link href="css/blue/style.css" rel="stylesheet" type="text/css" />
-    <link href="css/ui-lightness/jquery-ui-1.8.19.custom.css" rel="stylesheet" type="text/css" />
     <!--common js-->
     <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
     <script src="js/jquery.tablesorter.js" type="text/javascript"></script>
-    <script src="js/jquery-ui-1.8.19.custom.min.js" type="text/javascript"></script>
-   <script src="js/jquery.itriCSSJsonParser.js" type="text/javascript"></script>
-   <script src="js/jquery.itriFileBrowser2.js" type="text/javascript"></script>
+    <script src="js/jquery.itriCSSJsonParser.js" type="text/javascript"></script>
+    <script src="js/jquery.itriFileBrowser2.js" type="text/javascript"></script>
 
     
     <script type="text/javascript">
@@ -94,27 +92,31 @@
         });
         
         var $jsonParser = null;
+        var $tableSorter = null;
         var $fileBrowser = null;
-        function loadFileData(){
         
+        function loadFileData(){
+            //--itriCSSJsonParser plugin
             $jsonParser = $.itriCSSJsonParser({
                 url:'js/response.json',
                 type: 'fileBrowser',
-                rootId: "fileList2",
+                rootId: "fileList",
                 success: function(elements, rawData){
-                
+                   //append result to Div
                    $("#wrapDiv").append(elements);
                    
-                   $fileBrowser = $("#fileList2")
-                   .tablesorter({
+                   //--table sorter plugin
+                   $tableSorter = $("#fileList").tablesorter({
                         sortList: [[0,0], [1,0], [2,0]],
                         headers: { 
                             "1": { 
                                 sorter:'mbsorter' 
                             }
                         } 
-                    })
-                    .itriFileBrowser({
+                    });  
+                    
+                    //--itriFileBrowser plugin
+                    $fileBrowser = $("#fileList").itriFileBrowser({
                             rawData: rawData,
                             //showScrollArea: true,
                             onDrop: function(sel, target, selData, targetData){
@@ -128,14 +130,12 @@
                                       sel.empty().remove();
                             },
                             onUpdateSel: function(sel, selData, isAdd){
-                    
                                   $("#selNum").html(selData.length);
                                   var $infoObj = $("#info");
                                   $infoObj.empty();
                                   if(selData.length!=0)
                                   {
                                       $.each(selData, function(i, t){
-                                        
                                         var dataDivStr = 
                                         "<div class='item'>"+
                                         "<div> id:"+t.id+"</div>"+
@@ -149,17 +149,13 @@
                        
                                   }
                             }
-                    
                     });
-                    
-                 
-                    
+                    //-- 
                 }
-            });
-            
-       } 
+            });  
+        } 
        
-       loadFileData();
+    loadFileData();
              
 
    $('.testBtn').click(function(){
@@ -169,11 +165,6 @@
            
         
     $('#addBtn').click(function(){
-       // $fileBrowser.deSelections();
-         // $('.inlineEdit').width(300).css('border','solid 1px red').inlineEdit().trigger('click');
-        
-         //$jsonParser.addFolder("adf", function(){});
-        
         $fileBrowser.addFolder({
             img: "imgs/flavour-extended-png/folder_blue_stuffed.png",
             name: " New Folder",
@@ -181,14 +172,12 @@
             
             }
         });
-        
-        
     });
 
     
     $('#renameBtn').click(function(){
             $fileBrowser.rename();
-       });
+    });
         
  });
   
