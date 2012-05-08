@@ -1,11 +1,12 @@
 ﻿ *::selection {background: none;}
- /**::-moz-selection {background: none;} */
+ *::-moz-selection {background: none;} 
  *::-webkit-selection {background:none;}
  *::-o-selection {background:none;}
  *::-ms-selection {background:none;}
  *::-khtml-selection {background:none;}
 
-
+input::-moz-selection {background: #3399ff;} 
+ 
 img {
 -webkit-user-select: none;
 -khtml-user-select: none;
@@ -14,7 +15,7 @@ img {
 user-select: none;
 }
 
-table {
+* {
 -webkit-user-select: none;
 -khtml-user-select: none;
 /*-moz-user-select: none;*/
