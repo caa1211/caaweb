@@ -118,7 +118,7 @@ utils.swapImg($("#uploadBtn"), 'images/img/icon_upload_over.png');
                                       _L("drop" + selStr + " to "+ target.find(".name").html())
                                       */ 
                                        
-                                      $.jGrowl("Moved " + sel.length + " items to " + targetData.name); 
+                                      $.jGrowl("Moved " + sel.length + " items to folder '" + targetData.name + "'"); 
                                       sel.empty().remove();
                                       
                             },
@@ -154,8 +154,10 @@ utils.swapImg($("#uploadBtn"), 'images/img/icon_upload_over.png');
         $fileBrowser.addFolder({
             img: "imgs/flavour-extended-png/folder_blue_stuffed.png",
             name: " New Folder",
-            callback: function(){
+            callback: function(text){
+                $.jGrowl("Created folder '" + text + "'"); 
             }
+            
             });
         });
     
