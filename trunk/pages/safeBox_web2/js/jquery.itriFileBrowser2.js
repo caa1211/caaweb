@@ -35,24 +35,34 @@ function _L(str){
        var $thisObj = $(this);
        var defaultSetting = 
        {
-           imgs:null
+           imgs:null, 
+           maxThumb: 5
        };
        
        var _settings = $.extend({}, defaultSetting , settings);
        var len = _settings.imgs.length;
-       function modifyImgPos(){       
+       var thumbImg = [];
+
+       for(var i=0; i<len; i++){
+           if( i >= _settings.maxThumb ){
+                        break;
+           }
+           thumbImg.push( $(_settings.imgs[i]).clone()[0]);
+       }
+       
+       function modifyImgPos(imgs){       
            var offset=0;
-           $.each(_settings.imgs, function(){
-             $(this).css("position", "absolute").css("left", offset*+3).css("top", offset*7).css("z-index", 100-offset);
+
+           $.each(imgs, function(i, t){
+             $(t).css("position", "absolute").css("left", offset*+3).css("top", offset*7).css("z-index", 100-offset);
              offset++;
             });
        }
 
        var thumbCWidth =  9+Math.floor(len/10)*5 ;
-       modifyImgPos();
+       modifyImgPos(thumbImg);
        $thisObj.prepend("<div class='thumbCounter'><span style='width:"+ thumbCWidth +"px;'>"+len+"</span></div>");
-       //_settings.imgs.css({"width": "45", "height":"45"});
-       $thisObj.append(_settings.imgs);
+       $thisObj.append(thumbImg);
        return this;
     }
     
@@ -318,8 +328,10 @@ function _L(str){
                targetList.unbind('mousemove', drag.onInitmove);
                selThumbs = $("<div id='selThumbs' class='selThumbs'></div>");
                $("body").append(selThumbs);
-               var $img =  selections.find('img').clone();
-               selThumbs.thumbnails({imgs: selections.find('img').clone()});
+               
+               var $img =  selections.find('img');
+               selThumbs.thumbnails({imgs: $img});
+               
                drag.dropTargets = targetList.filter(drag.dragFilter);
                drag.dropTargets.bind('mouseup', drag.onDrop);
    
