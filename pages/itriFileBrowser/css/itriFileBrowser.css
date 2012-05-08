@@ -95,7 +95,7 @@ user-select:text;
     div.scrollDownArea{background: red;}
     div.scrollUpArea{background: blue;}
     
-  .editField {border: solid 1px #eaeaea;  vertical-align:middle; margin-top:8px; width:100%; font-size:13px; padding:2px;  width:120px; position: absolute; }
+  .editField {border: solid 2px #eaeaea;  vertical-align:middle; margin-top:8px; width:100%; font-size:13px; padding:2px;  width:120px; position: absolute; }
   .editAble{position: absolute; width:0px;}
   .fileList tbody tr.edit td {
         background-color:#F8F8F2;
