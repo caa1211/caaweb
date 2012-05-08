@@ -37,7 +37,7 @@ user-select:text;
 
 
 
-    .wrapDiv{border: solid 2px gray; width:80%; margin:0 auto;  overflow: auto;}
+    .wrapDiv{border: solid 2px gray; width:100%; margin:0 auto;  overflow: auto;}
    
     .fileList tbody tr.select td {
         background-color:#eaeaea;
@@ -62,8 +62,9 @@ user-select:text;
     }
     
     
-    .fileList tbody td {
-        border-bottom: solid 1px #eaeaea;
+    .fileList tbody .select td {
+        border-bottom: solid 1px #EEF5FC;
+        border-top: solid 1px #EEF5FC;
     }
     
     .nameArea img {width:36px; height:36px; float:left;}
