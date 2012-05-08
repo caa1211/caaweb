@@ -141,7 +141,8 @@ utils.swapImg($("#uploadBtn"), 'images/img/icon_upload_over.png');
                                       });
                        
                                   }
-                            }
+                            },
+                            onRename: function(data, text){  $.jGrowl(data.name +" rename to " + text)}
                     });
                     //--
                 }
