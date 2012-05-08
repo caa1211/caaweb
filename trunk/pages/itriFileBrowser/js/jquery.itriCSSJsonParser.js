@@ -44,6 +44,7 @@
             doc: "imgs/flavour-extended-png/file_doc.png",
             wav: "imgs/flavour-extended-png/file_wav.png",
             mpg: "imgs/flavour-extended-png/file_mpg.png",
+            mpeg: "imgs/flavour-extended-png/file_mpg.png",
             html: "imgs/flavour-extended-png/file_html.png",
            
             unknow: "imgs/flavour-extended-png/document_blank.png"
@@ -230,46 +231,7 @@
                _settings.complete(jqXHR, textStatus);
            }
         });
-       
-    
-    
-       this.addFolder = function(name, callback){
-
-          /*
-          <tr  class='listItem folder'> 
-            <td class='nameArea'><img src='imgs/folder2.png'/><div class='name'><a href="#">A</a></div></td>
-            <td>--</td> 
-            <td>--</td> 
-        </tr>*/ 
-       
-          var l = $("#"+_settings.rootId).find(".nameArea > .name").children('a:contains("'+name+'")').length;
-          var newDef ={
-                "id":  "newFolder_"+l,
-                "name" : name+" ("+l+")",
-                "action": "#",
-                "size": "--",
-                "lastMod": "--",
-                "type": "0"
-            }
-         var newFolder = buildListItem(newDef);
-       
-       newFolder.find('a').after("<input value='ewrw'/>");
-        newFolder.find('a').empty().remove();
-         $("#"+_settings.rootId).children('tbody').prepend(newFolder);
-         
-        
-         //newFolder =newFolder.children('td').parent(".listItem");
-
-         //newFolder.addClass('edit').find("div.name").addClass('inlineEdit').css('border','solid 1px red').inlineEdit()//.trigger('click');
-         
-         
-         
-         //$('.inlineEdit').width(300).css('border','solid 1px red').trigger('click')
-         callback(newFolder);
-         
-       };
-       
-        
+ 
        return this;
     };
  
