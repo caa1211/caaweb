@@ -7,7 +7,7 @@
  *::-ms-selection {background:none;}
  *::-khtml-selection {background:none;}
 
-input::-moz-selection {background: #3399ff;} 
+input::-moz-selection {background: #3399ff; color:#ffffff;} 
  
 img {
 -webkit-user-select: none;

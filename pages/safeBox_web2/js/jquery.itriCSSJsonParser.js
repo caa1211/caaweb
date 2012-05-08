@@ -44,6 +44,7 @@
             doc: "imgs/flavour-extended-png/file_doc.png",
             wav: "imgs/flavour-extended-png/file_wav.png",
             mpg: "imgs/flavour-extended-png/file_mpg.png",
+            mpeg: "imgs/flavour-extended-png/file_mpg.png",
             html: "imgs/flavour-extended-png/file_html.png",
            
             unknow: "imgs/flavour-extended-png/document_blank.png"
