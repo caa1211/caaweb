@@ -297,11 +297,15 @@
 
                 if (!node) return "";
 
-                if (!config.supportsTextContent) config.supportsTextContent = node.textContent || false;
-
+                //Jose Chang [fix the sorting failed in ie]
+                //if (!config.supportsTextContent) config.supportsTextContent = node.textContent || false;
+                if (!config.supportsTextContent) config.supportsTextContent = $(node).text() || false;
+                
                 if (config.textExtraction == "simple") {
                     if (config.supportsTextContent) {
-                        text = node.textContent;
+                        //Jose Chang [fix the sorting failed in ie]
+                        //text = node.textContent;
+                        text = $(node).text();
                     } else {
                         if (node.childNodes[0] && node.childNodes[0].hasChildNodes()) {
                             text = node.childNodes[0].innerHTML;
