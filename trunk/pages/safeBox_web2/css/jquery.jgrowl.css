@@ -95,11 +95,11 @@ div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
 }
 
 #jGrowl div.message{
-   
+   text-align: center;
 }
 
 div.jGrowl div.jGrowl-notification {
-	min-height: 			20px;
+	min-height: 			18px;
 }
 
 div.jGrowl div.jGrowl-notification div.header {
