@@ -110,14 +110,17 @@ utils.swapImg($("#uploadBtn"), 'images/img/icon_upload_over.png');
                             rawData: rawData,
                             //showScrollArea: true,
                             onDrop: function(sel, target, selData, targetData){
-                                      var selStr =" [ "; 
+                                      /*var selStr =" [ "; 
                                       sel.each(function(){
                                         selStr = selStr +$(this).find(".name").html() + ", ";
                                       })
                                       selStr = selStr + " ] ";
                                       _L("drop" + selStr + " to "+ target.find(".name").html())
+                                      */ 
                                        
+                                      $.jGrowl("Moved " + sel.length + " items to " + targetData.name); 
                                       sel.empty().remove();
+                                      
                             },
                             onUpdateSel: function(sel, selData, isAdd){
                                   $("#selNum").html(selData.length);
