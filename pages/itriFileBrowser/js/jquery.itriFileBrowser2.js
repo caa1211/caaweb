@@ -105,10 +105,11 @@ function _L(str){
         $editItem.each(function(i, t){
              var editItem = $(this);
              editItem.hide();
+             
              var $inputFiled = $("<input class='editField'/>");
              editItem.before($inputFiled);
              $inputFiled.val($editItem.text());
-             $inputFiled.select();
+             setTimeout(function(){$inputFiled.select();}, 1)
 
              
              $inputFiled.blur(function(){
@@ -593,8 +594,8 @@ function _L(str){
        };
        
        function preventDefaultAndStopPropagation(e){
-          if($editObj!=null)
-            return;
+          //if($editObj!=null)
+            //return;
           e.preventDefault(); 
           e.stopPropagation();  
        };
@@ -662,7 +663,15 @@ function _L(str){
        };
        
        $thisObj.mousedown(preventDefault).mouseup(preventDefault).mousemove(preventDefault)
-       .mouseenter(preventDefault).mouseleave(preventDefault).keydown(preventDefault).click(stopPropagation);
+       .mouseenter(preventDefault).mouseleave(preventDefault).keydown(preventDefault)
+       .click(stopPropagation)
+       //prevent copy, cut, and paste http://sumtips.com/2011/11/prevent-copy-cut-paste-text-field.html
+       .bind('dragenter', preventDefaultAndStopPropagation)
+       .bind('dragstart', preventDefaultAndStopPropagation)
+       .bind('dragover', preventDefaultAndStopPropagation)
+       .bind('drop', preventDefaultAndStopPropagation)
+       .bind('selectstart', preventDefault);
+       
        $(document).mousemove(preventDefault);
        $(document).keydown(function(e,a){ 
                   if(e.which==65 && e.ctrlKey){
