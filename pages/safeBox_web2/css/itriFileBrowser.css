@@ -37,7 +37,7 @@ user-select:text;
 
 
 
-    .wrapDiv{border: solid 2px #8dbdd8; width:100%; margin:0 auto;  overflow: auto;}
+    .wrapDiv{border: solid 1px #8dbdd8; width:100%; margin:0 auto;  overflow: auto;}
    
     .fileList tbody tr.select td {
         background-color:#eaeaea;
