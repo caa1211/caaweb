@@ -120,30 +120,24 @@
         return ret;
        }
        
-       function buildFileBrowser(jsonObj){
-        var tRoot = $('<table id='+ _settings.rootId +' class="tablesorter fileList">');
-        var tHeader = buildTableHeader(["Name", "Size", "LastModified"]);
-          tRoot.append(tHeader);
-          
-        var tBody = $("<tbody ></tbody>");
-        var trStr =  "<tr  class='listItem'></tr> ";
-        var tdStr =  "<td></td> ";
-    
-        for(var i=0; i < jsonObj.length; i++)
-        {
+       function buildListItem(itemObj, i){
+           var trStr =  "<tr  class='listItem'></tr> ";
+           var tdStr =  "<td></td> ";
            var trObj = $(trStr);
-           trObj.attr('dataIndex', i);
-           trObj.attr('id', jsonObj[i].id);
-           trObj.addClass(_settings.typeAry[jsonObj[i].type]);
+           if(i!=undefined){
+            trObj.attr('dataIndex', i);
+           }
+           trObj.attr('id', itemObj.id);
+           trObj.addClass(_settings.typeAry[itemObj.type]);
            //Name
            var nametd = $(tdStr);
            nametd.addClass('nameArea');
            var nameExtension 
-           if(_settings.typeAry[jsonObj[i].type] == "folder"){
+           if(_settings.typeAry[itemObj.type] == "folder"){
              nameExtension= 'folder';
              }
            else{
-             nameExtension = parseNameExtension(jsonObj[i].name);
+             nameExtension = parseNameExtension(itemObj.name);
            }
            var imgSrc = _settings.imgSrc[nameExtension];
            if(imgSrc == undefined){
@@ -164,22 +158,36 @@
               
            var nameObj = $("<div class='name'></div>");
            var actObj = $('<a href="#"></a>');
-           actObj.html(jsonObj[i].name);
-           actObj.attr('href', jsonObj[i].action);
+           actObj.html(itemObj.name);
+           actObj.attr('href', itemObj.action);
            nameObj.append(actObj)
            nametd.append(nameObj);
            trObj.append(nametd);
            //Size
            var sizetd = $(tdStr);
-           //sizetd.html(diskSizeRenderer(jsonObj[i].size))
-           sizetd.html(jsonObj[i].size)
+           //sizetd.html(diskSizeRenderer(itemObj.size))
+           sizetd.html(itemObj.size)
            trObj.append(sizetd);
             
            //LastModify
            var lmtd = $(tdStr);
-           lmtd.html(jsonObj[i].lastMod)
-           trObj.append(lmtd);
+           lmtd.html(itemObj.lastMod);
            
+           trObj.append(lmtd);
+           return trObj;
+       }
+       
+       function buildFileBrowser(jsonObj){
+        var tRoot = $('<table id='+ _settings.rootId +' class="tablesorter fileList">');
+        var tHeader = buildTableHeader(["Name", "Size", "LastModified"]);
+          tRoot.append(tHeader);
+          
+        var tBody = $("<tbody ></tbody>");
+  
+    
+        for(var i=0; i < jsonObj.length; i++)
+        {
+           var trObj = buildListItem(jsonObj[i], i);
            tBody.append(trObj);
         }
       
@@ -223,9 +231,7 @@
                _settings.complete(jqXHR, textStatus);
            }
         });
-       
-    
-        
+ 
        return this;
     };
  
