@@ -20,6 +20,15 @@
     font-size: 11px;
     font-style: normal;
     color: #09F;
+    margin-top: 20px;
+}
+
+.verisonText{
+     font-family: Verdana, Geneva, sans-serif;
+    font-size: 11px;
+    font-style: normal;
+    color: #09F;
+    margin-top:20px;
 }
 
 #apDiv1 {
