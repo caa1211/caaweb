@@ -322,6 +322,9 @@ function _L(str){
             
             var docHeight= $(document).height();
             var docWidth= $(document).width();
+            var cx = 0;
+            var cy = 0;
+            
             this.onInitmove = function(e){
                var targetList = getChildList();
                dragging = true;
@@ -354,11 +357,14 @@ function _L(str){
                 scrollDownArea.height(_settings.scrollSensitivity);
                 $('body').append(scrollDownArea);
                    var downTimer= null;
-                   scrollDownArea.bind('mouseover', function(){
+                   scrollDownArea.bind('mouseover', function(e){
+                  
                    downTimer = setInterval(function(){
                          var st = $(window).scrollTop();
                          if( docHeight > st+$(window).height()){
-                           $(window).scrollTop(st+30)
+                           cy = cy+30;
+                           moveThumbnail(cx, cy);
+                           $(window).scrollTop(st+30);
                          }
                       }, 50);
                    }).bind('mouseout', function(){
@@ -390,7 +396,9 @@ function _L(str){
                    upTimer = setInterval(function(){
                          var st = $(window).scrollTop();
                          if( st > 0){
-                           $(window).scrollTop(st-30)
+                           cy = cy-30;
+                           moveThumbnail(cx, cy);
+                           $(window).scrollTop(st-30);
                          }
                       }, 50);
                    
@@ -441,12 +449,12 @@ function _L(str){
             this.onDropDone = function(target){
               _settings.onDrop(selections, target, sel.getDataByIDs(selections), sel.getDataAt(target.attr('dataIndex')));
             };
-            
+
             this.onMousemove = function(e){
                //_L("move " + e.pageY);
-               var x = e.pageX;
-               var y = e.pageY;
-               moveThumbnail(x, y);
+               cx = e.pageX;
+               cy = e.pageY;
+               moveThumbnail(cx, cy);
             };
             
             function moveThumbnail(x, y){
