@@ -71,6 +71,7 @@ function _L(str){
        
        var defaultSetting = 
        {
+            escRemove: false,
             onChange: function(newValue){},
             onCancel: function(){},
             onCompleted: function(){}
@@ -96,7 +97,7 @@ function _L(str){
 
        function destroy(inputField, editItem, text){
           inputField.unbind().empty().remove();
-          _settings.onCompleted(editItem, text);
+          _settings.onCompleted($thisObj, text);
           editItem.removeClass('editAble');
           editItem.show();
        }
@@ -104,11 +105,11 @@ function _L(str){
        function checkChange(editItem, text){
            var orgText = editItem.text();
            if(orgText == text){
-                _settings.onCancel(editItem, text);
+                _settings.onCancel($thisObj, text);
            }
            else{
                 editItem.text(text);
-                _settings.onChange(editItem, text);
+                _settings.onChange($thisObj, text);
            }
        }
        
@@ -130,7 +131,7 @@ function _L(str){
                 var cText = $(this).val();
                 //esc
                 if(e.keyCode == 27){
-                   _settings.onCancel($(this), cText);
+                   _settings.onCancel($(this), cText, true);
                    destroy($inputFiled, editItem, cText);
                 }
                 //enter
@@ -156,7 +157,7 @@ function _L(str){
         rawData: null,
         scrollSensitivity:50,
         bottomOffset: 100,
-        onRename: function(){},
+        onRename: function(data, text){},
         showScrollArea: false,
         onDrop: function(sel, target, selData, targetData){
                       var selStr =" [ "; 
@@ -214,14 +215,14 @@ function _L(str){
             this.add = function(obj){
                 obj.addClass('select');
                 var selDomAry = sel.getSelections();
-                _settings.onUpdateSel(selDomAry, sel.getSelectionsData(selDomAry), true);
+                _settings.onUpdateSel(selDomAry, sel.getDataByIDs(selDomAry), true);
             };
             
             this.remove = function(obj, fireEvent){
                 obj.removeClass('select');
                 if(fireEvent==true){//only press ctrl+click
                    var selDomAry = sel.getSelections();
-                   _settings.onUpdateSel(selDomAry, sel.getSelectionsData(selDomAry), false);
+                   _settings.onUpdateSel(selDomAry, sel.getDataByIDs(selDomAry), false);
                   }
             };
             
@@ -270,7 +271,7 @@ function _L(str){
                 targetList.removeClass('select');
                 if(fireEvent == true){ //only click space area
                  var selDomAry = sel.getSelections();
-                 _settings.onUpdateSel(selDomAry, sel.getSelectionsData(selDomAry), false);
+                 _settings.onUpdateSel(selDomAry, sel.getDataByIDs(selDomAry), false);
                 }
             };
             
@@ -278,7 +279,7 @@ function _L(str){
                  var targetList = getChildList();
                  targetList.addClass('select');
                  var selDomAry = sel.getSelections();
-                 _settings.onUpdateSel(selDomAry, sel.getSelectionsData(selDomAry), true);
+                 _settings.onUpdateSel(selDomAry, sel.getDataByIDs(selDomAry), true);
             };
             
             this.getSelections = function(){
@@ -286,7 +287,7 @@ function _L(str){
                  return targetList.filter('.select');
             };
             
-            this.getSelectionsData = function(domAry){
+            this.getDataByIDs = function(domAry){
                  var dataAry = [];
                  $.each(domAry, function(){
                     var data = _settings.rawData[$(this).attr('dataIndex')];
@@ -438,7 +439,7 @@ function _L(str){
             };
             
             this.onDropDone = function(target){
-              _settings.onDrop(selections, target, sel.getSelectionsData(selections), sel.getDataAt(target.attr('dataIndex')));
+              _settings.onDrop(selections, target, sel.getDataByIDs(selections), sel.getDataAt(target.attr('dataIndex')));
             };
             
             this.onMousemove = function(e){
@@ -615,7 +616,12 @@ function _L(str){
        
        
        this.addFolder = function(param){
-          var l = $thisObj.children('tbody').children('.newFolder').length;
+          var l = $thisObj.children('tbody').children('.newFolder').filter(function(){ 
+            if($(this).text().indexOf(param.name)!=-1) 
+                return true; 
+            else 
+                return false;     
+          }).length;
           var $tr = $("<tr id='newFolder_'"+l+" class='listItem folder edit newFolder'></tr>");
           var $td = $("<td class='nameArea'><img src='"+param.img+"'/><span class='type'>1</span><div class='name'><a class='editAble' href='#'>"+ param.name+" ("+l+")" +"</a></div></td>")
           $tr.append($td);
@@ -624,13 +630,20 @@ function _L(str){
           $thisObj.prepend($tr);
 
          $editObj = $tr.editAble({
-            onChange: function(obj, text){  },
-            onCancel: function(){},
+            escRemove: true,
+            onChange: function(obj, text){},
+            onCancel: function(obj, text, escCancel){ 
+             if(escCancel== true){
+              $tr.empty().remove();
+              $tr=null;
+             }
+            },
             onCompleted: function(obj, text){
                $editObj=null;
-               $tr.removeClass("edit")
-               param.callback(text);
-               
+               if($tr!=null){//esc cancel
+                $tr.removeClass("edit");
+                param.callback(text);
+               }
                $childList.unbind();
                $childList.removeClass('hover').removeClass('select');
                var childList = $thisObj.children('tbody').children('tr');
@@ -648,11 +661,16 @@ function _L(str){
              $a = $tr.find('a');
              $a.addClass('editAble');
              $editObj = $tr.editAble({
-              onCompleted: function(obj, text){
- 
-               // $childList.bind('mousedown', mousedownHandler);
-                _settings.onRename();
-                $editObj=null;
+              onChange: function(obj, text){
+                var data = _sel.getDataByIDs([obj]);
+                    if(data.length == 1)
+                    {
+                   // $childList.bind('mousedown', mousedownHandler);
+                    _settings.onRename(data[0], text);
+                    }
+               },
+               onCompleted: function(){
+                 $editObj=null;
                }
               
              });
