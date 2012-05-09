@@ -84,7 +84,7 @@ user-select:text;
         background-color:#fcffd1;
     }
     
-    .selThumbs{position:absolute; }
+    .selThumbs{position:absolute; z-index: 500; }
     .selThumbs .thumbCounter{ background: url(../imgs/thumbCbg.png); width:20px; height:20px; left:15px; top:-12px; position:absolute; z-index:102; }
     .selThumbs .thumbCounter span{  margin:0 auto; width:9px; display:block; margin-top:2px; color: #5a5afa;}
     
