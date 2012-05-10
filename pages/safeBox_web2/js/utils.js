@@ -3,13 +3,21 @@ var utils = {
 tabMgr: null,
 tabContents: null,
 tabDef: [
-
 {id:'account', label: 'Account', href: "account.html"},
 {id:'files', label: 'Files', href: "files.html"},
 {id:'event', label: 'Event', href: "event.html"},
 {id:'apiVersion', label: 'API version', href: "apiVersion.html"},
 {id:'help', label: 'Help', href: "help.html"}
 ],
+/*
+tabDef: [
+{id:'account', label: 'Account', href: "../tabs/account.html"},
+{id:'files', label: 'Files', href: "../tabs/files.html"},
+{id:'event', label: 'Event', href: "../tabs/event.html"},
+{id:'apiVersion', label: 'API version', href: "../tabs/apiVersion.html"},
+{id:'help', label: 'Help', href: "../tabs/help.html"}
+],
+*/
 buildTab2Element: function(obj){
     var $ul = $("<ul></ul>");
     $.each(this.tabDef, function(i, t){
@@ -61,10 +69,17 @@ pageInit:function(o){
                 utils.tabMgr = $( "#tabs" ).tabs({
                         selected: tabIndex,
                          select: function(e, ui) { 
-                          var url = ui.tab.attributes.url.value;
+                         var url = ui.tab.attributes.url.value;
+                         if(true){
                           window.location.href = url;
-                          //$("#wrapDiv").empty();
-                          //$("#wrapDiv").load(url)
+                         }
+                         else{
+                          $("#pathandsearchArea").empty();
+                          $("#ctlArea").empty();
+                          $("#wrapDiv").empty();
+                          $("#wrapDiv").load(url);
+                          }
+                          
                         }
                 });
 
