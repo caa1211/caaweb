@@ -98,7 +98,6 @@
               url: '../js/response.json',
               type: 'fileBrowser',
               rootId: "fileList",
-              imgBase: "../imgs/",
               success: function (elements, rawData) {
                   //append result to Div
                   $("#wrapDiv").append(elements);
@@ -160,7 +159,7 @@
 
       $('#addBtn').click(function () {
           $fileBrowser.addFolder({
-              img: "imgs/flavour-extended-png/folder_blue_stuffed.png",
+              img: "../imgs/flavour-extended-png/folder_blue_stuffed.png",
               name: "New Folder",
               callback: function (text) {
                   $.jGrowl("Created folder '" + text + "'");

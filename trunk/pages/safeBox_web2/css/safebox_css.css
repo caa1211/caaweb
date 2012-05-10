@@ -19,7 +19,7 @@ height:auto; position:fixed;bottom:0em;z-Index:1;margin-left:0px;
 
 
 #topPanel .pathandsearchArea, #topPanel .ctlArea { 
-background: #f9fafb; 
+background: #f2f5f7; 
 
 border-left: solid 1px #dddddd;
 border-right: solid 1px #dddddd;
@@ -85,7 +85,7 @@ margin: 0 auto;
 min-height:600px;
 position: relative;
 padding-bottom:15px; 
-background: #f9fafb; 
+background: #f2f5f7; 
 border: solid 1px #dddddd;
 border-radius: 0 0 5px 5px;
 
@@ -145,8 +145,8 @@ border-radius: 0 0 5px 5px;
    
 #fakeHeader{
 display:block;
-background: #f9fafb;
-border: solid 1px #f9fafb;
+background: #f2f5f7;
+border: solid 1px #f2f5f7;
 border-left: solid 1px #dddddd;
 border-right: solid 1px #dddddd;
 
