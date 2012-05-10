@@ -65,12 +65,13 @@ display: none;
 #topPanel .shadow {
 background: gray;
 height: 5px;
-width: 100%;
+width: 95%;
+left: 22px;
+z-index: 300;
 position: absolute;
-filter:Alpha(Opacity=10, FinishOpacity=10, Style=2); /* IE */
--moz-opacity:0.1; /* Moz + FF */
-opacity:0.1; /* CSS3 */
-
+filter:Alpha(Opacity=15, FinishOpacity=15, Style=2); /* IE */
+-moz-opacity:0.15; /* Moz + FF */
+opacity:0.15; /* CSS3 */
 }
 
 
