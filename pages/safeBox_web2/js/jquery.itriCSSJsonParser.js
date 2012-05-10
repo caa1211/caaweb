@@ -33,21 +33,21 @@
         type: 'fileBrowser',
         typeAry : ["folder", "file"],
         imgSrc:{//refer to parseNameExtension()
-            folder: "imgs/flavour-extended-png/folder_blue_stuffed.png",
-            png: "imgs/flavour-extended-png/file_png.png",
-            jpg: "imgs/flavour-extended-png/file_jpg.png",
-            jpeg: "imgs/flavour-extended-png/file_jpg.png",
-            gif: "imgs/flavour-extended-png/file_gif.png",
-            pdf: "imgs/flavour-extended-png/file_pdf.png",
-            mp3: "imgs/flavour-extended-png/file_mp3.png",
-            txt: "imgs/flavour-extended-png/file_txt.png",
-            doc: "imgs/flavour-extended-png/file_doc.png",
-            wav: "imgs/flavour-extended-png/file_wav.png",
-            mpg: "imgs/flavour-extended-png/file_mpg.png",
-            mpeg: "imgs/flavour-extended-png/file_mpg.png",
-            html: "imgs/flavour-extended-png/file_html.png",
+            folder: "../imgs/flavour-extended-png/folder_blue_stuffed.png",
+            png: "../imgs/flavour-extended-png/file_png.png",
+            jpg: "../imgs/flavour-extended-png/file_jpg.png",
+            jpeg: "../imgs/flavour-extended-png/file_jpg.png",
+            gif: "../imgs/flavour-extended-png/file_gif.png",
+            pdf: "../imgs/flavour-extended-png/file_pdf.png",
+            mp3: "../imgs/flavour-extended-png/file_mp3.png",
+            txt: "../imgs/flavour-extended-png/file_txt.png",
+            doc: "../imgs/flavour-extended-png/file_doc.png",
+            wav: "../imgs/flavour-extended-png/file_wav.png",
+            mpg: "../imgs/flavour-extended-png/file_mpg.png",
+            mpeg: "../imgs/flavour-extended-png/file_mpg.png",
+            html: "../imgs/flavour-extended-png/file_html.png",
            
-            unknow: "imgs/flavour-extended-png/document_blank.png"
+            unknow: "../imgs/flavour-extended-png/document_blank.png"
         },
         success: function(e, data, textStatus, jqXHR){},
         error: function(jqXHR, textStatus, errorThrown){},
@@ -55,7 +55,7 @@
        };
        
        var _settings = $.extend({}, defaultSetting , settings);
-       
+
        function imgPreload(imgSrc){
            $.each(imgSrc, function(i, t){
                     var imageObj = new Image();
