@@ -120,6 +120,7 @@
                   $fileBrowser = $("#fileList").itriFileBrowser({
                       rawData: rawData,
                       //showScrollArea: true,
+                      scrollSensitivity: {top: 180, bottom: 50},
                       onDrop: function (sel, target, selData, targetData) {
                           /*var selStr =" [ "; 
                                       sel.each(function(){
