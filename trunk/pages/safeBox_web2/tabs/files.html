@@ -4,6 +4,19 @@
        <script type="text/javascript">
   $(function(){
         
+        var pathArea =
+                    ' <div class="wrap">'+
+                    '<div id="pathDiv" style="width:auto; position:relative; float: left;">'+
+                    ' PATH.../AAA/BBB'+
+                    ' </div>'+
+                    ' <div id="searchBtn" style="width:auto; position:relative; float: right;">'+
+                       '<input type="text" placeholder="Search SafeBox" name="searchField" id="searchField">'+
+                       ' <img src="../images/img/icon_search_up.png" sw_img="../images/img/icon_search_over.png">'+
+                    ' </div>'+
+                    ' </div>';
+        $("#pathandsearchArea").append(pathArea);
+        
+        
         function diskSizeRenderer(value){
           var bytes = parseInt(value);
           if(isNaN(bytes)){
