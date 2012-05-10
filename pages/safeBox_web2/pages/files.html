@@ -5,193 +5,181 @@
         <link href="../css/reset.css" rel="stylesheet" type="text/css" />
         <link href="../css/cupertino/jquery-ui-1.8.19.custom.css" type="text/css" rel="stylesheet"  />
         <link href="../css/safebox_css.css" type="text/css" rel="stylesheet">
-         
         <link href="../css/itriFileBrowser.css" rel="stylesheet" type="text/css" />
-        
         <link href="../css/blue/style.css" rel="stylesheet" type="text/css" />
         <link href="../css/jquery.jgrowl.css" rel="stylesheet" type="text/css" />
-        <!--
-        <link rel="stylesheet" href="css/demos.css">
-        -->
         <script src="../js/docWriter.js"></script>
         <script> docWriter.jsArea();</script>
         <script src="../js/jquery.itriCSSJsonParser.js" type="text/javascript"></script>
         <script src="../js/jquery.itriFileBrowser2.js" type="text/javascript"></script>
         <script type="text/javascript">  utils.pageInit({tabId:'files'}); </script>
         <script type="text/javascript">
-  $(function(){
-        
-        function diskSizeRenderer(value){
+  $(function () {
+
+      function diskSizeRenderer(value) {
           var bytes = parseInt(value);
-          if(isNaN(bytes)){
-            return "";
+          if (isNaN(bytes)) {
+              return "";
           }
-            
+
           var s = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
-          var e = Math.floor(Math.log(bytes)/Math.log(1024));
-          return (bytes/Math.pow(1024, Math.floor(e))).toFixed(2)+" "+s[e];
-        }
-        
-        //yyyy-MM-dd HH:mms
+          var e = Math.floor(Math.log(bytes) / Math.log(1024));
+          return (bytes / Math.pow(1024, Math.floor(e))).toFixed(2) + " " + s[e];
+      }
 
-        // add parser through the tablesorter addParser method 
-            $.tablesorter.addParser({ 
-                // set a unique id 
-                id: 'mbsorter', 
-                is: function(s) { 
-                    // return false so this parser is not auto detected 
-                    return false; 
-                }, 
-                format: function(s, b, c) {
-                   //for render
-                   var rawValue = parseInt($(c).html());
-                   //for sorting
-                   var num = 0; 
-                   if(rawValue > 0&&!isNaN(rawValue)){
-                    $(c).html(diskSizeRenderer(rawValue));
-                    num = rawValue;                    
-                    }
-                   else{
-                     $(c).html("--");  
-                     num = 0;
-                   }
-
-                   return num; 
-                }, 
-                // set type, either numeric or text 
-                type: 'numeric' 
-            });
-            
-        //January 6, 1978 9:12 AM or Jan. 6, 2001 9:12 AM
-        var monthNames = {};
-        monthNames["Jan"] = "01";
-        monthNames["Feb"] = "02";
-        monthNames["Mar"] = "03";
-        monthNames["Apr"] = "04";
-        monthNames["May"] = "05";
-        monthNames["Jun"] = "06";
-        monthNames["Jul"] = "07";
-        monthNames["Aug"] = "08";
-        monthNames["Sep"] = "09";
-        monthNames["Oct"] = "10";
-        monthNames["Nov"] = "11";
-        monthNames["Dec"] = "12";
-        
-        $.tablesorter.addParser({
-          id: 'monthDayYear',
-          is: function(s) {
+      //yyyy-MM-dd HH:mms
+      // add parser through the tablesorter addParser method 
+      $.tablesorter.addParser({
+          // set a unique id 
+          id: 'mbsorter',
+          is: function (s) {
+              // return false so this parser is not auto detected 
               return false;
           },
-          format: function(s) {
+          format: function (s, b, c) {
+              //for render
+              var rawValue = parseInt($(c).html());
+              //for sorting
+              var num = 0;
+              if (rawValue > 0 && !isNaN(rawValue)) {
+                  $(c).html(diskSizeRenderer(rawValue));
+                  num = rawValue;
+              } else {
+                  $(c).html("--");
+                  num = 0;
+              }
+
+              return num;
+          },
+          // set type, either numeric or text 
+          type: 'numeric'
+      });
+
+      //January 6, 1978 9:12 AM or Jan. 6, 2001 9:12 AM
+      var monthNames = {};
+      monthNames["Jan"] = "01";
+      monthNames["Feb"] = "02";
+      monthNames["Mar"] = "03";
+      monthNames["Apr"] = "04";
+      monthNames["May"] = "05";
+      monthNames["Jun"] = "06";
+      monthNames["Jul"] = "07";
+      monthNames["Aug"] = "08";
+      monthNames["Sep"] = "09";
+      monthNames["Oct"] = "10";
+      monthNames["Nov"] = "11";
+      monthNames["Dec"] = "12";
+
+      $.tablesorter.addParser({
+          id: 'monthDayYear',
+          is: function (s) {
+              return false;
+          },
+          format: function (s) {
               var date = s.match(/^(\w{3})[ ](\d{1,2}),[ ](\d{4})$/);
               var m = monthNames[date[1]];
               var d = String(date[2]);
-              if (d.length == 1) {d = "0" + d;}
+              if (d.length == 1) {
+                  d = "0" + d;
+              }
               var y = date[3];
               return '' + y + m + d;
           },
           type: 'numeric'
-        });
-        
-        var $jsonParser = null;
-        var $tableSorter = null;
-        var $fileBrowser = null;
-        
-        function loadFileData(){
-            //--itriCSSJsonParser plugin
-            $jsonParser = $.itriCSSJsonParser({
-                url:'../js/response.json',
-                type: 'fileBrowser',
-                rootId: "fileList",
-                imgBase: "../imgs/",
-                success: function(elements, rawData){
-                   //append result to Div
-                   $("#wrapDiv").append(elements);
-                   
-                   //--table sorter plugin
-                   $tableSorter = $("#fileList").tablesorter({
-                        sortList: [[0,0], [1,0], [2,0]],
-                        headers: { 
-                            "1": { 
-                                sorter:'mbsorter' 
-                            }
-                        } 
-                    });  
-                    
-                    //--itriFileBrowser plugin
-                    $fileBrowser = $("#fileList").itriFileBrowser({
-                            rawData: rawData,
-                            //showScrollArea: true,
-                            onDrop: function(sel, target, selData, targetData){
-                                      /*var selStr =" [ "; 
+      });
+
+      var $jsonParser = null;
+      var $tableSorter = null;
+      var $fileBrowser = null;
+
+      function loadFileData() {
+          //--itriCSSJsonParser plugin
+          $jsonParser = $.itriCSSJsonParser({
+              url: '../js/response.json',
+              type: 'fileBrowser',
+              rootId: "fileList",
+              imgBase: "../imgs/",
+              success: function (elements, rawData) {
+                  //append result to Div
+                  $("#wrapDiv").append(elements);
+
+                  //--table sorter plugin
+                  $tableSorter = $("#fileList").tablesorter({
+                      sortList: [
+                          [0, 0],
+                          [1, 0],
+                          [2, 0]
+                      ],
+                      headers: {
+                          "1": {
+                              sorter: 'mbsorter'
+                          }
+                      }
+                  });
+
+                  //--itriFileBrowser plugin
+                  $fileBrowser = $("#fileList").itriFileBrowser({
+                      rawData: rawData,
+                      //showScrollArea: true,
+                      onDrop: function (sel, target, selData, targetData) {
+                          /*var selStr =" [ "; 
                                       sel.each(function(){
                                         selStr = selStr +$(this).find(".name").html() + ", ";
                                       })
                                       selStr = selStr + " ] ";
                                       _L("drop" + selStr + " to "+ target.find(".name").html())
-                                      */ 
-                                       
-                                      $.jGrowl("Moved " + sel.length + " items to folder '" + target.find('.name').text() + "'"); 
-                                      sel.empty().remove();
-                                      
-                            },
-                            onUpdateSel: function(sel, selData, isAdd){
-                                  $("#selNum").html(selData.length);
-                                  var $infoObj = $("#info");
-                                  $infoObj.empty();
-                                  if(selData.length!=0)
-                                  {
-                                      $.each(selData, function(i, t){
-                                        var dataDivStr = 
-                                        "<div class='item'>"+
-                                        "<div> id:"+t.id+"</div>"+
-                                        "<div> name:"+t.name+"</div>"+
-                                        "<div> size:"+t.size+"</div>"+
-                                        "<div> type:"+t.type+"</div>"+
-                                        "<\div>";
-                                        //var $dataDiv = $(dataDivStr);
-                                        $infoObj.append(dataDivStr);
-                                      });
-                       
-                                  }
-                            },
-                            onRename: function(data, text){  $.jGrowl(data.name +" rename to " + text)}
-                    });
-                    //--
-                }
-            });  
-        } 
+                                      */
 
-       loadFileData();
-       
-      $('#addBtn').click(function(){
-        $fileBrowser.addFolder({
-            img: "imgs/flavour-extended-png/folder_blue_stuffed.png",
-            name: "New Folder",
-            callback: function(text){
-                $.jGrowl("Created folder '" + text + "'"); 
-            }
-            });
-        });
- 
-   
-   });
+                          $.jGrowl("Moved " + sel.length + " items to folder '" + target.find('.name').text() + "'");
+                          sel.empty().remove();
+
+                      },
+                      onUpdateSel: function (sel, selData, isAdd) {
+                          $("#selNum").html(selData.length);
+                          var $infoObj = $("#info");
+                          $infoObj.empty();
+                          if (selData.length != 0) {
+                              $.each(selData, function (i, t) {
+                                  var dataDivStr = "<div class='item'>" + "<div> id:" + t.id + "</div>" + "<div> name:" + t.name + "</div>" + "<div> size:" + t.size + "</div>" + "<div> type:" + t.type + "</div>" + "<\div>";
+                                  //var $dataDiv = $(dataDivStr);
+                                  $infoObj.append(dataDivStr);
+                              });
+
+                          }
+                      },
+                      onRename: function (data, text) {
+                          $.jGrowl(data.name + " rename to " + text)
+                      }
+                  });
+                  //--
+              }
+          });
+      }
+
+      loadFileData();
+
+      $('#addBtn').click(function () {
+          $fileBrowser.addFolder({
+              img: "imgs/flavour-extended-png/folder_blue_stuffed.png",
+              name: "New Folder",
+              callback: function (text) {
+                  $.jGrowl("Created folder '" + text + "'");
+              }
+          });
+      });
+
+  });
         </script>
     </head>
     <body>
-
-        <div id= "layoutWrap">
+      <div id= "layoutWrap">
         <div id="topPanel">
-
-           
             <script type="text/javascript"> 
                 docWriter.topArea(); 
                 docWriter.tabArea();
             </script>
-                
-            <div class="pathandsearchArea">
-               
-                    <div class="wrap">
+            <div id="pathandsearchArea" class="pathandsearchArea">
+                <div class="wrap">
                     <div id='pathDiv' style="width:auto; position:relative; float: left;">
                        PATH.../AAA/BBB
                     </div>
@@ -199,41 +187,37 @@
                         <input type="text" placeholder="Search SafeBox" name="searchField" id="searchField">
                         <img src="../images/img/icon_search_up.png" sw_img="../images/img/icon_search_over.png">
                     </div>
-                      </div>
-               
+                </div>
             </div>
-            <div class="ctlArea">
-              <div style="margin:0px; padding:0px;">
-               <table width="100%">
-               <tr>
-                   <td>
-                   <div class="wrap">
-                       <div  style="width:auto; position:relative; float: right; margin-top:5px;">
-                           <img id='addBtn' src="../images/img/icon_addfolder_up.png" sw_img='../images/img/icon_addfolder_over.png'>
-                           <img id='delBtn' src="../images/img/icon_delete_up.png" sw_img='../images/img/icon_delete_over.png'>
-                           <img id='downloadBtn' src="../images/img/icon_download_up.png" sw_img='../images/img/icon_download_over.png'>
-                           <img id='uploadBtn'src="../images/img/icon_upload_up.png" sw_img='../images/img/icon_upload_over.png'>
+            <div id="ctlArea" class="ctlArea">
+                <div style="margin:0px; padding:0px;">
+                   <table width="100%">
+                   <tr>
+                       <td>
+                       <div class="wrap">
+                           <div  style="width:auto; position:relative; float: right; margin-top:5px;">
+                               <img id='addBtn' src="../images/img/icon_addfolder_up.png" sw_img='../images/img/icon_addfolder_over.png'>
+                               <img id='delBtn' src="../images/img/icon_delete_up.png" sw_img='../images/img/icon_delete_over.png'>
+                               <img id='downloadBtn' src="../images/img/icon_download_up.png" sw_img='../images/img/icon_download_over.png'>
+                               <img id='uploadBtn'src="../images/img/icon_upload_up.png" sw_img='../images/img/icon_upload_over.png'>
+                           </div>
                        </div>
-                   </div>
-                   </td>
-                </tr>
-               </table>
-              </div>
+                       </td>
+                    </tr>
+                   </table>
+                </div>
             </div>
-            
-             <div class="lineArea">
-             </div>
-             <div class="shadow">
-             </div>
-
+            <div class="lineArea">
+            </div>
+            <div class="shadow">
+            </div>
         </div>
         <div id="leftPanel"></div>
         <div id="contentPanel">
-         <div id="fakeHeader"></div>
-         <div id="wrapDiv" class="innerTableDiv wrapDiv">
-         </div>
+            <div id="fakeHeader"></div>
+            <div id="wrapDiv" class="innerTableDiv wrapDiv"></div>
         </div>
-       </div>
-          
+        <div id="bottomPanel"></div>
+      </div>
     </body>
 </html>

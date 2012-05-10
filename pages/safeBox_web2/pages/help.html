@@ -5,37 +5,28 @@
         <link href="../css/reset.css" rel="stylesheet" type="text/css" />
         <link href="../css/cupertino/jquery-ui-1.8.19.custom.css" type="text/css" rel="stylesheet"  />
         <link href="../css/safebox_css.css" type="text/css" rel="stylesheet">
-         
         <link href="../css/itriFileBrowser.css" rel="stylesheet" type="text/css" />
-        
         <link href="../css/blue/style.css" rel="stylesheet" type="text/css" />
         <link href="../css/jquery.jgrowl.css" rel="stylesheet" type="text/css" />
-        <!--
-        <link rel="stylesheet" href="css/demos.css">
-        -->
         <script src="../js/docWriter.js"></script>
         <script> docWriter.jsArea();</script>
         <script type="text/javascript">  utils.pageInit({tabId:'help'}); </script>
         <script type="text/javascript">
         $(function(){
-
         });
         </script>
     </head>
     <body>
-        <div id= "layoutWrap">
+      <div id= "layoutWrap">
         <div id="topPanel">
             <script type="text/javascript"> 
                 docWriter.topArea(); 
                 docWriter.tabArea();
             </script>
-                
-            <div class="pathandsearchArea">
+            <div id="pathandsearchArea" class="pathandsearchArea">
             </div>
-  
-            <div class="ctlArea">
+            <div id="ctlArea" class="ctlArea">
             </div>
-            
             <div class="lineArea">
             </div>
             <div class="shadow">
@@ -43,11 +34,10 @@
         </div>
         <div id="leftPanel"></div>
         <div id="contentPanel">
-         <div id="fakeHeader"></div>
-         <div id="wrapDiv" class="innerTableDiv wrapDiv">
-         
-         </div>
+            <div id="fakeHeader"></div>
+            <div id="wrapDiv" class="innerTableDiv wrapDiv"></div>
         </div>
-       </div>
+        <div id="bottomPanel"></div>
+      </div>
     </body>
 </html>
