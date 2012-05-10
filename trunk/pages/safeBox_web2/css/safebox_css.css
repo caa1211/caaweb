@@ -13,6 +13,10 @@ height:auto; background: #ffffff; position:fixed;up:0em;z-Index:1;margin-left:0p
 
 }
 
+#bottomPanel{
+height:auto; position:fixed;bottom:0em;z-Index:1;margin-left:0px;
+}
+
 
 #topPanel .pathandsearchArea, #topPanel .ctlArea { 
 background: #f9fafb; 
@@ -42,7 +46,7 @@ height:30px;
 
 
 #topPanel .wrap{
-width:90%;
+width:95%;
  margin: 0 auto;
 }
 
@@ -83,7 +87,7 @@ position: relative;
 padding-bottom:15px; 
 background: #f9fafb; 
 border: solid 1px #dddddd;
--moz-border-radius: 0 0 10px 10px;
+border-radius: 0 0 5px 5px;
 
 }
 
