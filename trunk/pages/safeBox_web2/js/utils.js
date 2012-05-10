@@ -16,12 +16,15 @@ buildTab2Element: function(obj){
     var $li = $("<li></li>");
     $li.attr('id',t.id);
     var $a = $("<a></a>");
-    $a.attr('href', "#"+i);
+    $a.attr('href', "#tp");
+    $a.attr('url', t.href);
     $a.html(t.label);
     $li.append($a);
     $ul.append($li);
+
     });
     obj.append($ul);  
+    obj.append('<div id="tp" style="display: none;"></div>'); 
 },
 swapImg:function(obj, imgSrc){
 
@@ -46,7 +49,6 @@ pageInit:function(o){
         for(var i=0; i< utils.tabDef.length; i++)
         {
             if(opt.tabId == utils.tabDef[i].id){
-            
                 tabIndex = i;
                 break;
             }
@@ -58,9 +60,11 @@ pageInit:function(o){
         utils.buildTab2Element($("#tabs"));
                 utils.tabMgr = $( "#tabs" ).tabs({
                         selected: tabIndex,
-                        select: function(e, ui) { 
-                          var index =ui.tab.attributes[0].value.split("#")[1];
-                          window.location.href = utils.tabDef[index].href;
+                         select: function(e, ui) { 
+                          var url = ui.tab.attributes.url.value;
+                          window.location.href = url;
+                          //$("#wrapDiv").empty();
+                          //$("#wrapDiv").load(url)
                         }
                 });
 
