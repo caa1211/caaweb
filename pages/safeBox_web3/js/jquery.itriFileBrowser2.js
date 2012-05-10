@@ -624,6 +624,7 @@ function _L(str){
        
        
        this.addFolder = function(param){
+          $(window).scrollTop(0);
           var l = $thisObj.children('tbody').children('.newFolder').filter(function(){ 
             if($(this).text().indexOf(param.name)!=-1) 
                 return true; 
