@@ -5,8 +5,16 @@
         <link type="text/css"href="Scripts/safebox_css.css" rel="stylesheet">
 		<script type="text/javascript" src="js/safeboxComponents.js">
         </script>
+        <script type="text/javascript" src="js/jquery-1.7.2.js">
+        </script>
+        <script type="text/javascript" src="js/utils.js">
+        </script>
         <script type="text/javascript">
-           
+        $(function(){
+           $("#loginBtn").click(function(){
+             window.location.href = "pages/" +utils.tabDef[0].href;
+           });
+        });
         </script>
     </head>
     <body leftmargin="0" topmargin="200" marginwidth="0" marginheight="0" onLoad="MM_preloadImages('images/img/enter_over.png','images/img/download_over.png','images/img/noupdate_over.png')">
@@ -64,7 +72,7 @@
                             </form>
                         </td>
                         <td>
-                            <a href="mainframe.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('enter','','images/img/enter_over.png',1)"><img src="images/img/enter_up.png" name="enter" width="38" height="38" border="0" align="left"></a>
+                            <a href="#" id="loginBtn" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('enter','','images/img/enter_over.png',1)"><img src="images/img/enter_up.png" name="enter" width="38" height="38" border="0" align="left"></a>
                         </td>
                         <td>
                             &nbsp;

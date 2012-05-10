@@ -1,5 +1,104 @@
 @charset "utf-8";
 
+#layoutWrap{
+    width:900px; 
+    margin: 0 auto;
+    position: relative; 
+    margin-bottom: 20px;
+    
+}
+
+#topPanel{
+height:auto; background: #ffffff; position:fixed;up:0em;z-Index:1;margin-left:0px;
+
+}
+
+
+#topPanel .pathandsearchArea, #topPanel .ctlArea { 
+background: #f9fafb; 
+
+border-left: solid 1px #dddddd;
+border-right: solid 1px #dddddd;
+}
+
+#topPanel .topArea {
+height:65px;
+}
+#topPanel .tabArea {
+height:42px;
+
+}
+
+	/* css document chrome¡Bsafari css hack */
+	@media screen and (-webkit-min-device-pixel-ratio:0){
+	  #topPanel .tabArea {
+        height:38px;
+        }
+	}
+
+#topPanel .pathandsearchArea {
+height:30px;
+}
+
+
+#topPanel .wrap{
+width:90%;
+ margin: 0 auto;
+}
+
+
+
+#topPanel .ctlArea {
+height:30px;
+
+}
+
+#topPanel .lineArea {
+border-top: solid 0px #aed0ea;
+display: none;
+}
+
+#topPanel .shadow {
+background: gray;
+height: 5px;
+width: 100%;
+position: absolute;
+filter:Alpha(Opacity=10, FinishOpacity=10, Style=2); /* IE */
+-moz-opacity:0.1; /* Moz + FF */
+opacity:0.1; /* CSS3 */
+
+}
+
+
+
+#leftPanel {
+height:500px; border: solid 1px red; background: yellow; position:fixed;up:0em;z-Index:1;width:150px; display: none;
+}
+
+#contentPanel {
+width:100%;
+margin: 0 auto;
+min-height:600px;
+position: relative;
+padding-bottom:15px; 
+background: #f9fafb; 
+border: solid 1px #dddddd;
+-moz-border-radius: 0 0 10px 10px;
+
+}
+
+#searchBtn img{top:0px; }
+
+.logo{
+ margin-top:10px;
+ margin-left:10px;
+ width:100px;
+}
+
+.logo img{
+ padding-top:2px;
+}
+
 .help_link {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 10px;
@@ -31,6 +130,24 @@
     margin-top:20px;
 }
 
+
+
+#contentPanel .wrapDiv{
+ width:95%; 
+ margin:0 auto; 
+
+ }
+   
+   
+#fakeHeader{
+display:block;
+background: #f9fafb;
+border: solid 1px #f9fafb;
+border-left: solid 1px #dddddd;
+border-right: solid 1px #dddddd;
+
+}
+
 #apDiv1 {
     /*position: absolute;*/
     left: 68px;
@@ -38,6 +155,16 @@
     width: 70px;
     height: 21px;
     z-index: 1;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+    border-bottom: solid 0px red;
+    border-bottom-right-radius: 0px;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl {
+     border-bottom: solid 1px #aed0ea;
+    border-bottom-left-radius: 0px;
 }
 
 .innerBanner {
@@ -92,3 +219,4 @@
 	width:100%;
 	height:100%;
 }
+
