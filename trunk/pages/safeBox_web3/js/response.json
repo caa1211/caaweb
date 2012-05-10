@@ -2,7 +2,7 @@
 [{
     "id": "A",
     "name" : "A",
-    "action": "#",
+    "action": "#_FA",
     "size": -1,
     "lastMod": "--",
     "type": "0"
