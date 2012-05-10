@@ -155,7 +155,7 @@ function _L(str){
 
        var defaultSetting = {
         rawData: null,
-        scrollSensitivity:50,
+        scrollSensitivity: {top: 50, bottom: 50},
         bottomOffset: 100,
         onRename: function(data, text){},
         showScrollArea: false,
@@ -354,7 +354,7 @@ function _L(str){
                     scrollDownArea.css("background", "none");
                 }
                 scrollDownArea.width($(window).width());
-                scrollDownArea.height(_settings.scrollSensitivity);
+                scrollDownArea.height(_settings.scrollSensitivity.bottom);
                 $('body').append(scrollDownArea);
                    var downTimer= null;
                    scrollDownArea.bind('mouseover', function(e){
@@ -388,7 +388,7 @@ function _L(str){
                     scrollUpArea.css("background", "none");
                 }
                 scrollUpArea.width($(window).width());
-                scrollUpArea.height(_settings.scrollSensitivity);
+                scrollUpArea.height(_settings.scrollSensitivity.top);
                 $('body').prepend(scrollUpArea);
 
                    var upTimer= null;
@@ -624,6 +624,7 @@ function _L(str){
        
        
        this.addFolder = function(param){
+          $(window).scrollTop(0);
           var l = $thisObj.children('tbody').children('.newFolder').filter(function(){ 
             if($(this).text().indexOf(param.name)!=-1) 
                 return true; 
