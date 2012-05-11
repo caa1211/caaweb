@@ -1,7 +1,6 @@
 ﻿
 var utils = {
     tabMgr: null,
-    tabContents: null,
     tabDef: [
         {id:'account', label: 'Account', href: "account.html"},
         {id:'files', label: 'Files', href: "files.html"},
