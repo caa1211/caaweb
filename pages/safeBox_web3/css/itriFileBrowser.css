@@ -55,6 +55,7 @@ user-select:text;
         line-height: 32px;
     }
     
+    
     .fileList tbody tr div.name{  color: #000000; font-size: 13px;   }
     
     .fileList tbody td {
@@ -66,6 +67,12 @@ user-select:text;
         border-bottom: solid 1px #EEF5FC;
         border-top: solid 1px #EEF5FC;
     }
+    
+    
+    .fileList thead tr th {
+       width:100px;
+    }
+    
     
     .nameArea img {width:36px; height:36px; float:left;}
 

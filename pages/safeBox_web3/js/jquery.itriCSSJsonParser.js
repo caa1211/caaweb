@@ -82,7 +82,7 @@
         */
            var ths = "";
            for(var i=0; i<ary.length; i++)
-            ths = ths + "<th>"+ary[i]+"</th>";
+            ths = ths + "<th id='th_"+ary[i]+"'>"+ary[i]+"</th>";
             
            var res ="<thead>" +
                         "<tr>" +
@@ -185,7 +185,7 @@
        function buildFileBrowser(jsonObj){
         var tRoot = $('<table id='+ _settings.rootId +' class="tablesorter fileList">');
         var tHeader = buildTableHeader(["Name", "Size", "LastModified"]);
-          tRoot.append(tHeader);
+        tRoot.append(tHeader);
           
         var tBody = $("<tbody ></tbody>");
   

@@ -33,7 +33,7 @@ height:42px;
 
 }
 
-	/* css document chrome¡Bsafari css hack */
+	/* css document chromeï¿½Bsafari css hack */
 	@media screen and (-webkit-min-device-pixel-ratio:0){
 	  #topPanel .tabArea {
         height:38px;
@@ -48,6 +48,7 @@ height:30px;
 #topPanel .wrap{
 width:95%;
  margin: 0 auto;
+ position: relative;
 }
 
 
@@ -73,7 +74,6 @@ filter:Alpha(Opacity=15, FinishOpacity=15, Style=2); /* IE */
 -moz-opacity:0.15; /* Moz + FF */
 opacity:0.15; /* CSS3 */
 }
-
 
 
 #leftPanel {
@@ -135,7 +135,13 @@ border-radius: 0 0 5px 5px;
     margin-top:20px;
 }
 
+.tclone{
+	top:-2px;
+}
 
+.tclone thead{
+	height:30px;
+}
 
 #contentPanel .wrapDiv{
  width:95%; 

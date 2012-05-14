@@ -80,6 +80,49 @@ var utils = {
                 }
             });
         });
+    }, 
+    theadClone: function(torg, tclone){
+                var theaderClone = torg.children('thead').clone(false);
+                torg.children('thead').css('visibility', 'hidden');
+                tclone.addClass(torg.attr('class')).css('position', 'absolute');
+                tclone.addClass('tclone');
+                theaderClone.appendTo(tclone);
+                theaderClone.attr('id', 'theaderClone');
+                theaderClone.addClass('theaderClone');
+                var childTh =   theaderClone.find('th');
+
+                
+                $.each(childTh, function(i, t){
+                            var index = i+1;
+                            var cloneid = "thClone_"+index;
+                            var $tth =  torg.children("thead").find("th:nth-child("+index+")");
+                            $tth.attr("cloneid", cloneid);
+                            
+                            var tid =  $tth.attr("id");
+                            if( tid == undefined){
+                              tid = 'tth_'+i;
+                            }
+                            $tth.attr("id", tid);
+                            $(this).attr("id", cloneid);
+                            $(this).attr("targetid", tid);
+                            
+                        $(this).click(function(e){
+                            var tthid =   $(this).attr("targetid");
+                            $("#"+tthid).trigger("click");
+                            e.stopPropagation();  
+                        });
+                  });
+                  
+                  torg.bind("sortEnd",function(e) { 
+                           $.each( torg.find("th"), function(i, t){
+                              var cls =   $(this).attr("class");
+                              var cloneid =   $(this).attr("cloneid");
+                              var cloneObj = $("#"+cloneid);
+                              cloneObj.attr("class", cls);
+                            });
+                            e.stopPropagation();  
+                  }); 
+
     }
 
 
