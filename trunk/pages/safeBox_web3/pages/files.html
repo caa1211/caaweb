@@ -99,6 +99,7 @@
               type: 'fileBrowser',
               rootId: "fileList",
               success: function (elements, rawData) {
+                  $("#wrapDiv").empty();
                   //append result to Div
                   $("#wrapDiv").append(elements);
 
@@ -156,9 +157,6 @@
                       }
                   });
 
-                  
-                  
-                  
                 //clone head
 				utils.theadClone($("#fileList"), $("#tClone"));
 
@@ -190,32 +188,31 @@
                 docWriter.topArea(); 
                 docWriter.tabArea();
             </script>
-            <div id="pathandsearchArea" class="pathandsearchArea">
-                <div class="wrap">
-                    <div id='pathDiv' style="width:auto; position:relative; float: left;">
-                       PATH.../AAA/BBB
-                    </div>
-                    <div id='searchBtn' style="width:auto; position:relative; float: right;">
-                        <input type="text" placeholder="Search SafeBox" name="searchField" id="searchField">
-                        <img src="../images/img/icon_search_up.png" sw_img="../images/img/icon_search_over.png">
-                    </div>
-                </div>
-            </div>
+
             <div id="ctlArea" class="ctlArea" >
-            	<!--div id='aa' style="width:95%; margin: 0 auto;"></div-->
-           
-                <div style="margin:0px; padding:0px;">
+
+                 <div class="wrap">
+
                    <table width="100%">
                    <tr>
                        <td>
-                       <div class="wrap">
+                           <div  style="width:auto; position:relative; float: left; margin-top:5px;">
+                                PATH.../AAA/BBB
+                           </div>
+                       </td>
+                       <td>
                            <div  style="width:auto; position:relative; float: right; margin-top:5px;">
                                <img id='addBtn' src="../images/img/icon_addfolder_up.png" sw_img='../images/img/icon_addfolder_over.png'>
                                <img id='delBtn' src="../images/img/icon_delete_up.png" sw_img='../images/img/icon_delete_over.png'>
                                <img id='downloadBtn' src="../images/img/icon_download_up.png" sw_img='../images/img/icon_download_over.png'>
                                <img id='uploadBtn'src="../images/img/icon_upload_up.png" sw_img='../images/img/icon_upload_over.png'>
                            </div>
-                       </div>
+                       </td>
+                       <td>
+                           <div  style="width:auto; position:relative; float: right;">
+                                <input type="text" placeholder="Search SafeBox" name="searchField" id="searchField">
+                                <img src="../images/img/icon_search_up.png" sw_img="../images/img/icon_search_over.png" style="margin-top:2px;">
+                           </div>
                        </td>
                     </tr>
                    </table>
