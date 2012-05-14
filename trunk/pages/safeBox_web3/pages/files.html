@@ -135,6 +135,7 @@
 
                       },
                       onUpdateSel: function (sel, selData, isAdd) {
+                       /*
                           $("#selNum").html(selData.length);
                           var $infoObj = $("#info");
                           $infoObj.empty();
@@ -146,12 +147,16 @@
                               });
 
                           }
+                        */
+                       //todo: check length and enable or disable buttons
+                          
                       },
                       onRename: function (data, text) {
                           $.jGrowl(data.name + " rename to " + text)
                       }
                   });
 
+                  
                   
                   
                 //clone head
@@ -164,6 +169,7 @@
 
       loadFileData();
 
+  
       $('#addBtn').click(function() {
           $fileBrowser.addFolder({
               img: "../images/fileImgs/folder_blue_stuffed.png",
