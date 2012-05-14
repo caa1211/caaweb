@@ -17,7 +17,7 @@
 {
 
    
-    $.itriCSSJsonParser = function(settings){
+    $.itriCSSJsonParser_acc = function(settings){
 
         function _L(str){
         var debugDiv =  $("#debugDiv");
@@ -30,45 +30,13 @@
  
        var defaultSetting = {
         url:"",
-        rootId: "itriFileBrowser",
-        type: 'fileBrowser',
-        typeAry : ["folder", "file"],
-        baseImgPath : "../images/fileImgs/",
-        imgSrc:{//refer to parseNameExtension()
-            folder: "folder_blue_stuffed.png",
-            png: "file_png.png",
-            jpg: "file_jpg.png",
-            jpeg: "file_jpg.png",
-            gif: "file_gif.png",
-            pdf: "file_pdf.png",
-            mp3: "file_mp3.png",
-            txt: "file_txt.png",
-            doc: "file_doc.png",
-            wav: "file_wav.png",
-            mpg: "file_mpg.png",
-            mpeg: "file_mpg.png",
-            html: "file_html.png",
-            unknow: "document_blank.png"
-        },
         success: function(e, data, textStatus, jqXHR){},
         error: function(jqXHR, textStatus, errorThrown){},
         complete: function(jqXHR, textStatus){}
        };
        
        var _settings = $.extend({}, defaultSetting , settings);
-   
-       $.each(_settings.imgSrc, function(i, t){
-            _settings.imgSrc[i] = _settings.baseImgPath + _settings.imgSrc[i];
-       });
-      
-       function imgPreload(imgSrc){
-           $.each(imgSrc, function(i, t){
-                    var imageObj = new Image();
-                   imageObj.src = t;
-           });
-       }
-       imgPreload(_settings.imgSrc);
-       
+
        function buildTableHeader(ary){
         /*
         <thead> 
@@ -93,37 +61,6 @@
        }
 
 
-       function parseNameExtension(name){
-        
-        //var ename = (/[.]/.exec(name)) ? /[^.]+$/.exec(name) : 'unknow';
-        var ename = name.split('.').pop();
-        ename = ename.toLowerCase();
-        var typing = false;
-        if(typing){
-            switch(ename){
-                case 'jpg':
-                case 'png':
-                case 'gif':
-                case 'bmp':
-                    ret = "img";
-                break;
-                case 'doc':
-                case 'pdf':
-                    ret = "doc";
-                break;
-                
-                default:
-                    ret = ename;
-                break;
-            };
-        }
-        else{
-            ret = ename;
-        }
-        
-        
-        return ret;
-       }
        
        function buildListItem(itemObj, i){
            var trStr =  "<tr  class='listItem'></tr> ";
@@ -132,59 +69,39 @@
            if(i!=undefined){
             trObj.attr('dataIndex', i);
            }
+      
            trObj.attr('id', itemObj.id);
-           trObj.addClass(_settings.typeAry[itemObj.type]);
+         
            //Name
            var nametd = $(tdStr);
            nametd.addClass('nameArea');
-           var nameExtension 
-           if(_settings.typeAry[itemObj.type] == "folder"){
-             nameExtension= 'folder';
-             }
-           else{
-             nameExtension = parseNameExtension(itemObj.name);
-           }
-           var imgSrc = _settings.imgSrc[nameExtension];
-           if(imgSrc == undefined){
-             imgSrc = _settings.imgSrc["unknow"];
-           }
-          
-           nametd.append("<img src='"+ imgSrc +"'/>");
-           
-           var nameType = $("<span class='type'></span>");
-            if(nameExtension == "folder"){
-               nameType.html(1);
-            }
-            else{
-               nameType.html(2);
-            }
-            
-            nametd.append(nameType);
-              
+ 
            var nameObj = $("<div class='name'></div>");
            var actObj = $('<a href="#"></a>');
            actObj.html(itemObj.name);
-           actObj.attr('href', itemObj.action);
+           //actObj.attr('href', itemObj.action);
            nameObj.append(actObj)
            nametd.append(nameObj);
            trObj.append(nametd);
-           //Size
+           //num
            var sizetd = $(tdStr);
            //sizetd.html(diskSizeRenderer(itemObj.size))
-           sizetd.html(itemObj.size)
+           sizetd.html(itemObj.num)
            trObj.append(sizetd);
             
-           //LastModify
+           //usage
            var lmtd = $(tdStr);
-           lmtd.html(itemObj.lastMod);
+           lmtd.html(itemObj.usage);
            
            trObj.append(lmtd);
            return trObj;
        }
        
-       function buildFileBrowser(jsonObj){
+ 
+       
+       function buildAccountList(jsonObj){
         var tRoot = $('<table id='+ _settings.rootId +' class="tablesorter fileList">');
-        var tHeader = buildTableHeader(["Name", "Size", "LastModified"]);
+        var tHeader = buildTableHeader(["Bucket Name", "Num of Objects", "Usage"]);
         tRoot.append(tHeader);
           
         var tBody = $("<tbody ></tbody>");
@@ -208,6 +125,7 @@
           
         return tRoot;
        }
+       
        /*
        $.getJSON(_settings.url, function(response){
             var res = "";
@@ -224,9 +142,7 @@
           //data: data,
           success: function(data, textStatus, jqXHR){
                 var res = "";
-                if(_settings.type=='fileBrowser'){
-                   res = buildFileBrowser(data);
-                }
+                 res = buildAccountList(data);
                 _settings.success(res, data, textStatus, jqXHR);
            },
            error : function(jqXHR, textStatus, errorThrown){
