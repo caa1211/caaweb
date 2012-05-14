@@ -106,8 +106,8 @@
                   $tableSorter = $("#fileList").tablesorter({
                       sortList: [
                           [0, 0],
-                          [1, 0],
-                          [2, 0]
+                          [1, 0]//,
+                          //[2, 0]
                       ],
                       headers: {
                           "1": {
@@ -151,10 +151,12 @@
                           $.jGrowl(data.name + " rename to " + text)
                       }
                   });
+
                   
                   
                 //clone head
 				utils.theadClone($("#fileList"), $("#tClone"));
+
 
               }
           });
@@ -193,14 +195,34 @@
                     </div>
                 </div>
             </div>
-
+            <div id="ctlArea" class="ctlArea" >
+            	<!--div id='aa' style="width:95%; margin: 0 auto;"></div-->
+           
+                <div style="margin:0px; padding:0px;">
+                   <table width="100%">
+                   <tr>
+                       <td>
+                       <div class="wrap">
+                           <div  style="width:auto; position:relative; float: right; margin-top:5px;">
+                               <img id='addBtn' src="../images/img/icon_addfolder_up.png" sw_img='../images/img/icon_addfolder_over.png'>
+                               <img id='delBtn' src="../images/img/icon_delete_up.png" sw_img='../images/img/icon_delete_over.png'>
+                               <img id='downloadBtn' src="../images/img/icon_download_up.png" sw_img='../images/img/icon_download_over.png'>
+                               <img id='uploadBtn'src="../images/img/icon_upload_up.png" sw_img='../images/img/icon_upload_over.png'>
+                           </div>
+                       </div>
+                       </td>
+                    </tr>
+                   </table>
+                </div>
+            </div>
+            
             <div class="cloneHeaderArea">
-            	  <div class="wrap">
+            	 <div class="wrapDiv wrap">
             	 	<table id="tClone"></table>
-            	  </div>
+            	 </div>
             </div>
-            <div class="lineArea">
-            </div>
+            <!--div class="lineArea">
+            </div-->
             <div class="shadow">
             </div>
         </div>

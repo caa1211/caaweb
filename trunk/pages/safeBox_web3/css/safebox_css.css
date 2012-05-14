@@ -18,7 +18,7 @@ height:auto; position:fixed;bottom:0em;z-Index:1;margin-left:0px;
 }
 
 
-#topPanel .pathandsearchArea, #topPanel .ctlArea { 
+#topPanel .pathandsearchArea, #topPanel .ctlArea, #topPanel .cloneHeaderArea { 
 background: #f2f5f7; 
 
 border-left: solid 1px #dddddd;
@@ -51,10 +51,31 @@ width:95%;
  position: relative;
 }
 
-
-
 #topPanel .ctlArea {
 height:30px;
+
+}
+
+#topPanel .cloneHeaderArea {
+height:30px;
+margin:0px;
+}
+
+.tclone{
+	/*top:1px;*/
+}
+
+.tclone thead{
+	height:30px;
+}
+
+.tclone thead tr{
+	height:30px;
+
+}
+
+.tclone thead td{
+	width:100px;
 
 }
 
@@ -135,13 +156,6 @@ border-radius: 0 0 5px 5px;
     margin-top:20px;
 }
 
-.tclone{
-	top:-2px;
-}
-
-.tclone thead{
-	height:30px;
-}
 
 #contentPanel .wrapDiv{
  width:95%; 
