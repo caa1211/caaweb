@@ -82,6 +82,9 @@ var utils = {
         });
     }, 
     theadClone: function(torg, tclone){
+                if(torg.length==0 || tclone.length == 0){
+                    return;
+                }
                 var theaderClone = torg.children('thead').clone(false);
                 //torg.children('thead').css('visibility', 'hidden')//.find('th').height(0);
                 var h = torg.children('thead').height();
