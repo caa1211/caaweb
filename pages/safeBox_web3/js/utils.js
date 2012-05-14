@@ -69,7 +69,7 @@ var utils = {
             var wrapW = $("#layoutWrap").width();
             var topH = $("#topPanel").height();
             $("#topPanel").width(wrapW)
-            $("#fakeHeader").height(topH);
+            $("#fakeHeader").height(topH-1);
             $("#fakeHeader").width(wrapW - 3);
             $("#contentPanel").width(wrapW - 2);
 
@@ -83,8 +83,12 @@ var utils = {
     }, 
     theadClone: function(torg, tclone){
                 var theaderClone = torg.children('thead').clone(false);
-                torg.children('thead').css('visibility', 'hidden');
-                tclone.addClass(torg.attr('class')).css('position', 'absolute');
+                //torg.children('thead').css('visibility', 'hidden')//.find('th').height(0);
+                var h = torg.children('thead').height();
+    
+                torg.css("margin-top", "-"+h+"px");
+                
+                tclone.addClass(torg.attr('class'));
                 tclone.addClass('tclone');
                 theaderClone.appendTo(tclone);
                 theaderClone.attr('id', 'theaderClone');
