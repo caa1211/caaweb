@@ -11,8 +11,30 @@
         <script src="../js/docWriter.js"></script>
         <script> docWriter.jsArea();</script>
         <script type="text/javascript">  utils.pageInit({tabId:'event'}); </script>
+         <script src="../js/jquery.itriCSSJsonParser_event.js" type="text/javascript"></script>
         <script type="text/javascript">
         $(function(){
+        
+           $jsonParser = $.itriCSSJsonParser_event({
+              url: '../js/response_event.json',
+              type: 'eventList',
+              rootId: "eventList",   
+              success: function(elements, rawData){
+                  $("#wrapDiv").empty();
+                  $("#wrapDiv").append(elements);
+                  
+                  $tableSorter = $("#eventList").tablesorter({
+                      sortList: [
+                          [0, 0]
+                      ]
+                  });
+                  
+                  //clone head
+				  utils.theadClone($("#eventList"), $("#tClone"));
+                  
+              }
+           });
+        
         });
         </script>
     </head>
@@ -23,11 +45,14 @@
                 docWriter.topArea(); 
                 docWriter.tabArea();
             </script>
-            <div id="pathandsearchArea" class="pathandsearchArea">
-            </div>
+
             <div id="ctlArea" class="ctlArea">
+            
             </div>
-            <div class="lineArea">
+            <div class="cloneHeaderArea">
+            	 <div class="wrapDiv wrap">
+            	 	<table id="tClone"></table>
+            	 </div>
             </div>
             <div class="shadow">
             </div>
