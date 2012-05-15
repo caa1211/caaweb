@@ -11,8 +11,24 @@
         <script src="../js/docWriter.js"></script>
         <script> docWriter.jsArea();</script>
         <script type="text/javascript">  utils.pageInit({tabId:'help'}); </script>
+        <script src="../js/jquery.itriCSSJsonParser_help.js" type="text/javascript"></script>
         <script type="text/javascript">
         $(function(){
+             $jsonParser = $.itriCSSJsonParser_help({
+              url: '../js/response_help.json',
+              type: 'tableList',
+              rootId: "tableList",   
+              success: function(elements, rawData){
+                  $("#wrapDiv").empty();
+                  $("#wrapDiv").append(elements);
+  
+                  
+                  //clone head
+				  utils.theadClone($("#tableList"), $("#tClone"));
+                  
+              }
+           });
+           
         });
         </script>
     </head>

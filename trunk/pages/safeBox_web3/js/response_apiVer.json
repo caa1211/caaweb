@@ -1,0 +1,19 @@
+﻿
+[{
+    "id": "ver4",
+    "win" : {"label": "SafeBox v1.12", "action": "#"},
+    "linux": {"label": "SafeBox v1.12", "action": "#"}
+},{
+    "id": "ver3",
+    "win" : {"label": "SafeBox v1.11", "action": "#"},
+    "linux": {"label": "SafeBox v1.11", "action": "#"}
+},{
+    "id": "ver2",
+    "win" : {"label": "SafeBox v1.10", "action": "#"},
+    "linux": {"label": "SafeBox v1.10", "action": "#"}
+},{
+    "id": "ver1",
+    "win" : {"label": "SafeBox v1.09", "action": "#"},
+    "linux": {"label": "SafeBox v1.09", "action": "#"}
+}
+]
