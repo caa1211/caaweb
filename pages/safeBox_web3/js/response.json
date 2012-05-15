@@ -64,7 +64,7 @@
     "type": "1"
 },{
     "id": "i",
-    "name" : "i.wav",
+    "name" : "i.wma",
     "action": "#",
     "size": "677700000",
     "lastMod": "2012-04-11 12:55",
@@ -107,6 +107,13 @@
 },{
     "id": "p",
     "name" : "p.mpeg",
+    "action": "#",
+    "size": "1123",
+    "lastMod": "2012-04-13 12:55",
+    "type": "1"
+},{
+    "id": "q",
+    "name" : "q.zip",
     "action": "#",
     "size": "1123",
     "lastMod": "2012-04-13 12:55",
