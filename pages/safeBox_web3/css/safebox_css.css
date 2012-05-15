@@ -160,7 +160,7 @@ border-radius: 0 0 5px 5px;
 #contentPanel .wrapDiv{
  width:95%; 
  margin:0 auto; 
-
+ height: auto;
  }
    
    
