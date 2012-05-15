@@ -11,8 +11,54 @@
         <script src="../js/docWriter.js"></script>
         <script> docWriter.jsArea();</script>
         <script type="text/javascript">  utils.pageInit({tabId:'apiVersion'}); </script>
+        <script src="../js/jquery.itriCSSJsonParser_apiVer.js" type="text/javascript"></script>
         <script type="text/javascript">
         $(function(){
+        
+         $.tablesorter.defaults.sortInitialOrder = 'asc';
+
+            $.tablesorter.addParser({
+                  // set a unique id 
+                  id: 'verSorter',
+                  is: function (s) {
+                      // return false so this parser is not auto detected 
+                      return false;
+                  },
+                  format: function (s, b, c) {
+                      var ary = s.split("v");
+                     
+                      var num =  parseFloat(ary[1]);
+                      return num;
+                  },
+                  // set type, either numeric or text 
+                  type: 'numeric'
+            });
+            $jsonParser = $.itriCSSJsonParser_apiVer({
+              url: '../js/response_apiVer.json',
+              type: 'tableList',
+              rootId: "tableList",   
+              success: function(elements, rawData){
+                  $("#wrapDiv").empty();
+                  $("#wrapDiv").append(elements);
+                  
+                  $tableSorter = $("#tableList").tablesorter({
+                      sortList: [
+                          [0, 1]
+                      ],
+                      headers: {
+                          "0": {
+                              sorter: 'verSorter'
+                          }
+                      }
+                  });
+                  
+                  //clone head
+				  utils.theadClone($("#tableList"), $("#tClone"));
+                  
+              }
+           });
+           
+        
         });
         </script>
     </head>
