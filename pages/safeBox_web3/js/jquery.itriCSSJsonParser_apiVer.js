@@ -74,9 +74,9 @@
          
            //win
            var nametd = $(tdStr);
-           nametd.addClass('winArea');
+           nametd.addClass('nameArea');
  
-           var nameObj = $("<div class='win'></div>");
+           var nameObj = $("<div class='win name'></div>");
            var actObj = $('<a href="#"></a>');
         
            actObj.html(itemObj.win.label);
@@ -86,9 +86,10 @@
            trObj.append(nametd);
            
            //linux
-           nameObj = $("<div class='win'></div>");
+           nameObj = $("<div class='linux name'></div>");
            actObj = $('<a href="#"></a>');
            nametd = $(tdStr);
+           nametd.addClass('nameArea');
            actObj.html(itemObj.linux.label);
            actObj.attr('href', itemObj.linux.action);
            nameObj.append(actObj)
