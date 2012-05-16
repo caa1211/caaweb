@@ -85,6 +85,10 @@
             _settings.imgSrc[i] = _settings.baseImgPath + _settings.imgSrc[i];
        });
       
+      this.getImgSrc = function(){
+        return _settings.imgSrc;
+      };
+      
        function imgPreload(imgSrc){
            $.each(imgSrc, function(i, t){
                     var imageObj = new Image();
