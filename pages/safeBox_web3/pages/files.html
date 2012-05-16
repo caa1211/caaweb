@@ -170,7 +170,7 @@
   
       $('#addBtn').click(function() {
           $fileBrowser.addFolder({
-              img: "../images/fileImgs/folder_blue_stuffed.png",
+              img: $jsonParser.getImgSrc().folder,
               name: "New Folder",
               callback: function (text) {
                   $.jGrowl("Created folder '" + text + "'");
