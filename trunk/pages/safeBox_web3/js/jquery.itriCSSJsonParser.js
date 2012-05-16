@@ -35,7 +35,7 @@
         typeAry : ["folder", "file"],
         baseImgPath : "../images/fileImgs/",
         imgSrc:{//refer to parseNameExtension()
-            folder: "folder_close_yellow.png",
+            folder: "folder_close_web.png",
             dll: "doc_dll.png",
             iso: "doc_iso.png",
             pdf: "doc_pdf.png",
