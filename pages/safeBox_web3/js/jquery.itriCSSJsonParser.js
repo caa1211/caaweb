@@ -45,7 +45,7 @@
             rar: "doc_rar.png",
             zip: "doc_zip.png",
             txt: "doc_txt.png",
-            doc: "doc_word.png",
+            doc: "doc_doc.png",
             xlsx: "doc_xls.png",
             xls: "doc_xls.png",
             xml: "doc_xml.png",
@@ -70,8 +70,9 @@
             mpeg: "video_MPG.png",            
             rm: "video_rm.png",    
             rmvb: "video_rm.png",
-            wmv: "video_wmv.png",       
-            unknow: "unknown.png"
+            wmv: "video_wmv.png", 
+            wav: "file_music.png", 
+            unknow: "doc_unknown.png"
         },
         success: function(e, data, textStatus, jqXHR){},
         error: function(jqXHR, textStatus, errorThrown){},
