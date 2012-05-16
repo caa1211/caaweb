@@ -35,8 +35,6 @@ input{
 user-select:text;
 }
 
-
-
     .wrapDiv{border: solid 1px #8dbdd8; width:100%; margin:0 auto;  overflow: auto;}
    
     .fileList tbody tr.select td {
@@ -48,35 +46,27 @@ user-select:text;
 
     .fileList tbody tr span.type {
         background-color:#eaeaea;
-
     }
     
    .fileList tbody tr {  color: #000000; font-size: 13px;    line-height: 32px;}
         line-height: 32px;
     }
-    
-    
+
     .fileList tbody tr div.name{  color: #000000; font-size: 13px;   }
     
     .fileList tbody td {
         border-bottom: solid 1px #eaeaea;
     }
-    
-    
+
     .fileList tbody .select td {
         border-bottom: solid 1px #EEF5FC;
         border-top: solid 1px #EEF5FC;
     }
     
-    
     .fileList thead tr th {
        width:100px;
     }
-    
-    
-    .nameArea img {width:36px; height:36px; float:left;}
-
-    
+    .nameArea img {width:32px; height:32px; float:left; padding-top: 2px; padding-bottom: 2px;} 
     .nameArea .name{ margin-left: 45px; }
     .nameArea .type{ display:none; }
     .not-drop {cursor: url(../images/not-drop.cur), default;}
