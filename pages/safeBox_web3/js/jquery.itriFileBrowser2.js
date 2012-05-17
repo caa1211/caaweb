@@ -216,14 +216,14 @@ function _L(str){
             this.add = function(obj){
                 obj.addClass('select');
                 var selDomAry = sel.getSelections();
-                _settings.onUpdateSel(selDomAry, sel.getDataByIDs(selDomAry), true);
+                _settings.onUpdateSel(selDomAry, sel.getDataByIdx(selDomAry), true);
             };
             
             this.remove = function(obj, fireEvent){
                 obj.removeClass('select');
                 if(fireEvent==true){//only press ctrl+click
                    var selDomAry = sel.getSelections();
-                   _settings.onUpdateSel(selDomAry, sel.getDataByIDs(selDomAry), false);
+                   _settings.onUpdateSel(selDomAry, sel.getDataByIdx(selDomAry), false);
                   }
             };
             
@@ -272,7 +272,7 @@ function _L(str){
                 targetList.removeClass('select');
                 if(fireEvent == true){ //only click space area
                  var selDomAry = sel.getSelections();
-                 _settings.onUpdateSel(selDomAry, sel.getDataByIDs(selDomAry), false);
+                 _settings.onUpdateSel(selDomAry, sel.getDataByIdx(selDomAry), false);
                 }
             };
             
@@ -280,7 +280,7 @@ function _L(str){
                  var targetList = getChildList();
                  targetList.addClass('select');
                  var selDomAry = sel.getSelections();
-                 _settings.onUpdateSel(selDomAry, sel.getDataByIDs(selDomAry), true);
+                 _settings.onUpdateSel(selDomAry, sel.getDataByIdx(selDomAry), true);
             };
             
             this.getSelections = function(){
@@ -288,7 +288,7 @@ function _L(str){
                  return targetList.filter('.select');
             };
             
-            this.getDataByIDs = function(domAry){
+            this.getDataByIdx = function(domAry){
                  var dataAry = [];
                  $.each(domAry, function(){
                     var data = _settings.rawData[$(this).attr('dataIndex')];
@@ -448,7 +448,7 @@ function _L(str){
             };
             
             this.onDropDone = function(target){
-              _settings.onDrop(selections, target, sel.getDataByIDs(selections), sel.getDataAt(target.attr('dataIndex')));
+              _settings.onDrop(selections, target, sel.getDataByIdx(selections), sel.getDataAt(target.attr('dataIndex')));
             };
 
             this.onMousemove = function(e){
@@ -676,7 +676,7 @@ function _L(str){
              $a.addClass('editAble');
              $editObj = $tr.editAble({
               onChange: function(obj, text){
-                var data = _sel.getDataByIDs([obj]);
+                var data = _sel.getDataByIdx([obj]);
                     if(data.length == 1)
                     {
                    // $childList.bind('mousedown', mousedownHandler);
