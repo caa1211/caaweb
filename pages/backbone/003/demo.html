@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Backbone.js example</title>
+    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="app">
+
+        <input type="text" name="todo" value=""><br /><button class="btn btn-primary" id="add-friend">Add Friend</button>
+   
+    </div>
+    <script src="jquery-1.7.2.min.js"></script>
+    <script src="underscore-1.3.1.js"></script>
+    <script src="backbone.js"></script>
+    
+    <script>
+var i = 5;
+(function ($) {
+
+ //model
+var TODO = Backbone.Model.extend({
+  defaults: {data : '因為有人忘記輸入，所以我就自動出現了！'}
+});
+//collect
+var TODOCollection = Backbone.Collection.extend({
+  model : TODO
+});
+//view
+var AppView = Backbone.View.extend({
+  el : $('#app'), //搭配的是 jQuery 所以用 jQuery 選擇器選取
+  events : {
+      'click #add-todo' : 'add', //就這樣 click 事件，對 id="add-todo" 這個元素發生反應
+  },
+  add : function(e){
+      var input = $('input[name=todo]');
+      TODOList.add(new TODO({data : input.val()})); //後面做解釋
+      input.val('');
+  }
+});
+
+
+var TODOView = Backbone.View.extend({
+  tagName : 'div',
+  className : 'alert-message block-message info', //Bootstarp 的 Class Name 直接套用 Bootstrap 的 UI
+  render : function(){
+      $(this.el).html('<a href="#" class="remove">×</a><p>' + this.model.get('data') + '</p>');
+      return this;
+  },
+  events : {
+      'click remove' : 'remove',
+  },
+  initialize : function(){
+      this.model.bind('destroy', this.destroy, this);
+  },
+  remove : function(){
+      this.model.destroy();
+  },
+  destroy : function(){
+      $(this.el).remove();
+  }
+});
+
+
+var App = new AppView;
+var TODOList = new TODOCollection;
+TODOList.bind('add', function(Model){
+  var view = new TODOView({model : Model});
+  $('#todo-list').append(view.render().el);
+});
+
+
+
+
+
+})(jQuery);
+
+
+    </script>
+    <a href="http://blog.wu-boy.com/2012/04/backbonejs-framework-tutorial-example-1/"> tutorial 1</a>
+</body>
+</html>
