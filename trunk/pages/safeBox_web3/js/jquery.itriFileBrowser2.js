@@ -664,7 +664,7 @@ function _L(str){
        this.rename = function(param){
          var selAry = _sel.getSelections();
         // $childList.unbind();
-         
+         var _param = $.extend({}, {callback:function(){}}, param);
          if(selAry.length>0){
              $tr = $("#"+ selAry[0].id); 
              $a = $tr.find('a');
@@ -675,7 +675,8 @@ function _L(str){
                     if(data.length == 1)
                     {
                    // $childList.bind('mousedown', mousedownHandler);
-                    _settings.onRename(data[0], text);
+                     _settings.onRename(selAry[0], data[0], text);
+                     _param.callback(selAry[0], data[0], text);
                     }
                },
                onCompleted: function(){

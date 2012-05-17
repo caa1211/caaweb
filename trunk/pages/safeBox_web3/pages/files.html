@@ -152,7 +152,7 @@
                        //todo: check length and enable or disable buttons
                           
                       },
-                      onRename: function (data, text) {
+                      onRename: function (sel, data, text) {
                           $.jGrowl(data.name + " rename to " + text)
                       }
                   });
@@ -177,6 +177,19 @@
               }
           });
       });
+      
+      //rename test
+     $('#delBtn').click(function() {
+          //rename API
+          $fileBrowser.rename({
+              callback: function (htmlObj, objData, text) {
+                 // $.jGrowl("Created folder '" + text + "'");
+              }
+          });
+          
+      });
+      
+      
 
   });
         </script>
