@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Backbone.js example</title>
+    <link href="bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body>
+   <button id='debugBtn'>debug me</button>
+    <div class="well">
+        <h1>Friend List</h1>
+     
+        <input type="text" name="username" value=""><br /><button class="btn btn-primary" id="add-friend">Add Friend</button>
+        <ul id="friends-list" style="margin-top:10px"></ul>
+    </div>
+    <script src="jquery-1.7.2.min.js"></script>
+    <script src="underscore-1.3.1.js"></script>
+    <script src="backbone.js"></script>
+    
+    <script>
+var i = 5;
+(function ($) {
+
+
+//--
+		var Movie = Backbone.Model.extend({
+            initialize: function (spec) { 
+
+                if (!spec || !spec.title || !spec.format) { 
+                    throw "InvalidConstructArgs"; 
+                } 
+                
+                // we may also want to store something else as an attribute 
+                // for example a unique ID we can use in the HTML to identify this 
+                // item's element. We can use the models 'cid' or 'client id for this'. 
+                this.set({ 
+                    htmlId: 'movie_' + this.cid 
+                }); 
+            },    
+            validate: function (attrs) { 
+           
+                if (attrs.title) { 
+                    if (!_.isString(attrs.title) || attrs.title.length === 0 ||  attrs.title == 'aa') { 
+                        return "Title must be a string with a length"; 
+                    } 
+                } 
+            } 
+        
+        }); 
+        
+        matrix = new Movie({
+            title: "aa",
+            format: "dvd"
+        });
+        /*
+        matrix.set({
+            title: "The Matrix",
+            format: "dvd"
+        });*/
+        
+        //alert(matrix.get('title'));
+        
+
+ 
+ 
+//-----------------------
+
+
+        				// define our collection 
+var MovieLibrary = Backbone.Collection.extend({ 
+    model: Movie, 
+    initialize: function () { 
+        // somthing 
+    } 
+}); 
+
+var library = new MovieLibrary(); 
+ 
+// you can add stuff by creating the model first 
+var dumb_and_dumber = new Movie({ 
+    title: "Dumb and Dumber", 
+    format: "dvd" 
+}); 
+
+library.add(dumb_and_dumber); 
+ 
+// or even by adding the raw attributes 
+library.add({ 
+    title: "The Big Lebowski", 
+    format: "VHS" 
+});
+
+
+
+var MovieView = Backbone.View.extend({ 
+    initialize: function (args) { 
+        _.bindAll(this, 'changeTitle'); 
+        this.model.bind('change:title', this.changeTitle); 
+    }, 
+ 
+    events: { 
+        'click .title': 'handleTitleClick' 
+    }, 
+ 
+    render: function () { 
+        // "ich" is ICanHaz.js magic 
+        this.el = ich.movie(this.model.toJSON()); 
+        return this; 
+    }, 
+ 
+    changeTitle: function () { 
+        this.$('.title').text(this.model.get('title')); 
+    }, 
+ 
+    handleTitleClick: function () { 
+        alert('you clicked the title: ' + this.model.get('title')); 
+    } 
+}); 
+
+
+//--   
+   //model
+    Friend = Backbone.Model.extend({
+            initialize: function (spec) { 
+/*
+                if (!spec || !spec.name) { 
+                    throw "InvalidConstructArgs"; 
+                } 
+                
+                // we may also want to store something else as an attribute 
+                // for example a unique ID we can use in the HTML to identify this 
+                // item's element. We can use the models 'cid' or 'client id for this'. 
+                this.set({ 
+                  name: spec.name
+                });
+*/                
+            }, 
+        validate: function (attrs) { 
+         
+                if (attrs.name) { 
+                    if (attrs.name== 'aa') { 
+                        return "Title must be a string with a length"; 
+                    } 
+                } 
+        } 
+    });
+
+    Friends = Backbone.Collection.extend({
+        initialize: function (options) {
+        
+            this.bind("add", options.view.addFriendList);
+           // this.bind("del", options.view.delFriendList);
+        }
+    });
+    
+    //view
+    window.AppView = Backbone.View.extend({
+    el: $("body"),
+    initialize: function () {
+        this.friends = new Friends({ view: this });
+    },
+    events: {
+        "click #add-friend":  "showPrompt",
+        "click .delete":  "delete_li",
+        "click #debugBtn" : "debugMe"
+    },
+    debugMe: function(){
+        debugger
+    },
+    delete_li: function(e) {
+    
+      //  this.friends.remove
+            $(e.currentTarget).parent().remove();
+         //   debugger;
+    },
+    showPrompt: function (a, b, c) {
+    
+        var username = $("input[name=username]").val() || "";
+        this.friend_model = new Friend();
+        var ret =  this.friend_model.set({name: username}); //validate
+        if(ret)
+        this.friends.add(this.friend_model);
+        else
+        alert('illegal !')
+    },
+    addFriendList: function (model) {
+
+        $("#friends-list").append("<li style='margin-top:5px;'>Friend name: " + model.get('name') + " <button class='btn btn-danger delete'>Delete Friend</button></li>");
+    }
+    });
+    var appview = new AppView;
+
+})(jQuery);
+
+
+    </script>
+    <a href="http://blog.wu-boy.com/2012/04/backbonejs-framework-tutorial-example-1/"> tutorial 1</a>
+</body>
+</html>

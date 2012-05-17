@@ -2,3 +2,13 @@
 
 http://www.csser.com/tools/backbone/backbone.js.html#manual/Introduction
 
+002
+http://www.starming.com/index.php?action=plugin&v=wave&tpl=union&ac=viewgrouppost&gid=119&tid=11205
+
+
+003
+http://revo-skill.frost.tw/blog/2012/01/08/my-first-backbonejs-the-todo-list-without-store
+
+
+
+http://www.the5fire.net/2-helloworld-backbone.html
