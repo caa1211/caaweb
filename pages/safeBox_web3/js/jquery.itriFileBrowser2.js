@@ -158,6 +158,7 @@ function _L(str){
         scrollSensitivity: {top: 50, bottom: 50},
         bottomOffset: 100,
         onRename: function(data, text){},
+        onAddFolder: function(name){},
         showScrollArea: false,
         onDrop: function(sel, target, selData, targetData){
                       var selStr =" [ "; 
@@ -631,8 +632,11 @@ function _L(str){
             else 
                 return false;     
           }).length;
+          
+          var _param = $.extend({}, {img:"", callback: function(){}}, param);
+          
           var $tr = $("<tr id='newFolder_'"+l+" class='listItem folder edit newFolder'></tr>");
-          var $td = $("<td class='nameArea'><img src='"+param.img+"'/><span class='type'>1</span><div class='name'><a class='editAble' href='#'>"+ param.name+" ("+l+")" +"</a></div></td>")
+          var $td = $("<td class='nameArea'><img src='"+_param.img+"'/><span class='type'>1</span><div class='name'><a class='editAble' href='#'>"+ param.name+" ("+l+")" +"</a></div></td>")
           $tr.append($td);
           $tr.append("<td>--</td>");
           $tr.append("<td>--</td>");
@@ -651,7 +655,8 @@ function _L(str){
                $editObj=null;
                if($tr!=null){//esc cancel
                 $tr.removeClass("edit");
-                param.callback(text);
+                _settings.onAddFolder(text);
+                _param.callback(text);
                }
                $childList.unbind();
                $childList.removeClass('hover').removeClass('select');
