@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   minHeight="768" minWidth="1024"
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   xmlns:ftpClient="com.ftpClient.*">
+	
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	
+	<ftpClient:FTPClient horizontalCenter="0" verticalCenter="0"/>
+</s:WindowedApplication>

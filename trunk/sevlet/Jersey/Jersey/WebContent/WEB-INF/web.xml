@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:javaee="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <javaee:display-name>Jersey</javaee:display-name>
+  <servlet>
+    <servlet-name>ServletAdaptor</servlet-name>
+    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <javaee:param-name>com.sun.jersey.config.property.packages</javaee:param-name>
+      <javaee:param-value>idv.jose.service;org.codehaus.jackson.jaxrs</javaee:param-value>
+    </init-param>
+    <init-param>
+      <javaee:param-name>com.sun.jersey.api.json.POJOMappingFeature</javaee:param-name>
+      <javaee:param-value>true</javaee:param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletAdaptor</servlet-name>
+    <url-pattern>/*</url-pattern>
+  </servlet-mapping>
+</web-app>
