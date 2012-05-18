@@ -245,3 +245,41 @@ border-right: solid 1px #dddddd;
 	height:100%;
 }
 
+#iconselect {
+    background: url(../images/webicon_png/folder_close_yellow18.png) no-repeat;
+    height: 16px;
+    width: 16px;
+    font: 12px Arial, Helvetica, sans-serif;
+    padding-left: 15px;
+    padding-top: 4px;
+}
+
+.selectitems {
+    width: 100px;
+    height: 20px;
+    border-bottom: dashed 1px #ddd;
+    padding-left: 10px;
+    padding-top: 2px;
+}
+
+.selectitems span {
+    margin-left: 5px;
+}
+
+#iconselectholder {
+    width: 110px;
+    overflow: auto;
+    display: none;
+    position: absolute;
+    background-color: #aad5ff;
+    font: 12px Arial, Helvetica, sans-serif;
+}
+
+.hoverclass {
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.selectedclass {
+    background-color: #ff9;
+}
