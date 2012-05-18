@@ -1,0 +1,7 @@
+http://jersey.java.net/nonav/documentation/latest/jax-rs.html 
+http://www.mkyong.com/webservices/jax-rs/restful-java-client-with-jersey-client/ 
+http://blogs.steeplesoft.com/2012/01/a-jersey-pojomapping-clientserver-example/ 
+http://mukeshbansiwal.wordpress.com/2010/06/15/create-rest-service-using-spring-jersey/ 
+
+
+

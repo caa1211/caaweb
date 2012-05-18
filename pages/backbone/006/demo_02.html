@@ -45,10 +45,9 @@ Man = Backbone.Model.extend({
 
 var man = new Man();
 alert(man.get('name'));
-man.save(function(){
-
-});
-  
+alert('do save! ')
+man.save();
+  alert(' save! ')
   
 //customized method
 man.set({name: "Jerry"});

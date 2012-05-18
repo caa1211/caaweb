@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+				   xmlns:s="library://ns.adobe.com/flex/spark"
+				   xmlns:mx="library://ns.adobe.com/flex/mx"
+				   width="800" height="600" backgroundAlpha="0.0"
+				   creationComplete="init(event)"
+				   borderVisible="false" cornerRadius="5" dropShadowVisible="true" fontSize="13">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import com.ftpClient.core.Console;
+			import com.ftpClient.model.FTPFile;
+			
+			import flash.filesystem.File;
+			import flash.utils.clearInterval;
+			import flash.utils.setInterval;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			
+			protected function init(event:FlexEvent):void
+			{
+				Console.target = areaShowInfo;
+			}
+			
+			/**
+			 *连接服务器 
+			 */
+			protected function btnConn_clickHandler(event:MouseEvent):void
+			{
+				//FTPClientUtils.initConn(txtHost.text, txtPort.text, txtUser.text, txtPswd.text);
+				FTPClientUtils.initConn("114.32.52.98", "41", "guest", "sunriver");
+				var sid:int = setInterval(function():void
+				{
+					if(FTPClientUtils.client.isConnected())
+					{
+						clearInterval(sid);
+						showList("/");
+					}
+					
+				}, 500);
+			}
+			
+			[Bindable]
+			private var arrBind:ArrayCollection = new ArrayCollection();
+			/**
+			 *显示指定目录下文件 
+			 * @param dir 指定目录名
+			 */
+			private function showList(dir:String):void
+			{
+				arrBind.removeAll();
+				
+				FTPClientUtils.getFTPList(dir,backFun);
+				
+				function backFun(arr:ArrayCollection):void
+				{
+					arrBind = arr;
+					
+					fileList.dataProvider = arrBind;
+				}
+			}
+			
+			/**
+			 * 发送命令
+			 */
+			protected function btnCmd_clickHandler(event:MouseEvent):void
+			{
+				FTPClientUtils.sendCommand(txtCmd.text);
+			}
+			
+			/**
+			 * 下载
+			 */
+			protected function btnDowndata_clickHandler(event:MouseEvent):void
+			{
+				var index:int = path.text.lastIndexOf("/");
+				
+				var downFileName:String = path.text.substr(index+1, path.text.length);
+				var localfileUrl:String = localPath.text + downFileName;
+				
+				FTPClientUtils.downLoadFile(path.text, localfileUrl, backFun);
+				
+				function backFun():void
+				{
+					Alert.show("下载完成！");
+				}
+			}
+			
+			/**
+			 * 上传
+			 */
+			protected function btnUpdata_clickHandler(event:MouseEvent):void
+			{
+				var file:File = new File();
+				file.url = localPath.text;
+				sendFileToFtp(file.name, file);
+			}
+			
+			/**
+			 * 双击事件
+			 */
+			protected function fileList_doubleClickHandler(event:MouseEvent):void
+			{
+				var ftpFile:FTPFile = fileList.selectedItem as FTPFile;
+				path.text = ftpFile.fullPath;
+				if(ftpFile.isDir)
+				{
+					FTPClientUtils.sendCommand("cwd " + ftpFile.name);
+					showList(ftpFile.fullPath);
+				}
+			}
+			
+			/** 用于存储上传文件数据集合 **/
+			private var arrFiles:ArrayCollection = new ArrayCollection();
+			/**
+			 * 发送文件到远程ftp服务器上 
+			 * @param dirName 文件名称
+			 * @param dirFile 文件
+			 */
+			private function sendFileToFtp(dirName:String = null, dirFile:File = null):void
+			{
+				if(!dirFile.isDirectory)
+				{
+					var obj:Object = new Object();
+					
+					obj.file = dirFile;
+					obj.dirName = "/";
+					arrFiles.addItem(obj); 
+					
+					if (arrFiles.length == 1)
+					{
+						uploadfiles();
+					}
+				}
+				
+				else
+				{
+					var list:Array = dirFile.getDirectoryListing();
+					
+					FTPClientUtils.client.createDirectory(dirName);
+					
+					for each(var file:File in list)
+					{
+						if (file.isDirectory)
+						{
+							sendFileToFtp(dirName + "/" + file.name, file);
+						}
+						else
+						{
+							var obj:Object = new Object();
+							
+							obj.file = file;
+							obj.dirName = dirName;
+							arrFiles.addItem(obj); 
+							
+							if (arrFiles.length == 1)
+							{
+								uploadfiles();
+							}
+						}
+					} 
+					
+				}
+				
+			}
+			
+			/**
+			 *上传所有文件
+			 */
+			private function uploadfiles():void
+			{
+				if (arrFiles != null && arrFiles.length > 0)
+				{
+					var obj : Object = arrFiles.getItemAt(0) as Object;
+					if (obj == null)
+					{
+						return;
+					}
+					
+					FTPClientUtils.upLoadFile(obj.file as FileReference, obj.dirName, fun);	
+					
+					function fun():void
+					{
+						arrFiles.removeItemAt(0);
+						
+						if (arrFiles.length > 0)
+						{
+							uploadfiles();
+						}
+						else if (arrFiles.length == 0)
+						{
+							Alert.show("上传完成！");
+						}
+					}
+				}
+				
+			}
+			
+			protected function areaShowInfo_updateCompleteHandler(event:FlexEvent):void
+			{
+				areaShowInfo.verticalScrollPosition = areaShowInfo.maxVerticalScrollPosition;
+			}
+			
+			protected function btnReturnDir_clickHandler(event:MouseEvent):void
+			{
+				FTPClientUtils.sendCommand("cwd "+ path.text);
+				showList(path.text);
+			}
+			
+			protected function btnDelFile_clickHandler(event:MouseEvent):void
+			{
+				var ftpFile:FTPFile = fileList.selectedItem as FTPFile;
+				FTPClientUtils.client.deleteDirectory(ftpFile.fullPath,!ftpFile.isDir);
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<mx:TextArea updateComplete="areaShowInfo_updateCompleteHandler(event)" id="areaShowInfo" left="50" right="50" bottom="20" height="150"/>
+	
+	<s:TextInput id="txtCmd" left="150" bottom="200" width="400" height="23" fontSize="11"/>
+	<s:Label left="60" bottom="201" fontFamily="微软雅黑" fontSize="16" fontWeight="bold" text="输入命令："/>
+	<s:Button id="btnCmd" click="btnCmd_clickHandler(event)" left="587" bottom="202" label="发送命令"/>
+	
+	<s:Label left="40" top="27" text="主机（H）："/>
+	<s:Label left="232" top="27" text="用户名（U）："/>
+	<s:Label left="383" top="25" height="14" text="密码（W）："/>
+	<s:Label x="555" y="27" text="端口（P）："/>
+	<s:TextInput id="txtHost" left="110" top="22" width="110" height="20" fontSize="10"/>
+	<s:TextInput id="txtUser" left="279" top="22" width="90" height="20" fontSize="10"/>
+	<s:TextInput id="txtPswd" left="464" top="22" width="80" height="20" fontSize="10"/>
+	<s:TextInput id="txtPort" left="625" top="22" width="60" height="20" fontSize="10"/>
+	<s:Button id="btnConn" x="693" y="21" label="连接" click="btnConn_clickHandler(event)"/>
+	
+	<mx:HBox top="80" width="700" height="300" horizontalCenter="0">
+		<!-- 服务器目录-->
+		<mx:VBox  height="90%">
+			<mx:TextInput id="path"  width="100%"/>
+			<mx:HBox>
+				<s:Button id="btnReturnDir" click="btnReturnDir_clickHandler(event)"  label="打开" horizontalCenter="0"/>
+				<s:Button id="btnDelFile" click="btnDelFile_clickHandler(event)"  label="删除" horizontalCenter="0"/>
+			</mx:HBox>
+			
+			<mx:DataGrid id="fileList" height="100%" doubleClick="fileList_doubleClickHandler(event)" doubleClickEnabled="true">
+				<mx:columns>
+					<mx:DataGridColumn headerText="文件名" dataField="name"/>
+					<mx:DataGridColumn headerText="大小" dataField="size"/>
+					<mx:DataGridColumn headerText="是否是文件夹" dataField="isDir"/>
+				</mx:columns>
+			</mx:DataGrid>
+			<s:Button id="btnDowndata" click="btnDowndata_clickHandler(event)"  label="下载" horizontalCenter="0"/>
+		</mx:VBox>
+		<!-- 本地目录-->
+		<mx:VBox  height="90%">
+			<mx:TextInput id="localPath" text="{(localDir.selectedItem as File).url}" width="100%"/>
+			<mx:FileSystemTree id="localDir" width="344" height="100%"
+							   selectedIndex="{localDir.dataProvider.length - 1}"
+							   doubleClickEnabled="true"/>
+			<s:Button id="btnUpdata" click="btnUpdata_clickHandler(event)"  label="上传" horizontalCenter="0"/>
+		</mx:VBox>
+		
+	</mx:HBox>
+</s:BorderContainer>
