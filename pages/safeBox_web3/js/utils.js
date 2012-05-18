@@ -59,7 +59,7 @@ var utils = {
 
             //jGrowl config
             var jGrowlOptions = {
-                position: 'center',
+                position: 'center',//(top-left, top-right, bottom-left, bottom-right, center)
                 closer: false
             };
             $.extend($.jGrowl.defaults, jGrowlOptions);
