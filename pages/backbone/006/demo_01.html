@@ -14,8 +14,10 @@
 
 //model
 World = Backbone.Model.extend({
-    name: null,
-     initialize: function(){alert('create World')}
+    defaults: {
+      name: null
+    },
+    initialize: function(){alert('create Model')}
 });
 
 //collections
@@ -23,7 +25,7 @@ Worlds = Backbone.Collection.extend({
     initialize: function(models, options){
         this.bind("add", options.view.addOneWorld);
     },
-     initialize: function(){alert('create Worlds')}
+     initialize: function(){alert('create Collection')}
 });
 
 //view
@@ -31,6 +33,7 @@ AppView = Backbone.View.extend({
     el: $("body"),
     initialize: function(models, options){
        this.worlds = new Worlds(null, {view: this});
+       alert('create View');
     },
     events: {
         "click #check": "checkIn"
@@ -43,7 +46,6 @@ AppView = Backbone.View.extend({
            
          var world = new World({name: world_name});
          this.worlds.add(world);
-    
     },
     addOneWorld: function(model){
         $("#world-list").append("<li>Hello "+model.get('name')+" ! </li>");
