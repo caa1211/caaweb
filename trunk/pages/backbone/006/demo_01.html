@@ -14,14 +14,16 @@
 
 //model
 World = Backbone.Model.extend({
-    name: null
+    name: null,
+     initialize: function(){alert('create World')}
 });
 
 //collections
 Worlds = Backbone.Collection.extend({
     initialize: function(models, options){
         this.bind("add", options.view.addOneWorld);
-    }
+    },
+     initialize: function(){alert('create Worlds')}
 });
 
 //view
