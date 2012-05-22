@@ -77,8 +77,19 @@ var App = Backbone.Router.extend({
         $("#container").empty().append(addView.render().el);
          
     }, 
-    editState: function(name){
-       console.log('editState' + name);
+    editState: function(id){
+      console.log('editState ' + id);
+      var user = this.users.get(id);
+         
+      var addView = new AddView({
+        model: user,
+        collection: this.users
+      });
+      addView.on('done', function () {
+        this.navigate('', { trigger: true });
+      }, this);
+      $('#container').empty().append(addView.render().el);
+       
     }
 });
 
