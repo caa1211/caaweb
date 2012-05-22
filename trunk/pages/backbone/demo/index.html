@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Backbone.js example</title>
+    <link href="css/style.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/underscore-1.3.1.js"></script>
+    <script src="js/backbone.js"></script>
+    <script src="js/backbone-localstorage.js"></script>
+
+<body>  
+<button id='addBtn'>add</button>
+<table id='userList' class='newspaper-a'>
+    <tr>
+        <th>name</th>
+        <th>phone</th>
+        <th>edit</th>
+    </tr>
+    <tr>
+        <td>AAA</td>
+        <td>0945123625</td>
+        <td><button>edit</button></td>
+    </tr>
+    <tr>
+        <td>BBB</td>
+        <td>0987452145</td>
+        <td><button>edit</button></td>
+    </tr>
+</table>
+
+<div id="addUser" class="myform stylized">
+    <form id="form" name="form" method="post" action="index.html">
+    <h1>Add User</h1>
+    <p>Add User</p>
+
+    <label>Name
+    <span class="small">Add your name</span>
+    </label>
+    <input type="text" name="name" id="name" />
+
+    <label>Phone
+    <span class="small">Add your phone</span>
+    </label>
+    <input type="text" name="email" id="email" />
+
+ 
+    <button type="submit">Submit</button>
+    <div class="spacer"></div>
+
+    </form>
+</div>
+
+
+</body>
+</html>
