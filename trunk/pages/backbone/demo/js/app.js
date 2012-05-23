@@ -1,37 +1,11 @@
 ﻿
-
-//Collection & Model-----------
-var User = Backbone.Model.extend({
-    defaults: {
-      id: null,
-      name: '',
-      phone: ''
-    },
-    localStorage: new Backbone.LocalStorage('g'),
-    validate: function(attrs) {
-      if (attrs.name === '') {
-        return "'name' cannot be empty";
-      }
-      
-      if (attrs.phone === '') {
-        return "'phone' cannot be empty";
-      }
-      
-    }
-});
-
-var Users = Backbone.Collection.extend({
-    model: User,
-    localStorage: new Backbone.LocalStorage('g')
-});
-
-
 //Router---------------
 var App = Backbone.Router.extend({
     users: null, 
     initialize: function(){
         this.users = new Users();
         this.users.fetch();
+        console.log(this.users);
     }, 
     routes: {
         '': 'home',
@@ -82,6 +56,32 @@ var App = Backbone.Router.extend({
        
     }
 });
+
+//Collection & Model-----------
+var User = Backbone.Model.extend({
+    defaults: {
+      id: null,
+      name: '',
+      phone: ''
+    },
+    localStorage: new Backbone.LocalStorage('g'),
+    validate: function(attrs) {
+      if (attrs.name === '') {
+        return "'name' cannot be empty";
+      }
+      
+      if (attrs.phone === '') {
+        return "'phone' cannot be empty";
+      }
+      
+    }
+});
+
+var Users = Backbone.Collection.extend({
+    model: User,
+    localStorage: new Backbone.LocalStorage('g')
+});
+
 
 //View-----------
 var TableView = Backbone.View.extend({
