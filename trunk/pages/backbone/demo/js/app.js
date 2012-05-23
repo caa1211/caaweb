@@ -1,14 +1,4 @@
-﻿/*
-var ss = new Backbone.LocalStorage('userList');
-ss.records.push({"id":"u1", "name": "Jose", "phone": 0978541236});
-ss.records.push({"id":"u2", "name": "Jerry", "phone": 0945254789});
-ss.records.push({"id":"u3", "name": "Roger", "phone": 0911777789});
-ss.records.push({"id":"u4", "name": "Eric", "phone": 0911999789});
-ss.records.push({"id":"u5", "name": "Fliex", "phone": 0911254234});
-ss.records.push({"id":"u6", "name": "Dan", "phone": 0934254759});
-ss.save()
-debugger;
-*/
+﻿
 
 //Collection & Model-----------
 var User = Backbone.Model.extend({
@@ -127,7 +117,7 @@ var ItemView = Backbone.View.extend({
 var AddView = Backbone.View.extend({
   template: _.template($("#addView-template").html()),
   render: function(){
-    this.$el.html(this.template());
+    this.$el.html(this.template(this.model.toJSON()));
     return this;
   },
   events: {
