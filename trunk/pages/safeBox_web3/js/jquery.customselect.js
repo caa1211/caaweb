@@ -5,12 +5,14 @@ $.fn.customSelect = function() {
  obj = $(this);  
 obj.after("<div id=\"selectoptions\"> </div>");
 obj.find('option').each(function(i){ 
-  $("#selectoptions").append("<div id=\"" + $(this).attr("value") + "\" class=\"selectitems\"><img src=\"" + this.title + "\" /><span>" + $(this).html() + "</span></div>");
+  //$("#selectoptions").append("<div id=\"" + $(this).attr("value") + "\" class=\"selectitems\"><img src=\"" + this.title + "\" /><span>" + $(this).html() + "</span></div>");
+  $("#selectoptions").append("<div id=\"" + $(this).attr("value") + "\" class=\"selectitems\"><span>" + $(this).html() + "</span></div>");
 });
 obj.before("<input type=\"hidden\" value =\"\" name=\"" + this.name + "\" class=\"customselect\"/><div id=\"iconselect\">" + this.title + "</div><div id=\"iconselectholder\"> </div>")
 .remove();
 $("#iconselect").click(function(){
-$("#iconselectholder").toggle("slow");});
+    $("#iconselectholder").toggle("slow");
+});
 	$("#iconselectholder").append( $("#selectoptions")[0] ).css('z-index', 500);
 $(".selectitems").mouseover(function(){
 	$(this).addClass("hoverclass");
@@ -18,14 +20,14 @@ $(".selectitems").mouseover(function(){
 	$(".selectitems").mouseout(function(){
 	$(this).removeClass("hoverclass");
 	});
-	$(".selectitems").click(function(){
-	$(".selectedclass").removeClass("selectedclass");
-	$(this).addClass("selectedclass");
-	var thisselection = $(this).html();
-$(".customselect").val(this.id);
-	$("#iconselect").html(thisselection);
-	$("#iconselectholder").toggle("slow")
-	});
+//	$(".selectitems").click(function(){
+//	$(".selectedclass").removeClass("selectedclass");
+//	$(this).addClass("selectedclass");
+//	var thisselection = $(this).html();
+//$(".customselect").val(this.id);
+//	//$("#iconselect").html(thisselection);
+//	$("#iconselectholder").toggle("slow")
+//	});
     });  
   // do the rest of the plugin, using url and settings
 }

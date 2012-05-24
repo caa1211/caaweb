@@ -1,5 +1,6 @@
 @charset "utf-8";
 
+
 #layoutWrap{
     width:900px; 
     margin: 0 auto;
@@ -26,7 +27,7 @@ border-right: solid 1px #dddddd;
 }
 
 #topPanel .topArea {
-height:65px;
+height:70px;
 }
 #topPanel .tabArea {
 height:42px;
@@ -125,14 +126,6 @@ border-radius: 0 0 5px 5px;
  padding-top:2px;
 }
 
-.help_link {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 10px;
-    font-style: normal;
-    color: #999;
-    text-decoration: underline;
-}
-
 .hint {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
@@ -140,13 +133,7 @@ border-radius: 0 0 5px 5px;
     color: #999;
 }
 
-.logotxt {
-    font-family: Verdana, Geneva, sans-serif;
-    font-size: 11px;
-    font-style: normal;
-    color: #09F;
-    margin-top: 20px;
-}
+
 
 .verisonText{
      font-family: Verdana, Geneva, sans-serif;
@@ -173,14 +160,6 @@ border-right: solid 1px #dddddd;
 
 }
 
-#apDiv1 {
-    /*position: absolute;*/
-    left: 68px;
-    top: 205px;
-    width: 70px;
-    height: 21px;
-    z-index: 1;
-}
 
 .ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
     border-bottom: solid 0px red;
@@ -252,6 +231,7 @@ border-right: solid 1px #dddddd;
     font: 12px Arial, Helvetica, sans-serif;
     padding-left: 15px;
     padding-top: 4px;
+	cursor: pointer;
 }
 
 .selectitems {
@@ -283,3 +263,5 @@ border-right: solid 1px #dddddd;
 .selectedclass {
     background-color: #ff9;
 }
+
+

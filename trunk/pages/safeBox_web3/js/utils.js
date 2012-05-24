@@ -68,7 +68,7 @@ var utils = {
             //Modify position
             var wrapW = $("#layoutWrap").width();
             var topH = $("#topPanel").height();
-            $("#topPanel").width(wrapW)
+            $("#topPanel").width(wrapW);
             $("#fakeHeader").height(topH-1);
             $("#fakeHeader").width(wrapW - 3);
             $("#contentPanel").width(wrapW - 2);
