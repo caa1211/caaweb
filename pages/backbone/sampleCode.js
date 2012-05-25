@@ -214,5 +214,9 @@ var AddView = Backbone.View.extend({
   
   
   
+  17.
+
+  <script src="js/jquery.tablesorter.js" type="text/javascript"></script>
+      $tableSorter = this.$el.children.tablesorter();
   
                 
