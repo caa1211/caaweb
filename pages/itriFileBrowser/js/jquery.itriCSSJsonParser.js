@@ -148,10 +148,10 @@
            
            var nameType = $("<span class='type'></span>");
             if(nameExtension == "folder"){
-               nameType.html(1);
+               nameType.html("1_");
             }
             else{
-               nameType.html(2);
+               nameType.html("2_");
             }
             
             nametd.append(nameType);
