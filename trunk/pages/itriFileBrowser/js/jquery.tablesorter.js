@@ -301,11 +301,14 @@
                 //if (!config.supportsTextContent) config.supportsTextContent = node.textContent || false;
                 if (!config.supportsTextContent) config.supportsTextContent = $(node).text() || false;
                 
+                $(node).css('border','solid 1px red');
                 if (config.textExtraction == "simple") {
                     if (config.supportsTextContent) {
                         //Jose Chang [fix the sorting failed in ie]
                         //text = node.textContent;
+                       
                         text = $(node).text();
+                       //  debugger;
                     } else {
                         if (node.childNodes[0] && node.childNodes[0].hasChildNodes()) {
                             text = node.childNodes[0].innerHTML;

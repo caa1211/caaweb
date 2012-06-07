@@ -91,6 +91,18 @@
           type: 'numeric'
         });
         
+          $.tablesorter.addParser({
+          id: 'typesorter',
+          is: function( s ) {
+              return false;
+          },
+          format: function( s ) {
+            return parseInt(s.split('_')[0]);
+          },
+          type: 'numeric'
+        });
+        
+        
         var $jsonParser = null;
         var $tableSorter = null;
         var $fileBrowser = null;
@@ -98,7 +110,7 @@
         function loadFileData(){
             //--itriCSSJsonParser plugin
             $jsonParser = $.itriCSSJsonParser({
-                url:'js/response.json',
+                url:'js/aaa.js',
                 type: 'fileBrowser',
                 rootId: "fileList",
                 success: function(elements, rawData){
@@ -109,6 +121,9 @@
                    $tableSorter = $("#fileList").tablesorter({
                         sortList: [[0,0], [1,0], [2,0]],
                         headers: { 
+                            "0": { 
+                                sorter:'typesorter' 
+                            },
                             "1": { 
                                 sorter:'mbsorter' 
                             }
