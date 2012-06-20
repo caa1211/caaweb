@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!--common css-->
+<link href="css/vmTmpl.css" type="text/css" rel="stylesheet"/>
+<script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+$(function(){
+
+});
+</script>
+
+<body id='body'>
+<div id='vmtpmContainer'>
+
+<table>
+	<tbody>
+	
+		<tr>
+			<td>New Template Name:</td>
+			<td>
+				<div class=''>
+			<input value='aa' id='vmTmpName'/>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Virtual Machine</td>
+			<td>
+			
+			<div class='widgetWrapper vm'>
+			<!--VM tmp Widget-->
+			  <div class='tmpWidget'>
+				<input type='radio' name="vmTmpSelector" checked />
+				<div class='tmpIcon small'></div>
+				<div class='name'>Small VM</div>
+			  </div>
+			  <div class='tmpWidget'>
+				<input type='radio'  name="vmTmpSelector"/>
+				<div class='tmpIcon small'></div>
+				<div class='name'>Medium VM</div>
+			  </div>
+			  <div class='tmpWidget'>
+				 <input type='radio'  name="vmTmpSelector"/>
+				 <div class='tmpIcon small'></div>
+				 <div class='name'>Large VM</div>
+			   </div>
+			   <div class='tmpWidget' >
+				 <input type='radio' name="vmTmpSelector"/>
+				 <div class='tmpIcon small'></div>
+				 <div class='name'><button>Customize...</button></div>
+			   </div>
+			</div>
+			
+			</td>
+		</tr>
+		<tr>
+			<td>Operating System</td>
+			<td>
+			<div class='widgetWrapper os'>
+			<!--OS Widget-->
+			  <div class='tmpWidget'>
+				<input type='radio' name="osSelector"/>
+				<div class='tmpIcon small'></div>
+				<div class='name'>
+				<select>
+					<option value='aa'>rr</option>
+					<option>rr</option>
+				</select>
+				</div>
+			  </div>
+			  <div class='tmpWidget'>
+				<input type='radio' name="osSelector"/>
+				<div class='tmpIcon small'></div>
+				<div class='name'>				
+				<select>
+					<option>rr</option>
+				</select>
+				</div>
+			  </div>
+			  <div class='tmpWidget'>
+				 <input type='radio' name="osSelector"/>
+				 <div class='tmpIcon small'></div>
+				 <div class='name'>				
+				 <select>
+					<option>rr</option>
+				</select>
+				</div>
+			   </div>
+			</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td>Data Base</td>
+			<td>
+				<div class='widgetWrapper db'>
+				<!--OS Widget-->
+				  <div class='tmpWidget'>
+					<input type='radio' name="osSelector"/>
+					<div class='tmpIcon small'></div>
+					<div class='name'>SQL</div>
+				  </div>
+				  <div class='tmpWidget'>
+					<input type='radio' name="osSelector"/>
+					<div class='tmpIcon small'></div>
+					<div class='name'>Exchange</div>
+				  </div>
+				  <div class='tmpWidget'>
+					 <input type='radio' name="osSelector"/>
+					 <div class='tmpIcon small'></div>
+					 <div class='name'>ORACLE</div>
+				   </div>
+				</div>
+			</td>
+		</tr>
+			<tr>
+			<td></td>
+			<td>
+			<div class='tmpbbar'><button>Create Template</button></div>
+			</td>
+			</tr>
+	</tbody>
+</table>
+
+
+
+</div>
+</body>
+</html> <!-- metal:use-macro="context/page_macros/base-new" -->
