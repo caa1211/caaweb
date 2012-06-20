@@ -1,7 +1,8 @@
 ﻿#vmtpmContainer {width:650px; height: auto; border: solid 1px black; position: relative; overflow:auto;}
-#vmTmpName {width:100%; margin-top:10px;}
+#vmTmpName {width:50%; margin-top:10px; font-size:14px; font-weight:bold; text-align:center;}
 
 .widgetWrapper{border: solid 1px green; overflow: auto; margin-top:10px;}
+.widgetWrapper .navi {float: right; width:15px; height:120px; text-align: center; line-height:120px; margin-left:3px; border: solid 1px blue;}
 .tmpWidget {float:left; width:100px; height:120px; border: solid 1px blue; margin-left:10px;}
 .tmpWidget .tmpIcon {margin:0 auto; width:70px; height:70px; border: solid 1px red;}
 .tmpWidget .name {margin:0 auto; text-align: center; border: solid 1px red; margin-top:5px; font-size:12px;}
@@ -12,3 +13,6 @@
 .widgetWrapper.db .tmpWidget {width:140px;}
 .widgetWrapper.db .tmpWidget .tmpIcon {width:90px;}
 .tmpbbar{text-align:right; margin-top:10px; margin-right:10px; margin-bottom:10px;}
+
+.osVerSelector{width: 100px;}
+select.osVerSelector, option { text-align:center; margin: 0 auto;x}
