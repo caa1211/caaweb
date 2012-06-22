@@ -1,9 +1,9 @@
 
 
-#tmpConfigContainer{border: solid 1px black; width: 400px; height: 400px; overflow:hidden;}
-.wrapper {position: relative; height: 280px;}
-.stepWrapper{margin-top:-10px;}
-.step{ border: solid 1px red;  width:150px; margin-top: 10px; height: 50px; line-height:50px; text-align: left; }
+#tmpConfigContainer{border: solid 1px black; width: 400px; height: 310px; overflow:hidden;}
+.wrapper {position: relative; height: 200px;}
+.stepWrapper{margin-top:20px;}
+.step{ border: solid 1px red;  width:150px; margin-top: 8px; height: 50px; line-height:50px; text-align: left; }
 .step .inputDiv{display:inline; float:left; width:30px; height:30px; line-height:30px; text-align: center;}
 .step input[type=radio]{ margin-left:5px; }
 .step .icon{width:50px; height:50px; border: solid 1px pink; display:inline; float:left;}
@@ -18,9 +18,10 @@
  font-weight: bold;
  
 }
-tr{border: solid 1px green;}
 
-.stepContent{ border: solid 1px blue; width:220px; height:280px; position: absolute; top: 0px;}
+tr{border: solid 1px green; width:100%;}
+
+.stepContent{ border: solid 1px blue; width:220px; height:200px; position: absolute; top: 0px;}
 .step table td {table-layout:fixed; nowrap; width: 50px;}
 
 .ancer{width:15px; height:15px; float:right; border: solid 1px blue;}
@@ -28,16 +29,24 @@ tr{border: solid 1px green;}
 #ctrlArea button{margin-left:10px; }
 #resSummary{border: solid 1px gray; font-size:12px; text-align: left; font-weight: bold;  margin-top: 20px;}
 #resSummary .result{font-weight: normal; font-size:10px; text-align:left;}
-.resSlider{width:130px;}
-.resSlider.ui-slider{height:2px;}
-.resSlider a.ui-slider-handle{height:10px; width:10px;}
+.ctrl{}
+.resSlider{width:120px;}
+.resSlider.ui-slider{height:3px;}
+.resSlider a.ui-slider-handle{height:10px; width:10px; cursor: pointer;}
 .stepContent {background: #f7f7f7; display: none;}
 #cpuStepCent.stepContent {background: #f7f7f7; display: block;}
 .stepContent .name{ font-size:12px; font-weight: bold; margin-top:10px; margin-left:10px;  color: #8b8b8b;}
 .stepContent .desc{ font-size:12px; font-weight: bold; margin-top:10px; margin-left:10px;  color: #000000;}
 .stepContent .ctrl{ font-size:12px; font-weight: bold; margin-top:20px; margin-left:10px;  color: #000000; float: left;}
 .stepContent .ctrl .resSlider{ margin-left:15px;}
-.stepContent .sliderVal{ font-size:12px; font-weight: bold; margin-top:15px; margin-left:10px;  color: #000000; float: left;}
-.stepContent .others{ width:160px; border: solid 1px red; margin: 0 auto; margin-top:50px; }
+.stepContent .sliderVal{white-space:nowrap;width:40px; font-size:12px; font-weight: normal; margin-top:15px; margin-left:5px;  color: #000000; float: left;}
+.stepContent .subCtrl{ font-size:12px; font-weight: bold; margin-top:15px; margin-left:10px;  color: #000000; float: left;}
+.stepContent .subCtrl .spin{ cursor: pointer;}
 
-.stepContent .others .icon {width:15px; height:15px; border: solid 1px red;}
+.stepContent .subCtrl .up{ width:15px; background: red; height:8px;}
+.stepContent .subCtrl .spin.up.on{ background: gray;}
+.stepContent .subCtrl .down{width:15px; background: pink; height:8px;}
+.stepContent .subCtrl .spin.down.on{background: gray; }
+
+.stepContent .others{ width:160px; font-size:10px; border: solid 1px red; margin: 0 auto; margin-top:60px; position: relative; }
+.stepContent .others .icon {width:15px; height:15px; border: solid 1px red; position: absolute; left:-17px;}
