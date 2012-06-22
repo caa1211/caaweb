@@ -108,6 +108,13 @@ var $memSlider =  $( "#memSlider" ).slider(memDef);
 var $diskSlider = $( "#diskSlider" ).slider(diskDef);
 
 $stepContents = $('.stepContent');
+$ancers = $('.ancer');
+
+function hideAncers(){
+    $ancers.css('opacity', '0');
+}
+hideAncers();
+
 $('input[type=radio]').click(function(e){
 
     var cent = $(this).attr('cent');
@@ -115,6 +122,8 @@ $('input[type=radio]').click(function(e){
     $("#"+cent).show();
     //$("#"+cent).fadeIn('fast');
      e.stopPropagation();
+    hideAncers();
+    $(this).parents('.step').find('.ancer').css('opacity', '1');
 });
 
 $(".step").click(function(){
