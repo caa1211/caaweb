@@ -112,7 +112,8 @@ $('input[type=radio]').click(function(e){
 
     var cent = $(this).attr('cent');
     $stepContents.hide();
-    $("#"+cent).fadeIn('fast');
+    $("#"+cent).show();
+    //$("#"+cent).fadeIn('fast');
      e.stopPropagation();
 });
 
