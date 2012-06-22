@@ -7,9 +7,38 @@
 <link href="css/vmTmpl.css" type="text/css" rel="stylesheet"/>
 <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
 
+<link href="css/tipsy.css" type="text/css" rel="stylesheet"/>
+<script src="js/jquery.tipsy.js" type="text/javascript"></script>
+<script src="js/tmpCreate.js" type="text/javascript"></script>
+<script src="js/underscore-1.3.1.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
 
+//tooltip
+var $configBtns = $(".tmpConfigBtn");
+$configBtns.tipsy({
+            fade: false,
+            gravity: 'nw',
+            html: true,
+            offset: 2,  // pixel offset of tooltip from element
+            opacity: 0.8,    // opacity of tooltip
+            title: function () {
+                 
+                 var tipTmpObj = _.template(tipTmp);
+                 return tipTmpObj({
+                    cpu: '-- vCPU',
+                    mem: '-- MB',
+                    disk: '-- GB' 
+                 });
+             }
+ }).on('tipsyOn', function(e, tipObj){
+        var resType = $(this).attr('resType');
+        var resAry =  window.parent.tmpUtils.vmResDefine[resType];
+        tipObj.$tip.find('.cpu').children('span').html(resAry[0]);
+        tipObj.$tip.find('.mem').children('span').html(resAry[1]);
+        tipObj.$tip.find('.disk').children('span').html(resAry[2]);    
+ });
+ 
 });
 </script>
 
