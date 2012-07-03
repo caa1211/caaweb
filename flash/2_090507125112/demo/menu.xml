@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<menu>
+  <menu iconWidth="100" iconHeight="80" beginingScaleSize="40" rollOnScaleSize="150" gap="50" sec="0.3" menuBottomPadding="5"/>
+  <menu name="CHECK OUT" src="icon1.png" link="http://www.51xflash.com" target="_blank" />
+  <menu name="THIS DYNAMIC" src="icon2.png" link="http://www.51xflash.com" target="_blank" />
+  <menu name="COOL" src="icon3.png" link="http://www.51xflash.com" target="_blank" />
+  <menu name="EXPANDING" src="icon4.png" link="http://www.51xflash.com" target="_blank" />
+  <menu name="MACKISH MENU" src="icon5.png" link="http://www.51xflash.com" target="_blank" />
+</menu>

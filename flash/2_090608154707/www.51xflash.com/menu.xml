@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="iso-8859-1" ?> 
+
+<navigation>
+	<item title="Home" href="home.swf" /> 
+	<item title="About" href="about.swf" />
+	<item title="Portfolio" href="portfolio.swf" />
+	<item title="Link" link="http://www.51xflash.com" />
+</navigation>
