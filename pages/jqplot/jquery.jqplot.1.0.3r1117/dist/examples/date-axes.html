@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	
+	<title>Date Axes</title>
+
+    <link class="include" rel="stylesheet" type="text/css" href="../jquery.jqplot.min.css" />
+    <link rel="stylesheet" type="text/css" href="examples.min.css" />
+    <link type="text/css" rel="stylesheet" href="syntaxhighlighter/styles/shCoreDefault.min.css" />
+    <link type="text/css" rel="stylesheet" href="syntaxhighlighter/styles/shThemejqPlot.min.css" />
+  
+  <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="../excanvas.js"></script><![endif]-->
+    <script class="include" type="text/javascript" src="../jquery.min.js"></script>
+    
+   
+</head>
+<body>
+    <div class="logo">
+   <div class="nav">
+   <a class="nav" href="../../../index.php"><span>&gt;</span>Home</a>
+   <a class="nav"  href="../../../docs/"><span>&gt;</span>Docs</a>
+   <a class="nav"  href="../../download/"><span>&gt;</span>Download</a>
+   <a class="nav" href="../../../info.php"><span>&gt;</span>Info</a>
+   <a class="nav"  href="../../../donate.php"><span>&gt;</span>Donate</a>
+   </div>
+</div>
+    <div class="example-content">
+
+    <div class="example-nav">
+  <a href="data-renderers.html">Previous</a> <a href="./">Examples</a> <a href="dateAxisLogAxisZooming.html">Next</a></div>
+
+      
+<!-- Example scripts go here -->
+<p>Date axes support is provided through the dateAxisRenderer plugin.  Date axes expand javascripts native date handling capabilities.  This allow dates to be input in almost any unambiguous form, not just in milliseconds!</p>
+
+<p><em>Note, although jqPlot will parse most any human readable date, it is safest to use javascript time stamps when possible.  Also, it is best to specify a date and time and not just a date alone.  This is due to inconsistent browser handling of local time vs. UTC with bare dates.</em></p>
+
+<div id="chart1" style="height:300px; width:650px;"></div>
+
+<pre class="code prettyprint brush: js"></pre>
+
+<p>Date Axes also provide powerful formatting features.  This allows custom formatter strings to be used to format axis tick labels precisely the way you want.</p>
+
+<div id="chart2" style="height:300px; width:650px;"></div>
+
+<pre class="code prettyprint brush: js"></pre>
+  
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+  var line1=[['2008-08-12 4:00PM',4], ['2008-09-12 4:00PM',6.5], ['2008-10-12 4:00PM',5.7], ['2008-11-12 4:00PM',9], ['2008-12-12 4:00PM',8.2]];
+  var plot1 = $.jqplot('chart1', [line1], {
+    title:'Default Date Axis',
+    axes:{
+        xaxis:{
+            renderer:$.jqplot.DateAxisRenderer
+        }
+    },
+    series:[{lineWidth:4, markerOptions:{style:'square'}}]
+  });
+});
+</script>
+
+
+<script class="code" type="text/javascript">
+$(document).ready(function(){
+  var line1=[['23-May-08', 578.55], ['20-Jun-08', 566.5], ['25-Jul-08', 480.88], ['22-Aug-08', 509.84],
+      ['26-Sep-08', 454.13], ['24-Oct-08', 379.75], ['21-Nov-08', 303], ['26-Dec-08', 308.56],
+      ['23-Jan-09', 299.14], ['20-Feb-09', 346.51], ['20-Mar-09', 325.99], ['24-Apr-09', 386.15]];
+  var plot1 = $.jqplot('chart1', [line1], {
+      title:'Data Point Highlighting',
+      axes:{
+        xaxis:{
+          renderer:$.jqplot.DateAxisRenderer,
+          tickOptions:{
+            formatString:'%b&nbsp;%#d'
+          }
+        },
+        yaxis:{
+          tickOptions:{
+            formatString:'$%.2f'
+            }
+        }
+      },
+      highlighter: {
+        show: true,
+        sizeAdjust: 7.5
+      },
+      cursor: {
+        show: false
+      }
+  });
+});
+</script>
+
+<!-- End example scripts -->
+
+<!-- Don't touch this! -->
+
+
+    <script class="include" type="text/javascript" src="../jquery.jqplot.min.js"></script>
+    <script type="text/javascript" src="syntaxhighlighter/scripts/shCore.min.js"></script>
+    <script type="text/javascript" src="syntaxhighlighter/scripts/shBrushJScript.min.js"></script>
+    <script type="text/javascript" src="syntaxhighlighter/scripts/shBrushXml.min.js"></script>
+<!-- End Don't touch this! -->
+
+<!-- Additional plugins go here -->
+
+    <script class="include" language="javascript" type="text/javascript" src="../plugins/jqplot.dateAxisRenderer.min.js"></script>
+
+<!-- End additional plugins -->
+
+
+	</div>	
+	<script type="text/javascript" src="example.min.js"></script>
+
+</body>
+
+
+</html>
