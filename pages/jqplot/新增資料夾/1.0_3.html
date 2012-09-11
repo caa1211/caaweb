@@ -36,11 +36,11 @@
             $(document).ready(function () {
 
                 var resData_month = {
-                    "interval": ["2011-08-16 10:01:46 Tue", "2011-09-16 10:01:46 Fri", "2011-10-16 10:01:46 Sun", "2011-11-16 09:01:46 Wed", "2011-12-16 09:01:46 Fri", "2012-01-16 09:01:46 Mon", "2012-02-16 09:01:46 Thu", "2012-03-16 10:01:46 Fri", "2012-04-16 10:01:46 Mon", "2012-05-16 10:01:46 Wed", "2012-06-16 10:01:46 Sat", "2012-07-16 10:01:46 Mon", "2012-08-16 10:01:49 Thu"],
+                    "interval": ["2011-10-16 10:01:46", "2011-11-16 10:01:46"],
                     "growth": {
-                        "provisioned": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 172424654],
-                        "capacity": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 727187456],
-                        "used": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 102919439]
+                        "provisioned": [172424654],
+                        "capacity": [727187456],
+                        "used": [102919439]
                     }
                 };
                 /*
@@ -161,7 +161,7 @@ function drawGrowth(resData, rangeUnit){
                     }
                 }
 
-               var xmin = resData.interval[1];
+               var xmin = resData.interval[0];
                var xmax = resData.interval[resData.interval.length-1];
                var ymin = 0;
                var ymax = Math.floor(maxGB)+50;
@@ -194,7 +194,7 @@ function drawGrowth(resData, rangeUnit){
                             //smooth: true,
                             showMarker: false
                         },
-                        lineWidth: 3,
+                        lineWidth: 2,
                         showMarker: true
                     },/*
                     series: [{
@@ -227,7 +227,7 @@ function drawGrowth(resData, rangeUnit){
                                 forceTickAt0: true,
                                 formatString: plotOpts[rangeUnit].formatString, //, %#I %p',
                                 angle: -40,
-                                fontSize: '9pt',
+                                fontSize: '8pt',
                                 fontStretch: 1,
                                 showMark: true,
                                 showGridline: true

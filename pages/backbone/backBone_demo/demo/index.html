@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Backbone.js example</title>
+    <link href="css/style.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/underscore-1.3.1.js"></script>
+    <script src="js/backbone.js"></script>
+    <script src="js/backbone.localstorage.js"></script>
+     <script src="js/jquery.tablesorter.js"></script>
+    
+<body>  
+
+<div id='container'>
+
+<script type="text/template" id="tableView-template">
+<a id='addBtn'  href='#add'>add</a>
+<table id='userList' class='newspaper-a'>
+<thead>
+    <tr>
+        <th>name</th>
+        <th>phone</th>
+        <th>edit</th>
+    </tr>
+</thead>
+<tbody>   
+    
+</tbody>
+</table>
+</script>
+
+<script type="text/template" id="itemView-template">
+ 
+        <td><%= name %></td>
+        <td><%= phone %></td>
+        <td><a href='#edit/<%= id %>'>edit</a></td>
+   
+</script>    
+    
+
+<script type="text/template" id="addView-template">
+<div id="addUser" class="myform stylized">
+    <form id="form" name="form" method="post" action="index.html">
+    <h1>Add User</h1>
+    <p>Add User</p>
+
+    <label>Name
+    <span class="small">Add your name</span>
+    </label>
+    <input type="text" name="name" id="name"  value="<%= name %>"/>
+
+    <label>Phone
+    <span class="small">Add your phone</span>
+    </label>
+    <input type="text" name="phone" id="phone" value="<%= phone %>"/>
+
+ 
+    <button type="submit" id='submitBtn'>Submit</button>
+    <div class="spacer"></div>
+
+    </form>
+</div>
+</script>
+
+</div>
+<script src="js/app.js"></script>
+
+
+<!--a href="http://www.youtube.com/watch?v=OQlAiOOsvcs">http://www.youtube.com/watch?v=OQlAiOOsvcs</a-->
+<!--a href="https://github.com/jaceju/backbone_in_action">https://github.com/jaceju/backbone_in_action</a-->
+
+</body>
+</html>
