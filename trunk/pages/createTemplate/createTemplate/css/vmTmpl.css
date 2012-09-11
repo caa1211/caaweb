@@ -1,0 +1,27 @@
+﻿#vmtpmContainer {width:600px; height: auto; border: solid 1px black; position: relative; overflow:auto; margin: 0 auto;}
+#vmTmpName {width:50%; margin-top:10px; font-size:14px; font-weight:bold; text-align:center;}
+
+.widgetWrapper{border: solid 1px green; overflow: hidden; height:120px; margin-top:10px; position: relative;}
+.widgetWrapper .navi {display: none; float: right; width:15px; height:120px; text-align: center; line-height:120px; margin-left:3px; border: solid 1px blue;}
+.tmpWidget {margin-top:3px; float:left; width:100px; height:110px; border: solid 1px blue; margin-left:10px;  position: relative;}
+.tmpWidget .tmpIcon {cursor: pointer; margin:0 auto; width:70px; height:70px; border: solid 1px red; margin-top:-5px;}
+.tmpWidget .name {margin:0 auto;  text-align: center; border: solid 1px red; margin-top:5px; font-size:12px;}
+.tmpWidget .name .tmpConfigBtn{margin:0 auto; border: solid 1px blue; width:80px; overflow:hidden;}
+
+.widgetWrapper.vm .tmpWidget .name .tmpConfigBtn{cursor: pointer;}
+
+/*.widgetWrapper .tmpWidget input[type="radio"]{position: absolute; top:5px;}*/
+
+.widgetWrapper.os .tmpWidget {width:140px;}
+.widgetWrapper.os .tmpWidget .tmpIcon {width:90px;}
+
+.widgetWrapper.db .tmpWidget {width:140px;}
+.widgetWrapper.db .tmpWidget .tmpIcon {width:90px;}
+.tmpbbar{float: left; text-align:left; width:100%; margin-top:20px; margin-right:10px; margin-bottom:10px; white-space:nowrap; border: solid 1px blue;}
+#errorStr{visibility:hidden; position: absolute; color:#ff0000;   border: solid 1px red; width: 350px; left:100px; text-align: right; }
+#createTmpBtn{ margin-top:-10px; width: 100px; height: 30px; float: right; /*background: gray;*/ text-align: center;}
+.osVerSelector{width: 100px;}
+select.osVerSelector, option { text-align:center; margin: 0 auto;}
+
+.mask{background: #ffffff;}
+.vmRestip{text-align: left; font-size:12px;}

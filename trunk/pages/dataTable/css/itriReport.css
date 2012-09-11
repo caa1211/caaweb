@@ -1,0 +1,15 @@
+﻿div.reportWidget {background:#ffffff; width:80%; margin:0 auto; margin-top:10px; min-width:910px;}
+.dropdown-menu li{position: relative;}
+div.reportWidget a.date input {cursor: pointer; background: white; width:80px;}
+div.reportWidget .well.tbar {margin-bottom:0px; height:30px;}
+div.reportWidget .timeArea {margin-left:10px; text-align:center;}
+div.reportWidget span.timeArea {margin-left:10px; text-align:center; line-height:30px; }
+div.reportWidget div.dataTables_info{color: #333333;}
+div.reportWidget div.dataTables_filter{text-align:center; line-height:30px;}
+div.reportWidget .row-fluid:first-child {display:none;}
+div.reportWidget .generateReportBtn {margin-top:-5px; height:19px;}
+div.reportWidget .dateErrorMsg {position:absolute; top:25px; left:47px;}
+div.reportWidget .reportTitle {display:inline; line-height:30px; text-align:center;}
+
+div.reportWidget .dataTables_filter {float: right;}
+div.reportWidget .DTTT {float: right; margin-right: 10px;}

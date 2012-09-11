@@ -1,0 +1,211 @@
+﻿.nextMsg{
+	display:inline-block;
+	position:absolute;
+	cursor:pointer;
+}
+.nextMsg .nm-box{
+	border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-box-shadow: 3px 3px 5px rgba(176,176,176, 1); 
+    -moz-box-shadow: 3px 3px 5px rgba(176,176,176, 1);
+    box-shadow: 3px 3px 5px rgba(176,176,176, 1);
+    padding:5px;
+}
+.nextMsg .nm-box-bm{
+    margin-top:12px;
+}
+.nextMsg .nm-box-tm{
+    margin-bottom:12px;
+}
+.nextMsg .nm-box-rm{
+    margin-left:12px;
+}
+.nextMsg .nm-box-lm{
+    margin-right:12px;
+}
+.nextMsg .nm-msg{
+	margin:0px;
+}
+.nextMsg .nm-arrow-box{
+	display:inline-block;
+	position:absolute;
+	height:14px;
+}
+.nextMsg .nm-arrow-box-bm{
+	left:50%;
+	margin-left:-8px;
+	top:0;
+}
+.nextMsg .nm-arrow-box-tm{
+	left:50%;
+	margin-left:-8px;
+	bottom:0;
+}
+.nextMsg .nm-arrow-box-rm{
+	top:50%;
+	margin-top:-8px;
+	left:0;
+}
+.nextMsg .nm-arrow-box-lm{
+	top:50%;
+	margin-top:-8px;
+	right:0;
+}
+.nextMsg .nm-arrow{
+	/*
+	* In Internet Explorer, The"border-style: dashed" will never be
+	* rendered unless "(width * 5) >= border-width" is true.
+	* Since "width" is set to "0", the "dashed-border" remains
+	* invisible to the user, which renders the border just like how
+	* "border-color: transparent" renders.
+	*/
+	border-style: dashed;
+	border-color: transparent;
+	border-width: 0.53em;
+	display: -moz-inline-box;
+	display: block;
+	/* Use font-size to control the size of the arrow. */
+	font-size: 15px;
+	height: 0;
+	line-height: 0;
+	position: relative;
+	vertical-align: middle;
+	width: 0;
+}
+.nextMsg .nm-arrow-bm{
+	border-top-width: 0;
+	border-bottom-width: .8em;
+	border-bottom-style: solid;
+	bottom: 0;
+ }
+.nextMsg .nm-arrow-tm{
+	border-bottom-width: 0;
+	border-top-width: .8em;
+	border-top-style: solid;
+	top: 0;
+}
+.nextMsg .nm-arrow-rm{
+	border-left-width: 0;
+	border-right-width: .8em;
+	border-right-style: solid;
+	right: 0;
+}
+.nextMsg .nm-arrow-lm{
+	border-right-width: 0;
+	border-left-width: .8em;
+	border-left-style: solid;
+	left: 0;
+}
+/**** Theme colors ****/
+/* LIGHT */
+.nextMsg-LightTheme .nm-box{
+	border:5px #e0e0e0 solid;
+    background-color:#fdfdfd;
+    color:#454545;
+}
+.nextMsg-LightTheme .nm-arrow-tm{
+	border-top-color: #e0e0e0;
+}
+.nextMsg-LightTheme .nm-arrow-bm{
+	border-bottom-color: #e0e0e0;
+}
+.nextMsg-LightTheme .nm-arrow-lm{
+	border-left-color: #e0e0e0;
+}
+.nextMsg-LightTheme .nm-arrow-rm{
+	border-right-color: #e0e0e0;
+}
+/* BLUE */
+.nextMsg-BlueTheme .nm-box{
+	border:5px #36a4d9 solid;
+    background-color:#91d9f1;
+    color:#2f789b;
+}
+.nextMsg-BlueTheme .nm-arrow-tm{
+	border-top-color: #36a4d9;
+}
+.nextMsg-BlueTheme .nm-arrow-bm{
+	border-bottom-color: #36a4d9;
+}
+.nextMsg-BlueTheme .nm-arrow-lm{
+	border-left-color: #36a4d9;
+}
+.nextMsg-BlueTheme .nm-arrow-rm{
+	border-right-color: #36a4d9;
+}
+/* GREEN */
+.nextMsg-GreenTheme .nm-box{
+	border:5px #a9dc66 solid;
+    background-color:#cfe9aa;
+    color:#749954;
+}
+.nextMsg-GreenTheme .nm-arrow-tm{
+	border-top-color: #a9dc66;
+}
+.nextMsg-GreenTheme .nm-arrow-bm{
+	border-bottom-color: #a9dc66;
+}
+.nextMsg-GreenTheme .nm-arrow-lm{
+	border-left-color: #a9dc66;
+}
+.nextMsg-GreenTheme .nm-arrow-rm{
+	border-right-color: #a9dc66;
+}
+/* CREAM */
+.nextMsg-CreamTheme .nm-box{
+	border:5px #f9e88e solid;
+    background-color:#faf7aa;
+    color:#c8b571;
+}
+.nextMsg-CreamTheme .nm-arrow-tm{
+	border-top-color: #f9e88e;
+}
+.nextMsg-CreamTheme .nm-arrow-bm{
+	border-bottom-color: #f9e88e;
+}
+.nextMsg-CreamTheme .nm-arrow-lm{
+	border-left-color: #f9e88e;
+}
+.nextMsg-CreamTheme .nm-arrow-rm{
+	border-right-color: #f9e88e;
+}
+/* RED */
+.nextMsg-RedTheme .nm-box{
+	border:5px #ce6e6f solid;
+    background-color:#f79892;
+    color:#fff;
+}
+.nextMsg-RedTheme .nm-arrow-tm{
+	border-top-color: #ce6e6f;
+}
+.nextMsg-RedTheme .nm-arrow-bm{
+	border-bottom-color: #ce6e6f;
+}
+.nextMsg-RedTheme .nm-arrow-lm{
+	border-left-color: #ce6e6f;
+}
+.nextMsg-RedTheme .nm-arrow-rm{
+	border-right-color: #ce6e6f;
+}
+/* DARK */
+.nextMsg-DarkTheme .nm-box{
+	border:5px #303030 solid;
+    background-color:#505050;
+    color:#fff;
+}
+.nextMsg-DarkTheme .nm-arrow-tm{
+	border-top-color: #303030;
+}
+.nextMsg-DarkTheme .nm-arrow-bm{
+	border-bottom-color: #303030;
+}
+.nextMsg-DarkTheme .nm-arrow-lm{
+	border-left-color: #303030;
+}
+.nextMsg-DarkTheme .nm-arrow-rm{
+	border-right-color: #303030;
+}
+/*********************/
+
+

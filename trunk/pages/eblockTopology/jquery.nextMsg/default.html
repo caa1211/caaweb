@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<link type="text/css" rel="stylesheet" href="jquery.nextMsg.css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.nextMsg.js"></script>
+<script type="text/javascript">
+$().ready(function () {
+
+	var nextMsgOptions = {
+		msg: "Red Theme",
+		side: "rightMiddle", 		
+		CSSClass: "nextMsg-RedTheme",
+		width: 250,
+	}
+
+	$("#btTest").click(function(){
+		var options = $.extend({}, nextMsgOptions, { msg: "<b>The url is not valid!</b><br/>Check your spelling and make sure the url is still working.", CSSClass: "nextMsg-DarkTheme", minDuration: -1 });
+		$("#btTest").nextMsg(options);
+	});
+	
+	$("#btTest2").click(function(){
+		$("#btTest2").nextMsg(nextMsgOptions);
+	});
+
+	
+});
+</script>
+</head>
+<body>
+<div style="margin-top:70px; margin-left:60px;">
+	<span>some text</span>
+	<button id="btTest" class="blueFlat" style="margin:0px 5px 0px 5px;">Test Button</button>
+	<span>some text</span>
+</div>
+
+<div style="margin-top:150px; margin-left:60px;">
+	<span>some text</span>
+	<button id="btTest2" class="blueFlat" style="margin:0px 5px 0px 5px;">Test2 Button</button>
+	<span>some text</span>
+</div>
+
+
+</body>
+
+</html>

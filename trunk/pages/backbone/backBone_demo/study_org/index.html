@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Backbone.js example</title>
+    <link href="css/style.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/underscore-1.3.1.js"></script>
+    <script src="js/backbone.js"></script>
+    <script src="js/backbone.localstorage.js"></script>
+
+<body>  
+
+
+
+<div id='container'>
+
+<a id='addBtn' href='#'>add</a>
+
+<table id='userList' class='newspaper-a'>
+<thead>
+    <tr>
+        <th>name</th>
+        <th>phone</th>
+        <th>edit</th>
+    </tr>
+</thead>
+<tbody>   
+    <tr>
+        <td>AAA</td>
+        <td>0945123625</td>
+        <td><a href='#'>edit</a></td>
+    </tr>
+    <tr>
+        <td>BBB</td>
+        <td>0987452145</td>
+        <td><a href='#'>edit</a></td>
+    </tr>
+</tbody>
+</table>
+
+
+<div id="addUser" class="myform stylized">
+    <form id="form" name="form" method="post" action="index.html">
+    <h1>Add User</h1>
+    <p>Add User</p>
+
+    <label>Name
+    <span class="small">Add your name</span>
+    </label>
+    <input type="text" name="name" id="name" />
+
+    <label>Phone
+    <span class="small">Add your phone</span>
+    </label>
+    <input type="text" name="phone" id="phone" />
+
+ 
+     <button type="submit" id='submitBtn'>Submit</button>
+    <div class="spacer"></div>
+
+    </form>
+</div>
+
+</div>
+
+</body>
+</html>

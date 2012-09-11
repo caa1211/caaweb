@@ -1,0 +1,1087 @@
+[
+{
+ "category": "warning",
+ "key": "EventEx",
+ "description": "License Expiry",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.license.LicenseExpiryEvent|Your host license expires in {remainingDays} days. The host will disconnect from vCenter Server when its license expires."
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "vSphere HA agent can reach all cluster management addresses",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.AllHostAddrsPingable|The vSphere HA agent on the host {host.name} in cluster {computeResource.name} in {datacenter.name} can reach all the cluster management addresses"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "vSphere HA agent can reach all isolation addresses",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.AllIsoAddrsPingable|All vSphere HA isolation addresses are reachable by host {host.name} in cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "vSphere HA disabled the automatic VM Startup/Shutdown feature",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.AutoStartDisabled|vSphere HA disabled the automatic Virtual Machine Startup/Shutdown feature on host {host.name} in cluster {computeResource.name} in {datacenter.name}.  Automatic VM restarts will interfere with HA when reacting to a host failure."
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "vSphere HA agent is running",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.DasAgentRunningEvent|vSphere HA agent on host {host.name} in cluster {computeResource.name} in datacenter {datacenter.name} is running"
+},
+{
+ "category": "error",
+ "key": "ExtendedEvent",
+ "description": "vSphere HA detected a failed failover host",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.DasFailoverHostFailedEvent|vSphere HA detected a possible failover of failover host {host.name} in cluster {computeResource.name} in {datacenter.name} has failed"
+},
+{
+ "category": "error",
+ "key": "ExtendedEvent",
+ "description": "vSphere HA detected a network-isolated failover host",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.DasFailoverHostIsolatedEvent|Host {host.name} has been isolated from cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "warning",
+ "key": "ExtendedEvent",
+ "description": "vSphere HA detected a network-partitioned failover host",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.DasFailoverHostPartitionedEvent|Failover Host {host.name} in {computeResource.name} in {datacenter.name} is in a different network partition than the master"
+},
+{
+ "category": "error",
+ "key": "ExtendedEvent",
+ "description": "vSphere HA agent on a failover host is unreachable",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.DasFailoverHostUnreachableEvent|The vSphere HA agent on the failover host {host.name} in cluster {computeResource.name} in {datacenter.name} is not reachable but host responds to ICMP pings"
+},
+{
+ "category": "error",
+ "key": "EventEx",
+ "description": "Host complete datastore failure",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.DasHostCompleteDatastoreFailureEvent|All shared datastores failed on the host {hostName} in cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "error",
+ "key": "EventEx",
+ "description": "Host complete network failure",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.DasHostCompleteNetworkFailureEvent|All VM networks failed on the host {hostName} in cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "error",
+ "key": "ExtendedEvent",
+ "description": "vSphere HA detected a host failure",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.DasHostFailedEvent|vSphere HA detected a possible host failure of host {host.name} in cluster {computeResource.name} in datacenter {datacenter.name}"
+},
+{
+ "category": "error",
+ "key": "ExtendedEvent",
+ "description": "vSphere HA detected a network isolated host",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.DasHostIsolatedEvent|vSphere HA detected that host {host.name} is isolated from cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "EventEx",
+ "description": "vSphere HA changed a host's heartbeat datastores",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.HeartbeatDatastoreChanged|Datastore {dsName} is {changeType.@enum.com.vmware.vc.HA.HeartbeatDatastoreChange} for storage heartbeating monitored by the vSphere HA agent on host {host.name} in cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "warning",
+ "key": "EventEx",
+ "description": "vSphere HA heartbeat datastore number for a host is insufficient",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.HeartbeatDatastoreNotSufficient|The number of vSphere HA heartbeat datastores for host {host.name} in cluster {computeResource.name} in {datacenter.name} is {selectedNum}, which is less than required: {requiredNum}"
+},
+{
+ "category": "warning",
+ "key": "EventEx",
+ "description": "vSphere HA agent on a host has an error",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.HostAgentErrorEvent|vSphere HA agent for host {host.name} has an error in {computeResource.name} in {datacenter.name}: {reason.@enum.com.vmware.vc.HA.HostAgentErrorReason}"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "vSphere HA agent is healthy",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.HostDasAgentHealthyEvent|vSphere HA agent on host {host.name} in cluster {computeResource.name} in datacenter {datacenter.name} is healthy"
+},
+{
+ "category": "error",
+ "key": "EventEx",
+ "description": "vSphere HA agent error",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.HostDasErrorEvent|vSphere HA agent on {host.name} in cluster {computeResource.name} in {datacenter.name} has an error:  {reason.@enum.HostDasErrorEvent.HostDasErrorReason}"
+},
+{
+ "category": "error",
+ "key": "ExtendedEvent",
+ "description": "Host has no vSphere HA isolation addresses",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.HostHasNoIsolationAddrsDefined|Host {host.name} in cluster {computeResource.name} in {datacenter.name} has no isolation addresses defined as required by vSphere HA."
+},
+{
+ "category": "error",
+ "key": "ExtendedEvent",
+ "description": "vSphere HA requires a SSL Thumbprint for host",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.HostHasNoSslThumbprint|vSphere HA cannot be configured on host {host.name} in cluster {computeResource.name} in datacenter {datacenter.name} because its SSL thumbprint has not been verified. Check that vCenter Server is configured to verify SSL thumbprints and that the thumbprint for {host.name} has been verified."
+},
+{
+ "category": "error",
+ "key": "ExtendedEvent",
+ "description": "Host is incompatible with vSphere HA",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.HostIncompatibleWithHA|The product version of host {host.name} in cluster {computeResource.name} in {datacenter.name} is incompatible with vSphere HA."
+},
+{
+ "category": "warning",
+ "key": "ExtendedEvent",
+ "description": "vSphere HA detected a network-partitioned host",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.HostPartitionedFromMasterEvent|vSphere HA detected that host {host.name} is in a different network partition than the master {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "EventEx",
+ "description": "The vSphere HA host availability state changed",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.HostStateChangedEvent|The vSphere HA availability state of the host {host.name} in cluster in {computeResource.name} in {datacenter.name} has changed to {newState.@enum.com.vmware.vc.HA.DasFdmAvailabilityState}"
+},
+{
+ "category": "warning",
+ "key": "ExtendedEvent",
+ "description": "vSphere HA agent unconfigure failed on host",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.HostUnconfigureError|There was an error unconfiguring the vSphere HA agent on host {host.name} in cluster {computeResource.name} in {datacenter.name}. To solve this problem, connect the host to a vCenter Server of version 5.0 or later."
+},
+{
+ "category": "error",
+ "key": "EventEx",
+ "description": "A disconnected host has vSphere HA protected VMs",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.HostUnconfiguredWithProtectedVms|Host {host.name} in cluster {computeResource.name} in {datacenter.name} is disconnected from vCenter Server, but contains {protectedVmCount} protected virtual machine(s)"
+},
+{
+ "category": "info",
+ "key": "EventEx",
+ "description": "vSphere HA agent cannot reach some cluster management addresses",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.HA.NotAllHostAddrsPingable|The vSphere HA agent on the host {host.name} in cluster {computeResource.name} in {datacenter.name} cannot reach some of the management network addresses of other hosts, and thus HA may not be able to restart VMs if a host failure occurs: {unpingableAddrs}"
+},
+{
+ "category": "error",
+ "key": "EventEx",
+ "description": "Failed to update VM files",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.datastore.UpdateVmFilesFailedEvent|Failed to update VM files on datastore {ds.name} using host {hostName}"
+},
+{
+ "category": "info",
+ "key": "EventEx",
+ "description": "Updated VM files",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.datastore.UpdatedVmFilesEvent|Updated VM files on datastore {ds.name} using host {hostName}"
+},
+{
+ "category": "info",
+ "key": "EventEx",
+ "description": "Updating VM Files",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.datastore.UpdatingVmFilesEvent|Updating VM files on datastore {ds.name} using host {hostName}"
+},
+{
+ "category": "error",
+ "key": "ExtendedEvent",
+ "description": "Autostart rules reconfigure failed",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.host.AutoStartReconfigureFailedEvent|Reconfiguring autostart rules for virtual machines on {host.name} in datacenter {datacenter.name} failed"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Answer file exported",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.profile.AnswerFileExportedEvent|Answer file for host {host.name} in datacenter {datacenter.name} has been exported"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Answer file updated",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.profile.AnswerFileUpdatedEvent|Answer file for host {host.name} in datacenter {datacenter.name} has been updated"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Quick stats is not up-to-date",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.stats.HostQuickStatesNotUpToDateEvent|Quick stats on {host.name} in {computeResource.name} in {datacenter.name} is not up-to-date"
+},
+{
+ "category": "info",
+ "key": "EventEx",
+ "description": "VM Component Protection test ends",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.vcp.TestEndEvent|VM Component Protection test ends on host {host.name} in cluster {computeResource.name} in datacenter {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "EventEx",
+ "description": "VM Component Protection test starts",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.vcp.TestStartEvent|VM Component Protection test starts on host {host.name} in cluster {computeResource.name} in datacenter {datacenter.name}"
+},
+{
+ "category": "warning",
+ "key": "ExtendedEvent",
+ "description": "Application Monitoring Is Not Supported",
+ "formatOnVm": "",
+ "fullFormat": "com.vmware.vc.vmam.AppMonitoringNotSupported|Application monitoring is not supported on {host.name} in cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "USB configuration has changed.",
+ "formatOnVm": "",
+ "fullFormat": "esx.audit.usb.config.changed|USB configuration has changed on host {host.name} in cluster {computeResource.name} in {datacenter.name}."
+},
+{
+ "category": "warning",
+ "key": "ExtendedEvent",
+ "description": "System logging is not configured.",
+ "formatOnVm": "",
+ "fullFormat": "esx.problem.syslog.config|System logging is not configured on host {host.name}. Please check Syslog options for the host under Configuration -> Software -> Advanced Settings in vSphere client."
+},
+{
+ "category": "info",
+ "key": "AccountCreatedEvent",
+ "description": "Account created",
+ "formatOnVm": "",
+ "fullFormat": "An account was created on host {host.name}"
+},
+{
+ "category": "info",
+ "key": "AccountRemovedEvent",
+ "description": "Account removed",
+ "formatOnVm": "",
+ "fullFormat": "Account  {account} was removed on host {host.name}"
+},
+{
+ "category": "info",
+ "key": "AccountUpdatedEvent",
+ "description": "Account updated",
+ "formatOnVm": "",
+ "fullFormat": "An account was updated on host {host.name}"
+},
+{
+ "category": "info",
+ "key": "AdminPasswordNotChangedEvent",
+ "description": "Administrator password not changed",
+ "formatOnVm": "",
+ "fullFormat": "The default password for the root user on the host {host.name} has not been changed"
+},
+{
+ "category": "info",
+ "key": "CanceledHostOperationEvent",
+ "description": "Canceled host operation",
+ "formatOnVm": "",
+ "fullFormat": "The operation performed on host {host.name} in {datacenter.name} was canceled"
+},
+{
+ "category": "info",
+ "key": "ChangeOwnerOfFileEvent",
+ "description": "Change owner of file",
+ "formatOnVm": "",
+ "fullFormat": "Changed ownership of file name {filename} from {oldOwner} to {newOwner} on {host.name} in {datacenter.name}."
+},
+{
+ "category": "error",
+ "key": "ChangeOwnerOfFileFailedEvent",
+ "description": "Cannot change owner of file name",
+ "formatOnVm": "",
+ "fullFormat": "Cannot change ownership of file name {filename} from {owner} to {attemptedOwner} on {host.name} in {datacenter.name}."
+},
+{
+ "category": "info",
+ "key": "CustomizationFailed",
+ "description": "<Customization failed>",
+ "formatOnVm": "",
+ "fullFormat": "Cannot complete customization of VM {vm.name}. See customization log at {logLocation} on the guest OS for details."
+},
+{
+ "category": "error",
+ "key": "DasClusterIsolatedEvent",
+ "description": "All vSphere HA hosts isolated",
+ "formatOnVm": "",
+ "fullFormat": "All hosts in the vSphere HA cluster {computeResource.name} in {datacenter.name} were isolated from the network. Check the network configuration for proper network redundancy in the management network."
+},
+{
+ "category": "warning",
+ "key": "DasHostIsolatedEvent",
+ "description": "vSphere HA host isolated",
+ "formatOnVm": "",
+ "fullFormat": "Host {isolatedHost.name} has been isolated from cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "DatacenterCreatedEvent",
+ "description": "Datacenter created",
+ "formatOnVm": "",
+ "fullFormat": "Created datacenter {datacenter.name} in folder {parent.name}"
+},
+{
+ "category": "info",
+ "key": "DatacenterRenamedEvent",
+ "description": "Datacenter renamed",
+ "formatOnVm": "",
+ "fullFormat": "Renamed datacenter from {oldName} to {newName}"
+},
+{
+ "category": "info",
+ "key": "DatastoreDiscoveredEvent",
+ "description": "Datastore discovered",
+ "formatOnVm": "",
+ "fullFormat": "Discovered datastore {datastore.name} on {host.name} in {datacenter.name}"
+},
+{
+ "category": "error",
+ "key": "DatastoreDuplicatedEvent",
+ "description": "Datastore duplicated",
+ "formatOnVm": "",
+ "fullFormat": "Multiple datastores named {datastore} detected on host {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "DatastorePrincipalConfigured",
+ "description": "Datastore principal configured",
+ "formatOnVm": "",
+ "fullFormat": "Configured datastore principal {datastorePrincipal} on host {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "DatastoreRemovedOnHostEvent",
+ "description": "Datastore removed from host",
+ "formatOnVm": "",
+ "fullFormat": "Removed datastore {datastore.name} from {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "DrsEnteredStandbyModeEvent",
+ "description": "DRS entered standby mode",
+ "formatOnVm": "",
+ "fullFormat": "DRS put {host.name} into standby mode"
+},
+{
+ "category": "info",
+ "key": "DrsEnteringStandbyModeEvent",
+ "description": "DRS entering standby mode",
+ "formatOnVm": "",
+ "fullFormat": "DRS is putting {host.name} into standby mode"
+},
+{
+ "category": "error",
+ "key": "DrsExitStandbyModeFailedEvent",
+ "description": "DRS cannot exit the host out of standby mode",
+ "formatOnVm": "",
+ "fullFormat": "DRS cannot move {host.name} out of standby mode"
+},
+{
+ "category": "info",
+ "key": "DrsExitedStandbyModeEvent",
+ "description": "DRS exited standby mode",
+ "formatOnVm": "",
+ "fullFormat": "DRS moved {host.name} out of standby mode"
+},
+{
+ "category": "info",
+ "key": "DrsExitingStandbyModeEvent",
+ "description": "DRS exiting standby mode",
+ "formatOnVm": "",
+ "fullFormat": "DRS is moving {host.name} out of standby mode"
+},
+{
+ "category": "error",
+ "key": "DrsResourceConfigureFailedEvent",
+ "description": "Cannot complete DRS resource configuration",
+ "formatOnVm": "",
+ "fullFormat": "Unable to apply DRS resource settings on host {host.name} in {datacenter.name}. {reason.msg}. This can significantly reduce the effectiveness of DRS."
+},
+{
+ "category": "info",
+ "key": "DrsResourceConfigureSyncedEvent",
+ "description": "DRS resource configuration synchronized",
+ "formatOnVm": "",
+ "fullFormat": "Resource configuration specification returns to synchronization from previous failure on host '{host.name}' in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "DuplicateIpDetectedEvent",
+ "description": "Duplicate IP detected",
+ "formatOnVm": "",
+ "fullFormat": "Virtual machine {macAddress} on host {host.name} has a duplicate IP {duplicateIP}"
+},
+{
+ "category": "info",
+ "key": "EnteredMaintenanceModeEvent",
+ "description": "Entered maintenance mode",
+ "formatOnVm": "",
+ "fullFormat": "Host {host.name} in {datacenter.name} has entered maintenance mode"
+},
+{
+ "category": "info",
+ "key": "EnteredStandbyModeEvent",
+ "description": "Entered standby mode",
+ "formatOnVm": "",
+ "fullFormat": "The host {host.name} is in standby mode"
+},
+{
+ "category": "info",
+ "key": "EnteringMaintenanceModeEvent",
+ "description": "Entering maintenance mode",
+ "formatOnVm": "",
+ "fullFormat": "Host {host.name} in {datacenter.name} has started to enter maintenance mode"
+},
+{
+ "category": "info",
+ "key": "EnteringStandbyModeEvent",
+ "description": "Entering standby mode",
+ "formatOnVm": "",
+ "fullFormat": "The host {host.name} is entering standby mode"
+},
+{
+ "category": "info",
+ "key": "ExitMaintenanceModeEvent",
+ "description": "Exit maintenance mode",
+ "formatOnVm": "",
+ "fullFormat": "Host {host.name} in {datacenter.name} has exited maintenance mode"
+},
+{
+ "category": "error",
+ "key": "ExitStandbyModeFailedEvent",
+ "description": "Cannot exit standby mode",
+ "formatOnVm": "",
+ "fullFormat": "The host {host.name} could not exit standby mode"
+},
+{
+ "category": "info",
+ "key": "ExitedStandbyModeEvent",
+ "description": "Exited standby mode",
+ "formatOnVm": "",
+ "fullFormat": "The host {host.name} is no longer in standby mode"
+},
+{
+ "category": "info",
+ "key": "ExitingStandbyModeEvent",
+ "description": "Exiting standby mode",
+ "formatOnVm": "",
+ "fullFormat": "The host {host.name} is exiting standby mode"
+},
+{
+ "category": "error",
+ "key": "GeneralHostErrorEvent",
+ "description": "Host error",
+ "formatOnVm": "",
+ "fullFormat": "Error detected on {host.name} in {datacenter.name}: {message}"
+},
+{
+ "category": "info",
+ "key": "GeneralHostInfoEvent",
+ "description": "Host information",
+ "formatOnVm": "",
+ "fullFormat": "Issue detected on {host.name} in {datacenter.name}: {message}"
+},
+{
+ "category": "warning",
+ "key": "GeneralHostWarningEvent",
+ "description": "Host warning",
+ "formatOnVm": "",
+ "fullFormat": "Issue detected on {host.name} in {datacenter.name}: {message}"
+},
+{
+ "category": "info",
+ "key": "GhostDvsProxySwitchDetectedEvent",
+ "description": "The vSphere Distributed Switch corresponding to the proxy switches on the host does not exist in vCenter Server or does not contain this host.",
+ "formatOnVm": "",
+ "fullFormat": "The vSphere Distributed Switch corresponding to the proxy switches {switchUuid} on the host {host.name} does not exist in vCenter Server or does not contain this host."
+},
+{
+ "category": "info",
+ "key": "GhostDvsProxySwitchRemovedEvent",
+ "description": "A ghost proxy switch on the host was resolved.",
+ "formatOnVm": "",
+ "fullFormat": "A ghost proxy switch {switchUuid} on the host {host.name} was resolved."
+},
+{
+ "category": "warning",
+ "key": "HostAdminDisableEvent",
+ "description": "Host administrator access disabled",
+ "formatOnVm": "",
+ "fullFormat": "Administrator access to the host {host.name} is disabled"
+},
+{
+ "category": "warning",
+ "key": "HostAdminEnableEvent",
+ "description": "Host administrator access enabled",
+ "formatOnVm": "",
+ "fullFormat": "Administrator access to the host {host.name} has been restored"
+},
+{
+ "category": "error",
+ "key": "HostCnxFailedAccountFailedEvent",
+ "description": "Cannot connect host and configure management account",
+ "formatOnVm": "",
+ "fullFormat": "Cannot connect {host.name} in {datacenter.name}: cannot configure management account"
+},
+{
+ "category": "error",
+ "key": "HostCnxFailedAlreadyManagedEvent",
+ "description": "Cannot connect host - already managed",
+ "formatOnVm": "",
+ "fullFormat": "Cannot connect {host.name} in {datacenter.name}: already managed by {serverName}"
+},
+{
+ "category": "error",
+ "key": "HostCnxFailedBadCcagentEvent",
+ "description": "Cannot connect host -  incorrect Ccagent",
+ "formatOnVm": "",
+ "fullFormat": "Cannot connect host {host.name} in {datacenter.name} : server agent is not responding"
+},
+{
+ "category": "error",
+ "key": "HostCnxFailedBadUsernameEvent",
+ "description": "Cannot connect host - incorrect user name",
+ "formatOnVm": "",
+ "fullFormat": "Cannot connect {host.name} in {datacenter.name}: incorrect user name or password"
+},
+{
+ "category": "error",
+ "key": "HostCnxFailedBadVersionEvent",
+ "description": "Cannot connect host - incompatible version",
+ "formatOnVm": "",
+ "fullFormat": "Cannot connect {host.name} in {datacenter.name}: incompatible version"
+},
+{
+ "category": "error",
+ "key": "HostCnxFailedCcagentUpgradeEvent",
+ "description": "Cannot connect host - Ccagent upgrade",
+ "formatOnVm": "",
+ "fullFormat": "Cannot connect host {host.name} in {datacenter.name}. Did not install or upgrade vCenter agent service."
+},
+{
+ "category": "error",
+ "key": "HostCnxFailedEvent",
+ "description": "Cannot connect host",
+ "formatOnVm": "",
+ "fullFormat": "Cannot connect {host.name} in {datacenter.name}: error connecting to host"
+},
+{
+ "category": "error",
+ "key": "HostCnxFailedNetworkErrorEvent",
+ "description": "Cannot connect host - network error",
+ "formatOnVm": "",
+ "fullFormat": "Cannot connect {host.name} in {datacenter.name}: network error"
+},
+{
+ "category": "error",
+ "key": "HostCnxFailedNoAccessEvent",
+ "description": "Cannot connect host - no access",
+ "formatOnVm": "",
+ "fullFormat": "Cannot connect host {host.name} in {datacenter.name}: account has insufficient privileges"
+},
+{
+ "category": "error",
+ "key": "HostCnxFailedNoConnectionEvent",
+ "description": "Cannot connect host - no connection",
+ "formatOnVm": "",
+ "fullFormat": "Cannot connect host {host.name} in {datacenter.name}"
+},
+{
+ "category": "error",
+ "key": "HostCnxFailedNoLicenseEvent",
+ "description": "Cannot connect host - no license",
+ "formatOnVm": "",
+ "fullFormat": "Cannot connect {host.name} in {datacenter.name}: not enough CPU licenses"
+},
+{
+ "category": "error",
+ "key": "HostCnxFailedNotFoundEvent",
+ "description": "Cannot connect host - host not found",
+ "formatOnVm": "",
+ "fullFormat": "Cannot connect {host.name} in {datacenter.name}: incorrect host name"
+},
+{
+ "category": "error",
+ "key": "HostCnxFailedTimeoutEvent",
+ "description": "Cannot connect host - time-out",
+ "formatOnVm": "",
+ "fullFormat": "Cannot connect {host.name} in {datacenter.name}: time-out waiting for host response"
+},
+{
+ "category": "info",
+ "key": "HostComplianceCheckedEvent",
+ "description": "Checked host for compliance",
+ "formatOnVm": "",
+ "fullFormat": "Host {host.name} checked for compliance."
+},
+{
+ "category": "info",
+ "key": "HostCompliantEvent",
+ "description": "Host compliant with profile",
+ "formatOnVm": "",
+ "fullFormat": "Host {host.name} is in compliance with the attached profile"
+},
+{
+ "category": "info",
+ "key": "HostConfigAppliedEvent",
+ "description": "Host configuration changes applied to host",
+ "formatOnVm": "",
+ "fullFormat": "Host configuration changes applied."
+},
+{
+ "category": "info",
+ "key": "HostConnectedEvent",
+ "description": "Host connected",
+ "formatOnVm": "",
+ "fullFormat": "Connected to {host.name} in {datacenter.name}"
+},
+{
+ "category": "error",
+ "key": "HostConnectionLostEvent",
+ "description": "Host connection lost",
+ "formatOnVm": "",
+ "fullFormat": "Host {host.name} in {datacenter.name} is not responding"
+},
+{
+ "category": "info",
+ "key": "HostDVPortEvent",
+ "description": "dvPort connected to host changed status",
+ "formatOnVm": "",
+ "fullFormat": "dvPort connected to host {host.name} in {datacenter.name} changed status"
+},
+{
+ "category": "info",
+ "key": "HostDasDisabledEvent",
+ "description": "vSphere HA agent disabled on host",
+ "formatOnVm": "",
+ "fullFormat": "vSphere HA agent on {host.name} in cluster {computeResource.name} in {datacenter.name} is disabled"
+},
+{
+ "category": "info",
+ "key": "HostDasDisablingEvent",
+ "description": "Disabling vSphere HA",
+ "formatOnVm": "",
+ "fullFormat": "vSphere HA is being disabled on {host.name} in cluster {computeResource.name} in datacenter {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "HostDasEnabledEvent",
+ "description": "vSphere HA agent enabled on host",
+ "formatOnVm": "",
+ "fullFormat": "vSphere HA agent on {host.name} in cluster {computeResource.name} in {datacenter.name} is enabled"
+},
+{
+ "category": "warning",
+ "key": "HostDasEnablingEvent",
+ "description": "Enabling host vSphere HA agent",
+ "formatOnVm": "",
+ "fullFormat": "Enabling vSphere HA agent on {host.name} in cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "error",
+ "key": "HostDasErrorEvent",
+ "description": "vSphere HA agent error",
+ "formatOnVm": "",
+ "fullFormat": "vSphere HA agent on {host.name} in cluster {computeResource.name} in {datacenter.name} has an error {message}:  {reason.@enum.HostDasErrorEvent.HostDasErrorReason}"
+},
+{
+ "category": "info",
+ "key": "HostDasOkEvent",
+ "description": "vSphere HA agent configured",
+ "formatOnVm": "",
+ "fullFormat": "vSphere HA agent on host {host.name} in cluster {computeResource.name} in {datacenter.name} is configured correctly"
+},
+{
+ "category": "info",
+ "key": "HostDisconnectedEvent",
+ "description": "Host disconnected",
+ "formatOnVm": "",
+ "fullFormat": "Disconnected from {host.name} in {datacenter.name}. Reason: {reason.@enum.HostDisconnectedEvent.ReasonCode}"
+},
+{
+ "category": "error",
+ "key": "HostEnableAdminFailedEvent",
+ "description": "Cannot restore administrator permissions to host",
+ "formatOnVm": "",
+ "fullFormat": "Cannot restore some administrator permissions to the host {host.name}"
+},
+{
+ "category": "error",
+ "key": "HostExtraNetworksEvent",
+ "description": "Host has extra vSphere HA networks",
+ "formatOnVm": "",
+ "fullFormat": "Host {host.name} has the following extra networks not used by other hosts for vSphere HA communication:{ips}. Consider using vSphere HA advanced option das.allowNetwork to control network usage"
+},
+{
+ "category": "error",
+ "key": "HostGetShortNameFailedEvent",
+ "description": "Cannot get short host name",
+ "formatOnVm": "",
+ "fullFormat": "Cannot complete command 'hostname -s' on host {host.name} or returned incorrect name format"
+},
+{
+ "category": "info",
+ "key": "HostInAuditModeEvent",
+ "description": "Host is in Audit Mode.",
+ "formatOnVm": "",
+ "fullFormat": "Host {host.name} is running in audit mode. The host's configuration will not be persistent across reboots."
+},
+{
+ "category": "info",
+ "key": "HostInventoryUnreadableEvent",
+ "description": "Host Inventory Unreadable",
+ "formatOnVm": "",
+ "fullFormat": "The virtual machine inventory file on host {host.name} is damaged or unreadable."
+},
+{
+ "category": "info",
+ "key": "HostIpChangedEvent",
+ "description": "Host IP changed",
+ "formatOnVm": "",
+ "fullFormat": "IP address of the host {host.name} changed from {oldIP} to {newIP}"
+},
+{
+ "category": "error",
+ "key": "HostIpInconsistentEvent",
+ "description": "Host IP inconsistent",
+ "formatOnVm": "",
+ "fullFormat": "Configuration of host IP address is inconsistent on host {host.name}: address resolved to {ipAddress} and {ipAddress2}"
+},
+{
+ "category": "error",
+ "key": "HostIpToShortNameFailedEvent",
+ "description": "Host IP to short name not completed",
+ "formatOnVm": "",
+ "fullFormat": "Cannot resolve IP address to short name on host {host.name}"
+},
+{
+ "category": "error",
+ "key": "HostIsolationIpPingFailedEvent",
+ "description": "vSphere HA isolation address unreachable",
+ "formatOnVm": "",
+ "fullFormat": "vSphere HA agent on host {host.name} in cluster {computeResource.name} in {datacenter.name} could not reach isolation address: {isolationIp}"
+},
+{
+ "category": "error",
+ "key": "HostMissingNetworksEvent",
+ "description": "Host is missing vSphere HA networks",
+ "formatOnVm": "",
+ "fullFormat": "Host {host.name} does not have the following networks used by other hosts for vSphere HA communication:{ips}. Consider using vSphere HA advanced option das.allowNetwork to control network usage"
+},
+{
+ "category": "error",
+ "key": "HostNoAvailableNetworksEvent",
+ "description": "Host has no available networks for vSphere HA communication",
+ "formatOnVm": "",
+ "fullFormat": "Host {host.name} in cluster {computeResource.name} in {datacenter.name} rently has no available networks for vSphere HA Communication. The following networks are currently used by HA: {ips}"
+},
+{
+ "category": "error",
+ "key": "HostNoHAEnabledPortGroupsEvent",
+ "description": "Host has no port groups enabled for vSphere HA",
+ "formatOnVm": "",
+ "fullFormat": "Host {host.name} in cluster {computeResource.name} in {datacenter.name} has no port groups enabled for vSphere HA communication."
+},
+{
+ "category": "warning",
+ "key": "HostNoRedundantManagementNetworkEvent",
+ "description": "No redundant management network for host",
+ "formatOnVm": "",
+ "fullFormat": "Host {host.name} in cluster {computeResource.name} in {datacenter.name} currently has no management network redundancy"
+},
+{
+ "category": "error",
+ "key": "HostNonCompliantEvent",
+ "description": "Host non-compliant with profile",
+ "formatOnVm": "",
+ "fullFormat": "Host {host.name} is not in compliance with the attached profile"
+},
+{
+ "category": "error",
+ "key": "HostNotInClusterEvent",
+ "description": "Host not in cluster",
+ "formatOnVm": "",
+ "fullFormat": "Host {host.name} is not a cluster member in {datacenter.name}"
+},
+{
+ "category": "error",
+ "key": "HostPrimaryAgentNotShortNameEvent",
+ "description": "Host primary agent not specified as short name",
+ "formatOnVm": "",
+ "fullFormat": "Primary agent {primaryAgent} was not specified as a short name to host {host.name}"
+},
+{
+ "category": "info",
+ "key": "HostProfileAppliedEvent",
+ "description": "Host profile applied",
+ "formatOnVm": "",
+ "fullFormat": "Profile is applied on the host {host.name}"
+},
+{
+ "category": "error",
+ "key": "HostReconnectionFailedEvent",
+ "description": "Cannot reconnect host",
+ "formatOnVm": "",
+ "fullFormat": "Cannot reconnect to {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "HostRemovedEvent",
+ "description": "Host removed",
+ "formatOnVm": "",
+ "fullFormat": "Removed host {host.name} in {datacenter.name}"
+},
+{
+ "category": "error",
+ "key": "HostShortNameToIpFailedEvent",
+ "description": "Host short name to IP not completed",
+ "formatOnVm": "",
+ "fullFormat": "Cannot resolve short name {shortName} to IP address on host {host.name}"
+},
+{
+ "category": "info",
+ "key": "HostShutdownEvent",
+ "description": "Host shut down",
+ "formatOnVm": "",
+ "fullFormat": "Shut down of {host.name} in {datacenter.name}: {reason}"
+},
+{
+ "category": "error",
+ "key": "HostSyncFailedEvent",
+ "description": "Cannot synchronize host",
+ "formatOnVm": "",
+ "fullFormat": "Cannot synchronize host {host.name}. {reason.msg}"
+},
+{
+ "category": "error",
+ "key": "HostUpgradeFailedEvent",
+ "description": "Host upgrade failed",
+ "formatOnVm": "",
+ "fullFormat": "Cannot install or upgrade vCenter agent service on {host.name} in {datacenter.name}"
+},
+{
+ "category": "warning",
+ "key": "HostUserWorldSwapNotEnabledEvent",
+ "description": "The userworld swap is not enabled on the host",
+ "formatOnVm": "",
+ "fullFormat": "The userworld swap is not enabled on the host {host.name}"
+},
+{
+ "category": "info",
+ "key": "HostVnicConnectedToCustomizedDVPortEvent",
+ "description": "Some host vNICs were reconfigured to use dvPorts with port level configuration, which might be different from the dvPort group.",
+ "formatOnVm": "",
+ "fullFormat": "Host {host.name} vNIC {vnic.vnic} was reconfigured to use dvPort {vnic.port.portKey} with port level configuration, which might be different from the dvPort group."
+},
+{
+ "category": "warning",
+ "key": "HostWwnChangedEvent",
+ "description": "Host WWN changed",
+ "formatOnVm": "",
+ "fullFormat": "WWNs are changed for {host.name}"
+},
+{
+ "category": "error",
+ "key": "HostWwnConflictEvent",
+ "description": "Host WWN conflict",
+ "formatOnVm": "",
+ "fullFormat": "The WWN ({wwn}) of {host.name} conflicts with the currently registered WWN"
+},
+{
+ "category": "error",
+ "key": "IncorrectHostInformationEvent",
+ "description": "Incorrect host information",
+ "formatOnVm": "",
+ "fullFormat": "Host {host.name} did not provide the information needed to acquire the correct set of licenses"
+},
+{
+ "category": "warning",
+ "key": "EventEx",
+ "description": "License downgrade",
+ "formatOnVm": "",
+ "fullFormat": "vim.event.LicenseDowngradedEvent|License downgrade: {licenseKey} removes the following features: {lostFeatures}"
+},
+{
+ "category": "info",
+ "key": "LocalDatastoreCreatedEvent",
+ "description": "Local datastore created",
+ "formatOnVm": "",
+ "fullFormat": "Created local datastore {datastore.name} on {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "LocalTSMEnabledEvent",
+ "description": "ESXi Shell is enabled",
+ "formatOnVm": "",
+ "fullFormat": "ESXi Shell for the host {host.name} has been enabled"
+},
+{
+ "category": "info",
+ "key": "NASDatastoreCreatedEvent",
+ "description": "NAS datastore created",
+ "formatOnVm": "",
+ "fullFormat": "Created NAS datastore {datastore.name} on {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "NoDatastoresConfiguredEvent",
+ "description": "No datastores configured",
+ "formatOnVm": "",
+ "fullFormat": "No datastores have been configured on the host {host.name}"
+},
+{
+ "category": "info",
+ "key": "ProfileAssociatedEvent",
+ "description": "Profile attached to host",
+ "formatOnVm": "",
+ "fullFormat": "Profile {profile.name} attached."
+},
+{
+ "category": "info",
+ "key": "ProfileChangedEvent",
+ "description": "Profile was changed",
+ "formatOnVm": "",
+ "fullFormat": "Profile {profile.name} was changed."
+},
+{
+ "category": "info",
+ "key": "ProfileDissociatedEvent",
+ "description": "Profile detached from host",
+ "formatOnVm": "",
+ "fullFormat": "Profile {profile.name} detached."
+},
+{
+ "category": "info",
+ "key": "ProfileReferenceHostChangedEvent",
+ "description": "The profile reference host was changed",
+ "formatOnVm": "",
+ "fullFormat": "Profile {profile.name} reference host changed."
+},
+{
+ "category": "info",
+ "key": "RemoteTSMEnabledEvent",
+ "description": "SSH is enabled",
+ "formatOnVm": "",
+ "fullFormat": "SSH for the host {host.name} has been enabled"
+},
+{
+ "category": "warning",
+ "key": "TimedOutHostOperationEvent",
+ "description": "Host operation timed out",
+ "formatOnVm": "",
+ "fullFormat": "The operation performed on {host.name} in {datacenter.name} timed out"
+},
+{
+ "category": "info",
+ "key": "UpdatedAgentBeingRestartedEvent",
+ "description": "Restarting updated agent",
+ "formatOnVm": "",
+ "fullFormat": "The agent on host {host.name} is updated and will soon restart"
+},
+{
+ "category": "info",
+ "key": "UserPasswordChanged",
+ "description": "User password changed",
+ "formatOnVm": "",
+ "fullFormat": "Password was changed for account {userLogin} on host {host.name}"
+},
+{
+ "category": "info",
+ "key": "VMFSDatastoreCreatedEvent",
+ "description": "VMFS datastore created",
+ "formatOnVm": "",
+ "fullFormat": "Created VMFS datastore {datastore.name} on {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VMFSDatastoreExpandedEvent",
+ "description": "VMFS datastore expanded",
+ "formatOnVm": "",
+ "fullFormat": "Expanded VMFS datastore {datastore.name} on {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VMFSDatastoreExtendedEvent",
+ "description": "VMFS datastore extended",
+ "formatOnVm": "",
+ "fullFormat": "Extended VMFS datastore {datastore.name} on {host.name} in {datacenter.name}"
+},
+{
+ "category": "error",
+ "key": "VcAgentUninstallFailedEvent",
+ "description": "Cannot uninstall vCenter agent",
+ "formatOnVm": "",
+ "fullFormat": "Cannot uninstall vCenter agent from {host.name} in {datacenter.name}. {reason.@enum.fault.AgentInstallFailed.Reason}"
+},
+{
+ "category": "info",
+ "key": "VcAgentUninstalledEvent",
+ "description": "vCenter agent uninstalled",
+ "formatOnVm": "",
+ "fullFormat": "vCenter agent has been uninstalled from {host.name} in {datacenter.name}"
+},
+{
+ "category": "error",
+ "key": "VcAgentUpgradeFailedEvent",
+ "description": "Cannot complete vCenter agent upgrade",
+ "formatOnVm": "",
+ "fullFormat": "Cannot upgrade vCenter agent on {host.name} in {datacenter.name}. {reason.@enum.fault.AgentInstallFailed.Reason}"
+},
+{
+ "category": "info",
+ "key": "VcAgentUpgradedEvent",
+ "description": "vCenter agent upgraded",
+ "formatOnVm": "",
+ "fullFormat": "vCenter agent has been upgraded on {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VimAccountPasswordChangedEvent",
+ "description": "VIM account password changed",
+ "formatOnVm": "",
+ "fullFormat": "VIM account password was changed on host {host.name}"
+},
+{
+ "category": "info",
+ "key": "VmDeployedEvent",
+ "description": "VM deployed",
+ "formatOnVm": "",
+ "fullFormat": "Template {srcTemplate.name} deployed on host {host.name}"
+},
+{
+ "category": "info",
+ "key": "VmPoweringOnWithCustomizedDVPortEvent",
+ "description": "Virtual machine powered On with vNICs connected to dvPorts that have a port level configuration, which might be different from the dvPort group configuration.",
+ "formatOnVm": "",
+ "fullFormat": "Virtual machine {vm.name} powered On with vNICs connected to dvPorts that have a port level configuration, which might be different from the dvPort group configuration."
+},
+{
+ "category": "warning",
+ "key": "IScsiBootFailureEvent",
+ "description": "Boot from iSCSI failed.",
+ "formatOnVm": "",
+ "fullFormat": "Booting from iSCSI failed with an error. See the VMware Knowledge Base for information on configuring iBFT networking."
+},
+]

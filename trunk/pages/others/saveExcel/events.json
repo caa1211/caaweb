@@ -1,0 +1,1640 @@
+[
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Import certificate success",
+ "formatOnVm": "Import certificate succeeded.",
+ "fullFormat": "ad.event.ImportCertEvent|Import certificate succeeded."
+},
+{
+ "category": "error",
+ "key": "ExtendedEvent",
+ "description": "Import certificate failure",
+ "formatOnVm": "Import certificate failed.",
+ "fullFormat": "ad.event.ImportCertFailedEvent|Import certificate failed."
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Join domain success",
+ "formatOnVm": "Join domain succeeded.",
+ "fullFormat": "ad.event.JoinDomainEvent|Join domain succeeded."
+},
+{
+ "category": "error",
+ "key": "ExtendedEvent",
+ "description": "Join domain failure",
+ "formatOnVm": "Join domain failed.",
+ "fullFormat": "ad.event.JoinDomainFailedEvent|Join domain failed."
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Leave domain success",
+ "formatOnVm": "Leave domain succeeded.",
+ "fullFormat": "ad.event.LeaveDomainEvent|Leave domain succeeded."
+},
+{
+ "category": "error",
+ "key": "ExtendedEvent",
+ "description": "Leave domain failure",
+ "formatOnVm": "Leave domain failed.",
+ "fullFormat": "ad.event.LeaveDomainFailedEvent|Leave domain failed."
+},
+{
+ "category": "warning",
+ "key": "ExtendedEvent",
+ "description": "vSphere HA answered a lock-lost question on a virtual machine",
+ "formatOnVm": "vSphere HA answerd the lock-lost question on this virtual machine",
+ "fullFormat": "com.vmware.vc.HA.AnsweredVmLockLostQuestionEvent|vSphere HA answerd the lock-lost question on virtual machine {vm.name} on host {host.name} in cluster {computeResource.name}"
+},
+{
+ "category": "error",
+ "key": "ExtendedEvent",
+ "description": "vSphere HA failed to restart a network isolated virtual machine",
+ "formatOnVm": "vSphere HA was unable to restart this virtual machine after it was powered off in response to a network isolation event",
+ "fullFormat": "com.vmware.vc.HA.FailedRestartAfterIsolationEvent|vSphere HA was unable to restart virtual machine {vm.name} in cluster {computeResource.name} in datacenter {datacenter.name} after it was powered off in response to a network isolation event. The virtual machine should be manually powered back on."
+},
+{
+ "category": "error",
+ "key": "EventEx",
+ "description": "vSphere HA failed to start a Fault Tolerance secondary VM.",
+ "formatOnVm": "vSphere HA agent failed to start Fault Tolerance secondary VM {secondaryCfgPath} on host {secondaryHost}. Reason : {fault.msg}. vSphere HA agent will retry until it times out.",
+ "fullFormat": "com.vmware.vc.HA.StartFTSecondaryFailedEvent|vSphere HA agent failed to start Fault Tolerance secondary VM {secondaryCfgPath} on host {secondaryHost} for primary VM {vm.name} in cluster {computeResource.name} in {datacenter.name}. Reason : {fault.msg}. vSphere HA agent will retry until it times out."
+},
+{
+ "category": "info",
+ "key": "EventEx",
+ "description": "vSphere HA successfully started a Fault Tolerance secondary VM.",
+ "formatOnVm": "vSphere HA agent successfully started Fault Tolerance secondary VM {secondaryCfgPath} on host {secondaryHost}.",
+ "fullFormat": "com.vmware.vc.HA.StartFTSecondarySucceededEvent|vSphere HA agent successfully started Fault Tolerance secondary VM {secondaryCfgPath} on host {secondaryHost} for primary VM {vm.name} in cluster {computeResource.name}."
+},
+{
+ "category": "error",
+ "key": "ExtendedEvent",
+ "description": "Virtual machine failed to become vSphere HA Protected",
+ "formatOnVm": "This virtual machine failed to become vSphere HA Protected and HA may not attempt to restart it after a failure.",
+ "fullFormat": "com.vmware.vc.HA.VmNotProtectedEvent|Virtual machine {vm.name} in cluster {computeResource.name} in {datacenter.name} failed to become vSphere HA Protected and HA may not attempt to restart it after a failure."
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Virtual machine is vSphere HA protected",
+ "formatOnVm": "This virtual machine is vSphere HA Protected and HA will attempt to restart it after a failure.",
+ "fullFormat": "com.vmware.vc.HA.VmProtectedEvent|Virtual machine {vm.name} in cluster {computeResource.name} in {datacenter.name} is vSphere HA Protected and HA will attempt to restart it after a failure."
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Virtual machine is not vSphere HA Protected",
+ "formatOnVm": "This virtual machine is not vSphere HA Protected.",
+ "fullFormat": "com.vmware.vc.HA.VmUnprotectedEvent|Virtual machine {vm.name} in cluster {computeResource.name} in {datacenter.name} is not vSphere HA Protected."
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Virtual machine disks consolidation succeeded.",
+ "formatOnVm": "Virtual machine disks consolidation succeeded.",
+ "fullFormat": "com.vmware.vc.VmDiskConsolidatedEvent|Virtual machine {vm.name} disks consolidated successfully on {host.name} in cluster {computeResource.name} in {datacenter.name}."
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Virtual machine disks consolidation needed.",
+ "formatOnVm": "Virtual machine disks consolidation is needed.",
+ "fullFormat": "com.vmware.vc.VmDiskConsolidationNeeded|Virtual machine {vm.name} disks consolidation is needed on {host.name} in cluster {computeResource.name} in {datacenter.name}."
+},
+{
+ "category": "warning",
+ "key": "ExtendedEvent",
+ "description": "Virtual machine disks consolidation failed.",
+ "formatOnVm": "Virtual machine disks consolidation failed.",
+ "fullFormat": "com.vmware.vc.VmDiskFailedToConsolidateEvent|Virtual machine {vm.name} disks consolidation failed on {host.name} in cluster {computeResource.name} in {datacenter.name}."
+},
+{
+ "category": "warning",
+ "key": "ExtendedEvent",
+ "description": "Fault Tolerance VM restart disabled",
+ "formatOnVm": "vSphere HA has been disabled. vSphere HA will not restart this VM or its Secondary VM after a failure.",
+ "fullFormat": "com.vmware.vc.ft.VmAffectedByDasDisabledEvent|vSphere HA has been disabled in cluster {computeResource.name} of datacenter {datacenter.name}. vSphere HA will not restart VM {vm.name} or its Secondary VM after a failure."
+},
+{
+ "category": "info",
+ "key": "EventEx",
+ "description": "Guest operation",
+ "formatOnVm": "Guest operation {operationName.@enum.com.vmware.vc.guestOp} performed.",
+ "fullFormat": "com.vmware.vc.guestOperations.GuestOperation|Guest operation {operationName.@enum.com.vmware.vc.guestOp} performed on Virtual machine {vm.name}."
+},
+{
+ "category": "warning",
+ "key": "EventEx",
+ "description": "Guest operation authentication failure",
+ "formatOnVm": "Guest operation authentication failed for operation {operationName.@enum.com.vmware.vc.guestOp}.",
+ "fullFormat": "com.vmware.vc.guestOperations.GuestOperationAuthFailure|Guest operation authentication failed for operation {operationName.@enum.com.vmware.vc.guestOp} on Virtual machine {vm.name}."
+},
+{
+ "category": "warning",
+ "key": "ExtendedEvent",
+ "description": "vSphere HA restarted a virtual machine",
+ "formatOnVm": "vSphere HA restarted this virtual machine",
+ "fullFormat": "com.vmware.vc.ha.VmRestartedByHAEvent|vSphere HA restarted virtual machine {vm.name} on host {host.name} in cluster {computeResource.name}"
+},
+{
+ "category": "info",
+ "key": "EventEx",
+ "description": "Virtual NIC entered passthrough mode",
+ "formatOnVm": "Network passthrough is active on adapter {deviceLabel}",
+ "fullFormat": "com.vmware.vc.npt.VmAdapterEnteredPassthroughEvent|Network passthrough is active on adapter {deviceLabel} of virtual machine {vm.name} on host {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "EventEx",
+ "description": "Virtual NIC exited passthrough mode",
+ "formatOnVm": "Network passthrough is inactive on adapter {deviceLabel}",
+ "fullFormat": "com.vmware.vc.npt.VmAdapterExitedPassthroughEvent|Network passthrough is inactive on adapter {deviceLabel} of virtual machine {vm.name} on host {host.name} in {datacenter.name}"
+},
+{
+ "category": "error",
+ "key": "EventEx",
+ "description": "Failed to clone state for entity on extension",
+ "formatOnVm": "Failed to clone state on extension {extensionName}",
+ "fullFormat": "com.vmware.vc.ovfconsumers.CloneOvfConsumerStateErrorEvent|Failed to clone state for the entity '{entityName}' on extension {extensionName}"
+},
+{
+ "category": "error",
+ "key": "EventEx",
+ "description": "Failed to retrieve OVF environment sections for VM on extension",
+ "formatOnVm": "Failed to retrieve OVF environment sections from extension {extensionName}",
+ "fullFormat": "com.vmware.vc.ovfconsumers.GetOvfEnvironmentSectionsErrorEvent|Failed to retrieve OVF environment sections for VM '{vm.name}' from extension {extensionName}"
+},
+{
+ "category": "error",
+ "key": "EventEx",
+ "description": "Unable to power on VM after cloning",
+ "formatOnVm": "Powering on after cloning was blocked by an extension. Message: {description}",
+ "fullFormat": "com.vmware.vc.ovfconsumers.PowerOnAfterCloneErrorEvent|Powering on VM '{vm.name}' after cloning was blocked by an extension. Message: {description}"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Datastore maintenance mode operation canceled",
+ "formatOnVm": "The datastore maintenance mode operation has been canceled",
+ "fullFormat": "com.vmware.vc.sdrs.CanceledDatastoreMaintenanceModeEvent|The datastore maintenance mode operation has been canceled"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Configured storage DRS",
+ "formatOnVm": "Configured storage DRS on datastore cluster {objectName}",
+ "fullFormat": "com.vmware.vc.sdrs.ConfiguredStorageDrsOnPodEvent|Configured storage DRS on datastore cluster {objectName}"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Datastore entered maintenance mode",
+ "formatOnVm": "Datastore {ds.name} has entered maintenance mode",
+ "fullFormat": "com.vmware.vc.sdrs.DatastoreEnteredMaintenanceModeEvent|Datastore {ds.name} has entered maintenance mode"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Datastore is entering maintenance mode",
+ "formatOnVm": "Datastore {ds.name} is entering maintenance mode",
+ "fullFormat": "com.vmware.vc.sdrs.DatastoreEnteringMaintenanceModeEvent|Datastore {ds.name} is entering maintenance mode"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Datastore exited maintenance mode",
+ "formatOnVm": "Datastore {ds.name} has exited maintenance mode",
+ "fullFormat": "com.vmware.vc.sdrs.DatastoreExitedMaintenanceModeEvent|Datastore {ds.name} has exited maintenance mode"
+},
+{
+ "category": "warning",
+ "key": "EventEx",
+ "description": "Datastore cluster has datastores shared across multiple datacenters",
+ "formatOnVm": "Datastore cluster {objectName} has one or more datastores {datastore} shared across multiple datacenters",
+ "fullFormat": "com.vmware.vc.sdrs.DatastoreInMultipleDatacentersEvent|Datastore cluster {objectName} has one or more datastores {datastore} shared across multiple datacenters"
+},
+{
+ "category": "error",
+ "key": "ExtendedEvent",
+ "description": "Errors encountered while datastore entering into maintenance mode",
+ "formatOnVm": "Datastore {ds.name} encountered errors while entering maintenance mode",
+ "fullFormat": "com.vmware.vc.sdrs.DatastoreMaintenanceModeErrorsEvent|Datastore {ds.name} encountered errors while entering maintenance mode"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Storage DRS disabled",
+ "formatOnVm": "Disabled storage DRS on datastore cluster {objectName}",
+ "fullFormat": "com.vmware.vc.sdrs.StorageDrsDisabledEvent|Disabled storage DRS on datastore cluster {objectName}"
+},
+{
+ "category": "info",
+ "key": "EventEx",
+ "description": "Storage DRS enabled",
+ "formatOnVm": "Enabled storage DRS on datastore cluster {objectName} with automation level {behavior.@enum.storageDrs.PodConfigInfo.Behavior}",
+ "fullFormat": "com.vmware.vc.sdrs.StorageDrsEnabledEvent|Enabled storage DRS on datastore cluster {objectName} with automation level {behavior.@enum.storageDrs.PodConfigInfo.Behavior}"
+},
+{
+ "category": "error",
+ "key": "ExtendedEvent",
+ "description": "Storage DRS invocation failed",
+ "formatOnVm": "Storage DRS invocation failed on datastore cluster {objectName}",
+ "fullFormat": "com.vmware.vc.sdrs.StorageDrsInvocationFailedEvent|Storage DRS invocation failed on datastore cluster {objectName}"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "New storage DRS recommendation generated",
+ "formatOnVm": "A new storage DRS recommendation has been generated on datastore cluster {objectName}",
+ "fullFormat": "com.vmware.vc.sdrs.StorageDrsNewRecommendationPendingEvent|A new storage DRS recommendation has been generated on datastore cluster {objectName}"
+},
+{
+ "category": "warning",
+ "key": "EventEx",
+ "description": "Datastore cluster connected to host(s) that do not support storage DRS",
+ "formatOnVm": "Datastore cluster {objectName} is connected to one or more hosts {host} that do not support storage DRS",
+ "fullFormat": "com.vmware.vc.sdrs.StorageDrsNotSupportedHostConnectedToPodEvent|Datastore cluster {objectName} is connected to one or more hosts {host} that do not support storage DRS"
+},
+{
+ "category": "info",
+ "key": "EventEx",
+ "description": "Storage DRS migrated VM disks",
+ "formatOnVm": "Storage DRS migrated disks of VM {vm.name} to datastore {ds.name}",
+ "fullFormat": "com.vmware.vc.sdrs.StorageDrsStorageMigrationEvent|Storage DRS migrated disks of VM {vm.name} to datastore {ds.name}"
+},
+{
+ "category": "info",
+ "key": "EventEx",
+ "description": "Storage DRS placed VM disks",
+ "formatOnVm": "Storage DRS placed disks of VM {vm.name} on datastore {ds.name}",
+ "fullFormat": "com.vmware.vc.sdrs.StorageDrsStoragePlacementEvent|Storage DRS placed disks of VM {vm.name} on datastore {ds.name}"
+},
+{
+ "category": "info",
+ "key": "EventEx",
+ "description": "Datastore cluster created",
+ "formatOnVm": "Created datastore cluster {objectName}",
+ "fullFormat": "com.vmware.vc.sdrs.StoragePodCreatedEvent|Created datastore cluster {objectName}"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Datastore cluster deleted",
+ "formatOnVm": "Removed datastore cluster {objectName}",
+ "fullFormat": "com.vmware.vc.sdrs.StoragePodDestroyedEvent|Removed datastore cluster {objectName}"
+},
+{
+ "category": "warning",
+ "key": "EventEx",
+ "description": "SIOC: pre-4.1 host {host} connected to SIOC-enabled datastore {objectName}",
+ "formatOnVm": "SIOC has detected that a host: {host} connected to a SIOC-enabled datastore: {objectName} is running an older version of ESX that does not support SIOC. This is an unsupported configuration.",
+ "fullFormat": "com.vmware.vc.sioc.NotSupportedHostConnectedToDatastoreEvent|SIOC has detected that a host: {host} connected to a SIOC-enabled datastore: {objectName} is running an older version of ESX that does not support SIOC. This is an unsupported configuration."
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "FT Disabled VM protected as non-FT VM",
+ "formatOnVm": "HA VM Component Protection will protect this virtul machine as non-FT virtual machine because the FT state is disabled",
+ "fullFormat": "com.vmware.vc.vcp.FtDisabledVmTreatAsNonFtEvent|HA VM Component Protection protects virtual machine {vm.name} on {host.name} in cluster {computeResource.name} in datacenter {datacenter.name} as non-FT virtual machine because the FT state is disabled"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Failover FT VM due to component failure",
+ "formatOnVm": "FT Primary VM is going to fail over to Secondary VM due to component failure",
+ "fullFormat": "com.vmware.vc.vcp.FtFailoverEvent|FT Primary VM {vm.name} on host {host.name} in cluster {computeResource.name} in datacenter {datacenter.name} is going to fail over to Secondary VM due to component failure "
+},
+{
+ "category": "error",
+ "key": "ExtendedEvent",
+ "description": "FT VM failover failed",
+ "formatOnVm": "FT virtual machine failed to failover to secondary",
+ "fullFormat": "com.vmware.vc.vcp.FtFailoverFailedEvent|FT virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in datacenter {datacenter.name} failed to failover to secondary"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Restarting FT secondary due to component failure",
+ "formatOnVm": "HA VM Component Protection is restarting FT secondary virtual machine due to component failure",
+ "fullFormat": "com.vmware.vc.vcp.FtSecondaryRestartEvent|HA VM Component Protection is restarting FT secondary virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in datacenter {datacenter.name} due to component failure"
+},
+{
+ "category": "error",
+ "key": "ExtendedEvent",
+ "description": "FT secondary VM restart failed",
+ "formatOnVm": "FT Secondary VM failed to restart",
+ "fullFormat": "com.vmware.vc.vcp.FtSecondaryRestartFailedEvent|FT Secondary VM {vm.name} on host {host.name} in cluster {computeResource.name} in datacenter {datacenter.name} failed to restart"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Need secondary VM protected as non-FT VM",
+ "formatOnVm": "HA VM Component Protection protects this virtul machine as non-FT virtual machine because it has been in the needSecondary state too long",
+ "fullFormat": "com.vmware.vc.vcp.NeedSecondaryFtVmTreatAsNonFtEvent|HA VM Component Protection protects virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in datacenter {datacenter.name} as non-FT virtual machine because it has been in the needSecondary state too long"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "No action on VM",
+ "formatOnVm": "HA VM Component Protection did not take action due to the feature configuration setting",
+ "fullFormat": "com.vmware.vc.vcp.VcpNoActionEvent|HA VM Component Protection did not take action on virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in datacenter {datacenter.name} due to the feature configuration setting"
+},
+{
+ "category": "error",
+ "key": "EventEx",
+ "description": "Virtual machine lost datastore access",
+ "formatOnVm": "Virtual machine lost access to {datastore}",
+ "fullFormat": "com.vmware.vc.vcp.VmDatastoreFailedEvent|Virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in datacenter {datacenter.name} lost access to {datastore}"
+},
+{
+ "category": "error",
+ "key": "EventEx",
+ "description": "Virtual machine lost VM network accessibility",
+ "formatOnVm": "Virtual machine lost access to {network}",
+ "fullFormat": "com.vmware.vc.vcp.VmNetworkFailedEvent|Virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in datacenter {datacenter.name} lost access to {network}"
+},
+{
+ "category": "error",
+ "key": "EventEx",
+ "description": "VM power off hang",
+ "formatOnVm": "HA VM Component Protection could not power off virtual machine successfully after trying {numTimes} times and will keep trying",
+ "fullFormat": "com.vmware.vc.vcp.VmPowerOffHangEvent|HA VM Component Protection could not power off virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in datacenter {datacenter.name} successfully after trying {numTimes} times and will keep trying"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Restarting VM due to component failure",
+ "formatOnVm": "HA VM Component Protection is restarting virtual machine due to component failure",
+ "fullFormat": "com.vmware.vc.vcp.VmRestartEvent|HA VM Component Protection is restarting virtual machine {vm.name} due to component failure on host {host.name} in cluster {computeResource.name} in datacenter {datacenter.name}"
+},
+{
+ "category": "error",
+ "key": "ExtendedEvent",
+ "description": "Virtual machine affected by component failure failed to restart",
+ "formatOnVm": "Virtual machine affected by component failure failed to restart",
+ "fullFormat": "com.vmware.vc.vcp.VmRestartFailedEvent|Virtual machine {vm.name} affected by component failure on host {host.name} in cluster {computeResource.name} in datacenter {datacenter.name} failed to restart"
+},
+{
+ "category": "error",
+ "key": "EventEx",
+ "description": "No candidate host to restart",
+ "formatOnVm": "HA VM Component Protection could not find a destination host for this virtual machine after waiting {numSecWait} seconds and will keep trying",
+ "fullFormat": "com.vmware.vc.vcp.VmWaitForCandidateHostEvent|HA VM Component Protection could not find a destination host for virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in datacenter {datacenter.name} after waiting {numSecWait} seconds and will keep trying"
+},
+{
+ "category": "error",
+ "key": "ExtendedEvent",
+ "description": "Virtual machine register failed",
+ "formatOnVm": "Virtual machine registration failed",
+ "fullFormat": "com.vmware.vc.vm.VmRegisterFailedEvent|Virtual machine {vm.name} registration on {host.name} in datacenter {datacenter.name} failed"
+},
+{
+ "category": "error",
+ "key": "EventEx",
+ "description": "Failed to revert the virtual machine state to a snapshot",
+ "formatOnVm": "Failed to revert the execution state of the virtual machine to snapshot {snapshotName}, with ID {snapshotId}",
+ "fullFormat": "com.vmware.vc.vm.VmStateFailedToRevertToSnapshot|Failed to revert the execution state of the virtual machine {vm.name} on host {host.name}, in compute resource {computeResource.name} to snapshot {snapshotName}, with ID {snapshotId}"
+},
+{
+ "category": "info",
+ "key": "EventEx",
+ "description": "The virtual machine state has been reverted to a snapshot",
+ "formatOnVm": "The execution state of the virtual machine has been reverted to the state of snapshot {snapshotName}, with ID {snapshotId}",
+ "fullFormat": "com.vmware.vc.vm.VmStateRevertedToSnapshot|The execution state of the virtual machine {vm.name} on host {host.name}, in compute resource {computeResource.name} has been reverted to the state of snapshot {snapshotName}, with ID {snapshotId}"
+},
+{
+ "category": "warning",
+ "key": "EventEx",
+ "description": "vSphere HA detected application heartbeat status change",
+ "formatOnVm": "vSphere HA detected that the application heartbeat status changed to {status.@enum.VirtualMachine.AppHeartbeatStatusType} for this virtual machine",
+ "fullFormat": "com.vmware.vc.vmam.VmAppHealthMonitoringStateChangedEvent|vSphere HA detected that the application heartbeat status changed to {status.@enum.VirtualMachine.AppHeartbeatStatusType} for {vm.name} on {host.name} in cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "warning",
+ "key": "ExtendedEvent",
+ "description": "vSphere HA detected application heartbeat failure",
+ "formatOnVm": "vSphere HA detected application heartbeat failure for this virtual machine",
+ "fullFormat": "com.vmware.vc.vmam.VmDasAppHeartbeatFailedEvent|vSphere HA detected application heartbeat failure for {vm.name} on {host.name} in cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "event.com.vmware.vim.vsm.dependency.bind.vApp.category",
+ "key": "EventEx",
+ "description": "com.vmware.vim.vsm.dependency.bind.vApp",
+ "formatOnVm": "event.com.vmware.vim.vsm.dependency.bind.vApp.fullFormat",
+ "fullFormat": "com.vmware.vim.vsm.dependency.bind.vApp|event.com.vmware.vim.vsm.dependency.bind.vApp.fullFormat"
+},
+{
+ "category": "event.com.vmware.vim.vsm.dependency.bind.vm.category",
+ "key": "EventEx",
+ "description": "com.vmware.vim.vsm.dependency.bind.vm",
+ "formatOnVm": "event.com.vmware.vim.vsm.dependency.bind.vm.fullFormat",
+ "fullFormat": "com.vmware.vim.vsm.dependency.bind.vm|event.com.vmware.vim.vsm.dependency.bind.vm.fullFormat"
+},
+{
+ "category": "event.com.vmware.vim.vsm.dependency.create.vApp.category",
+ "key": "EventEx",
+ "description": "com.vmware.vim.vsm.dependency.create.vApp",
+ "formatOnVm": "event.com.vmware.vim.vsm.dependency.create.vApp.fullFormat",
+ "fullFormat": "com.vmware.vim.vsm.dependency.create.vApp|event.com.vmware.vim.vsm.dependency.create.vApp.fullFormat"
+},
+{
+ "category": "event.com.vmware.vim.vsm.dependency.create.vm.category",
+ "key": "EventEx",
+ "description": "com.vmware.vim.vsm.dependency.create.vm",
+ "formatOnVm": "event.com.vmware.vim.vsm.dependency.create.vm.fullFormat",
+ "fullFormat": "com.vmware.vim.vsm.dependency.create.vm|event.com.vmware.vim.vsm.dependency.create.vm.fullFormat"
+},
+{
+ "category": "event.com.vmware.vim.vsm.dependency.destroy.vApp.category",
+ "key": "EventEx",
+ "description": "com.vmware.vim.vsm.dependency.destroy.vApp",
+ "formatOnVm": "event.com.vmware.vim.vsm.dependency.destroy.vApp.fullFormat",
+ "fullFormat": "com.vmware.vim.vsm.dependency.destroy.vApp|event.com.vmware.vim.vsm.dependency.destroy.vApp.fullFormat"
+},
+{
+ "category": "event.com.vmware.vim.vsm.dependency.destroy.vm.category",
+ "key": "EventEx",
+ "description": "com.vmware.vim.vsm.dependency.destroy.vm",
+ "formatOnVm": "event.com.vmware.vim.vsm.dependency.destroy.vm.fullFormat",
+ "fullFormat": "com.vmware.vim.vsm.dependency.destroy.vm|event.com.vmware.vim.vsm.dependency.destroy.vm.fullFormat"
+},
+{
+ "category": "event.com.vmware.vim.vsm.dependency.reconfigure.vApp.category",
+ "key": "EventEx",
+ "description": "com.vmware.vim.vsm.dependency.reconfigure.vApp",
+ "formatOnVm": "event.com.vmware.vim.vsm.dependency.reconfigure.vApp.fullFormat",
+ "fullFormat": "com.vmware.vim.vsm.dependency.reconfigure.vApp|event.com.vmware.vim.vsm.dependency.reconfigure.vApp.fullFormat"
+},
+{
+ "category": "event.com.vmware.vim.vsm.dependency.reconfigure.vm.category",
+ "key": "EventEx",
+ "description": "com.vmware.vim.vsm.dependency.reconfigure.vm",
+ "formatOnVm": "event.com.vmware.vim.vsm.dependency.reconfigure.vm.fullFormat",
+ "fullFormat": "com.vmware.vim.vsm.dependency.reconfigure.vm|event.com.vmware.vim.vsm.dependency.reconfigure.vm.fullFormat"
+},
+{
+ "category": "event.com.vmware.vim.vsm.dependency.unbind.vApp.category",
+ "key": "EventEx",
+ "description": "com.vmware.vim.vsm.dependency.unbind.vApp",
+ "formatOnVm": "event.com.vmware.vim.vsm.dependency.unbind.vApp.fullFormat",
+ "fullFormat": "com.vmware.vim.vsm.dependency.unbind.vApp|event.com.vmware.vim.vsm.dependency.unbind.vApp.fullFormat"
+},
+{
+ "category": "event.com.vmware.vim.vsm.dependency.unbind.vm.category",
+ "key": "EventEx",
+ "description": "com.vmware.vim.vsm.dependency.unbind.vm",
+ "formatOnVm": "event.com.vmware.vim.vsm.dependency.unbind.vm.fullFormat",
+ "fullFormat": "com.vmware.vim.vsm.dependency.unbind.vm|event.com.vmware.vim.vsm.dependency.unbind.vm.fullFormat"
+},
+{
+ "category": "event.com.vmware.vim.vsm.dependency.update.vApp.category",
+ "key": "EventEx",
+ "description": "com.vmware.vim.vsm.dependency.update.vApp",
+ "formatOnVm": "event.com.vmware.vim.vsm.dependency.update.vApp.fullFormat",
+ "fullFormat": "com.vmware.vim.vsm.dependency.update.vApp|event.com.vmware.vim.vsm.dependency.update.vApp.fullFormat"
+},
+{
+ "category": "event.com.vmware.vim.vsm.dependency.update.vm.category",
+ "key": "EventEx",
+ "description": "com.vmware.vim.vsm.dependency.update.vm",
+ "formatOnVm": "event.com.vmware.vim.vsm.dependency.update.vm.fullFormat",
+ "fullFormat": "com.vmware.vim.vsm.dependency.update.vm|event.com.vmware.vim.vsm.dependency.update.vm.fullFormat"
+},
+{
+ "category": "event.com.vmware.vim.vsm.provider.register.category",
+ "key": "EventEx",
+ "description": "com.vmware.vim.vsm.provider.register",
+ "formatOnVm": "event.com.vmware.vim.vsm.provider.register.fullFormat",
+ "fullFormat": "com.vmware.vim.vsm.provider.register|event.com.vmware.vim.vsm.provider.register.fullFormat"
+},
+{
+ "category": "event.com.vmware.vim.vsm.provider.unregister.category",
+ "key": "EventEx",
+ "description": "com.vmware.vim.vsm.provider.unregister",
+ "formatOnVm": "event.com.vmware.vim.vsm.provider.unregister.fullFormat",
+ "fullFormat": "com.vmware.vim.vsm.provider.unregister|event.com.vmware.vim.vsm.provider.unregister.fullFormat"
+},
+{
+ "category": "event.com.vmware.vim.vsm.provider.update.category",
+ "key": "EventEx",
+ "description": "com.vmware.vim.vsm.provider.update",
+ "formatOnVm": "event.com.vmware.vim.vsm.provider.update.fullFormat",
+ "fullFormat": "com.vmware.vim.vsm.provider.update|event.com.vmware.vim.vsm.provider.update.fullFormat"
+},
+{
+ "category": "event.esx.problem.3rdParty.info.category",
+ "key": "EventEx",
+ "description": "esx.problem.3rdParty.info",
+ "formatOnVm": "event.esx.problem.3rdParty.info.fullFormat",
+ "fullFormat": "esx.problem.3rdParty.info|event.esx.problem.3rdParty.info.fullFormat"
+},
+{
+ "category": "event.esx.problem.dhclient.lease.offered.error.category",
+ "key": "EventEx",
+ "description": "esx.problem.dhclient.lease.offered.error",
+ "formatOnVm": "event.esx.problem.dhclient.lease.offered.error.fullFormat",
+ "fullFormat": "esx.problem.dhclient.lease.offered.error|event.esx.problem.dhclient.lease.offered.error.fullFormat"
+},
+{
+ "category": "info",
+ "key": "EventEx",
+ "description": "Application consistent delta completed",
+ "formatOnVm": "Application consistent delta completed ({bytes} bytes transferred)",
+ "fullFormat": "hbr.primary.AppQuiescedDeltaCompletedEvent|Application consistent delta completed for virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name} ({bytes} bytes transferred)"
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Connection to VR Server restored.",
+ "formatOnVm": "Connection to VR Server restored.",
+ "fullFormat": "hbr.primary.ConnectionRestoredToHbrServerEvent|Connection to VR Server restored for virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name}."
+},
+{
+ "category": "warning",
+ "key": "EventEx",
+ "description": "Delta aborted.",
+ "formatOnVm": "Delta aborted: {reason.@enum.hbr.primary.ReasonForDeltaAbort}",
+ "fullFormat": "hbr.primary.DeltaAbortedEvent|Delta aborted for virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name}: {reason.@enum.hbr.primary.ReasonForDeltaAbort}"
+},
+{
+ "category": "info",
+ "key": "EventEx",
+ "description": "Delta completed.",
+ "formatOnVm": "Delta completed ({bytes} bytes transferred).",
+ "fullFormat": "hbr.primary.DeltaCompletedEvent|Delta completed for virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name} ({bytes} bytes transferred)."
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Delta started.",
+ "formatOnVm": "Delta started by {userName}.",
+ "fullFormat": "hbr.primary.DeltaStartedEvent|Delta started by {userName} for virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name}."
+},
+{
+ "category": "warning",
+ "key": "EventEx",
+ "description": "File system consistent delta completed",
+ "formatOnVm": "File system consistent delta completed ({bytes} bytes transferred)",
+ "fullFormat": "hbr.primary.FSQuiescedDeltaCompletedEvent|File system consistent delta completed for virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name} ({bytes} bytes transferred)"
+},
+{
+ "category": "error",
+ "key": "EventEx",
+ "description": "Failed to start delta.",
+ "formatOnVm": "Failed to start delta: {reason.@enum.fault.ReplicationVmFault.ReasonForFault}",
+ "fullFormat": "hbr.primary.FailedToStartDeltaEvent|Failed to start delta for virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name}: {reason.@enum.fault.ReplicationVmFault.ReasonForFault}"
+},
+{
+ "category": "error",
+ "key": "EventEx",
+ "description": "Failed to start full sync.",
+ "formatOnVm": "Failed to start full sync: {reason.@enum.fault.ReplicationVmFault.ReasonForFault}",
+ "fullFormat": "hbr.primary.FailedToStartSyncEvent|Failed to start full sync for virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name}: {reason.@enum.fault.ReplicationVmFault.ReasonForFault}"
+},
+{
+ "category": "error",
+ "key": "EventEx",
+ "description": "Disk replication configuration is invalid.",
+ "formatOnVm": "Replication configuration is invalid for disk {diskKey}: {reasonForFault.@enum.fault.ReplicationDiskConfigFault.ReasonForFault}",
+ "fullFormat": "hbr.primary.InvalidDiskReplicationConfigurationEvent|Replication configuration is invalid for virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name}, disk {diskKey}: {reasonForFault.@enum.fault.ReplicationDiskConfigFault.ReasonForFault}"
+},
+{
+ "category": "error",
+ "key": "EventEx",
+ "description": "Virtual machine replication configuration is invalid.",
+ "formatOnVm": "Replication configuration is invalid: {reasonForFault.@enum.fault.ReplicationVmConfigFault.ReasonForFault}",
+ "fullFormat": "hbr.primary.InvalidVmReplicationConfigurationEvent|Replication configuration is invalid for virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name}: {reasonForFault.@enum.fault.ReplicationVmConfigFault.ReasonForFault}"
+},
+{
+ "category": "warning",
+ "key": "EventEx",
+ "description": "No connection to VR Server.",
+ "formatOnVm": "No connection to VR Server: {reason.@enum.hbr.primary.ReasonForNoServerConnection}",
+ "fullFormat": "hbr.primary.NoConnectionToHbrServerEvent|No connection to VR Server for virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name}: {reason.@enum.hbr.primary.ReasonForNoServerConnection}"
+},
+{
+ "category": "error",
+ "key": "EventEx",
+ "description": "VR Server error: {reason.@enum.hbr.primary.ReasonForNoServerProgress}",
+ "formatOnVm": "VR Server error: {reason.@enum.hbr.primary.ReasonForNoServerProgress}",
+ "fullFormat": "hbr.primary.NoProgressWithHbrServerEvent|VR Server error for virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name}: {reason.@enum.hbr.primary.ReasonForNoServerProgress}"
+},
+{
+ "category": "warning",
+ "key": "ExtendedEvent",
+ "description": "Quiescing is not supported for this virtual machine.",
+ "formatOnVm": "Quiescing is not supported for this virtual machine.",
+ "fullFormat": "hbr.primary.QuiesceNotSupported|Quiescing is not supported for virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name}."
+},
+{
+ "category": "info",
+ "key": "EventEx",
+ "description": "Full sync completed.",
+ "formatOnVm": "Full sync completed ({bytes} bytes transferred).",
+ "fullFormat": "hbr.primary.SyncCompletedEvent|Full sync completed for virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name} ({bytes} bytes transferred)."
+},
+{
+ "category": "info",
+ "key": "ExtendedEvent",
+ "description": "Full sync started.",
+ "formatOnVm": "Full sync started by {userName}.",
+ "fullFormat": "hbr.primary.SyncStartedEvent|Full sync started by {userName} for virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name}."
+},
+{
+ "category": "warning",
+ "key": "EventEx",
+ "description": "Delta completed.",
+ "formatOnVm": "Delta completed ({bytes} bytes transferred).",
+ "fullFormat": "hbr.primary.UnquiescedDeltaCompletedEvent|Delta completed for virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name} ({bytes} bytes transferred)."
+},
+{
+ "category": "info",
+ "key": "EventEx",
+ "description": "Replication configuration changed.",
+ "formatOnVm": "Replication configuration changed ({numDisks} disks, {rpo} minutes RPO, VR Server is {vrServerAddress}:{vrServerPort}).",
+ "fullFormat": "hbr.primary.VmReplicationConfigurationChangedEvent|Replication configuration changed for virtual machine {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name} ({numDisks} disks, {rpo} minutes RPO, VR Server is {vrServerAddress}:{vrServerPort})."
+},
+{
+ "category": "info",
+ "key": "AlarmAcknowledgedEvent",
+ "description": "Alarm acknowledged",
+ "formatOnVm": "Acknowledged alarm '{alarm.name}'",
+ "fullFormat": "Acknowledged alarm '{alarm.name}' on {entity.name}"
+},
+{
+ "category": "info",
+ "key": "AlarmClearedEvent",
+ "description": "Alarm cleared",
+ "formatOnVm": "Manually cleared alarm '{alarm.name}' from {from.@enum.ManagedEntity.Status}",
+ "fullFormat": "Manually cleared alarm '{alarm.name}' on {entity.name} from {from.@enum.ManagedEntity.Status}"
+},
+{
+ "category": "info",
+ "key": "AlarmCreatedEvent",
+ "description": "Alarm created",
+ "formatOnVm": "Created alarm '{alarm.name}'",
+ "fullFormat": "Created alarm '{alarm.name}' on {entity.name}"
+},
+{
+ "category": "info",
+ "key": "AlarmEmailCompletedEvent",
+ "description": "Alarm email sent",
+ "formatOnVm": "Alarm '{alarm.name}' sent email to {to}",
+ "fullFormat": "Alarm '{alarm.name}' on {entity.name} sent email to {to}"
+},
+{
+ "category": "error",
+ "key": "AlarmEmailFailedEvent",
+ "description": "Cannot send alarm email",
+ "formatOnVm": "Alarm '{alarm.name}' cannot send email to {to}",
+ "fullFormat": "Alarm '{alarm.name}' on {entity.name} cannot send email to {to}"
+},
+{
+ "category": "info",
+ "key": "AlarmReconfiguredEvent",
+ "description": "Alarm reconfigured",
+ "formatOnVm": "Reconfigured alarm '{alarm.name}'",
+ "fullFormat": "Reconfigured alarm '{alarm.name}' on {entity.name}"
+},
+{
+ "category": "info",
+ "key": "AlarmRemovedEvent",
+ "description": "Alarm removed",
+ "formatOnVm": "Removed alarm '{alarm.name}'",
+ "fullFormat": "Removed alarm '{alarm.name}' on {entity.name}"
+},
+{
+ "category": "info",
+ "key": "AlarmScriptCompleteEvent",
+ "description": "Alarm script completed",
+ "formatOnVm": "Alarm '{alarm.name}' ran script {script}",
+ "fullFormat": "Alarm '{alarm.name}' on {entity.name} ran script {script}"
+},
+{
+ "category": "error",
+ "key": "AlarmScriptFailedEvent",
+ "description": "Alarm script not completed",
+ "formatOnVm": "Alarm '{alarm.name}' did not complete script: {reason.msg}",
+ "fullFormat": "Alarm '{alarm.name}' on {entity.name} did not complete script: {reason.msg}"
+},
+{
+ "category": "info",
+ "key": "AlarmSnmpCompletedEvent",
+ "description": "Alarm SNMP trap sent",
+ "formatOnVm": "Alarm '{alarm.name}': an SNMP trap was sent",
+ "fullFormat": "Alarm '{alarm.name}': an SNMP trap for entity {entity.name} was sent"
+},
+{
+ "category": "error",
+ "key": "AlarmSnmpFailedEvent",
+ "description": "Alarm SNMP trap not sent",
+ "formatOnVm": "Alarm '{alarm.name}' did not send SNMP trap: {reason.msg}",
+ "fullFormat": "Alarm '{alarm.name}' on entity {entity.name} did not send SNMP trap: {reason.msg}"
+},
+{
+ "category": "info",
+ "key": "AlarmStatusChangedEvent",
+ "description": "Alarm status changed",
+ "formatOnVm": "Alarm '{alarm.name}' changed from {from.@enum.ManagedEntity.Status} to {to.@enum.ManagedEntity.Status}",
+ "fullFormat": "Alarm '{alarm.name}' on {entity.name} changed from {from.@enum.ManagedEntity.Status} to {to.@enum.ManagedEntity.Status}"
+},
+{
+ "category": "info",
+ "key": "CustomFieldValueChangedEvent",
+ "description": "Custom field value changed",
+ "formatOnVm": "Changed custom field {name} to {value}",
+ "fullFormat": "Changed custom field {name} on {entity.name} in {datacenter.name} to {value}"
+},
+{
+ "category": "info",
+ "key": "DVPortgroupEvent",
+ "description": "dvPort group event",
+ "formatOnVm": "dvPort group event",
+ "fullFormat": ""
+},
+{
+ "category": "info",
+ "key": "DatastoreIORMReconfiguredEvent",
+ "description": "Reconfigured Storage I/O Control on datastore",
+ "formatOnVm": "Reconfigured Storage I/O Control on datastore {datastore.name}",
+ "fullFormat": "Reconfigured Storage I/O Control on datastore {datastore.name}"
+},
+{
+ "category": "info",
+ "key": "DrsRuleComplianceEvent",
+ "description": "VM is now compliant with DRS VM-Host affinity rules",
+ "formatOnVm": "virtual machine on {host.name} is now compliant with DRS VM-Host affinity rules",
+ "fullFormat": "{vm.name} on {host.name} in {datacenter.name} is now compliant with DRS VM-Host affinity rules"
+},
+{
+ "category": "info",
+ "key": "DrsRuleViolationEvent",
+ "description": "VM is violating a DRS VM-Host affinity rule",
+ "formatOnVm": "virtual machine on {host.name} is violating a DRS VM-Host affinity rule",
+ "fullFormat": "{vm.name} on {host.name} in {datacenter.name} is violating a DRS VM-Host affinity rule"
+},
+{
+ "category": "info",
+ "key": "DrsVmMigratedEvent",
+ "description": "DRS VM migrated",
+ "formatOnVm": "Migrated from {sourceHost.name} to {host.name} by DRS",
+ "fullFormat": "DRS migrated {vm.name} from {sourceHost.name} to {host.name} in cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "DrsVmPoweredOnEvent",
+ "description": "DRS VM powered on",
+ "formatOnVm": "DRS powered On the virtual machine on {host.name}",
+ "fullFormat": "DRS powered On {vm.name} on {host.name} in {datacenter.name}"
+},
+{
+ "category": "error",
+ "key": "GeneralVmErrorEvent",
+ "description": "VM error",
+ "formatOnVm": "{message} on {host.name}",
+ "fullFormat": "Error detected for {vm.name} on {host.name} in {datacenter.name}: {message}"
+},
+{
+ "category": "info",
+ "key": "GeneralVmInfoEvent",
+ "description": "VM information",
+ "formatOnVm": "{message} on {host.name}",
+ "fullFormat": "Issue detected for {vm.name} on {host.name} in {datacenter.name}: {message}"
+},
+{
+ "category": "warning",
+ "key": "GeneralVmWarningEvent",
+ "description": "VM warning",
+ "formatOnVm": "{message} on {host.name}",
+ "fullFormat": "Issue detected for {vm.name} on {host.name} in {datacenter.name}: {message}"
+},
+{
+ "category": "error",
+ "key": "MigrationErrorEvent",
+ "description": "Migration error",
+ "formatOnVm": "Unable to migrate from {host.name}: {fault.msg}",
+ "fullFormat": "Unable to migrate {vm.name} from {host.name} in {datacenter.name}: {fault.msg}"
+},
+{
+ "category": "error",
+ "key": "MigrationHostErrorEvent",
+ "description": "Migration host error",
+ "formatOnVm": "Unable to migrate from {host.name} to {dstHost.name}: {fault.msg}",
+ "fullFormat": "Unable to migrate {vm.name} from {host.name} to {dstHost.name} in {datacenter.name}: {fault.msg}"
+},
+{
+ "category": "warning",
+ "key": "MigrationHostWarningEvent",
+ "description": "Migration host warning",
+ "formatOnVm": "Migration from {host.name} to {dstHost.name}: {fault.msg}",
+ "fullFormat": "Migration of {vm.name} from {host.name} to {dstHost.name} in {datacenter.name}: {fault.msg}"
+},
+{
+ "category": "error",
+ "key": "MigrationResourceErrorEvent",
+ "description": "Migration resource error",
+ "formatOnVm": "Unable to migrate from {host.name} to {dstHost.name} and resource pool {dstPool.name}: {fault.msg}",
+ "fullFormat": "Cannot migrate {vm.name} from {host.name} to {dstHost.name} and resource pool {dstPool.name} in {datacenter.name}: {fault.msg}"
+},
+{
+ "category": "warning",
+ "key": "MigrationResourceWarningEvent",
+ "description": "Migration resource warning",
+ "formatOnVm": "Migration from {host.name} to {dstHost.name} and resource pool {dstPool.name}: {fault.msg}",
+ "fullFormat": "Migration of {vm.name} from {host.name} to {dstHost.name} and resource pool {dstPool.name} in {datacenter.name}: {fault.msg}"
+},
+{
+ "category": "warning",
+ "key": "MigrationWarningEvent",
+ "description": "Migration warning",
+ "formatOnVm": "Migration from {host.name}: {fault.msg}",
+ "fullFormat": "Migration of {vm.name} from {host.name} in {datacenter.name}: {fault.msg}"
+},
+{
+ "category": "info",
+ "key": "NoMaintenanceModeDrsRecommendationForVM",
+ "description": "No maintenance mode DRS recommendation for the VM",
+ "formatOnVm": "Unable to automatically migrate from {host.name}",
+ "fullFormat": "Unable to automatically migrate {vm.name} from {host.name}"
+},
+{
+ "category": "info",
+ "key": "NonVIWorkloadDetectedOnDatastoreEvent",
+ "description": "Unmanaged workload detected on SIOC-enabled datastore",
+ "formatOnVm": "An unmanaged I/O workload is detected on a SIOC-enabled datastore: {datastore.name}.",
+ "fullFormat": "An unmanaged I/O workload is detected on a SIOC-enabled datastore: {datastore.name}."
+},
+{
+ "category": "info",
+ "key": "NotEnoughResourcesToStartVmEvent",
+ "description": "Not enough resources for vSphere HA to start VM",
+ "formatOnVm": "Not enough resources to failover this virtual machine. vSphere HA will retry when resources become available.",
+ "fullFormat": "Not enough resources to failover {vm.name} in {computeResource.name} in {datacenter.name}. vSphere HA will retry when resources become available."
+},
+{
+ "category": "info",
+ "key": "ScheduledTaskCompletedEvent",
+ "description": "Scheduled task completed",
+ "formatOnVm": "Task {scheduledTask.name} completed successfully",
+ "fullFormat": "Task {scheduledTask.name} on {entity.name} in datacenter {datacenter.name} completed successfully"
+},
+{
+ "category": "info",
+ "key": "ScheduledTaskCreatedEvent",
+ "description": "Scheduled task created",
+ "formatOnVm": "Created task {scheduledTask.name}",
+ "fullFormat": "Created task {scheduledTask.name} on {entity.name} in datacenter {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "ScheduledTaskEmailCompletedEvent",
+ "description": "Sent scheduled task email",
+ "formatOnVm": "Task {scheduledTask.name} on {entity.name} sent email to {to}",
+ "fullFormat": "Task {scheduledTask.name} on {entity.name} in datacenter {datacenter.name} sent email to {to}"
+},
+{
+ "category": "error",
+ "key": "ScheduledTaskEmailFailedEvent",
+ "description": "Scheduled task email not sent",
+ "formatOnVm": "Task {scheduledTask.name} cannot send email to {to}: {reason.msg}",
+ "fullFormat": "Task {scheduledTask.name} on {entity.name} in datacenter {datacenter.name} cannot send email to {to}: {reason.msg}"
+},
+{
+ "category": "error",
+ "key": "ScheduledTaskFailedEvent",
+ "description": "Cannot complete scheduled task",
+ "formatOnVm": "Task {scheduledTask.name} cannot be completed: {reason.msg}",
+ "fullFormat": "Task {scheduledTask.name} on {entity.name} in datacenter {datacenter.name} cannot be completed: {reason.msg}"
+},
+{
+ "category": "info",
+ "key": "ScheduledTaskReconfiguredEvent",
+ "description": "Scheduled task reconfigured",
+ "formatOnVm": "Reconfigured task {scheduledTask.name}",
+ "fullFormat": "Reconfigured task {scheduledTask.name} on {entity.name} in datacenter {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "ScheduledTaskRemovedEvent",
+ "description": "Scheduled task removed",
+ "formatOnVm": "Removed task {scheduledTask.name}",
+ "fullFormat": "Removed task {scheduledTask.name} on {entity.name} in datacenter {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "ScheduledTaskStartedEvent",
+ "description": "Scheduled task started",
+ "formatOnVm": "Running task {scheduledTask.name}",
+ "fullFormat": "Running task {scheduledTask.name} on {entity.name} in datacenter {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmAcquiredMksTicketEvent",
+ "description": "VM acquired MKS ticket",
+ "formatOnVm": "Remote console has been opened for this virtual machine on {host.name}",
+ "fullFormat": "Remote console to {vm.name} on  {host.name} in {datacenter.name} has been opened"
+},
+{
+ "category": "info",
+ "key": "VmAcquiredTicketEvent",
+ "description": "VM acquired ticket",
+ "formatOnVm": "A ticket of type {ticketType} has been acquired.",
+ "fullFormat": "A ticket for {vm.name} of type {ticketType} on {host.name} in {datacenter.name} has been acquired"
+},
+{
+ "category": "info",
+ "key": "VmAutoRenameEvent",
+ "description": "VM auto rename",
+ "formatOnVm": "Conflicting or invalid virtual machine name detected. Renamed from {oldName} to {newName}",
+ "fullFormat": "Invalid name for {vm.name} on {host.name} in {datacenter.name}. Renamed from {oldName} to {newName}"
+},
+{
+ "category": "info",
+ "key": "VmBeingClonedEvent",
+ "description": "VM being cloned",
+ "formatOnVm": "Being cloned to {destName} on {destHost.name}",
+ "fullFormat": "Cloning {vm.name} on host {host.name} in {datacenter.name} to {destName} on host {destHost.name}"
+},
+{
+ "category": "info",
+ "key": "VmBeingClonedNoFolderEvent",
+ "description": "VM being cloned to a vApp",
+ "formatOnVm": "Being cloned to {destName} on {destHost.name} to a vApp",
+ "fullFormat": "Cloning {vm.name} on host {host.name} in {datacenter.name} to {destName} on host {destHost.name} to a vApp"
+},
+{
+ "category": "info",
+ "key": "VmBeingCreatedEvent",
+ "description": "Creating VM",
+ "formatOnVm": "Creating VM on host {host.name}",
+ "fullFormat": "Creating {vm.name} on host {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmBeingDeployedEvent",
+ "description": "Deploying VM",
+ "formatOnVm": "Deploying VM on host {host.name} from template {srcTemplate.name}",
+ "fullFormat": "Deploying {vm.name} on host {host.name} in {datacenter.name} from template {srcTemplate.name}"
+},
+{
+ "category": "info",
+ "key": "VmBeingHotMigratedEvent",
+ "description": "VM is hot migrating",
+ "formatOnVm": "Migrating VM from {host.name}, {ds.name} to {destHost.name}, {destDatastore.name}",
+ "fullFormat": "Migrating {vm.name} from {host.name}, {ds.name} to {destHost.name}, {destDatastore.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmBeingMigratedEvent",
+ "description": "VM migrating",
+ "formatOnVm": "Relocating VM from {host.name} to {destHost.name}",
+ "fullFormat": "Relocating {vm.name} from {host.name}, {ds.name} to {destHost.name}, {destDatastore.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmBeingRelocatedEvent",
+ "description": "VM relocating",
+ "formatOnVm": "Relocating from {host.name}, {ds.name} to {destHost.name}, {destDatastore.name}",
+ "fullFormat": "Relocating {vm.name} in {datacenter.name} from {host.name}, {ds.name} to {destHost.name}, {destDatastore.name}"
+},
+{
+ "category": "info",
+ "key": "VmCloneEvent",
+ "description": "<VM Clone Event>",
+ "formatOnVm": "<internal>",
+ "fullFormat": "<internal>"
+},
+{
+ "category": "info",
+ "key": "VmConfigMissingEvent",
+ "description": "VM configuration missing",
+ "formatOnVm": "Configuration file cannot be found",
+ "fullFormat": "Configuration file for {vm.name} on {host.name} in {datacenter.name} cannot be found"
+},
+{
+ "category": "info",
+ "key": "VmConnectedEvent",
+ "description": "VM connected",
+ "formatOnVm": "Host is connected",
+ "fullFormat": "Virtual machine {vm.name} is connected"
+},
+{
+ "category": "info",
+ "key": "VmCreatedEvent",
+ "description": "VM created",
+ "formatOnVm": "Virtual machine created",
+ "fullFormat": "Created virtual machine {vm.name} on {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmDVPortEvent",
+ "description": "dvPort connected to VM changed status",
+ "formatOnVm": "dvPort changed status",
+ "fullFormat": "dvPort connected to VM {vm.name} on {host.name} in {datacenter.name} changed status"
+},
+{
+ "category": "info",
+ "key": "VmDasBeingResetEvent",
+ "description": "vSphere HA is resetting VM",
+ "formatOnVm": "This virtual machine reset by vSphere HA. Reason: {reason.@enum.VmDasBeingResetEvent.ReasonCode}. ",
+ "fullFormat": "{vm.name} on {host.name} in cluster {computeResource.name} in {datacenter.name} reset by vSphere HA. Reason: {reason.@enum.VmDasBeingResetEvent.ReasonCode}"
+},
+{
+ "category": "info",
+ "key": "VmDasBeingResetWithScreenshotEvent",
+ "description": "vSphere HA enabled VM reset with screenshot",
+ "formatOnVm": "This virtual machine reset by vSphere HA. Reason: {reason.@enum.VmDasBeingResetEvent.ReasonCode}. A screenshot is saved at {screenshotFilePath}",
+ "fullFormat": "{vm.name} on {host.name} in cluster {computeResource.name} in {datacenter.name} reset by vSphere HA. Reason: {reason.@enum.VmDasBeingResetEvent.ReasonCode}. A screenshot is saved at {screenshotFilePath}."
+},
+{
+ "category": "warning",
+ "key": "VmDasResetFailedEvent",
+ "description": "vSphere HA cannot reset VM",
+ "formatOnVm": "vSphere HA cannot reset this virtual machine",
+ "fullFormat": "vSphere HA cannot reset {vm.name} on {host.name} in cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmDisconnectedEvent",
+ "description": "VM disconnected",
+ "formatOnVm": "{host.name} is disconnected",
+ "fullFormat": "{vm.name} on host {host.name} in {datacenter.name} is disconnected"
+},
+{
+ "category": "info",
+ "key": "VmDiscoveredEvent",
+ "description": "VM discovered",
+ "formatOnVm": "Discovered on {host.name}",
+ "fullFormat": "Discovered {vm.name} on {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmEmigratingEvent",
+ "description": "VM emigrating",
+ "formatOnVm": "Migrating off host {host.name}",
+ "fullFormat": "Migrating {vm.name} off host {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmEndRecordingEvent",
+ "description": "End a recording session",
+ "formatOnVm": "End a recording session",
+ "fullFormat": "End a recording session on {vm.name}"
+},
+{
+ "category": "info",
+ "key": "VmEndReplayingEvent",
+ "description": "End a replay session",
+ "formatOnVm": "End a replay session",
+ "fullFormat": "End a replay session on {vm.name}"
+},
+{
+ "category": "error",
+ "key": "VmFailedMigrateEvent",
+ "description": "Cannot migrate VM",
+ "formatOnVm": "Cannot migrate to {destHost.name}, {destDatastore.name}",
+ "fullFormat": "Cannot migrate {vm.name} from {host.name}, {ds.name} to {destHost.name}, {destDatastore.name} in {datacenter.name}"
+},
+{
+ "category": "error",
+ "key": "VmFailedRelayoutEvent",
+ "description": "Cannot complete VM relayout.",
+ "formatOnVm": "Cannot complete relayout for this virtual machine on {host.name}: {reason.msg}",
+ "fullFormat": "Cannot complete relayout {vm.name} on {host.name} in {datacenter.name}: {reason.msg}"
+},
+{
+ "category": "error",
+ "key": "VmFailedRelayoutOnVmfs2DatastoreEvent",
+ "description": "Cannot complete VM relayout on Vmfs2 datastore",
+ "formatOnVm": "Cannot complete relayout due to disks on a VMFS2 volume",
+ "fullFormat": "Cannot complete relayout for virtual machine {vm.name} which has disks on a VMFS2 volume."
+},
+{
+ "category": "error",
+ "key": "VmFailedStartingSecondaryEvent",
+ "description": "vCenter cannot start the Fault Tolerance secondary VM",
+ "formatOnVm": "vCenter cannot start the Fault Tolerance secondary VM. Reason: {reason.@enum.VmFailedStartingSecondaryEvent.FailureReason}",
+ "fullFormat": "vCenter cannot start the Fault Tolerance secondary VM for {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name}. Reason: {reason.@enum.VmFailedStartingSecondaryEvent.FailureReason}"
+},
+{
+ "category": "error",
+ "key": "VmFailedToPowerOffEvent",
+ "description": "Cannot power Off the VM.",
+ "formatOnVm": "Cannot power Off: {reason.msg}",
+ "fullFormat": "Cannot power Off {vm.name} on {host.name} in {datacenter.name}: {reason.msg}"
+},
+{
+ "category": "error",
+ "key": "VmFailedToPowerOnEvent",
+ "description": "Cannot power On the VM.",
+ "formatOnVm": "Cannot power On {vm.name} on {host.name}. {reason.msg}",
+ "fullFormat": "Cannot power On {vm.name} on {host.name} in {datacenter.name}. {reason.msg}"
+},
+{
+ "category": "error",
+ "key": "VmFailedToRebootGuestEvent",
+ "description": "VM cannot reboot the guest OS.",
+ "formatOnVm": "Cannot reboot Guest OS. {reason.msg}",
+ "fullFormat": "Cannot reboot the guest OS for {vm.name} on {host.name} in {datacenter.name}. {reason.msg}"
+},
+{
+ "category": "error",
+ "key": "VmFailedToResetEvent",
+ "description": "Cannot reset VM",
+ "formatOnVm": "Cannot suspend {host.name}: {reason.msg}",
+ "fullFormat": "Cannot suspend {vm.name} on {host.name} in {datacenter.name}: {reason.msg}"
+},
+{
+ "category": "error",
+ "key": "VmFailedToShutdownGuestEvent",
+ "description": "Cannot shut down the guest OS",
+ "formatOnVm": "Cannot shut down the guest OS. {reason.msg}",
+ "fullFormat": "{vm.name} cannot shut down the guest OS on {host.name} in {datacenter.name}: {reason.msg}"
+},
+{
+ "category": "error",
+ "key": "VmFailedToStandbyGuestEvent",
+ "description": "VM cannot standby the guest OS",
+ "formatOnVm": "Cannot standby the guest OS. {reason.msg}",
+ "fullFormat": "{vm.name} cannot standby the guest OS on {host.name} in {datacenter.name}: {reason.msg}"
+},
+{
+ "category": "error",
+ "key": "VmFailedToSuspendEvent",
+ "description": "Cannot suspend VM",
+ "formatOnVm": "Cannot suspend {host.name}: {reason.msg}",
+ "fullFormat": "Cannot suspend {vm.name} on {host.name} in {datacenter.name}: {reason.msg}"
+},
+{
+ "category": "error",
+ "key": "VmFailedUpdatingSecondaryConfig",
+ "description": "vCenter cannot update the Fault Tolerance secondary VM configuration",
+ "formatOnVm": "vCenter cannot update the Fault Tolerance secondary VM configuration",
+ "fullFormat": "vCenter cannot update the Fault Tolerance secondary VM configuration for {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "warning",
+ "key": "VmFailoverFailed",
+ "description": "vSphere HA virtual machine failover unsuccessful",
+ "formatOnVm": "vSphere HA unsuccessfully failed over this virtual machine. vSphere HA will retry if the maximum number of attempts has not been exceeded. Reason: {reason.msg}",
+ "fullFormat": "vSphere HA unsuccessfully failed over {vm.name} on {host.name} in cluster {computeResource.name} in {datacenter.name}. vSphere HA will retry if the maximum number of attempts has not been exceeded. Reason: {reason.msg}"
+},
+{
+ "category": "info",
+ "key": "VmFaultToleranceStateChangedEvent",
+ "description": "VM Fault Tolerance state changed",
+ "formatOnVm": "Fault Tolerance state changed from {oldState.@enum.VirtualMachine.FaultToleranceState} to {newState.@enum.VirtualMachine.FaultToleranceState}",
+ "fullFormat": "Fault Tolerance state of {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name} changed from {oldState.@enum.VirtualMachine.FaultToleranceState} to {newState.@enum.VirtualMachine.FaultToleranceState}"
+},
+{
+ "category": "info",
+ "key": "VmFaultToleranceTurnedOffEvent",
+ "description": "VM Fault Tolerance turned off",
+ "formatOnVm": "Fault Tolerance protection has been turned off for this virtual machine",
+ "fullFormat": "Fault Tolerance protection has been turned off for {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmFaultToleranceVmTerminatedEvent",
+ "description": "Fault Tolerance VM terminated",
+ "formatOnVm": "The Fault Tolerance VM has been terminated. {reason.@enum.VmFaultToleranceVmTerminatedEvent.TerminateReason}",
+ "fullFormat": "The Fault Tolerance VM {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name} has been terminated. {reason.@enum.VmFaultToleranceVmTerminatedEvent.TerminateReason}"
+},
+{
+ "category": "info",
+ "key": "VmGuestRebootEvent",
+ "description": "Guest reboot",
+ "formatOnVm": "Guest OS reboot",
+ "fullFormat": "Guest OS reboot for {vm.name} on {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmGuestShutdownEvent",
+ "description": "Guest OS shut down",
+ "formatOnVm": "Guest OS shut down",
+ "fullFormat": "Guest OS shut down for {vm.name} on {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmGuestStandbyEvent",
+ "description": "Guest standby",
+ "formatOnVm": "Guest OS standby",
+ "fullFormat": "Guest OS standby for {vm.name} on {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmInstanceUuidAssignedEvent",
+ "description": "Assign a new instance UUID",
+ "formatOnVm": "Assign a new instance UUID ({instanceUuid})",
+ "fullFormat": "Assign a new instance UUID ({instanceUuid}) to {vm.name}"
+},
+{
+ "category": "info",
+ "key": "VmInstanceUuidChangedEvent",
+ "description": "Instance UUID Changed",
+ "formatOnVm": "The instance UUID has been changed from ({oldInstanceUuid}) to ({newInstanceUuid})",
+ "fullFormat": "The instance UUID of {vm.name} has been changed from ({oldInstanceUuid}) to ({newInstanceUuid})"
+},
+{
+ "category": "error",
+ "key": "VmInstanceUuidConflictEvent",
+ "description": "Instance UUIDs conflict",
+ "formatOnVm": "The instance UUID ({instanceUuid}) conflicts with the instance UUID assigned to {conflictedVm.name}",
+ "fullFormat": "The instance UUID ({instanceUuid}) of {vm.name} conflicts with the instance UUID assigned to {conflictedVm.name}"
+},
+{
+ "category": "info",
+ "key": "VmMacAssignedEvent",
+ "description": "VM MAC assigned",
+ "formatOnVm": "New MAC address ({mac}) assigned to adapter {adapter}",
+ "fullFormat": "New MAC address ({mac}) assigned to adapter {adapter} for {vm.name}"
+},
+{
+ "category": "warning",
+ "key": "VmMacChangedEvent",
+ "description": "VM MAC changed",
+ "formatOnVm": "Changed MAC address from {oldMac} to {newMac} for adapter {adapter}",
+ "fullFormat": "Changed MAC address from {oldMac} to {newMac} for adapter {adapter} for {vm.name}"
+},
+{
+ "category": "error",
+ "key": "VmMacConflictEvent",
+ "description": "VM MAC conflict",
+ "formatOnVm": "The MAC address ({mac}) conflicts with MAC assigned to {conflictedVm.name}",
+ "fullFormat": "The MAC address ({mac}) of {vm.name} conflicts with MAC assigned to  {conflictedVm.name}"
+},
+{
+ "category": "warning",
+ "key": "VmMaxFTRestartCountReached",
+ "description": "vSphere HA reached maximum Secondary VM restart count.",
+ "formatOnVm": "vSphere HA stopped trying to restart Secondary VM because the maximum VM restart count was reached",
+ "fullFormat": "vSphere HA stopped trying to restart Secondary VM {vm.name} on {host.name} in cluster {computeResource.name} in {datacenter.name} because the maximum VM restart count was reached"
+},
+{
+ "category": "warning",
+ "key": "VmMaxRestartCountReached",
+ "description": "vSphere HA reached maximum VM restart count",
+ "formatOnVm": "vSphere HA stopped trying to restart this VM because the maximum VM restart count was reached",
+ "fullFormat": "vSphere HA stopped trying to restart {vm.name} on {host.name} in cluster {computeResource.name} in {datacenter.name} because the maximum VM restart count was reached"
+},
+{
+ "category": "error",
+ "key": "VmMessageErrorEvent",
+ "description": "VM error message",
+ "formatOnVm": "Error message from {host.name}: {message}",
+ "fullFormat": "Error message on {vm.name} on {host.name} in {datacenter.name}: {message}"
+},
+{
+ "category": "info",
+ "key": "VmMessageEvent",
+ "description": "VM information message",
+ "formatOnVm": "Message from {host.name}: {message}",
+ "fullFormat": "Message on {vm.name} on {host.name} in {datacenter.name}: {message}"
+},
+{
+ "category": "warning",
+ "key": "VmMessageWarningEvent",
+ "description": "VM warning message",
+ "formatOnVm": "Warning message from {host.name}: {message}",
+ "fullFormat": "Warning message on {vm.name} on {host.name} in {datacenter.name}: {message}"
+},
+{
+ "category": "info",
+ "key": "VmMigratedEvent",
+ "description": "VM migrated",
+ "formatOnVm": "Migration from host {sourceHost.name}, {sourceDatastore.name} completed",
+ "fullFormat": "Migration of virtual machine {vm.name} from {sourceHost.name}, {sourceDatastore.name} to {host.name}, {ds.name} completed"
+},
+{
+ "category": "error",
+ "key": "VmNoCompatibleHostForSecondaryEvent",
+ "description": "No compatible host for the Fault Tolerance secondary VM",
+ "formatOnVm": "No compatible host for the Fault Tolerance secondary VM",
+ "fullFormat": "No compatible host for the Fault Tolerance secondary VM {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "warning",
+ "key": "VmNoNetworkAccessEvent",
+ "description": "VM No Network Access",
+ "formatOnVm": "Not all networks are accessible by {destHost.name}",
+ "fullFormat": "Not all networks for {vm.name} are accessible by {destHost.name}"
+},
+{
+ "category": "warning",
+ "key": "VmOrphanedEvent",
+ "description": "VM orphaned",
+ "formatOnVm": "Virtual machine does not exist on {host.name}",
+ "fullFormat": "{vm.name} does not exist on {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmPowerOffOnIsolationEvent",
+ "description": "vSphere HA powered off VM on isolated host",
+ "formatOnVm": "vSphere HA powered off this virtual machine on the isolated host {isolatedHost.name}",
+ "fullFormat": "vSphere HA powered off {vm.name} on the isolated host {isolatedHost.name} in cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmPoweredOffEvent",
+ "description": "VM powered off",
+ "formatOnVm": "Virtual machine on {host.name} is powered off",
+ "fullFormat": "{vm.name} on  {host.name} in {datacenter.name} is powered off"
+},
+{
+ "category": "info",
+ "key": "VmPoweredOnEvent",
+ "description": "VM powered on",
+ "formatOnVm": "Virtual machine on {host.name} is powered on",
+ "fullFormat": "{vm.name} on  {host.name} in {datacenter.name} is powered on"
+},
+{
+ "category": "error",
+ "key": "VmPrimaryFailoverEvent",
+ "description": "Fault Tolerance VM failover",
+ "formatOnVm": "Fault Tolerance VM failed over to {host.name}. {reason.@enum.VirtualMachine.NeedSecondaryReason}",
+ "fullFormat": "Fault Tolerance VM ({vm.name}) failed over to {host.name} in cluster {computeResource.name} in {datacenter.name}. {reason.@enum.VirtualMachine.NeedSecondaryReason}"
+},
+{
+ "category": "info",
+ "key": "VmReconfiguredEvent",
+ "description": "VM reconfigured",
+ "formatOnVm": "Reconfigured virtual machine",
+ "fullFormat": "Reconfigured {vm.name} on {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmRegisteredEvent",
+ "description": "VM registered",
+ "formatOnVm": "Registered with vCenter",
+ "fullFormat": "Registered {vm.name} on {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmRelayoutSuccessfulEvent",
+ "description": "VM relayout completed",
+ "formatOnVm": "Relayout of the virtual machine completed",
+ "fullFormat": "Relayout of {vm.name} on {host.name} in {datacenter.name} completed"
+},
+{
+ "category": "info",
+ "key": "VmRelayoutUpToDateEvent",
+ "description": "VM relayout up-to-date",
+ "formatOnVm": "In the correct format and relayout is not neccessary",
+ "fullFormat": "{vm.name} on {host.name} in {datacenter.name} is in the correct format and relayout is not necessary"
+},
+{
+ "category": "info",
+ "key": "VmReloadFromPathEvent",
+ "description": "Virtual machine reloaded from path",
+ "formatOnVm": "Virtual machine reloaded from new configuration {configPath}.",
+ "fullFormat": "{vm.name} on {host.name} reloaded from new configuration {configPath}."
+},
+{
+ "category": "error",
+ "key": "VmReloadFromPathFailedEvent",
+ "description": "Virtual machine not reloaded from path",
+ "formatOnVm": "This virtual machine could not be reloaded from {configPath}.",
+ "fullFormat": "{vm.name} on {host.name} could not be reloaded from {configPath}."
+},
+{
+ "category": "error",
+ "key": "VmRelocateFailedEvent",
+ "description": "Cannot relocate VM",
+ "formatOnVm": "Cannot relocate virtual machine",
+ "fullFormat": "Cannot relocate virtual machine '{vm.name}' in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmRelocateSpecEvent",
+ "description": "<VM Relocate Spec Event>",
+ "formatOnVm": "<internal>",
+ "fullFormat": "<internal>"
+},
+{
+ "category": "info",
+ "key": "VmRemoteConsoleConnectedEvent",
+ "description": "VM remote console connected",
+ "formatOnVm": "Remote console connected",
+ "fullFormat": "Remote console connected to {vm.name} on host {host.name}"
+},
+{
+ "category": "info",
+ "key": "VmRemoteConsoleDisconnectedEvent",
+ "description": "VM remote console disconnected",
+ "formatOnVm": "Remote console connected",
+ "fullFormat": "Remote console disconnected from {vm.name} on host {host.name}"
+},
+{
+ "category": "info",
+ "key": "VmRemovedEvent",
+ "description": "VM removed",
+ "formatOnVm": "Removed",
+ "fullFormat": "Removed {vm.name} on {host.name} from {datacenter.name}"
+},
+{
+ "category": "warning",
+ "key": "VmRenamedEvent",
+ "description": "VM renamed",
+ "formatOnVm": "Renamed from {oldName} to {newName}",
+ "fullFormat": "Renamed {vm.name} from {oldName} to {newName} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmResettingEvent",
+ "description": "VM resetting",
+ "formatOnVm": "Virtual machine on {host.name} is reset",
+ "fullFormat": "{vm.name} on  {host.name} in {datacenter.name} is reset"
+},
+{
+ "category": "info",
+ "key": "VmResourcePoolMovedEvent",
+ "description": "VM resource pool moved",
+ "formatOnVm": "Moved from resource pool {oldParent.name} to {newParent.name}",
+ "fullFormat": "Moved {vm.name} from resource pool {oldParent.name} to {newParent.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmResourceReallocatedEvent",
+ "description": "VM resource reallocated",
+ "formatOnVm": "Resource allocation changed",
+ "fullFormat": "Changed resource allocation for {vm.name}"
+},
+{
+ "category": "info",
+ "key": "VmRestartedOnAlternateHostEvent",
+ "description": "VM restarted on alternate host",
+ "formatOnVm": "Virtual machine was restarted on {host.name} since {sourceHost.name} failed",
+ "fullFormat": "Virtual machine {vm.name} was restarted on {host.name} since {sourceHost.name} failed"
+},
+{
+ "category": "info",
+ "key": "VmResumingEvent",
+ "description": "VM resuming",
+ "formatOnVm": "Virtual machine on {host.name} is resumed",
+ "fullFormat": "{vm.name} on  {host.name} in {datacenter.name} is resumed"
+},
+{
+ "category": "info",
+ "key": "VmSecondaryAddedEvent",
+ "description": "Fault Tolerance secondary VM added",
+ "formatOnVm": "A Fault Tolerance secondary VM has been added for this VM",
+ "fullFormat": "A Fault Tolerance secondary VM has been added for {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "error",
+ "key": "VmSecondaryDisabledBySystemEvent",
+ "description": "vCenter disabled Fault Tolerance",
+ "formatOnVm": "vCenter disabled Fault Tolerance because the Secondary VM could not be powered On.",
+ "fullFormat": "vCenter disabled Fault Tolerance on VM {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name} because the Secondary VM could not be powered On."
+},
+{
+ "category": "info",
+ "key": "VmSecondaryDisabledEvent",
+ "description": "Disabled Fault Tolerance secondary VM",
+ "formatOnVm": "Disabled Fault Tolerance secondary VM for this virtual machine",
+ "fullFormat": "Disabled Fault Tolerance secondary VM for {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmSecondaryEnabledEvent",
+ "description": "Enabled Fault Tolerance secondary VM",
+ "formatOnVm": "Enabled Fault Tolerance secondary VM for this VM",
+ "fullFormat": "Enabled Fault Tolerance secondary VM for {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmSecondaryStartedEvent",
+ "description": "Started Fault Tolerance secondary VM",
+ "formatOnVm": "Started Fault Tolerance secondary VM for this virtual machine",
+ "fullFormat": "Started Fault Tolerance secondary VM for {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmShutdownOnIsolationEvent",
+ "description": "vSphere HA shut down VM on isolated host",
+ "formatOnVm": "vSphere HA shut down this virtual machine on the isolated host {isolatedHost.name}:  {shutdownResult.@enum.VmShutdownOnIsolationEvent.Operation}",
+ "fullFormat": "vSphere HA shut down {vm.name} was shut down on the isolated host {isolatedHost.name} in cluster {computeResource.name} in {datacenter.name}:  {shutdownResult.@enum.VmShutdownOnIsolationEvent.Operation}"
+},
+{
+ "category": "info",
+ "key": "VmStartRecordingEvent",
+ "description": "Start a recording session",
+ "formatOnVm": "Start a recording session",
+ "fullFormat": "Start a recording session on {vm.name}"
+},
+{
+ "category": "info",
+ "key": "VmStartReplayingEvent",
+ "description": "Start a replay session",
+ "formatOnVm": "Start a replay session",
+ "fullFormat": "Start a replay session on {vm.name}"
+},
+{
+ "category": "info",
+ "key": "VmStartingEvent",
+ "description": "VM starting",
+ "formatOnVm": "Virtual machine is starting",
+ "fullFormat": "{vm.name} on host {host.name} in {datacenter.name} is starting"
+},
+{
+ "category": "info",
+ "key": "VmStartingSecondaryEvent",
+ "description": "Starting Fault Tolerance secondary VM",
+ "formatOnVm": "Starting Fault Tolerance secondary VM for this virtual machine",
+ "fullFormat": "Starting Fault Tolerance secondary VM for {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name}"
+},
+{
+ "category": "error",
+ "key": "VmStaticMacConflictEvent",
+ "description": "VM static MAC conflict",
+ "formatOnVm": "The static MAC address ({mac}) conflicts with MAC assigned to {conflictedVm.name}",
+ "fullFormat": "The static MAC address ({mac}) of {vm.name} conflicts with MAC assigned to  {conflictedVm.name}"
+},
+{
+ "category": "info",
+ "key": "VmStoppingEvent",
+ "description": "VM stopping",
+ "formatOnVm": "Virtual machine is stopping",
+ "fullFormat": "{vm.name} on  {host.name} in {datacenter.name} is stopping"
+},
+{
+ "category": "info",
+ "key": "VmSuspendedEvent",
+ "description": "VM suspended",
+ "formatOnVm": "Virtual machine is suspended",
+ "fullFormat": "{vm.name} on {host.name} in {datacenter.name} is suspended"
+},
+{
+ "category": "info",
+ "key": "VmSuspendingEvent",
+ "description": "VM being suspended",
+ "formatOnVm": "Virtual machine is being suspended",
+ "fullFormat": "{vm.name} on {host.name} in {datacenter.name} is being suspended"
+},
+{
+ "category": "error",
+ "key": "VmTimedoutStartingSecondaryEvent",
+ "description": "Starting the Fault Tolerance secondary VM timed out",
+ "formatOnVm": "Starting the Fault Tolerance secondary VM timed out within {timeout} ms",
+ "fullFormat": "Starting the Fault Tolerance secondary VM {vm.name} on host {host.name} in cluster {computeResource.name} in {datacenter.name} timed out within {timeout} ms"
+},
+{
+ "category": "warning",
+ "key": "VmUnsupportedStartingEvent",
+ "description": "VM unsupported guest OS is starting",
+ "formatOnVm": "Unsupported guest OS {guestId}",
+ "fullFormat": "Unsupported guest OS {guestId} for {vm.name} on {host.name} in {datacenter.name}"
+},
+{
+ "category": "info",
+ "key": "VmUpgradingEvent",
+ "description": "Upgrading VM",
+ "formatOnVm": "Upgrading virtual hardware to version {version}",
+ "fullFormat": "Upgrading virtual hardware on {vm.name} in {datacenter.name} to version {version}"
+},
+{
+ "category": "info",
+ "key": "VmUuidAssignedEvent",
+ "description": "VM UUID assigned",
+ "formatOnVm": "Assigned new BIOS UUID ({uuid})",
+ "fullFormat": "Assigned new BIOS UUID ({uuid}) to {vm.name} on {host.name} in {datacenter.name}"
+},
+{
+ "category": "warning",
+ "key": "VmUuidChangedEvent",
+ "description": "VM UUID Changed",
+ "formatOnVm": "BIOS UUID was changed from {oldUuid} to {newUuid}",
+ "fullFormat": "Changed BIOS UUID from {oldUuid} to {newUuid} for {vm.name} on {host.name} in {datacenter.name}"
+},
+{
+ "category": "error",
+ "key": "VmUuidConflictEvent",
+ "description": "VM UUID Conflict",
+ "formatOnVm": "BIOS ID ({uuid}) conflicts with that of {conflictedVm.name}",
+ "fullFormat": "BIOS ID ({uuid}) of {vm.name} conflicts with that of {conflictedVm.name}"
+},
+{
+ "category": "info",
+ "key": "VmWwnAssignedEvent",
+ "description": "VM WWN assigned",
+ "formatOnVm": "New WWNs assigned",
+ "fullFormat": "New WWNs assigned to {vm.name}"
+},
+{
+ "category": "warning",
+ "key": "VmWwnChangedEvent",
+ "description": "VM WWN changed",
+ "formatOnVm": "WWNs are changed",
+ "fullFormat": "WWNs are changed for {vm.name}"
+},
+{
+ "category": "error",
+ "key": "VmWwnConflictEvent",
+ "description": "VM WWN conflict",
+ "formatOnVm": "The WWN ({wwn}) conflicts with the currently registered WWN",
+ "fullFormat": "The WWN ({wwn}) of {vm.name} conflicts with the currently registered WWN"
+}
+]

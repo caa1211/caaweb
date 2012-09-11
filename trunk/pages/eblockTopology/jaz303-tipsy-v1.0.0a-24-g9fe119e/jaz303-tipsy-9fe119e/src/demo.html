@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--common css-->
+
+    <link href="stylesheets/tipsy.css" rel="stylesheet" type="text/css" />
+    
+    
+    <!--common js-->
+    <script src="jquery-1.7.2.min.js" type="text/javascript"></script>
+  <script src="javascripts/jquery.tipsy.js" type="text/javascript"></script>
+   
+
+    
+    <script type="text/javascript">
+
+        $(function()
+        {
+   
+     $('a[rel=tipsy]').tipsy({fade: true, gravity: $.fn.tipsy.autoNS, html: true,
+     delayIn: 500, delayOut: 1000,
+     title: function() { 
+    // debugger;
+     return '<div>dddddddddddddddd</div><div>dddddddddddddddd</div><div>dddddddddddddddd</div><div>dddddddddddddddd</div><div>dddddddddddddddd</div><div>dddddddddddddddd</div><div>dddddddddddddddd</div><div>dddddddddddddddd</div><div>dddddddddddddddd</div><div>dddddddddddddddd</div><div>dddddddddddddddd</div><div>dddddddddddddddd</div><div>dddddddddddddddd</div><div>dddddddddddddddd</div>'; }     
+     });
+        
+//alert(   $('a[rel=tipsy]').length);
+        });
+        
+       
+   function aa(){return "dd";}
+    </script> 
+
+</head>
+<body>
+
+<a title=aaa() rel='tipsy' href="#" id='d'>ffffffffffffffff</a>
+ 
+<!--web link-->
+<br/><br/><br/>
+<a href='aaaaa' 
+class='ui-state-default ui-corner-all' 
+target='http://onehackoranother.com/projects/jquery/tipsy/'>reference</a>
+
+
+</body>
+</html>

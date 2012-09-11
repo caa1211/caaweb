@@ -1,0 +1,243 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link href="cmps/datepicker/css/datepicker.css" rel="stylesheet"></link>
+        <link href="cmps/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
+        <link href="cmps/dataTables/css/dataTables.bootstrap.css" rel="stylesheet"></link>
+        <link href="css/itriReport.css" rel="stylesheet"></link>
+    	<script type="text/javascript" language="javascript" src="js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" language="javascript" src="cmps/dataTables/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cmps/TableTools/media/js/ZeroClipboard.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cmps/TableTools/media/js/TableTools.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cmps/dataTables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cmps/datepicker/js/bootstrap-datepicker.js"></script>
+
+		<script type="text/javascript" charset="utf-8">
+        
+	$(function () {
+        /*obj define*/
+        var $reportWidget = $(".reportWidget");
+        var $generateReportBtn = $(".generateReportBtn");
+        var $report = $('#perfReport');
+        var $dateInputs = $reportWidget.find("a.date input");
+        var $dateErrorMsg = $reportWidget.find('.dateErrorMsg');
+        var $startDatepicker = $reportWidget.find(".startTime");
+        var $endDatepicker = $reportWidget.find(".endTime");
+        var $genReportArea = $reportWidget.find(".genReportArea");
+        var isTimeRangeSelectable = true;
+
+        var startDate = new Date(2012,0,20);
+        var endDate = new Date(2012,0,22);
+        var reportColumns = [{
+	            "mData": "engine"
+	        }, {
+	            "mData": "browser"
+	        }, {
+	            "mData": "platform"
+	        }, {
+	            "mData": "version"
+	        }, {
+	            "mData": "grade"
+	        }];
+            
+	    var oTable = $report.dataTable({
+	        "sAjaxSource": "cmps/ajax/sources/objects.txt",
+	        "aoColumns": reportColumns,
+	        "bDeferRender": true,
+            "sDom": "<'row-fluid'<'span6'T><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+	        "oTableTools": {
+	            "sSwfPath": "cmps/TableTools/media/swf/copy_csv_xls_pdf.swf",
+	            "aButtons": ["copy", "print", {
+	                "sExtends": "collection",
+	                "sButtonText": 'Export <span class="caret" />',
+	                "aButtons": [	
+                    {
+					"sExtends": "xls",
+					"sButtonText": "Excel (CSV)"
+                    }
+                    , "pdf"]
+	            }
+                ]
+	        }
+	    });
+
+    //date selecter--
+ if(isTimeRangeSelectable){
+    var isValidTimeRange = true;
+    $dateErrorMsg.hide();
+    $dateInputs.click(function(e){
+      $(this).parent().find('.add-on').trigger('click');
+      e.preventDefault(); 
+      e.stopPropagation();  
+    });
+    function  checkTimeRange(){
+       isValidTimeRange = startDate.valueOf() <= endDate.valueOf();
+       if(!isValidTimeRange){
+        $dateErrorMsg.show();
+        $generateReportBtn.addClass('disabled');
+       }else{
+        $dateErrorMsg.hide();
+        $generateReportBtn.removeClass('disabled');
+       }
+    }
+    function pad(num, n) {
+        var len = num.toString().length;
+        while(len < n) {
+            num = "0" + num;
+            len++;
+        }
+        return num;
+    }
+    function dateToString(date, splitStr){
+        return  ""+
+        date.getFullYear()+""+splitStr+""+
+        pad(date.getMonth()+1, 2)+""+splitStr+""+
+        pad(date.getDate(), 2);
+    }
+    $startDatepicker.attr("data-date", dateToString(startDate, "/")).datepicker({
+    }).on('changeDate', function(ev){
+        startDate = new Date(ev.date);
+        checkTimeRange();
+    });
+    
+    $endDatepicker.attr("data-date", dateToString(endDate, "/")).datepicker({
+    }).on('changeDate', function(ev){
+        endDate = new Date(ev.date);
+        checkTimeRange();
+    });
+    
+    $('.date').each(function(){
+        var $input = $(this).children('input');
+        var date = $(this).attr('data-date');
+        $input.val(date);
+    });
+ }else{
+    $genReportArea.hide();
+ }
+    //date selecter--
+    
+    var $dataTables_filter = $reportWidget.find('.dataTables_filter'); 
+    var $DTTT = $reportWidget.find('.DTTT'); 
+    
+    (function modifyTbarPosition(){
+        $dataTables_filter.appendTo('.tbar')
+        $DTTT.appendTo('.tbar')
+    })();
+
+ //--for debug
+   $("#debugBtn").click(function(){
+   debugger;
+   });
+	$("#addBtn").click(function () {
+	        $report.dataTable().fnAddData(
+	        [{
+	            "engine": "1",
+	            "browser": "O2",
+	            "platform": "Win 95+ / OSX.3+",
+	            "version": "-",
+	            "grade": "A"
+	        }, {
+	            "engine": "2",
+	            "browser": "O2",
+	            "platform": "Win 95+ / OSX.3+",
+	            "version": "-",
+	            "grade": "A"
+	        }
+	        ]
+
+	        );
+	    });
+        
+        
+         $("#clearBtn").click(function () {
+	        $report.dataTable().fnClearTable();
+	    });
+        //--for debug
+         
+
+	});
+ 
+		</script>
+        
+   
+    </head>
+	<body>
+
+<div class="well reportWidget" style=''>
+    <div class="well well-small tbar" style='' >
+        <h4 class="reportTitle" style=''>Performance Report</h4>
+        <span class='genReportArea' style='position:relative;'>
+            <span class="badge badge-important dateErrorMsg" style=''>The end date can not be less then the start date</span>
+            <span class='timeArea' style=''>
+            Start:
+            <a class="input-append date mini startTime"  data-date="" data-date-format="yyyy/mm/dd" >
+                <input class="span2"  type="text" readonly="" size="16" type="text" value="" style=''>
+                <span class="add-on "><i class="icon-th"></i></span>
+            </a>
+            </span>
+              
+           <span class='timeArea' style=''>
+            End:
+            <a class="input-append date mini endTime" data-date="" data-date-format="yyyy/mm/dd" >
+                <input  class="span2"  type="text" readonly="" size="16" type="text" value="" style=''> 
+                <span class="add-on "><i class="icon-th"></i></span>
+            </a>
+            </span>
+          
+           <span class='timeArea' style=''>
+            <a href="#" class="btn  generateReportBtn" style=''> <i class=" icon-repeat"></i></a>
+           </span>
+       </span>
+    </div>
+
+    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="perfReport" >
+	<thead>
+		<tr>
+			<th width="20%">Rendering engine</th>
+			<th width="25%">Browser</th>
+			<th width="25%">Platform(s)</th>
+			<th width="15%">Engine version</th>
+			<th width="15%">CSS grade</th>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
+</div>
+
+
+<!-- for test -->
+    <div class="btn-group">
+    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" >
+    Action
+    <span class="caret"></span>
+    </a>
+    
+    </div>
+  
+<button id='addBtn' >add </button>
+<button id='clearBtn' >clear </button>
+<button id='debugBtn' >debug </button>
+<!-- for test -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+</html>
+    

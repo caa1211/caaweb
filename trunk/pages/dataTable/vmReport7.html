@@ -1,0 +1,117 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link href="cmps/datepicker/css/datepicker.css" rel="stylesheet"></link>
+        <link href="cmps/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
+        <link href="cmps/dataTables/css/dataTables.bootstrap.css" rel="stylesheet"></link>
+        <link href="css/jquery.eblockReport.css" rel="stylesheet"></link>
+    	<script type="text/javascript" language="javascript" src="js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" language="javascript" src="cmps/dataTables/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cmps/TableTools/media/js/ZeroClipboard.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cmps/TableTools/media/js/TableTools.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cmps/dataTables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cmps/datepicker/js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/underscore-1.3.1.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/jquery.eblockReport.js"></script>
+		<script type="text/javascript" charset="utf-8">
+     
+	$(function () {
+    
+      
+      var $perfReportObj = $("#perfReportDiv").eblockReport({
+            title: "Performance Report",
+            header:[
+                {label:"aa", width:"20%"}, 
+                {label:"bb", width:"20%"}, 
+                {label:"cc", width:"20%"}, 
+                {label:"dd", width:"20%"}, 
+                {label:"ee", width:"20%"}],
+            dataSchema:[
+                {"mData": "engine"}, 
+                {"mData": "browser"}, 
+                {"mData": "platform"}, 
+                {"mData": "version"}, 
+                {"mData": "grade"}],
+            isTimeRangeSelectable: true
+      });
+      
+      $perfReportObj.addData([{
+	            "engine": "1",
+	            "browser": "O2",
+	            "platform": "Win 95+ / OSX.3+",
+	            "version": "-",
+	            "grade": "A"
+	        }, {
+	            "engine": "2",
+	            "browser": "O2",
+	            "platform": "Win 95+ / OSX.3+",
+	            "version": "-",
+	            "grade": "A"
+	        }]
+        );
+        
+      $perfReportObj.setTimeRange(new Date(2012,0,20), new Date(2012,0,20));
+      
+      $perfReportObj.getGenBtn().on('click', function(e){
+            var timeRange = $perfReportObj.getTimeRange();
+            var startDate = timeRange.startDate;
+            var endDate = timeRange.endDate;
+            //convert date to string
+            var startDateStr = eblockReportUtils.dateToString(startDate, "-");
+            var endDateStr = eblockReportUtils.dateToString(endDate, "-");
+
+            $perfReportObj.getGenBtn().disable();
+            $perfReportObj.getLoadingIcon().fadeIn();
+       
+            setTimeout(function(){
+                $perfReportObj.getGenBtn().enable();
+                $perfReportObj.getLoadingIcon().fadeOut();
+            }, 1000);
+            //todo: generate report by API with time range
+            //step1: ajax query;
+            //step2: $perfReportObj.clearData();
+            //step3: $perfReportObj.addData(data);
+            
+      });
+      
+        
+      //-------Get Data By Ajax 
+      var $ajaxReportObj = $("#ajaxReportDiv").eblockReport({
+            title: "Ajax Test",
+            header:[
+                {label:"aa", width:"20%"}, 
+                {label:"bb", width:"20%"}, 
+                {label:"cc", width:"20%"}, 
+                {label:"dd", width:"20%"}, 
+                {label:"ee", width:"20%"}],
+            dataSchema:[
+                {"mData": "engine"}, 
+                {"mData": "browser"}, 
+                {"mData": "platform"}, 
+                {"mData": "version"}, 
+                {"mData": "grade"}]
+      });
+      
+      $.getJSON("cmps/ajax/sources/objects.txt", function(a,b){
+            $ajaxReportObj.addData(a.aaData);
+      });
+      //-------Get Data By Ajax 
+
+         
+
+	});
+ 
+		</script>
+        
+   
+    </head>
+<body>
+
+    <div id='perfReportDiv'></div>
+
+    <div id='ajaxReportDiv'></div>
+
+    </body>
+</html>
+    
