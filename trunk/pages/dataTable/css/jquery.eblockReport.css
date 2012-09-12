@@ -9,6 +9,7 @@ div.reportWidget div.dataTables_filter{text-align:center; line-height:30px;}
 div.reportWidget .row-fluid:first-child {display:none;}
 div.reportWidget .generateReportBtn {height:30px; margin-top:-2px;}
 div.reportWidget .dateErrorMsg {position:absolute; top:25px; left:47px;}
+div.reportWidget .dateErrorMsg .badge{margin-top:2px;}
 div.reportWidget h4.reportTitle {display:inline; line-height:30px; text-align:left; width:190px; margin:0px; float:left; text-overflow : ellipsis;  white-space: nowrap; overflow:hidden;}
 
 div.reportWidget .dataTables_filter {float: right;}

@@ -10,7 +10,10 @@ eblockReportUtils.reportTmpl = '<div class="well reportWidget" style="">'+
     '<div class="well well-small tbar" style="" >'+
         '<h4 class="reportTitle" style=""><%= title %></h4>'+
         '<span class="genReportArea" style="position:relative;">'+
-            '<span class="badge badge-important dateErrorMsg" style="">The end date can not be less then the start date</span>'+
+        '<div class="dateErrorMsg"> '+
+            '<div class="badge badge-important  dateErrorMsg_range" style="">The start date can not be more then the end date</div>'+
+            '<div class="badge badge-important  dateErrorMsg_future" style="">The start date can not be more then the today: <span class="today"></span></div>'+
+          '</div>'+  
             '<span class="timeArea" style="">'+
             'Start:'+
             '<a class="input-append date mini startTime"  data-date="" data-date-format="yyyy/mm/dd" >'+
@@ -81,7 +84,8 @@ eblockReportUtils.dateToString = function(date, splitStr){
            timeRange:{
                startDate: new Date(),
                endDate: new Date()
-           }
+           },
+           today: new Date()
        };
        
        var _settings = $.extend({}, defaultSetting , settings);
@@ -94,6 +98,7 @@ eblockReportUtils.dateToString = function(date, splitStr){
        var $generateReportBtn;
        var $genReportArea;
        var $loadingIcon;
+       var $dateErrorMsg_future;
        var startDate;
        var endDate;
         
@@ -105,53 +110,58 @@ eblockReportUtils.dateToString = function(date, splitStr){
        };
       
 
-   
+
        function doTable(){
         var $reportWidget = $thisObj;
         $report = $reportWidget.find("table.reportTable");
         $loadingIcon = $reportWidget.find("span.loading");
         $loadingIcon.hide();
+        $loadingIcon.disable = function(){
+           $(this).fadeOut();
+        };
+         $loadingIcon.enable = function(){
+            $(this).fadeIn();
+        };
 
         var $dateInputs = $reportWidget.find("a.date input");
-        var $dateErrorMsg = $reportWidget.find('.dateErrorMsg');
+        //error msg
+        var $dateErrorMsg = $reportWidget.find('.dateErrorMsg_range');
+        $dateErrorMsg_future = $reportWidget.find('.dateErrorMsg_future');
+        $dateErrorMsg.hide();
+        $dateErrorMsg_future.hide();
+        $dateErrorMsg_future.updateToday = function(){
+          var todyStr = eblockReportUtils.dateToString(_settings.today, "/")
+          $(this).children('.today').html(todyStr);
+        }
+        $dateErrorMsg_future.updateToday();
+        
         $generateReportBtn = $reportWidget.find(".generateReportBtn");
         $generateReportBtn.disable = function(){
-            $generateReportBtn.addClass('disabled');
+            $(this).addClass('disabled');
         };
         $generateReportBtn.enable = function(){
-            $generateReportBtn.removeClass('disabled');
+            $(this).removeClass('disabled');
         };
-        /*
-        $generateReportBtn.click(function(){
-            if($(this).hasClass('disabled')==false){
-                $(this).trigger('generate');
-            }
-        });
-        */
 
         $startDatepicker = $reportWidget.find(".startTime");
         $endDatepicker = $reportWidget.find(".endTime");
         $genReportArea = $reportWidget.find(".genReportArea");
         $genReportArea.disable = function(){
             $generateReportBtn.addClass('disabled');
-       
             $startDatepicker.datepicker('disable');
-           
             $startDatepicker.children('.add-on').addClass('disabled');
-           // $startDatepicker.datepicker('show')
-	
-           // $startDatepicker.datepicker('show')
-            $endDatepicker.children('.add-on').addClass('disabled');
             $endDatepicker.datepicker('disable');
-            // $('div.datepicker.dropdown-menu').css('border', "solid 1px red")
+            $endDatepicker.children('.add-on').addClass('disabled');
+            $loadingIcon.enable();
         };
 
         $genReportArea.enable = function(){
             $generateReportBtn.removeClass('disabled');
-            $startDatepicker.children('.add-on').removeClass('disabled');
             $startDatepicker.datepicker('enable');
+            $startDatepicker.children('.add-on').removeClass('disabled');
+            $endDatepicker.datepicker('enable');
             $endDatepicker.children('.add-on').removeClass('disabled');
-             $endDatepicker.datepicker('enable');
+            $loadingIcon.disable();
         };
         
         var $tbar = $reportWidget.find('.tbar');
@@ -186,27 +196,46 @@ eblockReportUtils.dateToString = function(date, splitStr){
             startDate = _settings.timeRange.startDate;
             endDate = _settings.timeRange.endDate;
             var isValidTimeRange = true;
+            var isFutureDate = false;
             $dateErrorMsg.hide();
             $dateInputs.click(function(e){
               $(this).parent().find('.add-on').trigger('click');
               e.preventDefault(); 
               e.stopPropagation();  
             });
+            
             function  checkTimeRange(){
                isValidTimeRange = startDate.valueOf() <= endDate.valueOf();
+               
+               if(_settings.today.valueOf()<startDate.valueOf()){
+                    isFutureDate = true;
+               }else{
+                    isFutureDate = false;
+               }
+
                if(!isValidTimeRange){
                 $dateErrorMsg.show();
                 $generateReportBtn.disable();
                }else{
                 $dateErrorMsg.hide();
                 $generateReportBtn.enable();
+
+               }  
+               
+               if(isFutureDate){
+                    $dateErrorMsg_future.show();
+                    $generateReportBtn.disable();
+               }else{
+                    $dateErrorMsg_future.hide();
+                    $generateReportBtn.enable();
                }
             }
 
-
             $startDatepicker.attr("data-date", eblockReportUtils.dateToString(startDate, "/")).datepicker({
             }).on('changeDate', function(ev){
-                startDate = new Date(ev.date);
+                var newDate = new Date(ev.date);
+
+                startDate = newDate;
                 checkTimeRange();
             });
             
@@ -258,6 +287,8 @@ eblockReportUtils.dateToString = function(date, splitStr){
        this.setTimeRange = function(startDate, endDate){
             updateDatePicker($startDatepicker, startDate);
             updateDatePicker($endDatepicker, endDate);
+            _settings.today = endDate;
+            $dateErrorMsg_future.updateToday();
        };
        
        this.getTimeRange = function(){
@@ -268,7 +299,7 @@ eblockReportUtils.dateToString = function(date, splitStr){
             return $generateReportBtn;
        };
        
-       this.getGenReportArea = function(){
+       this.getCalendarArea = function(){
             return $genReportArea;
        };
 
