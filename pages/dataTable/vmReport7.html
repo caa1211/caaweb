@@ -57,24 +57,34 @@
             if($(this).hasClass('disabled')==true){
                return;
             }
+            
             var timeRange = $perfReportObj.getTimeRange();
+            
             var startDate = timeRange.startDate;
             var endDate = timeRange.endDate;
+            
             //convert date to string
             var startDateStr = eblockReportUtils.dateToString(startDate, "-");
             var endDateStr = eblockReportUtils.dateToString(endDate, "-");
 
-            $perfReportObj.getGenReportArea().disable();
-            $perfReportObj.getLoadingIcon().fadeIn();
-       
-            setTimeout(function(){
-                $perfReportObj.getGenReportArea().enable();
-                $perfReportObj.getLoadingIcon().fadeOut();
-            }, 2000);
             //todo: generate report by API with time range
-            //step1: ajax query;
-            //step2: $perfReportObj.clearData();
-            //step3: $perfReportObj.addData(data);
+            //step1: disable calendar & GenBtn
+            //step2: ajax query;
+            //step3: $perfReportObj.clearData();
+            //step4: $perfReportObj.addData(data);
+            //step5: enable calendar & GenBtn
+            
+            //for demo
+            $perfReportObj.getCalendarArea().disable();
+            
+       
+            $.getJSON("cmps/ajax/sources/objects.txt", function(a,b){
+                $perfReportObj.clearData();
+                $perfReportObj.getCalendarArea().enable();
+                $perfReportObj.addData(a.aaData);
+            });
+      
+
             
       });
       
@@ -101,6 +111,7 @@
       });
       //-------Get Data By Ajax 
 
+ 
          
 
 	});
@@ -109,12 +120,15 @@
         
    
     </head>
-<body>
+<body style='postion:relative;'>
 
     <div id='perfReportDiv'></div>
 
     <div id='ajaxReportDiv'></div>
 
+ 
+    
+    
     </body>
 </html>
     
