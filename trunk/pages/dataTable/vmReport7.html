@@ -19,7 +19,7 @@
      
 	$(function () {
     
-      
+      //-------Report 1--------------------------------------
       var $perfReportObj = $("#perfReportDiv").eblockReport({
             title: "Performance Report",
             fileTitle: "vm3 - performance report",
@@ -85,9 +85,11 @@
                 $perfReportObj.addData(a.aaData);
             });   
       });
-      
+      //-------Report 1--------------------------------------
         
-      //-------Get Data By Ajax and build table
+        
+      //-------Report 2--------------------------------------
+      //Get Data By Ajax and build table
       var $ajaxReportObj = $("#ajaxReportDiv").eblockReport({
             title: "Ajax Test",
             header:[
@@ -107,8 +109,11 @@
       $.getJSON("cmps/ajax/sources/objects.txt", function(a,b){
             $ajaxReportObj.addData(a.aaData);
       });
-      //-------Get Data By Ajax 
+      //-------Report 2--------------------------------------
 
+
+      
+      
 
 	});
  
@@ -122,8 +127,6 @@
 
     <div id='ajaxReportDiv'></div>
 
-
-    
     
     </body>
 </html>
