@@ -1,9 +1,9 @@
-{ "aaData": [
+﻿{ "aaData": [
 	{
 		"engine": "Trident",
 		"browser": "Internet Explorer 4.0",
 		"platform": "Win 95+",
-		"version": "4",
+		"version": "中文",
 		"grade": "X"
 	},
 	{
