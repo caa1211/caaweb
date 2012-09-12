@@ -78,6 +78,7 @@ eblockReportUtils.dateToString = function(date, splitStr){
        var defaultSetting = 
        {
            title: "Report",
+           fileTitle: "",
            header: [{label:"header", width:""}],
            dataSchema:[{mData:"data"}],
            isTimeRangeSelectable: false,
@@ -141,7 +142,7 @@ eblockReportUtils.dateToString = function(date, splitStr){
         
         $generateReportBtn = $reportWidget.find(".generateReportBtn");
         $generateReportBtn.disable = function(){
-            $(this).addClass('disabled');
+           $(this).addClass('disabled');
         };
         $generateReportBtn.enable = function(){
             $(this).removeClass('disabled');
@@ -179,7 +180,7 @@ eblockReportUtils.dateToString = function(date, splitStr){
 	        "aoColumns": reportColumns,
 	        "bDeferRender": true,
             "sDom": "<'row-fluid'<'span6'T><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
-	        "oTableTools": {
+            "oTableTools": {
 	            "sSwfPath": sSwfPath,
 	            "aButtons": ["copy", "print", {
 	                "sExtends": "collection",
@@ -187,9 +188,16 @@ eblockReportUtils.dateToString = function(date, splitStr){
 	                "aButtons": [	
                     {
 					"sExtends": "xls",
-					"sButtonText": "Excel (CSV)"
+					"sButtonText": "Excel",
+                    "sTitle": _settings.fileTitle == "" ? _settings.title : _settings.fileTitle
+                    },
+                    {
+					"sExtends": "pdf",
+					"sButtonText": "PDF",
+                    "sTitle": _settings.fileTitle == "" ? _settings.title : _settings.fileTitle
                     }
-                    , "pdf"]
+                    //, "csv"
+                    ]
 	            }
                 ]
 	        }

@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 	<head>
+        <title>report</title>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <link href="cmps/datepicker/css/datepicker.css" rel="stylesheet"></link>
         <link href="cmps/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
@@ -21,6 +22,7 @@
       
       var $perfReportObj = $("#perfReportDiv").eblockReport({
             title: "Performance Report",
+            fileTitle: "vm3 - performance report",
             header:[
                 {label:"aa", width:"20%"}, 
                 {label:"bb", width:"20%"}, 
@@ -46,19 +48,19 @@
 	            "engine": "2",
 	            "browser": "O2",
 	            "platform": "Win 95+ / OSX.3+",
-	            "version": "-",
+	            "version": "中文測試",
 	            "grade": "A"
 	        }]
         );
        
-      //setTimeRange API will set today by end date and       
+      //setTimeRange(startDate, endDate) will also set today by end date.        
       $perfReportObj.setTimeRange(new Date(2012,0,20), new Date(2012,0,20));
       
+      //generate button clicked
       $perfReportObj.getGenBtn().on('click', function(e){
             if($(this).hasClass('disabled')==true){
                return;
             }
-            
             //get time range and parse it
             var timeRange = $perfReportObj.getTimeRange();
             var startDate = timeRange.startDate;
@@ -107,8 +109,6 @@
       });
       //-------Get Data By Ajax 
 
- 
-         
 
 	});
  
@@ -122,7 +122,7 @@
 
     <div id='ajaxReportDiv'></div>
 
- 
+
     
     
     </body>
