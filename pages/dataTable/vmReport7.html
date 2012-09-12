@@ -54,6 +54,9 @@
       $perfReportObj.setTimeRange(new Date(2012,0,20), new Date(2012,0,20));
       
       $perfReportObj.getGenBtn().on('click', function(e){
+            if($(this).hasClass('disabled')==true){
+               return;
+            }
             var timeRange = $perfReportObj.getTimeRange();
             var startDate = timeRange.startDate;
             var endDate = timeRange.endDate;
@@ -61,13 +64,13 @@
             var startDateStr = eblockReportUtils.dateToString(startDate, "-");
             var endDateStr = eblockReportUtils.dateToString(endDate, "-");
 
-            $perfReportObj.getGenBtn().disable();
+            $perfReportObj.getGenReportArea().disable();
             $perfReportObj.getLoadingIcon().fadeIn();
        
             setTimeout(function(){
-                $perfReportObj.getGenBtn().enable();
+                $perfReportObj.getGenReportArea().enable();
                 $perfReportObj.getLoadingIcon().fadeOut();
-            }, 1000);
+            }, 2000);
             //todo: generate report by API with time range
             //step1: ajax query;
             //step2: $perfReportObj.clearData();
