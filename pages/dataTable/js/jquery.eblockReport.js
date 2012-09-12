@@ -29,8 +29,9 @@ eblockReportUtils.reportTmpl = '<div class="well reportWidget" style="">'+
             '</a>'+
             '</span>'+
            '<span class="timeArea" style="position:relative;">'+
-            '<button href="#" class="btn  generateReportBtn" style="">  <i class=" icon-repeat"></i></button>'+
-            "<span class='loading' style=''></span>"+
+            '<button href="#" class="btn  generateReportBtn" style=""><i class=" icon-repeat"></i></button>'+
+            '<span class="loading"></span>'+
+            '<span class="icon-info-sign dateErrorIcon" style=""></span>'+
            '</span>'+
            
        '</span>'+
@@ -99,6 +100,7 @@ eblockReportUtils.dateToString = function(date, splitStr){
        var $genReportArea;
        var $loadingIcon;
        var $dateErrorMsg_future;
+       var $dateErrorIcon;
        var startDate;
        var endDate;
         
@@ -115,6 +117,8 @@ eblockReportUtils.dateToString = function(date, splitStr){
         var $reportWidget = $thisObj;
         $report = $reportWidget.find("table.reportTable");
         $loadingIcon = $reportWidget.find("span.loading");
+        $dateErrorIcon = $reportWidget.find("span.dateErrorIcon");
+        $dateErrorIcon.hide();
         $loadingIcon.hide();
         $loadingIcon.disable = function(){
            $(this).fadeOut();
@@ -125,9 +129,9 @@ eblockReportUtils.dateToString = function(date, splitStr){
 
         var $dateInputs = $reportWidget.find("a.date input");
         //error msg
-        var $dateErrorMsg = $reportWidget.find('.dateErrorMsg_range');
+        var $dateErrorMsg_range = $reportWidget.find('.dateErrorMsg_range');
         $dateErrorMsg_future = $reportWidget.find('.dateErrorMsg_future');
-        $dateErrorMsg.hide();
+        $dateErrorMsg_range.hide();
         $dateErrorMsg_future.hide();
         $dateErrorMsg_future.updateToday = function(){
           var todyStr = eblockReportUtils.dateToString(_settings.today, "/")
@@ -197,13 +201,32 @@ eblockReportUtils.dateToString = function(date, splitStr){
             endDate = _settings.timeRange.endDate;
             var isValidTimeRange = true;
             var isFutureDate = false;
-            $dateErrorMsg.hide();
+
             $dateInputs.click(function(e){
               $(this).parent().find('.add-on').trigger('click');
               e.preventDefault(); 
               e.stopPropagation();  
             });
             
+            function errorInfoHoverIn(){
+                if(!$generateReportBtn.hasClass('disabled'))
+                    return;
+                    
+                if(!isValidTimeRange){
+                    $dateErrorMsg_range.fadeIn(300);
+                };
+                if(isFutureDate){
+                    $dateErrorMsg_future.fadeIn(300);
+                };
+            }
+            
+            function errorInfoHoverOut(){
+                $dateErrorMsg_range.fadeOut(300);    
+                $dateErrorMsg_future.fadeOut(300);
+            }
+            
+            $generateReportBtn.parent().hover(errorInfoHoverIn, errorInfoHoverOut);
+
             function  checkTimeRange(){
                isValidTimeRange = startDate.valueOf() <= endDate.valueOf();
                
@@ -213,21 +236,14 @@ eblockReportUtils.dateToString = function(date, splitStr){
                     isFutureDate = false;
                }
 
-               if(!isValidTimeRange){
-                $dateErrorMsg.show();
-                $generateReportBtn.disable();
-               }else{
-                $dateErrorMsg.hide();
-                $generateReportBtn.enable();
-
-               }  
-               
-               if(isFutureDate){
-                    $dateErrorMsg_future.show();
-                    $generateReportBtn.disable();
-               }else{
-                    $dateErrorMsg_future.hide();
+               if(isFutureDate == false && isValidTimeRange){
+                    //invalid case
+                    $dateErrorIcon.hide();
                     $generateReportBtn.enable();
+               }else{
+                    //valid case
+                    $dateErrorIcon.show();
+                    $generateReportBtn.disable();
                }
             }
 

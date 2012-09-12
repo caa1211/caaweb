@@ -50,7 +50,8 @@
 	            "grade": "A"
 	        }]
         );
-        
+       
+      //setTimeRange API will set today by end date and       
       $perfReportObj.setTimeRange(new Date(2012,0,20), new Date(2012,0,20));
       
       $perfReportObj.getGenBtn().on('click', function(e){
@@ -58,16 +59,15 @@
                return;
             }
             
+            //get time range and parse it
             var timeRange = $perfReportObj.getTimeRange();
-            
             var startDate = timeRange.startDate;
             var endDate = timeRange.endDate;
-            
             //convert date to string
             var startDateStr = eblockReportUtils.dateToString(startDate, "-");
             var endDateStr = eblockReportUtils.dateToString(endDate, "-");
 
-            //todo: generate report by API with time range
+            //generate report by API with time range
             //step1: disable calendar & GenBtn
             //step2: ajax query;
             //step3: $perfReportObj.clearData();
@@ -76,20 +76,16 @@
             
             //for demo
             $perfReportObj.getCalendarArea().disable();
-            
-       
+
             $.getJSON("cmps/ajax/sources/objects.txt", function(a,b){
                 $perfReportObj.clearData();
                 $perfReportObj.getCalendarArea().enable();
                 $perfReportObj.addData(a.aaData);
-            });
-      
-
-            
+            });   
       });
       
         
-      //-------Get Data By Ajax 
+      //-------Get Data By Ajax and build table
       var $ajaxReportObj = $("#ajaxReportDiv").eblockReport({
             title: "Ajax Test",
             header:[
