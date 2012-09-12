@@ -15,14 +15,14 @@ eblockReportUtils.reportTmpl = '<div class="well reportWidget" style="">'+
             'Start:'+
             '<a class="input-append date mini startTime"  data-date="" data-date-format="yyyy/mm/dd" >'+
                 '<input class="span2"  type="text" readonly="" size="16" type="text" value="" style="">'+
-                '<span class="add-on "><i class="icon-th"></i></span>'+
+                '<span class="add-on btn"><i class="icon-th"></i></span>'+
             '</a>'+
             '</span>'+
            '<span class="timeArea" style="">'+
             'End:'+
             '<a class="input-append date mini endTime" data-date="" data-date-format="yyyy/mm/dd" >'+
                 '<input  class="span2"  type="text" readonly="" size="16" type="text" value="" style=""> '+
-                '<span class="add-on "><i class="icon-th"></i></span>'+
+                '<span class="add-on btn"><i class="icon-th"></i></span>'+
             '</a>'+
             '</span>'+
            '<span class="timeArea" style="position:relative;">'+
@@ -92,6 +92,7 @@ eblockReportUtils.dateToString = function(date, splitStr){
        var $startDatepicker;
        var $endDatepicker;
        var $generateReportBtn;
+       var $genReportArea;
        var $loadingIcon;
        var startDate;
        var endDate;
@@ -120,10 +121,39 @@ eblockReportUtils.dateToString = function(date, splitStr){
         $generateReportBtn.enable = function(){
             $generateReportBtn.removeClass('disabled');
         };
-  
+        /*
+        $generateReportBtn.click(function(){
+            if($(this).hasClass('disabled')==false){
+                $(this).trigger('generate');
+            }
+        });
+        */
+
         $startDatepicker = $reportWidget.find(".startTime");
         $endDatepicker = $reportWidget.find(".endTime");
-        var $genReportArea = $reportWidget.find(".genReportArea");
+        $genReportArea = $reportWidget.find(".genReportArea");
+        $genReportArea.disable = function(){
+            $generateReportBtn.addClass('disabled');
+       
+            $startDatepicker.datepicker('disable');
+           
+            $startDatepicker.children('.add-on').addClass('disabled');
+           // $startDatepicker.datepicker('show')
+	
+           // $startDatepicker.datepicker('show')
+            $endDatepicker.children('.add-on').addClass('disabled');
+            $endDatepicker.datepicker('disable');
+            // $('div.datepicker.dropdown-menu').css('border', "solid 1px red")
+        };
+
+        $genReportArea.enable = function(){
+            $generateReportBtn.removeClass('disabled');
+            $startDatepicker.children('.add-on').removeClass('disabled');
+            $startDatepicker.datepicker('enable');
+            $endDatepicker.children('.add-on').removeClass('disabled');
+             $endDatepicker.datepicker('enable');
+        };
+        
         var $tbar = $reportWidget.find('.tbar');
         var isTimeRangeSelectable = _settings.isTimeRangeSelectable;
         var sSwfPath = _settings.sSwfPath;
@@ -238,6 +268,10 @@ eblockReportUtils.dateToString = function(date, splitStr){
             return $generateReportBtn;
        };
        
+       this.getGenReportArea = function(){
+            return $genReportArea;
+       };
+
        this.getLoadingIcon = function(){
             return $loadingIcon;
        };

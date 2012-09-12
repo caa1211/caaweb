@@ -52,12 +52,17 @@
 		this.fillMonths();
 		this.update();
 		this.showMode();
+        this.disabled = false;
 	};
 	
 	Datepicker.prototype = {
 		constructor: Datepicker,
-		
+		disable: function(){ this.disabled = true; },
+        enable: function(){ this.disabled= false; },
 		show: function(e) {
+          if(this.disabled){
+            return;
+          }
 		  $('div.datepicker.dropdown-menu').hide(); //make sure to hide all other calendars
 			this.picker.show();
 			this.height = this.component ? this.component.outerHeight() : this.element.outerHeight();
