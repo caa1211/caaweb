@@ -891,6 +891,12 @@ TableTools.prototype = {
 	 */
 	"_fnCollectionShow": function ( nButton, oConfig )
 	{
+        //Jose Chang
+        var $oldCollection = $("#exportSelMenu");
+        if($oldCollection.length!=0){
+            $oldCollection.trigger('click');
+        }
+        
 		var
 			that = this,
 			oPos = $(nButton).offset(),
@@ -914,7 +920,8 @@ TableTools.prototype = {
 		nBackground.style.width = ((iWinWidth>iDocWidth)? iWinWidth : iDocWidth) +"px";
 		nBackground.className = this.classes.collection.background;
 		$(nBackground).css('opacity',0);
-		
+		$(nBackground).attr('id', "exportSelMenu");
+        
 		document.body.appendChild( nBackground );
 		document.body.appendChild( nHidden );
 		
@@ -938,10 +945,13 @@ TableTools.prototype = {
 		/* This results in a very small delay for the end user but it allows the animation to be
 		 * much smoother. If you don't want the animation, then the setTimeout can be removed
 		 */
-		setTimeout( function () {
+		/*setTimeout( function () {
 			$(nHidden).animate({"opacity": 1}, 500);
 			$(nBackground).animate({"opacity": 0.25}, 500);
 		}, 10 );
+        */
+            $(nHidden).animate({"opacity": 1}, 200);
+			$(nBackground).animate({"opacity": 0.25}, 200);
 
 		/* Resize the buttons to the Flash contents fit */
 		this.fnResizeButtons();
@@ -969,11 +979,11 @@ TableTools.prototype = {
 		
 		if ( this.dom.collection.collection !== null )
 		{
-			$(this.dom.collection.collection).animate({"opacity": 0}, 500, function (e) {
+			$(this.dom.collection.collection).animate({"opacity": 0}, 0, function (e) {
 				this.style.display = "none";
 			} );
 			
-			$(this.dom.collection.background).animate({"opacity": 0}, 500, function (e) {
+			$(this.dom.collection.background).animate({"opacity": 0}, 0, function (e) {
 				this.parentNode.removeChild( this );
 			} );
 			
