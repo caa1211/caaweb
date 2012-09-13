@@ -136,8 +136,15 @@ eblockReportUtils.dateToString = function(date, splitStr){
         $dateErrorMsg_range.hide();
         $dateErrorMsg_future.hide();
         $dateErrorMsg_future.updateToday = function(){
+       
           var todyStr = eblockReportUtils.dateToString(_settings.today, "/")
           $(this).children('.today').html(todyStr);
+          
+          //update datepicker
+          if($startDatepicker!=undefined && $endDatepicker!=undefined){
+            $endDatepicker.data('datepicker').setNowDate(_settings.today);
+            $startDatepicker.data('datepicker').setNowDate(_settings.today);
+          }
         }
         $dateErrorMsg_future.updateToday();
         
@@ -258,9 +265,7 @@ eblockReportUtils.dateToString = function(date, splitStr){
 
             $startDatepicker.attr("data-date", eblockReportUtils.dateToString(startDate, "/")).datepicker({
             }).on('changeDate', function(ev){
-                var newDate = new Date(ev.date);
-
-                startDate = newDate;
+                startDate = new Date(ev.date);
                 checkTimeRange();
             });
             
@@ -310,9 +315,9 @@ eblockReportUtils.dateToString = function(date, splitStr){
        }
        
        this.setTimeRange = function(startDate, endDate){
+            _settings.today = endDate;
             updateDatePicker($startDatepicker, startDate);
             updateDatePicker($endDatepicker, endDate);
-            _settings.today = endDate;
             $dateErrorMsg_future.updateToday();
        };
        

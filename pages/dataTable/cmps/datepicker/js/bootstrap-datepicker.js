@@ -44,7 +44,7 @@
 				this.element.on('click.Datepicker', $.proxy(this.show, this));
 			}
 		}
-		
+		this.nowDate = new Date();
 		this.viewMode = 0;
 		this.weekStart = options.weekStart||this.element.data('date-weekstart')||0;
 		this.weekEnd = this.weekStart == 0 ? 6 : this.weekStart - 1;
@@ -103,7 +103,10 @@
 				left: offset.left
 			});
 		},
-		
+		setNowDate: function(date){
+            this.nowDate = new Date(date);
+            this.fill();
+        },
 		update: function(){
 		  var date = this.element.val();
 			this.date = DPGlobal.parseDate(
@@ -138,6 +141,7 @@
 				year = d.getFullYear(),
 				month = d.getMonth(),
 				currentDate = this.date.valueOf();
+                nowDateValue = this.nowDate.valueOf();
 			this.picker.find('.datepicker-days th:eq(1)')
 						.text(DPGlobal.dates.months[month]+' '+year);
 			var prevMonth = new Date(year, month-1, 28,0,0,0,0),
@@ -162,6 +166,9 @@
 				if (prevMonth.valueOf() == currentDate) {
 					clsName += ' active';
 				}
+                if (prevMonth.valueOf() == nowDateValue) {
+					clsName += ' now';
+				}
 				html.push('<td class="day'+clsName+'">'+prevMonth.getDate() + '</td>');
 				if (prevMonth.getDay() == this.weekEnd) {
 					html.push('</tr>');
@@ -170,14 +177,19 @@
 			}
 			this.picker.find('.datepicker-days tbody').empty().append(html.join(''));
 			var currentYear = this.date.getFullYear();
-			
+			var nowDateYear = this.nowDate.getFullYear();
+            
 			var months = this.picker.find('.datepicker-months')
 						.find('th:eq(1)')
 							.text(year)
 							.end()
-						.find('span').removeClass('active');
+						.find('span').removeClass('active').removeClass('now');
+                      
 			if (currentYear == year) {
 				months.eq(this.date.getMonth()).addClass('active');
+			}
+            if (nowDateYear == year) {
+				months.eq(this.nowDate.getMonth()).addClass('now');
 			}
 			
 			html = '';
@@ -189,7 +201,9 @@
 								.find('td');
 			year -= 1;
 			for (var i = -1; i < 11; i++) {
-				html += '<span class="year'+(i == -1 || i == 10 ? ' old' : '')+(currentYear == year ? ' active' : '')+'">'+year+'</span>';
+				html += '<span class="year'+(i == -1 || i == 10 ? ' old' : '')+(currentYear == year ? ' active' : '')+' ' +
+                (nowDateYear == year ? ' now' : '') +
+                '">'+year+'</span>';
 				year += 1;
 			}
 			yearCont.html(html);
