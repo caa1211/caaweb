@@ -154,3 +154,8 @@ cursor: pointer;
 width: 16px;
 height: 16px;
 }
+
+div.datepicker  .now{ 
+    background: none repeat scroll 0 0 #FFFACD;
+    border-radius: 4px 4px 4px 4px;
+}
