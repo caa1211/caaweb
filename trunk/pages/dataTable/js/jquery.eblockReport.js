@@ -119,6 +119,7 @@ eblockReportUtils.dateToString = function(date, splitStr){
         $report = $reportWidget.find("table.reportTable");
         $loadingIcon = $reportWidget.find("span.loading");
         $dateErrorIcon = $reportWidget.find("span.dateErrorIcon");
+        $dates = $reportWidget.find(".date");
         $dateErrorIcon.hide();
         $loadingIcon.hide();
         $loadingIcon.disable = function(){
@@ -269,7 +270,7 @@ eblockReportUtils.dateToString = function(date, splitStr){
                 checkTimeRange();
             });
             
-            $('.date').each(function(){
+            $dates.each(function(){
                 var $input = $(this).children('input');
                 var date = $(this).attr('data-date');
                 $input.val(date);
