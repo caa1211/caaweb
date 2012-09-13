@@ -16,3 +16,9 @@ div.reportWidget .dataTables_filter {float: right;}
 div.reportWidget .DTTT {float: right; margin-right: 10px;}
 div.reportWidget .loading{background-image: url(../images/loading.gif); z-index:300; height:16px; width:16px; left:47px; position:absolute; top:0px;}
 div.reportWidget .dataTable{}
+
+div.datepicker  .now{ 
+    background: none repeat scroll 0 0 #FFFACD;
+    border-radius: 4px 4px 4px 4px;
+ 
+}
