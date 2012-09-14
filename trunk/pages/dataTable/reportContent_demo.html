@@ -76,7 +76,7 @@
             if($(this).hasClass('disabled')==true){
                return;
             }
-            $perfReportObj.setTimeRange(new Date(2012,2,30), new Date(2012,2,30));
+
             //get time range and parse it
             var timeRange = $perfReportObj.getTimeRange();
             var startDate = timeRange.startDate;
@@ -84,7 +84,7 @@
             //convert date to string
             var startDateStr = eblockReportUtils.dateToString(startDate, "-");
             var endDateStr = eblockReportUtils.dateToString(endDate, "-");
-
+alert(startDateStr + " " + endDateStr)
             //generate report by API with time range
             //step1: disable calendar & GenBtn
             //step2: ajax query;
@@ -97,6 +97,8 @@
             $perfReportObj.getCalendarArea().disable();
             //step2
             $.getJSON("cmps/ajax/sources/objects.txt", function(a,b){
+            
+             $perfReportObj.setTimeRange(new Date(2012,2,30), new Date(2012,2,30));
                 //step3
                 $perfReportObj.clearData();
                 //step4

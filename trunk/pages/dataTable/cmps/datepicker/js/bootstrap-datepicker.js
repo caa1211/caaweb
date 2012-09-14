@@ -44,7 +44,7 @@
 				this.element.on('click.Datepicker', $.proxy(this.show, this));
 			}
 		}
-		this.nowDate = new Date();
+		this.nowDate;
 		this.viewMode = 0;
 		this.weekStart = options.weekStart||this.element.data('date-weekstart')||0;
 		this.weekEnd = this.weekStart == 0 ? 6 : this.weekStart - 1;
@@ -105,7 +105,6 @@
 		},
 		setNowDate: function(date){
             this.nowDate = new Date(date);
-            this.fill();
         },
 		update: function(){
 		  var date = this.element.val();
@@ -114,6 +113,7 @@
 				this.format
 			);
 			this.viewDate = new Date(this.date);
+            this.setNowDate(date);
 			this.fill();
 		},
 		
@@ -141,7 +141,12 @@
 				year = d.getFullYear(),
 				month = d.getMonth(),
 				currentDate = this.date.valueOf();
-                nowDateValue = this.nowDate.valueOf();
+
+                if(this.nowDate == undefined){
+                    this.nowDate = new Date(this.viewDate);
+                }
+            nowDateValue = this.nowDate.valueOf();
+       
 			this.picker.find('.datepicker-days th:eq(1)')
 						.text(DPGlobal.dates.months[month]+' '+year);
 			var prevMonth = new Date(year, month-1, 28,0,0,0,0),

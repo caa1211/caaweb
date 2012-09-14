@@ -12,7 +12,7 @@ eblockReportUtils.reportTmpl = '<div class="well reportWidget" style="">'+
         '<span class="genReportArea" style="position:relative;">'+
         '<div class="dateErrorMsg"> '+
             '<div class="badge badge-important  dateErrorMsg_range" style="">The start date can not be more then the end date</div>'+
-            '<div class="badge badge-important  dateErrorMsg_future" style="">The start date can not be more then the today: <span class="today"></span></div>'+
+           
           '</div>'+  
             '<span class="timeArea" style="">'+
             'Start:'+
@@ -86,12 +86,10 @@ eblockReportUtils.dateToString = function(date, splitStr){
            timeRange:{
                startDate: new Date(),
                endDate: new Date()
-           },
-           today: new Date()
+           }
        };
        
        var _settings = $.extend({}, defaultSetting , settings);
-       
        var reportTmp = _.template(eblockReportUtils.reportTmpl);
        var reportDomObj;
        var $report;
@@ -111,9 +109,16 @@ eblockReportUtils.dateToString = function(date, splitStr){
           doTable();
           return that;
        };
-      
 
-
+       function updateDatePicker($datepicker, date){
+            var dateStr = eblockReportUtils.dateToString(date, "/");
+            $datepicker.val(dateStr);
+            $datepicker.children('input').val(dateStr);
+            $datepicker.datepicker('update');     
+            $datepicker.trigger({type: 'changeDate',
+								date: date});
+       }
+       
        function doTable(){
         var $reportWidget = $thisObj;
         $report = $reportWidget.find("table.reportTable");
@@ -132,22 +137,8 @@ eblockReportUtils.dateToString = function(date, splitStr){
         var $dateInputs = $reportWidget.find("a.date input");
         //error msg
         var $dateErrorMsg_range = $reportWidget.find('.dateErrorMsg_range');
-        $dateErrorMsg_future = $reportWidget.find('.dateErrorMsg_future');
         $dateErrorMsg_range.hide();
-        $dateErrorMsg_future.hide();
-        $dateErrorMsg_future.updateToday = function(){
-       
-          var todyStr = eblockReportUtils.dateToString(_settings.today, "/")
-          $(this).children('.today').html(todyStr);
-          
-          //update datepicker
-          if($startDatepicker!=undefined && $endDatepicker!=undefined){
-            $endDatepicker.data('datepicker').setNowDate(_settings.today);
-            $startDatepicker.data('datepicker').setNowDate(_settings.today);
-          }
-        }
-        $dateErrorMsg_future.updateToday();
-        
+
         $generateReportBtn = $reportWidget.find(".generateReportBtn");
         $generateReportBtn.disable = function(){
            $(this).addClass('disabled');
@@ -180,7 +171,6 @@ eblockReportUtils.dateToString = function(date, splitStr){
         var $tbar = $reportWidget.find('.tbar');
         var isTimeRangeSelectable = _settings.isTimeRangeSelectable;
         var sSwfPath = _settings.sSwfPath;
-
         var reportColumns = _settings.dataSchema;
             
 	    var oTable = $report.dataTable({
@@ -211,13 +201,12 @@ eblockReportUtils.dateToString = function(date, splitStr){
 	        }
 	    });
 
-            //date selecter--
+         //date selecter--
          if(isTimeRangeSelectable){
             startDate = _settings.timeRange.startDate;
             endDate = _settings.timeRange.endDate;
             var isValidTimeRange = true;
-            var isFutureDate = false;
-
+            
             $dateInputs.click(function(e){
               $(this).parent().find('.add-on').trigger('click');
               e.preventDefault(); 
@@ -231,28 +220,18 @@ eblockReportUtils.dateToString = function(date, splitStr){
                 if(!isValidTimeRange){
                     $dateErrorMsg_range.fadeIn(300);
                 };
-                if(isFutureDate){
-                    $dateErrorMsg_future.fadeIn(300);
-                };
             }
             
             function errorInfoHoverOut(){
                 $dateErrorMsg_range.fadeOut(300);    
-                $dateErrorMsg_future.fadeOut(300);
             }
             
             $generateReportBtn.parent().hover(errorInfoHoverIn, errorInfoHoverOut);
 
             function  checkTimeRange(){
                isValidTimeRange = startDate.valueOf() <= endDate.valueOf();
-               
-               if(_settings.today.valueOf()<startDate.valueOf()){
-                    isFutureDate = true;
-               }else{
-                    isFutureDate = false;
-               }
 
-               if(isFutureDate == false && isValidTimeRange){
+               if(isValidTimeRange){
                     //invalid case
                     $dateErrorIcon.hide();
                     $generateReportBtn.enable();
@@ -268,30 +247,34 @@ eblockReportUtils.dateToString = function(date, splitStr){
                 startDate = new Date(ev.date);
                 checkTimeRange();
             });
-            
+
             $endDatepicker.attr("data-date", eblockReportUtils.dateToString(endDate, "/")).datepicker({
             }).on('changeDate', function(ev){
                 endDate = new Date(ev.date);
                 checkTimeRange();
-            });
-            
+            });      
+
             $dates.each(function(){
                 var $input = $(this).children('input');
                 var date = $(this).attr('data-date');
                 $input.val(date);
             });
+  
+            updateDatePicker($startDatepicker, startDate);
+            updateDatePicker($endDatepicker, endDate);
+
          }else{
             $genReportArea.hide();
          }
-            //date selecter--
-            
-            var $dataTables_filter = $reportWidget.find('.dataTables_filter'); 
-            var $DTTT = $reportWidget.find('.DTTT'); 
-            
-            (function modifyTbarPosition(){
+         
+        //date selecter
+        var $dataTables_filter = $reportWidget.find('.dataTables_filter'); 
+        var $DTTT = $reportWidget.find('.DTTT'); 
+        //modify position   
+        (function modifyTbarPosition(){
                 $dataTables_filter.appendTo($tbar)
                 $DTTT.appendTo($tbar)
-            })();
+        })();
 
        }
        
@@ -303,22 +286,10 @@ eblockReportUtils.dateToString = function(date, splitStr){
        this.clearData = function(data){
             $report.dataTable().fnClearTable();
        };
-       
-       function updateDatePicker($datepicker, date){
-            var dateStr = eblockReportUtils.dateToString(date, "/");
-            $datepicker.val(dateStr);
-            $datepicker.children('input').val(dateStr);
-            $datepicker.datepicker('update')
-            
-            $datepicker.trigger({type: 'changeDate',
-								date: date});
-       }
-       
+
        this.setTimeRange = function(startDate, endDate){
-            _settings.today = endDate;
             updateDatePicker($startDatepicker, startDate);
             updateDatePicker($endDatepicker, endDate);
-            $dateErrorMsg_future.updateToday();
        };
        
        this.getTimeRange = function(){
