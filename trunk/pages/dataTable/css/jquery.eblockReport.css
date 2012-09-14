@@ -1,6 +1,14 @@
 ﻿
-#pageTitle {}
-div.reportWidget {background:#ffffff; width:90%; margin:0 auto; margin-top:15px; min-width:920px; padding-top:15px; padding-bottom:5px;  /*border: 1px solid #5eb0e7;*/}
+div.reportWidget {
+    background:#ffffff; width:90%; 
+    margin:0 auto; 
+    margin-top:15px;
+    margin-bottom:10px; 
+    min-width:920px; 
+    padding-top:15px; 
+    padding-bottom:15px;  
+    /*border: 1px solid #5eb0e7;*/
+}
 .dropdown-menu li{position: relative;}
 div.reportWidget a.date input {cursor: pointer; background: white; width:80px;}
 div.reportWidget .well.tbar { margin-bottom:0px; height:30px; /*background: #adc3de;*/}
@@ -18,8 +26,8 @@ div.reportWidget .DTTT {float: right; margin-right: 10px;}
 div.reportWidget .loading{background-image: url(../images/loading.gif); z-index:300; height:16px; width:16px; left:47px; position:absolute; top:0px;}
 div.reportWidget .dataTable{}
 
-div.reportWidget .timeRangeInfo {font-size:12px; color: #333333; margin-top:2px;}
+div.reportWidget .timeRangeInfo {font-size:12px; color: #333333; margin-top:2px; position:absolute;}
 div.reportWidget .timeRangeInfo span {margin:2px;}
 
-.page-header{padding-left:20px; height:25px; line-height:20px; margin-bottom:0px;}
-.page-header small{margin-left:10px;}
+.page-header{ padding:0px; padding-left:20px; height:25px; margin:4px 0px 0px 0px;}
+.page-header small{margin-left:3px;}
