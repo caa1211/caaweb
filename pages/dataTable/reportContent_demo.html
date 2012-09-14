@@ -23,7 +23,8 @@
     
      //get url parameter
      var uid = $.getURLParam("uid", "?");
-     $("#debugConsole").append("uid:" + uid);
+     var type = $.getURLParam("type", "?");
+     $("#debugConsole").append("uid:" + uid + ", type:" + type);
 
      //call ws api or RPC to get data
      /*
@@ -36,7 +37,7 @@
       //install eblockReport plugin in a DIV
       var $perfReportObj = $("#perfReportDiv").eblockReport({
             title: "Performance Report",
-            fileTitle: "vm3 - performance report",
+            fileTitle: "performance report",
             header:[
                 {label:"aa", width:"20%"}, 
                 {label:"bb", width:"20%"}, 
@@ -68,15 +69,15 @@
 	        }]
         );
        
-      //setTimeRange(startDate, endDate) will also set today by end date.        
-      $perfReportObj.setTimeRange(new Date(2012,0,30), new Date(2012,0,30));
+      //setTimeRange(startDate, endDate) will also set today by end date.
+      //arg2 is month from 0 to 11, ex 0: January
+      $perfReportObj.setTimeRange(new Date(2012,0,20), new Date(2012,0,20));
       
       //generate button clicked
       $perfReportObj.getGenBtn().on('click', function(e){
             if($(this).hasClass('disabled')==true){
                return;
             }
-
             //get time range and parse it
             var timeRange = $perfReportObj.getTimeRange();
             var startDate = timeRange.startDate;
@@ -84,21 +85,21 @@
             //convert date to string
             var startDateStr = eblockReportUtils.dateToString(startDate, "-");
             var endDateStr = eblockReportUtils.dateToString(endDate, "-");
-//alert(startDateStr + " " + endDateStr)
+
             //generate report by API with time range
             //step1: disable calendar & GenBtn
             //step2: ajax query;
             //step3: clear perious table data
             //step4: add new data to table
             //step5: enable calendar & GenBtn
-            
+
             //for demo
             //step1
             $perfReportObj.getCalendarArea().disable();
             //step2
             $.getJSON("cmps/ajax/sources/objects.txt", function(a,b){
-            //get data success, set to new time range
-            $perfReportObj.setTimeRange(new Date(startDate), new Date(endDate));
+                //get data success, set to new time range
+                $perfReportObj.setTimeRange(new Date(startDate), new Date(endDate));
                 //step3
                 $perfReportObj.clearData();
                 //step4
@@ -114,6 +115,7 @@
       //Get Data By Ajax and build table
       var $ajaxReportObj = $("#ajaxReportDiv").eblockReport({
             title: "Ajax Test",
+            fileTitle: "report",
             header:[
                 {label:"aa", width:"20%"}, 
                 {label:"bb", width:"20%"}, 
@@ -125,8 +127,7 @@
                 {"mData": "browser"}, 
                 {"mData": "platform"}, 
                 {"mData": "version"}, 
-                {"mData": "grade"}],
-            isTimeRangeSelectable: true
+                {"mData": "grade"}]
       });
       
       $.getJSON("cmps/ajax/sources/objects.txt", function(a,b){
