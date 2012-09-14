@@ -21,11 +21,15 @@
      
 	$(function () {
     
+    var $pageTitle = $("#pageTitle");
+    var $pageSubTitle = $("#pageSubTitle");
      //get url parameter
      var uid = $.getURLParam("uid", "?");
      var type = $.getURLParam("type", "?");
-     $("#debugConsole").append("uid:" + uid + ", type:" + type);
+     $pageTitle.text("uid:" + uid );
+     $pageSubTitle.append( "type:" + type);
 
+  
      //call ws api or RPC to get data
      /*
      var Zenoss = window.parent.Zenoss;
@@ -130,7 +134,10 @@
                 {"mData": "grade"}]
       });
       
+   
       $.getJSON("cmps/ajax/sources/objects.txt", function(a,b){
+            //get data success, set to new time range
+            $ajaxReportObj.setTimeRange(new Date(2012,0,10), new Date(2012,2,2));
             $ajaxReportObj.addData(a.aaData);
       });
       //-------Report 2--------------------------------------
@@ -143,8 +150,20 @@
    
     </head>
 <body style='postion:relative;'>
-    <div id='debugConsole' style='color:gray; postion:absolute;'></div>
-    
+
+<!--div class=" navbar ">
+<div class="navbar-inner">
+    <h3>Typography</h3>
+</div>
+</div-->
+
+    <div class="page-header">
+        <h3 >
+        <span id='pageTitle'></span>
+        <small id='pageSubTitle'></small>
+        </h3>
+    </div>
+
     <div id='perfReportDiv'></div>
     <div id='ajaxReportDiv'></div>
     

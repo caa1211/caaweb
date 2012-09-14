@@ -9,6 +9,7 @@ var eblockReportUtils = {};
 eblockReportUtils.reportTmpl = '<div class="well reportWidget" style="">'+
     '<div class="well well-small tbar" style="" >'+
         '<h4 class="reportTitle" style=""><%= title %></h4>'+
+        '<div class="timeRangeInfo" style=""><span  class="start"></span>~<span  class="end"></span></div>'+
         '<span class="genReportArea" style="position:relative;">'+
         '<div class="dateErrorMsg"> '+
             '<div class="badge badge-important  dateErrorMsg_range" style="">The start date can not be more then the end date</div>'+
@@ -100,6 +101,8 @@ eblockReportUtils.dateToString = function(date, splitStr){
        var $loadingIcon;
        var $dateErrorMsg_future;
        var $dateErrorIcon;
+       var $dataTables_info;
+       var $timeRangeInfo;
        var startDate;
        var endDate;
         
@@ -117,14 +120,25 @@ eblockReportUtils.dateToString = function(date, splitStr){
             $datepicker.datepicker('update');     
             $datepicker.trigger({type: 'changeDate',
 								date: date});
+            if($timeRangeInfo!=undefined){
+                if($datepicker.hasClass("startTime")){
+                    $timeRangeInfo.children('.start').html(dateStr);
+                }else if($datepicker.hasClass("endTime")){
+                    $timeRangeInfo.children('.end').html(dateStr);
+                }
+           
+            }                    
        }
        
        function doTable(){
+       
         var $reportWidget = $thisObj;
         $report = $reportWidget.find("table.reportTable");
         $loadingIcon = $reportWidget.find("span.loading");
         $dateErrorIcon = $reportWidget.find("span.dateErrorIcon");
         $dates = $reportWidget.find(".date");
+        $timeRangeInfo = $reportWidget.find(".timeRangeInfo");
+        
         $dateErrorIcon.hide();
         $loadingIcon.hide();
         $loadingIcon.disable = function(){
@@ -270,6 +284,12 @@ eblockReportUtils.dateToString = function(date, splitStr){
         //date selecter
         var $dataTables_filter = $reportWidget.find('.dataTables_filter'); 
         var $DTTT = $reportWidget.find('.DTTT'); 
+       
+        $dataTables_info = $reportWidget.find(".dataTables_info");
+        $dataTables_info.after($timeRangeInfo);
+        $timeRangeInfo.hide();
+        // $timeRangeInfo will be show until caller call setTimeRange
+
         //modify position   
         (function modifyTbarPosition(){
                 $dataTables_filter.appendTo($tbar)
@@ -288,6 +308,9 @@ eblockReportUtils.dateToString = function(date, splitStr){
        };
 
        this.setTimeRange = function(startDate, endDate){
+            if($timeRangeInfo!=undefined && $timeRangeInfo.is(":visible") == false){
+                $timeRangeInfo.show();
+            }
             updateDatePicker($startDatepicker, startDate);
             updateDatePicker($endDatepicker, endDate);
        };
