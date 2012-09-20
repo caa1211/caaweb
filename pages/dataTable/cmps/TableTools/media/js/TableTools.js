@@ -1753,6 +1753,15 @@ TableTools.prototype = {
 		/* Cache the scrolling and the jump to the top of the page */
 		this.s.print.saveScroll = $(window).scrollTop();
 		window.scrollTo( 0, 0 );
+     
+        /* if print src is not undefined, pop-up a report window. and pass dom to it's parentDom attribute.*/
+        if ( oConfig.printSrc!=undefined &&  oConfig.printSrc!== "" ){
+            printWin = window.open(oConfig.printSrc);
+            printWin.parentDOM =$("body").clone().html();
+            printWin.pInfo = oConfig.pInfo;   
+            printWin.sTitle = oConfig.sTitle;                
+            that._fnPrintEnd.call(that);
+        }
 
 		/* Bind a key event listener to the document for the escape key -
 		 * it is removed in the callback
