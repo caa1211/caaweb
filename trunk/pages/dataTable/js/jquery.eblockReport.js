@@ -87,7 +87,8 @@ eblockReportUtils.dateToString = function(date, splitStr){
            timeRange:{
                startDate: new Date(),
                endDate: new Date()
-           }
+           },
+           dataTableOpt:{}
        };
        
        var _settings = $.extend({}, defaultSetting , settings);
@@ -187,15 +188,28 @@ eblockReportUtils.dateToString = function(date, splitStr){
         var sSwfPath = _settings.sSwfPath;
         var reportColumns = _settings.dataSchema;
             
-	    var oTable = $report.dataTable({
+	    var dataTableOpt_default = {
 	        //"sAjaxSource": "cmps/ajax/sources/objects.txt",
 	        "aoColumns": reportColumns,
 	        "bDeferRender": true,
             "sDom": "<'row-fluid'<'span6'T><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
             "oTableTools": {
 	            "sSwfPath": sSwfPath,
-	            "aButtons": ["copy", "print"
-                    , {
+	            "aButtons": ["copy", {
+					"sExtends": "print",
+					"sButtonText": "Print",
+                    "sInfo": "<h6>Print Info</h6><p>Please use your browser's print function to "+
+                    "print the pop-up window.",
+                    "pInfo":"<h6>Print view</h6><p>Please use your browser's print function to "+
+                    "print this report.",
+                    "printSrc": "print.html",
+                    "sToolTip": "",
+                    "sTitle": _settings.fileTitle == "" ? _settings.title : _settings.fileTitle
+                    }, {
+					"sExtends": "xls",
+					"sButtonText": "Excel",
+                    "sTitle": _settings.fileTitle == "" ? _settings.title : _settings.fileTitle
+                    }/*{
 	                "sExtends": "collection",
 	                "sButtonText": 'Export <span class="caret" />',
 	                "aButtons": [	
@@ -211,11 +225,12 @@ eblockReportUtils.dateToString = function(date, splitStr){
                     }
                     //, "csv"
                     ]
-	            }
+	            }*/
                 ]
 	        }
-	    });
-
+	    };
+        var dataTableOpt = $.extend({}, dataTableOpt_default, _settings.dataTableOpt);
+        var oTable = $report.dataTable(dataTableOpt);
          //date selecter--
          if(isTimeRangeSelectable){
             startDate = _settings.timeRange.startDate;
