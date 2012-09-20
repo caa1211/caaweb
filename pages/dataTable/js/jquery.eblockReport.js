@@ -194,7 +194,8 @@ eblockReportUtils.dateToString = function(date, splitStr){
             "sDom": "<'row-fluid'<'span6'T><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
             "oTableTools": {
 	            "sSwfPath": sSwfPath,
-	            "aButtons": ["copy", "print", {
+	            "aButtons": ["copy", "print"
+                    , {
 	                "sExtends": "collection",
 	                "sButtonText": 'Export <span class="caret" />',
 	                "aButtons": [	
