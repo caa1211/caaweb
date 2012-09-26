@@ -57,7 +57,6 @@ TableTools = function( oDT, oOpts )
 		 * @default  this
 		 */
 		"that": this,
-		
 		/** 
 		 * DataTables settings objects
 		 * @property dt
@@ -100,7 +99,11 @@ TableTools = function( oDT, oOpts )
 		 	 *  @type	 Function
 			 *  @default  function () {}
 		 	 */
-		  "funcEnd": function () {}
+		  "funcEnd": function () {},
+          /*
+           * Jose add
+           */
+          "printWin": null
 	  },
 	
 		/**
@@ -1756,10 +1759,10 @@ TableTools.prototype = {
      
         /* if print src is not undefined, pop-up a report window. and pass dom to it's parentDom attribute.*/
         if ( oConfig.printSrc!=undefined &&  oConfig.printSrc!== "" ){
-            printWin = window.open(oConfig.printSrc);
-            printWin.parentDOM =$("body").clone().html();
-            printWin.pInfo = oConfig.pInfo;   
-            printWin.sTitle = oConfig.sTitle;                
+            this.s.print.printWin = window.open(oConfig.printSrc);
+            this.s.print.printWin.parentDOM =$("body").clone().html();
+            this.s.print.printWin.pInfo = oConfig.pInfo;   
+            this.s.print.printWin.sTitle = oConfig.sTitle;                
             that._fnPrintEnd.call(that);
         }
 
