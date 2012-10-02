@@ -88,7 +88,8 @@ eblockReportUtils.dateToString = function(date, splitStr){
                startDate: new Date(),
                endDate: new Date()
            },
-           dataTableOpt:{}
+           dataTableOpt:{},
+           printPath: "print.html"
        };
        
        var _settings = $.extend({}, defaultSetting , settings);
@@ -186,8 +187,9 @@ eblockReportUtils.dateToString = function(date, splitStr){
         var $tbar = $reportWidget.find('.tbar');
         var isTimeRangeSelectable = _settings.isTimeRangeSelectable;
         var sSwfPath = _settings.sSwfPath;
+        var printPath = _settings.printPath;
         var reportColumns = _settings.dataSchema;
-            
+           
 	    var dataTableOpt_default = {
 	        //"sAjaxSource": "cmps/ajax/sources/objects.txt",
 	        "aoColumns": reportColumns,
@@ -198,11 +200,9 @@ eblockReportUtils.dateToString = function(date, splitStr){
 	            "aButtons": ["copy", {
 					"sExtends": "print",
 					"sButtonText": "Print",
-                    "sInfo": "<h6>Print Info</h6><p>Please use your browser's print function to "+
-                    "print the pop-up window.",
-                    "pInfo":"<h6>Print view</h6><p>Please use your browser's print function to "+
-                    "print this report.",
-                    "printSrc": "print.html",
+                    "sInfo": "",
+                    "pInfo":"<h6>Print view</h6><p>Please press the print button to print this report.</p>",
+                    "printSrc": printPath,
                     "sToolTip": "",
                     "sTitle": _settings.fileTitle == "" ? _settings.title : _settings.fileTitle
                     }, {
@@ -312,6 +312,17 @@ eblockReportUtils.dateToString = function(date, splitStr){
                 $DTTT.appendTo($tbar)
         })();
 
+        
+        //set time to print win
+        that.find('.DTTT_button_print').click(function(){
+            if($timeRangeInfo.lengt!=0 && $timeRangeInfo.children('.start').text()!=""){
+                    var dt = that.getDataTable();
+                    var oTT = TableTools.fnGetInstance(dt.attr('id'));
+                    var printWin = oTT.s.print.printWin;
+                    printWin.dateTitle = $timeRangeInfo.text();
+            }  
+        });
+        
        }
        
        //public api
@@ -350,6 +361,20 @@ eblockReportUtils.dateToString = function(date, splitStr){
        this.getDataTable = function(){
             return $report;
        };
+       
+       //chart
+       var charts = {};
+       this.getChart = function(id){
+        return charts[id];
+       };
+       
+       this.drawChart = function(opt){
+            if($.fn.eblockReport.drawChart != undefined ){
+               charts[opt.targetId] =  this.eblockReport.drawChart(opt, this);
+            } 
+            return this;            
+       }
+       //chart
         
        return _init();
     };

@@ -103,7 +103,7 @@ TableTools = function( oDT, oOpts )
           /*
            * Jose add
            */
-          "printWin": null
+          "printWin": {}
 	  },
 	
 		/**
@@ -1760,7 +1760,7 @@ TableTools.prototype = {
         /* if print src is not undefined, pop-up a report window. and pass dom to it's parentDom attribute.*/
         if ( oConfig.printSrc!=undefined &&  oConfig.printSrc!== "" ){
             this.s.print.printWin = window.open(oConfig.printSrc);
-            this.s.print.printWin.parentDOM =$("body").clone().html();
+            this.s.print.printWin.parentDOM =$("body").html();
             this.s.print.printWin.pInfo = oConfig.pInfo;   
             this.s.print.printWin.sTitle = oConfig.sTitle;                
             that._fnPrintEnd.call(that);
