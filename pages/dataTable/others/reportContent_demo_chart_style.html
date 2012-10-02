@@ -1,0 +1,479 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+        <title>report</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link href="cmps/datepicker/css/datepicker.css" rel="stylesheet"/>
+        <link href="cmps/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="cmps/dataTables/css/dataTables.bootstrap.css" rel="stylesheet"/>
+        <link href="css/jquery.eblockReport.css" rel="stylesheet"/>
+        <link href="css/jquery.eblockReport.chart.css" rel="stylesheet"/>
+        <link rel="stylesheet" type="text/css" href="cmps/jqplot1.0/jquery.jqplot.css"/>
+                 
+    	<script type="text/javascript" language="javascript" src="js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" language="javascript" src="cmps/dataTables/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cmps/TableTools/media/js/ZeroClipboard.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cmps/TableTools/media/js/TableTools.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cmps/dataTables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cmps/datepicker/js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/underscore-1.3.1.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/jquery.eblockReport.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/jquery.getParams.js"></script>
+        
+        
+        <!-- BEGIN: load jqplot -->
+
+        <script language="javascript" type="text/javascript" src="cmps/jqplot1.0/jquery.jqplot.js"></script>
+        <script language="javascript" type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.dateAxisRenderer.js"></script>
+        <!--script language="javascript" type="text/javascript" src="jqplot1.0/plugins/jqplot.categoryAxisRenderer.js"></script-->
+        <script language="javascript" type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.canvasTextRenderer.js"></script>
+        <script language="javascript" type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.canvasAxisTickRenderer.js"></script>
+        <script language="javascript" type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.dateAxisRenderer.js"></script>
+        <!--script language="javascript" type="text/javascript" src="jqplot1.0/plugins/jqplot.cursor.js"></script-->
+        <!--script type="text/javascript" src="jqplot1.0/plugins/jqplot.pointLabels.min.js"></script-->
+        <script type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+        
+        <script type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.cursor.min.js"></script>
+<script type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.pointLabels.min.js"></script>
+
+        
+		<script type="text/javascript" charset="utf-8">
+     
+	$(function () {
+    
+    var $pageTitle = $("#pageTitle");
+    var $pageSubTitle = $("#pageSubTitle");
+     //get url parameter
+     var uid = $.getURLParam("uid", "?");
+     var type = $.getURLParam("type", "?");
+     $pageTitle.text("uid:" + uid );
+     $pageSubTitle.append( "type:" + type);
+
+  
+     //call ws api or RPC to get data
+     /*
+     var Zenoss = window.parent.Zenoss;
+     Zenoss.remote.vdcmApiRouter.getEventByHostName({HostName: "10.201.35.3"}, function(res){
+     });
+     */
+     
+      //-------Report 1--------------------------------------
+      //install eblockReport plugin in a DIV
+      var $perfReportObj = $("#perfReportDiv").eblockReport({
+            title: "Performance Report",
+            fileTitle: "performance report",
+            header:[
+                {label:"aa", width:"20%"}, 
+                {label:"bb", width:"20%"}, 
+                {label:"cc", width:"20%"}, 
+                {label:"dd", width:"20%"}, 
+                {label:"ee", width:"20%"}],
+            dataSchema:[
+                {"mData": "engine"}, 
+                {"mData": "browser"}, 
+                {"mData": "platform"}, 
+                {"mData": "version"}, 
+                {"mData": "grade"}],
+            isTimeRangeSelectable: true
+      });
+      
+      //add Data in report object
+      $perfReportObj.addData([{
+	            "engine": "1",
+	            "browser": "O2",
+	            "platform": "Win 95+ / OSX.3+",
+	            "version": "-",
+	            "grade": "A"
+	        }, {
+	            "engine": "2",
+	            "browser": "O2",
+	            "platform": "Win 95+ / OSX.3+",
+	            "version": "中文測試",
+	            "grade": "A"
+	        }]
+        );
+       
+      //setTimeRange(startDate, endDate) will also set today by end date.
+      //arg2 is month from 0 to 11, ex 0: January
+      $perfReportObj.setTimeRange(new Date(2012,0,20), new Date(2012,0,20));
+      
+      //generate button clicked
+      $perfReportObj.getGenBtn().on('click', function(e){
+            if($(this).hasClass('disabled')==true){
+               return;
+            }
+            //get time range and parse it
+            var timeRange = $perfReportObj.getTimeRange();
+            var startDate = timeRange.startDate;
+            var endDate = timeRange.endDate;
+            //convert date to string
+            var startDateStr = eblockReportUtils.dateToString(startDate, "-");
+            var endDateStr = eblockReportUtils.dateToString(endDate, "-");
+
+            //generate report by API with time range
+            //step1: disable calendar & GenBtn
+            //step2: ajax query;
+            //step3: clear perious table data
+            //step4: add new data to table
+            //step5: enable calendar & GenBtn
+
+            //for demo
+            //step1
+            $perfReportObj.getCalendarArea().disable();
+            //step2
+            $.getJSON("cmps/ajax/sources/objects.txt", function(a,b){
+                //get data success, set to new time range
+                $perfReportObj.setTimeRange(new Date(startDate), new Date(endDate));
+                //step3
+                $perfReportObj.clearData();
+                //step4
+                $perfReportObj.getCalendarArea().enable();
+                //step5
+                $perfReportObj.addData(a.aaData);
+            });   
+      });
+      //-------Report 1--------------------------------------
+        
+        
+      //-------Report 2--------------------------------------
+      //Get Data By Ajax and build table
+      var $ajaxReportObj = $("#ajaxReportDiv").eblockReport({
+            title: "Ajax Test",
+            fileTitle: "report",
+            header:[
+                {label:"aa", width:"20%"}, 
+                {label:"bb", width:"20%"}, 
+                {label:"cc", width:"20%"}, 
+                {label:"dd", width:"20%"}, 
+                {label:"ee", width:"20%"}],
+            dataSchema:[
+                {"mData": "engine"}, 
+                {"mData": "browser"}, 
+                {"mData": "platform"}, 
+                {"mData": "version"}, 
+                {"mData": "grade"}]
+      });
+      
+   
+      $.getJSON("cmps/ajax/sources/objects.txt", function(a,b){
+            //get data success, set to new time range
+            $ajaxReportObj.setTimeRange(new Date(2012,0,10), new Date(2012,2,2));
+            $ajaxReportObj.addData(a.aaData);
+      });
+      //-------Report 2--------------------------------------
+      
+      
+      
+      
+      
+//--cc
+      $chartTable= $("#chartTable");
+      $perfReportObj.find('div.row-fluid:first-child').show().empty().append($chartTable);
+     // $chartTable.find(".row-fluid:first-child").prepend($chartTable);
+      
+      
+                var data = {
+                "data": {
+                    "report": {
+                        "usage_max": [2395, 2396, 2394, 2396, 2394, 2393, 2395, 2396, 2396, 2395, 2393, 2395, 2395, 2395, 2397, 2394, 2396, 2396, 2394, 2386, 2386, 2385, 2390, 2387, 2386, 2384, 2385],
+                        "usage_aver": [2385, 2385, 2385, 2385, 2385, 2385, 2385, 2385, 2385, 2384, 2385, 2386, 2385, 2385, 2386, 2385, 2386, 2385, 2377, 2373, 2374, 2373, 2374, 2374, 2375, 2375, 2375]
+                    },
+                    "interval": ["2012-09-21 00:00:00", "2012-09-21 00:30:00", "2012-09-21 01:00:00", "2012-09-21 01:30:00", "2012-09-21 02:00:00", "2012-09-21 02:30:00", "2012-09-21 03:00:00", "2012-09-21 03:30:00", "2012-09-21 04:00:00", "2012-09-21 04:30:00", "2012-09-21 05:00:00", "2012-09-21 05:30:00", "2012-09-21 06:00:00", "2012-09-21 06:30:00", "2012-09-21 07:00:00", "2012-09-21 07:30:00", "2012-09-21 08:00:00", "2012-09-21 08:30:00", "2012-09-21 09:00:00", "2012-09-21 09:30:00", "2012-09-21 10:00:00", "2012-09-21 10:30:00", "2012-09-21 11:00:00", "2012-09-21 11:30:00", "2012-09-21 12:00:00", "2012-09-21 12:30:00", "2012-09-21 13:00:00", "2012-09-21 13:30:00"],
+                    "unit": 1800
+                }
+            };
+         
+var data = {
+    "data": {
+        "report": {
+            "usage_max": [0, 0, 0, 2448, 2398, 2407, 2396, 2396, 2398, 2403, 2399, 2392],
+            "usage_aver": [0, 0, 0, 2309, 2381, 2382, 2382, 2382, 2380, 2387, 2385, 2381]
+        },
+        "interval": ["2012-09-10 00:00:00", "2012-09-11 00:00:00", "2012-09-12 00:00:00", "2012-09-13 00:00:00", "2012-09-14 00:00:00", "2012-09-15 00:00:00", "2012-09-16 00:00:00", "2012-09-17 00:00:00", "2012-09-18 00:00:00", "2012-09-19 00:00:00", "2012-09-20 00:00:00", "2012-09-21 00:00:00"],
+        "unit": 86400,
+    }
+};  
+
+
+var data = {"data": {"report": {"usage_max": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2448, 2398, 2407, 2396, 2396, 2398, 2403, 2399, 2392], "usage_aver": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2309, 2381, 2382, 2382, 2382, 2380, 2387, 2385, 2381]}, "interval": ["2012-01-01 00:00:00", "2012-01-02 00:00:00", "2012-01-03 00:00:00", "2012-01-04 00:00:00", "2012-01-05 00:00:00", "2012-01-06 00:00:00", "2012-01-07 00:00:00", "2012-01-08 00:00:00", "2012-01-09 00:00:00", "2012-01-10 00:00:00", "2012-01-11 00:00:00", "2012-01-12 00:00:00", "2012-01-13 00:00:00", "2012-01-14 00:00:00", "2012-01-15 00:00:00", "2012-01-16 00:00:00", "2012-01-17 00:00:00", "2012-01-18 00:00:00", "2012-01-19 00:00:00", "2012-01-20 00:00:00", "2012-01-21 00:00:00", "2012-01-22 00:00:00", "2012-01-23 00:00:00", "2012-01-24 00:00:00", "2012-01-25 00:00:00", "2012-01-26 00:00:00", "2012-01-27 00:00:00", "2012-01-28 00:00:00", "2012-01-29 00:00:00", "2012-01-30 00:00:00", "2012-01-31 00:00:00", "2012-02-01 00:00:00", "2012-02-02 00:00:00", "2012-02-03 00:00:00", "2012-02-04 00:00:00", "2012-02-05 00:00:00", "2012-02-06 00:00:00", "2012-02-07 00:00:00", "2012-02-08 00:00:00", "2012-02-09 00:00:00", "2012-02-10 00:00:00", "2012-02-11 00:00:00", "2012-02-12 00:00:00", "2012-02-13 00:00:00", "2012-02-14 00:00:00", "2012-02-15 00:00:00", "2012-02-16 00:00:00", "2012-02-17 00:00:00", "2012-02-18 00:00:00", "2012-02-19 00:00:00", "2012-02-20 00:00:00", "2012-02-21 00:00:00", "2012-02-22 00:00:00", "2012-02-23 00:00:00", "2012-02-24 00:00:00", "2012-02-25 00:00:00", "2012-02-26 00:00:00", "2012-02-27 00:00:00", "2012-02-28 00:00:00", "2012-02-29 00:00:00", "2012-03-01 00:00:00", "2012-03-02 00:00:00", "2012-03-03 00:00:00", "2012-03-04 00:00:00", "2012-03-05 00:00:00", "2012-03-06 00:00:00", "2012-03-07 00:00:00", "2012-03-08 00:00:00", "2012-03-09 00:00:00", "2012-03-10 00:00:00", "2012-03-11 00:00:00", "2012-03-12 00:00:00", "2012-03-13 00:00:00", "2012-03-14 00:00:00", "2012-03-15 00:00:00", "2012-03-16 00:00:00", "2012-03-17 00:00:00", "2012-03-18 00:00:00", "2012-03-19 00:00:00", "2012-03-20 00:00:00", "2012-03-21 00:00:00", "2012-03-22 00:00:00", "2012-03-23 00:00:00", "2012-03-24 00:00:00", "2012-03-25 00:00:00", "2012-03-26 00:00:00", "2012-03-27 00:00:00", "2012-03-28 00:00:00", "2012-03-29 00:00:00", "2012-03-30 00:00:00", "2012-03-31 00:00:00", "2012-04-01 00:00:00", "2012-04-02 00:00:00", "2012-04-03 00:00:00", "2012-04-04 00:00:00", "2012-04-05 00:00:00", "2012-04-06 00:00:00", "2012-04-07 00:00:00", "2012-04-08 00:00:00", "2012-04-09 00:00:00", "2012-04-10 00:00:00", "2012-04-11 00:00:00", "2012-04-12 00:00:00", "2012-04-13 00:00:00", "2012-04-14 00:00:00", "2012-04-15 00:00:00", "2012-04-16 00:00:00", "2012-04-17 00:00:00", "2012-04-18 00:00:00", "2012-04-19 00:00:00", "2012-04-20 00:00:00", "2012-04-21 00:00:00", "2012-04-22 00:00:00", "2012-04-23 00:00:00", "2012-04-24 00:00:00", "2012-04-25 00:00:00", "2012-04-26 00:00:00", "2012-04-27 00:00:00", "2012-04-28 00:00:00", "2012-04-29 00:00:00", "2012-04-30 00:00:00", "2012-05-01 00:00:00", "2012-05-02 00:00:00", "2012-05-03 00:00:00", "2012-05-04 00:00:00", "2012-05-05 00:00:00", "2012-05-06 00:00:00", "2012-05-07 00:00:00", "2012-05-08 00:00:00", "2012-05-09 00:00:00", "2012-05-10 00:00:00", "2012-05-11 00:00:00", "2012-05-12 00:00:00", "2012-05-13 00:00:00", "2012-05-14 00:00:00", "2012-05-15 00:00:00", "2012-05-16 00:00:00", "2012-05-17 00:00:00", "2012-05-18 00:00:00", "2012-05-19 00:00:00", "2012-05-20 00:00:00", "2012-05-21 00:00:00", "2012-05-22 00:00:00", "2012-05-23 00:00:00", "2012-05-24 00:00:00", "2012-05-25 00:00:00", "2012-05-26 00:00:00", "2012-05-27 00:00:00", "2012-05-28 00:00:00", "2012-05-29 00:00:00", "2012-05-30 00:00:00", "2012-05-31 00:00:00", "2012-06-01 00:00:00", "2012-06-02 00:00:00", "2012-06-03 00:00:00", "2012-06-04 00:00:00", "2012-06-05 00:00:00", "2012-06-06 00:00:00", "2012-06-07 00:00:00", "2012-06-08 00:00:00", "2012-06-09 00:00:00", "2012-06-10 00:00:00", "2012-06-11 00:00:00", "2012-06-12 00:00:00", "2012-06-13 00:00:00", "2012-06-14 00:00:00", "2012-06-15 00:00:00", "2012-06-16 00:00:00", "2012-06-17 00:00:00", "2012-06-18 00:00:00", "2012-06-19 00:00:00", "2012-06-20 00:00:00", "2012-06-21 00:00:00", "2012-06-22 00:00:00", "2012-06-23 00:00:00", "2012-06-24 00:00:00", "2012-06-25 00:00:00", "2012-06-26 00:00:00", "2012-06-27 00:00:00", "2012-06-28 00:00:00", "2012-06-29 00:00:00", "2012-06-30 00:00:00", "2012-07-01 00:00:00", "2012-07-02 00:00:00", "2012-07-03 00:00:00", "2012-07-04 00:00:00", "2012-07-05 00:00:00", "2012-07-06 00:00:00", "2012-07-07 00:00:00", "2012-07-08 00:00:00", "2012-07-09 00:00:00", "2012-07-10 00:00:00", "2012-07-11 00:00:00", "2012-07-12 00:00:00", "2012-07-13 00:00:00", "2012-07-14 00:00:00", "2012-07-15 00:00:00", "2012-07-16 00:00:00", "2012-07-17 00:00:00", "2012-07-18 00:00:00", "2012-07-19 00:00:00", "2012-07-20 00:00:00", "2012-07-21 00:00:00", "2012-07-22 00:00:00", "2012-07-23 00:00:00", "2012-07-24 00:00:00", "2012-07-25 00:00:00", "2012-07-26 00:00:00", "2012-07-27 00:00:00", "2012-07-28 00:00:00", "2012-07-29 00:00:00", "2012-07-30 00:00:00", "2012-07-31 00:00:00", "2012-08-01 00:00:00", "2012-08-02 00:00:00", "2012-08-03 00:00:00", "2012-08-04 00:00:00", "2012-08-05 00:00:00", "2012-08-06 00:00:00", "2012-08-07 00:00:00", "2012-08-08 00:00:00", "2012-08-09 00:00:00", "2012-08-10 00:00:00", "2012-08-11 00:00:00", "2012-08-12 00:00:00", "2012-08-13 00:00:00", "2012-08-14 00:00:00", "2012-08-15 00:00:00", "2012-08-16 00:00:00", "2012-08-17 00:00:00", "2012-08-18 00:00:00", "2012-08-19 00:00:00", "2012-08-20 00:00:00", "2012-08-21 00:00:00", "2012-08-22 00:00:00", "2012-08-23 00:00:00", "2012-08-24 00:00:00", "2012-08-25 00:00:00", "2012-08-26 00:00:00", "2012-08-27 00:00:00", "2012-08-28 00:00:00", "2012-08-29 00:00:00", "2012-08-30 00:00:00", "2012-08-31 00:00:00", "2012-09-01 00:00:00", "2012-09-02 00:00:00", "2012-09-03 00:00:00", "2012-09-04 00:00:00", "2012-09-05 00:00:00", "2012-09-06 00:00:00", "2012-09-07 00:00:00", "2012-09-08 00:00:00", "2012-09-09 00:00:00", "2012-09-10 00:00:00", "2012-09-11 00:00:00", "2012-09-12 00:00:00", "2012-09-13 00:00:00", "2012-09-14 00:00:00", "2012-09-15 00:00:00", "2012-09-16 00:00:00", "2012-09-17 00:00:00", "2012-09-18 00:00:00", "2012-09-19 00:00:00", "2012-09-20 00:00:00", "2012-09-21 00:00:00"], "unit": 86400}};
+       
+       var dataAry1 = [];
+       var dataAry2 =[];
+               
+      for(var i=0; i<data.data.report.usage_aver.length; i++){
+        var d1 = [data.data.interval[i], data.data.report.usage_aver[i]];
+        dataAry1.push(d1);
+        var d2 = [data.data.interval[i], data.data.report.usage_max[i]];
+        dataAry2.push(d2);
+      }
+          
+          
+   
+            //   var dataAry1 = [["2012-09-20 11:00:00", 2395], ["2012-09-21 11:00:00", 500]]
+             //  var dataAry2 = [["2012-09-20 11:00:00", 600], ["2012-09-21 11:00:00", 900]]
+          
+               var plot1 = $.jqplot('cpuChart', [dataAry1, dataAry2 ], {
+                  title:'Data Point Highlighting',
+                  legend: {
+                        show: true,
+                        location: 'nw',
+                        yoffset: 6,
+                        labels: ["Aver", "Max", "Latency"]
+                  },
+                  //ticks: ticks,
+                  highlighter: {
+                    show: true,
+                    sizeAdjust: 7.5
+                  },
+                  cursor: {
+                    show: false
+                  },
+                    axes: {
+                        xaxis: {
+                            renderer: $.jqplot.DateAxisRenderer,
+                            //tickInterval: '7 day',
+                            rendererOptions: {
+                                tickRenderer: $.jqplot.CanvasAxisTickRenderer
+                            },
+                            tickOptions: {
+                                alignTicks: true,
+                                forceTickAt0: true,
+                       
+                                //formatString: '%#d, %H:%M:%S', //hour
+                                formatString:'%m %d %Y',//day
+                                //angle: -40,
+                                fontSize: '9pt',
+                                fontStretch: 1,
+                                showMark: true,
+                                showGridline: true
+                            }
+                        },
+                        yaxis: {
+                            label: "GB",
+                            min: 0,
+                            labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                            //tickInterval: 50,
+                            //max: 700,
+                            rendererOptions: {
+                                tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                                forceTickAt0: true,
+                                forceTickAt100: true
+                            },
+                            tickOptions: { /*formatString:'%.2f',*/
+                                fontSize: '10pt',
+                                fontFamily: 'Tahoma',
+                                fontWeight: 'normal',
+                                fontStretch: 1
+                            }
+                        }
+                    },
+              });
+          
+       
+           
+               var plot2 = $.jqplot('cpuChart2', [dataAry1, dataAry2 ], {
+                  title:'Data Point Highlighting',
+                  legend: {
+                        show: true,
+                        location: 'nw',
+                        yoffset: 6,
+                        labels: ["Aver", "Max", "Latency"]
+                  },
+                  //ticks: ticks,
+                  highlighter: {
+                    show: true,
+                    sizeAdjust: 7.5
+                  },
+                  cursor: {
+                    show: false
+                  },
+                    axes: {
+                        xaxis: {
+                            renderer: $.jqplot.DateAxisRenderer,
+                            //tickInterval: '7 day',
+                            rendererOptions: {
+                                tickRenderer: $.jqplot.CanvasAxisTickRenderer
+                            },
+                            tickOptions: {
+                                alignTicks: true,
+                                forceTickAt0: true,
+                       
+                                //formatString: '%#d, %H:%M:%S', //hour
+                                formatString:'%m %d %Y',//day
+                                //angle: -40,
+                                fontSize: '9pt',
+                                fontStretch: 1,
+                                showMark: true,
+                                showGridline: true
+                            }
+                        },
+                        yaxis: {
+                            label: "GB",
+                            min: 0,
+                            labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                            //tickInterval: 50,
+                            //max: 700,
+                            rendererOptions: {
+                                tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                                forceTickAt0: true,
+                                forceTickAt100: true
+                            },
+                            tickOptions: { /*formatString:'%.2f',*/
+                                fontSize: '10pt',
+                                fontFamily: 'Tahoma',
+                                fontWeight: 'normal',
+                                fontStretch: 1
+                            }
+                        }
+                    },
+              });
+          
+      
+      
+         var s2 = [["2012-09-10 00:00:00", 10200], ["2012-09-21 00:30:00", 10800]];
+            
+               var plot3 = $.jqplot('cpuChart3', [dataAry1, dataAry2, s2  ], {
+                  title:'Data Point Highlighting',
+                  legend: {
+                        show: true,
+                        location: 'nw',
+                        yoffset: 6,
+                        labels: ["Aver", "Max", "Latency"]
+                  },
+                  //ticks: ticks,
+                  
+                  animateReplot: true,
+                  animate: true,
+                  highlighter: {
+                    show: true,
+                    sizeAdjust: 7.5
+                  },
+                  cursor: {
+                         show: true,
+            zoom: true,
+            looseZoom: true,
+            showTooltip: false,
+                 
+                  },
+        series:[
+            {
+                yaxis: 'yaxis',
+                   lineWidth:5, 
+                    
+               // markerOptions: { style:'dimaond', size:5 }
+            }, 
+            {
+                yaxis: 'yaxis',
+                 lineWidth:3,
+            //markerOptions: { size: 7, style:"x", size:5 }
+            },
+            {
+                yaxis: 'y2axis',
+                 lineWidth:1,
+                //    markerOptions: { style:"circle", size:5 }
+            }
+        ],
+                    axes: {
+                        xaxis: {
+                            renderer: $.jqplot.DateAxisRenderer,
+                            //tickInterval: '7 day',
+                            pad:0,
+                            rendererOptions: {
+                                tickRenderer: $.jqplot.CanvasAxisTickRenderer
+                            },
+                            tickOptions: {
+                                alignTicks: true,
+                                forceTickAt0: true,
+                       
+                                //formatString: '%#d, %H:%M:%S', //hour
+                                formatString:'%m %d %Y',//day
+                                //angle: -40,
+                                fontSize: '9pt',
+                                fontStretch: 1,
+                                showMark: true,
+                                showGridline: true
+                            }
+                        },
+                        yaxis: {
+                            label: "GB",
+                            min: 0,
+                            labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                            //tickInterval: 50,
+                            //max: 700,
+                            rendererOptions: {
+                                tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                                forceTickAt0: true,
+                                forceTickAt100: true
+                            },
+                            tickOptions: { /*formatString:'%.2f',*/
+                                fontSize: '10pt',
+                                fontFamily: 'Tahoma',
+                                fontWeight: 'normal',
+                                fontStretch: 1
+                            }
+                        },
+                        y2axis: {
+                            tickOptions: {
+                                formatString: "$%'d"
+                            },
+                            rendererOptions: {
+                                // align the ticks on the y2 axis with the y axis.
+                                alignTicks: true,
+                                forceTickAt0: true
+                            }
+                        }
+                    },
+              });
+          
+          
+          $("#reset").click(function(){
+       plot3.resetZoom();
+          });
+          
+//--cc
+
+var dt = $perfReportObj.getDataTable();
+var oTT = TableTools.fnGetInstance(dt.attr('id'));
+
+
+
+	});
+ 
+		</script>
+        
+   
+    </head>
+<body style='postion:relative;'>
+
+
+    <div class="page-header">
+        <h4>
+        <span id='pageTitle'></span>
+        <small id='pageSubTitle'></small>
+        </h4>
+    </div>
+
+    <div id='perfReportDiv'>
+
+    
+    </div>
+    <div id='ajaxReportDiv'></div>
+    
+    
+   <table id='chartTable'  class=" table table-striped table-bordered chartTable" cellspacing="0" cellpadding="0" border="0">
+        <tr class="">
+            <td><div id='cpuChart' class='chartDiv'>AA</div></td>
+        </tr>
+        <tr class="">
+            <td><div id='cpuChart2' class='chartDiv'>AA</div></td>
+        </tr>
+        <tr class="">
+            <td><div id='cpuChart3' class='chartDiv'>AA</div><button id='reset'>reset</button></td>
+        </tr>
+    </table>
+    
+    
+    </body>
+</html>
+    

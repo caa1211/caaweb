@@ -1,0 +1,268 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+        <title>report</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link href="cmps/datepicker/css/datepicker.css" rel="stylesheet"/>
+        <link href="cmps/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="cmps/dataTables/css/dataTables.bootstrap.css" rel="stylesheet"/>
+        <link href="css/jquery.eblockReport.css" rel="stylesheet"/>
+        
+    	<script type="text/javascript" language="javascript" src="js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" language="javascript" src="cmps/dataTables/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cmps/TableTools/media/js/ZeroClipboard.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cmps/TableTools/media/js/TableTools.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cmps/dataTables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cmps/datepicker/js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/underscore-1.3.1.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/jquery.eblockReport.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/jquery.getParams.js"></script>
+        
+        
+         <!--Chart-->
+         <link href="css/chartUtils.css" rel="stylesheet"/>
+        <link rel="stylesheet" type="text/css" href="cmps/jqplot1.0/jquery.jqplot.css"/>
+        <!-- BEGIN: load jqplot -->
+        <!--[if IE]>
+            <script language="javascript" type="text/javascript" src="cmps/jqplot1.0/excanvas.min.js"></script>
+        <![endif]-->
+        <script language="javascript" type="text/javascript" src="cmps/jqplot1.0/jquery.jqplot.min.js"></script>
+        <script language="javascript" type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <!--script language="javascript" type="text/javascript" src="jqplot1.0/plugins/jqplot.categoryAxisRenderer.js"></script-->
+        <script language="javascript" type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.canvasTextRenderer.min.js"></script>
+        <script language="javascript" type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+        <script language="javascript" type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.enhancedLegendRenderer.min.js"></script> 
+        <!--script language="javascript" type="text/javascript" src="jqplot1.0/plugins/jqplot.cursor.js"></script-->
+        <!--script type="text/javascript" src="jqplot1.0/plugins/jqplot.pointLabels.min.js"></script-->
+        <script type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+        <script type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="js/chartUtils.js"></script>
+        
+       	 <script language="javascript" type="text/javascript" src="cmps/bootstrap/js/bootstrap.min.js"></script>
+
+         
+		<script type="text/javascript" charset="utf-8">
+     
+	$(function () {
+    
+    var $pageTitle = $("#pageTitle");
+    var $pageSubTitle = $("#pageSubTitle");
+     //get url parameter
+     var uid = $.getURLParam("uid", "?");
+     var type = $.getURLParam("type", "?");
+     $pageTitle.text("uid:" + uid );
+     $pageSubTitle.append( "type:" + type);
+
+  
+     //call ws api or RPC to get data
+     /*
+     var Zenoss = window.parent.Zenoss;
+     Zenoss.remote.vdcmApiRouter.getEventByHostName({HostName: "10.201.35.3"}, function(res){
+     });
+     */
+     
+      //-------Report 1--------------------------------------
+      //install eblockReport plugin in a DIV
+      var $perfReportObj = $("#perfReportDiv").eblockReport({
+            title: "Performance Report",
+            fileTitle: "performance report",
+            header:[
+                {label:"aa", width:"20%"}, 
+                {label:"bb", width:"20%"}, 
+                {label:"cc", width:"20%"}, 
+                {label:"dd", width:"20%"}, 
+                {label:"ee", width:"20%"}],
+            dataSchema:[
+                {"mData": "engine"}, 
+                {"mData": "browser"}, 
+                {"mData": "platform"}, 
+                {"mData": "version"}, 
+                {"mData": "grade"}],
+            isTimeRangeSelectable: true,
+            printPath: "print_chart.html"
+      });
+      
+      //add Data in report object
+      $perfReportObj.addData([{
+	            "engine": "1",
+	            "browser": "O2",
+	            "platform": "Win 95+ / OSX.3+",
+	            "version": "-",
+	            "grade": "A"
+	        }, {
+	            "engine": "2",
+	            "browser": "O2",
+	            "platform": "Win 95+ / OSX.3+",
+	            "version": "中文測試",
+	            "grade": "A"
+	        }]
+        );
+       
+      //setTimeRange(startDate, endDate) will also set today by end date.
+      //arg2 is month from 0 to 11, ex 0: January
+      $perfReportObj.setTimeRange(new Date(2012,0,20), new Date(2012,0,20));
+      
+      //generate button clicked
+      $perfReportObj.getGenBtn().on('click', function(e){
+            if($(this).hasClass('disabled')==true){
+               return;
+            }
+            //get time range and parse it
+            var timeRange = $perfReportObj.getTimeRange();
+            var startDate = timeRange.startDate;
+            var endDate = timeRange.endDate;
+            //convert date to string
+            var startDateStr = eblockReportUtils.dateToString(startDate, "-");
+            var endDateStr = eblockReportUtils.dateToString(endDate, "-");
+
+            //generate report by API with time range
+            //step1: disable calendar & GenBtn
+            //step2: ajax query;
+            //step3: clear perious table data
+            //step4: add new data to table
+            //step5: enable calendar & GenBtn
+
+            //for demo
+            //step1
+            $perfReportObj.getCalendarArea().disable();
+            //step2
+            $.getJSON("cmps/ajax/sources/objects.txt", function(a,b){
+                //get data success, set to new time range
+                $perfReportObj.setTimeRange(new Date(startDate), new Date(endDate));
+                //step3
+                $perfReportObj.clearData();
+                //step4
+                $perfReportObj.getCalendarArea().enable();
+                //step5
+                $perfReportObj.addData(a.aaData);
+            });   
+      });
+      
+      
+      //--chart
+
+        var chartObjs = {
+            cpu:{plot:null, id: "cpuChart", title: "CPU", unit: 'mghz'},
+            disk: {plot:null, id: "diskChart", title: "Disk", unit: "kbps"}
+        };
+        chartUtils.initChartUI($perfReportObj, chartObjs);
+        
+        var data = {
+                    "report": {
+                        "usage_max": [2395, 2396, 2394, 2396, 2394, 2393, 2395, 2396, 2396, 2395, 2393, 2395, 2395, 2395, 2397, 2394, 2396, 2396, 2394, 2386, 2386, 2385, 2390, 2387, 2386, 2384, 2385],
+                        "usage_aver": [2385, 2385, 2385, 2385, 2385, 2385, 2385, 2385, 2385, 2384, 2385, 2386, 2385, 2385, 2386, 2385, 2386, 2385, 2377, 2373, 2374, 2373, 2374, 2374, 2375, 2375, 2375]
+                    },
+                    "interval": ["2012-09-21 00:00:00", "2012-09-21 00:30:00", "2012-09-21 01:00:00", "2012-09-21 01:30:00", "2012-09-21 02:00:00", "2012-09-21 02:30:00", "2012-09-21 03:00:00", "2012-09-21 03:30:00", "2012-09-21 04:00:00", "2012-09-21 04:30:00", "2012-09-21 05:00:00", "2012-09-21 05:30:00", "2012-09-21 06:00:00", "2012-09-21 06:30:00", "2012-09-21 07:00:00", "2012-09-21 07:30:00", "2012-09-21 08:00:00", "2012-09-21 08:30:00", "2012-09-21 09:00:00", "2012-09-21 09:30:00", "2012-09-21 10:00:00", "2012-09-21 10:30:00", "2012-09-21 11:00:00", "2012-09-21 11:30:00", "2012-09-21 12:00:00", "2012-09-21 12:30:00", "2012-09-21 13:00:00", "2012-09-21 13:30:00"],
+                    "unit": 1800
+            };
+       
+        var data_disk = {
+                    "report": {
+                        "usage_max": [2395, 2396, 2394, 2396, 2394, 2393, 2395, 2396, 2396, 2395, 2393, 2395, 2395, 2395, 2397, 2394, 2396, 2396, 2394, 2386, 2386, 2385, 2390, 2387, 2386, 2384, 2385],
+                        "usage_aver": [2385, 2385, 2385, 2385, 2385, 2385, 2385, 2385, 2385, 2384, 2385, 2386, 2385, 2385, 2386, 2385, 2386, 2385, 2377, 2373, 2374, 2373, 2374, 2374, 2375, 2375, 2375]
+                    },
+                    "interval": ["2012-09-21 00:00:00", "2012-09-21 00:30:00", "2012-09-21 01:00:00", "2012-09-21 01:30:00", "2012-09-21 02:00:00", "2012-09-21 02:30:00", "2012-09-21 03:00:00", "2012-09-21 03:30:00", "2012-09-21 04:00:00", "2012-09-21 04:30:00", "2012-09-21 05:00:00", "2012-09-21 05:30:00", "2012-09-21 06:00:00", "2012-09-21 06:30:00", "2012-09-21 07:00:00", "2012-09-21 07:30:00", "2012-09-21 08:00:00", "2012-09-21 08:30:00", "2012-09-21 09:00:00", "2012-09-21 09:30:00", "2012-09-21 10:00:00", "2012-09-21 10:30:00", "2012-09-21 11:00:00", "2012-09-21 11:30:00", "2012-09-21 12:00:00", "2012-09-21 12:30:00", "2012-09-21 13:00:00", "2012-09-21 13:30:00"],
+                    "unit": 1800
+         };
+            
+        $.extend($perfReportObj, {  
+         data :{
+            cpu:  {data:data, done: false, type: 'cpu'},
+            disk: {data:data_disk, done: false, type: 'disk'}
+         }
+        });
+      
+        chartUtils.doChart(chartObjs['cpu'], data);
+        chartUtils.doChart(chartObjs['disk'],data_disk);
+        
+            
+      //-------Report 1--------------------------------------
+        
+        
+      //-------Report 2--------------------------------------
+      //Get Data By Ajax and build table
+      var $ajaxReportObj = $("#ajaxReportDiv").eblockReport({
+            title: "Ajax Test",
+            fileTitle: "report",
+            header:[
+                {label:"aa", width:"20%"}, 
+                {label:"bb", width:"20%"}, 
+                {label:"cc", width:"20%"}, 
+                {label:"dd", width:"20%"}, 
+                {label:"ee", width:"20%"}],
+            dataSchema:[
+                {"mData": "engine"}, 
+                {"mData": "browser"}, 
+                {"mData": "platform"}, 
+                {"mData": "version"}, 
+                {"mData": "grade"}]
+      });
+      
+   
+      $.getJSON("cmps/ajax/sources/objects.txt", function(a,b){
+            //get data success, set to new time range
+            $ajaxReportObj.setTimeRange(new Date(2012,0,10), new Date(2012,2,2));
+            $ajaxReportObj.addData(a.aaData);
+      });
+      //-------Report 2--------------------------------------
+
+
+	});
+ 
+		</script>
+        
+   
+    </head>
+<body style='postion:relative;'>
+
+
+    <div class="page-header">
+        <h4>
+        <span id='pageTitle'></span>
+        <small id='pageSubTitle'></small>
+        </h4>
+    </div>
+
+    <div id='perfReportDiv'>
+    
+          <!--Chart HTML begin -->
+         
+          <!--chart btn-->
+          <div class="btn-group custBtnGroup">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+            Chart
+            <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" style="left:120px;">
+                 <li><a href="javascript:void(0)" class='disableChartBtn'>Disable</a></li>
+                 <li><a href="javascript:void(0)" class='allChartBtn'>Show All</a></li>
+                 <li class="divider"></li>
+                 <li><a href="javascript:void(0)" type="cpu" class='chartBtn'>CPU</a></li>
+                 <li><a href="javascript:void(0)" type="disk" class='chartBtn'>Disk</a></li>
+
+            </ul>
+          </div>
+          <!--chart container-->
+          <div class="chartTable">
+            <!--chart 1-->
+            <div class='chartWrap ' type="cpu">
+            <a href="javascript:void(0)" class="btn btn-custom   btn-mini resetZoom">reset zoom <i class="icon-white icon-zoom-out"></i></a>
+            <div id='cpuChart' class='chartDiv'></div>
+            </div>
+            <!--chart 2-->
+            <div class='chartWrap ' type="disk">
+            <a href="javascript:void(0)" class="btn btn-custom  btn-mini resetZoom">reset zoom <i class="icon-white icon-zoom-out"></i></a>
+            <div id='diskChart' class='chartDiv'></div>
+            </div>
+          </div>
+          
+         <!--Chart HTML end-->
+    
+    
+    </div>
+    <div id='ajaxReportDiv'></div>
+    
+    </body>
+</html>
+    

@@ -1,0 +1,4 @@
+﻿.chartTable{
+}
+.chartTable tbody tr:nth-child(2n+1) td, .chartTable tbody tr:nth-child(2n+1) th td {background:#ffffff;}
+.chartTable .chartDiv{height:350px; width:80%; margin: 0 auto;}

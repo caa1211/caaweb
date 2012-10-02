@@ -1,0 +1,165 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 5.01//EN" "http://www.w3.org/TR/html5/strict.dtd">
+<html>
+	<head>
+        <title>report</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link href="cmps/datepicker/css/datepicker.css" rel="stylesheet"/>
+        <link href="cmps/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="cmps/dataTables/css/dataTables.bootstrap.css" rel="stylesheet"/>
+        <link href="css/jquery.eblockReport.css" rel="stylesheet"/>
+        <link rel="stylesheet" type="text/css" href="cmps/jqplot1.0/jquery.jqplot.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/chartUtils.css"/>
+        
+    	<script type="text/javascript" language="javascript" src="js/jquery-1.7.2.min.js"></script>
+		<!--script language="javascript" type="text/javascript" src="/++resource++ESXHost/cmps/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" language="javascript" src="/++resource++zenui/itricomponent/report/cmps/dataTables/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/++resource++zenui/itricomponent/report/cmps/TableTools/media/js/ZeroClipboard.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/++resource++zenui/itricomponent/report/cmps/TableTools/media/js/TableTools.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/++resource++zenui/itricomponent/report/cmps/dataTables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/++resource++zenui/itricomponent/report/cmps/datepicker/js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/++resource++zenui/itricomponent/report/js/underscore-1.3.1.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/++resource++zenui/itricomponent/report/js/jquery.eblockReport.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/++resource++zenui/itricomponent/report/js/jquery.getParams.js"></script-->
+		
+        <!-- BEGIN: load jqplot -->
+        <!--[if IE]>
+            <script language="javascript" type="text/javascript" src="cmps/jqplot1.0/excanvas.min.js"></script>
+        <![endif]-->
+        <script language="javascript" type="text/javascript" src="cmps/jqplot1.0/jquery.jqplot.min.js"></script>
+        <script language="javascript" type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <!--script language="javascript" type="text/javascript" src="jqplot1.0/plugins/jqplot.categoryAxisRenderer.js"></script-->
+        <script language="javascript" type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.canvasTextRenderer.min.js"></script>
+        <script language="javascript" type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+        <script language="javascript" type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.enhancedLegendRenderer.min.js"></script> 
+        <!--script language="javascript" type="text/javascript" src="jqplot1.0/plugins/jqplot.cursor.js"></script-->
+        <!--script type="text/javascript" src="jqplot1.0/plugins/jqplot.pointLabels.min.js"></script-->
+        <script type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+        <script type="text/javascript" src="cmps/jqplot1.0/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="js/chartUtils.js"></script>
+        <script type="text/javascript" charset="utf-8">
+     
+
+	$(function () {
+ 
+        function fnInfo( message, time ) {
+            var nInfo = document.createElement( "div" );
+            nInfo.className = "DTTT_print_info modal";
+            nInfo.innerHTML = message;
+
+            document.body.appendChild( nInfo );
+            
+            setTimeout( function() {
+                $(nInfo).fadeOut( "normal", function() {
+                    document.body.removeChild( nInfo );
+                } );
+            }, time );
+        }
+        
+        setTimeout(function(){
+             if(window.parentDOM != undefined){
+                drawTable();
+             }else{
+                alert("Please re-generate this report");
+             }
+         }, 80);
+
+         
+         function drawTable(){
+             var pInfo = window.pInfo;   
+             var sTitle = window.sTitle;
+             var $printDOMClone = $(window.parentDOM); 
+             var $printBtn = $("#printButton");
+             
+             $printBtn.click(function(){
+                $(".DTTT_print_info").hide();
+                window.print();
+             });
+             
+             var dateTitle = window.dateTitle;
+
+             $('body').append($printDOMClone);
+
+             if(pInfo!=undefined && pInfo!=""){
+                fnInfo(pInfo, 3000);
+             }
+             
+             var $pageHeader = $('body').find('.page-header');
+             $pageHeader.show();
+             
+             
+             if(sTitle!=undefined){
+               if(dateTitle!=undefined){
+                 sTitle = sTitle + " " + dateTitle;
+               }
+               //can not change page title by jQuery selector in ie
+               //$("title").html(sTitle);
+               document.title = sTitle;
+               
+               var $reportTitle = $("#reportTitle")
+               $reportTitle.html(" [" + sTitle + "]");
+               $pageHeader.children('h4').append($reportTitle);
+             }
+             $printBtn.show().appendTo($pageHeader.children('h4'));
+
+         }
+         
+         //draw chart
+         var chartData = window.chartData; 
+         function delayDrawChart(){
+                setTimeout(function(){
+                    chartData = window.chartData; 
+                    if(chartData == undefined){
+                        delayDrawChart();
+                    }else{
+                        drawChart();
+                    }
+                }, 200);
+         }
+         delayDrawChart();
+         
+         function drawChart(){
+                var chartDataObj = {};
+                try{
+                  var $chartTable =  $(".chartTable");
+                  $chartTable.show();
+                  chartDataObj =  jQuery.parseJSON(chartData);
+                  var doChart = chartUtils.doChart;
+                  var $chartWraps = $(".chartWrap");
+                  $chartWraps.find(".resetZoom").hide();
+                  var $chartDivs =  $(".chartDiv");
+                  var chartHeight = $chartDivs.height() + 3;
+                  $chartDivs.empty().parent().height(chartHeight);
+                  var chartOpt = {
+                    showMarker: false,
+                    showHighlighter: false,
+                    zoom: false, 
+                    animate: false
+                  };
+
+                  doChart(chartDataObj.chartDef.cpu, chartDataObj.data.cpu.data, chartOpt);
+                //  doChart(chartDataObj.chartDef.network, chartDataObj.data.network.data, chartOpt);
+                  doChart(chartDataObj.chartDef.disk, chartDataObj.data.disk.data, chartOpt);
+
+                }catch(e){}
+         }
+
+	});
+ 
+    
+		</script>
+<style>
+#printButton {
+ display:none;float:right;  margin-right:150px; margin-top:-6px;
+}
+</style>
+    </head>
+<body style='postion:relative; width:95%;margin: 0 auto;'>
+<small id='reportTitle' style="">
+
+</small>
+  
+  <a href="javascript:void(0)" class="btn" id="printButton" style="">Print <i class="icon-print"></i></a>
+ </body>
+</html>
+    
