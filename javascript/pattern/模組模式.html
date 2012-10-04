@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style='height:auto;'>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--common css-->
+
+
+   
+<script type="text/javascript">
+
+MyArray = (function(){
+
+var a = 5;
+
+//將Method 包裝成 function 了!
+var Constr = function(o){
+    this.elements = this.toArray(o);
+    this.testFun = this.realFunction(o);
+  
+};
+
+Constr.prototype =  {
+    varsion: "2.0",
+    toArray: function(obj){
+        return obj;
+    },
+    realFunction: function(obj){
+        alert(obj);
+    }
+    
+
+};
+
+return Constr;
+
+}());
+
+
+var arr = new MyArray(3);
+alert(arr.elements); //alert 3
+
+arr.testFun;
+
+  
+</script> 
+
+</head>
+<body>
+    
+
+
+
+
+</body>
+</html>
