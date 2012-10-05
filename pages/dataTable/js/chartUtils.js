@@ -61,21 +61,10 @@
                  },
                  data: $reportObj.data
              };
-             
-             dataToSubWin.selfObj = dataToSubWin;
-             seen = [];
-             var jsonStr = JSON.stringify(dataToSubWin, function(key, val) {
-               if (typeof val == "object") {
-                    if (seen.indexOf(val) >= 0)
-                        return undefined
-                    seen.push(val)
-                }
-                return val;
-             });
              var dt = $reportObj.getDataTable();
              var oTT = TableTools.fnGetInstance(dt.attr('id'));
              var printWin = oTT.s.print.printWin;
-             printWin.chartData =jsonStr;
+             printWin.chartData = dataToSubWin;
              
            });
     },
