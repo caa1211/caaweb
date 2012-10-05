@@ -201,7 +201,7 @@ eblockReportUtils.dateToString = function(date, splitStr){
 					"sExtends": "print",
 					"sButtonText": "Print",
                     "sInfo": "",
-                    "pInfo":"<h6>Print view</h6><p>Please press the print button to print this report.</p>",
+                    "pInfo":"",
                     "printSrc": printPath,
                     "sToolTip": "",
                     "sTitle": _settings.fileTitle == "" ? _settings.title : _settings.fileTitle
@@ -361,20 +361,6 @@ eblockReportUtils.dateToString = function(date, splitStr){
        this.getDataTable = function(){
             return $report;
        };
-       
-       //chart
-       var charts = {};
-       this.getChart = function(id){
-        return charts[id];
-       };
-       
-       this.drawChart = function(opt){
-            if($.fn.eblockReport.drawChart != undefined ){
-               charts[opt.targetId] =  this.eblockReport.drawChart(opt, this);
-            } 
-            return this;            
-       }
-       //chart
         
        return _init();
     };

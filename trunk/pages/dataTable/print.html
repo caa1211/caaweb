@@ -21,41 +21,79 @@
      
 
 	$(function () {
+    
+        function fnInfo( message, time ) {
+            var nInfo = document.createElement( "div" );
+            nInfo.className = "DTTT_print_info modal";
+            nInfo.innerHTML = message;
+
+            document.body.appendChild( nInfo );
+            
+            setTimeout( function() {
+                $(nInfo).fadeOut( "normal", function() {
+                    document.body.removeChild( nInfo );
+                } );
+            }, time );
+        }
+        
         //timer for fix the ie issue.
         setTimeout(function(){
-        
+             if(window.parentDOM != undefined){
+                drawTable();
+             }else{
+                alert("Please re-generate this report");
+             }
+        }, 80);
+
+        function drawTable(){
              var pInfo = window.pInfo;   
              var sTitle = window.sTitle;
              var $printDOMClone = $(window.parentDOM); 
+             var dateTitle = window.dateTitle;
              $('body').append($printDOMClone);
-             var $info = $('body').find('.DTTT_print_info');
+             
+             if(pInfo!=undefined && pInfo!=""){
+                fnInfo(pInfo, 3000);
+             }
+             
+             var $printBtn = $("#printButton");
+             
+             $printBtn.click(function(){
+                $(".DTTT_print_info").hide();
+                window.print();
+             });
+             
              var $pageHeader = $('body').find('.page-header');
              $pageHeader.show();
-             
-             if(pInfo!=undefined){
-                $info.html(pInfo);
-             }
-             
+
              if(sTitle!=undefined){
+               if(dateTitle!=undefined){
+                 sTitle = sTitle + " " + dateTitle;
+               }
+               //can not change page title by jQuery selector in ie
+               //$("title").html(sTitle);
+               document.title = sTitle;
+               
                var $reportTitle = $("#reportTitle")
-               $reportTitle.html(" - [ " + sTitle + " ]");
+               $reportTitle.html(" [" + sTitle + "]");
                $pageHeader.children('h4').append($reportTitle);
              }
-             
-             setTimeout( function() {
-                     $info.fadeOut( "normal", function() {
-                         $info.remove();
-                    } );
-             }, 2000 );
+             $printBtn.show().appendTo($pageHeader.children('h4'));
+         };
          
-         }, 80);
 	});
  
 		</script>
 
+<style>
+#printButton {
+ display:none;float:right;  margin-right:150px; margin-top:-6px;
+}
+</style>
     </head>
 <body style='postion:relative;'>
 <small id='reportTitle'></small>
+<a href="javascript:void(0)" class="btn " id="printButton" style="">Print <i class="icon-print"></i></a>
  </body>
 </html>
     
