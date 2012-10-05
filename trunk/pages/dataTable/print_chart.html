@@ -40,6 +40,32 @@
         <script type="text/javascript" charset="utf-8">
      
 
+
+(function($) {
+	$.fn.CanvasHack = function() {
+		var canvases = this.find('canvas').filter(function() {
+			return $(this).css('position') == 'absolute';
+		});
+
+		canvases.wrap(function() {
+			var canvas = $(this);
+			var div = $('<div />').css({
+				position: 'absolute',
+				top: canvas.css('top'),
+				left: canvas.css('left')
+			});
+			canvas.css({
+				top: '0',
+				left: '0'
+			});
+			return div;
+		});
+
+		return this;
+	};
+})(jQuery);
+
+
 	$(function () {
  
         function fnInfo( message, time ) {
@@ -64,13 +90,12 @@
              }
          }, 80);
 
-         
+         var $printBtn = $("#printButton");
          function drawTable(){
              var pInfo = window.pInfo;   
              var sTitle = window.sTitle;
              var $printDOMClone = $(window.parentDOM); 
-             var $printBtn = $("#printButton");
-             
+
              $printBtn.click(function(){
                 $(".DTTT_print_info").hide();
                 window.print();
@@ -101,47 +126,57 @@
                $pageHeader.children('h4').append($reportTitle);
              }
              $printBtn.show().appendTo($pageHeader.children('h4'));
+       
+             //draw chart
+             var chartData = window.chartData; 
+             function delayDrawChart(){
+                    setTimeout(function(){
+                        chartData = window.chartData; 
+                        if(chartData == undefined){
+                            delayDrawChart();
+                        }else{
+                            drawChart(chartData);
+                        }
+                    }, 200);
+             }
+             delayDrawChart();
+         }
 
-         }
          
-         //draw chart
-         var chartData = window.chartData; 
-         function delayDrawChart(){
-                setTimeout(function(){
-                    chartData = window.chartData; 
-                    if(chartData == undefined){
-                        delayDrawChart();
-                    }else{
-                        drawChart();
-                    }
-                }, 200);
-         }
-         delayDrawChart();
-         
-         function drawChart(){
+         function drawChart(chartData){
                 var chartDataObj = {};
                 try{
                   var $chartTable =  $(".chartTable");
                   $chartTable.show();
-                  chartDataObj =  jQuery.parseJSON(chartData);
                   var doChart = chartUtils.doChart;
                   var $chartWraps = $(".chartWrap");
                   $chartWraps.find(".resetZoom").hide();
                   var $chartDivs =  $(".chartDiv");
                   var chartHeight = $chartDivs.height() + 3;
                   $chartDivs.empty().parent().height(chartHeight);
+                  var showMarker = false;
+                  if(chartData.chartDef.cpu.data.report.usage_aver.length == 1){
+                    showMarker = true;
+                  }
                   var chartOpt = {
-                    showMarker: false,
+                    showMarker: showMarker,
                     showHighlighter: false,
                     zoom: false, 
                     animate: false,
                     shadow: false
                   };
 
-                  doChart(chartDataObj.chartDef.cpu, chartOpt);
-                //  doChart(chartDataObj.chartDef.network, chartDataObj.data.network.data, chartOpt);
-                  doChart(chartDataObj.chartDef.disk, chartOpt);
+                  doChart(chartData.chartDef.cpu, chartOpt);
+                 // doChart(chartData.chartDef.network, chartOpt);
+                  doChart(chartData.chartDef.disk, chartOpt);
 
+                  if($.browser.msie) {
+                    $('body').CanvasHack();
+                  } 
+                
+                  //auto show the browser's print UI.
+                  $printBtn.trigger('click');
+             
                 }catch(e){}
          }
 
@@ -163,4 +198,5 @@
   <a href="javascript:void(0)" class="btn" id="printButton" style="">Print <i class="icon-print"></i></a>
  </body>
 </html>
+    
     
