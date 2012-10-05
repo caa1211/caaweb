@@ -134,12 +134,13 @@
                     showMarker: false,
                     showHighlighter: false,
                     zoom: false, 
-                    animate: false
+                    animate: false,
+                    shadow: false
                   };
 
-                  doChart(chartDataObj.chartDef.cpu, chartDataObj.data.cpu.data, chartOpt);
+                  doChart(chartDataObj.chartDef.cpu, chartOpt);
                 //  doChart(chartDataObj.chartDef.network, chartDataObj.data.network.data, chartOpt);
-                  doChart(chartDataObj.chartDef.disk, chartDataObj.data.disk.data, chartOpt);
+                  doChart(chartDataObj.chartDef.disk, chartOpt);
 
                 }catch(e){}
          }

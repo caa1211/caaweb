@@ -79,11 +79,12 @@
              
            });
     },
-    doChart: function(chartObj, data, opt){
+    doChart: function(chartObj, opt){
                var htmlTmpl = chartUtils.htmlTmpl;
                var dataAry_cpu = [];
                var dataAry_network =[];
                var dataAry_disk =[]; 
+               var data = chartObj.data;
                var xmin = data.interval[0];
                var xmax = 0;
                var ymax = 0;
@@ -95,7 +96,8 @@
                 seriesColors: ['#594c6d', '#8FBC8F', "#B0E0E6"],
                 zoom: true,
                 animate: true,
-                lineWidth: 1
+                lineWidth: 1,
+                shadow: true
                };
                
                var _opt = $.extend({}, default_opt, opt);
@@ -200,8 +202,10 @@
                     markerOptions: {
                         show:  _opt.showMarker,
                         lineWidth: _opt.lineWidth,       // width of the stroke drawing the marker.
-                        size: makerSize           // size (diameter, edge length, etc.) of the marker.
-                    }
+                        size: makerSize,           // size (diameter, edge length, etc.) of the marker.
+                        shadow: _opt.shadow
+                    },
+                    shadow: _opt.shadow
                   },
                   series:[
                     {
@@ -230,7 +234,10 @@
                     looseZoom: true,
                     showTooltip: false
                   },
-                    axes: {
+                  grid:{
+                    shadow: _opt.shadow
+                  },
+                  axes: {
                         xaxis: {
                             pad:0,
                             min: xmin,
