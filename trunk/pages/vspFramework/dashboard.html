@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+    <title>Bootstrap 101 Template</title>
+
+    <link href="cmps/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="cmps/jquery-ui/css/black-tie/jquery.ui.theme.css" rel="stylesheet" media="screen">
+    
+    <link href="css/zyDDPanel.css" rel="stylesheet" type="text/css" />
+    <link href="css/zyDDPanel.js.css" rel="stylesheet" type="text/css" />
+   
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <script src="cmps/jquery-ui/js/jquery-ui-1.9.1.custom.min.js"></script>
+    <script src="cmps/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/zyDDPanel2.js"></script>
+    
+        <script type="text/javascript">
+
+        $(function()
+        {
+   
+          $('#columns').zyDDPanel();
+         
+          $('.widget').bind('refresh', function(e, panel){
+              $(panel).css('border', 'solid 1px red');
+          });
+          
+          $('.widget').bind('setting', function(e, panel){
+              $(panel).css('border', 'solid 1px blue');
+              
+              
+          });
+          
+          $('.widget').addClass('ui-widget');
+          $('.widget-head').addClass('ui-widget-header ui-corner-all');
+          $('.widget-content').addClass('ui-widget-content');
+
+          
+        });
+  
+    </script> 
+    
+    
+    </head>
+    <style>
+    
+body {
+    background: url("https://kippt.com/static/img/home-bg-lib.jpg?62cc53229b01") no-repeat scroll center 40px, url("/static/img/home-bg-black.png?62cc53229b01") repeat-x scroll left 40px transparent;
+    padding-top:80px;
+}
+    </style>
+    <body>
+    
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Project name</a>
+          <div class="nav-collapse collapse">
+
+            <p class="navbar-text pull-right">
+              Logged in as <a href="#" class="navbar-link">Username</a>
+            </p>
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid" style="">
+
+        <div class="" style=" margin: 0 auto; width:900px; ">
+        
+          <div class="hero-unit" style="height:170px; opacity:0.5;">
+
+            <h3>Hello, world!</h3>
+            <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+            <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+          </div>
+        
+
+        
+            
+    
+    
+    <div id="columns" style= "margin-top:80px;">
+        
+        <ul id="columnLeft" class="column">
+            
+            <li class="widget" id="intro">
+                <div class="widget-head ">
+                    <h3>Introduction Widget</h3>
+                </div>
+                <div class="widget-content">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam magna sem, fringilla in, commodo a, rutrum ut, massa. Donec id nibh eu dui auctor tempor. Morbi laoreet eleifend dolor. Suspendisse pede odio, accumsan vitae, auctor non, suscipit at, ipsum. Cras varius sapien vel lectus.</p>
+          
+                </div>
+            </li>
+            
+            <li class="widget">  
+                <div class="widget-head">
+                    <h3>Widget title</h3>
+                </div>
+                <div class="widget-content">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam magna sem, fringilla in, commodo a, rutrum ut, massa. Donec id nibh eu dui auctor tempor. Morbi laoreet eleifend dolor. Suspendisse pede odio, accumsan vitae, auctor non, suscipit at, ipsum. Cras varius sapien vel lectus.</p>
+                </div>
+            </li>
+            
+        </ul>
+
+        
+        <ul id="columnRight" class="column">
+            
+            <li class="widget noSetting noRefresh noClose noCollapse " id='testWidget'>  
+                <div class="widget-head">
+                    <h3>Widget title</h3>
+                </div>
+                <div class="widget-content">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam magna sem, fringilla in, commodo a, rutrum ut, massa. Donec id nibh eu dui auctor tempor. Morbi laoreet eleifend dolor. Suspendisse pede odio, accumsan vitae, auctor non, suscipit at, ipsum. Cras varius sapien vel lectus.</p>
+                </div>
+            </li>
+            <li class="widget">  
+                <div class="widget-head">
+                    <h3>Widget title</h3>
+                </div>
+                <div class="widget-content">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam magna sem, fringilla in, commodo a, rutrum ut, massa. Donec id nibh eu dui auctor tempor. Morbi laoreet eleifend dolor. Suspendisse pede odio, accumsan vitae, auctor non, suscipit at, ipsum. Cras varius sapien vel lectus.</p>
+                </div>
+            </li>
+            
+            
+            <li class="widget">  
+                <div class="widget-head">
+                    <h3>Widget title</h3>
+                </div>
+                <div class="widget-content">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam magna sem, fringilla in, commodo a, rutrum ut, massa. Donec id nibh eu dui auctor tempor. Morbi laoreet eleifend dolor. Suspendisse pede odio, accumsan vitae, auctor non, suscipit at, ipsum. Cras varius sapien vel lectus.</p>
+              <iframe src="http://www.kimo.com.tw"></iframe>
+
+              </div>
+            </li>
+            
+            
+        </ul>
+        
+    </div>
+    
+    
+    
+    
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>&copy; Company 2012</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+    
+    
+    
+
+    
+    
+    
+<div class="modal hide fade"  id="myModal">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Modal header</h3>
+    </div>
+    <div class="modal-body">
+    <p>Remove this Portlet ?</p>
+    </div>
+    <div class="modal-footer">
+    <a href="#" class="btn cancel">Cancel</a>
+    <a href="#" class="btn btn-primary ok">OK</a>
+    </div>
+ </div>
+
+    
+    
+    
+    
+    </body>
+</html>
