@@ -5,7 +5,7 @@
 
 ;(function(){
 
-    require(["js/a.js"], function() {   
+    require(["./js/domReady!", "./portlet/portletCAA/js/a.js"], function() {   
      
         
         var key = "<?php echo $_GET['key'];?>";
@@ -32,7 +32,7 @@
 
 
 <li class="widget ui-widget" id="portlet_<?php echo $_GET['key'];?>">
-    <div class="widget-head ui-widget-header ui-corner-all">
+    <div class="widget-head ui-widget-header ui-corner-all myheader">
         <h3>CAA Widget <?php echo $_GET['key'];?> </h3>
         </div>
 
