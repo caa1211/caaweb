@@ -31,7 +31,7 @@
         var $btn = $(btnTmp({name: "FeeBtn 111"}));
         $content.append($btn);
         
-        $btn.click( function(){ _module.bFun(key); });
+        $btn.click( function(){ _module.aFun(key); });
         
         
     });   
