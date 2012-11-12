@@ -1,7 +1,7 @@
 ﻿define(function(){  
  
   return {  
-        bFun: 
+        aFun: 
         function(name){ 
            alert("Fee " + name);        
            /* return {  
