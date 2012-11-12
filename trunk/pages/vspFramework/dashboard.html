@@ -20,7 +20,7 @@
         $(function()
         {
    
-          $('#columns').zyDDPanel();
+          var $ddPanelObj = $('#columns').zyDDPanel();
          
           $('.widget').bind('refresh', function(e, panel){
               $(panel).css('border', 'solid 1px red');
@@ -37,6 +37,29 @@
           $('.widget-content').addClass('ui-widget-content');
 
           
+          /*
+          var newPortletTmpl = '<li class="widget">'  +
+                '<div class="widget-head">'+
+                    '<h3>Widget title</h3>'+
+                '</div>'+
+                '<div class="widget-content">'+
+                    '<p>Donec id nibh eu dui auctus.</p>'+
+                '</div>'+
+            '</li>';
+            
+          var newPortletOpt = {
+                    content: newPortletTmpl,
+                    movable: true,
+                    removable: true,
+                    refreshable: true,
+                    settingable: true,
+                    collapsible: true
+          };
+            
+          $("#addPortlet").click(function(){
+                $ddPanelObj.addPortlet(newPortletOpt);
+          });
+          */
         });
   
     </script> 
@@ -88,7 +111,7 @@ body {
 
             <h3>Hello, world!</h3>
             <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-            <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+            <p><a class="btn btn-primary btn-large" id="addPortlet">Add Portlet </a></p>
           </div>
         
 
@@ -124,9 +147,9 @@ body {
         
         <ul id="columnRight" class="column">
             
-            <li class="widget noSetting noRefresh noClose noCollapse " id='testWidget'>  
+            <li class="widget noSetting noRefresh noClose noCollapse noMove" id='testWidget'>  
                 <div class="widget-head">
-                    <h3>Widget title</h3>
+                    <h3>Widget title 1</h3>
                 </div>
                 <div class="widget-content">
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam magna sem, fringilla in, commodo a, rutrum ut, massa. Donec id nibh eu dui auctor tempor. Morbi laoreet eleifend dolor. Suspendisse pede odio, accumsan vitae, auctor non, suscipit at, ipsum. Cras varius sapien vel lectus.</p>

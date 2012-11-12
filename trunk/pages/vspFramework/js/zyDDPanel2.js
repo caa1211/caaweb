@@ -58,9 +58,10 @@
         };
         
         var ddPanelObj = $(this);
+        
+        
         var addWidgetControls = function(){
-        
-        
+
             $(_settings.widgetSelector, $(_settings.columns)).each(function(){
                 var thisWidgetSettings = getWidgetSettings(this);
                 
@@ -92,9 +93,9 @@
                         }).dialog('open');
                         */
                         $('#myModal').modal({
-                        
-                        
+
                         });
+                        
                          $('#myModal .ok').click(function(){
                                     panel.animate({
                                         opacity: 0
@@ -166,12 +167,13 @@
         
         
         var makeSortable = function(){
-        
-        
             $sortableItems = (function(){
+                /*
                 var notSortable = '';
+                
                 $(_settings.widgetSelector, $(_settings.columns)).each(function(i){
-                    if (!getWidgetSettings(ddPanelObj).movable) {
+                      // debugger;
+                    if (!getWidgetSettings(this).movable) {
                         if (!this.id) {
                             this.id = 'widget-no-id-' + i;
                         }
@@ -180,13 +182,27 @@
                 });
                 
                 
-                return notSortable != '' ? $('> li:not(' + notSortable + ')', _settings.columns) : $('li', _settings.columns);
+                var $items = notSortable != '' ? $('> li:not(' + notSortable + ')', _settings.columns) : $('li', _settings.columns);
+                return $items;
+                */
+                
+                $items = $('li', _settings.columns).filter(function(){
+                    if (!getWidgetSettings(this).movable) {
+                        if (!this.id) {
+                            this.id = 'widget-no-id-' + i;
+                        }
+                        return false;
+                    }else{
+                        return true;
+                    }
+                });
+                return $items;
                 
             })();
             
             $sortableItems.find(_settings.handleSelector).css({
                 cursor: 'move'
-            })
+            });
             
             $(_settings.columns).sortable({
                 items: $sortableItems,
@@ -208,15 +224,17 @@
                 }
             });
             
+           
         }
+
+        addWidgetControls();
+        makeSortable();
         
-        var _handler = function(setting){
-          //  attachStylesheet('zyDDPanel.js.css');
-            addWidgetControls();
-            makeSortable();
-        };
-        
-        return this.each(_handler);
+        this.addPortlet = function(){
+                alert("dd");
+        }
+            
+        return this;
         
     };
     
