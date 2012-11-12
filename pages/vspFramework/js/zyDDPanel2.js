@@ -238,6 +238,7 @@
         this.addPortlet = function(opt){
             var url = opt.url;
             $loadTrunk.load(url, function(){
+            
                if($loadTrunk.children(".widget").length == 1){
                     var $newWidget = $loadTrunk.children(".widget");
 

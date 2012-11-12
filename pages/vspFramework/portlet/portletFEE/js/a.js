@@ -1,15 +1,18 @@
 ﻿define(function(){  
  
   return {  
-        aFun: 
+        bFun: 
         function(name){ 
-           alert("CAA " + name);        
+           alert("Fee " + name);        
            /* return {  
                 name: name,  
                 gender: gender  
             };  
            */
-        }  
+        },
+        template: {
+            btn: "<button class='debugBtn'> <%= name %> </button>"
+        }
      
    };  
  

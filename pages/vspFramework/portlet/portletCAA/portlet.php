@@ -5,22 +5,22 @@
 
 ;(function(){
 
-    require(["./js/domReady!", "./portlet/portletCAA/js/a.js"], function() {   
-     
+    require(["./js/domReady!", "./portlet/portletCAA/js/a"], function(_my, _module) {   
+        
         
         var key = "<?php echo $_GET['key'];?>";
         
-        var $thisPortler = $("#portlet_"+key);
-        $thisPortler.find(".testBtn").click(function(){
-            a(key);
+        var $thisPortlet = $("#portlet_"+key);
+        $thisPortlet.find(".testBtn").click(function(){
+            _module.aFun(key);
         });
         
         
-        $thisPortler.on("setting", function(){
+        $thisPortlet.on("setting", function(){
             alert("setting portlet " + key);
         });
 
-        $thisPortler.on("refresh", function(){
+        $thisPortlet.on("refresh", function(){
             alert("refresh portlet " + key);
         });
 
