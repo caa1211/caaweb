@@ -14,7 +14,7 @@
     <script src="cmps/jquery-ui/js/jquery-ui-1.9.1.custom.min.js"></script>
     <script src="cmps/bootstrap/js/bootstrap.min.js"></script>
     <script src="js/zyDDPanel2.js"></script>
-    
+    <script src="js/jquery.getParams.js"></script>
         <script type="text/javascript">
 
         $(function()
@@ -32,34 +32,38 @@
               
           });
           
+          
           $('.widget').addClass('ui-widget');
           $('.widget-head').addClass('ui-widget-header ui-corner-all');
           $('.widget-content').addClass('ui-widget-content');
 
           
-          /*
-          var newPortletTmpl = '<li class="widget">'  +
-                '<div class="widget-head">'+
-                    '<h3>Widget title</h3>'+
-                '</div>'+
-                '<div class="widget-content">'+
-                    '<p>Donec id nibh eu dui auctus.</p>'+
-                '</div>'+
-            '</li>';
-            
-          var newPortletOpt = {
-                    content: newPortletTmpl,
-                    movable: true,
-                    removable: true,
-                    refreshable: true,
-                    settingable: true,
-                    collapsible: true
-          };
+                      // 用來產生類似 GUID 的字串
+            function S4() {
+               return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+            }
+ 
+            function NewGuid() {
+               return (S4()+S4());
+            }
+
             
           $("#addPortlet").click(function(){
-                $ddPanelObj.addPortlet(newPortletOpt);
+               var randomKey =  NewGuid();
+               $ddPanelObj.addPortlet({
+                    url:"portlet/testPortlet.php?key="+randomKey 
+               });
           });
-          */
+         
+          $("#addPortlet2").click(function(){
+               var randomKey =  NewGuid();
+               $ddPanelObj.addPortlet({
+                    url:"portlet/testPortlet2.php?key="+randomKey 
+               });
+          });
+          
+          
+          
         });
   
     </script> 
@@ -111,7 +115,9 @@ body {
 
             <h3>Hello, world!</h3>
             <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-            <p><a class="btn btn-primary btn-large" id="addPortlet">Add Portlet </a></p>
+            <p><a class="btn btn-primary btn-large" id="addPortlet">Add Portlet A</a>
+            <a class="btn btn-primary btn-large" id="addPortlet2">Add Portlet B</a>
+            </p>
           </div>
         
 
@@ -123,11 +129,23 @@ body {
         
         <ul id="columnLeft" class="column">
             
-            <li class="widget" id="intro">
+            <!--li class="widget" id="intro">
                 <div class="widget-head ">
                     <h3>Introduction Widget</h3>
                 </div>
+                
+
                 <div class="widget-content">
+                
+    <div style="display: none;" class="edit-box well">
+        <div class="">Setting</div>
+        <div class="label label-info">Heads up!</div>
+        <div class="controls controls-row">
+        <input class="span4" type="text" placeholder=".span4">
+        <input class="span1" type="text" placeholder=".span1">
+        </div>
+    </div>
+    
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam magna sem, fringilla in, commodo a, rutrum ut, massa. Donec id nibh eu dui auctor tempor. Morbi laoreet eleifend dolor. Suspendisse pede odio, accumsan vitae, auctor non, suscipit at, ipsum. Cras varius sapien vel lectus.</p>
           
                 </div>
@@ -140,16 +158,16 @@ body {
                 <div class="widget-content">
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam magna sem, fringilla in, commodo a, rutrum ut, massa. Donec id nibh eu dui auctor tempor. Morbi laoreet eleifend dolor. Suspendisse pede odio, accumsan vitae, auctor non, suscipit at, ipsum. Cras varius sapien vel lectus.</p>
                 </div>
-            </li>
+            </li-->
             
         </ul>
 
         
         <ul id="columnRight" class="column">
             
-            <li class="widget noSetting noRefresh noClose noCollapse noMove" id='testWidget'>  
+            <!--li class="widget noSetting noRefresh noClose noCollapse noMove" id='testWidget'>  
                 <div class="widget-head">
-                    <h3>Widget title 1</h3>
+                    <h3>Widget title 1 - fixed widget</h3>
                 </div>
                 <div class="widget-content">
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam magna sem, fringilla in, commodo a, rutrum ut, massa. Donec id nibh eu dui auctor tempor. Morbi laoreet eleifend dolor. Suspendisse pede odio, accumsan vitae, auctor non, suscipit at, ipsum. Cras varius sapien vel lectus.</p>
@@ -169,12 +187,13 @@ body {
                 <div class="widget-head">
                     <h3>Widget title</h3>
                 </div>
+                
                 <div class="widget-content">
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam magna sem, fringilla in, commodo a, rutrum ut, massa. Donec id nibh eu dui auctor tempor. Morbi laoreet eleifend dolor. Suspendisse pede odio, accumsan vitae, auctor non, suscipit at, ipsum. Cras varius sapien vel lectus.</p>
               <iframe src="http://www.kimo.com.tw"></iframe>
 
               </div>
-            </li>
+            </li-->
             
             
         </ul>
@@ -218,6 +237,6 @@ body {
     
     
     
-    
+    <div id="loadTrunk"></div>
     </body>
 </html>

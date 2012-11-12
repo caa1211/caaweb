@@ -9,6 +9,8 @@
             widgetSelector: '.widget',
             handleSelector: '.widget-head',
             contentSelector: '.widget-content',
+            editSelector: ".edit-box",
+            loadTrunk: "#loadTrunk",
             widgetDefault: {
                 movable: true,
                 removable: true,
@@ -37,6 +39,9 @@
         
         var _settings = $.extend(defaultSettings, settings);
         
+        var $loadTrunk = $(_settings.loadTrunk);
+        var $columnRight = $("#columnRight");
+        var $columnLeft = $("#columnLeft");
         
         var getWidgetSettings = function(widget){
         
@@ -60,47 +65,24 @@
         var ddPanelObj = $(this);
         
         
-        var addWidgetControls = function(){
-
-            $(_settings.widgetSelector, $(_settings.columns)).each(function(){
-                var thisWidgetSettings = getWidgetSettings(this);
-                
-                if (thisWidgetSettings.removable) {
-                    var panel = $(this);
-                    
-                    $('<a href="#" class="remove" title="Close Widget">CLOSE</a>').mousedown(function(e){
+        function setWidget(widget){
+            var thisWidgetSettings = getWidgetSettings(widget);
+            var panel = $(widget);
+            
+           if (thisWidgetSettings.removable && panel.find("a.remove").length == 0) {
+                $('<a href="#" class="remove" title="Close Widget">CLOSE</a>').mousedown(function(e){
                         e.stopPropagation();
                     }).click(function(){
-                    /*
-                        $("<div class='win_warning'>This widget will be removed.</div>").dialog({
-                           model: true,
-                            buttons: {
-                                Ok: function(){
-                                    panel.animate({
-                                        opacity: 0
-                                    }, function(){
-                                        panel.wrap('<div/>').parent().slideUp(function(){
-                                            panel.remove();
-                                        });
-                                    });
-                                    
-                                    $(this).dialog('close');
-                                },
-                                Cancel: function(){
-                                    $(this).dialog('close');
-                                }
-                            }
-                        }).dialog('open');
-                        */
+                    
                         $('#myModal').modal({
-
-                        });
                         
+                        
+                        });
                          $('#myModal .ok').click(function(){
                                     panel.animate({
                                         opacity: 0
                                     }, function(){
-                                        panel.wrap('<div/>').parent().slideUp(function(){
+                                        panel.slideUp(function(){
                                             panel.remove();
                                         });
                                     });
@@ -112,31 +94,51 @@
                               $('#myModal').modal('hide');      
                          });
                          
+                        
                         return false;
-                    }).appendTo($(_settings.handleSelector, this));
+                    }).appendTo($(_settings.handleSelector, widget));
+                    
                 }
                 
                 
-                if (thisWidgetSettings.refreshable) {
+                if (thisWidgetSettings.refreshable && panel.find("a.refresh").length == 0) {
                     $('<a href="#" class="refresh" title="Refresh Widget">REFRESH</a>').mousedown(function(e){
                         e.stopPropagation();
                     }).click(function(e){
-                        $(this).trigger('refresh', $(this).parents('.widget'));
-                    }).appendTo($(_settings.handleSelector, this));
+                       panel.trigger('refresh');
+                    }).appendTo($(_settings.handleSelector, widget));
                 }
                 
                 
-                if (thisWidgetSettings.settingable) {
+                if (thisWidgetSettings.settingable && panel.find("a.setting").length == 0) {
                     $('<a href="#" class="setting" title="Edit Widget">SETTING</a>').mousedown(function(e){
                         e.stopPropagation();
                     }).click(function(e){
-                        $(this).trigger('setting', $(this).parents('.widget'));
-                    }).appendTo($(_settings.handleSelector, this));
+                       panel.trigger('setting');
+                    }).toggle(function(){
+                        
+                        var kk = $(this);
+                        $(this).parents(_settings.widgetSelector).find(_settings.editSelector).slideDown({
+                            duration: 150,
+                            easing: 'easeInQuad',
+                            complete: function(e){
+                            }
+                        });
+                        return false;
+                    }, function(){
+                        $(this).parents(_settings.widgetSelector).find(_settings.editSelector).slideUp({
+                            duration: 150,
+                            easing: 'easeOutQuart',
+                            complete: function(e){
+                            }
+                        });
+                        return false;
+                    }).appendTo($(_settings.handleSelector, widget));
                 }
                 
-                if (thisWidgetSettings.collapsible) {
+                if (thisWidgetSettings.collapsible && panel.find("a.collapse").length == 0) {
                 
-                    $('<a href="#" class="collapse ">COLLAPSE</a>').mousedown(function(e){
+                    $('<a href="#" class="collapse">COLLAPSE</a>').mousedown(function(e){
                         e.stopPropagation();
                     }).toggle(function(){
                         var kk = $(this);
@@ -159,13 +161,16 @@
                         });
                         
                         return false;
-                    }).appendTo($(_settings.handleSelector, this));
+                    }).appendTo($(_settings.handleSelector, widget));
                     
                 }
-            });
+            }
+            
+        var addWidgetControls = function(){
+            $(_settings.widgetSelector, $(_settings.columns)).each(function(){ setWidget(this);});
         };
         
-        
+        var $sortableItems;
         var makeSortable = function(){
             $sortableItems = (function(){
                 /*
@@ -230,9 +235,25 @@
         addWidgetControls();
         makeSortable();
         
-        this.addPortlet = function(){
-                alert("dd");
-        }
+        this.addPortlet = function(opt){
+            var url = opt.url;
+            $loadTrunk.load(url, function(){
+               if($loadTrunk.children(".widget").length == 1){
+                    var $newWidget = $loadTrunk.children(".widget");
+
+                    $newWidget.prependTo($columnLeft);
+                    setWidget($newWidget);
+                    
+                   // $(_settings.columns).sortable('cancel');
+                      
+                    addWidgetControls();
+                    makeSortable();
+                    
+                    //--
+
+               }
+            });
+        };
             
         return this;
         
