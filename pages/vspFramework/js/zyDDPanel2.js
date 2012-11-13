@@ -3,7 +3,11 @@
 (function($){
 
     $.fn.zyDDPanel = function(settings){
-    
+        var portletDef = [
+        
+        
+        ];
+        
         defaultSettings = {
             columns: '.column',
             widgetSelector: '.widget',
@@ -236,9 +240,13 @@
         makeSortable();
         
         this.addPortlet = function(opt){
-            var url = opt.url;
+            var id = opt.id;
+            var url = opt.url + "?key=" + id;
+
             $loadTrunk.load(url, function(){
             
+               portletDef.push(opt);
+
                if($loadTrunk.children(".widget").length == 1){
                     var $newWidget = $loadTrunk.children(".widget");
 
