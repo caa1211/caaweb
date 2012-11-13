@@ -239,10 +239,19 @@
         addWidgetControls();
         makeSortable();
         
+        
+        var _portletConfig = {
+            id: "portlet_",
+            url: "",
+            pos: [0, 0]
+        };
+        
         this.addPortlet = function(opt){
-            var id = opt.id;
-            var url = opt.url + "?key=" + id;
+            var _opt = $.extend({}, _portletConfig, opt);
+            var id = _opt.id;
+            var url = _opt.url + "?key=" + id;
 
+            
             $loadTrunk.load(url, function(){
             
                portletDef.push(opt);
