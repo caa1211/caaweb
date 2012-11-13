@@ -39,7 +39,7 @@
           $("#addPortlet").click(function(){
                var randomKey =  NewGuid();
                $ddPanelObj.addPortlet({
-                    id: "portlet_" + randomKey,
+                    id: "plt_" + randomKey,
                     url:"portlet/testPortlet.php"
                });
           });
@@ -47,7 +47,7 @@
           $("#addPortlet2").click(function(){
                var randomKey =  NewGuid();
                $ddPanelObj.addPortlet({
-                    id: "portlet_" + randomKey,
+                    id: "plt_" + randomKey,
                     url:"portlet/testPortlet2.php"
                });
           });
@@ -55,7 +55,7 @@
           $("#addPortlet3").click(function(){
                var randomKey =  NewGuid();
                $ddPanelObj.addPortlet({
-                    id: "portlet_" + randomKey,
+                    id: "plt_" + randomKey,
                     url:"portlet/portletCAA/portlet.php"
                });
           });
@@ -63,7 +63,7 @@
           $("#addPortlet4").click(function(){
                var randomKey =  NewGuid();
                $ddPanelObj.addPortlet({
-                    id: "portlet_" + randomKey,
+                    id: "plt_" + randomKey,
                     url:"portlet/portletFEE/portlet.php" 
                });
           });
@@ -72,9 +72,10 @@
           $("#addPortlet5").click(function(){
                var randomKey =  NewGuid();
                $ddPanelObj.addPortlet({
-                    id: "portlet_" + randomKey,
+                    id: "plt_" + randomKey,
                     url:"portlet/portletGPE/portlet.php",
-                    pos: [1, 1]
+                    pos: [1, 1]//,
+                   // expand: false
                });
           });
           
@@ -82,6 +83,24 @@
                 debugger;
           });
           
+          
+           
+           
+           
+           
+            var portletPoolStr = localStorage.getItem('portletPool');
+            var portletPosMapStr = localStorage.getItem('portletPosMap');
+            if(portletPoolStr!=null && portletPosMapStr!=null){
+                try{
+                    var portletPool = JSON.parse(portletPoolStr);
+                    var portletPosMap = JSON.parse(portletPosMapStr);
+                    $ddPanelObj.restorePortlet(portletPosMap, portletPool);
+                }catch(e){
+                }
+            }
+            
+            
+        
         });
   
     </script> 

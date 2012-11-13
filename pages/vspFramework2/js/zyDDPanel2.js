@@ -1,26 +1,27 @@
+//for test
 
 ;
 (function($){
 
-
-$.fn.insertAt = function(index, element) {
-  var lastIndex = this.children().size()
-  if (index < 0) {
-    index = Math.max(0, lastIndex + 1 + index)
-  }
-  this.append(element)
-  if (index < lastIndex) {
-    this.children().eq(index).before(this.children().last())
-  }
-  return this;
-}  
+        
+        
+    $.fn.insertAt = function(index, element) {
+      var lastIndex = this.children().size()
+      if (index < 0) {
+        index = Math.max(0, lastIndex + 1 + index)
+      }
+      this.append(element)
+      if (index < lastIndex) {
+        this.children().eq(index).before(this.children().last())
+      }
+      return this;
+    }  
 
 
     $.fn.zyDDPanel = function(settings){
-        var portletDef = [
-        
-        
-        ];
+    
+        var portletPool = {};
+        var portletPosMap = [];
         
         defaultSettings = {
             columns: '.column',
@@ -79,14 +80,28 @@ $.fn.insertAt = function(index, element) {
             return $styleSheet.attr('type', 'text/css');
         };
         
-        var ddPanelObj = $(this);
+        var $ddPanelObj = $(this);
         
         
-        function setWidget(widget){
+        function setWidget($widget){
             var thisWidgetSettings = getWidgetSettings(widget);
-            var panel = $(widget);
+            //var $widget = $(widget);
+            var widget = $widget[0];
+            $widget.doRemove = function(){
+                $(this).trigger('remove');
+                var pltid =  $(this).attr('pltid');
+                $(this).remove();
+                try{
+                    delete portletPool[pltid];
+                }catch(e){}
+                update2PortletPosMap();
+            };
             
-           if (thisWidgetSettings.removable && panel.find("a.remove").length == 0) {
+            $widget.updateIsExpanded = function(flag){
+                    update2PortletPool($(this), {expand: flag});
+            };
+            
+           if (thisWidgetSettings.removable && $widget.find("a.remove").length == 0) {
                 $('<a href="#" class="remove" title="Close Widget">CLOSE</a>').mousedown(function(e){
                         e.stopPropagation();
                     }).click(function(){
@@ -96,11 +111,11 @@ $.fn.insertAt = function(index, element) {
                         
                         });
                          $('#myModal .ok').click(function(){
-                                    panel.animate({
+                                    $widget.animate({
                                         opacity: 0
                                     }, function(){
-                                        panel.slideUp(function(){
-                                            panel.remove();
+                                        $widget.slideUp(function(){
+                                            $widget.doRemove();
                                         });
                                     });
                               $('#myModal').modal('hide');      
@@ -118,20 +133,20 @@ $.fn.insertAt = function(index, element) {
                 }
                 
                 
-                if (thisWidgetSettings.refreshable && panel.find("a.refresh").length == 0) {
+                if (thisWidgetSettings.refreshable && $widget.find("a.refresh").length == 0) {
                     $('<a href="#" class="refresh" title="Refresh Widget">REFRESH</a>').mousedown(function(e){
                         e.stopPropagation();
                     }).click(function(e){
-                       panel.trigger('refresh');
+                       $widget.trigger('refresh');
                     }).appendTo($(_settings.handleSelector, widget));
                 }
                 
                 
-                if (thisWidgetSettings.settingable && panel.find("a.setting").length == 0) {
+                if (thisWidgetSettings.settingable && $widget.find("a.setting").length == 0) {
                     $('<a href="#" class="setting" title="Edit Widget">SETTING</a>').mousedown(function(e){
                         e.stopPropagation();
                     }).click(function(e){
-                       panel.trigger('setting');
+                       $widget.trigger('setting');
                     }).toggle(function(){
                         
                         var kk = $(this);
@@ -153,30 +168,36 @@ $.fn.insertAt = function(index, element) {
                     }).appendTo($(_settings.handleSelector, widget));
                 }
                 
-                if (thisWidgetSettings.collapsible && panel.find("a.collapse").length == 0) {
+                if (thisWidgetSettings.collapsible && $widget.find("a.collapse").length == 0) {
                 
                     $('<a href="#" class="collapse">COLLAPSE</a>').mousedown(function(e){
                         e.stopPropagation();
-                    }).toggle(function(){
+                    }).toggle(function(e, time){
+                    
+                        var dur = time == undefined? 150 : 30;
                         var kk = $(this);
-                        $(this).parents(_settings.widgetSelector).find(_settings.contentSelector).slideUp({
-                            duration: 150,
+                     
+                        $widget.find(_settings.contentSelector).slideUp({
+                            duration: dur,
                             easing: 'easeOutQuart',
                             complete: function(e){
                                 kk.removeClass('collapse').addClass('expand');
+                                $widget.updateIsExpanded(false);
                             }
                         });
                         return false;
-                    }, function(){
+                    }, function(e, time){
+                        var dur = time == undefined? 150 : 30;
                         var kk = $(this);
-                        $(this).parents(_settings.widgetSelector).find(_settings.contentSelector).slideDown({
-                            duration: 150,
+                       
+                        $widget.find(_settings.contentSelector).slideDown({
+                            duration: dur,
                             easing: 'easeInQuad',
                             complete: function(e){
                                 kk.removeClass('expand').addClass('collapse');
+                                $widget.updateIsExpanded(true);
                             }
                         });
-                        
                         return false;
                     }).appendTo($(_settings.handleSelector, widget));
                     
@@ -184,11 +205,11 @@ $.fn.insertAt = function(index, element) {
             }
             
         var addWidgetControls = function(){
-            $(_settings.widgetSelector, $(_settings.columns)).each(function(){ setWidget(this);});
+            $(_settings.widgetSelector, $(_settings.columns)).each(function(){ setWidget( $(this) );});
         };
         
         var $sortableItems;
-        var makeSortable = function(){
+        var makeSortable = function(isUpdate2PortletPosMap){
             $sortableItems = (function(){
                 /*
                 var notSortable = '';
@@ -243,47 +264,116 @@ $.fn.insertAt = function(index, element) {
                         width: ''
                     }).removeClass('dragging');
                     $(_settings.columns).sortable('enable');
+                    update2PortletPosMap();
                 }
             });
             
-           
+            if(isUpdate2PortletPosMap == true){       
+                update2PortletPosMap();
+            }
         }
 
         addWidgetControls();
-        makeSortable();
+        makeSortable(false);
         
         
         var _portletConfDft = {
-            id: "portlet_",
+            id: "plt_",
             url: "",
-            pos: [0, 0]
+            expand: true
         };
+
+        function update2PortletPool($widget, opt){
+            try{
+                var pltid = $widget.attr('pltid');
+                $.extend(portletPool[pltid], opt);
+            }catch(e){
+            }
+            localStorage.setItem('portletPool',  JSON.stringify(portletPool));
+        }
         
-        this.addPortlet = function(opt){
+        function update2PortletPosMap(){
+            portletPosMap.length = 0;
+            /*
+            $columns.each(function(i, t){
+                var ary = [];
+                $(t).find(_settings.widgetSelector).each(function(j, tt){
+                    var pltid = $(tt).attr("pltid");
+                    ary.push(pltid);
+                });
+                portletPosMap.push(ary);
+            });
+            */
+            for(var i=0; i<$columns.length; i++){
+                var $col = $columns.eq(i);
+                var $widgets =  $col.find(_settings.widgetSelector);
+                var ary = [];
+
+                for(var j=0; j<$widgets.length; j++){
+                   var $w = $widgets.eq(j);
+                   var pltid = $w.attr("pltid");
+                   ary.push(pltid);
+                }
+                portletPosMap.push(ary);
+            }            
+            localStorage.setItem('portletPosMap', JSON.stringify(portletPosMap));
+        };
+
+        
+        this.addPortlet = function(opt, pos, isUpdateStore){
             var _opt = $.extend({}, _portletConfDft, opt);
             var id = _opt.id;
             var url = _opt.url + "?key=" + id;
-
-            $loadTrunk.load(url, function(){
+            if(pos == undefined){
+                pos = [0, 0];
+            }
+            var $tmpWidget = $("<span>");
+            $($columns[ pos[0] ]).append( $tmpWidget );
+            //$($columns[ pos[0] ]).insertAt(pos[1], $tmpWidget );
             
-               portletDef.push(opt);
+            $loadTrunk.load(url, function(){
 
+                portletPool[_opt.id] = _opt;
+                update2PortletPool();
+                
                if($loadTrunk.children(".widget").length == 1){
                     var $newWidget = $loadTrunk.children(".widget");
-                    $($columns[_opt.pos[0]]).insertAt( _opt.pos[1],   $newWidget );
+                    $newWidget.attr('pltid', _opt.id);
+                   
+                    $tmpWidget.append( $newWidget );
+                   
                     setWidget($newWidget);
                     
+                    if(!_opt.expand){
+                        $newWidget.find("a.collapse").trigger('click', 0);
+                    }
                    // $(_settings.columns).sortable('cancel');
                       
                     addWidgetControls();
-                    makeSortable();
-                    
+                    makeSortable(isUpdateStore == false ? false: true);
+        
                     //--
 
                }
             });
         };
             
+                    
+        this.restorePortlet = function(pmap, ppool){
+
+          try{
+            for(var i = 0; i< pmap.length; i++){
+                var col = pmap[i];
+                for(var j = 0; j < col.length; j++){
+                    var pltid = col[j];
+                    var pltDef = ppool[pltid];
+                    this.addPortlet(pltDef, [i, 0] , false );
+                }
+               
+            }
+           }catch(e){}
+        };
+        
         return this;
         
     };
