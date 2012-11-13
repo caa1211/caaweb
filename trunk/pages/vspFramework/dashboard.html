@@ -23,24 +23,9 @@
         {
    
           var $ddPanelObj = $('#columns').zyDDPanel();
-         
-          $('.widget').bind('refresh', function(e, panel){
-              $(panel).css('border', 'solid 1px red');
-          });
-          
-          $('.widget').bind('setting', function(e, panel){
-              $(panel).css('border', 'solid 1px blue');
-              
-              
-          });
-          
-          
-          $('.widget').addClass('ui-widget');
-          $('.widget-head').addClass('ui-widget-header ui-corner-all');
-          $('.widget-content').addClass('ui-widget-content');
 
           
-                      // 用來產生類似 GUID 的字串
+            // 用來產生類似 GUID 的字串
             function S4() {
                return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
             }
@@ -79,6 +64,13 @@
           });
           
 
+          $("#addPortlet5").click(function(){
+               var randomKey =  NewGuid();
+               $ddPanelObj.addPortlet({
+                    url:"portlet/portletGPE/portlet.php?key="+randomKey 
+               });
+          });
+          
           
         });
   
@@ -135,7 +127,7 @@ body {
             <a class="btn btn-primary btn-large" id="addPortlet2">Add Portlet B</a>
             <a class="btn btn-primary btn-large" id="addPortlet3">Add Portlet CAA</a>
             <a class="btn btn-primary btn-large" id="addPortlet4">Add Portlet Fee</a>
-
+            <a class="btn btn-primary btn-large" id="addPortlet5">Add Portlet GPE</a>
             </p>
           </div>
         

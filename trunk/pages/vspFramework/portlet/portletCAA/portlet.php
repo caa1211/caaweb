@@ -11,6 +11,7 @@
         var key = "<?php echo $_GET['key'];?>";
         
         var $thisPortlet = $("#portlet_"+key);
+        
         $thisPortlet.find(".testBtn").click(function(){
             _module.aFun(key);
         });
