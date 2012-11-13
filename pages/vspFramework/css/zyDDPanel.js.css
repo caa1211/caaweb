@@ -1,5 +1,7 @@
 /* JS-Enabled CSS */
-
+.widget-head {
+margin-left:-1px; margin-top:-1px;
+}
 .widget-head a.remove  {
     float: right;
     display: inline;
