@@ -220,6 +220,7 @@ return returnSettings
                 var notSortable = '';
                 $(settings.widgetSelector,$(settings.columns)).each(function (i) {
                     if (!iNettuts.getWidgetSettings(this).movable) {
+                    debugger;
                         if(!this.id) {
                             this.id = 'widget-no-id-' + i;
                         }
