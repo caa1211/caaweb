@@ -25,7 +25,7 @@
         name: "portletGPE"
     };
     
-    require([portletDef.path+"/js/module"], function(_module) {   
+    require([ portletDef.path+"/js/module"], function(_module) {   
 
         var key = "<?php echo $_GET['key'];?>";
         var $thisPortlet = $("#portlet_"+key);

@@ -1,0 +1,29 @@
+﻿{
+    "plt_089eb394": {
+        "id": "plt_089eb394",
+        "url": "portlet/portletFEE/portlet.php",
+        "expand": true
+    },
+    "plt_a88c34db": {
+        "id": "plt_a88c34db",
+        "url": "portlet/portletGPE/portlet.php",
+        "expand": true,
+        "pos": [1, 1]
+    },
+    "plt_8358e317": {
+        "id": "plt_8358e317",
+        "url": "portlet/testPortlet.php",
+        "expand": true
+    },
+    "plt_62c0408a": {
+        "id": "plt_62c0408a",
+        "url": "portlet/portletGPE/portlet.php",
+        "expand": true,
+        "pos": [1, 1]
+    },
+    "plt_3e903924": {
+        "id": "plt_3e903924",
+        "url": "portlet/testPortlet2.php",
+        "expand": true
+    }
+}

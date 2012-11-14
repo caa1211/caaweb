@@ -73,8 +73,7 @@
                var randomKey =  NewGuid();
                $ddPanelObj.addPortlet({
                     id: "plt_" + randomKey,
-                    url:"portlet/portletGPE/portlet.php",
-                    pos: [1, 1]//,
+                    url:"portlet/portletGPE/portlet.php"
                    // expand: false
                });
           });
@@ -87,19 +86,41 @@
            
            
            
-           
+            var portletPool_def_url = "./portletPool_def.json";
+            var portletPosMap_def_url = "./portletPosMap_def.json";
+
+            
             var portletPoolStr = localStorage.getItem('portletPool');
             var portletPosMapStr = localStorage.getItem('portletPosMap');
+            var portletPool = null;
+            var portletPosMap = null; 
+            
             if(portletPoolStr!=null && portletPosMapStr!=null){
                 try{
-                    var portletPool = JSON.parse(portletPoolStr);
-                    var portletPosMap = JSON.parse(portletPosMapStr);
+                    portletPool = JSON.parse(portletPoolStr);
+                    portletPosMap = JSON.parse(portletPosMapStr);
                     $ddPanelObj.restorePortlet(portletPosMap, portletPool);
                 }catch(e){
                 }
+            }else{
+ 
+                $.getJSON(portletPool_def_url, function(d, s){
+                    portletPool = d;
+                    getPortletDefDone();
+                });
+                
+                $.getJSON(portletPosMap_def_url, function(d, s){
+                    portletPosMap = d;
+                    getPortletDefDone();
+                });
+
             }
             
-            
+            function getPortletDefDone(){
+                if(portletPool!=null && portletPosMap!=null){
+                  $ddPanelObj.restorePortlet(portletPosMap, portletPool);
+                }
+            }
         
         });
   
