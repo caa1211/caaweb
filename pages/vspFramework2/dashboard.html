@@ -105,14 +105,14 @@
             }else{
  
                 $.getJSON(portletPool_def_url, function(d, s){
-                    if(s="success"){
+                    if(s=="success"){
                         portletPool = d;
                         getPortletDefDone();
                     }
                 });
                 
                 $.getJSON(portletPosMap_def_url, function(d, s){
-                    if(s="success"){
+                    if(s=="success"){
                         portletPosMap = d;
                         getPortletDefDone();
                     }
