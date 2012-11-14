@@ -363,17 +363,19 @@
                     
         this.restorePortlet = function(pmap, ppool){
 
-          try{
+        
             for(var i = 0; i< pmap.length; i++){
                 var col = pmap[i];
                 for(var j = 0; j < col.length; j++){
+                   try{
                     var pltid = col[j];
                     var pltDef = ppool[pltid];
                     this.addPortlet(pltDef, [i, 0] , false );
+                   }catch(e){}
                 }
                
             }
-           }catch(e){}
+          
         };
         
         return this;
