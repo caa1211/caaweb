@@ -143,6 +143,7 @@
                 
                 
                 if (thisWidgetSettings.settingable && $widget.find("a.setting").length == 0) {
+                
                     $('<a href="#" class="setting" title="Edit Widget">SETTING</a>').mousedown(function(e){
                         e.stopPropagation();
                     }).click(function(e){
@@ -168,13 +169,13 @@
                     }).appendTo($(_settings.handleSelector, widget));
                 }
                 
-                if (thisWidgetSettings.collapsible && $widget.find("a.collapse").length == 0) {
+                if (thisWidgetSettings.collapsible && $widget.find("a.collapse").length == 0&& $widget.find("a.expand").length == 0) {
                 
                     $('<a href="#" class="collapse">COLLAPSE</a>').mousedown(function(e){
                         e.stopPropagation();
                     }).toggle(function(e, time){
                     
-                        var dur = time == undefined? 150 : 30;
+                        var dur = time == undefined? 150 : 0;
                         var kk = $(this);
                      
                         $widget.find(_settings.contentSelector).slideUp({
@@ -187,7 +188,7 @@
                         });
                         return false;
                     }, function(e, time){
-                        var dur = time == undefined? 150 : 30;
+                        var dur = time == undefined? 150 : 0;
                         var kk = $(this);
                        
                         $widget.find(_settings.contentSelector).slideDown({
@@ -328,6 +329,7 @@
                 pos = [0, 0];
             }
             var $tmpWidget = $("<span>");
+            
             $($columns[ pos[0] ]).append( $tmpWidget );
             //$($columns[ pos[0] ]).insertAt(pos[1], $tmpWidget );
             
