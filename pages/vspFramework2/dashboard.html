@@ -25,6 +25,72 @@
    
           var $ddPanelObj = $('#columns').zyDDPanel();
 
+          var $fullPortletContainer = $("#fullPortletContainer");
+          $fullPortletContainer.fadeOut(0);
+ 
+ 
+ /*
+   var portletDlg = {
+        dlg: $("#fullPortlet"),
+        body: (function(){ debugger;  return "";}()),//portletDlg.dlg.find('.modal-body'),
+        header: portletDlg.dlg.find('.modal-header'),
+        model: function($w){
+            var leftOffset = -1* portletDlg.dlg.width() / 2;
+            portletDlg.dlg.css("margin-left", leftOffset);
+            portletDlg.dlg.modal();
+        }
+   };
+  */
+
+    
+    var $portletDlg = $("#fullPortlet").portletDlg();
+   
+  
+    $('#myModal .ok').click(function(){ });
+    
+    
+    
+    function showFullPortlet($w){
+    
+        $portletDlg.show($w);
+       
+       
+    
+     
+    /*
+      $fullPortletContainer.fadeIn(300);
+      var $wapper = $fullPortletContainer.find('.portleWapper');
+      var $overlayContent = $fullPortletContainer.find(".overlayContent");
+      var $overlayCloseBtn = $fullPortletContainer.find(".closeBtn");
+      
+      
+      var $fullPortletId = $fullPortletContainer.find(".fullPortletId");
+      var $portletHead = $w.find(".widget-head");
+      var $portletContent = $w.find(".widget-content");
+      var cH = $overlayContent.height();
+
+      
+      $fullPortletId.html( $portletHead.find(".widget-title").text());
+      var phH = $portletHead.height();
+      var oh = $portletContent.height();
+      if(oh < cH )
+      $portletContent.height(cH - phH);
+      
+      $portletContent.appendTo( $wapper );
+      $w.hide();
+      $overlayCloseBtn.on('click', function(){
+      
+        $portletContent.height(oh);
+        $w.append($portletContent);
+        $portletContent.unbind("click");
+        $fullPortletContainer.fadeOut(300);
+      
+       $w.show();
+      });
+        */
+    }
+ 
+ $ddPanelObj.on("refresh", function(e, a, b){showFullPortlet( $(e.target) );});
           
             // 用來產生類似 GUID 的字串
             function S4() {
@@ -138,12 +204,37 @@ body {
     background: url("https://kippt.com/static/img/home-bg-lib.jpg?62cc53229b01") no-repeat scroll center 40px, url("/static/img/home-bg-black.png?62cc53229b01") repeat-x scroll left 40px transparent;
     padding-top:80px;
 }
+
+
+.modal.fade{
+    -webkit-transition: opacity .05s linear, none;
+    -moz-transition: opacity .05s linear, none;
+    -ms-transition: opacity .05s linear, none;
+    -o-transition: opacity .05s linear, none;
+    transition: opacity .05s linear, none;
+    top: 50%;
+}
+
+.fullPortlet.modal.fade{
+    top: 350px;
+}
+
+.fullPortlet.modal.fade.in {
+    top: 350px;
+}
+
+
+  
+#columns .widget .widget-content {
+height:200px; overflow: auto;
+}
+
     </style>
-    <body>
+    <body >
     
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
+    <div class="navbar navbar-inverse navbar-fixed-top" >
+      <div class="navbar-inner" >
 
         <div class="container-fluid">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -168,7 +259,7 @@ body {
       </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container-fluid" >
       <div class="row-fluid" style="">
 
         <div class="" style=" margin: 0 auto; max-width:1280px;  ">
@@ -192,9 +283,9 @@ body {
             
     
     
-    <div id="columns" style= "margin-top:80px; border: solid 1px blue; margin-top:0px; margin:0 auto;">
+    <div id="columns" style= "margin-top:80px; border: solid 1px blue; margin-top:0px; margin:0 auto; ">
         
-        <ul  class="column">
+        <ul  class="column" >
             
             <!--li class="widget" id="intro">
                 <div class="widget-head ">
@@ -264,13 +355,20 @@ body {
             
             
         </ul>
-        
-         <ul class="column" style="" ></ul>
-        
+
     </div>
     
     
-    
+      <div id="fullPortletContainer" class="overlay">
+      
+        <div class="overlayContent" style="position: relative; width:1280px; height:500px; border: solid 1px red; margin:0 auto; margin-top:100px;">
+            
+            <div style="background:red; text-align:right;" class="closeBtn"><a href="#">close</a></div>
+            <div style="position:absolute; top:0px" class="fullPortletId"></div>
+            <div class="portleWapper" style=""></div>
+       </div>
+      
+      </div>
     
         </div><!--/span-->
       </div><!--/row-->
@@ -286,7 +384,19 @@ body {
     
     
 
-    
+ <div class="modal hide fade fullPortlet"  id="fullPortlet" style="width:80%; height:auto;">
+  
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> << Back </button>
+    <h3>portlet title</h3>
+    </div>
+    <div class="modal-body">
+    <p></p>
+    </div>
+    <div class="modal-footer"> </div>
+ 
+ </div>
+ 
     
     
 <div class="modal hide fade"  id="myModal">
@@ -304,7 +414,7 @@ body {
  </div>
 
     
-    
+  
     
     <div id="loadTrunk" style="display:none;"></div>
     </body>

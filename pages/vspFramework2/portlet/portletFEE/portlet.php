@@ -1,7 +1,10 @@
 
 <li class="widget ui-widget" id="portlet_<?php echo $_GET['key'];?>">
-        <div class="widget-head ui-widget-header ui-corner-all myheader"></div>
-        <div class="widget-content ui-widget-content"></div>
+        <div class="widget-head ui-widget-header ui-corner-all myheader">
+            <span class="widget-title-icon"></span>
+            <span class="widget-title"></span>
+        </div>
+        <div class="widget-content ui-widget-content" ></div>
 </li>
  
  
@@ -9,14 +12,19 @@
 
 ;(function(){
 
+    var portletDef = {
+        path: "./portlet/portletFEE/",
+        name: "portletFEE"
+    };
     require(["./js/domReady!", "./portlet/portletFEE/js/a"], function(_my, _module) {   
 
         var key = "<?php echo $_GET['key'];?>";
         var $thisPortlet = $("#portlet_"+key);
         var $head = $thisPortlet.find(".widget-head");
+        var $title = $thisPortlet.find(".widget-title");
         var $content = $thisPortlet.find(".widget-content");
-       
-        $head.append("FEE widget "+ key);
+        
+        $title.append(portletDef.name + " " + key);
         
         $thisPortlet.on("setting", function(){
             alert("setting portlet " + key);
