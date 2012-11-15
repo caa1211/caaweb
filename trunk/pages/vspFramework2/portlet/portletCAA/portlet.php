@@ -5,11 +5,21 @@
 
 ;(function(){
 
+    var portletDef = {
+        path: "./portlet/portletCAA/",
+        name: "portletCAA"
+    };
+    
     require(["./js/domReady!", "./portlet/portletCAA/js/a"], function(_my, _module) {   
-        
-        
+    
         var key = "<?php echo $_GET['key'];?>";
+        var $thisPortlet = $("#portlet_"+key);
+        var $head = $thisPortlet.find(".widget-head");
+        var $title = $thisPortlet.find(".widget-title");
+        var $content = $thisPortlet.find(".widget-content");
         
+        $title.append(portletDef.name + " " + key);
+           
         var $thisPortlet = $("#portlet_"+key);
         
         $thisPortlet.find(".testBtn").click(function(){
@@ -34,7 +44,8 @@
 
 <li class="widget ui-widget" id="portlet_<?php echo $_GET['key'];?>">
     <div class="widget-head ui-widget-header ui-corner-all myheader">
-        <h3>CAA Widget <?php echo $_GET['key'];?> </h3>
+            <span class="widget-title-icon"></span>
+            <span class="widget-title"></span>
         </div>
 
     
