@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Style sheet-->
+    <link href="css/normalize.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="cmps/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="cmps/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="cmps/jquery-ui/css/hot-sneaks/jquery.ui.theme.css" rel="stylesheet" media="screen">
+    <link href="css/dashboard.css" rel="stylesheet" type="text/css" />
+  
+    <!--Script-->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="cmps/jquery-ui/js/jquery-ui-1.9.1.custom.min.js"></script>
+    
+    <script src="js/underscore-1.3.1.js"></script>
+    <script src="js/backbone.js"></script>
+    <script src="js/backbone.localstorage.js"></script>
+    
+    <script src="cmps/jquery-ui/js/jquery-ui-1.9.1.custom.min.js"></script>
+    <script src="cmps/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/require.js"></script>
+    <script src="js/zyDDPanel2.js"></script>
+ <script type="text/javascript">
+    $(function(){
+        
+        var $ddPanelObj = $('#columns').zyDDPanel();
+
+        
+    });
+</script>
+
+<style>
+.modal.fade{
+    -webkit-transition: opacity .05s linear, none;
+    -moz-transition: opacity .05s linear, none;
+    -ms-transition: opacity .05s linear, none;
+    -o-transition: opacity .05s linear, none;
+    transition: opacity .05s linear, none;
+    top: 50%;
+}
+
+.fullPortlet.modal.fade{
+    top: 350px;
+}
+
+.fullPortlet.modal.fade.in {
+    top: 350px;
+}
+
+
+  
+#columns .widget .widget-content {
+max-height:200px; overflow: auto;
+}
+</style>
+
+</head>
+
+
+<body>  
+
+
+    <!-- Menu BAR -->  
+    <div class="navbar navbar-inverse navbar-fixed-top" >
+ 
+      <div class="navbar-inner" >
+        <div class="container-fluid" style=" background: url('https://kippt.com/static/img/home-bg-lib.jpg?62cc53229b01'); height:80px;">
+            <div class="row-fluid " style="">
+                <div class="span12" style="">
+                <!--Sidebar content-->
+                     <h3 style="height:30px;">Project Name & Icon</h3>
+                </div>
+            
+                <div class="span10">
+                <!--Body content-->
+              
+                </div>
+            </div>
+        </div>
+        
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <!--a class="brand" href="#">--</a-->
+          <div class="nav-collapse collapse">
+            <p class="navbar-text pull-right">
+              Logged in as <a href="#" class="navbar-link">Username</a>
+            </p>
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    <!--   -->
+   <div class="container-fluid " style=" margin-top:130px;">
+      <div id="columns" class="  "  style= " margin-top:0px; margin:0 auto; width:95%; ">
+        <ul  class="column" >
+            <!--PORTLET-->
+            <li class="widget ui-widget">  
+                <div class="widget-head ui-widget-header ui-corner-all myheader">
+                  
+                    <h3>Widget title</h3>
+                </div>
+                
+                <div class="widget-content ui-widget-content">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam magna sem, fringilla in, commodo a, rutrum ut, massa. Donec id nibh eu dui auctor tempor. Morbi laoreet eleifend dolor. Suspendisse pede odio, accumsan vitae, auctor non, suscipit at, ipsum. Cras varius sapien vel lectus.</p>
+                </div>
+            </li>
+             <!--PORTLET-->
+        </ul>
+        
+        <ul  class="column" >
+            <!--PORTLET-->
+            <li class="widget ui-widget">  
+                <div class="widget-head ui-widget-header ui-corner-all myheader">
+                  
+                    <h3>Widget title</h3>
+                </div>
+                
+                <div class="widget-content ui-widget-content">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam magna sem, fringilla in, commodo a, rutrum ut, massa. Donec id nibh eu dui auctor tempor. Morbi laoreet eleifend dolor. Suspendisse pede odio, accumsan vitae, auctor non, suscipit at, ipsum. Cras varius sapien vel lectus.</p>
+                </div>
+            </li>
+            <!--PORTLET-->
+            <!--PORTLET-->
+            <li class="widget ui-widget">  
+                <div class="widget-head ui-widget-header ui-corner-all myheader">
+                  
+                    <h3>Widget title</h3>
+                </div>
+                
+                <div class="widget-content ui-widget-content">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam magna sem, fringilla in, commodo a, rutrum ut, massa. Donec id nibh eu dui auctor tempor. Morbi laoreet eleifend dolor. Suspendisse pede odio, accumsan vitae, auctor non, suscipit at, ipsum. Cras varius sapien vel lectus.</p>
+                </div>
+            </li>
+            <!--PORTLET-->
+                        <!--PORTLET-->
+            <li class="widget ui-widget">  
+                <div class="widget-head ui-widget-header ui-corner-all myheader">
+                  
+                    <h3>Widget title</h3>
+                </div>
+                
+                <div class="widget-content ui-widget-content">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam magna sem, fringilla in, commodo a, rutrum ut, massa. Donec id nibh eu dui auctor tempor. Morbi laoreet eleifend dolor. Suspendisse pede odio, accumsan vitae, auctor non, suscipit at, ipsum. Cras varius sapien vel lectus.</p>
+                </div>
+            </li>
+            <!--PORTLET-->
+        </ul>
+
+       
+     </div>
+     
+    </div>
+    
+    
+<!--OTHERS UI-->
+ <div class="modal hide fade fullPortlet"  id="fullPortlet" style="width:80%; height:auto;">
+  
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> << Back </button>
+    <h3>portlet title</h3>
+    </div>
+    <div class="modal-body">
+    <p></p>
+    </div>
+    <div class="modal-footer"> </div>
+ 
+ </div>
+ 
+    
+    
+<div class="modal hide fade"  id="myModal">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Modal header</h3>
+    </div>
+    <div class="modal-body">
+    <p>Remove this Portlet ?</p>
+    </div>
+    <div class="modal-footer">
+    <a href="#" class="btn cancel">Cancel</a>
+    <a href="#" class="btn btn-primary ok">OK</a>
+    </div>
+ </div>
+
+ <div id="loadTrunk" style="display:none;"></div>
+
+    
+    
+</body>
+</html>

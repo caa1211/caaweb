@@ -1,0 +1,122 @@
+/* JS-Enabled CSS */
+.widget-head {
+margin-left:-1px; margin-top:-1px;
+}
+.widget-head a.remove  {
+    float: right;
+    display: inline;
+    background: url(../images/buttons.gif) no-repeat 0 0;
+
+    width: 14px;
+    height: 14px;
+    margin: 4px 4px 8px 0;
+    text-indent: -9999em;
+    outline: none;
+}
+.widget-head a:hover.remove {background: url(../images/buttons.gif) no-repeat -42px 0;}
+*html .widget-head a:hover.remove  {
+    float: right;
+    display: inline;
+    background: url(../images/buttons.gif) no-repeat 0 0;
+    width: 14px;
+    height: 14px;
+    margin: 4px 4px 8px 0;
+    text-indent: -9999em;
+    outline: none;
+}
+
+.widget-head a.setting  {
+    float: right;
+    display: inline;
+    background: url(../images/buttons.gif) no-repeat -98px 0;
+    width: 14px;
+    height: 14px;
+    margin: 4px 4px 8px 0;
+    text-indent: -9999em;
+    outline: none;
+}
+.widget-head a:hover.setting {background: url(../images/buttons.gif) no-repeat -126px 0;}
+*html .widget-head a:hover.setting  {
+    float: right;
+    display: inline;
+    background: url(../images/buttons.gif) no-repeat -98px 0;
+    width: 14px;
+    height: 14px;
+    margin: 4px 4px 8px 0;
+    text-indent: -9999em;
+    outline: none;
+}
+
+.widget-head a.refresh  {
+    float: right;
+    display: inline;
+    background: url(../images/buttons.gif) no-repeat -84px 0;
+    width: 14px;
+    height: 14px;
+    margin: 4px 4px 8px 0;
+    text-indent: -9999em;
+    outline: none;
+}
+.widget-head a:hover.refresh {background: url(../images/buttons.gif) no-repeat -112px 0;}
+*html .widget-head a:hover.refresh  {
+    float: right;
+    display: inline;
+    background: url(../images/buttons.gif) no-repeat -84px 0;
+    width: 14px;
+    height: 14px;
+    margin: 4px 4px 8px 0;
+    text-indent: -9999em;
+    outline: none;
+}
+
+.widget-head a.expand  {
+    float: right;
+    display: inline;
+    background: url(../images/buttons.gif) no-repeat -28px 0;
+    width: 14px;
+    height: 14px;
+    margin: 4px 4px 8px 0;
+    text-indent: -9999em;
+    outline: none;
+}
+.widget-head a:hover.expand {background: url(../images/buttons.gif) no-repeat -70px 0;}
+*html .widget-head a:hover.expand  {
+    float: right;
+    display: inline;
+    background: url(../images/buttons.gif) no-repeat -28px 0;
+    width: 14px;
+    height: 14px;
+    margin: 4px 4px 8px 0;
+    text-indent: -9999em;
+    outline: none;
+}
+
+.widget-head a.collapse  {
+    float: right;
+    display: inline;
+    background: url(../images/buttons.gif) no-repeat -14px 0;
+    width: 14px;
+    height: 14px;
+    text-indent: -9999em;
+    margin: 4px 3px 8px 4px;
+    outline: none;
+}
+.widget-head a:hover.collapse {background: url(../images/buttons.gif) no-repeat -56px 0;}
+*html .widget-head a:hover.collapse  {
+    float: right;
+    display: inline;
+    background: url(../images/buttons.gif) no-repeat -14px 0;
+    width: 14px;
+    height: 14px;
+    text-indent: -9999em;
+    margin: 4px 3px 8px 4px;
+    outline: none;
+}
+
+.widget-placeholder { border: 2px dashed #6e6e6e;}
+.column .widget-placeholder { margin: 0px 5px 10px 5px;  }
+/*#column2 .widget-placeholder { margin: 30px 20px 0 20px; }*/
+
+
+
+.widget h3{margin-top:-7px;}
