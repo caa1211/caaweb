@@ -1,0 +1,28 @@
+﻿[
+   {
+        "id": "CPEPortlet",
+        "name": "CPE Portlet",
+        "url": "portlet/portletGPE/portlet.php",
+        "params":{
+            "otherVals": 10
+             
+        },
+        "acl":{
+            "admin": [1, 1, 1], 
+            "user": [1, 1, 1]
+        }
+   },
+   {
+        "id": "CPEPortlet2",
+        "name": "CPE Portlet2",
+        "url": "portlet/portletGPE/portlet.php",
+        "params":{
+            "otherVals": 10
+        },
+        "acl":{
+            "admin": [1, 1, 1], 
+            "user": [0, 0, 1]
+        }
+    }
+
+]
