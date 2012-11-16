@@ -22,9 +22,11 @@ body {
 }
 
 body {
-   /* background: url("http://wbpreview.com/previews/WB000348T/images/bg/px_by_Gre3g.png") repeat scroll 0 0 #FAFAFA;*/
+   /*background: url("http://wbpreview.com/previews/WB000348T/images/bg/px_by_Gre3g.png") repeat scroll 0 0 #FAFAFA;*/
+   background: url("http://wbpreview.com/previews/WB01PF84M/assets/app/img/linen-bg.jpg") repeat scroll 0 0 #FAFAFA;
    
-   background: #F8F8F8;
+ 
+   /*background: #F8F8F8;*/
     color: #404040;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 13px;
