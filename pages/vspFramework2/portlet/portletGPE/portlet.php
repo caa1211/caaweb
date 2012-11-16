@@ -471,67 +471,7 @@
             <input class="span4" type="text" placeholder=".span4">
             <input class="span1" type="text" placeholder=".span1">
             </div>
-                    <div class="controls controls-row">
-            <input class="span4" type="text" placeholder=".span4">
-            <input class="span1" type="text" placeholder=".span1">
-            </div>        <div class="controls controls-row">
-            <input class="span4" type="text" placeholder=".span4">
-            <input class="span1" type="text" placeholder=".span1">
-            </div>
-                    <div class="controls controls-row">
-            <input class="span4" type="text" placeholder=".span4">
-            <input class="span1" type="text" placeholder=".span1">
-            </div>
-                    <div class="controls controls-row">
-            <input class="span4" type="text" placeholder=".span4">
-            <input class="span1" type="text" placeholder=".span1">
-            </div>
-                    <div class="controls controls-row">
-            <input class="span4" type="text" placeholder=".span4">
-            <input class="span1" type="text" placeholder=".span1">
-            </div>
-                    <div class="controls controls-row">
-            <input class="span4" type="text" placeholder=".span4">
-            <input class="span1" type="text" placeholder=".span1">
-            </div>        <div class="controls controls-row">
-            <input class="span4" type="text" placeholder=".span4">
-            <input class="span1" type="text" placeholder=".span1">
-            </div>
-                    <div class="controls controls-row">
-            <input class="span4" type="text" placeholder=".span4">
-            <input class="span1" type="text" placeholder=".span1">
-            </div>
-                    <div class="controls controls-row">
-            <input class="span4" type="text" placeholder=".span4">
-            <input class="span1" type="text" placeholder=".span1">
-            </div>
-                    <div class="controls controls-row">
-            <input class="span4" type="text" placeholder=".span4">
-            <input class="span1" type="text" placeholder=".span1">
-            </div>
-                    <div class="controls controls-row">
-            <input class="span4" type="text" placeholder=".span4">
-            <input class="span1" type="text" placeholder=".span1">
-            </div>        <div class="controls controls-row">
-            <input class="span4" type="text" placeholder=".span4">
-            <input class="span1" type="text" placeholder=".span1">
-            </div>
-                    <div class="controls controls-row">
-            <input class="span4" type="text" placeholder=".span4">
-            <input class="span1" type="text" placeholder=".span1">
-            </div>
-                    <div class="controls controls-row">
-            <input class="span4" type="text" placeholder=".span4">
-            <input class="span1" type="text" placeholder=".span1">
-            </div>
-                    <div class="controls controls-row">
-            <input class="span4" type="text" placeholder=".span4">
-            <input class="span1" type="text" placeholder=".span1">
-            </div>
-                    <div class="controls controls-row">
-            <input class="span4" type="text" placeholder=".span4">
-            <input class="span1" type="text" placeholder=".span1">
-            </div>
+      
             
             <!--content end-->
         </div>
