@@ -105,9 +105,9 @@ var DashboardModel = Backbone.Collection.extend({
     opts:{
          user: "",
          role: "",
-         url: "",
-         menuContainer: ""
+         url: ""
     },
+    menuContainer: "",
     portletDefine: {},
     initialize: function(param){
         $.extend(this.opts, param);
@@ -147,7 +147,7 @@ var DashboardModel = Backbone.Collection.extend({
             
             
             //hard code
-            $("#"+ that.opts.menuContainer).append(that.view.render().el);
+            $("#"+ that.menuContainer).append(that.view.render().el);
 
             //todo: get user setting
             //var portlet = new Portlet();
@@ -167,17 +167,10 @@ $(function(){
         role: "admin",
         url: "./portletDefine.json"
     };
-    
-    var defaultOpts = {
-        user: "",
-        role: "",
-        url: "",
-        menuContainer: "addPortletCtl"
-    }
-    
-    var _dashboardOpts =  $.extend({}, defaultOpts, dashboardOpts);
-    
-    var dashboardObj = new DashboardModel(_dashboardOpts);
+    var menuContainer = "addPortletCtl";
+    //var _dashboardOpts =  $.extend({}, defaultOpts, dashboardOpts);
+    var dashboardObj = new DashboardModel(dashboardOpts);
+    dashboardObj.menuContainer = menuContainer;
     dashboardObj.fetch();
  
 });
