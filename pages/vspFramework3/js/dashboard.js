@@ -22,7 +22,7 @@
 //--Portlet
 var PortletView = Backbone.View.extend({
  template: "",
- portletView: "portlet.html",
+ portletView: "portlet.tmp",
  portletModule: "module",
  tagName: "li",
  render: function(){
