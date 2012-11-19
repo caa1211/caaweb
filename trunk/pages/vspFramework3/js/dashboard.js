@@ -160,8 +160,7 @@ var DashboardModel = Backbone.Collection.extend({
     uiContainer:{
         menuContainer: "",
         ddPanelContainer: "",
-        userName: "",
-        loadTrunk: ""
+        userName: ""
     },
     menuContainer: "",
     $ddPanelObj: {},
@@ -231,8 +230,7 @@ $(function(){
     var uiContainer = {
         menuContainer: "addPortletCtl",
         ddPanelContainer: "columns",
-        userName : "userName",
-        loadTrunk: "loadTrunk"
+        userName : "userName"
     };
     $("#"+ uiContainer.userName).html( dashboardOpts.user );
     
