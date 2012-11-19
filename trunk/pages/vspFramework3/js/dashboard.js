@@ -43,7 +43,19 @@ var PortletView = Backbone.View.extend({
         that.$el.id = param.id ;
         that.$el.attr('id', param.id);
         that.$el.addClass("widget ui-widget");
+		that.$el.on('destroy', function(){
+			that.model.trigger('destroy');
+		});
+		/*
+		that.$el.on('removeClick', function(){
+			alert('removeClick');
 
+			//click yes
+			that.$el.trigger('destroy');
+			that.model.trigger('destroy');
+		});
+		*/
+		
         require([ moduleUrl ], function(_module) {
             _module.init(that.$el, config);
         });
@@ -61,6 +73,10 @@ var PortletModel = Backbone.Model.extend({
       params:{},
       acl: {}
     },
+	//sync: function(method, model, options){},
+	url: function(){
+		return this.instanceUrl;
+	},
     initialize: function(param, collectionOpts){
        if(collectionOpts == undefined){
        }
@@ -73,6 +89,10 @@ var PortletModel = Backbone.Model.extend({
         this.view.on('done', function(){
              that.trigger("done");
         });
+		this.on('destroy', function(){
+			//that.destroy();
+			that.collection.remove( that, {silent: true} );
+		});
     }
 });
 
@@ -168,33 +188,50 @@ var DashboardCtrler = Backbone.Router.extend({
         role: "",
         url: ""
 	},
+	getGUID: function (){
+        function S4() {
+               return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+        }
+        return (S4()+S4());	
+	},
 	dashboardModel: null,
 	$ddPanelObj: null,
     initialize: function(){},
-	addPortlet: function(modelDefine){
+	addPortlet: function(modelDefine, pos){
 	    var that = this;
+		if(pos == undefined){
+            pos = [0, 0];
+        }
 	    var portlet = new PortletModel(modelDefine);
+
 	    //var checkExistedModel = that.findModelInCollectionById(modelDefine.id);
 	    var pltid = modelDefine.pltid;
+		var isUpdateStore = true;
+		var expand = true;
 	    if(pltid == undefined){
 		  //##new portlet!!
-		   var cid = portlet.cid;
-		   pltid = modelDefine.id+"_"+cid;
-		  
+		   //var cid = portlet.cid;
+		   var key = that.getGUID();
+		   pltid = modelDefine.id+"_"+key;
+		   isUpdateStore = true;
+		   expand= true;
 	    }else{
 		  //## restoring portlet
+		   isUpdateStore = false;
+		   expand = modelDefine.expand;
 	    }
 	    portlet.set('id', pltid);
 	    portlet.fetch();
 	    portlet.on("done", function(){
-	    var model = this;
-	    var opts = {
+			var model = this;
+			var opts = {
 				pltid: pltid,
 				name: model.attributes.name,
 				params: model.attributes.params,
-				url: model.attributes.url
+				url: model.attributes.url,
+				expand: expand
 			};
-			that.$ddPanelObj.addPortlet2( model.view.$el, [0, 0], opts);
+			that.$ddPanelObj.addPortlet2( model.view.$el, pos, opts, isUpdateStore);
 	    });
 		this.dashboardModel.add(portlet); 
 	},
@@ -212,7 +249,20 @@ var DashboardCtrler = Backbone.Router.extend({
             try{
                 that.restoreData.portletPool = JSON.parse(portletPoolStr);
                 that.restoreData.portletPosMap = JSON.parse(portletPosMapStr);
-				//debugger;
+				var ppool = that.restoreData.portletPool;
+				var pmap = that.restoreData.portletPosMap;
+
+				for(var i = 0; i< pmap.length; i++){
+					var col = pmap[i];
+					for(var j = 0; j < col.length; j++){
+					   try{
+						var pltid = col[j];
+						var pltDef = ppool[pltid];
+						that.addPortlet(pltDef, [i, 0]);
+					   }catch(e){}
+					}
+				}
+					//debugger;
                // $ddPanelObj.restorePortlet(portletPosMap, portletPool);
             }catch(e){
             }
