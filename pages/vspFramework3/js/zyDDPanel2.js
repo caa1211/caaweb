@@ -275,21 +275,21 @@
 
         addWidgetControls();
         makeSortable(false);
-        
-        
+ 
         var _portletConfDft = {
             id: "plt_",
             url: "",
             expand: true
         };
 
-        function update2PortletPool($widget, opt){
+        function update2PortletPool($widget, opts){
             try{
                 var pltid = $widget.attr('pltid');
-                $.extend(portletPool[pltid], opt);
+                portletPool[pltid] = opts;
             }catch(e){
             }
             localStorage.setItem('portletPool',  JSON.stringify(portletPool));
+			
         }
         
         function update2PortletPosMap(){
@@ -360,11 +360,11 @@
         };
         
         
-        this.addPortlet2 = function($w, pos, opt, isUpdateStore){
-             var pltid =  $w.id;
+        this.addPortlet2 = function($w, pos, opts, isUpdateStore){
+             var pltid =  opts.pltid;
              $w.attr('pltid', pltid);
              $($columns[pos[0]]).append( $w );//todo opt?
-             update2PortletPool($w, opt);
+             update2PortletPool($w, opts);
              setWidget($w);
              //addWidgetControls();
              makeSortable(isUpdateStore == false ? false: true);

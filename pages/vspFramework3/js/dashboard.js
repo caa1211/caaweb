@@ -21,20 +21,6 @@
             
 //--Portlet
 var PortletView = Backbone.View.extend({
-/*
-    loadTemplateAsync: function(tmpId){
-        var promise = promises[tmpId] || $.get("/templates/" + tmpId + ".html");
-        promises[tmpId] = promise;
-        return promise;
-    },
-    loadTemplate : function(templateId, callback){
-        var tmpId = templateId.replace("#", "");
-        var promise = loadTemplateAsync(tmpId);
-        promise.done(function(template){
-          callback.call(this, $(template));
-        });
-    }
- */
  template: "",
  portletView: "portlet.html",
  portletModule: "module",
@@ -52,7 +38,6 @@ var PortletView = Backbone.View.extend({
         var param = that.model.toJSON();
         var config = that.model.get('config');
         var deps = that.model.get('deps');
-        param.id =  param.id +"_"+ that.cid;
         var htmlStr = that.template(param);
         that.$el.html(htmlStr);
         that.$el.id = param.id ;
@@ -78,7 +63,6 @@ var PortletModel = Backbone.Model.extend({
     },
     initialize: function(param, collectionOpts){
        if(collectionOpts == undefined){
-            
        }
     },
     validate: function(attrs){},
@@ -93,8 +77,7 @@ var PortletModel = Backbone.Model.extend({
 });
 
 
-
-var PortletItemView = Backbone.View.extend({
+var AddViewItem = Backbone.View.extend({
     initialize: function(param){
         this.model = param.model;
         this.parentView = param.parentView;
@@ -104,14 +87,14 @@ var PortletItemView = Backbone.View.extend({
         var that = this;
         this.$el.html(this.template(this.model));
         this.$el.click(function(){
-            that.parentView.model.addPortlet(that.model);
+		   that.parentView.trigger('addPortlet', that.model);
         });
         return this;
     }
 });
 
 //--Dashboard
-var DashboardView = Backbone.View.extend({
+var AddView = Backbone.View.extend({
     initialize: function(param){
         this.model = param.model;
     },
@@ -125,29 +108,16 @@ var DashboardView = Backbone.View.extend({
         var $dropMenu =  this.$el.find(".dropdown-menu");
         
         $.each(this.allowList, function(i, t){
-            var itemView = new PortletItemView({model: t, parentView: that});
-            $dropMenu.append(itemView.render().el);
+            var addViewItem = new AddViewItem({model: t, parentView: that});
+            $dropMenu.append(addViewItem.render().el);
         });
         
         if(this.allowList.length == 0){
              this.$el.css("visibility", "hidden");
         }
-        
-        /*
-        this.$el.click(function(e){
-           var $item = $(e.target);
-           
-           var porletid = $item.attr("pltid"); 
-       
-           if(typeof porletid != "undefined"){
-                this.model.addPortlet(porletid);
-           }
-        });
-        */
         return this;
     }
 });
-
 
 
 var DashboardModel = Backbone.Collection.extend({
@@ -157,24 +127,10 @@ var DashboardModel = Backbone.Collection.extend({
          role: "",
          url: ""
     },
-    uiContainer:{
-        menuContainer: "",
-        ddPanelContainer: "",
-        userName: ""
-    },
     menuContainer: "",
-    $ddPanelObj: {},
     portletDefine: {},
-    initialize: function(param, uiContainer){
+    initialize: function(param){
         $.extend(this.opts, param);
-        $.extend(this.uiContainer, uiContainer);
-    },
-    getPortletDefine: function(done){
-        var that = this;
-        $.getJSON(this.opts.url, function(json){
-            that.portletDefine = json;
-            done(); 
-        });
     },
     filterRole: function(index, flag){
         var role = this.opts.role;
@@ -190,53 +146,120 @@ var DashboardModel = Backbone.Collection.extend({
         });
         return allowList;
     },
-    addPortlet: function(portletDef){
-       var that = this;
-       var portlet = new PortletModel(portletDef);
-       portlet.fetch();
-       portlet.on("done", function(){
-           var model = this;
-           that.$ddPanelObj.addPortlet2(  model.view.$el, [0, 0], model.attributes);
-       });
-       this.add(portlet);
-    },
-    fetch: function(){
+    getPortletDefine: function(){
         var that = this;
-        var uiCntr = that.uiContainer;
-        that.$ddPanelObj = $('#' + uiCntr.ddPanelContainer).zyDDPanel();
-        
-        this.getPortletDefine(function(){
-            //Append Portlet menu
-            that.view = new DashboardView({model: that});
-            //Append Portlet menu
-            $("#"+ uiCntr.menuContainer).append(that.view.render().$el);
-            //todo: get user setting
-            //var portlet = new Portlet();
-        });    
+		$.getJSON(that.opts.url, function(json){
+            that.portletDefine = json;
+			that.addView = new AddView({model: that});
+            that.trigger("getPortletDefine_done");
+        });  
     }
 });
 
 
-
-$(function(){
-
-    //todo: get dashboardOpts by ajax api
-    var dashboardOpts = {
-        user: "Caa",
-        role: "admin", //admin or user
-        url: "./portletDefine.json"
-    };
-    
-    var uiContainer = {
+var DashboardCtrler = Backbone.Router.extend({
+	uiContainer: {
         menuContainer: "addPortletCtl",
         ddPanelContainer: "columns",
         userName : "userName"
-    };
-    $("#"+ uiContainer.userName).html( dashboardOpts.user );
+    },
+	dashboardOpts:{
+        user: "",
+        role: "",
+        url: ""
+	},
+	dashboardModel: null,
+	$ddPanelObj: null,
+    initialize: function(){},
+	addPortlet: function(modelDefine){
+	    var that = this;
+	    var portlet = new PortletModel(modelDefine);
+	    //var checkExistedModel = that.findModelInCollectionById(modelDefine.id);
+	    var pltid = modelDefine.pltid;
+	    if(pltid == undefined){
+		  //##new portlet!!
+		   var cid = portlet.cid;
+		   pltid = modelDefine.id+"_"+cid;
+		  
+	    }else{
+		  //## restoring portlet
+	    }
+	    portlet.set('id', pltid);
+	    portlet.fetch();
+	    portlet.on("done", function(){
+	    var model = this;
+	    var opts = {
+				pltid: pltid,
+				name: model.attributes.name,
+				params: model.attributes.params,
+				url: model.attributes.url
+			};
+			that.$ddPanelObj.addPortlet2( model.view.$el, [0, 0], opts);
+	    });
+		this.dashboardModel.add(portlet); 
+	},
+	restoreData:{
+		portletPool:{},
+		portletPosMap:[]
+	},
+	restorePortlet: function(){
+		var that = this;
+	    var portletPoolStr = localStorage.getItem('portletPool');
+        var portletPosMapStr = localStorage.getItem('portletPosMap');
+        var portletPool = null;
+        var portletPosMap = null; 
+		if(portletPoolStr!=null && portletPosMapStr!=null){
+            try{
+                that.restoreData.portletPool = JSON.parse(portletPoolStr);
+                that.restoreData.portletPosMap = JSON.parse(portletPosMapStr);
+				//debugger;
+               // $ddPanelObj.restorePortlet(portletPosMap, portletPool);
+            }catch(e){
+            }
+        }
+	},
+	getPortletDefine_done: function(){
+		var that = this;
+		var uiContainer = this.uiContainer;
+		var collection = this.dashboardModel;
+		$("#"+ uiContainer.menuContainer).append(collection.addView.render().$el);
+		collection.addView.on("addPortlet", function(modelDefine){
+			that.addPortlet(modelDefine);
+		});
+		
+		that.restorePortlet();
+	},
+	initUI: function(){
+		var that = this;
+	    var uiContainer = that.uiContainer;
+		that.$ddPanelObj = $('#' + uiContainer.ddPanelContainer).zyDDPanel();
+		$("#"+ uiContainer.userName).html(  that.dashboardOpts.user );
+	},
+	getUserOptionDone: function(){
+		var that = this;
+		var dashboardOpts = that.dashboardOpts;
+		that.initUI();
+		that.dashboardModel = new DashboardModel(dashboardOpts);
+		that.dashboardModel.getPortletDefine();//get portletDefine
+		that.dashboardModel.on("getPortletDefine_done", function(){ that.getPortletDefine_done(); });
+	},
+	fetch: function(opts){
+		var that = this;
+		//call ajax to get dashboardOpts
+	    var opts = {
+			user: "Caa",
+			role: "admin", //admin or user
+			url: "./portletDefine.json"
+		};
+		$.extend(that.dashboardOpts, opts);
+		that.getUserOptionDone();
+	}
+});
+
+$(function(){
+
+	var dashboardCtrler = new DashboardCtrler();
+	dashboardCtrler.fetch();
     
-    //var _dashboardOpts =  $.extend({}, defaultOpts, dashboardOpts);
-    var dashboardObj = new DashboardModel(dashboardOpts, uiContainer);
-    
-    dashboardObj.fetch();
  
 });
