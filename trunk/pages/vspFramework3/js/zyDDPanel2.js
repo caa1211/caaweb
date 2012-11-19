@@ -335,7 +335,7 @@
 			 var _opts = $.extend({}, _portletConfDft, opts);
              var pltid =  _opts.pltid;
              $w.attr('pltid', pltid);
-             $($columns[pos[0]]).append( $w );//todo opt?
+             //$($columns[pos[0]]).append( $w );//todo opt?
              update2PortletPool($w, opts);
              setWidget($w);
              //addWidgetControls();

@@ -191,7 +191,8 @@ var DashboardCtrler = Backbone.Router.extend({
 	uiContainer: {
         menuContainer: "addPortletCtl",
         ddPanelContainer: "columns",
-        userName : "userName"
+        userName : "userName",
+		columns: ".column"
     },
 	dashboardOpts:{
         user: "",
@@ -206,6 +207,7 @@ var DashboardCtrler = Backbone.Router.extend({
 	},
 	dashboardModel: null,
 	$ddPanelObj: null,
+	$columns: null,
     initialize: function(){},
 	addPortlet: function(modelDefine, pos){
 	    var that = this;
@@ -232,6 +234,11 @@ var DashboardCtrler = Backbone.Router.extend({
 	    }
 	    portlet.set('id', pltid);
 	    portlet.fetch();
+		
+		//hard code, ugly
+	    var $tmpWidget = $("<span class='aaa'>");
+        $(that.$columns[ pos[0] ]).append( $tmpWidget );
+		
 	    portlet.on("done", function(){
 			var model = this;
 			var opts = $.extend({}, modelDefine, {expand: expand, pltid: pltid});
@@ -243,7 +250,7 @@ var DashboardCtrler = Backbone.Router.extend({
 				url: model.attributes.url,
 				expand: expand
 			};*/
-			
+			$tmpWidget.replaceWith(  model.view.$el );
 			that.$ddPanelObj.addPortlet( model.view.$el, pos, opts, isUpdateStore);
 	    });
 		this.dashboardModel.add(portlet); 
@@ -302,6 +309,7 @@ var DashboardCtrler = Backbone.Router.extend({
 	    var uiContainer = that.uiContainer;
 		that.$ddPanelObj = $('#' + uiContainer.ddPanelContainer).zyDDPanel();
 		$("#"+ uiContainer.userName).html(  that.dashboardOpts.user );
+		that.$columns = $(uiContainer.columns);
 	},
 	getUserOptionDone: function(){
 		var that = this;
@@ -328,6 +336,5 @@ $(function(){
 
 	var dashboardCtrler = new DashboardCtrler();
 	dashboardCtrler.fetch();
-    
- 
+
 });
