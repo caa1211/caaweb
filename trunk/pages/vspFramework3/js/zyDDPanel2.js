@@ -85,9 +85,10 @@
         
         
         function setWidget($widget){
+		    var widget = $widget[0];
             var thisWidgetSettings = getWidgetSettings(widget);
             //var $widget = $(widget);
-            var widget = $widget[0];
+
             /*$widget.on('destroy',function(){
                 //$(this).trigger('destroy');
                 var pltid =  $(this).attr('pltid');
@@ -133,7 +134,6 @@
 						});
 
 						$confirmRemoveModal.find('.cancel').unbind("click").click(function () {
-							alert('hide')
 							$confirmRemoveModal.modal('hide');
 						});
 						
@@ -330,49 +330,8 @@
             }            
             localStorage.setItem('portletPosMap', JSON.stringify(portletPosMap));
         };
-
-        
-        this.addPortlet = function(opt, pos, isUpdateStore){
-            var _opt = $.extend({}, _portletConfDft, opt);
-            var id = _opt.id;
-            var url = _opt.url + "?key=" + id;
-            if(pos == undefined){
-                pos = [0, 0];
-            }
-            var $tmpWidget = $("<span>");
-            
-            $($columns[ pos[0] ]).append( $tmpWidget );
-            //$($columns[ pos[0] ]).insertAt(pos[1], $tmpWidget );
-            
-            $loadTrunk.load(url, function(){
-
-                portletPool[_opt.id] = _opt;
-                update2PortletPool();
-                
-               if($loadTrunk.children(".widget").length == 1){
-                    var $newWidget = $loadTrunk.children(".widget");
-                    $newWidget.attr('pltid', _opt.id);
-                   
-                    $tmpWidget.append( $newWidget );
-                   
-                    setWidget($newWidget);
-                    
-                    if(!_opt.expand){
-                        $newWidget.find("a.collapse").trigger('click', 0);
-                    }
-                   // $(_settings.columns).sortable('cancel');
-                      
-                    addWidgetControls();
-                    makeSortable(isUpdateStore == false ? false: true);
-        
-                    //--
-
-               }
-            });
-        };
-        
-        
-        this.addPortlet2 = function($w, pos, opts, isUpdateStore){
+ 
+        this.addPortlet = function($w, pos, opts, isUpdateStore){
 			 var _opts = $.extend({}, _portletConfDft, opts);
              var pltid =  _opts.pltid;
              $w.attr('pltid', pltid);
@@ -386,23 +345,7 @@
                 $w.find("a.collapse").trigger('click', 0);
             }
         }
-        
-        this.restorePortlet = function(pmap, ppool){
 
-        
-            for(var i = 0; i< pmap.length; i++){
-                var col = pmap[i];
-                for(var j = 0; j < col.length; j++){
-                   try{
-                    var pltid = col[j];
-                    var pltDef = ppool[pltid];
-                    this.addPortlet(pltDef, [i, 0] , false );
-                   }catch(e){}
-                }
-               
-            }
-          
-        };
         
         return this;
         
