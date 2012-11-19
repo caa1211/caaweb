@@ -42,6 +42,7 @@ var PortletView = Backbone.View.extend({
         that.$el.html(htmlStr);
         that.$el.id = param.id ;
         that.$el.attr('id', param.id);
+		//noSetting noRefresh noRemove noCollapse noMove
         that.$el.addClass("widget ui-widget");
 		that.$el.on('destroy', function(){
 			that.model.trigger('destroy');
@@ -224,14 +225,17 @@ var DashboardCtrler = Backbone.Router.extend({
 	    portlet.fetch();
 	    portlet.on("done", function(){
 			var model = this;
-			var opts = {
+			var opts = $.extend({}, modelDefine, {expand: expand, pltid: pltid});
+		
+			/*var opts = {
 				pltid: pltid,
 				name: model.attributes.name,
 				params: model.attributes.params,
 				url: model.attributes.url,
 				expand: expand
-			};
-			that.$ddPanelObj.addPortlet2( model.view.$el, pos, opts, isUpdateStore);
+			};*/
+			
+			that.$ddPanelObj.addPortlet( model.view.$el, pos, opts, isUpdateStore);
 	    });
 		this.dashboardModel.add(portlet); 
 	},
