@@ -88,7 +88,8 @@
             //var $widget = $(widget);
             var widget = $widget[0];
             $widget.doRemove = function(){
-                $(this).trigger('remove');
+
+                $(this).trigger('destroy');
                 var pltid =  $(this).attr('pltid');
                 $(this).remove();
                 try{
@@ -102,6 +103,8 @@
             };
             
            if (thisWidgetSettings.removable && $widget.find("a.remove").length == 0) {
+                $widget.trigger("beforeDestory");
+                
                 $('<a href="#" class="remove" title="Close Widget">CLOSE</a>').mousedown(function(e){
                         e.stopPropagation();
                     }).click(function(){
@@ -177,7 +180,7 @@
                     
                         var dur = time == undefined? 150 : 0;
                         var kk = $(this);
-                     
+                    
                         $widget.find(_settings.contentSelector).slideUp({
                             duration: dur,
                             easing: 'easeOutQuart',
@@ -355,8 +358,18 @@
                }
             });
         };
-            
-                    
+        
+        
+        this.addPortlet2 = function($w, pos, opt, isUpdateStore){
+             var pltid =  $w.id;
+             $w.attr('pltid', pltid);
+             $($columns[pos[0]]).append( $w );//todo opt?
+             update2PortletPool($w, opt);
+             setWidget($w);
+             //addWidgetControls();
+             makeSortable(isUpdateStore == false ? false: true);
+        }
+        
         this.restorePortlet = function(pmap, ppool){
 
         
