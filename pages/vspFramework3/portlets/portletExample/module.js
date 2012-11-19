@@ -8,7 +8,7 @@ define(function(require, exports, module){
         //main function here=============================
         var $view =$el;
         var id = $view.id;
-        
+     
         $view.on("setting", function(e){
             alert($view.id + " setting");
         });
@@ -37,8 +37,11 @@ define(function(require, exports, module){
 			 alert($view.id + " button click");
 		});
 		*/
+		
 		$view.find('.myBtn').click(function(){
-			 alert($view.id + " my button click");
+			 //alert($view.id + " my button click");
+			 var newValue = $view.find('input.inputField').val();
+		     $view.trigger('updateConfig', {aaee: newValue});
 		});
 		
         //public method

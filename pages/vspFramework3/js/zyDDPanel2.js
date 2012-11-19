@@ -345,6 +345,10 @@
                 $w.find("a.collapse").trigger('click', 0);
             }
         }
+		
+		this.updatePortletPool = function($w, opts){
+			 update2PortletPool($w, opts);
+		};
 
         
         return this;
