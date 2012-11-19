@@ -1,7 +1,7 @@
 ﻿[
    {
         "id": "performancePortlet",
-        "name": "CPE Portlet",
+        "name": "CPE Portlet 1",
         "url": "./portlets/performancePortlet/",
         "acl":{
             "admin": [1, 1, 1], 
@@ -9,7 +9,7 @@
         }
    },{
         "id": "performancePortlet2",
-        "name": "CPE Portlet",
+        "name": "CPE Portlet 2",
         "url": "portlets/performancePortlet/",
         "acl":{
             "admin": [1, 1, 1], 
@@ -20,7 +20,7 @@
         }
     },{
         "id": "performancePortlet5",
-        "name": "CPE Portlet",
+        "name": "CPE Portlet 5",
         "url": "portlets/performancePortlet/",
         "acl":{
             "admin": [1, 1, 1], 
