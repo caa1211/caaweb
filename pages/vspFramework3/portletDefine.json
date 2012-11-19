@@ -1,27 +1,33 @@
 ﻿[
    {
-        "id": "CPEPortlet",
+        "id": "performancePortlet",
         "name": "CPE Portlet",
-        "url": "portlet/portletGPE/portlet.php",
-        "params":{
-            "otherVals": 10
-             
-        },
+        "url": "./portlets/performancePortlet/",
         "acl":{
             "admin": [1, 1, 1], 
             "user": [1, 1, 1]
         }
-   },
-   {
-        "id": "CPEPortlet2",
-        "name": "CPE Portlet2",
-        "url": "portlet/portletGPE/portlet.php",
-        "params":{
-            "otherVals": 10
-        },
+   },{
+        "id": "performancePortlet2",
+        "name": "CPE Portlet",
+        "url": "portlets/performancePortlet/",
         "acl":{
             "admin": [1, 1, 1], 
-            "user": [0, 0, 1]
+            "user": [1, 1, 1]
+        },
+        "config":{
+            "otherVals": 10
+        }
+    },{
+        "id": "performancePortlet5",
+        "name": "CPE Portlet",
+        "url": "portlets/performancePortlet/",
+        "acl":{
+            "admin": [1, 1, 1], 
+            "user": [1, 1, 1]
+        },
+        "config":{
+            "otherVals": 10
         }
     }
 
