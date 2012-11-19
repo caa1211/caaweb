@@ -29,6 +29,7 @@
             handleSelector: '.widget-head',
             contentSelector: '.widget-content',
             editSelector: ".edit-box",
+			confirmRemoveModal: "#confirmRemoveModal",
             loadTrunk: "#loadTrunk",
             widgetDefault: {
                 movable: true,
@@ -57,7 +58,7 @@
         }
         
         var _settings = $.extend(defaultSettings, settings);
-        
+        var $confirmRemoveModal = $(_settings.confirmRemoveModal);
         var $loadTrunk = $(_settings.loadTrunk);
         var $columns = $(".column");
         
@@ -87,8 +88,17 @@
             var thisWidgetSettings = getWidgetSettings(widget);
             //var $widget = $(widget);
             var widget = $widget[0];
-            $widget.doRemove = function(){
-
+            /*$widget.on('destroy',function(){
+                //$(this).trigger('destroy');
+                var pltid =  $(this).attr('pltid');
+                $(this).remove();
+                try{
+                    delete portletPool[pltid];
+                }catch(e){}
+                update2PortletPosMap();
+            });*/
+			
+			$widget.doRemove = function(){
                 $(this).trigger('destroy');
                 var pltid =  $(this).attr('pltid');
                 $(this).remove();
@@ -106,35 +116,33 @@
                 $widget.trigger("beforeDestory");
                 
                 $('<a href="#" class="remove" title="Close Widget">CLOSE</a>').mousedown(function(e){
-                        e.stopPropagation();
+                       e.stopPropagation();
                     }).click(function(){
-                    
-                        $('#myModal').modal({
-                        
-                        
-                        });
-                         $('#myModal .ok').click(function(){
-                                    $widget.animate({
-                                        opacity: 0
-                                    }, function(){
-                                        $widget.slideUp(function(){
-                                            $widget.doRemove();
-                                        });
-                                    });
-                              $('#myModal').modal('hide');      
-                         });
-                        
-                         $('#myModal .cancel').click(function(){
+					   $widget.trigger('removeClick');
+                       $confirmRemoveModal.modal({});
+					   
+					   $confirmRemoveModal.find('.ok').unbind("click").click(function () {
+							$widget.animate({
+								opacity: 0
+							}, function () {
+								$widget.slideUp(function () {
+									$widget.doRemove();
+								});
+							});
+							$confirmRemoveModal.modal('hide');
+						});
 
-                              $('#myModal').modal('hide');      
-                         });
-                         
-                        
-                        return false;
-                    }).appendTo($(_settings.handleSelector, widget));
+						$confirmRemoveModal.find('.cancel').unbind("click").click(function () {
+							alert('hide')
+							$confirmRemoveModal.modal('hide');
+						});
+						
+                       return false;
+                }).appendTo($(_settings.handleSelector, widget));
                     
-                }
+            }
                 
+
                 
                 if (thisWidgetSettings.refreshable && $widget.find("a.refresh").length == 0) {
                     $('<a href="#" class="refresh" title="Refresh Widget">REFRESH</a>').mousedown(function(e){
@@ -285,7 +293,11 @@
         function update2PortletPool($widget, opts){
             try{
                 var pltid = $widget.attr('pltid');
-                portletPool[pltid] = opts;
+				if(portletPool[pltid]!=undefined){
+					$.extend(portletPool[pltid],opts);
+				}else{
+					portletPool[pltid] = opts ;
+				}
             }catch(e){
             }
             localStorage.setItem('portletPool',  JSON.stringify(portletPool));
@@ -361,13 +373,18 @@
         
         
         this.addPortlet2 = function($w, pos, opts, isUpdateStore){
-             var pltid =  opts.pltid;
+			 var _opts = $.extend({}, _portletConfDft, opts);
+             var pltid =  _opts.pltid;
              $w.attr('pltid', pltid);
              $($columns[pos[0]]).append( $w );//todo opt?
              update2PortletPool($w, opts);
              setWidget($w);
              //addWidgetControls();
              makeSortable(isUpdateStore == false ? false: true);
+			 
+			if(!_opts.expand){
+                $w.find("a.collapse").trigger('click', 0);
+            }
         }
         
         this.restorePortlet = function(pmap, ppool){
