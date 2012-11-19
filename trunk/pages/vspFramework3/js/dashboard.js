@@ -59,6 +59,11 @@ var PortletView = Backbone.View.extend({
 		
         require([ moduleUrl ], function(_module) {
             _module.init(that.$el, config);
+			that.$el.on('updateConfig', function(view, configParam ){
+				var newConfig = $.extend({}, config, configParam);
+				that.model.trigger('updateConfig', newConfig);
+				//todo update config
+			});
         });
 
         that.trigger("done");
@@ -71,8 +76,8 @@ var PortletModel = Backbone.Model.extend({
       id: null,
       name: '',
       url:"",
-      params:{},
-      acl: {}
+	  acl: {},
+      config:{}
     },
 	//sync: function(method, model, options){},
 	url: function(){
@@ -93,6 +98,10 @@ var PortletModel = Backbone.Model.extend({
 		this.on('destroy', function(){
 			//that.destroy();
 			that.collection.remove( that, {silent: true} );
+		});
+		
+		this.on('updateConfig', function(newConfig){
+			that.set('config', newConfig);
 		});
     }
 });
@@ -238,6 +247,11 @@ var DashboardCtrler = Backbone.Router.extend({
 			that.$ddPanelObj.addPortlet( model.view.$el, pos, opts, isUpdateStore);
 	    });
 		this.dashboardModel.add(portlet); 
+		
+		portlet.on('updateConfig', function(newConfig){
+			var model = this;
+			that.$ddPanelObj.updatePortletPool( model.view.$el, {config: newConfig} );
+		});
 	},
 	restoreData:{
 		portletPool:{},
@@ -302,7 +316,7 @@ var DashboardCtrler = Backbone.Router.extend({
 		//call ajax to get dashboardOpts
 	    var opts = {
 			user: "Caa",
-			role: "admin", //admin or user
+			role: "user", //admin or user
 			url: "./portletDefine.json"
 		};
 		$.extend(that.dashboardOpts, opts);
