@@ -1,0 +1,19 @@
+﻿<!--Portlet Template-->
+<div class="widget-head ui-widget-header ui-corner-all">      
+    <h3 class="title">name:<%= name %> / id: <%= id %></h3>
+</div>
+<div class="widget-content ui-widget-content">
+        <div class="wall">
+        <ul class="nav nav-list" style="width:90%;margin: 0 auto;">
+        <li class="active"><a href="#"><i class="icon-home icon-white"></i> Home</a></li>
+        <li><a href="#"><i class="icon-book"></i> Library</a></li>
+        <li><a href="#"><i class="icon-pencil"></i> Applications</a></li>
+        <li><a href="#"><i class="i"></i> Misc</a></li>
+        </ul>
+        </div>
+</div>
+
+
+
+
+
