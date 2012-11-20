@@ -61,6 +61,8 @@
         
         var _settings = $.extend(defaultSettings, settings);
         var $confirmRemoveModal = $(_settings.confirmRemoveModal);
+        var $confirmRemoveModal_ok = $(_settings.confirmRemoveModal).find('.ok');
+        var $confirmRemoveModal_cancel = $(_settings.confirmRemoveModal).find('.cancel');
         var $loadTrunk = $(_settings.loadTrunk);
         var $columns = $(".column");
         
@@ -100,7 +102,7 @@
                 }catch(e){}
                 update2PortletPosMap();
             });*/
-			
+			/*
 			$widget.doRemove = function(){
                 $(this).trigger('destroy');
                 var pltid =  $(this).attr('pltid');
@@ -110,7 +112,7 @@
                     update2PortletPool($(this), {pltid: pltid}, true);//isRemove is true
                 }catch(e){}
                 update2PortletPosMap();
-            };
+            };*/
             
             $widget.updateIsExpanded = function(flag){
                     update2PortletPool($(this), {expand: flag});
@@ -124,19 +126,19 @@
                     }).click(function(){
 					   $widget.trigger('removeClick');
                        $confirmRemoveModal.modal({});
-					   
-					   $confirmRemoveModal.find('.ok').unbind("click").click(function () {
+					    
+					    $confirmRemoveModal_ok.unbind("click").bind('click', function () {
 							$widget.animate({
 								opacity: 0
 							}, function () {
-								$widget.slideUp(function () {
-									$widget.doRemove();
+								$(this).slideUp(function () {
+									$(this).trigger("doRemove");
 								});
 							});
 							$confirmRemoveModal.modal('hide');
 						});
 
-						$confirmRemoveModal.find('.cancel').unbind("click").click(function () {
+						$confirmRemoveModal_cancel.unbind("click").click(function () {
 							$confirmRemoveModal.modal('hide');
 						});
 						

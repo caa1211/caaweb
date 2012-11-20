@@ -28,6 +28,9 @@ var PortletView = Backbone.View.extend({
  portletModule: "module",
  tagName: "li",
  noRefresh: true,
+ doRemove: function(){
+    this.$el.trigger("doRemove");
+ },
  render: function(){
     var that = this;
     var url = this.model.get("url");
@@ -61,8 +64,27 @@ var PortletView = Backbone.View.extend({
             that.$el.addClass("noRefresh");
         }
 
-		that.$el.on('destroy', function(){
+		that.on('destroy', function(){
 			that.model.trigger('destroy');
+		});
+        
+                
+        that.$el.on('doRemove', function(){
+
+           $(this).remove();
+           that.trigger('destroy');
+           //var pltid =  $(this).attr('pltid');
+         
+           /*
+            $(this).trigger('destroy');
+            var pltid =  $(this).attr('pltid');
+            $(this).remove();
+            try{
+                //delete portletPool[pltid];
+               update2PortletPool($(this), {pltid: pltid}, true);//isRemove is true
+            }catch(e){}
+               update2PortletPosMap();
+           */     
 		});
         
 		/*
@@ -117,6 +139,7 @@ var PortletModel = Backbone.Model.extend({
     validate: function(attrs){},
     fetch: function(){
         var that = this;
+        var pltid = that.get('id');
         this.getUserRole();
         this.view = new PortletView({model: this});
         this.view.render();
@@ -124,13 +147,16 @@ var PortletModel = Backbone.Model.extend({
              that.trigger("done");
         });
 		this.on('destroy', function(){
-			//that.destroy();
+            that.collection.controler.saveDashboardSetting('pool', null, {pltid: pltid}, true);
+            that.collection.controler.saveDashboardSetting('pos');
 			that.collection.remove( that, {silent: true} );
 		});
 		
 		this.on('updateConfig', function(newConfig){
 			that.set('config', newConfig);
 		});
+
+        
     }
 });
 
@@ -223,7 +249,7 @@ var DashboardCtrler = Backbone.Router.extend({
         widgetSelector: ".widget"
     },
     userOptsUrl: "./userOpts.json",
-
+    defautlDashboardUrl: "./dashboard_default.json",
 	dashboardOpts:{
         user: {
             name: "default user",
@@ -240,7 +266,9 @@ var DashboardCtrler = Backbone.Router.extend({
 	dashboardModel: null,
 	$ddPanelObj: null,
 	$columns: null,
-    initialize: function(){},
+    initialize: function(){
+    
+    },
 	addPortlet: function(modelDefine, pos){
 	    var that = this;
 		if(pos == undefined){
@@ -288,6 +316,20 @@ var DashboardCtrler = Backbone.Router.extend({
 			that.$ddPanelObj.updatePortletPool( model.view.$el, {config: newConfig} );
 		});
 	},
+    reset2Default: function(){
+        var that = this;
+        var length = that.dashboardModel.models.length;
+        var views = [];
+        for(var i=0; i<that.dashboardModel.models.length; i++){
+            var model = that.dashboardModel.models[i];
+            if(model.view != undefined){
+                views.push(model.view);
+            }
+        }
+        for(var i=0; i<views.length; i++){
+            views[i].doRemove();
+        }
+    },
     portletDefine: [],
     getPortletDefineById: function(id){
         var portletDefine =  this.portletDefine;
@@ -304,6 +346,44 @@ var DashboardCtrler = Backbone.Router.extend({
         portletPool: {},
         portletPosMap: []
     },
+    refreshDashboard: function(){
+        var that = this;
+        var dashboardSetting = that.dashboardSetting;
+    
+		var ppool = dashboardSetting.portletPool;
+		var pmap = dashboardSetting.portletPosMap;
+        var ppoolNew = {};
+		for (var i = 0; i < pmap.length; i++) {
+		    var col = pmap[i];
+		    for (var j = 0; j < col.length; j++) {
+		            var pltid = col[j];
+		            var pltDef = ppool[pltid];
+		            var _pltDef;
+		            var currentDefine = that.getPortletDefineById(pltDef.id);
+		            //avoid restore data is conflict with current portlet define
+		            if (currentDefine != undefined) {
+		                _pltDef = $.extend({}, pltDef, {
+		                    acl: currentDefine.acl,
+		                    url: currentDefine.url
+		                });
+		            }
+
+		            var userRole = that.dashboardOpts.user.role;
+		            var roleAry = [0, 0, 0, 0];
+		            try {
+		                roleAry = _pltDef.acl[userRole];
+		            } catch (e) {
+
+		            }
+
+		            if (roleAry[1] == 1) { //ACL: R
+                        ppoolNew[pltid] = pltDef;
+		                that.addPortlet(_pltDef, [i, 0]);
+		            }
+		    }
+		}
+        dashboardSetting.portletPool = ppoolNew;
+    },
 	restorePortlet: function(){
 		var that = this;
 	    var portletPoolStr = localStorage.getItem('portletPool');
@@ -311,45 +391,27 @@ var DashboardCtrler = Backbone.Router.extend({
         var dashboardSetting = that.dashboardSetting;
  
 		if(portletPoolStr!=null && portletPosMapStr!=null){
+            //get dashboard from user's setting (demo for localstorage)
             try{
                 dashboardSetting.portletPool = JSON.parse(portletPoolStr);
                 dashboardSetting.portletPosMap = JSON.parse(portletPosMapStr);
-				var ppool = dashboardSetting.portletPool;
-				var pmap = dashboardSetting.portletPosMap;
-
-				for(var i = 0; i< pmap.length; i++){
-					var col = pmap[i];
-					for(var j = 0; j < col.length; j++){
-					   try{
-						var pltid = col[j];
-						var pltDef = ppool[pltid];
-                        
-                        var currentDefine = that.getPortletDefineById(pltDef.id);
-                        //avoid restore data is conflict with current portlet define
-                        if(currentDefine!=undefined){
-                            $.extend(pltDef, {acl: currentDefine.acl, url: currentDefine.url  });
-                        }
-                          
-                        var userRole = that.dashboardOpts.user.role;
-                        var roleAry = [0,0,0,0];
-                        try{
-                            roleAry= pltDef.acl[userRole];
-                        }catch(e){
-                        
-                        }
-                        
-                        if(roleAry[1]==1){ //ACL: R
-                            that.addPortlet(pltDef, [i, 0]);
-                        }
-                        
-					   }catch(e){
-                       
-                       }
-					}
-				}
-                
+                that.refreshDashboard();
             }catch(e){
             }
+        }else{
+            //get dashboard from default setting (demo for static json data)
+            $.getJSON(that.defautlDashboardUrl, function(d, s){
+                if(s=="success"){
+                    try{
+                        dashboardSetting.portletPool = d.portletPool;
+                        dashboardSetting.portletPosMap = d.portletPosMap;
+                        that.refreshDashboard();
+                    }catch(e){
+                    
+                    }
+                }
+            });
+        
         }
 	},
 	getPortletDefine_done: function(){
@@ -372,7 +434,6 @@ var DashboardCtrler = Backbone.Router.extend({
         var that = this;
         var portletPosMap = this.dashboardSetting.portletPosMap;
         var portletPool = this.dashboardSetting.portletPool;
-   
         if(type == "pos"){
             portletPosMap.length = 0;
             var $columns = that.$columns; 
@@ -445,4 +506,44 @@ $(function(){
 	var dashboardCtrler = new DashboardCtrler();
 	dashboardCtrler.fetch();
 
+    
+    //#############for debug#####################
+     var debugModal = $("#debugModal");
+     debugModal.find('.ok').click(function(){
+        debugModal.modal('hide');
+     });
+          
+    $("#debugBtn").click(function(){
+        var ctrler = dashboardCtrler;
+        debugger;
+    });
+     
+    $("#getPortletPoolBtn").click(function(){
+        var ctrler = dashboardCtrler;
+        var portletPool = ctrler.dashboardSetting.portletPool;
+        var str = JSON.stringify(portletPool)
+        debugModal.find('.modal-body').html(str)
+        debugModal.modal();
+    });
+    
+    $("#getPortletPosMapBtn").click(function(){
+        var ctrler = dashboardCtrler;
+        var portletPosMap = ctrler.dashboardSetting.portletPosMap;
+        var str = JSON.stringify(portletPosMap)
+        debugModal.find('.modal-body').html(str)
+        debugModal.modal();
+    });
+    
+    $("#restore2DefaultBtn").click(function(){
+           var ctrler = dashboardCtrler;
+            ctrler.reset2Default();
+    });
+    
+    
+    //#############for debug#####################
+    
+    
+    
+    
+    
 });
