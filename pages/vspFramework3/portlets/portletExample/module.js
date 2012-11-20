@@ -22,7 +22,7 @@ define(function(require, exports, module){
         });
         
         $view.on("destroy", function(e){
-            alert($view.id + " destroy");
+            //alert($view.id + " destroy");
         });
         
         $view.on("fullScreenOn", function(e){

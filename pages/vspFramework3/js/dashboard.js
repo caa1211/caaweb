@@ -342,7 +342,9 @@ var DashboardCtrler = Backbone.Router.extend({
                             that.addPortlet(pltDef, [i, 0]);
                         }
                         
-					   }catch(e){}
+					   }catch(e){
+                       
+                       }
 					}
 				}
                 
