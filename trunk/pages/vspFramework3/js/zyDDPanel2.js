@@ -238,7 +238,7 @@
                         notSortable += '#' + this.id + ',';
                     }
                 });
-                var $items = notSortable != '' ? $('> li:not(' + notSortable + ')', _settings.columns) : $('li', _settings.columns);
+                var $items = notSortable != '' ? $('> li:not(' + notSortable + ')', _settings.columns) : $('li.widget', _settings.columns);
                 return $items;
                 
                 /*
@@ -266,8 +266,9 @@
                 handle: _settings.handleSelector,
                 placeholder: 'widget-placeholder',
                 forcePlaceholderSize: true,
-                revert: 300,
+                revert: 200,
                 opacity: 0.8,
+                delay: 100,
                 containment: 'document',
                 start: function(e, ui){
                     $(ui.helper).addClass('dragging');

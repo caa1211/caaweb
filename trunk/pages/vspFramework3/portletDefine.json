@@ -12,7 +12,7 @@
         "name": "CPE Portlet 2",
         "url": "portlets/performancePortlet/",
         "acl":{
-            "admin": [1, 1, 1, 1],
+            "admin": [0, 1, 1, 1],
             "user": [0, 1, 1, 0]
         },
         "config":{
@@ -28,6 +28,28 @@
         },
         "config":{
             "aaee": "hello"
+        }
+    },{
+        "id": "portletAAA",
+        "name": "portlet AAA",
+        "url": "portlets/portletAAA/",
+        "acl":{
+            "admin": [1, 1, 1, 1],
+            "user": [0, 1, 0, 0]
+        },
+        "config":{
+            "caaParameter": "hello"
+        }
+    },{
+        "id": "portletBBB",
+        "name": "portlet BBB",
+        "url": "portlets/portletBBB/",
+        "acl":{
+            "admin": [1, 1, 1, 1],
+            "user": [0, 1, 0, 0]
+        },
+        "config":{
+            "caaParameter": "hello"
         }
     }
 
