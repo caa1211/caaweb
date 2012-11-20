@@ -268,7 +268,7 @@ var DashboardCtrler = Backbone.Router.extend({
 	    portlet.fetch();
 		
 		//hard code, ugly
-	    var $tmpWidget = $("<span class='aaa'>");
+	    var $tmpWidget = $("<span>");
         $(that.$columns[ pos[0] ]).append( $tmpWidget );
 		
 	    portlet.on("done", function(){
