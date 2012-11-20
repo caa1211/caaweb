@@ -1,20 +1,22 @@
+/*  dashboard.js
+ *  (c) 2012 Jose Change, ITRI.
+ */
 
 
-/*PORTLET Define
+/*PORTLET Define Example
 
-   {
-        "id": "CPEPortlet",
-        "name": "CPE Portlet",
-        "url": "portlet/portletGPE/portlet.php",
-        "params":{
-            "otherVals": 10
-             
-        },
+    {
+        "id": "performancePortlet2",
+        "name": "CPE Portlet 2",
+        "url": "portlets/performancePortlet/",
         "acl":{
             "admin": [1, 1, 1], 
             "user": [1, 1, 1]
+        },
+        "config":{
+            "otherVals": 10
         }
-   }
+    }
 
 */
       
@@ -153,8 +155,10 @@ var AddView = Backbone.View.extend({
 var DashboardModel = Backbone.Collection.extend({
     model: PortletModel,
     opts:{
-         user: "",
-         role: "",
+        user:{
+             name: "",
+             role: "",
+         },
          url: ""
     },
     menuContainer: "",
@@ -163,7 +167,7 @@ var DashboardModel = Backbone.Collection.extend({
         $.extend(this.opts, param);
     },
     filterRole: function(index, flag){
-        var role = this.opts.role;
+        var role = this.opts.user.role;
         var allowList = [];
         $.each(this.portletDefine, function(i, t){
            try{
@@ -194,10 +198,13 @@ var DashboardCtrler = Backbone.Router.extend({
         userName : "userName",
 		columns: ".column"
     },
+    userOptsUrl: "./userOpts.json",
 	dashboardOpts:{
-        user: "",
-        role: "",
-        url: ""
+        user: {
+            name: "default user",
+            role: "user",
+        },
+        url: "./portletDefine.json"
 	},
 	getGUID: function (){
         function S4() {
@@ -240,16 +247,9 @@ var DashboardCtrler = Backbone.Router.extend({
         $(that.$columns[ pos[0] ]).append( $tmpWidget );
 		
 	    portlet.on("done", function(){
+            //portlet got it's own view.
 			var model = this;
 			var opts = $.extend({}, modelDefine, {expand: expand, pltid: pltid});
-		
-			/*var opts = {
-				pltid: pltid,
-				name: model.attributes.name,
-				params: model.attributes.params,
-				url: model.attributes.url,
-				expand: expand
-			};*/
 			$tmpWidget.replaceWith(  model.view.$el );
 			that.$ddPanelObj.addPortlet( model.view.$el, pos, opts, isUpdateStore);
 	    });
@@ -287,13 +287,14 @@ var DashboardCtrler = Backbone.Router.extend({
 					   }catch(e){}
 					}
 				}
-					//debugger;
-               // $ddPanelObj.restorePortlet(portletPosMap, portletPool);
+                
             }catch(e){
             }
         }
 	},
 	getPortletDefine_done: function(){
+        //got portlet define, 
+        //1. try to build add view for adding portlet.
 		var that = this;
 		var uiContainer = this.uiContainer;
 		var collection = this.dashboardModel;
@@ -302,13 +303,14 @@ var DashboardCtrler = Backbone.Router.extend({
 			that.addPortlet(modelDefine);
 		});
 		
+        //2. restore Portlet
 		that.restorePortlet();
 	},
 	initUI: function(){
 		var that = this;
 	    var uiContainer = that.uiContainer;
 		that.$ddPanelObj = $('#' + uiContainer.ddPanelContainer).zyDDPanel();
-		$("#"+ uiContainer.userName).html(  that.dashboardOpts.user );
+		$("#"+ uiContainer.userName).html(  that.dashboardOpts.user.name );
 		that.$columns = $(uiContainer.columns);
 	},
 	getUserOptionDone: function(){
@@ -319,16 +321,15 @@ var DashboardCtrler = Backbone.Router.extend({
 		that.dashboardModel.getPortletDefine();//get portletDefine
 		that.dashboardModel.on("getPortletDefine_done", function(){ that.getPortletDefine_done(); });
 	},
-	fetch: function(opts){
+	fetch: function(){
 		var that = this;
-		//call ajax to get dashboardOpts
-	    var opts = {
-			user: "Caa",
-			role: "user", //admin or user
-			url: "./portletDefine.json"
-		};
-		$.extend(that.dashboardOpts, opts);
-		that.getUserOptionDone();
+        $.getJSON(that.userOptsUrl, function(userData, status){
+            if(status == "success"){
+                $.extend(that.dashboardOpts.user, userData);
+                that.getUserOptionDone();
+            }
+        });
+
 	}
 });
 
