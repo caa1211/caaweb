@@ -41,14 +41,25 @@ var PortletView = Backbone.View.extend({
         var config = that.model.get('config');
         var deps = that.model.get('deps');
         var htmlStr = that.template(param);
+        var userRoleAry = that.model.userRoleAry; // [0, 0, 0, 0] : CRUD
         that.$el.html(htmlStr);
         that.$el.id = param.id ;
         that.$el.attr('id', param.id);
 		//noSetting noRefresh noRemove noCollapse noMove
         that.$el.addClass("widget ui-widget");
+        
+        if(userRoleAry[2]==0){ //R
+            that.$el.addClass("noSetting");
+        }
+
+        if(userRoleAry[3]==0){ //D
+            that.$el.addClass("noRemove");
+        }
+        
 		that.$el.on('destroy', function(){
 			that.model.trigger('destroy');
 		});
+        
 		/*
 		that.$el.on('removeClick', function(){
 			alert('removeClick');
@@ -64,7 +75,6 @@ var PortletView = Backbone.View.extend({
 			that.$el.on('updateConfig', function(view, configParam ){
 				var newConfig = $.extend({}, config, configParam);
 				that.model.trigger('updateConfig', newConfig);
-				//todo update config
 			});
         });
 
@@ -85,13 +95,24 @@ var PortletModel = Backbone.Model.extend({
 	url: function(){
 		return this.instanceUrl;
 	},
-    initialize: function(param, collectionOpts){
+    initialize: function(param, collectionOpts, c){
        if(collectionOpts == undefined){
+            //a portlet be created
        }
+    },
+    userRoleAry: [0,0,0,0], //CRUD
+    getUserRole: function(){
+        var userRole =  this.collection.opts.user.role; 
+        var userRoleAry = this.userRoleAry;
+        try {
+            userRoleAry = this.get("acl")[userRole]
+        }catch(e){}
+        this.userRoleAry = userRoleAry;
     },
     validate: function(attrs){},
     fetch: function(){
         var that = this;
+        this.getUserRole();
         this.view = new PortletView({model: this});
         this.view.render();
         this.view.on('done', function(){
@@ -135,7 +156,7 @@ var AddView = Backbone.View.extend({
     allowList: [],
     render: function(){
         var that = this;
-        this.allowList = this.model.filterRole(0, 1); //filter the adding list
+        this.allowList = this.model.filterRole(0, 1); //filter the adding list: index 0 is true;
         this.$el.html(this.template());
         var $dropMenu =  this.$el.find(".dropdown-menu");
         
@@ -154,17 +175,13 @@ var AddView = Backbone.View.extend({
 
 var DashboardModel = Backbone.Collection.extend({
     model: PortletModel,
-    opts:{
-        user:{
-             name: "",
-             role: "",
-         },
-         url: ""
-    },
+    controler: null,
     menuContainer: "",
     portletDefine: {},
     initialize: function(param){
-        $.extend(this.opts, param);
+       //$.extend(this.opts, param);
+        this.opts = param.opts;
+        this.controler = param.controler;
     },
     filterRole: function(index, flag){
         var role = this.opts.user.role;
@@ -221,8 +238,10 @@ var DashboardCtrler = Backbone.Router.extend({
 		if(pos == undefined){
             pos = [0, 0];
         }
-	    var portlet = new PortletModel(modelDefine);
-
+        var userData = that.dashboardOpts.user;
+	    var portlet = new PortletModel(modelDefine, userData);
+        
+		this.dashboardModel.add(portlet); 
 	    //var checkExistedModel = that.findModelInCollectionById(modelDefine.id);
 	    var pltid = modelDefine.pltid;
 		var isUpdateStore = true;
@@ -253,7 +272,7 @@ var DashboardCtrler = Backbone.Router.extend({
 			$tmpWidget.replaceWith(  model.view.$el );
 			that.$ddPanelObj.addPortlet( model.view.$el, pos, opts, isUpdateStore);
 	    });
-		this.dashboardModel.add(portlet); 
+
 		
 		portlet.on('updateConfig', function(newConfig){
 			var model = this;
@@ -264,6 +283,18 @@ var DashboardCtrler = Backbone.Router.extend({
 		portletPool:{},
 		portletPosMap:[]
 	},
+    portletDefine: [],
+    getPortletDefineById: function(id){
+        var portletDefine =  this.portletDefine;
+        var currentDefine;
+        for(var i = 0; i < portletDefine.length; i++){
+            if(portletDefine[i].id == id){
+               currentDefine = portletDefine[i];
+               break;
+            }
+        }
+        return currentDefine;
+    },
 	restorePortlet: function(){
 		var that = this;
 	    var portletPoolStr = localStorage.getItem('portletPool');
@@ -283,7 +314,25 @@ var DashboardCtrler = Backbone.Router.extend({
 					   try{
 						var pltid = col[j];
 						var pltDef = ppool[pltid];
-						that.addPortlet(pltDef, [i, 0]);
+                        
+                        var currentDefine = that.getPortletDefineById(pltDef.id);
+                        //avoid restore data is conflict with current portlet define
+                        if(currentDefine!=undefined){
+                            $.extend(pltDef, {acl: currentDefine.acl, url: currentDefine.url  });
+                        }
+                          
+                        var userRole = that.dashboardOpts.user.role;
+                        var roleAry = [0,0,0,0];
+                        try{
+                            roleAry= pltDef.acl[userRole];
+                        }catch(e){
+                        
+                        }
+
+                        if(roleAry[1]==1){ //R
+                            that.addPortlet(pltDef, [i, 0]);
+                        }
+                        
 					   }catch(e){}
 					}
 				}
@@ -296,8 +345,10 @@ var DashboardCtrler = Backbone.Router.extend({
         //got portlet define, 
         //1. try to build add view for adding portlet.
 		var that = this;
+        that.portletDefine = this.dashboardModel.portletDefine;
 		var uiContainer = this.uiContainer;
 		var collection = this.dashboardModel;
+
 		$("#"+ uiContainer.menuContainer).append(collection.addView.render().$el);
 		collection.addView.on("addPortlet", function(modelDefine){
 			that.addPortlet(modelDefine);
@@ -317,7 +368,7 @@ var DashboardCtrler = Backbone.Router.extend({
 		var that = this;
 		var dashboardOpts = that.dashboardOpts;
 		that.initUI();
-		that.dashboardModel = new DashboardModel(dashboardOpts);
+		that.dashboardModel = new DashboardModel({opts: dashboardOpts, controler: that});
 		that.dashboardModel.getPortletDefine();//get portletDefine
 		that.dashboardModel.on("getPortletDefine_done", function(){ that.getPortletDefine_done(); });
 	},
