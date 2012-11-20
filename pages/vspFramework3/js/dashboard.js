@@ -219,9 +219,11 @@ var DashboardCtrler = Backbone.Router.extend({
         menuContainer: "addPortletCtl",
         ddPanelContainer: "columns",
         userName : "userName",
-		columns: ".column"
+		columns: ".column",
+        widgetSelector: ".widget"
     },
     userOptsUrl: "./userOpts.json",
+
 	dashboardOpts:{
         user: {
             name: "default user",
@@ -286,10 +288,6 @@ var DashboardCtrler = Backbone.Router.extend({
 			that.$ddPanelObj.updatePortletPool( model.view.$el, {config: newConfig} );
 		});
 	},
-	restoreData:{
-		portletPool:{},
-		portletPosMap:[]
-	},
     portletDefine: [],
     getPortletDefineById: function(id){
         var portletDefine =  this.portletDefine;
@@ -302,18 +300,22 @@ var DashboardCtrler = Backbone.Router.extend({
         }
         return currentDefine;
     },
+    dashboardSetting:{
+        portletPool: {},
+        portletPosMap: []
+    },
 	restorePortlet: function(){
 		var that = this;
 	    var portletPoolStr = localStorage.getItem('portletPool');
         var portletPosMapStr = localStorage.getItem('portletPosMap');
-        var portletPool = null;
-        var portletPosMap = null; 
+        var dashboardSetting = that.dashboardSetting;
+ 
 		if(portletPoolStr!=null && portletPosMapStr!=null){
             try{
-                that.restoreData.portletPool = JSON.parse(portletPoolStr);
-                that.restoreData.portletPosMap = JSON.parse(portletPosMapStr);
-				var ppool = that.restoreData.portletPool;
-				var pmap = that.restoreData.portletPosMap;
+                dashboardSetting.portletPool = JSON.parse(portletPoolStr);
+                dashboardSetting.portletPosMap = JSON.parse(portletPosMapStr);
+				var ppool = dashboardSetting.portletPool;
+				var pmap = dashboardSetting.portletPosMap;
 
 				for(var i = 0; i< pmap.length; i++){
 					var col = pmap[i];
@@ -364,10 +366,55 @@ var DashboardCtrler = Backbone.Router.extend({
         //2. restore Portlet
 		that.restorePortlet();
 	},
+    saveDashboardSetting: function(type, $w, opts, isRemove){
+        var that = this;
+        var portletPosMap = this.dashboardSetting.portletPosMap;
+        var portletPool = this.dashboardSetting.portletPool;
+   
+        if(type == "pos"){
+            portletPosMap.length = 0;
+            var $columns = that.$columns; 
+            for(var i=0; i<$columns.length; i++){
+                var $col = $columns.eq(i);
+                var $widgets =  $col.find(that.uiContainer.widgetSelector);
+                var ary = [];
+
+                for(var j=0; j<$widgets.length; j++){
+                    var $w = $widgets.eq(j);
+                    var pltid = $w.attr("pltid");
+                    ary.push(pltid);
+                }
+                portletPosMap.push(ary);
+            }            
+            localStorage.setItem('portletPosMap', JSON.stringify(portletPosMap));
+        }
+        else if(type == "pool"){
+            if(isRemove == true){
+                var pltid = opts.pltid;
+                delete portletPool[pltid];
+            }else{
+                try{
+                    var pltid = $w.attr('pltid');
+                    if(portletPool[pltid]!=undefined){
+                        $.extend(portletPool[pltid],opts);
+                    }else{
+                        portletPool[pltid] = opts ;
+                    }
+                }catch(e){ return; }
+            }
+            
+            localStorage.setItem('portletPool',  JSON.stringify(portletPool));
+        }
+   
+    },
 	initUI: function(){
 		var that = this;
 	    var uiContainer = that.uiContainer;
-		that.$ddPanelObj = $('#' + uiContainer.ddPanelContainer).zyDDPanel();
+        var ddpanelOpts = {
+            update2PortletPool: function($w, opts, isRemove){that.saveDashboardSetting("pool", $w, opts, isRemove);},
+            update2PortletPosMap: function(){that.saveDashboardSetting("pos");}
+        };
+		that.$ddPanelObj = $('#' + uiContainer.ddPanelContainer).zyDDPanel(ddpanelOpts);
 		$("#"+ uiContainer.userName).html(  that.dashboardOpts.user.name );
 		that.$columns = $(uiContainer.columns);
 	},

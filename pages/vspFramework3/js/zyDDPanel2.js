@@ -24,6 +24,8 @@
         var portletPosMap = [];
         
         defaultSettings = {
+            update2PortletPool: function(){},
+            update2PortletPosMap: function(){},
             columns: '.column',
             widgetSelector: '.widget',
             handleSelector: '.widget-head',
@@ -104,7 +106,8 @@
                 var pltid =  $(this).attr('pltid');
                 $(this).remove();
                 try{
-                    delete portletPool[pltid];
+                    //delete portletPool[pltid];
+                    update2PortletPool($(this), {pltid: pltid}, true);//isRemove is true
                 }catch(e){}
                 update2PortletPosMap();
             };
@@ -290,7 +293,8 @@
             expand: true
         };
 
-        function update2PortletPool($widget, opts){
+        function update2PortletPool($widget, opts, isRemove){
+            /*
             try{
                 var pltid = $widget.attr('pltid');
 				if(portletPool[pltid]!=undefined){
@@ -301,21 +305,13 @@
             }catch(e){
             }
             localStorage.setItem('portletPool',  JSON.stringify(portletPool));
-			
+            */
+            _settings.update2PortletPool($widget, opts, isRemove);
         }
         
         function update2PortletPosMap(){
-            portletPosMap.length = 0;
             /*
-            $columns.each(function(i, t){
-                var ary = [];
-                $(t).find(_settings.widgetSelector).each(function(j, tt){
-                    var pltid = $(tt).attr("pltid");
-                    ary.push(pltid);
-                });
-                portletPosMap.push(ary);
-            });
-            */
+            portletPosMap.length = 0;
             for(var i=0; i<$columns.length; i++){
                 var $col = $columns.eq(i);
                 var $widgets =  $col.find(_settings.widgetSelector);
@@ -329,6 +325,8 @@
                 portletPosMap.push(ary);
             }            
             localStorage.setItem('portletPosMap', JSON.stringify(portletPosMap));
+            */
+            _settings.update2PortletPosMap();
         };
  
         this.addPortlet = function($w, pos, opts, isUpdateStore){
@@ -336,7 +334,9 @@
              var pltid =  _opts.pltid;
              $w.attr('pltid', pltid);
              //$($columns[pos[0]]).append( $w );//todo opt?
-             update2PortletPool($w, opts);
+             if(isUpdateStore==true){
+                update2PortletPool($w, opts);
+             }
              setWidget($w);
              //addWidgetControls();
              makeSortable(isUpdateStore == false ? false: true);
@@ -347,6 +347,7 @@
         }
 		
 		this.updatePortletPool = function($w, opts){
+
 			 update2PortletPool($w, opts);
 		};
 
