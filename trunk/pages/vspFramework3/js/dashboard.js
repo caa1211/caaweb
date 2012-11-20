@@ -398,7 +398,7 @@ var DashboardCtrler = Backbone.Router.extend({
 	    var portletPoolStr = localStorage.getItem('portletPool');
         var portletPosMapStr = localStorage.getItem('portletPosMap');
         var dashboardSetting = that.dashboardSetting;
- debugger;
+
 		if(portletPoolStr!=null && portletPosMapStr!=null){
             //get dashboard from user's setting (demo for localstorage)
             try{
