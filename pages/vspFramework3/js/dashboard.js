@@ -27,6 +27,7 @@ var PortletView = Backbone.View.extend({
  portletView: "portlet.pt",
  portletModule: "module",
  tagName: "li",
+ noRefresh: true,
  render: function(){
     var that = this;
     var url = this.model.get("url");
@@ -56,6 +57,10 @@ var PortletView = Backbone.View.extend({
             that.$el.addClass("noRemove");
         }
         
+        if(that.noRefresh){
+            that.$el.addClass("noRefresh");
+        }
+
 		that.$el.on('destroy', function(){
 			that.model.trigger('destroy');
 		});
