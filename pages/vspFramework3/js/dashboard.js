@@ -316,7 +316,7 @@ var DashboardCtrler = Backbone.Router.extend({
 			that.$ddPanelObj.updatePortletPool( model.view.$el, {config: newConfig} );
 		});
 	},
-    reset2Default: function(){
+    clearPortlet: function(){
         var that = this;
         var length = that.dashboardModel.models.length;
         var views = [];
@@ -329,6 +329,15 @@ var DashboardCtrler = Backbone.Router.extend({
         for(var i=0; i<views.length; i++){
             views[i].doRemove();
         }
+    },
+    resetUserDashboard: function(){
+        delete window.localStorage["portletPool"] ;
+        delete window.localStorage["portletPosMap"]; 
+    },
+    reset2Default: function(){
+        this.clearPortlet();
+        this.resetUserDashboard();
+        this.restorePortlet();
     },
     portletDefine: [],
     getPortletDefineById: function(id){
@@ -389,7 +398,7 @@ var DashboardCtrler = Backbone.Router.extend({
 	    var portletPoolStr = localStorage.getItem('portletPool');
         var portletPosMapStr = localStorage.getItem('portletPosMap');
         var dashboardSetting = that.dashboardSetting;
- 
+ debugger;
 		if(portletPoolStr!=null && portletPosMapStr!=null){
             //get dashboard from user's setting (demo for localstorage)
             try{
@@ -534,9 +543,15 @@ $(function(){
         debugModal.modal();
     });
     
+    $("#clearAllPortletsBtn").click(function(){
+        var ctrler = dashboardCtrler;
+        ctrler.clearPortlet();
+    });
+    
+    
     $("#restore2DefaultBtn").click(function(){
-           var ctrler = dashboardCtrler;
-            ctrler.reset2Default();
+        var ctrler = dashboardCtrler;
+        ctrler.reset2Default();
     });
     
     
