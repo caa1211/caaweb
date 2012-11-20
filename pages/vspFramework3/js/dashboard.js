@@ -48,11 +48,11 @@ var PortletView = Backbone.View.extend({
 		//noSetting noRefresh noRemove noCollapse noMove
         that.$el.addClass("widget ui-widget");
         
-        if(userRoleAry[2]==0){ //R
+        if(userRoleAry[2]==0){ //ACL: R
             that.$el.addClass("noSetting");
         }
 
-        if(userRoleAry[3]==0){ //D
+        if(userRoleAry[3]==0){ //ACL: D
             that.$el.addClass("noRemove");
         }
         
@@ -156,6 +156,7 @@ var AddView = Backbone.View.extend({
     allowList: [],
     render: function(){
         var that = this;
+        //ACL: C
         this.allowList = this.model.filterRole(0, 1); //filter the adding list: index 0 is true;
         this.$el.html(this.template());
         var $dropMenu =  this.$el.find(".dropdown-menu");
@@ -268,8 +269,9 @@ var DashboardCtrler = Backbone.Router.extend({
 	    portlet.on("done", function(){
             //portlet got it's own view.
 			var model = this;
-			var opts = $.extend({}, modelDefine, {expand: expand, pltid: pltid});
 			$tmpWidget.replaceWith(  model.view.$el );
+            var opts = $.extend({}, modelDefine, {expand: expand, pltid: pltid});
+            delete opts.acl;//do not save acl to user portlet setting
 			that.$ddPanelObj.addPortlet( model.view.$el, pos, opts, isUpdateStore);
 	    });
 
@@ -328,8 +330,8 @@ var DashboardCtrler = Backbone.Router.extend({
                         }catch(e){
                         
                         }
-
-                        if(roleAry[1]==1){ //R
+                        
+                        if(roleAry[1]==1){ //ACL: R
                             that.addPortlet(pltDef, [i, 0]);
                         }
                         
