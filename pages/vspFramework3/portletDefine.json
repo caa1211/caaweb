@@ -4,16 +4,16 @@
         "name": "CPE Portlet 1",
         "url": "./portlets/performancePortlet/",
         "acl":{
-            "admin": [1, 1, 1], 
-            "user": [1, 1, 1]
+            "admin": [1, 1, 1, 1], 
+            "user": [0, 0, 1, 0]
         }
    },{
         "id": "performancePortlet2",
         "name": "CPE Portlet 2",
         "url": "portlets/performancePortlet/",
         "acl":{
-            "admin": [1, 1, 1], 
-            "user": [1, 1, 1]
+            "admin": [1, 1, 1, 1],
+            "user": [0, 1, 1, 0]
         },
         "config":{
             "otherVals": 10
@@ -23,8 +23,8 @@
         "name": "portlet Example",
         "url": "portlets/portletExample/",
         "acl":{
-            "admin": [1, 1, 1], 
-            "user": [1, 1, 1]
+            "admin": [1, 1, 1, 1],
+            "user": [0, 1, 0, 0]
         },
         "config":{
             "aaee": "hello"
