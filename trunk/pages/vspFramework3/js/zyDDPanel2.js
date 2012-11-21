@@ -121,7 +121,15 @@
            if (thisWidgetSettings.removable && $widget.find("a.remove").length == 0) {
                 $widget.trigger("beforeDestory");
                 
-                $('<a href="#" class="remove" title="Close Widget">CLOSE</a>').mousedown(function(e){
+                
+  var btns = ' <div class="btn-group" style="float:right; height:10px; opacity:0.5;">'+
+        '<button class="btn btn-mini  "><i class=" icon-remove"></i></button>'+
+        '<button class="btn btn-mini  btn-inverse"><i class="icon-white icon-remove"></i></button>'+
+        '<button class="btn btn-mini  btn-inverse"><i class="icon-white icon-remove"></i></button>'+
+    '</div>';
+   
+    
+                $(btns).mousedown(function(e){
                        e.stopPropagation();
                     }).click(function(){
 					   $widget.trigger('removeClick');

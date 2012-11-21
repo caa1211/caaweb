@@ -361,6 +361,7 @@ var DashboardCtrler = Backbone.Router.extend({
 		for (var i = 0; i < pmap.length; i++) {
 		    var col = pmap[i];
 		    for (var j = 0; j < col.length; j++) {
+              try{
 		            var pltid = col[j];
 		            var pltDef = ppool[pltid];
 		            var _pltDef;
@@ -385,6 +386,9 @@ var DashboardCtrler = Backbone.Router.extend({
                         ppoolNew[pltid] = pltDef;
 		                that.addPortlet(_pltDef, [i, 0]);
 		            }
+                }catch(e){
+                    //pltid == null
+                }
 		    }
 		}
         dashboardSetting.portletPool = ppoolNew;
