@@ -17,7 +17,15 @@
       return this;
     }  
 
-
+    /*
+    event trigger: 
+        doRemove
+        refresh
+        setting
+        fullscreen
+        fullscreenOn
+        fullscreenOff
+    */
     $.fn.zyDDPanel = function(settings){
     
         var portletPool = {};
@@ -64,8 +72,20 @@
         var $confirmRemoveModal_ok = $(_settings.confirmRemoveModal).find('.ok');
         var $confirmRemoveModal_cancel = $(_settings.confirmRemoveModal).find('.cancel');
         var $loadTrunk = $(_settings.loadTrunk);
-        var $columns = $(".column");
-        
+        var $columns = $(".column");                  
+        var btnGup = ''+
+           '<div class="btn-toolbar" style="float:right; opacity:0.6; margin-top:3px; margin-right:3px;" >'+
+            '<div class="btn-group" style="" >'+
+               '<button class="btn btn-inverse btn-mini" type="setting" title="Setting" style="line-height:10px;"><i class="icon-white icon-cog"></i></button>'+
+               '<button class="btn btn-inverse btn-mini"  type="refresh" title="Refresh" style="line-height:10px;"><i class="icon-white icon-refresh"></i></button>'+
+            '</div>'+
+            '<div class="btn-group"  style="" >'+
+               '<button class="btn btn-mini" type="collapse" title="Collapse" style="line-height:10px;"><i class=" icon-chevron-up"></i></button>'+
+               '<button class="btn btn-mini" type="fullscreen" title="Full screen" style="line-height:10px;"><i class="icon-fullscreen"></i></button>'+
+               '<button class="btn  btn-mini" type="remove" title="Remove" style="line-height:10px;" ><i class=" icon-remove"></i></button>'+
+            '</div>'+ 
+            '</div>';
+            
         var getWidgetSettings = function(widget){
         
             var returnSettings = _settings.widgetDefault;
@@ -117,11 +137,20 @@
             $widget.updateIsExpanded = function(flag){
                     update2PortletPool($(this), {expand: flag});
             };
-            
-           if (thisWidgetSettings.removable && $widget.find("a.remove").length == 0) {
-                $widget.trigger("beforeDestory");
-                
-                $('<a href="#" class="remove" title="Close Widget">CLOSE</a>').mousedown(function(e){
+
+           var $btnGup = $(btnGup);      
+           $btnGup.appendTo($(_settings.handleSelector, widget));
+           var $removeBtn =  $btnGup.find("button[type=remove]");
+           var $refreshBtn =  $btnGup.find("button[type=refresh]");
+           var $settingBtn =  $btnGup.find("button[type=setting]");
+           var $fullscreenBtn =  $btnGup.find("button[type=fullscreen]");
+           var $collapseBtn =  $btnGup.find("button[type=collapse]");       
+           
+           var $widgetContent =  $widget.find(_settings.contentSelector);
+           
+           // remove button
+           if (thisWidgetSettings.removable) {
+                $removeBtn.mousedown(function(e){
                        e.stopPropagation();
                     }).click(function(){
 					   $widget.trigger('removeClick');
@@ -141,64 +170,72 @@
 						$confirmRemoveModal_cancel.unbind("click").click(function () {
 							$confirmRemoveModal.modal('hide');
 						});
-						
                        return false;
-                }).appendTo($(_settings.handleSelector, widget));
-                    
+                });      
+            }else{
+                $removeBtn.remove();
             }
-                
+            // refresh button
+            if (thisWidgetSettings.refreshable) {
+                $refreshBtn.mousedown(function (e) {
+                    e.stopPropagation();
+                }).click(function (e) {
+                    $widget.trigger('refresh');
+                });
+            } else {
+                $refreshBtn.remove();
+            }
 
-                
-                if (thisWidgetSettings.refreshable && $widget.find("a.refresh").length == 0) {
-                    $('<a href="#" class="refresh" title="Refresh Widget">REFRESH</a>').mousedown(function(e){
-                        e.stopPropagation();
-                    }).click(function(e){
-                       $widget.trigger('refresh');
-                    }).appendTo($(_settings.handleSelector, widget));
-                }
-                
-                
-                if (thisWidgetSettings.settingable && $widget.find("a.setting").length == 0) {
-                
-                    $('<a href="#" class="setting" title="Edit Widget">SETTING</a>').mousedown(function(e){
-                        e.stopPropagation();
-                    }).click(function(e){
-                       $widget.trigger('setting');
-                    }).toggle(function(){
-                        
-                        var kk = $(this);
-                        $(this).parents(_settings.widgetSelector).find(_settings.editSelector).slideDown({
-                            duration: 150,
-                            easing: 'easeInQuad',
-                            complete: function(e){
-                            }
-                        });
-                        return false;
-                    }, function(){
-                        $(this).parents(_settings.widgetSelector).find(_settings.editSelector).slideUp({
-                            duration: 150,
-                            easing: 'easeOutQuart',
-                            complete: function(e){
-                            }
-                        });
-                        return false;
-                    }).appendTo($(_settings.handleSelector, widget));
-                }
-                
-                if (thisWidgetSettings.collapsible && $widget.find("a.collapse").length == 0&& $widget.find("a.expand").length == 0) {
-                
-                    $('<a href="#" class="collapse">COLLAPSE</a>').mousedown(function(e){
-                        e.stopPropagation();
-                    }).toggle(function(e, time){
-                    
+            // setting button
+            if (thisWidgetSettings.settingable) {
+                $settingBtn.mousedown(function (e) {
+                    e.stopPropagation();
+                }).click(function (e) {
+                    $widget.trigger('setting');
+                }).toggle(function () {
+                    var kk = $(this);
+                    $(this).parents(_settings.widgetSelector).find(_settings.editSelector).slideDown({
+                        duration: 150,
+                        easing: 'easeInQuad',
+                        complete: function (e) {}
+                    });
+                    return false;
+                }, function () {
+                    $(this).parents(_settings.widgetSelector).find(_settings.editSelector).slideUp({
+                        duration: 150,
+                        easing: 'easeOutQuart',
+                        complete: function (e) {}
+                    });
+                    return false;
+                });
+            }else{
+                 $settingBtn.remove();
+            }
+            
+            // fullscreen button
+            if (true) {
+                $fullscreenBtn.mousedown(function (e) {
+                    e.stopPropagation();
+                }).click(function (e) {
+                    $widget.trigger('fullscreen');
+                });
+            } else {
+                $fullscreenBtn.remove();
+            }
+ 
+            // fullscreen button
+            if (thisWidgetSettings.collapsible) {
+                $collapseBtn.mousedown(function (e) {
+                    e.stopPropagation();
+                }).toggle(function(e, time){
                         var dur = time == undefined? 150 : 0;
                         var kk = $(this);
-                    
-                        $widget.find(_settings.contentSelector).slideUp({
+                        $widgetContent.slideUp({
                             duration: dur,
                             easing: 'easeOutQuart',
                             complete: function(e){
-                                kk.removeClass('collapse').addClass('expand');
+                                kk.children('i').removeClass("icon-chevron-up").addClass('icon-chevron-down');
+                                kk.attr('title', "Expand");
                                 $widget.updateIsExpanded(false);
                             }
                         });
@@ -207,20 +244,22 @@
                         var dur = time == undefined? 150 : 0;
                         var kk = $(this);
                        
-                        $widget.find(_settings.contentSelector).slideDown({
+                        $widgetContent.slideDown({
                             duration: dur,
                             easing: 'easeInQuad',
                             complete: function(e){
-                                kk.removeClass('expand').addClass('collapse');
+                                kk.children('i').removeClass('icon-chevron-down').addClass('icon-chevron-up');
+                                kk.attr('title', "Collapse");
                                 $widget.updateIsExpanded(true);
                             }
                         });
                         return false;
-                    }).appendTo($(_settings.handleSelector, widget));
-                    
-                }
+                });
+            } else {
+                $collapseBtn.remove();
             }
-            
+        }
+          
         var addWidgetControls = function(){
             $(_settings.widgetSelector, $(_settings.columns)).each(function(){ setWidget( $(this) );});
         };

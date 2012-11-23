@@ -53,7 +53,7 @@ body {
     float: left;
     width: 50%;
 	/* Min-height: */
-	min-height: 400px;
+	min-height: 30px;
 	height: auto !important; 
 	height: 400px;
 }

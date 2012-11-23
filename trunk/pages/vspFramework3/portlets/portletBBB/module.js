@@ -25,11 +25,15 @@ define(function(require, exports, module){
             //alert($view.id + " destroy");
         });
         
-        $view.on("fullScreenOn", function(e){
+        $view.on("fullscreen", function(e){
+            alert($view.id + " fullScreen");
+        });
+        
+        $view.on("fullscreenOn", function(e){
             alert($view.id + " fullScreenOn");
         });
         
-        $view.on("fullScreenOff", function(e){
+        $view.on("fullscreenOff", function(e){
             alert($view.id + " fullScreenOff");
         });
         /*
