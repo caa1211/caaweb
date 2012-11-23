@@ -51,6 +51,18 @@
         "config":{
             "caaParameter": "hello"
         }
+    },{
+        "id": "portletCCC",
+        "name": "portlet CCC",
+        "url": "portlets/portletExample/",
+        "acl":{
+            "admin": [1, 1, 1, 1],
+            "user": [0, 1, 0, 0]
+        },
+        "config":{
+            "aaee": "aaaaaaaaaaaa",
+            "oo": "aaa"
+        }
     }
 
 ]

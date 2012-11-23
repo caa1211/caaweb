@@ -10,7 +10,7 @@ define(function(require, exports, module){
         var id = $view.id;
      
         $view.on("setting", function(e){
-            alert($view.id + " setting");
+            alert($view.id + " setting 11111111111");
         });
         
         $view.on("refresh", function(e){

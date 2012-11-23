@@ -145,8 +145,16 @@
            var $settingBtn =  $btnGup.find("button[type=setting]");
            var $fullscreenBtn =  $btnGup.find("button[type=fullscreen]");
            var $collapseBtn =  $btnGup.find("button[type=collapse]");       
-           
            var $widgetContent =  $widget.find(_settings.contentSelector);
+           
+           $widget.ctrlBtns = {
+            remove: $removeBtn,
+            refresh: $refreshBtn,
+            setting: $settingBtn,
+            fullscreenn: $fullscreenBtn,
+            collapse: $collapseBtn
+           };
+           $widget.contentObj = $widgetContent;
            
            // remove button
            if (thisWidgetSettings.removable) {
@@ -223,7 +231,7 @@
                 $fullscreenBtn.remove();
             }
  
-            // fullscreen button
+            // collapse button
             if (thisWidgetSettings.collapsible) {
                 $collapseBtn.mousedown(function (e) {
                     e.stopPropagation();
@@ -383,8 +391,8 @@
              //addWidgetControls();
              makeSortable(isUpdateStore == false ? false: true);
 			 
-			if(!_opts.expand){
-                $w.find("a.collapse").trigger('click', 0);
+			if(!_opts.expand && $w.ctrlBtns != undefined && $w.ctrlBtns.collapse!=undefined){
+                $w.ctrlBtns.collapse.trigger('click', 0);
             }
         }
 		
