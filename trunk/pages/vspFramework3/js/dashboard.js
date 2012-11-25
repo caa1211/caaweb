@@ -143,7 +143,8 @@ var PortletModel = Backbone.Model.extend({
 	  pltid: "",
       config:{}
     },
-	//sync: function(method, model, options){},
+    //idAttribute: "pltid",
+    //sync: function(method, model, options){},
 	url: function(){
 		return this.instanceUrl;
 	},
@@ -608,6 +609,10 @@ $(function(){
           
     $("#debugBtn").click(function(){
         var ctrler = dashboardCtrler;
+		//ctrler.dashboardModel.where({pltid: "performancePortlet_06673d48"})
+	
+
+
 			debugger;
     });
      
