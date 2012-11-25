@@ -60,6 +60,8 @@ var PortletView = Backbone.View.extend({
         that.$el.html(htmlStr);
         that.$el.id = param.pltid ;
         that.$el.attr('id', param.pltid);
+		that.$el.attr('pltid', param.pltid);
+	    that.$el.attr('type', param.type);
 		that.$title =  that.$el.find('.title'); 
 		//noSetting noRefresh noRemove noCollapse noMove
         that.$el.addClass("widget ui-widget");
@@ -134,7 +136,7 @@ var PortletView = Backbone.View.extend({
 
 var PortletModel = Backbone.Model.extend({
     defaults: {
-      id: null,
+      type: null,
 	  title: "",
       url:"",
 	  acl: {},
@@ -184,8 +186,6 @@ var PortletModel = Backbone.Model.extend({
 	},
     fetch: function(){
         var that = this;
-        var pltid = that.get('id');
-
         this.getUserRole();
         this.view = new PortletView({model: this});
         this.view.render();
@@ -344,7 +344,7 @@ var DashboardCtrler = Backbone.Router.extend({
 		  //##new portlet!!
 		   //var cid = portlet.cid;
 		   var key = that.getGUID();
-		   pltid = modelDefine.id+"_"+key;
+		   pltid = modelDefine.type+"_"+key;
 		   portlet.set('expand', expand);
 	    }else{
 		  //## restoring portlet
@@ -403,11 +403,11 @@ var DashboardCtrler = Backbone.Router.extend({
         this.restorePortlet();
     },
     portletDefine: [],
-    getPortletDefineById: function(id){
+    getPortletDefineByType: function(type){
         var portletDefine =  this.portletDefine;
         var currentDefine;
         for(var i = 0; i < portletDefine.length; i++){
-            if(portletDefine[i].id == id){
+            if(portletDefine[i].type == type){
                currentDefine = portletDefine[i];
                break;
             }
@@ -425,6 +425,7 @@ var DashboardCtrler = Backbone.Router.extend({
 		var ppool = dashboardSetting.portletPool;
 		var pmap = dashboardSetting.portletPosMap;
         var ppoolNew = {};
+	
 		for (var i = 0; i < pmap.length; i++) {
 		    var col = pmap[i];
 		    for (var j = 0; j < col.length; j++) {
@@ -432,7 +433,7 @@ var DashboardCtrler = Backbone.Router.extend({
 		            var pltid = col[j];
 		            var pltDef = ppool[pltid];
 		            var _pltDef;
-		            var currentDefine = that.getPortletDefineById(pltDef.id);
+		            var currentDefine = that.getPortletDefineByType(pltDef.type);
 		            //avoid restore data is conflict with current portlet define
 		            if (currentDefine != undefined) {
 		                _pltDef = $.extend({}, pltDef, {
@@ -483,6 +484,7 @@ var DashboardCtrler = Backbone.Router.extend({
         delete window.localStorage["portletPosMap"]; 
     },
 	restorePortlet: function(){
+
 		var that = this;
         var userDashboardSetting = that.getUserDashboardSetting();
         if(userDashboardSetting.portletPool !=null){

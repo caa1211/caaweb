@@ -1,6 +1,6 @@
 ﻿[
    {
-        "id": "performancePortlet",
+        "type": "performancePortlet",
         "title": "CPE Portlet 1",
         "url": "./portlets/performancePortlet/",
         "acl":{
@@ -8,7 +8,7 @@
             "user": [0, 0, 1, 0]
         }
    },{
-        "id": "performancePortlet2",
+        "type": "performancePortlet2",
         "title": "CPE Portlet 2",
         "url": "portlets/performancePortlet/",
         "acl":{
@@ -19,7 +19,7 @@
             "otherVals": 10
         }
     },{
-        "id": "portletExample",
+        "type": "portletExample",
         "title": "portlet Example",
         "url": "portlets/portletExample/",
         "acl":{
@@ -30,7 +30,7 @@
             "aaee": "hello"
         }
     },{
-        "id": "portletAAA",
+        "type": "portletAAA",
         "title": "portlet AAA",
         "url": "portlets/portletAAA/",
         "acl":{
@@ -41,7 +41,7 @@
             "caaParameter": "hello"
         }
     },{
-        "id": "portletBBB",
+        "type": "portletBBB",
         "title": "portlet BBB",
         "url": "portlets/portletBBB/",
         "acl":{
@@ -52,7 +52,7 @@
             "caaParameter": "hello"
         }
     },{
-        "id": "portletCCC",
+        "type": "portletCCC",
         "title": "portlet CCC",
         "url": "portlets/portletExample/",
         "acl":{
