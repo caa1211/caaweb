@@ -31,7 +31,8 @@ var PortletView = Backbone.View.extend({
  $title: null,
  $content: null,
  doRemove: function(){
-    this.$el.trigger("doRemove");
+     this.$el.remove();
+     this.model.destroy();
  },
  fullscreenHandler: function(){
 	this.$portletDlg.show(this.$el, this.model.get('title'));
@@ -85,22 +86,8 @@ var PortletView = Backbone.View.extend({
         
         that.$el.on("fullscreen", function(){ that.fullscreenHandler();});    
         that.$el.on('doRemove', function(){
-
-           $(this).remove();
-           that.model.destroy();
-
-           /*
-            $(this).trigger('destroy');
-            var id =  $(this).attr('id');
-            $(this).remove();
-            try{
-                //delete portletPool[id];
-               update2PortletPool($(this), {id: id}, true);//isRemove is true
-            }catch(e){}
-               update2PortletPosMap();
-           */     
+			that.doRemove();    
 		});
-        
 		/*
 		that.$el.on('removeClick', function(){
 			alert('removeClick');
@@ -138,20 +125,26 @@ var PortletView = Backbone.View.extend({
 		    that.trigger("done");
         });
 
-
     });
  } 
 });
 
 var PortletModel = Backbone.Model.extend({
     defaults: {
-      type: null,
+	 acl:{},
+	 title: "",
+	 type: "",
+	 url: "",
+	 config:{},
+	 expand: true,
+	 id: ""
+     /* type: null,
 	  title: "",
       url:"",
 	  acl: {},
 	  id: "",
       config:{},
-	  expand: true
+	  expand: true*/
     },
     //idAttribute: "id",
     //sync: function(method, model, options){},
@@ -299,10 +292,10 @@ var DashboardModel = Backbone.Collection.extend({
 	toJSON : function() {
 	  return this.map(function(model){ return model.toJSON(); });
 	},
-	save: function() {      
+	/*save: function() {      
 		//debugger;    
 		//localStorage.setItem(this.name, JSON.stringify(this.data));
-	},
+	},*/
     getPortletDefine: function(){
         var that = this;
 		$.getJSON(that.opts.url, function(json){
@@ -345,7 +338,7 @@ var DashboardCtrler = Backbone.Router.extend({
     initialize: function(){
 		this.$portletDlg = $(this.ui.fullscreenSelector).portletDlg();
     },
-	doFetchPortlet: function(portlet, $tmpWidget, isRestore){
+	doFetchPortlet: function(portlet, $tmpWidget, isNew){
 		 var that = this;
 		 portlet.fetch();
 		 portlet.on("done", function(){
@@ -354,41 +347,58 @@ var DashboardCtrler = Backbone.Router.extend({
 			
 			$tmpWidget.replaceWith(  model.view.$el );
 			$tmpWidget.remove();
+			
+			if(isNew){
+			    model.view.$el.addClass("newWidget");
+				 
+				setTimeout(function(){
+					if(model.view.$el!=undefined){
+					  model.view.$el.removeClass("newWidget");
+					}
+				}, 1000);
+			}
             //var opts = $.extend({}, modelDefine, {expand: expand, id: id});
 			
 			var opts =  $.extend({}, model.attributes);
             delete opts.acl;//do not save acl to user portlet setting
-			that.$ddPanelObj.addPortlet( model.view.$el, opts, isRestore);
+			that.$ddPanelObj.addPortlet( model.view.$el, opts, isNew);
 	    });
 	},
 	addPortlet: function(modelDefine, pos){
-
 	    var that = this;
 		if(pos == undefined){
             pos = [0, 0];
         }
+		var _modelDefine = $.extend({}, modelDefine);
         var userData = that.dashboardOpts.user;
-	    var portlet = new PortletModel(modelDefine, userData);
-        
-		this.dashboardModel.add(portlet); 
-	    //var checkExistedModel = that.findModelInCollectionById(modelDefine.id);
-	    var id = modelDefine.id;
-		var isRestore = true;
+		var isNew;
 		var expand = true;
-	    if(id == undefined){
+
+	    if(_modelDefine.id == undefined){
 		  //##new portlet!!
+		   isNew = true;
 		   var key = that.getGUID();
-		   id = modelDefine.type+"_"+key;
-		   portlet.set('expand', expand);
+		   _modelDefine.id = _modelDefine.type+"_"+key;
+		   _modelDefine.expand = expand;
 	    }else{
 		  //## restoring portlet
-		   isRestore = false;
+		   isNew = false;
 	    }
-		portlet.set('id', id);
-
+		
+		if(_modelDefine.expand == undefined){
+		   _modelDefine.expand = expand;
+		}
+		
+	    var portlet = new PortletModel(_modelDefine, userData);
+		this.dashboardModel.add(portlet); 
 	    var $tmpWidget = $("<span>");
-        $(that.$columns[ pos[0] ]).append( $tmpWidget );
-		that.doFetchPortlet(portlet, $tmpWidget, isRestore);
+		if(isNew){
+			$(that.$columns[ pos[0] ]).prepend( $tmpWidget );
+		}
+		else{
+			$(that.$columns[ pos[0] ]).append( $tmpWidget );
+		}
+		that.doFetchPortlet(portlet, $tmpWidget, isNew);
 	},
     clearPortlet: function(){
         var that = this;
@@ -400,6 +410,7 @@ var DashboardCtrler = Backbone.Router.extend({
                 views.push(model.view);
             }
         }
+		
         for(var i=0; i<views.length; i++){
             views[i].doRemove();
         }
