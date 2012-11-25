@@ -355,7 +355,7 @@ var DashboardCtrler = Backbone.Router.extend({
 					if(model.view.$el!=undefined){
 					  model.view.$el.removeClass("newWidget");
 					}
-				}, 1000);
+				}, 2000);
 			}
             //var opts = $.extend({}, modelDefine, {expand: expand, id: id});
 			
