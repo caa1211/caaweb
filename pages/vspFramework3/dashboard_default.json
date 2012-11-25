@@ -3,14 +3,14 @@
     "portletPool": {
         "performancePortlet_ab2ecc97": {
             "id": "performancePortlet",
-            "name": "CPE Portlet 1",
+            "title": "CPE Portlet 1",
             "url": "./portlets/performancePortlet/",
             "expand": true,
             "pltid": "performancePortlet_ab2ecc97"
         },
         "portletExample_76fc2b2d": {
             "id": "portletExample",
-            "name": "portlet Example",
+            "title": "portlet Example VM2",
             "url": "portlets/portletExample/",
             "config": {
                 "aaee": "hello"

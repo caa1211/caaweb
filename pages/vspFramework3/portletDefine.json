@@ -1,7 +1,7 @@
 ﻿[
    {
         "id": "performancePortlet",
-        "name": "CPE Portlet 1",
+        "title": "CPE Portlet 1",
         "url": "./portlets/performancePortlet/",
         "acl":{
             "admin": [1, 1, 1, 1], 
@@ -9,7 +9,7 @@
         }
    },{
         "id": "performancePortlet2",
-        "name": "CPE Portlet 2",
+        "title": "CPE Portlet 2",
         "url": "portlets/performancePortlet/",
         "acl":{
             "admin": [0, 1, 1, 1],
@@ -20,7 +20,7 @@
         }
     },{
         "id": "portletExample",
-        "name": "portlet Example",
+        "title": "portlet Example",
         "url": "portlets/portletExample/",
         "acl":{
             "admin": [1, 1, 1, 1],
@@ -31,7 +31,7 @@
         }
     },{
         "id": "portletAAA",
-        "name": "portlet AAA",
+        "title": "portlet AAA",
         "url": "portlets/portletAAA/",
         "acl":{
             "admin": [1, 1, 1, 1],
@@ -42,7 +42,7 @@
         }
     },{
         "id": "portletBBB",
-        "name": "portlet BBB",
+        "title": "portlet BBB",
         "url": "portlets/portletBBB/",
         "acl":{
             "admin": [1, 1, 1, 1],
@@ -53,7 +53,7 @@
         }
     },{
         "id": "portletCCC",
-        "name": "portlet CCC",
+        "title": "portlet CCC",
         "url": "portlets/portletExample/",
         "acl":{
             "admin": [1, 1, 1, 1],
