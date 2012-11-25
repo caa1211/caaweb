@@ -7,17 +7,18 @@
       var $dlgObj = $(this);
       var $dlgBody = $dlgObj.find('.modal-body');
       var $dlgHead = $dlgObj.find('.modal-header');
+	  var $dlgTitle = $dlgHead.find(".modal-title");
       var opts = {
         //backdrop: "static",
         //keyboard: true
       };
-  
+	   
       var $portlet = null, $portletContent = null, $portletHead = null;
-      
-      this.show = function($w){
+      this.show = function($w, title){
         var wH = $(window).height();
-        $dlgBody.css('max-height', wH-350);
-        $dlgBody.css('height', wH-350);
+		var dh =  wH-350 < 200 ? 200: wH-350
+        $dlgBody.css('max-height', dh);
+        $dlgBody.css('height', dh);
  
         $portlet = $w;
         $portletHead = $w.find(".widget-head");
@@ -25,6 +26,7 @@
                
         //todo: write portlet title to head
         
+		$dlgTitle.html(title);
         //--
         if(!$portletContent.is(":visible")){
             $portletContent.show();
@@ -35,12 +37,12 @@
         
         var leftOffset = -1* $dlgObj.width() / 2;
         $dlgObj.css("margin-left", leftOffset);
+		$portletContent.oh = $portletContent.height();
         $w.hide();
-        
+		$portletContent.height(dh-10);
         $portletContent.appendTo( $dlgBody  );
-
         $dlgObj.modal(opts);
-        $portlet.trigger("fullScreenOn");
+        $portlet.trigger("fullscreenOn");
       };
       
       function putBackPortlet(){
@@ -49,10 +51,12 @@
            $portletContent.hide();
            
         }else{}
-        
+		var oh =  $portletContent.oh;
+	    var _oh = oh == undefined ? "auto": oh;
+        $portletContent.height(_oh);
         $portlet.append($portletContent);
         $portlet.fadeIn(200);
-        $portlet.trigger("fullScreenOff");
+        $portlet.trigger("fullscreenOff");
         $portlet = null, $portletContent = null, $portletHead = null;
       }
       
