@@ -58,9 +58,8 @@ var PortletView = Backbone.View.extend({
         var htmlStr = that.template(param);
         var userRoleAry = that.model.userRoleAry; // [0, 0, 0, 0] : CRUD
         that.$el.html(htmlStr);
-        that.$el.id = param.pltid ;
-        that.$el.attr('id', param.pltid);
-		that.$el.attr('pltid', param.pltid);
+        that.$el.id = param.id ;
+        that.$el.attr('id', param.id);
 	    that.$el.attr('type', param.type);
 		that.$title =  that.$el.find('.title'); 
 		//noSetting noRefresh noRemove noCollapse noMove
@@ -92,11 +91,11 @@ var PortletView = Backbone.View.extend({
 
            /*
             $(this).trigger('destroy');
-            var pltid =  $(this).attr('pltid');
+            var id =  $(this).attr('id');
             $(this).remove();
             try{
-                //delete portletPool[pltid];
-               update2PortletPool($(this), {pltid: pltid}, true);//isRemove is true
+                //delete portletPool[id];
+               update2PortletPool($(this), {id: id}, true);//isRemove is true
             }catch(e){}
                update2PortletPosMap();
            */     
@@ -140,10 +139,10 @@ var PortletModel = Backbone.Model.extend({
 	  title: "",
       url:"",
 	  acl: {},
-	  pltid: "",
+	  id: "",
       config:{}
     },
-    //idAttribute: "pltid",
+    //idAttribute: "id",
     //sync: function(method, model, options){},
 	url: function(){
 		return this.instanceUrl;
@@ -170,8 +169,8 @@ var PortletModel = Backbone.Model.extend({
 	},
 	destroy: function(){
 		var controller =  this.collection.controler;
-		var pltid = this.get('pltid');
-        controller.saveDashboardSetting('pool', null, {pltid: pltid}, true);
+		var id = this.get('id');
+        controller.saveDashboardSetting('pool', null, {id: id}, true);
         controller.saveDashboardSetting('map');
 		this.collection.remove( this, {silent: true} );
 	},
@@ -320,7 +319,7 @@ var DashboardCtrler = Backbone.Router.extend({
 			
 			$tmpWidget.replaceWith(  model.view.$el );
 			$tmpWidget.remove();
-            //var opts = $.extend({}, modelDefine, {expand: expand, pltid: pltid});
+            //var opts = $.extend({}, modelDefine, {expand: expand, id: id});
 			
 			var opts =  $.extend({}, model.attributes);
             delete opts.acl;//do not save acl to user portlet setting
@@ -338,22 +337,22 @@ var DashboardCtrler = Backbone.Router.extend({
         
 		this.dashboardModel.add(portlet); 
 	    //var checkExistedModel = that.findModelInCollectionById(modelDefine.id);
-	    var pltid = modelDefine.pltid;
+	    var id = modelDefine.id;
 		var isRestore = true;
 		var expand = true;
-	    if(pltid == undefined){
+	    if(id == undefined){
 		  //##new portlet!!
 		   //var cid = portlet.cid;
 		   var key = that.getGUID();
-		   pltid = modelDefine.type+"_"+key;
+		   id = modelDefine.type+"_"+key;
 		   portlet.set('expand', expand);
 	    }else{
 		  //## restoring portlet
 		  
 		   isRestore = false;
 	    }
-		portlet.set('pltid', pltid);
-	    //portlet.set('id', pltid);
+		portlet.set('id', id);
+	    //portlet.set('id', id);
 		
 	    var $tmpWidget = $("<span>");
         $(that.$columns[ pos[0] ]).append( $tmpWidget );
@@ -364,7 +363,7 @@ var DashboardCtrler = Backbone.Router.extend({
 	    portlet.on("done", function($tmpWidget){
 			var model = this;
 			$tmpWidget.replaceWith(  model.view.$el );
-            var opts = $.extend({}, modelDefine, {expand: expand, pltid: pltid});
+            var opts = $.extend({}, modelDefine, {expand: expand, id: id});
             delete opts.acl;//do not save acl to user portlet setting
 			that.$ddPanelObj.addPortlet( model.view.$el, opts, isRestore);
 	    });
@@ -378,7 +377,7 @@ var DashboardCtrler = Backbone.Router.extend({
             //portlet got it's own view.
 			var model = this;
 			$tmpWidget.replaceWith(  model.view.$el );
-            var opts = $.extend({}, modelDefine, {expand: expand, pltid: pltid});
+            var opts = $.extend({}, modelDefine, {expand: expand, id: id});
             delete opts.acl;//do not save acl to user portlet setting
 			that.$ddPanelObj.addPortlet( model.view.$el, opts, isUpdateStore);
 	    });
@@ -431,8 +430,8 @@ var DashboardCtrler = Backbone.Router.extend({
 		    var col = pmap[i];
 		    for (var j = 0; j < col.length; j++) {
               try{
-		            var pltid = col[j];
-		            var pltDef = ppool[pltid];
+		            var id = col[j];
+		            var pltDef = ppool[id];
 		            var _pltDef;
 		            var currentDefine = that.getPortletDefineByType(pltDef.type);
 		            //avoid restore data is conflict with current portlet define
@@ -452,11 +451,11 @@ var DashboardCtrler = Backbone.Router.extend({
 		            }
 
 		            if (roleAry[1] == 1) { //ACL: R
-                        ppoolNew[pltid] = _pltDef;
+                        ppoolNew[id] = _pltDef;
 		                that.addPortlet(_pltDef, [i, 0]);
 		            }
                 }catch(e){
-                    //pltid == null
+                    //id == null
                 }
 		    }
 		}
@@ -537,8 +536,8 @@ var DashboardCtrler = Backbone.Router.extend({
 
                 for(var j=0; j<$widgets.length; j++){
                     var $w = $widgets.eq(j);
-                    var pltid = $w.attr("pltid");
-                    ary.push(pltid);
+                    var id = $w.attr("id");
+                    ary.push(id);
                 }
                 portletPosMap.push(ary);
             }            
@@ -546,15 +545,15 @@ var DashboardCtrler = Backbone.Router.extend({
         }
         else if(type == "pool"){
             if(isRemove == true){
-                var pltid = opts.pltid;
-                delete portletPool[pltid];
+                var id = opts.id;
+                delete portletPool[id];
             }else{
                 try{
-                    var pltid = $w.attr('pltid');
-                    if(portletPool[pltid]!=undefined){
-                        $.extend(portletPool[pltid],opts);
+                    var id = $w.attr('id');
+                    if(portletPool[id]!=undefined){
+                        $.extend(portletPool[id],opts);
                     }else{
-                        portletPool[pltid] = opts ;
+                        portletPool[id] = opts ;
                     }
                 }catch(e){ return; }
             }
@@ -609,7 +608,7 @@ $(function(){
           
     $("#debugBtn").click(function(){
         var ctrler = dashboardCtrler;
-		//ctrler.dashboardModel.where({pltid: "performancePortlet_06673d48"})
+		//ctrler.dashboardModel.where({id: "performancePortlet_06673d48"})
 	
 
 
