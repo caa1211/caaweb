@@ -306,8 +306,20 @@
             
             $sortableItems.find(_settings.handleSelector).css({
                 cursor: 'move'
-            });
-            
+            })/*.mousedown(function (e) {
+				$sortableItems.css({width:''});
+				$(this).parent().css({
+					width: $(this).parent().width() + 'px'
+				});
+			}).mouseup(function () {
+				if(!$(this).parent().hasClass('dragging')) {
+					$(this).parent().css({width:''});
+				} else {
+					$(settings.columns).sortable('disable');
+				}
+			})*/;
+		
+            var $columnsObj = $(_settings.columns);
             $(_settings.columns).sortable({
                 items: $sortableItems,
                 connectWith: $(_settings.columns),
@@ -317,9 +329,25 @@
                 revert: 200,
                 opacity: 0.8,
                 delay: 100,
+				scroll: true,
                 containment: 'document',
+				forcePlaceholderSize: true,
+				forceHelperSize: true,
                 start: function(e, ui){
                     $(ui.helper).addClass('dragging');
+					var thisObj = $(this);
+					/*$columnsObj.each(function(){
+						var _this = $(this);
+						if(_this[0]!=thisObj[0] && _this.children().length == 0){
+							_this.animate({"paddingTop": 20, "paddingBottom": 20, "marginBottom":5, "marginLeft":5}, 300);
+							_this.addClass("hoveredHolder");
+						}
+					});
+					*/
+					
+					$columnsObj
+					.animate({"paddingTop": 30, "paddingBottom": 30}, 200)
+					.addClass("hoveredHolder");
                 },
                 stop: function(e, ui){
                     $(ui.item).css({
@@ -327,6 +355,10 @@
                     }).removeClass('dragging');
                     $(_settings.columns).sortable('enable');
                     update2PortletPosMap();
+					
+					$columnsObj
+					.animate({"paddingTop": 5, "paddingBottom": 5}, 200)
+					.removeClass("hoveredHolder");
                 }
             });
             
