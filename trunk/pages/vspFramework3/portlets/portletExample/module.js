@@ -1,14 +1,20 @@
-﻿
+﻿/*
+Events:
+	"updateTitle", string
+	"updateConfig", json Object
+	
+*/
 //define(id?, dependencies?, factory); 
-define(function(require, exports, module){
+define(function(require, exports){
   var config = {};
-  
-  var initialize = function($el, config){
-  
+  //be careful to use model
+  var initialize = function($view, config, model){
         //main function here=============================
-        var $view =$el;
+		//$view.trigger('updateTitle', "Portlet");
         var id = $view.id;
-     
+		var $inputField = $view.find('input.inputField');
+
+		
         $view.on("setting", function(e){
             alert($view.id + " setting 11111111111");
         });
@@ -40,8 +46,11 @@ define(function(require, exports, module){
 		
 		$view.find('.myBtn').click(function(){
 			 //alert($view.id + " my button click");
-			 var newValue = $view.find('input.inputField').val();
+			 var newValue = $inputField.val();
 		     $view.trigger('updateConfig', {aaee: newValue});
+			$view.trigger('updateTitle', newValue);
+			
+
 		});
 		
         //public method

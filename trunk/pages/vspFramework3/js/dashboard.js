@@ -7,7 +7,7 @@
 
     {
         "id": "performancePortlet2",
-        "name": "CPE Portlet 2",
+        "title": "CPE Portlet 2",
         "url": "portlets/performancePortlet/",
         "acl":{
             "admin": [1, 1, 1], 
@@ -28,8 +28,20 @@ var PortletView = Backbone.View.extend({
  portletModule: "module",
  tagName: "li",
  noRefresh: true,
+ title: "",
+ $title: null,
  doRemove: function(){
     this.$el.trigger("doRemove");
+ },
+ fullscreenHandler: function(){
+	var $w = this.$el;
+	this.$portletDlg.show($w);
+ },
+ initialize: function(){
+	this.$portletDlg  = this.model.collection.controler.$portletDlg;
+ },
+ updateView: function(){
+ 
  },
  render: function(){
     var that = this;
@@ -39,7 +51,6 @@ var PortletView = Backbone.View.extend({
     var moduleUrl = url+"/"+ that.portletModule;
     
     promise.done(function(template){
-
         that.template = _.template(template);
         var param = that.model.toJSON();
         var config = that.model.get('config');
@@ -49,6 +60,7 @@ var PortletView = Backbone.View.extend({
         that.$el.html(htmlStr);
         that.$el.id = param.id ;
         that.$el.attr('id', param.id);
+		that.$title =  that.$el.find('.title'); 
 		//noSetting noRefresh noRemove noCollapse noMove
         that.$el.addClass("widget ui-widget");
         
@@ -68,13 +80,12 @@ var PortletView = Backbone.View.extend({
 			that.model.trigger('destroy');
 		});
         
-                
+        that.$el.on("fullscreen", function(){ that.fullscreenHandler();});    
         that.$el.on('doRemove', function(){
 
            $(this).remove();
            that.trigger('destroy');
-           //var pltid =  $(this).attr('pltid');
-         
+
            /*
             $(this).trigger('destroy');
             var pltid =  $(this).attr('pltid');
@@ -96,13 +107,17 @@ var PortletView = Backbone.View.extend({
 			that.model.trigger('destroy');
 		});
 		*/
+		that.$el.on('updateConfig', function(view, configParam ){
+			var newConfig = $.extend({}, config, configParam);
+			that.model.trigger('updateConfig', newConfig);
+		});
+		
+		that.$el.on('updateTitle', function(view, title ){
+			that.model.trigger('updateTitle', title);
+		});	
 		
         require([ moduleUrl ], function(_module) {
-            _module.init(that.$el, config);
-			that.$el.on('updateConfig', function(view, configParam ){
-				var newConfig = $.extend({}, config, configParam);
-				that.model.trigger('updateConfig', newConfig);
-			});
+            _module.init(that.$el, config, that);
         });
 
         that.trigger("done");
@@ -113,7 +128,7 @@ var PortletView = Backbone.View.extend({
 var PortletModel = Backbone.Model.extend({
     defaults: {
       id: null,
-      name: '',
+	  title: "",
       url:"",
 	  acl: {},
       config:{}
@@ -140,20 +155,29 @@ var PortletModel = Backbone.Model.extend({
     fetch: function(){
         var that = this;
         var pltid = that.get('id');
+	
         this.getUserRole();
         this.view = new PortletView({model: this});
         this.view.render();
         this.view.on('done', function(){
              that.trigger("done");
         });
+
 		this.on('destroy', function(){
-            that.collection.controler.saveDashboardSetting('pool', null, {pltid: pltid}, true);
-            that.collection.controler.saveDashboardSetting('pos');
+			var controller =  that.collection.controler;
+            controller.saveDashboardSetting('pool', null, {pltid: pltid}, true);
+            controller.saveDashboardSetting('pos');
 			that.collection.remove( that, {silent: true} );
 		});
-		
 		this.on('updateConfig', function(newConfig){
+			var controller =  that.collection.controler;
 			that.set('config', newConfig);
+			controller.saveDashboardSetting("pool",  that.view.$el, {config: newConfig});
+		});	
+		this.on("updateTitle", function(title){
+			var controller =  that.collection.controler;
+			that.set('title', title);
+			controller.saveDashboardSetting("pool",  that.view.$el, {title: title});
 		});
 
         
@@ -241,12 +265,13 @@ var DashboardModel = Backbone.Collection.extend({
 
 
 var DashboardCtrler = Backbone.Router.extend({
-	uiContainer: {
+	ui: {
         menuContainer: "addPortletCtl",
         ddPanelContainer: "columns",
         userName : "userName",
 		columns: ".column",
-        widgetSelector: ".widget"
+        widgetSelector: ".widget",
+		fullscreenSelector: "#fullPortlet"
     },
     userOptsUrl: "./userOpts.json",
     defautlDashboardUrl: "./dashboard_default.json",
@@ -266,8 +291,9 @@ var DashboardCtrler = Backbone.Router.extend({
 	dashboardModel: null,
 	$ddPanelObj: null,
 	$columns: null,
+	$portletDlg: null,
     initialize: function(){
-    
+		this.$portletDlg = $(this.ui.fullscreenSelector).portletDlg();
     },
 	addPortlet: function(modelDefine, pos){
 	    var that = this;
@@ -308,13 +334,22 @@ var DashboardCtrler = Backbone.Router.extend({
             var opts = $.extend({}, modelDefine, {expand: expand, pltid: pltid});
             delete opts.acl;//do not save acl to user portlet setting
 			that.$ddPanelObj.addPortlet( model.view.$el, pos, opts, isUpdateStore);
+			
+		/*
+			//fullscreen handle 
+			 model.view.$el.on("fullscreen", function(e){
+				var $w = $(this);
+				that.$portletDlg.show($w);
+			 });
+		*/	 
 	    });
 
-		
+		/*
 		portlet.on('updateConfig', function(newConfig){
 			var model = this;
 			that.$ddPanelObj.updatePortletPool( model.view.$el, {config: newConfig} );
 		});
+		*/
 	},
     clearPortlet: function(){
         var that = this;
@@ -442,10 +477,10 @@ var DashboardCtrler = Backbone.Router.extend({
         //1. try to build add view for adding portlet.
 		var that = this;
         that.portletDefine = this.dashboardModel.portletDefine;
-		var uiContainer = this.uiContainer;
+		var ui = this.ui;
 		var collection = this.dashboardModel;
 
-		$("#"+ uiContainer.menuContainer).append(collection.addView.render().$el);
+		$("#"+ ui.menuContainer).append(collection.addView.render().$el);
 		collection.addView.on("addPortlet", function(modelDefine){
 			that.addPortlet(modelDefine);
 		});
@@ -453,16 +488,16 @@ var DashboardCtrler = Backbone.Router.extend({
         //2. restore Portlet
 		that.restorePortlet();
 	},
-    saveDashboardSetting: function(type, $w, opts, isRemove){
+    saveDashboardSetting: function(type, $w, opts, isRemove){//type: pool/map
         var that = this;
         var portletPosMap = this.dashboardSetting.portletPosMap;
         var portletPool = this.dashboardSetting.portletPool;
-        if(type == "pos"){
+        if(type == "map"){
             portletPosMap.length = 0;
             var $columns = that.$columns; 
             for(var i=0; i<$columns.length; i++){
                 var $col = $columns.eq(i);
-                var $widgets =  $col.find(that.uiContainer.widgetSelector);
+                var $widgets =  $col.find(that.ui.widgetSelector);
                 var ary = [];
 
                 for(var j=0; j<$widgets.length; j++){
@@ -494,14 +529,14 @@ var DashboardCtrler = Backbone.Router.extend({
     },
 	initUI: function(){
 		var that = this;
-	    var uiContainer = that.uiContainer;
+	    var ui = that.ui;
         var ddpanelOpts = {
             update2PortletPool: function($w, opts, isRemove){that.saveDashboardSetting("pool", $w, opts, isRemove);},
-            update2PortletPosMap: function(){that.saveDashboardSetting("pos");}
+            update2PortletPosMap: function(){that.saveDashboardSetting("map");}
         };
-		that.$ddPanelObj = $('#' + uiContainer.ddPanelContainer).zyDDPanel(ddpanelOpts);
-		$("#"+ uiContainer.userName).html(  that.dashboardOpts.user.name );
-		that.$columns = $(uiContainer.columns);
+		that.$ddPanelObj = $('#' + ui.ddPanelContainer).zyDDPanel(ddpanelOpts);
+		$("#"+ ui.userName).html(  that.dashboardOpts.user.name );
+		that.$columns = $(ui.columns);
 	},
 	getUserOptionDone: function(){
 		var that = this;
@@ -527,6 +562,7 @@ $(function(){
 
 	var dashboardCtrler = new DashboardCtrler();
 	dashboardCtrler.fetch();
+
 
     
     //#############for debug#####################
