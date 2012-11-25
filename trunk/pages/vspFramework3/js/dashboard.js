@@ -27,7 +27,7 @@ var PortletView = Backbone.View.extend({
  portletView: "portlet.pt",
  portletModule: "module",
  tagName: "li",
- noRefresh: true,
+ noRefresh: false,
  title: "",
  $title: null,
  doRemove: function(){
@@ -116,6 +116,11 @@ var PortletView = Backbone.View.extend({
 			that.model.trigger('updateTitle', title);
 		});	
 		
+		that.$el.on('refresh', function(){
+           $(this).remove();
+           that.trigger('destroy');
+		});	
+		
         require([ moduleUrl ], function(_module) {
             _module.init(that.$el, config, that);
         });
@@ -166,7 +171,7 @@ var PortletModel = Backbone.Model.extend({
 		this.on('destroy', function(){
 			var controller =  that.collection.controler;
             controller.saveDashboardSetting('pool', null, {pltid: pltid}, true);
-            controller.saveDashboardSetting('pos');
+            controller.saveDashboardSetting('map');
 			that.collection.remove( that, {silent: true} );
 		});
 		this.on('updateConfig', function(newConfig){
