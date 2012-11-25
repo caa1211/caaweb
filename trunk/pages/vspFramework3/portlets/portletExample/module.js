@@ -48,8 +48,8 @@ define(function(require, exports){
 			 //alert($view.id + " my button click");
 			 var newValue = $inputField.val();
 		     $view.trigger('updateConfig', {aaee: newValue});
-			$view.trigger('updateTitle', newValue);
-			
+		  	 $view.trigger('updateTitle', newValue);
+			 $view.trigger('refresh');
 
 		});
 		
