@@ -331,10 +331,11 @@
                 delay: 100,
 				scroll: true,
                 containment: 'document',
-				forcePlaceholderSize: true,
-				forceHelperSize: true,
+				//forcePlaceholderSize: false,
+				//forceHelperSize: false,
                 start: function(e, ui){
                     $(ui.helper).addClass('dragging');
+					$(ui.helper).height(1);
 					var thisObj = $(this);
 					/*$columnsObj.each(function(){
 						var _this = $(this);
@@ -346,7 +347,7 @@
 					*/
 					
 					$columnsObj
-					.animate({"paddingTop": 30, "paddingBottom": 30}, 200)
+					//.animate({"paddingTop": 25, "paddingBottom": 25}, 200)
 					.addClass("hoveredHolder");
                 },
                 stop: function(e, ui){
@@ -357,7 +358,7 @@
                     update2PortletPosMap();
 					
 					$columnsObj
-					.animate({"paddingTop": 5, "paddingBottom": 5}, 200)
+					//.animate({"paddingTop": 5, "paddingBottom": 5}, 200)
 					.removeClass("hoveredHolder");
                 }
             });
