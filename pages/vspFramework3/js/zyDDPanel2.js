@@ -380,7 +380,7 @@
             _settings.update2PortletPosMap();
         };
  
-        this.addPortlet = function($w, pos, opts, isUpdateStore){
+        this.addPortlet = function($w, opts, isUpdateStore){
 			 var _opts = $.extend({}, _portletConfDft, opts);
              var pltid =  _opts.pltid;
              $w.attr('pltid', pltid);
