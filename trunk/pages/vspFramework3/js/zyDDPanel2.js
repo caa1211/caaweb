@@ -115,21 +115,21 @@
 
             /*$widget.on('destroy',function(){
                 //$(this).trigger('destroy');
-                var pltid =  $(this).attr('pltid');
+                var id =  $(this).attr('id');
                 $(this).remove();
                 try{
-                    delete portletPool[pltid];
+                    delete portletPool[id];
                 }catch(e){}
                 update2PortletPosMap();
             });*/
 			/*
 			$widget.doRemove = function(){
                 $(this).trigger('destroy');
-                var pltid =  $(this).attr('pltid');
+                var id =  $(this).attr('id');
                 $(this).remove();
                 try{
-                    //delete portletPool[pltid];
-                    update2PortletPool($(this), {pltid: pltid}, true);//isRemove is true
+                    //delete portletPool[id];
+                    update2PortletPool($(this), {id: id}, true);//isRemove is true
                 }catch(e){}
                 update2PortletPosMap();
             };*/
@@ -347,11 +347,11 @@
         function update2PortletPool($widget, opts, isRemove){
             /*
             try{
-                var pltid = $widget.attr('pltid');
-				if(portletPool[pltid]!=undefined){
-					$.extend(portletPool[pltid],opts);
+                var id = $widget.attr('id');
+				if(portletPool[id]!=undefined){
+					$.extend(portletPool[id],opts);
 				}else{
-					portletPool[pltid] = opts ;
+					portletPool[id] = opts ;
 				}
             }catch(e){
             }
@@ -370,8 +370,8 @@
 
                 for(var j=0; j<$widgets.length; j++){
                    var $w = $widgets.eq(j);
-                   var pltid = $w.attr("pltid");
-                   ary.push(pltid);
+                   var id = $w.attr("id");
+                   ary.push(id);
                 }
                 portletPosMap.push(ary);
             }            
@@ -382,8 +382,8 @@
  
         this.addPortlet = function($w, opts, isUpdateStore){
 			 var _opts = $.extend({}, _portletConfDft, opts);
-             var pltid =  _opts.pltid;
-             $w.attr('pltid', pltid);
+             var id =  _opts.id;
+             $w.attr('id', id);
              //$($columns[pos[0]]).append( $w );//todo opt?
              if(isUpdateStore==true){
                 update2PortletPool($w, opts);

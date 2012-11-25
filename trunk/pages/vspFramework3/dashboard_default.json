@@ -6,7 +6,7 @@
             "title": "CPE Portlet 1",
             "url": "./portlets/performancePortlet/",
             "expand": true,
-            "pltid": "performancePortlet_ab2ecc97"
+            "id": "performancePortlet_ab2ecc97"
         },
         "portletExample_76fc2b2d": {
             "type": "portletExample",
@@ -16,7 +16,7 @@
                 "aaee": "hello"
             },
             "expand": true,
-            "pltid": "portletExample_76fc2b2d"
+            "id": "portletExample_76fc2b2d"
         }
     }
 }
