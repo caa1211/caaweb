@@ -1,22 +1,15 @@
 ﻿{
-    "portletPosMap": [["performancePortlet_ab2ecc97"],["portletExample_76fc2b2d"]], 
+    "portletPosMap": [["performancePortlet_ab2ecc97"]], 
     "portletPool": {
         "performancePortlet_ab2ecc97": {
             "type": "performancePortlet",
-            "title": "CPE Portlet 1",
-            "url": "./portlets/performancePortlet/",
+            "title": "Performance Portlet 192.168.1.1",
+            "url": "./portlet/performancePortlet/",
             "expand": true,
-            "id": "performancePortlet_ab2ecc97"
-        },
-        "portletExample_76fc2b2d": {
-            "type": "portletExample",
-            "title": "portlet Example VM2",
-            "url": "portlets/portletExample/",
-            "config": {
-                "aaee": "hello"
-            },
-            "expand": true,
-            "id": "portletExample_76fc2b2d"
+            "id": "performancePortlet_ab2ecc97",
+            "config":{
+               "ipAddr": "192.168.1.1"
+            }
         }
     }
 }
