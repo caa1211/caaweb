@@ -24,6 +24,7 @@ Portlet Template Info:
 <div class="widget-head ui-widget-header ui-corner-all">  
   
      <!--Head Here-->
+    <i class="icon-leaf icon-white icon"></i>
     <h3 class="title"><%= title %></h3>
      <!--Head Here-->
      
