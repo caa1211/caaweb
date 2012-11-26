@@ -318,7 +318,7 @@
 					$(settings.columns).sortable('disable');
 				}
 			})*/;
-		
+            var hh = $sortableItems.find(_settings.handleSelector).height();
             var $columnsObj = $(_settings.columns);
             $(_settings.columns).sortable({
                 items: $sortableItems,
@@ -335,7 +335,11 @@
 				//forceHelperSize: false,
                 start: function(e, ui){
                     $(ui.helper).addClass('dragging');
-					$(ui.helper).height(1);
+                    if($.browser.msie){
+                        $(ui.helper).height(hh);
+                    }else{
+                        $(ui.helper).height(5);
+                    }
 					var thisObj = $(this);
 					/*$columnsObj.each(function(){
 						var _this = $(this);
