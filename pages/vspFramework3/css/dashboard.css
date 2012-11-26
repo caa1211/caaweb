@@ -286,3 +286,7 @@ margin-left:-1px; margin-top:-1px;
  max-height:180px; overflow: auto;
 }
 
+#columns .widget .widget-setting  {
+    display:none;
+}
+

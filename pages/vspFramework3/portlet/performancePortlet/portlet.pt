@@ -1,32 +1,70 @@
-﻿<!--Portlet Template-->
-<div class="widget-head ui-widget-header ui-corner-all">      
+﻿<!--
+Portlet Template Info:
+1. do not remove the following class define: 
+    "widget-head", 
+    "widget-setting", 
+    "widget-coontent" 
+2. Can get model's value by < %= key % >
+3. model define:
+   {
+        "type": "performancePortlet",
+        "title": "Performance Portlet",
+        "url": "./portlet/performancePortlet/",
+        "acl":{
+            "admin": [1, 1, 1, 1], 
+            "user": [0, 0, 1, 0]
+        },
+        "config":{
+             "customDefine": "XXX"
+        }
+   }
+
+-->
+
+<div class="widget-head ui-widget-header ui-corner-all">  
+  
+     <!--Head Here-->
     <h3 class="title"><%= title %></h3>
+     <!--Head Here-->
+     
 </div>
-<div class="widget-content ui-widget-content">
-    <!--Content Here-->
+
+ <div class="widget-setting ui-widget-content">
+ 
+    <!--Setting Here-->
+    <br>
     <form class="form-horizontal">
-    
-    <div class="control-group">
-    <label class="control-label">Portlet ID</label>
-    <div class="controls">
-        <h4><%= id %></h4>
-    </div>
-    </div>
-    
+
     <div class="control-group">
         <label class="control-label">IP Address</label>
         <div class="controls">
             <input type="text" class="ipField" placeholder="IP Address" value="<%= config.ipAddr %>">
         </div>
     </div>
+    </form>
+    <!--Setting Here-->
+    
+</div>
+    
+<div class="widget-content ui-widget-content">
 
-    <div class="control-group">
-        <div class="controls">
-            <button type="button" class="btn">Set</button>
+    <!--Content Here-->
+    <form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label">Portlet ID:</label>
+            <div class="controls">
+                <h4><%= id %></h4>
+            </div>
         </div>
-    </div>
+        <div class="control-group">
+            <label class="control-label">IP Address:</label>
+            <div class="controls">
+               <h4><%= config.ipAddr %></h4>
+            </div>
+        </div>
     </form>
     <!--Content Here-->
+    
 </div>
 
 
