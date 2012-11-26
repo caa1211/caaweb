@@ -33,11 +33,12 @@ body {
     font-weight: normal;
     line-height: 18px;
     margin: 0;
-        color: #333333;
+    color: #333333;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 13px;
     line-height: 18px;
     margin: 0;
+    min-width:1024px;
 }
 
 /* Colors */
@@ -51,7 +52,7 @@ body {
 }
 #columns .column {
     float: left;
-    width: 50%;
+    width: 100%;
 	/* Min-height: */
 	min-height: 5px;
     padding-top:10px;
@@ -280,3 +281,4 @@ margin-left:-1px; margin-top:-1px;
 	background: #E8EFF7;
     border-radius: 4px;
 }
+
