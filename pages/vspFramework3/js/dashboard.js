@@ -37,17 +37,63 @@ var PortletView = Backbone.View.extend({
  },
  fullscreenHandler: function(){
 	this.$portletDlg.show(this.$el, this.model.get('title'));
+    /*
+    var that = this;
+    this.$portletDlg.show({
+        $view:  that.$el, 
+        title:  this.model.get('title'),
+        fullscreen: true,
+        content: {
+            objSelector: ".widget-content"
+        }
+    });
+    */
  },
  settingHandler: function(){
-     this.$settingDlg.show(this.$el, this.model.get('title') + " Setting");
+    this.$settingDlg.show(this.$el, this.model.get('title') + " Setting");
+    /*this.$settingDlg.show({
+        $view:  that.$el, 
+        title:  this.model.get('title') + " Setting",
+        setting: true,
+        content: {
+            objSelector: ".widget-setting"
+        }
+    });
+    */
+ },
+ removeHandler: function(){
+     var that = this;
+     //confirm window;
+     this.$removeDlg.show({
+         $view:  that.$el, 
+         title:   "Remove Portlet",
+         content: {
+            text: "Do you want to remove portlet - ["+that.model.get('title') + "] ?"
+         },
+         buttons:{
+            "ok": function(){
+                that.$el.animate({
+                    opacity: 0
+				}, function () {
+					$(this).slideUp(function () {
+                        that.doRemove();  // real job
+					});
+				}); 
+            },
+            "cancel": function(){}
+         }
+     });
+     
  },
  hideAllDlgs: function(){
 		this.$portletDlg.hide();
         this.$settingDlg.hide();
+        this.$removeDlg .hide();
  },
  initialize: function(){
 	this.$portletDlg  = this.model.collection.controler.$portletDlg;
     this.$settingDlg  = this.model.collection.controler.$settingDlg;
+    this.$removeDlg  = this.model.collection.controler.$removeDlg;
  },
  updateView: function(){
  
@@ -97,8 +143,12 @@ var PortletView = Backbone.View.extend({
         that.$el.on("fullscreen", function(){ that.fullscreenHandler();});
         
         that.$el.on('doRemove', function(){
-			that.doRemove();    
+            that.removeHandler();
+        
+			//that.doRemove();    
 		});
+        
+        
 		/*
 		that.$el.on('removeClick', function(){
 			alert('removeClick');
@@ -328,7 +378,8 @@ var DashboardCtrler = Backbone.Router.extend({
 		columns: ".column",
         widgetSelector: ".widget",
 		fullscreenSelector: "#fullPortlet",
-        settingModalSelector : "#settingModal"
+        settingModalSelector : "#settingModal",
+        removeModalSelector : "#removelModal",
     },
     userOptsUrl: "./userOpts.json",
     defautlDashboardUrl: "./dashboard_default.json",
@@ -349,9 +400,12 @@ var DashboardCtrler = Backbone.Router.extend({
 	$ddPanelObj: null,
 	$columns: null,
 	$portletDlg: null,
+    $settingDlg:null,
+    $removeDlg: null,
     initialize: function(){
 		this.$portletDlg = $(this.ui.fullscreenSelector).portletDlg();
         this.$settingDlg = $(this.ui.settingModalSelector).settingDlg();
+        this.$removeDlg = $(this.ui.removeModalSelector).Dlg();
     },
 	doFetchPortlet: function(portlet, $tmpWidget, isNew){
 		 var that = this;

@@ -39,7 +39,7 @@
             handleSelector: '.widget-head',
             contentSelector: '.widget-content',
             editSelector: ".edit-box",
-			confirmRemoveModal: "#confirmRemoveModal",
+			//confirmRemoveModal: "#confirmRemoveModal",
             loadTrunk: "#loadTrunk",
             widgetDefault: {
                 movable: true,
@@ -68,9 +68,11 @@
         }
         
         var _settings = $.extend(defaultSettings, settings);
+        /*
         var $confirmRemoveModal = $(_settings.confirmRemoveModal);
         var $confirmRemoveModal_ok = $(_settings.confirmRemoveModal).find('.ok');
         var $confirmRemoveModal_cancel = $(_settings.confirmRemoveModal).find('.cancel');
+        */
         var $loadTrunk = $(_settings.loadTrunk);
         var $columns = $(".column");                  
         var btnGup = ''+
@@ -162,7 +164,9 @@
                 $removeBtn.mousedown(function(e){
                        e.stopPropagation();
                     }).click(function(){
-					   $widget.trigger('removeClick');
+                       $widget.trigger("doRemove");
+					  // $widget.trigger('removeClick');
+                       /*
                        $confirmRemoveModal.modal({});
 					    
 					    $confirmRemoveModal_ok.unbind("click").bind('click', function () {
@@ -179,6 +183,7 @@
 						$confirmRemoveModal_cancel.unbind("click").click(function () {
 							$confirmRemoveModal.modal('hide');
 						});
+                       */
                        return false;
                 });      
             }else{

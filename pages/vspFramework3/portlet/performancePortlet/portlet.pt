@@ -53,13 +53,13 @@ Portlet Template Info:
         <div class="control-group">
             <label class="control-label">Portlet ID:</label>
             <div class="controls">
-                <h4><%= id %></h4>
+                <h5><%= id %></h5>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label">IP Address:</label>
             <div class="controls">
-               <h4><%= config.ipAddr %></h4>
+               <h5><%= config.ipAddr %></h5>
             </div>
         </div>
     </form>
