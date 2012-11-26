@@ -1,0 +1,50 @@
+﻿<!--
+Portlet Template Info:
+1. do not remove the following class define: 
+    "widget-head", 
+    "widget-setting", 
+    "widget-coontent" 
+2. Can get model's value by < %= key % >
+3. model define:
+   {
+        "type": "performancePortlet",
+        "title": "Performance Portlet",
+        "url": "./portlet/performancePortlet/",
+        "acl":{
+            "admin": [1, 1, 1, 1], 
+            "user": [0, 0, 1, 0]
+        },
+        "config":{
+             "customDefine": "XXX"
+        }
+   }
+
+-->
+<div class="widget-head ui-widget-header ui-corner-all">      
+     <!--Head Here-->
+    <i class="icon-heart icon-white icon"></i>
+    <h3 class="title"><%= title %></h3>
+     <!--Head Here-->
+</div>
+
+<div class="widget-setting ui-widget-content">
+ 
+    <!--Setting Here-->
+    No Setting
+    <!--Setting Here-->
+    
+</div>
+
+<div class="widget-content ui-widget-content">
+
+<!--Content Here-->
+ <button class="setBtn">set</button>
+ <button class="getBtn">get</button>
+ <!--Content Here-->
+ 
+</div>
+
+
+
+
+

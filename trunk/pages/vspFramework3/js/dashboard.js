@@ -68,7 +68,7 @@ var PortletView = Backbone.View.extend({
          $view:  that.$el, 
          title:   "Remove Portlet",
          content: {
-            text: "Do you want to remove portlet - ["+that.model.get('title') + "] ?"
+            text: "Do you want to remove the portlet - ["+that.model.get('title') + "] ?"
          },
          buttons:{
             "ok": function(){
