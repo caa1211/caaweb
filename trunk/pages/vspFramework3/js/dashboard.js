@@ -38,8 +38,16 @@ var PortletView = Backbone.View.extend({
  fullscreenHandler: function(){
 	this.$portletDlg.show(this.$el, this.model.get('title'));
  },
+ settingHandler: function(){
+     this.$settingDlg.show(this.$el, this.model.get('title') + " Setting");
+ },
+ hideAllDlgs: function(){
+		this.$portletDlg.hide();
+        this.$settingDlg.hide();
+ },
  initialize: function(){
 	this.$portletDlg  = this.model.collection.controler.$portletDlg;
+    this.$settingDlg  = this.model.collection.controler.$settingDlg;
  },
  updateView: function(){
  
@@ -85,7 +93,9 @@ var PortletView = Backbone.View.extend({
 			that.model.destroy();
 		});
         
-        that.$el.on("fullscreen", function(){ that.fullscreenHandler();});    
+		that.$el.on('setting', function(){that.settingHandler();}); 
+        that.$el.on("fullscreen", function(){ that.fullscreenHandler();});
+        
         that.$el.on('doRemove', function(){
 			that.doRemove();    
 		});
@@ -118,7 +128,8 @@ var PortletView = Backbone.View.extend({
 		   }else{
 				that.model.set("expand", true);
 		   }
-		   that.$portletDlg.hide();
+
+           that.hideAllDlgs();
            that.model.refresh();
 		};	
 		
@@ -316,7 +327,8 @@ var DashboardCtrler = Backbone.Router.extend({
         userName : "userName",
 		columns: ".column",
         widgetSelector: ".widget",
-		fullscreenSelector: "#fullPortlet"
+		fullscreenSelector: "#fullPortlet",
+        settingModalSelector : "#settingModal"
     },
     userOptsUrl: "./userOpts.json",
     defautlDashboardUrl: "./dashboard_default.json",
@@ -339,6 +351,7 @@ var DashboardCtrler = Backbone.Router.extend({
 	$portletDlg: null,
     initialize: function(){
 		this.$portletDlg = $(this.ui.fullscreenSelector).portletDlg();
+        this.$settingDlg = $(this.ui.settingModalSelector).settingDlg();
     },
 	doFetchPortlet: function(portlet, $tmpWidget, isNew){
 		 var that = this;
