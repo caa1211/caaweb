@@ -31,6 +31,7 @@ var PortletView = Backbone.View.extend({
  $title: null,
  $content: null,
  doRemove: function(){
+     this.$el.trigger('destroy');
      this.$el.remove();
      this.model.destroy();
  },
@@ -97,18 +98,20 @@ var PortletView = Backbone.View.extend({
 			that.model.trigger('destroy');
 		});
 		*/
-		that.$el.on('updateConfig', function(view, configParam ){
+        
+        //public method
+		that.$el.setConfig = function( configParam ){
 			var newConfig = $.extend({}, config, configParam);
 			//that.model.updateConfig(newConfig);
 			that.model.update("config", newConfig);
-		});
+		};
 		
-		that.$el.on('updateTitle', function(view, title ){
+		that.$el.setTitle = function( title ){
 			//that.model.updateTitle(title);
 			that.model.update("title", title);
-		});	
+		};	
 		
-		that.$el.on('refresh', function(){
+		that.$el.refresh = function(){
 		   //keep the expand status
 		   if( that.$content.is(":visible") == false || that.$el.isHidden == true){
 				that.model.set("expand", false);
@@ -116,9 +119,8 @@ var PortletView = Backbone.View.extend({
 				that.model.set("expand", true);
 		   }
 		   that.$portletDlg.hide();
-			
            that.model.refresh();
-		});	
+		};	
 		
         require([ moduleUrl ], function(_module) {
             _module.init(that.$el, config, that);
