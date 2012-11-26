@@ -1,6 +1,6 @@
 ﻿<!--Portlet Template-->
 <div class="widget-head ui-widget-header ui-corner-all">      
-    <h3 class="title"><%= title %> / id: <%= id %></h3>
+    <h3 class="title"><%= title %></h3>
 </div>
 <div class="widget-content ui-widget-content">
     <p>ABC</p>
