@@ -125,7 +125,7 @@
       var $portlet = null, $portletContent = null, $portletHead = null;
       this.show = function($w, title){
         var wH = $(window).height();
-		var dh =  wH-350 < 200 ? 200: wH-350
+		var dh = wH-350 < 200 ? 200: wH-350
         $dlgBody.css('max-height', dh);
         $dlgBody.css('height', dh);
  
@@ -133,8 +133,7 @@
         $portletHead = $w.find(".widget-head");
         $portletContent = $w.find(".widget-content");
                
-        //todo: write portlet title to head
-        
+
 		$dlgTitle.html(title);
         //--
         if(!$portletContent.is(":visible")){
@@ -148,7 +147,7 @@
         $dlgObj.css("margin-left", leftOffset);
 		$portletContent.oh = $portletContent.height();
         $portlet.fadeOut(200);
-		$portletContent.height(dh-10);
+		$portletContent.height(dh-20);
         $portletContent.appendTo( $dlgBody  );
         $dlgObj.modal(opts);
         $portlet.trigger("fullscreenOn");

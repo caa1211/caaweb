@@ -76,15 +76,15 @@
         var $loadTrunk = $(_settings.loadTrunk);
         var $columns = $(".column");                  
         var btnGup = ''+
-           '<div class="btn-toolbar" style="float:right; opacity:0.6; margin-top:3px; margin-right:3px;" >'+
+           '<div class="btn-toolbar" style="" >'+
             '<div class="btn-group" style="" >'+
-               '<button class="btn btn-inverse btn-mini" ctype="setting" title="Setting" style="line-height:10px;"><i class="icon-white icon-cog"></i></button>'+
-               '<button class="btn btn-inverse btn-mini"  ctype="refresh" title="Refresh" style="line-height:10px;"><i class="icon-white icon-refresh"></i></button>'+
+               '<button class="btn btn-inverse btn-mini" ctype="setting" title="Setting" style=""><i class="icon-white icon-cog"></i></button>'+
+               '<button class="btn btn-inverse btn-mini"  ctype="refresh" title="Refresh" style=""><i class="icon-white icon-refresh"></i></button>'+
             '</div>'+
             '<div class="btn-group"  style="" >'+
-               '<button class="btn btn-mini" ctype="collapse" title="Collapse" style="line-height:10px;"><i class=" icon-chevron-up"></i></button>'+
-               '<button class="btn btn-mini" ctype="fullscreen" title="Full screen" style="line-height:10px;"><i class="icon-fullscreen"></i></button>'+
-               '<button class="btn  btn-mini" ctype="remove" title="Remove" style="line-height:10px;" ><i class=" icon-remove"></i></button>'+
+               '<button class="btn btn-mini" ctype="collapse" title="Collapse" style=""><i class=" icon-chevron-up"></i></button>'+
+               '<button class="btn btn-mini" ctype="fullscreen" title="Full screen" style=""><i class="icon-fullscreen"></i></button>'+
+               '<button class="btn  btn-mini" ctype="remove" title="Remove" style="" ><i class=" icon-remove"></i></button>'+
             '</div>'+ 
             '</div>';
             

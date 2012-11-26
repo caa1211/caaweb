@@ -38,7 +38,7 @@ body {
     font-size: 13px;
     line-height: 18px;
     margin: 0;
-    min-width:1024px;
+    min-width:1030px;
 }
 
 /* Colors */
@@ -64,8 +64,9 @@ body {
 	/*height: 400px;*/
 }
 
-   
-#columns .column .widget { margin: 0px 5px 5px 5px; }
+.widget-placeholder { border: 2px dotted #6e6e6e;}
+#columns .column .widget, #columns .column .widget-placeholder  { margin: 8px 1px 8px 1px; }
+
 
 
 #columns .widget {
@@ -82,7 +83,7 @@ body {
     /*color: #000;*/
     overflow: hidden;
     width: 100%;
-    height: 26px;
+    height: 29px;
     line-height: 20px;
 	/*background:url(../images/db_header.gif);*/
 }
@@ -260,8 +261,7 @@ margin-left:-1px; margin-top:-1px;
     outline: none;
 }
 
-.widget-placeholder { border: 2px dotted #6e6e6e;}
-.column .widget-placeholder { margin: 0px 5px 5px 5px;  }
+
 /*#column2 .widget-placeholder { margin: 30px 20px 0 20px; }*/
 
 
@@ -283,7 +283,8 @@ margin-left:-1px; margin-top:-1px;
 }
 
 #columns .widget .widget-content {
- max-height:180px; overflow: auto;
+ max-height:220px; 
+ overflow: auto;
 }
 
 #columns .widget .widget-setting  {
@@ -292,17 +293,25 @@ margin-left:-1px; margin-top:-1px;
 
 
 #columns .widget-head .icon  {
-    float:left; margin-left:10px;margin-top:5px;
+    float:left; margin-left:10px;margin-top:8px;
 }
 
-#columns .widget-head .title  {
-    font-size: 14px;
-    font-weight: 800;
+#columns .widget-head h3.title  {
+    font-size: 15px;
+   
     line-height: 18px;
     margin-right: 3em;
     position: relative;
     top: 12px;
+    color:#eaeaea;
 }
 
+.modal-body .widget-content{padding-top:10px;}
 
+#columns .widget-head .btn-toolbar{
+    float:right; opacity:0.6; margin-top:4px; margin-right:3px;
+}
 
+#columns .widget-head .btn{
+    line-height:13px;
+}

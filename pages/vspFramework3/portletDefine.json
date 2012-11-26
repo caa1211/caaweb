@@ -25,6 +25,15 @@
             "admin": [1, 1, 1, 1], 
             "user": [0, 1, 0, 0]
         }
+   },
+  {
+        "type": "shortcutsPortlet",
+        "title": "Shortcuts Portlet",
+        "url": "./portlet/shortcutsPortlet/",
+        "acl":{
+            "admin": [1, 1, 1, 1], 
+            "user": [0, 1, 0, 0]
+        }
    }
 
 ]
