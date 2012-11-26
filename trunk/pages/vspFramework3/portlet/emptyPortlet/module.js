@@ -1,9 +1,22 @@
 ﻿/*
-Events:
-	"updateTitle", string
-	"updateConfig", json Object
-	
+Event:
+    setting
+    refresh
+    destroy
+    fullscreen
+    fullscreenOn
+    fullscreenOff
+    settingOn
+    settingOff
+    settingDone
+    
+    
+$view's Method:
+	setConfig(JSON)  ;set new config to portlet
+	setTitle(STRING) ;set new title to portlet
+	refresh()
 */
+
 //define(id?, dependencies?, factory); 
 define(function(require, exports){
   var config = {};
@@ -12,8 +25,8 @@ define(function(require, exports){
 
         //main function here=============================
         var id = $view.id;
-		var $inputField = $view.find('input.inputField');
-      
+        
+        
 		//-Event-
         $view.on("setting", function(e){
             console.log($view.id + " setting");
@@ -22,20 +35,44 @@ define(function(require, exports){
         $view.on("refresh", function(e){
             console.log($view.id + " refresh");
         });
-  
         
         $view.on("destroy", function(e){
             console.log($view.id + " destroy");
         });
         
-        $view.on("fullscreenOn", function(e){
+        $view.on("fullscreen", function(e){
             console.log($view.id + " fullscreenOn");
         });
         
         $view.on("fullscreenOff", function(e){
             console.log($view.id + " fullscreenOff");
         });
-        //-Event-
+       
+        $view.on("settingOn", function(e){
+            console.log($view.id + " settingOn");
+        });
+        
+        $view.on("settingOff", function(e){
+            console.log($view.id + " settingOff");
+        });
+        
+        
+        $view.on("settingDone", function(e, res){
+            console.log($view.id + " settingDone " + res );
+            if(res == "ok"){
+                console.log($view.id + " setting ok");
+                
+                //call update methods
+                //$view.setConfig({ipAddr: ipAddr});
+                //$view.setTitle("performance Portlet : " + ipAddr);
+                //$view.refresh();
+    
+            }else{
+                console.log($view.id + " setting cancel");
+            }
+        });
+        
+        //main function here=============================
 
   };
 

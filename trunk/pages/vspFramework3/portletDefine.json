@@ -1,11 +1,20 @@
 ﻿[
+  {
+        "type": "emptyPortlet",
+        "title": "Empty Portlet",
+        "url": "./portlet/emptyPortlet/",
+        "acl":{
+            "admin": [1, 1, 1, 1], 
+            "user": [0, 1, 0, 0]
+        }
+   },
    {
         "type": "performancePortlet",
         "title": "Performance Portlet",
         "url": "./portlet/performancePortlet/",
         "acl":{
             "admin": [1, 1, 1, 1], 
-            "user": [0, 0, 1, 0]
+            "user": [0, 1, 0, 0]
         }
    },
   {
@@ -14,7 +23,7 @@
         "url": "./portlet/tablePortlet/",
         "acl":{
             "admin": [1, 1, 1, 1], 
-            "user": [0, 0, 1, 0]
+            "user": [0, 1, 0, 0]
         }
    }
 

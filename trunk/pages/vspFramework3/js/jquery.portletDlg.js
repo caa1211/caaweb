@@ -1,7 +1,117 @@
 ﻿
  ;
 (function($){
+//common
+    $.fn.Dlg = function(){
+        var defaultSetting = {
+             fullscreen: false,
+             $view:  null,
+             title:  "",
+             content: {
+                text: "",
+                objSelector: ""
+             },
+             buttons:{
+                "ok": function(){},
+                "cancel": function(){}
+             }
+        };
+        var modalOpts = {
+            //backdrop: "static",
+            //keyboard: true
+        };
+        var $dlgObj = $(this);
+        var $dlgBody = $dlgObj.find('.modal-body');
+        var $dlgHead = $dlgObj.find('.modal-header');
+        var $dlgFooter = $dlgObj.find('.modal-footer');
+        var $dlgTitle = $dlgHead.find(".modal-title");
+        
+        var $okBtn = $dlgFooter .find('.ok');
+        var $cancelBtn = $dlgFooter .find('.cancel');
+
+        this.show = function(opt){
+            var _settings = $.extend({}, defaultSetting, opt);
+            
+            if(_settings.content.text!=undefined && _settings.content.text!=""){
+                $dlgBody.empty().append("<p>"+_settings.content.text+"</p>");
+            }else if(_settings.content.objSelector!=undefined && _settings.content.objSelector!=null){
+
+                $portlet = _settings.$view;
+                $portletHead = $portlet.find(".widget-head");
+                $portletContent = $portlet.find(_settings.content.objSelector);
+  
+                $dlgObj.unbind("hidden").bind("hidden", function(){
+                     putBackPortlet(_settings);
+                });
+            }
+            
+            if(_settings.fullscreen){
+                var wH = $(window).height();
+                var dh =  wH-350 < 200 ? 200: wH-350
+                $dlgBody.css('max-height', dh);
+                $dlgBody.css('height', dh);
+
+                if(!$portletContent.is(":visible")){
+                    $portletContent.show();
+                    $portlet.isHidden = true;
+                }else{
+                    $portlet.isHidden = false;
+                }
+                
+                var leftOffset = -1* $dlgObj.width() / 2;
+                $dlgObj.css("margin-left", leftOffset);
+                $portletContent.oh = $portletContent.height();
+                $portlet.hide();
+                $portletContent.height(dh-10);
+                $portletContent.appendTo( $dlgBody  );
+                $portlet.trigger("fullscreenOn");
+            }
+            
+            $dlgTitle.empty().html(_settings.title);
+             
+            $okBtn.unbind("click").bind("click", function(){
+                _settings.buttons.ok();
+                $dlgObj.modal("hide");
+            });
+            
+            $cancelBtn.unbind("click").bind("click", function(){
+                _settings.buttons.cancel();
+                $dlgObj.modal("hide");
+            });
+            
+            $dlgObj.modal(modalOpts);
+        };
+        
+      function putBackPortlet(_settings){
+        if(_settings.fullscreen){
+            if($portlet.isHidden==true){
+               $portletContent.hide();
+            }else{}
+            var oh =  $portletContent.oh;
+            var _oh = oh == undefined ? "auto": oh;
+            $portletContent.height(_oh);
+            $portlet.append($portletContent);
+            $portlet.fadeIn(200);
+            $portlet.trigger("fullscreenOff");
+            $portlet = null, $portletContent = null, $portletHead = null;
+        }
+      }
+
+      $(document).keyup(function(e){
+         if(e.keyCode === 27){
+           $dlgObj.modal("hide");
+         }
+      });
+
+      this.hide = function(){
+         $dlgObj.modal("hide");
+      };
+      
+        return this
+    };
+    
  //fullscreen
+ 
     $.fn.portletDlg = function(setting) { 
       var $dlgObj = $(this);
       var $dlgBody = $dlgObj.find('.modal-body');
@@ -80,7 +190,6 @@
 
 //setting
     $.fn.settingDlg = function(setting) {
-      
       var $dlgObj = $(this);
       var $dlgBody = $dlgObj.find('.modal-body');
       var $dlgHead = $dlgObj.find('.modal-header');
@@ -154,6 +263,7 @@
       
       return this;
     };     
+ 
     
 })(jQuery);
 

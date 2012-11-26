@@ -71,7 +71,7 @@ define(function(require, exports){
             }
         });
         
-
+        //main function here=============================
   };
 
   return {
