@@ -34,6 +34,15 @@
             "admin": [1, 1, 1, 1], 
             "user": [0, 1, 0, 0]
         }
+   },
+  {
+        "type": "testConfigPortlet",
+        "title": "test config Portlet",
+        "url": "./portlet/testConfig/",
+        "acl":{
+            "admin": [1, 1, 1, 1], 
+            "user": [0, 1, 0, 0]
+        }
    }
 
 ]

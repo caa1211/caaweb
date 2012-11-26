@@ -38,7 +38,7 @@ body {
     font-size: 13px;
     line-height: 18px;
     margin: 0;
-    min-width:1030px;
+    min-width:1024px;
 }
 
 /* Colors */
@@ -60,7 +60,7 @@ body {
 	margin-top:5px;
 	margin-left:5px;
 	height: auto !important; 
-
+	
 	/*height: 400px;*/
 }
 
@@ -293,7 +293,9 @@ margin-left:-1px; margin-top:-1px;
 
 
 #columns .widget-head .icon  {
-    float:left; margin-left:10px;margin-top:8px;
+    float:left; 
+	margin-left:10px;
+	margin-top:7px;
 }
 
 #columns .widget-head h3.title  {
@@ -304,14 +306,18 @@ margin-left:-1px; margin-top:-1px;
     position: relative;
     top: 12px;
     color:#eaeaea;
+	width: auto;
 }
 
 .modal-body .widget-content{padding-top:10px;}
 
 #columns .widget-head .btn-toolbar{
-    float:right; opacity:0.6; margin-top:4px; margin-right:3px;
+    float:right; 
+	opacity:0.6; 
+	margin-top:4px;
+	margin-right:3px;
 }
 
 #columns .widget-head .btn{
-    line-height:13px;
+    line-height:16px;
 }
