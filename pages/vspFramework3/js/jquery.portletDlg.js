@@ -147,7 +147,7 @@
         var leftOffset = -1* $dlgObj.width() / 2;
         $dlgObj.css("margin-left", leftOffset);
 		$portletContent.oh = $portletContent.height();
-        $w.hide();
+        $portlet.fadeOut(200);
 		$portletContent.height(dh-10);
         $portletContent.appendTo( $dlgBody  );
         $dlgObj.modal(opts);
