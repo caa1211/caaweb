@@ -85,6 +85,18 @@ var PortletView = Backbone.View.extend({
      });
      
  },
+ refreshHandler: function(){
+        var that = this;
+		//keep the expand status
+		if( that.$content.is(":visible") == false || that.$el.isHidden == true){
+				that.model.set("expand", false);
+	    }else{
+			that.model.set("expand", true);
+		}
+
+        that.hideAllDlgs();
+        that.model.refresh();
+ },
  hideAllDlgs: function(){
 		this.$portletDlg.hide();
         this.$settingDlg.hide();
@@ -142,12 +154,8 @@ var PortletView = Backbone.View.extend({
 		that.$el.on('setting', function(){that.settingHandler();}); 
         that.$el.on("fullscreen", function(){ that.fullscreenHandler();});
         
-        that.$el.on('doRemove', function(){
-            that.removeHandler();
-        
-			//that.doRemove();    
-		});
-        
+        that.$el.on('doRemove', function(){that.removeHandler();});
+        that.$el.on('refresh', function(){that.refreshHandler();});
         
 		/*
 		that.$el.on('removeClick', function(){
@@ -172,15 +180,7 @@ var PortletView = Backbone.View.extend({
 		};	
 		
 		that.$el.refresh = function(){
-		   //keep the expand status
-		   if( that.$content.is(":visible") == false || that.$el.isHidden == true){
-				that.model.set("expand", false);
-		   }else{
-				that.model.set("expand", true);
-		   }
-
-           that.hideAllDlgs();
-           that.model.refresh();
+            that.refreshHandler();
 		};	
 		
         require([ moduleUrl ], function(_module) {
