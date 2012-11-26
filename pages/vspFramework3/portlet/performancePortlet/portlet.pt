@@ -1,0 +1,35 @@
+﻿<!--Portlet Template-->
+<div class="widget-head ui-widget-header ui-corner-all">      
+    <h3 class="title"><%= title %></h3>
+</div>
+<div class="widget-content ui-widget-content">
+    <!--Content Here-->
+    <form class="form-horizontal">
+    
+    <div class="control-group">
+    <label class="control-label">Portlet ID</label>
+    <div class="controls">
+        <h4><%= id %></h4>
+    </div>
+    </div>
+    
+    <div class="control-group">
+        <label class="control-label">IP Address</label>
+        <div class="controls">
+            <input type="text" class="ipField" placeholder="IP Address" value="<%= config.ipAddr %>">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <button type="button" class="btn">Set</button>
+        </div>
+    </div>
+    </form>
+    <!--Content Here-->
+</div>
+
+
+
+
+

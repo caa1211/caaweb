@@ -1,68 +1,21 @@
 ﻿[
    {
         "type": "performancePortlet",
-        "title": "CPE Portlet 1",
-        "url": "./portlets/performancePortlet/",
+        "title": "Performance Portlet",
+        "url": "./portlet/performancePortlet/",
         "acl":{
             "admin": [1, 1, 1, 1], 
             "user": [0, 0, 1, 0]
         }
-   },{
-        "type": "performancePortlet2",
-        "title": "CPE Portlet 2",
-        "url": "portlets/performancePortlet/",
+   },
+  {
+        "type": "tablePortlet",
+        "title": "Table Portlet",
+        "url": "./portlet/tablePortlet/",
         "acl":{
-            "admin": [0, 1, 1, 1],
-            "user": [0, 1, 1, 0]
-        },
-        "config":{
-            "otherVals": 10
+            "admin": [1, 1, 1, 1], 
+            "user": [0, 0, 1, 0]
         }
-    },{
-        "type": "portletExample",
-        "title": "portlet Example",
-        "url": "portlets/portletExample/",
-        "acl":{
-            "admin": [1, 1, 1, 1],
-            "user": [0, 1, 0, 0]
-        },
-        "config":{
-            "aaee": "hello"
-        }
-    },{
-        "type": "portletAAA",
-        "title": "portlet AAA",
-        "url": "portlets/portletAAA/",
-        "acl":{
-            "admin": [1, 1, 1, 1],
-            "user": [0, 1, 0, 0]
-        },
-        "config":{
-            "caaParameter": "hello"
-        }
-    },{
-        "type": "portletBBB",
-        "title": "portlet BBB",
-        "url": "portlets/portletBBB/",
-        "acl":{
-            "admin": [1, 1, 1, 1],
-            "user": [0, 1, 0, 0]
-        },
-        "config":{
-            "caaParameter": "hello"
-        }
-    },{
-        "type": "portletCCC",
-        "title": "portlet CCC",
-        "url": "portlets/portletExample/",
-        "acl":{
-            "admin": [1, 1, 1, 1],
-            "user": [0, 1, 0, 0]
-        },
-        "config":{
-            "aaee": "aaaaaaaaaaaa",
-            "oo": "aaa"
-        }
-    }
+   }
 
 ]

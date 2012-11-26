@@ -283,6 +283,6 @@ margin-left:-1px; margin-top:-1px;
 }
 
 #columns .widget .widget-content {
- height:180px; overflow: auto;
+ max-height:180px; overflow: auto;
 }
 
