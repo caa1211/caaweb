@@ -1,0 +1,16 @@
+﻿.shortcuts {
+    text-align: center;
+}
+.shortcuts .shortcut {
+    background: none repeat scroll 0 0 #F3F3F3;
+    border-radius: 5px 5px 5px 5px;
+    display: inline-block;
+    margin: 0 0.9% 1em;
+    padding: 12px 0;
+    text-decoration: none;
+    vertical-align: top;
+    width: 22.5%;
+}
+a.shortcut:hover{
+    background: #eaeaea;
+}

@@ -361,7 +361,7 @@ var DashboardModel = Backbone.Collection.extend({
 	},*/
     getPortletDefine: function(){
         var that = this;
-		$.getJSON(that.opts.url, function(json){
+		$.getJSON(that.opts.url+"?"+Math.random(), function(json){
             that.portletDefine = json;
 			that.addView = new AddView({model: that});
             that.trigger("getPortletDefine_done");
@@ -579,7 +579,7 @@ var DashboardCtrler = Backbone.Router.extend({
             that.refreshDashboard();
         }else{
             //get dashboard from default setting (demo for static json data)
-            $.getJSON(that.defautlDashboardUrl, function(d, s){
+            $.getJSON(that.defautlDashboardUrl+"?"+Math.random(), function(d, s){
                 if(s=="success"){
                     try{
                         that.dashboardSetting = d;
@@ -669,7 +669,7 @@ var DashboardCtrler = Backbone.Router.extend({
 	},
 	fetch: function(){
 		var that = this;
-        $.getJSON(that.userOptsUrl, function(userData, status){
+        $.getJSON(that.userOptsUrl+"?"+Math.random(), function(userData, status){
             if(status == "success"){
                 $.extend(that.dashboardOpts.user, userData);
                 that.getUserOptionDone();
