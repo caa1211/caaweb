@@ -290,3 +290,19 @@ margin-left:-1px; margin-top:-1px;
     display:none;
 }
 
+
+#columns .widget-head .icon  {
+    float:left; margin-left:10px;margin-top:5px;
+}
+
+#columns .widget-head .title  {
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 18px;
+    margin-right: 3em;
+    position: relative;
+    top: 12px;
+}
+
+
+
