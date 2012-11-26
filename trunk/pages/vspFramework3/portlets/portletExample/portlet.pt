@@ -4,7 +4,7 @@
 </div>
 <div class="widget-content ui-widget-content">
     <p>ABC</p>
-	<div style="border: solid 1px red; height:50px;">AFD</div>
+	<div style="border: solid 1px red;">AFD</div>
 	<input class='inputField' value="<%= config.aaee %>"/>
 	<button class="btn btn-primary btn-large myBtn" id="<%= id %>_btn">Set</button>
     
