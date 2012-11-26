@@ -78,13 +78,13 @@
         var btnGup = ''+
            '<div class="btn-toolbar" style="float:right; opacity:0.6; margin-top:3px; margin-right:3px;" >'+
             '<div class="btn-group" style="" >'+
-               '<button class="btn btn-inverse btn-mini" type="setting" title="Setting" style="line-height:10px;"><i class="icon-white icon-cog"></i></button>'+
-               '<button class="btn btn-inverse btn-mini"  type="refresh" title="Refresh" style="line-height:10px;"><i class="icon-white icon-refresh"></i></button>'+
+               '<button class="btn btn-inverse btn-mini" ctype="setting" title="Setting" style="line-height:10px;"><i class="icon-white icon-cog"></i></button>'+
+               '<button class="btn btn-inverse btn-mini"  ctype="refresh" title="Refresh" style="line-height:10px;"><i class="icon-white icon-refresh"></i></button>'+
             '</div>'+
             '<div class="btn-group"  style="" >'+
-               '<button class="btn btn-mini" type="collapse" title="Collapse" style="line-height:10px;"><i class=" icon-chevron-up"></i></button>'+
-               '<button class="btn btn-mini" type="fullscreen" title="Full screen" style="line-height:10px;"><i class="icon-fullscreen"></i></button>'+
-               '<button class="btn  btn-mini" type="remove" title="Remove" style="line-height:10px;" ><i class=" icon-remove"></i></button>'+
+               '<button class="btn btn-mini" ctype="collapse" title="Collapse" style="line-height:10px;"><i class=" icon-chevron-up"></i></button>'+
+               '<button class="btn btn-mini" ctype="fullscreen" title="Full screen" style="line-height:10px;"><i class="icon-fullscreen"></i></button>'+
+               '<button class="btn  btn-mini" ctype="remove" title="Remove" style="line-height:10px;" ><i class=" icon-remove"></i></button>'+
             '</div>'+ 
             '</div>';
             
@@ -143,13 +143,13 @@
 		   //Set buttons
            var $btnGup = $(btnGup);      
            $btnGup.appendTo($(_settings.handleSelector, widget));
-           var $removeBtn =  $btnGup.find("button[type=remove]");
-           var $refreshBtn =  $btnGup.find("button[type=refresh]");
-           var $settingBtn =  $btnGup.find("button[type=setting]");
-           var $fullscreenBtn =  $btnGup.find("button[type=fullscreen]");
-           var $collapseBtn =  $btnGup.find("button[type=collapse]");       
+           var $removeBtn =  $btnGup.find("button[ctype=remove]");
+           var $refreshBtn =  $btnGup.find("button[ctype=refresh]");
+           var $settingBtn =  $btnGup.find("button[ctype=setting]");
+           var $fullscreenBtn =  $btnGup.find("button[ctype=fullscreen]");
+           var $collapseBtn =  $btnGup.find("button[ctype=collapse]");       
            var $widgetContent =  $widget.find(_settings.contentSelector);
-           
+ 
            $widget.ctrlBtns = {
             remove: $removeBtn,
             refresh: $refreshBtn,
@@ -189,10 +189,11 @@
             }else{
                 $removeBtn.remove();
             }
+            
             // refresh button
             if (thisWidgetSettings.refreshable) {
                 $refreshBtn.mousedown(function (e) {
-                    e.stopPropagation();
+                  //  e.stopPropagation();
                 }).click(function (e) {
                     $widget.trigger('refresh');
                 });
