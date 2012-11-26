@@ -73,6 +73,7 @@ body {
 	padding: 1px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
+    border-radius: 4px;
     box-shadow:4px 4px 12px -2px rgba(20%,20%,40%,0.5);
 }
 
@@ -98,6 +99,8 @@ body {
     -moz-border-radius-bottomright: 2px;
     -webkit-border-bottom-left-radius: 2px;
     -webkit-border-bottom-right-radius: 2px;
+    border-radius-bottomleft: 2px;
+    border-radius-bottomright: 2px;
     line-height: 1.2em;
     overflow: hidden;
 }
@@ -274,5 +277,6 @@ margin-left:-1px; margin-top:-1px;
 
 #columns ul.hoveredHolder{
 	/*border: dashed 1px #eaeaea;*/
-	background: #FFFFCE;
+	background: #E8EFF7;
+    border-radius: 4px;
 }
