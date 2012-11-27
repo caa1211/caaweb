@@ -328,6 +328,11 @@ margin-left:-1px; margin-top:-1px;
  
 }
 
+.wrapTmp{
+   border: 1px solid #aaaaaa;
+   /* background: #eaeaea;*/
+   background:  url("../images/ui-bg_diagonals-thick_90_eeeeee_40x40.png") repeat;
+}
 
 .bottombar{
 box-shadow:4px 4px 12px 5px rgba(20%,20%,40%,0.5); 

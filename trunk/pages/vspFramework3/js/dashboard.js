@@ -127,6 +127,7 @@ var PortletView = Backbone.View.extend({
         that.$el.html(htmlStr);
         that.$el.id = param.id ;
         that.$el.attr('id', param.id);
+        that.$el.attr('pltid', param.id);
 	    that.$el.attr('type', param.type);
 		that.$content =  that.$el.find(".widget-content");
 		that.$title =  that.$el.find('.title'); 
@@ -623,7 +624,7 @@ var DashboardCtrler = Backbone.Router.extend({
 
                 for(var j=0; j<$widgets.length; j++){
                     var $w = $widgets.eq(j);
-                    var id = $w.attr("id");
+                    var id = $w.attr("pltid");
                     ary.push(id);
                 }
                 portletPosMap.push(ary);
