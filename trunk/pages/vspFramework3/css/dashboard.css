@@ -334,6 +334,34 @@ margin-left:-1px; margin-top:-1px;
    background:  url("../images/ui-bg_diagonals-thick_90_eeeeee_40x40.png") repeat;
 }
 
-.bottombar{
-box-shadow:4px 4px 12px 5px rgba(20%,20%,40%,0.5); 
+.modal.fade{
+    -webkit-transition: opacity .01s linear, none;
+    -moz-transition: opacity .01s linear, none;
+    -ms-transition: opacity .01s linear, none;
+    -o-transition: opacity .01s linear, none;
+    transition: opacity .01s linear, none;
+    top: 60%;
 }
+
+.modal.fade.in {
+    top: 60%;
+}
+
+.fullPortlet.modal.fade{
+    top: 350px;
+}
+
+.fullPortlet.modal.fade.in {
+    top: 350px;
+	
+}
+
+ .bottombar {
+ box-shadow:4px 4px 12px 5px rgba(20%,20%,40%,0.5); 
+ position: fixed;
+ bottom: 0;
+ left: 0;
+ right: 0;
+ }
+        
+ .modal {zIndex:500;}
