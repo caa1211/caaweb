@@ -101,6 +101,7 @@ define(function(require, exports){
 		});
 		
 		$getBtn.click(function(){
+        var c = config;
 		debugger;
 		});
         //main function here=============================
