@@ -124,7 +124,7 @@
       var $wrapTmp;
       this.show = function($w, title){
         var wH = $(window).height();
-		var dh = wH-350 < 200 ? 200: wH-350
+		var dh = wH-200 < 200 ? 200: wH-200
         $dlgBody.css('max-height', dh);
         $dlgBody.css('height', dh);
  
