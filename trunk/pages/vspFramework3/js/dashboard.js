@@ -97,12 +97,12 @@ var PortletView = Backbone.View.extend({
 		}
         that.hideAllDlgs();
         //loading  mask
-        that.$content.mask("");
+        that.$el.mask("");
         that.model.refresh(function(model){
             //alert(that.$el.is(":visible") )
             //alert(that.$el.parents("body").length )
             fn(model);
-            that.$content.unmask();
+            that.$el.unmask();
        });
  
  },

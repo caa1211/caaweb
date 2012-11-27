@@ -105,6 +105,7 @@
             $portlet.fadeIn(200);
             $portlet.trigger("fullscreenOff");
             $portlet = null, $portletContent = null, $portletHead = null;
+            $dlgBody.empty();
         }
       }
 
@@ -193,6 +194,7 @@
         
         $portlet = null, $portletSetting = null, $portletHead = null, $portletSetting = null;
         $wrapTmp.remove();$wrapTmp = null;
+        $dlgBody.empty();
       }
 
       $(document).keyup(function(e){
@@ -274,6 +276,7 @@
         $portletSetting.hide();
         $portlet.trigger("settingOff");
         $portlet = null, $portletSetting = null, $portletHead = null, $portletSetting = null;
+        $dlgBody.empty();
       }
 
       $dlgObj.bind("hidden", function(){
