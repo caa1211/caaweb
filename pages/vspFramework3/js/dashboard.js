@@ -32,7 +32,9 @@ var PortletView = Backbone.View.extend({
  $content: null,
  doRemove: function(){
      this.$el.trigger('destroy');
-     this.$el.remove();
+     this.$el.unbind().remove();
+     this.unbind();
+     this.remove();
      this.model.destroy();
  },
  fullscreenHandler: function(){
@@ -93,9 +95,16 @@ var PortletView = Backbone.View.extend({
 	    }else{
 			that.model.set("expand", true);
 		}
-
         that.hideAllDlgs();
-        that.model.refresh(fn);
+        //loading  mask
+        that.$content.mask("");
+        that.model.refresh(function(model){
+            //alert(that.$el.is(":visible") )
+            //alert(that.$el.parents("body").length )
+            fn(model);
+            that.$content.unmask();
+       });
+ 
  },
  hideAllDlgs: function(){
 		this.$portletDlg.hide();
@@ -264,6 +273,7 @@ var PortletModel = Backbone.Model.extend({
 	destroy: function(){
 		var controler =  this.collection.controler;
 		var id = this.get('id');
+        
         controler.saveDashboardSetting('pool', null, {id: id}, true);
         controler.saveDashboardSetting('map');
 		this.collection.remove( this, {silent: true} );

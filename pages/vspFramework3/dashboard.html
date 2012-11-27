@@ -9,9 +9,10 @@
     <link href="cmps/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="cmps/jquery-ui/css/hot-sneaks/jquery.ui.theme.css" rel="stylesheet" media="screen">
     <link href="css/dashboard.css" rel="stylesheet" type="text/css" />
+    <link href="cmps/loadingMask/jquery.loadmask.css" rel="stylesheet" type="text/css" />
     
     <link href="portlet/shortcutsPortlet/css.css" rel="stylesheet" type="text/css" />
-   
+
     <!--Script-->
     <script src="js/utils.js"></script>
     <script src="js/jquery-1.8.3.min.js"></script>
@@ -26,7 +27,7 @@
     <script src="js/require.js"></script>
     <script src="js/zyDDPanel2.js"></script>
     <script src="js/jquery.portletDlg.js"></script>
-    
+    <script type="text/javascript" src="cmps/loadingMask/jquery.loadmask.js"></script>
 <script type="text/template" id="addPortlet-template"> 
     <div class="btn-group">
         <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
@@ -58,36 +59,7 @@
 </script>
 
 <style>
-.modal.fade{
-    -webkit-transition: opacity .01s linear, none;
-    -moz-transition: opacity .01s linear, none;
-    -ms-transition: opacity .01s linear, none;
-    -o-transition: opacity .01s linear, none;
-    transition: opacity .01s linear, none;
-    top: 60%;
-}
 
-.modal.fade.in {
-    top: 60%;
-}
-
-.fullPortlet.modal.fade{
-    top: 350px;
-}
-
-.fullPortlet.modal.fade.in {
-    top: 350px;
-	
-}
-
-        .bottombar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-        }
-        
- .modal {zIndex:500;}
 </style>
 
 </head>
