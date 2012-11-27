@@ -76,7 +76,7 @@
         var $loadTrunk = $(_settings.loadTrunk);
         var $columns = $(".column");                  
         var btnGup = ''+
-           '<div class="btn-toolbar" style="" >'+
+           '<div class="btn-toolbar widgetBtns" style="" >'+
             '<div class="btn-group" style="" >'+
                '<button class="btn btn-inverse btn-mini" ctype="setting" title="Setting" style=""><i class="icon-white icon-cog"></i></button>'+
                '<button class="btn btn-inverse btn-mini"  ctype="refresh" title="Refresh" style=""><i class="icon-white icon-refresh"></i></button>'+
@@ -109,37 +109,25 @@
         
         var $ddPanelObj = $(this);
         
+        function setButtons($widget){
+        
+
+        }
+        
         
         function setWidget($widget){
+        	//set widget buttons		
+            if($widget.find(".widgetBtns").length !=0){
+                return;
+            }
+            
 		    var widget = $widget[0];
             var thisWidgetSettings = getWidgetSettings(widget);
-            //var $widget = $(widget);
 
-            /*$widget.on('destroy',function(){
-                //$(this).trigger('destroy');
-                var id =  $(this).attr('id');
-                $(this).remove();
-                try{
-                    delete portletPool[id];
-                }catch(e){}
-                update2PortletPosMap();
-            });*/
-			/*
-			$widget.doRemove = function(){
-                $(this).trigger('destroy');
-                var id =  $(this).attr('id');
-                $(this).remove();
-                try{
-                    //delete portletPool[id];
-                    update2PortletPool($(this), {id: id}, true);//isRemove is true
-                }catch(e){}
-                update2PortletPosMap();
-            };*/
-            
             $widget.updateIsExpanded = function(flag){
                     update2PortletPool($(this), {expand: flag});
             };
-			
+
 		   //Set buttons
            var $btnGup = $(btnGup);      
            $btnGup.appendTo($(_settings.handleSelector, widget));
