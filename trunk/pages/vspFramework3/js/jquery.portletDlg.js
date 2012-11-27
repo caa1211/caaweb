@@ -119,7 +119,8 @@
         //keyboard: true
       };
 	   
-      var $portlet = null, $portletContent = null, $portletHead = null;
+      var $portlet = null, $portletContent = null, $portletHead = null,
+      $portletSetting = null;
       var $wrapTmp;
       this.show = function($w, title){
         var wH = $(window).height();
@@ -130,16 +131,15 @@
         $portlet = $w;
         $portletHead = $w.find(".widget-head");
         $portletContent = $w.find(".widget-content");
-    
+        $portletSetting = $w.find(".widget-setting");
         $wrapTmp = $("<div class='wrapTmp widget'></div>"); 
 
-    
         $portlet.wrap($wrapTmp);
         $wrapTmp = $portlet.parent(".wrapTmp");
         
         //fake $portlet by $wrapTmp
         $wrapTmp.attr("pltid", $portlet.attr("pltid"));
-        $wrapTmp.width( $portlet.width()+2);
+        $wrapTmp.width( $portlet.width()+3);
         $wrapTmp.height( $portlet.height());
         
 		$dlgTitle.html(title);
@@ -151,8 +151,9 @@
             $portlet.isHidden = false;
         }
         
-        $portlet.children().not( $portletContent ).hide();
-
+        $portletHead.hide();
+        $portletSetting.hide();
+        
         var leftOffset = -1* $dlgObj.width() / 2;
         $dlgObj.css("margin-left", leftOffset);
 		$portletContent.oh = $portletContent.height();
@@ -164,13 +165,15 @@
       };
       
       function putBackPortlet(){
-        $portlet.children().show();
+        $portletHead.show();
         $portlet.appendTo($wrapTmp);
         $portlet.unwrap();
         
         if($portlet.isHidden==true){
            $portletContent.hide();
-        }else{}
+        }else{
+           $portletContent.show();
+        }
         
 		var oh =  $portletContent.oh;
 	    var _oh = oh == undefined ? "auto": oh;
@@ -179,7 +182,7 @@
         $portlet.fadeIn(200);
         $portlet.trigger("fullscreenOff");
         
-        $portlet = null, $portletContent = null, $portletHead = null;
+        $portlet = null, $portletSetting = null, $portletHead = null, $portletSetting = null;
         $wrapTmp.remove();$wrapTmp = null;
       }
 
@@ -215,7 +218,8 @@
         //keyboard: true
       };
 	   
-      var $portlet = null, $portletContent = null, $portletHead = null;
+      var $portlet = null, $portletContent = null, $portletHead = null,
+      $portletSetting=null;
       
       this.show = function($w, title){
         var wH = $(window).height();
@@ -249,7 +253,7 @@
         $portletHead.after($portletSetting);
         $portletSetting.hide();
         $portlet.trigger("settingOff");
-        $portlet = null, $portletSetting = null, $portletHead = null;
+        $portlet = null, $portletSetting = null, $portletHead = null, $portletSetting = null;
       }
       
       $(document).keyup(function(e){
