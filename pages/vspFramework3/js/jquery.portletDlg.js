@@ -57,9 +57,7 @@
                 }else{
                     $portlet.isHidden = false;
                 }
-                
-                var leftOffset = -1* $dlgObj.width() / 2;
-                $dlgObj.css("margin-left", leftOffset);
+
                 $portletContent.oh = $portletContent.height();
                 $portlet.hide();
                 $portletContent.height(dh-10);
@@ -67,6 +65,10 @@
                 $portlet.trigger("fullscreenOn");
             }
             
+                            
+           // var leftOffset = -1* $dlgObj.width() / 2;
+           // $dlgObj.css("margin-left", leftOffset);
+                
             $dlgTitle.empty().html(_settings.title);
              
             $okBtn.unbind("click").bind("click", function(){
@@ -218,8 +220,6 @@
         //--
         $portletContent.show();
 
-        var leftOffset = -1* $dlgObj.width() / 2;
-        $dlgObj.css("margin-left", leftOffset);
 		//$portletContent.oh = $portletContent.height();
         //$w.hide();
 		//$portletContent.height(dh-10);
