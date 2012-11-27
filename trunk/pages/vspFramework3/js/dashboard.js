@@ -783,34 +783,54 @@ $(function(){
     });
      
 	 var debugForLocalStorage = true;
-    $("#getPortletPoolBtn").click(function(){
+     
+     
+    function getPortletPool(){
         var ctrler = dashboardCtrler;
 	    var str = "";
 		if(!debugForLocalStorage){
          var portletPool = ctrler.dashboardSetting.portletPool;
-         str = JSON.stringify(portletPool)
+         str = JSON.stringify(portletPool);
 		}
 		else{
 	     str = localStorage.getItem('portletPool');
         }
-        debugModal.find('.modal-body').html(str)
-        debugModal.modal();
-    });
-    
-    $("#getPortletPosMapBtn").click(function(){
+        return str;
+    }
+
+    function getPortletPosMap(){
         var ctrler = dashboardCtrler;
 		var str = "";
 		if(!debugForLocalStorage){
           var portletPosMap = ctrler.dashboardSetting.portletPosMap;
-          str = JSON.stringify(portletPosMap)
+          str = JSON.stringify(portletPosMap);
 		}
 		else{
 	      str = localStorage.getItem('portletPosMap');
 		}
-        debugModal.find('.modal-body').html(str)
+        return str;
+    }
+    
+    $("#getPortletPoolBtn").click(function(){
+        var str = getPortletPool();
+        debugModal.find('.modal-body').html(str);
         debugModal.modal();
     });
     
+    $("#getPortletPosMapBtn").click(function(){
+        var str = getPortletPosMap();
+        debugModal.find('.modal-body').html(str);
+        debugModal.modal();
+    });
+    
+    $("#getDashboardSettingBtn").click(function(){
+        var ctrler = dashboardCtrler;
+        var dataObj = ctrler.getUserDashboardSetting();
+        var str = JSON.stringify(dataObj);
+        debugModal.find('.modal-body').html(str);
+        debugModal.modal();
+    });
+
     $("#clearAllPortletsBtn").click(function(){
         var ctrler = dashboardCtrler;
         ctrler.clearPortlet();
