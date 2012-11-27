@@ -34,7 +34,7 @@ Portlet Template Info:
  
     <!--Setting Here-->
     <br>
-    <form class="form-horizontal">
+    <div class="form-horizontal">
 
     <div class="control-group">
         <label class="control-label">iFrame url</label>
@@ -42,7 +42,7 @@ Portlet Template Info:
             <input type="text" class="urlField" placeholder="http://..." value="<%= config.url %>">
         </div>
     </div>
-    </form>
+    </div>
     <!--Setting Here-->
     
 </div>

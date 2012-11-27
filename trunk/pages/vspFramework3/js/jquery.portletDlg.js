@@ -28,7 +28,8 @@
         
         var $okBtn = $dlgFooter .find('.ok');
         var $cancelBtn = $dlgFooter .find('.cancel');
-
+        var $defaultBtn = $dlgObj.find('.btn-primary');
+        
         this.show = function(opt){
             var _settings = $.extend({}, defaultSetting, opt);
             
@@ -77,6 +78,18 @@
                 $dlgObj.modal("hide");
             });
             
+                  
+              $(document).unbind("keyup").bind("keyup",function(e){
+                 if(e.keyCode === 27){
+                   //esc
+                   $dlgObj.modal("hide");
+                 }
+                 else if(e.keyCode === 13){
+                    $defaultBtn.trigger("click");
+                 }
+              });
+      
+              
             $dlgObj.modal(modalOpts);
         };
         
@@ -95,11 +108,7 @@
         }
       }
 
-      $(document).keyup(function(e){
-         if(e.keyCode === 27){
-           $dlgObj.modal("hide");
-         }
-      });
+
 
       this.hide = function(){
          $dlgObj.modal("hide");
@@ -212,7 +221,8 @@
       
       var $okBtn = $dlgObj.find('.ok');
       var $cancelBtn = $dlgObj.find('.cancel');
-      
+      var $defaultBtn = $dlgObj.find('.btn-primary');
+
       var opts = {
         //backdrop: "static",
         //keyboard: true
@@ -247,6 +257,16 @@
             $portlet.trigger("settingDone", "cancel");
             $dlgObj.modal("hide");
         });
+        
+        $(document).unbind("keyup").bind("keyup",function(e){
+            if(e.keyCode === 27){
+            //esc
+               $dlgObj.modal("hide");
+            }
+            else if(e.keyCode === 13){
+               $defaultBtn.trigger("click");
+            }
+        });
       };
       
       function putBackPortlet(){
@@ -255,13 +275,7 @@
         $portlet.trigger("settingOff");
         $portlet = null, $portletSetting = null, $portletHead = null, $portletSetting = null;
       }
-      
-      $(document).keyup(function(e){
-         if(e.keyCode === 27){
-           $dlgObj.modal("hide");
-         }
-      });
-      
+
       $dlgObj.bind("hidden", function(){
          putBackPortlet();
       });

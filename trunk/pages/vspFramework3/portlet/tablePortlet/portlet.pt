@@ -31,13 +31,13 @@ Portlet Template Info:
  
     <!--Setting Here-->
     <br>
-    <form class="form-horizontal">
+    <div class="form-horizontal">
 
     <div class="control-group">
         <label class="control-label">No Setting</label>
 
     </div>
-    </form>
+    </dov>
     <!--Setting Here-->
     
 </div>
