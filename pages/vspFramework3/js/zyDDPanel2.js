@@ -337,7 +337,7 @@
                 forcePlaceholderSize: true,
                 revert: 200,
                 opacity: 0.8,
-                delay: 100,
+                //delay: 100,
 				scroll: true,
                 containment: 'document',
 				//forcePlaceholderSize: false,
