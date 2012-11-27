@@ -34,7 +34,7 @@ Portlet Template Info:
  
     <!--Setting Here-->
     <br>
-    <form class="form-horizontal">
+    <div class="form-horizontal">
 
     <div class="control-group">
         <label class="control-label">IP Address</label>
@@ -42,7 +42,7 @@ Portlet Template Info:
             <input type="text" class="ipField" placeholder="IP Address" value="<%= config.ipAddr %>">
         </div>
     </div>
-    </form>
+    </div>
     <!--Setting Here-->
     
 </div>
@@ -50,7 +50,7 @@ Portlet Template Info:
 <div class="widget-content ui-widget-content">
 
     <!--Content Here-->
-    <form class="form-horizontal">
+    <div class="form-horizontal">
         <div class="control-group">
             <label class="control-label">Portlet ID:</label>
             <div class="controls">
@@ -63,7 +63,7 @@ Portlet Template Info:
                <h5><%= config.ipAddr %></h5>
             </div>
         </div>
-    </form>
+    </div>
     <!--Content Here-->
     
 </div>
