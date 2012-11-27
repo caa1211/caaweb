@@ -12,8 +12,9 @@ Event:
     
     
 $view's Method:
-	setConfig(JSON)  ;set new config to portlet
-	setTitle(STRING) ;set new title to portlet
+	setConfig(JSON, DoneFunction)  ;set new config to portlet
+	setTitle(STRING, DoneFunction) ;set new title to portlet
+    setModel(JSON, DoneFunction)
 	refresh()
 */
 //define(id?, dependencies?, factory); 
@@ -58,15 +59,33 @@ define(function(require, exports){
             console.log($view.id + " settingOff");
         });
         
+        
         $view.on("settingDone", function(e, res){
             console.log($view.id + " settingDone " + res );
             if(res == "ok"){
                 var ipAddr = $ipField.val();
                 if(ipAddr!=""){
                     //call update methods
-                    $view.setConfig({ipAddr: ipAddr});
-                    $view.setTitle("performance Portlet : " + ipAddr);
-                    $view.refresh();
+                    /*
+                    $view.setConfig({ipAddr: ipAddr}, function(model){ 
+                        console.log("save config done "+ model.get('id')); 
+                    });
+                   
+                   $view.setTitle("performance Portlet : " + ipAddr, function(model){ 
+                        console.log("save config done "+ model.get('id')); 
+                    });
+                    */
+                    
+                    $view.setModel({
+                        title: "performance Portlet : " + ipAddr,
+                        config:{
+                            ipAddr: ipAddr
+                        }
+                    }, function(m){
+                        $view.refresh();
+                    });
+                
+                   // $view.refresh();
                 }
             }
         });
