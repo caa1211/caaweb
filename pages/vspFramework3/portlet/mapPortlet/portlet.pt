@@ -1,0 +1,63 @@
+﻿<!--
+Portlet Template Info:
+1. do not remove the following class define: 
+    "widget-head", 
+    "widget-setting", 
+    "widget-coontent" 
+2. Can get model's value by < %= key % >
+3. model define:
+   {
+        "type": "performancePortlet",
+        "title": "Performance Portlet",
+        "url": "./portlet/performancePortlet/",
+        "acl":{
+            "admin": [1, 1, 1, 1], 
+            "user": [0, 0, 1, 0]
+        },
+        "config":{
+             "customDefine": "XXX"
+        }
+   }
+
+-->
+
+<div class="widget-head ui-widget-header ui-corner-all">  
+  
+     <!--Head Here-->
+    <i class="icon-tag icon-white icon"></i>
+    <h3 class="title"><%= title %></h3>
+     <!--Head Here-->
+     
+</div>
+
+ <div class="widget-setting ui-widget-content">
+ 
+    <!--Setting Here-->
+    <br>
+    <form class="form-horizontal">
+
+    <div class="control-group">
+        <label class="control-label">iFrame url</label>
+        <div class="controls">
+            <input type="text" class="urlField" placeholder="http://..." value="<%= config.url %>">
+        </div>
+    </div>
+    </form>
+    <!--Setting Here-->
+    
+</div>
+    
+<div class="widget-content ui-widget-content">
+
+    <!--Content Here-->
+    
+<iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.tw/maps?f=q&amp;source=s_q&amp;hl=zh-TW&amp;geocode=+&amp;q=%E5%B7%A5%E7%A0%94%E9%99%A2&amp;ie=UTF8&amp;hq=%E5%B7%A5%E7%A0%94%E9%99%A2&amp;hnear=%E6%96%B0%E7%AB%B9%E7%B8%A3%E7%AB%B9%E6%9D%B1%E9%8E%AE&amp;t=m&amp;brcurrent=3,0x3468386b33cd5741:0x973955153c6391d4,0,0x3468412ca1674fd5:0x4061145f0e1f1fc9&amp;fll=24.773487,121.044445&amp;fspn=0.032926,0.055747&amp;st=110345467832378550678&amp;rq=1&amp;ev=zi&amp;split=1&amp;ll=24.773486,121.044445&amp;spn=0.034641,0.055747&amp;output=embed"></iframe><br /><small><a href="https://maps.google.com.tw/maps?f=q&amp;source=embed&amp;hl=zh-TW&amp;geocode=+&amp;q=%E5%B7%A5%E7%A0%94%E9%99%A2&amp;ie=UTF8&amp;hq=%E5%B7%A5%E7%A0%94%E9%99%A2&amp;hnear=%E6%96%B0%E7%AB%B9%E7%B8%A3%E7%AB%B9%E6%9D%B1%E9%8E%AE&amp;t=m&amp;brcurrent=3,0x3468386b33cd5741:0x973955153c6391d4,0,0x3468412ca1674fd5:0x4061145f0e1f1fc9&amp;fll=24.773487,121.044445&amp;fspn=0.032926,0.055747&amp;st=110345467832378550678&amp;rq=1&amp;ev=zi&amp;split=1&amp;ll=24.773486,121.044445&amp;spn=0.034641,0.055747" style="color:#0000FF;text-align:left">goto Full Map</a></small>
+   
+   <!--Content Here-->
+    
+</div>
+
+
+
+
+

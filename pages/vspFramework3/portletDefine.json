@@ -43,13 +43,20 @@
             "admin": [1, 1, 1, 1], 
             "user": [0, 1, 0, 0]
         }
-   },
-   {
+   },{
         "type": "iframePortlet",
-        "title": "iframePortlet",
+        "title": "iFrame Portlet",
         "url": "./portlet/iframePortlet/",
         "acl":{
             "admin": [1, 1, 1, 1], 
+            "user": [0, 1, 0, 0]
+        }
+   },{
+        "type": "mapPortlet",
+        "title": "Map Portlet",
+        "url": "./portlet/mapPortlet/",
+        "acl":{
+            "admin": [1, 1, 0, 1], 
             "user": [0, 1, 0, 0]
         }
    }
