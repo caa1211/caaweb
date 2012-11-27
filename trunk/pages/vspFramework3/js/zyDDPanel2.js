@@ -149,7 +149,10 @@
            var $fullscreenBtn =  $btnGup.find("button[ctype=fullscreen]");
            var $collapseBtn =  $btnGup.find("button[ctype=collapse]");       
            var $widgetContent =  $widget.find(_settings.contentSelector);
- 
+           $btnGup.dblclick(function(e){
+             e.stopPropagation();
+           });
+           
            $widget.ctrlBtns = {
             remove: $removeBtn,
             refresh: $refreshBtn,
@@ -207,7 +210,7 @@
                     e.stopPropagation();
                 }).click(function (e) {
                     $widget.trigger('setting');
-                }).toggle(function () {
+                })/*.toggle(function () {
                     var kk = $(this);
                     $(this).parents(_settings.widgetSelector).find(_settings.editSelector).slideDown({
                         duration: 150,
@@ -222,7 +225,7 @@
                         complete: function (e) {}
                     });
                     return false;
-                });
+                })*/;
             }else{
                  $settingBtn.remove();
             }
