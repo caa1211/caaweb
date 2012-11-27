@@ -133,6 +133,7 @@ var PortletView = Backbone.View.extend({
         that.$el.attr('pltid', param.id);
 	    that.$el.attr('type', param.type);
 		that.$content =  that.$el.find(".widget-content");
+        that.$head =  that.$el.find(".widget-head");
 		that.$title =  that.$el.find('.title'); 
 		//noSetting noRefresh noRemove noCollapse noMove
         that.$el.addClass("widget ui-widget");
@@ -162,7 +163,10 @@ var PortletView = Backbone.View.extend({
         
 		that.$el.on('setting', function(){that.settingHandler();}); 
         that.$el.on("fullscreen", function(){ that.fullscreenHandler();});
-        
+        that.$head.on("dblclick", function(e){ 
+            //double click head (exclude controls buttons), will execute fullscreen method;
+            that.fullscreenHandler();
+        });
         that.$el.on('doRemove', function(){that.removeHandler();});
         that.$el.on('refresh', function(){
             that.refreshHandler(that.refreshDown);
