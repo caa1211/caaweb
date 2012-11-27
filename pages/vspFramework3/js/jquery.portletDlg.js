@@ -64,11 +64,7 @@
                 $portletContent.appendTo( $dlgBody  );
                 $portlet.trigger("fullscreenOn");
             }
-            
-                            
-           // var leftOffset = -1* $dlgObj.width() / 2;
-           // $dlgObj.css("margin-left", leftOffset);
-                
+
             $dlgTitle.empty().html(_settings.title);
              
             $okBtn.unbind("click").bind("click", function(){
@@ -112,8 +108,7 @@
         return this
     };
     
- //fullscreen
- 
+ //fullscreen dialog
     $.fn.portletDlg = function(setting) { 
       var $dlgObj = $(this);
       var $dlgBody = $dlgObj.find('.modal-body');
@@ -125,6 +120,7 @@
       };
 	   
       var $portlet = null, $portletContent = null, $portletHead = null;
+      var $wrapTmp;
       this.show = function($w, title){
         var wH = $(window).height();
 		var dh = wH-350 < 200 ? 200: wH-350
@@ -134,10 +130,20 @@
         $portlet = $w;
         $portletHead = $w.find(".widget-head");
         $portletContent = $w.find(".widget-content");
-               
+    
+        $wrapTmp = $("<div class='wrapTmp widget'></div>"); 
 
+    
+        $portlet.wrap($wrapTmp);
+        $wrapTmp = $portlet.parent(".wrapTmp");
+        
+        //fake $portlet by $wrapTmp
+        $wrapTmp.attr("pltid", $portlet.attr("pltid"));
+        $wrapTmp.width( $portlet.width()+2);
+        $wrapTmp.height( $portlet.height());
+        
 		$dlgTitle.html(title);
-        //--
+
         if(!$portletContent.is(":visible")){
             $portletContent.show();
             $portlet.isHidden = true;
@@ -145,32 +151,38 @@
             $portlet.isHidden = false;
         }
         
+        $portlet.children().not( $portletContent ).hide();
+
         var leftOffset = -1* $dlgObj.width() / 2;
         $dlgObj.css("margin-left", leftOffset);
 		$portletContent.oh = $portletContent.height();
-        $portlet.fadeOut(200);
+       
 		$portletContent.height(dh-20);
-        $portletContent.appendTo( $dlgBody  );
+        $portlet.appendTo( $dlgBody  );
         $dlgObj.modal(opts);
         $portlet.trigger("fullscreenOn");
       };
       
       function putBackPortlet(){
-      
+        $portlet.children().show();
+        $portlet.appendTo($wrapTmp);
+        $portlet.unwrap();
+        
         if($portlet.isHidden==true){
            $portletContent.hide();
-           
         }else{}
+        
 		var oh =  $portletContent.oh;
 	    var _oh = oh == undefined ? "auto": oh;
         $portletContent.height(_oh);
-        $portlet.append($portletContent);
+
         $portlet.fadeIn(200);
         $portlet.trigger("fullscreenOff");
+        
         $portlet = null, $portletContent = null, $portletHead = null;
+        $wrapTmp.remove();$wrapTmp = null;
       }
-      
-      
+
       $(document).keyup(function(e){
          if(e.keyCode === 27){
            $dlgObj.modal("hide");
@@ -188,8 +200,7 @@
       return this;
     };
 
-
-//setting
+//setting dialog
     $.fn.settingDlg = function(setting) {
       var $dlgObj = $(this);
       var $dlgBody = $dlgObj.find('.modal-body');
@@ -214,16 +225,12 @@
  
         $portlet = $w;
         $portletHead = $w.find(".widget-head");
-        $portletContent = $w.find(".widget-setting");
+        $portletSetting = $w.find(".widget-setting");
                
 		$dlgTitle.html(title);
-        //--
-        $portletContent.show();
 
-		//$portletContent.oh = $portletContent.height();
-        //$w.hide();
-		//$portletContent.height(dh-10);
-        $portletContent.appendTo( $dlgBody  );
+        $portletSetting.show();
+        $portletSetting.appendTo( $dlgBody  );
         $dlgObj.modal(opts);
         $portlet.trigger("settingOn");
         
@@ -239,12 +246,11 @@
       };
       
       function putBackPortlet(){
-        $portletHead.after($portletContent);
-        $portletContent.hide();
+        $portletHead.after($portletSetting);
+        $portletSetting.hide();
         $portlet.trigger("settingOff");
-        $portlet = null, $portletContent = null, $portletHead = null;
+        $portlet = null, $portletSetting = null, $portletHead = null;
       }
-      
       
       $(document).keyup(function(e){
          if(e.keyCode === 27){
