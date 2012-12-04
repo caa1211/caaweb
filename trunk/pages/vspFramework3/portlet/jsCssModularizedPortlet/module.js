@@ -35,8 +35,10 @@ define(["css!./css/style.css",  "require"], function(css ,require){
 
   var initialize = function($view, config, baseUrl){
 
- 
-   //load js by order
+  
+  
+  
+   //Method 1 load js by order ----------------
    requirejs.config({
     paths: {
       'inventory': baseUrl+'./js/inventory',
@@ -54,8 +56,9 @@ define(["css!./css/style.css",  "require"], function(css ,require){
         inventory.logColor(cart.color);
   });
  
-  
-  /*Method
+ 
+  //Method 2 load js by order -------------------
+  /*
   require(["./js/cart"], function(cart){
      require(["./js/inventory"], function(inventory){
         inventory.logColor(cart.color);
