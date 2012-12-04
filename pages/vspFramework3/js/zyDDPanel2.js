@@ -328,15 +328,19 @@
                 //delay: 100,
 				scroll: true,
                 containment: 'document',
-				//forcePlaceholderSize: false,
+				forcePlaceholderSize: false,
 				//forceHelperSize: false,
                 start: function(e, ui){
                     $(ui.helper).addClass('dragging');
+                    /*
                     if($.browser.msie){
                         $(ui.helper).height(hh);
                     }else{
                         $(ui.helper).height(5);
                     }
+                    */
+                    $(ui.helper).height(hh).css('overflow', "hidden");
+                    
 					var thisObj = $(this);
 					/*$columnsObj.each(function(){
 						var _this = $(this);

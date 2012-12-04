@@ -60,8 +60,8 @@
             "user": [0, 1, 0, 0]
         }
    },{
-        "type": "jsPortlet",
-        "title": "js Portlet",
+        "type": "jsCssPortlet",
+        "title": "js css Portlet",
         "url": "./portlet/jsCssModularizedPortlet/",
         "acl":{
             "admin": [1, 1, 0, 1], 

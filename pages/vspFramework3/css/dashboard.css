@@ -64,7 +64,16 @@ body {
 	/*height: 400px;*/
 }
 
-.widget-placeholder { border: 2px dotted #6e6e6e;}
+.widget-placeholder { 
+    border: 2px solid #6e6e6e;
+    margin: auto;
+    background:  url("../images/ui-bg_diagonals-thick_90_eeeeee_40x40.png") repeat;
+    height:29px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    box-shadow:4px 4px 12px -2px rgba(20%,20%,40%,0.5);
+}
 #columns .column .widget, #columns .column .widget-placeholder  { margin: 8px 1px 8px 1px; }
 
 
