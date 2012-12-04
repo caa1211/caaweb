@@ -122,6 +122,14 @@ var PortletView = Backbone.View.extend({
  refreshDown: function(model){
     console.log("refreshDown " + model.get("id"));
  },
+ configRequirejs: function(){
+    requirejs.config({
+       // baseUrl:"./",
+        paths: {
+            'css': 'js/css' //relative to dashboard.html
+        }
+    });
+ },
  render: function(){
     var that = this;
     var url = this.model.get("url");
@@ -209,14 +217,10 @@ var PortletView = Backbone.View.extend({
             that.$el.trigger("refresh");
 		};	
 
-        requirejs.config({
-            paths: {
-                'css': './js/css'
-            }
-        });
+        that.configRequirejs();
 
         require(["css", moduleUrl ], function(css, _module) {
-            _module.init(that.$el, config, that);
+            _module.init(that.$el, config, url, that);
 		    that.trigger("done");
         });
 

@@ -18,16 +18,51 @@ $view's Method:
 */
 
 //define(id?, dependencies?, factory); 
-define(["css!./css/style.css", "./js/cart.js", "./js/inventory.js"], function(css, cart, inventory){
 
-  inventory.logColor(cart.color);
- 
- 
- 
-   
+
+ /*requirejs.config({
+    shim: {
+    
+        'cart': ['inventory']
+    }
+ });
+  */
+  
+define(["css!./css/style.css",  "require"], function(css ,require){
+
+  var cssUrl = require.toUrl("./css/style.css");
   var config = {};
 
-  var initialize = function($view, config){
+  var initialize = function($view, config, baseUrl){
+
+ 
+   //load js by order
+   requirejs.config({
+    paths: {
+      'inventory': baseUrl+'./js/inventory',
+      'cart': baseUrl+'./js/cart'
+    },
+    shim: {
+        "inventory": {
+            deps:
+              [ 'cart' ]
+          }
+    }
+  });
+   
+  require(["cart", "inventory"], function(cart, inventory){
+        inventory.logColor(cart.color);
+  });
+ 
+  
+  /*Method
+  require(["./js/cart"], function(cart){
+     require(["./js/inventory"], function(inventory){
+        inventory.logColor(cart.color);
+     });
+  });
+  */
+  
 
         //main function here=============================
         var id = $view.id;
