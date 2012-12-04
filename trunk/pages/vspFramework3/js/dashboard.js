@@ -209,7 +209,13 @@ var PortletView = Backbone.View.extend({
             that.$el.trigger("refresh");
 		};	
 
-        require([ moduleUrl ], function(_module) {
+        requirejs.config({
+            paths: {
+                'css': './js/css'
+            }
+        });
+
+        require(["css", moduleUrl ], function(css, _module) {
             _module.init(that.$el, config, that);
 		    that.trigger("done");
         });
