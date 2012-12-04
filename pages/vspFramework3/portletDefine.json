@@ -59,6 +59,14 @@
             "admin": [1, 1, 0, 1], 
             "user": [0, 1, 0, 0]
         }
+   },{
+        "type": "jsPortlet",
+        "title": "js Portlet",
+        "url": "./portlet/jsCssModularizedPortlet/",
+        "acl":{
+            "admin": [1, 1, 0, 1], 
+            "user": [0, 1, 0, 0]
+        }
    }
 
 ]
