@@ -73,13 +73,33 @@ define(function(require){
     
     //require is relate with index html page
     requirejs.config({
-        paths: {
+        paths: {//do not need .css, .js in each paths
+          'jqplot-css': './cmps/jqplot/jquery.jqplot.min',
+          'excanvas': './cmps/jqplot/excanvas.min',
+          'jqplot': './cmps/jqplot/jquery.jqplot.min',
           'jqplot-highlighter': './cmps/jqplot/plugins/jqplot.highlighter.min',
           'jqplot-cursor': './cmps/jqplot/plugins/jqplot.cursor.min',
           'jqplot-dateAxisRenderer': './cmps/jqplot/plugins/jqplot.dateAxisRenderer.min'
+        },
+        shim: {//dependency
+          'jqplot-highlighter': ["jqplot"],
+          'jqplot-cursor': ["jqplot"],
+          'jqplot-dateAxisRenderer': ["jqplot"]
         }
     });
-    require(['jqplot-highlighter', 'jqplot-cursor',  'jqplot-dateAxisRenderer'], function(){
+    
+    var requireLibs = [];
+    requireLibs.push("css!jqplot-css");
+    if ($.browser.msie && parseInt($.browser.version) < 9) {
+        requireLibs.push("excanvas");
+    }
+    requireLibs.push("jqplot");
+    requireLibs.push("jqplot-highlighter");
+    requireLibs.push("jqplot-cursor");
+    requireLibs.push("jqplot-dateAxisRenderer");
+
+    
+    require(requireLibs, function(){
     
             var id = $view.id;
             var chartDivId = id+"_chartDiv";

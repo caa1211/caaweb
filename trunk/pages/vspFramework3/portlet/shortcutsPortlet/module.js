@@ -18,7 +18,7 @@ $view's Method:
 */
 
 //define(id?, dependencies?, factory); 
-define(function(require, exports){
+define(["css!./css/style.css"], function(css, require, exports){
   var config = {};
 
   var initialize = function($view, config){

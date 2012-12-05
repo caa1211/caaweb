@@ -66,12 +66,28 @@ define(function(require){
     
         //require is relate with index html page
         requirejs.config({
-            paths: {
+            paths: {//do not need .css, .js in each paths
+              'jqplot-css': './cmps/jqplot/jquery.jqplot.min',
+              'excanvas': './cmps/jqplot/excanvas.min',
+              'jqplot': './cmps/jqplot/jquery.jqplot.min',
               'jqplot-pieRenderer': './cmps/jqplot/plugins/jqplot.pieRenderer.min',
               'jqplot-donutRenderer': './cmps/jqplot/plugins/jqplot.donutRenderer.min'
+            },
+            shim: {//dependency
+              'jqplot-pieRenderer': ['jqplot'],
+              'jqplot-donutRenderer': ['jqplot']
             }
         });
-        require(['jqplot-pieRenderer', 'jqplot-donutRenderer'], function(){
+        var requireLibs = [];
+        requireLibs.push("css!jqplot-css");
+        if ($.browser.msie && parseInt($.browser.version) < 9) {
+            requireLibs.push("excanvas");
+        }
+        requireLibs.push("jqplot");
+        requireLibs.push("jqplot-pieRenderer");
+        requireLibs.push("jqplot-donutRenderer");
+    
+        require(requireLibs, function(){
         
             var id = $view.id;
             var chartDivId = id+"_chartDiv";
