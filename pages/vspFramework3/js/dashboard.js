@@ -126,7 +126,7 @@ var PortletView = Backbone.View.extend({
     requirejs.config({
        // baseUrl:"./",
         paths: {
-            'css': 'js/css' //relative to dashboard.html
+            'css': './js/css' //relative to dashboard.html
         }
     });
  },
