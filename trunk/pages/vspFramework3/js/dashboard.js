@@ -807,6 +807,20 @@ $(function(){
 	var dashboardCtrler = new DashboardCtrler();
 	dashboardCtrler.fetch();
 
+
+    function imgPreloader(imgAry) {
+        imageObj = new Image();
+        for (var i = 0; i < imgAry.length; i++) {
+            imageObj.src = imgAry[i];
+        }
+    }
+    
+    imgPreloader([
+        "images/ui-bg_diagonals-thick_90_eeeeee_40x40.png",
+        "cmps/loadingMask/images/loading.gif"
+    
+    ]);
+    
     //#############for debug#####################
      var debugModal = $("#debugModal");
      debugModal.find('.ok').click(function(){
