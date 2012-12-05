@@ -42,7 +42,7 @@ define(function(require){
           'jqplot-css': './cmps/jqplot/jquery.jqplot.min',
           'excanvas': './cmps/jqplot/excanvas.min',
           'jqplot': './cmps/jqplot/jquery.jqplot.min',
-          'jqplot-highlighter': './cmps/jqplot/plugins/jqplot.highlighter.min',
+          'jqplot-highlighter': './cmps/jqplot/plugins/jqplot.highlighter',
           'jqplot-cursor': './cmps/jqplot/plugins/jqplot.cursor.min',
           'jqplot-dateAxisRenderer': './cmps/jqplot/plugins/jqplot.dateAxisRenderer.min'
         },

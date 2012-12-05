@@ -214,9 +214,11 @@ var PortletView = Backbone.View.extend({
             that.checkResize("fullscreenOff");    
         }).bind("dragStop", function(){
             that.checkResize("dragStop"); 
+       }).bind("expand", function(){
+            that.checkResize("expand"); 
        });
        
-       $(window).bind("lazyResize", function(){
+       $(window).bind("resize", function(){
               that.checkResize("windowResize"); 
        });
 		/*
@@ -805,18 +807,6 @@ $(function(){
 	var dashboardCtrler = new DashboardCtrler();
 	dashboardCtrler.fetch();
 
-    var lazyResizeTimer = null;
-    function lazyResize(){
-        clearInterval(lazyResizeTimer);
-        lazyResizeTimer = setTimeout(function(){
-           $(window).trigger("lazyResize");
-        }, 200);
-    }
-       
-    $(window).resize(function(){
-            lazyResize();
-    });
-    
     //#############for debug#####################
      var debugModal = $("#debugModal");
      debugModal.find('.ok').click(function(){

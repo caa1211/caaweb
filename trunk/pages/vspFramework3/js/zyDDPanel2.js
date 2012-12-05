@@ -257,6 +257,7 @@
                                 kk.children('i').removeClass('icon-chevron-down').addClass('icon-chevron-up');
                                 kk.attr('title', "Collapse");
                                 $widget.updateIsExpanded(true);
+                                $widget.trigger('expand');
                             }
                         });
                         return false;
