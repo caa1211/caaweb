@@ -292,7 +292,7 @@ margin-left:-1px; margin-top:-1px;
 }
 
 #columns .widget .widget-content {
- max-height:220px; 
+ /*max-height:220px; */
  overflow: auto;
 }
 

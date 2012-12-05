@@ -19,8 +19,8 @@
     }
 
 */
+    
       
-            
 //--Portlet
 var PortletView = Backbone.View.extend({
  template: "",
@@ -130,6 +130,25 @@ var PortletView = Backbone.View.extend({
         }
     });
  },
+ checkResize: function(type){
+    var that = this;
+    var cW = this.$el.width();
+    var cH = this.$el.height();
+    
+    function triggerResize(){
+       that.$el.oWidth = cW;
+       that.$el.oHeight = cH;
+       that.$el.trigger("resize", type);
+       console.log("resize")
+    }
+    
+    if(this.$el.oWidth == undefined || this.$el.oHeight == undefined){
+        triggerResize();
+    }
+    else if( this.$el.oWidth != cW ||  this.$el.oHeight !=cH){
+        triggerResize();
+    }
+ },
  render: function(){
     var that = this;
     var url = this.model.get("url");
@@ -189,6 +208,17 @@ var PortletView = Backbone.View.extend({
             that.refreshHandler(that.refreshDown);
         });
         
+        that.$el.bind("fullscreenOn", function(e){
+            that.checkResize("fullscreenOn");
+        }).bind("fullscreenOff", function(){
+            that.checkResize("fullscreenOff");    
+        }).bind("dragStop", function(){
+            that.checkResize("dragStop"); 
+       });
+       
+       $(window).bind("lazyResize", function(){
+              that.checkResize("windowResize"); 
+       });
 		/*
 		that.$el.on('removeClick', function(){
 			alert('removeClick');
@@ -221,7 +251,7 @@ var PortletView = Backbone.View.extend({
 
         require(["css", moduleUrl ], function(css, _module) {
             _module.init(that.$el, config, url, that);
-		    that.trigger("done");
+		    that.trigger("portletViewDone");
         });
 
     });
@@ -342,9 +372,9 @@ var PortletModel = Backbone.Model.extend({
         this.getUserRole();
         this.view = new PortletView({model: this});
         this.view.render();
-        this.view.on('done', function(){
-			 this.off('done');
-             that.trigger("done");
+        this.view.on('portletViewDone', function(){
+			 this.off('portletViewDone');
+             that.trigger("portletDone");
         });
 
         
@@ -478,13 +508,14 @@ var DashboardCtrler = Backbone.Router.extend({
 	doFetchPortlet: function(portlet, $tmpWidget, isNew, doneFn){
 		 var that = this;
 		 portlet.fetch();
-		 portlet.on("done", function(){
-			portlet.off('done');
+		 portlet.on("portletDone", function(){
+			portlet.off('portletDone');
 			var model = this;
 			
 			$tmpWidget.replaceWith(  model.view.$el );
 			$tmpWidget.remove();
-			
+			model.view.$el.trigger("selfDomReady");
+            
 			if(isNew){
 			    model.view.$el.addClass("newWidget");
 				 
@@ -774,7 +805,17 @@ $(function(){
 	var dashboardCtrler = new DashboardCtrler();
 	dashboardCtrler.fetch();
 
-
+    var lazyResizeTimer = null;
+    function lazyResize(){
+        clearInterval(lazyResizeTimer);
+        lazyResizeTimer = setTimeout(function(){
+           $(window).trigger("lazyResize");
+        }, 200);
+    }
+       
+    $(window).resize(function(){
+            lazyResize();
+    });
     
     //#############for debug#####################
      var debugModal = $("#debugModal");

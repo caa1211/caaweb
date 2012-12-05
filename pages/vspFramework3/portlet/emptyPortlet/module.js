@@ -9,7 +9,10 @@ Event:
     settingOn
     settingOff
     settingDone
-    
+    selfDomReady
+    dragStart
+    dragStop
+    resize
     
 $view's Method:
 	setConfig(JSON)  ;set new config to portlet
@@ -17,9 +20,8 @@ $view's Method:
 	refresh()
 */
 
-//define(id?, dependencies?, factory); 
-define(function(require, exports){
-  var config = {};
+
+define(function(require){
 
   var initialize = function($view, config){
 
