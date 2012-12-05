@@ -257,7 +257,7 @@
                                 kk.children('i').removeClass('icon-chevron-down').addClass('icon-chevron-up');
                                 kk.attr('title', "Collapse");
                                 $widget.updateIsExpanded(true);
-                                $widget.trigger('expand');
+                                $widget.trigger('expanded');
                             }
                         });
                         return false;
@@ -333,14 +333,14 @@
 				//forceHelperSize: false,
                 start: function(e, ui){
                     $(ui.helper).addClass('dragging').trigger("dragStart");
-                    /*
+                    
                     if($.browser.msie){
                         $(ui.helper).height(hh);
                     }else{
                         $(ui.helper).height(5);
                     }
-                    */
-                    $(ui.helper).height(hh).css('overflow', "hidden");
+                    
+                    //$(ui.helper).height(hh).css('overflow', "hidden");
                     
 					var thisObj = $(this);
 					/*$columnsObj.each(function(){

@@ -214,8 +214,8 @@ var PortletView = Backbone.View.extend({
             that.checkResize("fullscreenOff");    
         }).bind("dragStop", function(){
             that.checkResize("dragStop"); 
-       }).bind("expand", function(){
-            that.checkResize("expand"); 
+       }).bind("expanded", function(){
+            that.checkResize("expanded"); 
        });
        
        $(window).bind("resize", function(){
