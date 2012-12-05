@@ -69,15 +69,33 @@ define(function(require){
     //main function here=============================
     $view.bind("selfDomReady", function(){
     
-    //require is relate with index html page
+    //requirejs's config path is relate with index html page
     requirejs.config({
-        paths: {
+        paths: {//do not need .css, .js in each paths
+          'jqplot-css': './cmps/jqplot/jquery.jqplot.min',
+          'excanvas': './cmps/jqplot/excanvas.min',
+          'jqplot': './cmps/jqplot/jquery.jqplot.min',
           'jqplot-barRenderer': './cmps/jqplot/plugins/jqplot.barRenderer.min',
           'jqplot-categoryAxisRenderer': './cmps/jqplot/plugins/jqplot.categoryAxisRenderer.min',
           'jqplot-pointLabels': './cmps/jqplot/plugins/jqplot.pointLabels.min'
+        },
+        shim: {//dependency
+            "jqplot-barRenderer": ['jqplot'],
+            "jqplot-categoryAxisRenderer": ['jqplot'],
+            "jqplot-pointLabels": ['jqplot']
         }
     });
-    require(['jqplot-barRenderer', 'jqplot-categoryAxisRenderer',  'jqplot-pointLabels'], function(){
+    var requireLibs = [];
+    requireLibs.push("css!jqplot-css");
+    if ($.browser.msie && parseInt($.browser.version) < 9) {
+        requireLibs.push("excanvas");
+    }
+    requireLibs.push("jqplot");
+    requireLibs.push("jqplot-barRenderer");
+    requireLibs.push("jqplot-categoryAxisRenderer");
+    requireLibs.push("jqplot-pointLabels");
+    
+    require(requireLibs, function(){
     
             var id = $view.id;
             var chartDivId = id+"_chartDiv";
