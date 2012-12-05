@@ -97,7 +97,7 @@ var PortletView = Backbone.View.extend({
 		}
         that.hideAllDlgs();
         //loading  mask
-        that.$el.mask("");
+        that.$el.mask();
         that.model.refresh(function(model){
             //alert(that.$el.is(":visible") )
             //alert(that.$el.parents("body").length )

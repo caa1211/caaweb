@@ -18,8 +18,12 @@ $view's Method:
 	setConfig(JSON)  ;set new config to portlet
 	setTitle(STRING) ;set new title to portlet
 	refresh()
+    mask()
+    unmask()
 */
 
+; 
+(function(){
 
 define(function(require){
 
@@ -81,7 +85,7 @@ define(function(require){
   return {
     init: initialize
   };
-  
-  
+
 });
 
+}());

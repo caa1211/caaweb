@@ -1,33 +1,8 @@
-﻿/*
-Event:
-    setting
-    refresh
-    destroy
-    fullscreen
-    fullscreenOn
-    fullscreenOff
-    settingOn
-    settingOff
-    settingDone
-    
-    
-$view's Method:
-	setConfig(JSON)  ;set new config to portlet
-	setTitle(STRING) ;set new title to portlet
-	refresh()
-*/
+﻿
 
-//define(id?, dependencies?, factory); 
-
-
- /*requirejs.config({
-    shim: {
-    
-        'cart': ['inventory']
-    }
- });
-  */
-  
+; 
+(function(){
+ 
 define(["css!./css/style.css",  "require"], function(css ,require){
 
   var cssUrl = require.toUrl("./css/style.css");
@@ -127,3 +102,4 @@ define(["css!./css/style.css",  "require"], function(css ,require){
   
 });
 
+});

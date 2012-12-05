@@ -1,25 +1,8 @@
-﻿/*
-Event:
-    setting
-    refresh
-    destroy
-    fullscreen
-    fullscreenOn
-    fullscreenOff
-    settingOn
-    settingOff
-    settingDone
-    
-    
-$view's Method:
-	setConfig(JSON, DoneFunction)  ;set new config to portlet
-	setTitle(STRING, DoneFunction) ;set new title to portlet
-    setModel(JSON, DoneFunction)
-	refresh()
-*/
-//define(id?, dependencies?, factory); 
-define(function(require, exports){
-  var config = {};
+﻿ ; 
+(function(){
+
+
+define(function(require){
 
   var initialize = function($view, config){
 
@@ -98,6 +81,6 @@ define(function(require, exports){
     init: initialize
   };
   
-  
 });
 
+}());
