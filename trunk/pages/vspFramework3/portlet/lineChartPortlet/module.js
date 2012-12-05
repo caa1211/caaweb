@@ -1,41 +1,6 @@
-﻿/*
-Event:
-    setting
-    refresh
-    destroy
-    fullscreen
-    fullscreenOn
-    fullscreenOff
-    settingOn
-    settingOff
-    settingDone
-    selfDomReady
-    dragStart
-    dragStop
-    resize
-    
-$view's Method:
-	setConfig(JSON)  ;set new config to portlet
-	setTitle(STRING) ;set new title to portlet
-	refresh()
-*/
-
-//define(id?, dependencies?, factory); 
+﻿; 
 (function(){
-/*
-var baseJsLibs = [];
-baseJsLibs.push( "require");
-baseJsLibs.push( "css!./cmps/jqplot/jquery.jqplot.min.css");
-if($.browser.msie){
-   baseJsLibs.push( "./cmps/jqplot/excanvas.min.js");
-}    
-baseJsLibs.push( "./cmps/jqplot/jquery.jqplot.min.js");
 
-var dependencyLibAry = [];    
-dependencyLibAry.push( "./cmps/jqplot/plugins/jqplot.highlighter.min");
-dependencyLibAry.push( "./cmps/jqplot/plugins/jqplot.cursor.min");
-dependencyLibAry.push( "./cmps/jqplot/plugins/jqplot.dateAxisRenderer.min");
-*/
 define(function(require){
 
   function doChart(chartDivId){

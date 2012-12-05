@@ -19,6 +19,9 @@
 	 *              mask display for quick processes.   	
 	 */
 	$.fn.mask = function(label, delay){
+        if(label==undefined){
+            label = "";
+        }
 		$(this).each(function() {
 			if(delay !== undefined && delay > 0) {
 		        var element = $(this);

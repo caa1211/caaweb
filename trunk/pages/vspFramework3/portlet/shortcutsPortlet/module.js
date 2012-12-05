@@ -1,25 +1,7 @@
-﻿/*
-Event:
-    setting
-    refresh
-    destroy
-    fullscreen
-    fullscreenOn
-    fullscreenOff
-    settingOn
-    settingOff
-    settingDone
-    
-    
-$view's Method:
-	setConfig(JSON)  ;set new config to portlet
-	setTitle(STRING) ;set new title to portlet
-	refresh()
-*/
+﻿; 
+(function(){
 
-//define(id?, dependencies?, factory); 
-define(["css!./css/style.css"], function(css, require, exports){
-  var config = {};
+define(["css!./css/style.css"], function(css, require){
 
   var initialize = function($view, config){
 
@@ -81,5 +63,7 @@ define(["css!./css/style.css"], function(css, require, exports){
   };
   
   
+});
+
 });
 
