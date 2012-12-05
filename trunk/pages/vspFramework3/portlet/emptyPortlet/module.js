@@ -15,8 +15,9 @@ Event:
     resize
     
 $view's Method:
-	setConfig(JSON)  ;set new config to portlet
-	setTitle(STRING) ;set new title to portlet
+	setConfig(JSON)  ;set a new config to portlet
+	setTitle(STRING) ;set a new title to portlet
+    setModel(JSON)   ;set a new model to portlet ex setModel({ title:"cc", config:{"aa":"bb"} })
 	refresh()
     mask()
     unmask()
