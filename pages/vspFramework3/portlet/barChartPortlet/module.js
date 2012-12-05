@@ -88,6 +88,7 @@ define(function(require){
             
             var plot = doChart(chartDivId);
             //redraw plot after view resize
+            
             $view.bind("resize", function(e, type){
                if($view.isFullscreen==true){
                     $chartDiv.height(500);
@@ -95,7 +96,9 @@ define(function(require){
                     $chartDiv.height(chartHeight);
                }
                $chartDiv.width($view.width() - chartWidthOffset); 
-               plot.replot();
+               try{
+                    plot.replot( {resetAxes: true } );
+               }catch(e){}
             });
             
         }); 

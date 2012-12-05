@@ -86,7 +86,9 @@ define(function(require){
                }else{
                     $chartDiv.height(chartHeight);
                }
-               plot.replot();
+               try{
+                    plot.replot( {resetAxes: true } );
+               }catch(e){}
             });
             
         }); 
