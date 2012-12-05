@@ -72,23 +72,36 @@ define(function(require){
             }
         });
         require(['jqplot-pieRenderer', 'jqplot-donutRenderer'], function(){
+        
             var id = $view.id;
             var chartDivId = id+"_chartDiv";
             var $chartDiv = $view.find("#"+chartDivId);
             var chartHeight = 300;
-            $chartDiv.height(chartHeight); 
+            var chartHeightOffset = 150;
+            var chartWidthOffset = 20;
+            $chartDiv.height($view.height() - chartHeightOffset); 
+            $chartDiv.width($view.width() - chartWidthOffset); 
             
             var plot = doChart(chartDivId);
+            
             //redraw plot after view resize
+            var lazyResizeTimer = null;
+            function doLazyResize(){
+                clearInterval(lazyResizeTimer);
+                lazyResizeTimer = setTimeout(function(){
+                   if($view.isFullscreen==true){
+                        $chartDiv.height($view.height() - chartHeightOffset); 
+                   }else{
+                        $chartDiv.height(chartHeight);
+                   }
+                   $chartDiv.width($view.width() - chartWidthOffset); 
+                   try{
+                        plot.replot( {resetAxes: true } );
+                   }catch(e){}
+                }, 150);
+            }
             $view.bind("resize", function(e, type){
-               if($view.isFullscreen==true){
-                    $chartDiv.height(500);
-               }else{
-                    $chartDiv.height(chartHeight);
-               }
-               try{
-                    plot.replot( {resetAxes: true } );
-               }catch(e){}
+               doLazyResize();
             });
             
         }); 
