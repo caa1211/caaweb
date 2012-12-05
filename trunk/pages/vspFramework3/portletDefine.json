@@ -91,6 +91,14 @@
             "admin": [1, 1, 1, 1], 
             "user": [0, 1, 0, 0]
         }
+   },{
+        "type": "areaChartPortlet",
+        "title": "Area Chart Portlet",
+        "url": "./portlet/areaChartPortlet/",
+        "acl":{
+            "admin": [1, 1, 1, 1], 
+            "user": [0, 1, 0, 0]
+        }
    }
 
 ]
