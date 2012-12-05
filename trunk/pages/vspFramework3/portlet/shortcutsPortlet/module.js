@@ -65,5 +65,5 @@ define(["css!./css/style.css"], function(css, require){
   
 });
 
-});
+}());
 

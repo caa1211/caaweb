@@ -102,4 +102,4 @@ define(["css!./css/style.css",  "require"], function(css ,require){
   
 });
 
-});
+}());
