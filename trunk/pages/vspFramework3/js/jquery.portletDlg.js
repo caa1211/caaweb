@@ -170,8 +170,13 @@
        
 		$portletContent.height(dh-20);
         $portlet.appendTo( $dlgBody  );
+        
         $dlgObj.modal(opts);
-        $portlet.trigger("fullscreenOn");
+        $dlgObj.unbind("shown").bind('shown', function(){
+            $portlet.isFullscreen = true;
+            $portlet.trigger("fullscreenOn");
+        });
+
       };
       
       function putBackPortlet(){
@@ -190,8 +195,8 @@
         $portletContent.height(_oh);
 
         $portlet.fadeIn(200);
+        $portlet.isFullscreen = false;
         $portlet.trigger("fullscreenOff");
-        
         $portlet = null, $portletSetting = null, $portletHead = null, $portletSetting = null;
         $wrapTmp.remove();$wrapTmp = null;
         $dlgBody.empty();
@@ -248,7 +253,10 @@
         $portletSetting.show();
         $portletSetting.appendTo( $dlgBody  );
         $dlgObj.modal(opts);
-        $portlet.trigger("settingOn");
+        $dlgObj.unbind("shown").bind('shown', function(){
+            $portlet.isSetting = true;
+            $portlet.trigger("settingOn");
+        });
         
         $okBtn.unbind('click').bind("click", function(){
             $portlet.trigger("settingDone", "ok");
@@ -274,6 +282,7 @@
       function putBackPortlet(){
         $portletHead.after($portletSetting);
         $portletSetting.hide();
+        $portlet.isSetting = false;
         $portlet.trigger("settingOff");
         $portlet = null, $portletSetting = null, $portletHead = null, $portletSetting = null;
         $dlgBody.empty();

@@ -328,10 +328,10 @@
                 //delay: 100,
 				scroll: true,
                 containment: 'document',
-				forcePlaceholderSize: false,
+				//forcePlaceholderSize: false,
 				//forceHelperSize: false,
                 start: function(e, ui){
-                    $(ui.helper).addClass('dragging');
+                    $(ui.helper).addClass('dragging').trigger("dragStart");
                     /*
                     if($.browser.msie){
                         $(ui.helper).height(hh);
@@ -358,7 +358,7 @@
                 stop: function(e, ui){
                     $(ui.item).css({
                         width: ''
-                    }).removeClass('dragging');
+                    }).removeClass('dragging').trigger("dragStop");
                     $(_settings.columns).sortable('enable');
                     update2PortletPosMap();
 					

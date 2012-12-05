@@ -67,6 +67,30 @@
             "admin": [1, 1, 0, 1], 
             "user": [0, 1, 0, 0]
         }
+   },{
+        "type": "pieChartPortlet",
+        "title": "Pie Chart Portlet",
+        "url": "./portlet/pieChartPortlet/",
+        "acl":{
+            "admin": [1, 1, 1, 1], 
+            "user": [0, 1, 0, 0]
+        }
+   },{
+        "type": "lineChartPortlet",
+        "title": "Line Chart Portlet",
+        "url": "./portlet/lineChartPortlet/",
+        "acl":{
+            "admin": [1, 1, 1, 1], 
+            "user": [0, 1, 0, 0]
+        }
+   },{
+        "type": "barChartPortlet",
+        "title": "Bar Chart Portlet",
+        "url": "./portlet/barChartPortlet/",
+        "acl":{
+            "admin": [1, 1, 1, 1], 
+            "user": [0, 1, 0, 0]
+        }
    }
 
 ]
