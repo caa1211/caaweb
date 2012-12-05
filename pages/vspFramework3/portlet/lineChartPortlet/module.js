@@ -72,9 +72,7 @@ define(function(require){
             var chartHeight = 300;
             var chartHeightOffset = 150;
             var chartWidthOffset = 20;
-            $chartDiv.height($view.height() - chartHeightOffset); 
-            $chartDiv.width($view.width() - chartWidthOffset); 
-            
+            $chartDiv.height(chartHeight); 
             var plot = doChart(chartDivId);
             
             //redraw plot after view resize
