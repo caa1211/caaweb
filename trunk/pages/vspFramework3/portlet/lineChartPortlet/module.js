@@ -97,7 +97,9 @@ define(function(require){
                     $chartDiv.height(chartHeight);
                }
                $chartDiv.width($view.width() - chartWidthOffset); 
-               plot.replot();
+               try{
+                    plot.replot( {resetAxes: true } );
+               }catch(e){}
             });
             
         }); 
