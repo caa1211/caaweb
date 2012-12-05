@@ -65,7 +65,7 @@ body {
 }
 
 .widget-placeholder { 
-    border: 2px solid #6e6e6e;
+    border: 1px solid #aaaaaa;
     margin: auto;
     background:  url("../images/ui-bg_diagonals-thick_90_eeeeee_40x40.png") repeat;
     height:29px;
