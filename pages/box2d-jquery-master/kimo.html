@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head><title>hello world box2d-jquery example</title>
+ <meta charset='utf-8'> 
+</head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="./js/lib/jquery.box2d.min.js"></script>
+<style>
+
+</style>
+<body style="overflow: auto;">
+
+<script> 
+$(function() {
+ // $('#button1').click(function(){
+  $.ajax({
+    type:'Post',
+    dataType:'html',
+    data: {
+        strURL:'http://tw.yahoo.com/'
+    },
+    
+    url:"proxy.php",
+  error: function(xmlHttpRequest,error) {
+    alert('Ajax request ERROR');
+  },     
+     success:function(html){
+     $html = $(html);
+     try{
+       $("#flickr").append(   $html);
+       }catch(e){}
+  //     setTimeout(function(){
+      // debugger;
+            $html.find("#ylogo, #sf1,#srchkw, #trough, #news, #ec, #todayN, #pa, #travel, #money, #life, #ad-pe, #mhhd, #buzz, #vi, #ticker, #fm").box2d({'y-velocity':5});
+        $html.find("#mhbd").box2d({'y-velocity':5});
+    //   }, 1000);
+     
+          //debugger;
+        
+     }
+  })
+ // })
+});
+</script>
+
+<!--input name="button1" id="button1" type="button" value="test" /-->
+<div id="flickr"></div> 
+   
+</body>
+</html>
