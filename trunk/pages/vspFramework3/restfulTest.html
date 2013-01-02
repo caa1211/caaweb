@@ -1,0 +1,151 @@
+﻿
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+  <meta name="description" edit="mootools shell, easy test you snippets before implementing"/>
+  <meta name="keywords" edit="mootools,javascript,javascript framework,shell,test"/>
+  <meta name="robots" edit="all"/>
+  
+  <script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+
+$(function(){
+
+
+jQuery.support.cors = true; // force cross-site scripting in IE
+
+
+$("#getBtn").click(function(){
+    
+    $.ajax({
+       url: "http://140.96.29.30:8113/hq/user/abc?age=5",
+       type: "get",
+       crossDomain: true,
+       //contentType: "application/json; charset=UTF-8",
+       data:{"a":"aa", "b":6},
+        dataType:"json",    
+        success:function(json) {
+        debugger;
+          alert('成功');  
+       },
+       error:function(er, b, c){
+           debugger;
+         alert('失敗'+c);
+       }
+    });
+
+});
+
+$("#postBtn").click(function(){
+    
+    $.ajax({
+       url: "http://140.96.29.30:8113/hq/user",
+       type: "post",
+       crossDomain: true,
+       data:{"age":"15", "b":6},
+       dataType:"json",
+       success:function(json) {
+        debugger;
+          alert('成功');  
+       },
+      error:function(er, b, c){
+         alert('失敗 '+c);
+       }
+    });
+
+});
+$("#delBtn").click(function(){
+    
+    $.ajax({
+       url: "http://140.96.29.30:8113/hq/user",
+       type: "delete",
+       crossDomain: true,
+       data:{"age":"15", "b":6},
+       //contentType: "application/json; charset=UTF-8",
+        success:function(json) {
+        debugger;
+          alert('成功');  
+       },
+       error:function(er, b, c){
+           debugger;
+         alert('失敗'+c);
+       }
+    });
+});
+
+
+$("#putBtn").click(function(){
+    $.ajax({
+       url: "http://140.96.29.30:8113/hq/user",
+       type: "put",
+       crossDomain: true,
+       //contentType: "application/json; charset=UTF-8",
+  
+       data:{"age":"15", "b":6},
+        success:function(json) {
+        debugger;
+          alert('成功');  
+       },
+       error:function(er, b, c){
+           debugger;
+         alert('失敗'+c);
+       }
+    });
+
+});
+
+
+
+//--------------------------------------------
+$("#getBtn_jsonp").click(function(){
+    $.ajax({
+       url: "http://140.96.29.30:8113/hq/user/abc?age=5",
+       type: "get",
+       crossDomain: true,
+       //contentType: "application/json; charset=UTF-8",
+        //jsonpCallback:"success_jsonpCallback",
+        data:{"a":"aa", "b":6},
+        dataType:"jsonp",    
+        success:function(json) {
+        debugger;
+          alert('成功');  
+       },
+       error:function(er, b, c){
+           debugger;
+         alert('失敗'+c);
+       }
+    });
+
+});
+
+
+
+
+});
+
+</script>
+
+
+
+ 
+</head>
+
+</body>
+<button id="getBtn">Get</button>
+
+<button id="postBtn">Post</button>
+
+<button id="delBtn">Delete</button>
+
+<button id="putBtn">Put</button>
+<br>
+
+<button id="getBtn_jsonp">Get (jsonp)</button>
+
+
+
+
+</body>
+
+</html>
