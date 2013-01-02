@@ -32,8 +32,6 @@
         var portletPosMap = [];
         
         defaultSettings = {
-            update2PortletPool: function(){},
-            update2PortletPosMap: function(){},
             columns: '.column',
             widgetSelector: '.widget',
             handleSelector: '.widget-head',
@@ -123,10 +121,6 @@
             
 		    var widget = $widget[0];
             var thisWidgetSettings = getWidgetSettings(widget);
-
-            $widget.updateIsExpanded = function(flag){
-                    update2PortletPool($(this), {expand: flag});
-            };
 
 		   //Set buttons
            var $btnGup = $(btnGup);      
@@ -242,7 +236,8 @@
                             complete: function(e){
                                 kk.children('i').removeClass("icon-chevron-up").addClass('icon-chevron-down');
                                 kk.attr('title', "Expand");
-                                $widget.updateIsExpanded(false);
+                                //$widget.updateIsExpanded(false);
+                                $widget.trigger("collapsed");
                             }
                         });
                         return false;
@@ -256,7 +251,7 @@
                             complete: function(e){
                                 kk.children('i').removeClass('icon-chevron-down').addClass('icon-chevron-up');
                                 kk.attr('title', "Collapse");
-                                $widget.updateIsExpanded(true);
+                                //$widget.updateIsExpanded(true);
                                 $widget.trigger('expanded');
                             }
                         });
@@ -272,7 +267,7 @@
         };
         
         var $sortableItems;
-        var makeSortable = function(isUpdate2PortletPosMap){
+        var makeSortable = function(){
             $sortableItems = (function(){
                 
                 var notSortable = '';
@@ -361,17 +356,13 @@
                         width: ''
                     }).removeClass('dragging').trigger("dragStop");
                     $(_settings.columns).sortable('enable');
-                    update2PortletPosMap();
-					
+
 					$columnsObj
 					//.animate({"paddingTop": 5, "paddingBottom": 5}, 200)
 					.removeClass("hoveredHolder");
                 }
             });
-            
-            if(isUpdate2PortletPosMap == true){       
-                update2PortletPosMap();
-            }
+
         }
 
         addWidgetControls();
@@ -379,54 +370,16 @@
  
         var _portletConfDft = {
             id: "plt_",
-            url: "",
             expand: true
         };
 
-        function update2PortletPool($widget, opts, isRemove){
-            /*
-            try{
-                var id = $widget.attr('id');
-				if(portletPool[id]!=undefined){
-					$.extend(portletPool[id],opts);
-				}else{
-					portletPool[id] = opts ;
-				}
-            }catch(e){
-            }
-            localStorage.setItem('portletPool',  JSON.stringify(portletPool));
-            */
-            _settings.update2PortletPool($widget, opts, isRemove);
-        }
-        
-        function update2PortletPosMap(){
-            /*
-            portletPosMap.length = 0;
-            for(var i=0; i<$columns.length; i++){
-                var $col = $columns.eq(i);
-                var $widgets =  $col.find(_settings.widgetSelector);
-                var ary = [];
-
-                for(var j=0; j<$widgets.length; j++){
-                   var $w = $widgets.eq(j);
-                   var id = $w.attr("id");
-                   ary.push(id);
-                }
-                portletPosMap.push(ary);
-            }            
-            localStorage.setItem('portletPosMap', JSON.stringify(portletPosMap));
-            */
-            _settings.update2PortletPosMap();
-        };
  
         this.addPortlet = function($w, opts, isUpdateStore){
 			 var _opts = $.extend({}, _portletConfDft, opts);
              var id =  _opts.id;
              $w.attr('id', id);
              //$($columns[pos[0]]).append( $w );//todo opt?
-             if(isUpdateStore==true){
-                update2PortletPool($w, opts);
-             }
+
              setWidget($w);
              //addWidgetControls();
              makeSortable(isUpdateStore == false ? false: true);
@@ -435,11 +388,6 @@
                 $w.ctrlBtns.collapse.trigger('click', 0);
             }
         }
-		
-		this.updatePortletPool = function($w, opts){
-
-			 update2PortletPool($w, opts);
-		};
 
         
         return this;

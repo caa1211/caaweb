@@ -1,4 +1,14 @@
 ﻿[
+
+   {
+        "type": "userList",
+        "title": "User List",
+        "url": "./vspPortlet/userList/",
+        "acl":{
+            "admin": [1, 1, 0, 1], 
+            "user": [1, 1, 0, 0]
+        }
+   },
   {
         "type": "emptyPortlet",
         "title": "Empty Portlet",
@@ -95,6 +105,14 @@
         "type": "areaChartPortlet",
         "title": "Area Chart Portlet",
         "url": "./portlet/areaChartPortlet/",
+        "acl":{
+            "admin": [1, 1, 1, 1], 
+            "user": [0, 1, 0, 0]
+        }
+   },{
+        "type": "openWin",
+        "title": "open Win",
+        "url": "./portlet/openWin/",
         "acl":{
             "admin": [1, 1, 1, 1], 
             "user": [0, 1, 0, 0]

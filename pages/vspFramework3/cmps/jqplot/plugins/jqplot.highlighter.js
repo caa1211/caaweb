@@ -399,7 +399,9 @@
     function handleMove(ev, gridpos, datapos, neighbor, plot) {
         var hl = plot.plugins.highlighter;
         var c = plot.plugins.cursor;
-
+if(hl==undefined ){
+//debugger;
+}
         if (hl!=undefined && hl.show) {
             if (neighbor == null && hl.isHighlighting) {
                 var evt = jQuery.Event('jqplotHighlighterUnhighlight');

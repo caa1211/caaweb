@@ -1,0 +1,22 @@
+﻿
+    <table class="table table-striped table-bordered" style="">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Email</th>
+				<th class="td-actions">ID</th>
+				</tr>
+		</thead>
+		<tbody>
+                              
+         <% _.each(Users,  function(user) { %>
+            <tr>
+            <td><%= user.Name %></td>
+            <td><%= user.Email %></td>
+            <td><%= user.ID %></td>
+            </tr>
+          <% }); %>
+
+         </tbody>
+	</table>
+

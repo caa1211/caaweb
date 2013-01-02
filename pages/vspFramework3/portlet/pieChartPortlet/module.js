@@ -34,10 +34,12 @@ define(function(require){
               'jqplot-css': './cmps/jqplot/jquery.jqplot.min',
               'excanvas': './cmps/jqplot/excanvas.min',
               'jqplot': './cmps/jqplot/jquery.jqplot.min',
+              'jqplot-highlighter': './cmps/jqplot/plugins/jqplot.highlighter',
               'jqplot-pieRenderer': './cmps/jqplot/plugins/jqplot.pieRenderer.min',
               'jqplot-donutRenderer': './cmps/jqplot/plugins/jqplot.donutRenderer.min'
             },
             shim: {//dependency
+              'jqplot-highlighter': ['jqplot'],
               'jqplot-pieRenderer': ['jqplot'],
               'jqplot-donutRenderer': ['jqplot']
             }
@@ -49,6 +51,7 @@ define(function(require){
         }
         requireLibs.push("jqplot");
         requireLibs.push("jqplot-pieRenderer");
+        requireLibs.push("jqplot-highlighter");
         requireLibs.push("jqplot-donutRenderer");
     
         require(requireLibs, function(){
@@ -61,27 +64,39 @@ define(function(require){
             var chartWidthOffset = 20;
             $chartDiv.height(chartHeight); 
 
-            var plot = doChart(chartDivId);
+            var plot;// = doChart(chartDivId);
             
             //redraw plot after view resize
-            var lazyResizeTimer = null;
-            function doLazyResize(){
-                clearInterval(lazyResizeTimer);
-                lazyResizeTimer = setTimeout(function(){
-                   if($view.isFullscreen==true){
-                        $chartDiv.height($view.height() - chartHeightOffset); 
-                   }else{
-                        $chartDiv.height(chartHeight);
-                   }
-                   $chartDiv.width($view.width() - chartWidthOffset); 
-                   try{
-                        plot.replot( {resetAxes: true } );
-                   }catch(e){}
-                }, 150);
+            function doResize(){
+                if($view.isFullscreen==true){
+                    $chartDiv.height($view.height() - chartHeightOffset); 
+                }else{
+                    $chartDiv.height(chartHeight);
+                }
+                $chartDiv.width($view.width() - chartWidthOffset); 
+                try{
+                    if(plot!=undefined){
+                        plot.destroy();
+                    }
+                    plot = doChart(chartDivId);
+                    /*
+                    //official method will cause failed result
+                    if(plot==undefined){
+                        plot = doChart(chartDivId);
+                    }else{
+                        plot.replot( {resetAxes: true, clear: true} );
+                    }
+                    */
+                }catch(e){}
             }
+            
             $view.bind("resize", function(e, type){
-               doLazyResize();
+               //if(type!="lazyResize"){
+                    doResize();
+               //}
+               e.stopPropagation();
             });
+            doResize();
             
         }); 
     });

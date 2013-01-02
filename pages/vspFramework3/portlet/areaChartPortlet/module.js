@@ -66,27 +66,40 @@ define(function(require){
             var chartWidthOffset = 20;
             $chartDiv.height(chartHeight); 
 
-            var plot = doChart(chartDivId);
+            var plot;// = doChart(chartDivId);
             
             //redraw plot after view resize
-            var lazyResizeTimer = null;
-            function doLazyResize(){
-                clearInterval(lazyResizeTimer);
-                lazyResizeTimer = setTimeout(function(){
-                   if($view.isFullscreen==true){
-                        $chartDiv.height($view.height() - chartHeightOffset); 
-                   }else{
-                        $chartDiv.height(chartHeight);
-                   }
-                   $chartDiv.width($view.width() - chartWidthOffset); 
-                   try{
-                        plot.replot( {resetAxes: true } );
-                   }catch(e){}
-                }, 150);
+            function doResize(){
+                if($view.isFullscreen==true){
+                    $chartDiv.height($view.height() - chartHeightOffset); 
+                }else{
+                    $chartDiv.height(chartHeight);
+                }
+                $chartDiv.width($view.width() - chartWidthOffset); 
+                try{
+                    if(plot!=undefined){
+                        plot.destroy();
+                    }
+                    plot = doChart(chartDivId);
+                   
+                    /*
+                    //official method will cause failed result
+                    if(plot==undefined){
+                        plot = doChart(chartDivId);
+                    }else{
+                        plot.replot( {resetAxes: true, clear: true} );
+                    }
+                    */
+                }catch(e){}
             }
+            
             $view.bind("resize", function(e, type){
-               doLazyResize();
+               //if(type!="lazyResize"){
+                    doResize();
+               //}
+               e.stopPropagation();
             });
+            doResize();
             
         }); 
     });

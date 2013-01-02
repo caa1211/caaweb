@@ -11,3 +11,9 @@ if (typeof console === "undefined" || typeof console.log === "undefined") {
     }
 }
 
+var vspUtils = {};
+vspUtils.ajaxSetup = function(){
+    jQuery.support.cors = true;
+};
+
+

@@ -54,7 +54,7 @@ body {
     float: left;
     width: 100%;
 	/* Min-height: */
-	min-height: 5px;
+	min-height: 50px;
     padding-top:5px;
 	padding-bottom:5px;
 	margin-top:5px;
@@ -376,3 +376,6 @@ margin-left:-1px; margin-top:-1px;
  .modal {zIndex:500;}
  
 #columns .widget.dragging{}
+
+
+#fullPortlet  .widget-content {overflow:auto;}

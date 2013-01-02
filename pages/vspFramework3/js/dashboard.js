@@ -126,28 +126,34 @@ var PortletView = Backbone.View.extend({
     requirejs.config({
        // baseUrl:"./",
         paths: {
-            'css': './js/css' //relative to dashboard.html
+            'css': './js/css', //relative to dashboard.html
+            'text': './js/text'
         }
     });
  },
+ resizeTimer: null,
  checkResize: function(type){
+   /*
     var that = this;
-    var cW = this.$el.width();
-    var cH = this.$el.height();
-    
-    function triggerResize(){
-       that.$el.oWidth = cW;
-       that.$el.oHeight = cH;
-       that.$el.trigger("resize", type);
-       console.log("resize")
-    }
-    
-    if(this.$el.oWidth == undefined || this.$el.oHeight == undefined){
-        triggerResize();
-    }
-    else if( this.$el.oWidth != cW ||  this.$el.oHeight !=cH){
-        triggerResize();
-    }
+    clearInterval(that.resizeTimer);
+    that.resizeTimer = setTimeout(function(){ 
+        var cW = that.$el.width();
+        var cH = that.$el.height();
+
+        if(that.$el.oWidth == undefined || that.$el.oHeight == undefined){
+           that.$el.oWidth = cW;
+           that.$el.oHeight = cH;
+           //that.$el.trigger("resize", type);
+           console.log("resize " +type)
+        }else if( that.$el.oWidth != cW ||  that.$el.oHeight !=cH){
+           that.$el.oWidth = cW;
+           that.$el.oHeight = cH;
+           //that.$el.trigger("resize", type);
+           console.log("resize " +type);
+        } 
+        
+    }, 150);
+    */
  },
  render: function(){
     var that = this;
@@ -189,6 +195,7 @@ var PortletView = Backbone.View.extend({
 		//usless ?!
 		that.on('destroy', function(){
 			alert("destroy event usless?");
+            
 			that.model.destroy();
 		});
         
@@ -207,20 +214,21 @@ var PortletView = Backbone.View.extend({
         that.$el.on('refresh', function(){
             that.refreshHandler(that.refreshDown);
         });
-        
+        /*
         that.$el.bind("fullscreenOn", function(e){
             that.checkResize("fullscreenOn");
         }).bind("fullscreenOff", function(){
             that.checkResize("fullscreenOff");    
         }).bind("dragStop", function(){
             that.checkResize("dragStop"); 
-       }).bind("expanded", function(){
+        }).bind("expanded", function(){
             that.checkResize("expanded"); 
-       });
-       
-       $(window).bind("resize", function(){
-              that.checkResize("windowResize"); 
-       });
+        });
+
+        that.$el.bind("lazyResize", function(){
+            that.checkResize("lazyResize"); 
+        });
+       */
 		/*
 		that.$el.on('removeClick', function(){
 			alert('removeClick');
@@ -316,10 +324,25 @@ var PortletModel = Backbone.Model.extend({
 		var controler =  this.collection.controler;
 		var id = this.get('id');
         
-        controler.saveDashboardSetting('pool', null, {id: id}, true);
-        controler.saveDashboardSetting('map');
+        controler.saveDashboardSetting('map_pool', null, {id: id}, true);
+        //controler.saveDashboardSetting('map');
 		this.collection.remove( this, {silent: true} );
 	},
+    created: function(isNew){
+        var that = this;
+        var controler =  that.collection.controler;
+        if(isNew==true){
+            //todo: Merge portDef & dashboard setting
+		   var opts =  $.extend({}, that.attributes);
+           controler.saveDashboardSetting('map_pool', that.view.$el, opts, false);
+           //controler.saveDashboardSetting('map');
+        }
+    },
+    expandStatusUpdate: function(expandFlag){
+        var that = this;
+        var controler =  that.collection.controler;
+        controler.saveDashboardSetting('pool', that.view.$el,  {expand: expandFlag}, false);
+    },
     updateDashboardDone: function(doneFn){
         console.log("save dashboard setting done");
         if(doneFn!=undefined && typeof(doneFn) != "undefined"){
@@ -332,12 +355,10 @@ var PortletModel = Backbone.Model.extend({
 		var controler =  this.collection.controler;
         var _newDefine = {};
         $.each(newDefine, function(i, t){
-        
             if(i!="title" && i!="config"){
                 alert("try to update the invaild value in model " + i);
                 return true;
             }
-            
             var orgDefine = that.get(i);
             if(orgDefine !=undefined ){
                 var _t = "";
@@ -368,7 +389,7 @@ var PortletModel = Backbone.Model.extend({
         });
     */    
 	},
-    fetch: function(){
+    fetch: function(isNew){
 
         var that = this;
         this.getUserRole();
@@ -377,8 +398,12 @@ var PortletModel = Backbone.Model.extend({
         this.view.on('portletViewDone', function(){
 			 this.off('portletViewDone');
              that.trigger("portletDone");
+             that.created(isNew);
         });
 
+        this.view.$el
+        .bind("collapsed", function(){that.expandStatusUpdate(false); })
+        .bind("expanded", function(){that.expandStatusUpdate(true); });
         
     }
 });
@@ -490,6 +515,7 @@ var DashboardCtrler = Backbone.Router.extend({
         },
         url: "./portletDefine.json"
 	},
+    portletSaveDataSchema:["id", "title", "type", "expand", "config"],
 	getGUID: function (){
         function S4() {
                return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
@@ -509,7 +535,7 @@ var DashboardCtrler = Backbone.Router.extend({
     },
 	doFetchPortlet: function(portlet, $tmpWidget, isNew, doneFn){
 		 var that = this;
-		 portlet.fetch();
+		 portlet.fetch(isNew);
 		 portlet.on("portletDone", function(){
 			portlet.off('portletDone');
 			var model = this;
@@ -519,23 +545,21 @@ var DashboardCtrler = Backbone.Router.extend({
 			model.view.$el.trigger("selfDomReady");
             
 			if(isNew){
+                //add a highlight for new widget
 			    model.view.$el.addClass("newWidget");
-				 
 				setTimeout(function(){
 					if(model.view.$el!=undefined){
 					  model.view.$el.removeClass("newWidget");
 					}
 				}, 2000);
 			}
-            //var opts = $.extend({}, modelDefine, {expand: expand, id: id});
-			 
-			var opts =  $.extend({}, model.attributes);
-            delete opts.acl;//do not save acl to user portlet setting
+
+			var opts = {id: model.get("id"), expand: model.get("expand") }// $.extend({}, model.attributes);
 			that.$ddPanelObj.addPortlet( model.view.$el, opts, isNew);
-            
+
             if(doneFn!=undefined && typeof( doneFn) == 'function'){
                 doneFn(model);
-            }
+            }    
 	    });
 	},
 	addPortlet: function(modelDefine, pos, doneFn){
@@ -566,6 +590,12 @@ var DashboardCtrler = Backbone.Router.extend({
 	    var portlet = new PortletModel(_modelDefine, userData);
 		this.dashboardModel.add(portlet); 
 	    var $tmpWidget = $("<span>");
+        
+        //if layout is modified, append portlet to perious columns.
+        if(that.$columns.length-1 < pos[0]){
+             pos[0] = that.$columns.length-1;
+        }
+        
 		if(isNew){
 			$(that.$columns[ pos[0] ]).prepend( $tmpWidget );
 		}
@@ -608,7 +638,8 @@ var DashboardCtrler = Backbone.Router.extend({
     },
     dashboardSetting:{
         portletPool: {},
-        portletPosMap: []
+        portletPosMap: [],
+        portletLayout: [[12],[6,6],[12]]
     },
     portletRestoreDone: function(model){
         console.log("portletRestoreDone " + model.get('id'));
@@ -616,7 +647,6 @@ var DashboardCtrler = Backbone.Router.extend({
     refreshDashboard: function(){
         var that = this;
         var dashboardSetting = that.dashboardSetting;
-    
 		var ppool = dashboardSetting.portletPool;
 		var pmap = dashboardSetting.portletPosMap;
         var ppoolNew = {};
@@ -628,15 +658,9 @@ var DashboardCtrler = Backbone.Router.extend({
 		            var id = col[j];
 		            var pltDef = ppool[id];
 		            var _pltDef;
-		            var currentDefine = that.getPortletDefineByType(pltDef.type);
-		            //avoid restore data is conflict with current portlet define
-		            if (currentDefine != undefined) {
-		                _pltDef = $.extend({}, pltDef, {
-		                    acl: currentDefine.acl,
-		                    url: currentDefine.url
-		                });
-		            }
-
+		            var defaultPortletDefine = that.getPortletDefineByType(pltDef.type);
+                    //merge default portlet and customized portlet
+                    _pltDef = $.extend({}, defaultPortletDefine, pltDef);
 		            var userRole = that.dashboardOpts.user.role;
 		            var roleAry = [0, 0, 0, 0];
 		            try {
@@ -659,21 +683,27 @@ var DashboardCtrler = Backbone.Router.extend({
     getUserDashboardSetting: function(){
         var portletPoolStr = localStorage.getItem('portletPool');
         var portletPosMapStr = localStorage.getItem('portletPosMap');
+        var portletLayoutStr = localStorage.getItem('portletLayout');
         var portletPool = null;
         var portletPosMap = null;
-        try{
-            portletPool = JSON.parse(portletPoolStr);
-            portletPosMap = JSON.parse(portletPosMapStr);
-        }catch(e){
-        }
-        return { portletPool: portletPool, portletPosMap: portletPosMap  };
+        var portletLayout = null;
+        
+        try{ portletPool = JSON.parse(portletPoolStr); }catch(e){}
+        try{ portletPosMap = JSON.parse(portletPosMapStr); }catch(e){}
+        try{ portletLayout = JSON.parse(portletLayoutStr); }catch(e){}
+        
+        return { portletPool: portletPool, portletPosMap: portletPosMap, portletLayout: portletLayout  };
     },
     setUserDashboardSetting: function(doneFn){
         var portletPool = this.dashboardSetting.portletPool;
         var portletPosMap = this.dashboardSetting.portletPosMap;
+        var portletLayout = this.dashboardSetting.portletLayout;
+        
         localStorage.setItem('portletPool', JSON.stringify(portletPool));
         localStorage.setItem('portletPosMap', JSON.stringify(portletPosMap));
+        localStorage.setItem('portletLayout', JSON.stringify(portletLayout));
         
+        console.log("update dashboard setting !");
         if(doneFn!=undefined && typeof(doneFn)=="function"){
             doneFn(this.dashboardSetting);
         }
@@ -682,20 +712,66 @@ var DashboardCtrler = Backbone.Router.extend({
         delete window.localStorage["portletPool"] ;
         delete window.localStorage["portletPosMap"]; 
     },
+    columnsReady: function(){
+        var that = this;
+        that.$columns = $(that.ui.columns);
+       //todo
+        that.$columns.unbind("sortreceive").bind("sortreceive", function(e, a, b){
+            that.saveDashboardSetting("map");
+        });
+    },
+    drawLayout: function(){
+        var that = this;
+        
+        if(that.$columns!=undefined){
+            that.$columns.unbind();
+        }
+        that.$ddPanelObj.empty();
+        
+        //that.dashboardSetting.layout  = [1, 3, 1];
+        var layoutSetting = that.dashboardSetting.portletLayout;
+        for(var i=0; i<layoutSetting.length; i++){
+            var rowNum = layoutSetting[i];
+            var $fluid = $('<div class="row-fluid"></div>');
+            for(var j=0; j< rowNum.length; j++){
+                var colNum = rowNum[j];
+                var spanCls = "span" + colNum.toString();
+                var $col = $('<div class="'+spanCls+'">  <ul class="column"></ul> </div>');
+                $fluid.append($col);
+            }
+            that.$ddPanelObj.append($fluid);
+        }
+        that.columnsReady();
+    },
 	restorePortlet: function(restoreDashboardDone){
 
 		var that = this;
         var userDashboardSetting = that.getUserDashboardSetting();
-        if(userDashboardSetting.portletPool !=null){
+        if(userDashboardSetting.portletPool != null){
+        
             //user's setting
-            that.dashboardSetting = userDashboardSetting;
+            var _dashboardSetting = userDashboardSetting;
+            
+            if(_dashboardSetting.portletLayout==void(0)){
+                _dashboardSetting.portletLayout = that.dashboardSetting.portletLayout;
+            }
+            that.dashboardSetting = _dashboardSetting;
+           
+            that.drawLayout();
             that.refreshDashboard();
         }else{
             //get dashboard from default setting (demo for static json data)
             $.getJSON(that.defautlDashboardUrl+"?"+Math.random(), function(d, s){
                 if(s=="success"){
                     try{
-                        that.dashboardSetting = d;
+                        var _dashboardSetting = d;
+                        
+                        if(_dashboardSetting.portletLayout==void(0)){
+                            _dashboardSetting.portletLayout = that.dashboardSetting.portletLayout;
+                        }
+                        that.dashboardSetting = _dashboardSetting;
+           
+                        that.drawLayout();
                         that.refreshDashboard();
                         that.setUserDashboardSetting(restoreDashboardDone);
                     }catch(e){
@@ -732,42 +808,72 @@ var DashboardCtrler = Backbone.Router.extend({
         //2. restore Portlet
 		that.restorePortlet(restoreDashboardDone);
 	},
-    saveDashboardSetting: function(type, $w, opts, isRemove, saveDone){//type: pool/map
+    update2DashboardMap: function(){
         var that = this;
         var portletPosMap = this.dashboardSetting.portletPosMap;
         var portletPool = this.dashboardSetting.portletPool;
-        if(type == "map"){
-            portletPosMap.length = 0;
-            var $columns = that.$columns; 
-            for(var i=0; i<$columns.length; i++){
-                var $col = $columns.eq(i);
-                var $widgets =  $col.find(that.ui.widgetSelector);
-                var ary = [];
+        portletPosMap.length = 0;
+        var $columns = that.$columns;
+        for (var i = 0; i < $columns.length; i++) {
+            var $col = $columns.eq(i);
+            var $widgets = $col.find(that.ui.widgetSelector);
+            var ary = [];
 
-                for(var j=0; j<$widgets.length; j++){
-                    var $w = $widgets.eq(j);
-                    var id = $w.attr("pltid");
-                    ary.push(id);
+            for (var j = 0; j < $widgets.length; j++) {
+                var $w = $widgets.eq(j);
+                var id = $w.attr("pltid");
+                ary.push(id);
+            }
+            portletPosMap.push(ary);
+        }
+    },
+    portletSaveDataFilter: function(opts){
+        var that = this;
+        var saveSchema = that.portletSaveDataSchema;
+        var _opts = {};
+        for(var i =0; i<saveSchema.length; i++){
+            try{
+                var key = saveSchema[i];
+                _opts[key] = opts[key];
+            }catch(e){
+                alert("[Error] -- save dashboard data by saveSchema failed");
+            }
+        }
+        return _opts;
+    },
+    update2DashboardPool: function($w, isRemove, opts){
+        var that = this;
+        var portletPosMap = this.dashboardSetting.portletPosMap;
+        var portletPool = this.dashboardSetting.portletPool;
+        if (isRemove == true) {
+            var id = opts.id;
+            delete portletPool[id];
+        } else {
+            try {
+                var _opts = that.portletSaveDataFilter(opts);
+                
+                var id = $w.attr('id');
+                if (portletPool[id] != undefined) {
+                    $.extend(portletPool[id], _opts);
+                } else {
+                    portletPool[id] = _opts;
                 }
-                portletPosMap.push(ary);
-            }            
-            
+            } catch (e) {
+                return;
+            }
+        }
+    },
+    saveDashboardSetting: function(type, $w, opts, isRemove, saveDone){//type: pool/map
+        var that = this;
+        if(type == "map"){
+          that.update2DashboardMap($w);
         }
         else if(type == "pool"){
-            if(isRemove == true){
-                var id = opts.id;
-                delete portletPool[id];
-            }else{
-                try{
-                    var id = $w.attr('id');
-                    if(portletPool[id]!=undefined){
-                        $.extend(portletPool[id],opts);
-                    }else{
-                        portletPool[id] = opts ;
-                    }
-                }catch(e){ return; }
-            }
-                        
+          that.update2DashboardPool($w, isRemove, opts);           
+        }        
+        else if(type == "map_pool"){
+          that.update2DashboardMap($w);
+          that.update2DashboardPool($w, isRemove, opts);           
         }
         this.setUserDashboardSetting(saveDone);
     },
@@ -775,12 +881,18 @@ var DashboardCtrler = Backbone.Router.extend({
 		var that = this;
 	    var ui = that.ui;
         var ddpanelOpts = {
-            update2PortletPool: function($w, opts, isRemove){that.saveDashboardSetting("pool", $w, opts, isRemove);},
-            update2PortletPosMap: function(){that.saveDashboardSetting("map");}
+           //update2PortletPool: function($w, opts, isRemove){that.saveDashboardSetting("pool", $w, opts, isRemove);},
+           //update2PortletPosMap: function(){that.saveDashboardSetting("map");}
         };
 		that.$ddPanelObj = $('#' + ui.ddPanelContainer).zyDDPanel(ddpanelOpts);
 		$("#"+ ui.userName).html(  that.dashboardOpts.user.name );
-		that.$columns = $(ui.columns);
+		/*
+        that.$columns = $(ui.columns);
+       //todo
+        that.$columns.bind("sortreceive", function(e, a, b){
+            that.saveDashboardSetting("map");
+        });
+        */
 	},
 	getUserOptionDone: function(){
 		var that = this;
@@ -804,10 +916,27 @@ var DashboardCtrler = Backbone.Router.extend({
 
 $(function(){
 
+  vspUtils.ajaxSetup();
 	var dashboardCtrler = new DashboardCtrler();
 	dashboardCtrler.fetch();
-
-
+    /*
+     var lazyResizeTimer = null;
+     function lazyResize(){
+        clearInterval(lazyResizeTimer);
+        lazyResizeTimer = setTimeout(function(){
+             var ctrler = dashboardCtrler;
+             for(var i = 0; i<ctrler.dashboardModel.models.length; i++){
+                if(ctrler.dashboardModel.models[i].view!=undefined){
+                    ctrler.dashboardModel.models[i].view.$el.trigger("lazyResize");
+                }
+             }
+        }, 300);
+     }
+    
+     $(window).resize(function(){
+        lazyResize();
+     });
+     */
     function imgPreloader(imgAry) {
         imageObj = new Image();
         for (var i = 0; i < imgAry.length; i++) {
