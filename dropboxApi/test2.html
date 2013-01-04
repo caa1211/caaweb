@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Dropbox REST</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<!-- jQuery v1.8.3 -->
+        <script src="http://code.jquery.com/jquery.min.js" type="text/javascript" charset="utf-8"></script>        
+     
+    <script>
+    $(function(){
+    
+        var consumerKey = "jdt0q0vv2zszeuo";
+        var consumerSecret = "puajv509whmafzo";
+        var url = "https://api.dropbox.com/1/oauth/request_token";
+        var requestToken = "";
+        var response = {};
+        $("#btn1").click(function(){
+            $.ajax({
+                url: url,
+                type: 'POST',
+                beforeSend: function (xhr) { 
+                    xhr.setRequestHeader('Authorization', 'OAuth oauth_version="1.0", oauth_signature_method="PLAINTEXT", oauth_consumer_key="'+consumerKey+'", oauth_signature="'+consumerSecret+'&"'); 
+                  
+                },
+                success: function(data, textStatus, jqXHR){
+                   //data = "oauth_token_secret=gwfzgub2va2j22z&oauth_token=13ohy0mdtbxjeto"
+                  
+                    requestToken = data;
+                    var items = data.split("&");
+					for (var i=0,len=items.length; i<len; i++){
+						var tmp = items[i].split("=");
+						response[tmp[0]] = tmp[1];
+					}
+					response['status'] = 200;
+                }
+            });
+        
+        });
+        //http://localhost/HCI/dropboxApi/test2.html
+        var authorizeUrl = "https://www.dropbox.com/1/oauth/authorize";
+        var oauth_callbackUrl = "http://localhost/HCI/dropboxApi/test3.html";
+         $("#btn2").click(function(){
+            //window.location.
+            
+            var href = authorizeUrl+"?oauth_token="+response.oauth_token+"&oauth_callback="+oauth_callbackUrl
+           // window.location.href = href;
+            window.open(href);
+            
+         });
+         
+        
+        var accessTokenUrl = "https://api.dropbox.com/1/oauth/access_token";
+        var accessResponse={};
+        $("#btn3").click(function(){
+                $.ajax({
+                url: accessTokenUrl,
+                type: 'POST',
+                beforeSend: function (xhr) { 
+             
+                    xhr.setRequestHeader('Authorization', 'OAuth oauth_version="1.0", oauth_signature_method="PLAINTEXT", oauth_consumer_key="'+consumerKey+'", oauth_token="'+response.oauth_token+'", oauth_signature="'+consumerSecret+'&'+ response.oauth_token_secret+'"'); 
+                  
+                },
+                success: function(data, textStatus, jqXHR){
+                   //data ="oauth_token_secret=9pxhhubiuq1y2tf&oauth_token=7ahu5kdw8oofgnz&uid=54155651"
+                   
+                    var items = data.split("&");
+					for (var i=0,len=items.length; i<len; i++){
+						var tmp = items[i].split("=");
+						accessResponse[tmp[0]] = tmp[1];
+					}
+					accessResponse['status'] = 200;
+                 //   debugger;
+                }
+            });
+        
+        });
+        
+        
+        
+        $("#btn4").click(function(){
+                $.ajax({
+                url: "https://api.dropbox.com/1/account/info",
+                type: 'GET',
+                beforeSend: function (xhr) { 
+                    xhr.setRequestHeader('Authorization', 'OAuth oauth_version="1.0", oauth_signature_method="PLAINTEXT", oauth_consumer_key="'+consumerKey+'", oauth_token="'+accessResponse.oauth_token+'", oauth_signature="'+consumerSecret+'&'+ accessResponse.oauth_token_secret+'"'); 
+                },
+                success: function(data, textStatus, jqXHR){
+                   //data = "oauth_token_secret=gwfzgub2va2j22z&oauth_token=13ohy0mdtbxjeto"
+                alert(data);
+                }
+            });
+        
+        });
+        
+        
+        
+        
+    });
+	</script>
+    </head>
+	<body>
+	   <button id="btn1"> request </button>
+       
+       <button id="btn2"> authorize </button>
+       
+       <button id="btn3"> convert to access token </button>
+       
+       <button id="btn4"> account info </button>
+	</body>
+</html>
