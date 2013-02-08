@@ -1,0 +1,344 @@
+﻿
+<html>
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="description"
+	edit="mootools shell, easy test you snippets before implementing" />
+<meta name="keywords"
+	edit="mootools,javascript,javascript framework,shell,test" />
+<meta name="robots" edit="all" />
+
+<script src="js/jquery-1.8.3.min.js" type="text/javascript"
+	charset="utf-8"></script>
+
+<script src="js/json2.js"></script>
+
+<script src="js/apiList.js"></script>
+
+<script>
+	$(function() {
+
+		var $sel = $("#apiSelector");
+		var initApi;
+		var $apiField = $("#apiField");
+		var $dataField = $("#dataField");
+		var $descField = $("#descField");
+		var $ctrlBtns = $("#ctrlBtns");
+		var $resultFiled = $("#resultField");
+		var $isDebugChk = $("#isDebug");
+
+		$.each(apiList, function(i, t) {
+			if (i == 0) {
+				initApi = t;
+			}
+			var $opt = $("<option></option>");
+			$opt.html(t.name);
+			$opt.attr("id", "api_" + i);
+			$opt.attr("value", t.name);
+			$opt.attr("desc", t.desc);
+			$opt.attr("url", t.url);
+			$opt.attr("supportType", t.supportType);
+			$opt.attr("data", t.data);
+			$sel.append($opt);
+			/*$opt.change(function() {
+				debugger;
+				updateApiSel(t);
+			});
+	*/
+			
+		});
+		$sel.change(function(){
+			var $opt = $(this).find(":selected");
+			var t = {
+					name : $opt.attr("value"),
+					supportType:$opt.attr("value"),
+					desc:$opt.attr("desc"),
+					url : $opt.attr("url"),
+					data: $opt.attr("data")
+			}
+			updateApiSel(t);
+		});
+		updateApiSel(initApi);
+
+		function updateApiSel(t) {
+			$apiField.empty().val(t.url);
+			$dataField.empty().val(t.data);
+			$descField.empty().html(t.desc);
+			//$ctrlBtns.find("button").attr("disabled", "disabled");//.removeClass("enable");
+			$ctrlBtns.find("button").removeClass("enable");
+			for ( var i = 0; i < t.supportType.length; i++) {
+				var type = t.supportType[i];
+				//$ctrlBtns.find("button[type='"+type+"']").removeAttr("disabled")//.addClass("enable");
+				$ctrlBtns.find("button[type='" + type + "']")
+						.addClass("enable");
+			}
+
+		}
+
+		$apiField.keyup(function() {
+			$ctrlBtns.find("button").addClass("enable");
+
+		});
+
+		jQuery.support.cors = true; // force cross-site scripting in IE
+
+		function getApi() {
+
+			return $("#apiField").val();
+
+		}
+		;
+
+		function getData() {
+			$("#dataField").text($("#dataField").val())
+
+			return $("#dataField").text();// $.parseJSON($("#dataField").text());
+		}
+		;
+
+		$("#getBtn").click(function() {
+			var api = getApi();
+			var data = getData();
+			try {
+				data = $.parseJSON(data);
+			} catch (e) {
+				alert("json format error");
+				return;
+			}
+
+			$.ajax({
+				url : api,
+				//url: "/vsp/rest/t/restTest",
+				//url: "/vsp/rest/t/unknownDead",
+				type : "get",
+				crossDomain : true,
+				//contentType: "application/json; charset=UTF-8",
+				data : data,
+				dataType : "json",
+				success : function(json) {
+
+					if ($("#isDebug").is(":checked")) {
+						debugger;
+					}
+					
+					$resultFiled.html("");
+					try{
+				      var jsonStr = JSON.stringify(json);
+					  $resultFiled.html(jsonStr );
+					}catch(e){
+						alert('failed');
+					}
+					
+				},
+				error : function(er, b, c) {
+					if ($("#isDebug").is(":checked")) {
+						debugger;
+					}
+					alert('失敗' + c);
+				}
+			});
+
+		});
+
+		$("#postBtn").click(function() {
+			var api = getApi();
+			var data = getData();
+			try {
+				data = $.parseJSON(data);
+			} catch (e) {
+				alert("json format error");
+				return;
+			}
+
+			$.ajax({
+				url : api,
+				type : "post",
+				crossDomain : true,
+				data : data,
+				dataType : "json",
+				success : function(json) {
+					if ($("#isDebug").is(":checked")) {
+						debugger;
+					}
+					$resultFiled.html("");
+					try{
+				      var jsonStr = JSON.stringify(json);
+					  $resultFiled.html( jsonStr );
+					}catch(e){
+						alert('failed');
+					}
+				},
+				error : function(er, b, c) {
+					if ($("#isDebug").is(":checked")) {
+						debugger;
+					}
+					alert('失敗 ' + c);
+				}
+			});
+
+		});
+		$("#delBtn").click(function() {
+			var api = getApi();
+			var data = getData();
+			try {
+				data = $.parseJSON(data);
+			} catch (e) {
+				alert("json format error");
+				return;
+			}
+
+		
+	$.ajax({
+				url : api,
+				type : "delete",
+				crossDomain : true,
+				data : data,
+				//contentType: "application/json; charset=UTF-8",
+
+				success : function(json) {
+					if ($("#isDebug").is(":checked")) {
+						debugger;
+					}
+					$resultFiled.html("");
+					try {
+						var jsonStr = JSON.stringify(json);
+						$resultFiled.html(jsonStr);
+					} catch (e) {
+						alert('failed');
+					}
+
+				},
+				error : function(er, b, c) {
+					if ($("#isDebug").is(":checked")) {
+						debugger;
+					}
+					alert('失敗' + c);
+				}
+			});
+		});
+
+		$("#putBtn").click(function() {
+			var api = getApi();
+			var data = getData();
+			try {
+				data = $.parseJSON(data);
+			} catch (e) {
+				alert("json format error");
+				return;
+			}
+
+			$.ajax({
+				url : api,
+				type : "put",
+				crossDomain : true,
+				//contentType: "application/json; charset=UTF-8",
+
+				data : data,
+				success : function(json) {
+					if ($("#isDebug").is(":checked")) {
+						debugger;
+					}
+					$resultFiled.html("");
+					try {
+						var jsonStr = JSON.stringify(json);
+						$resultFiled.html(jsonStr);
+					} catch (e) {
+						alert('failed');
+					}
+				},
+				error : function(er, b, c) {
+					if ($("#isDebug").is(":checked")) {
+						debugger;
+					}
+					alert('失敗' + c);
+				}
+			});
+
+		});
+
+		//--------------------------------------------
+		/*
+		 $("#getBtn_jsonp").click(function(){
+		 $.ajax({
+		 url: "http://140.96.29.30:8113/hq/user/abc?age=5",
+		 type: "get",
+		 crossDomain: true,
+		 //contentType: "application/json; charset=UTF-8",
+		 //jsonpCallback:"success_jsonpCallback",
+		 data:{"a":"aa", "b":6},
+		 dataType:"jsonp",    
+		 success:function(json) {
+		 debugger;
+		 alert('成功');  
+		 },
+		 error:function(er, b, c){
+		 debugger;
+		 alert('失敗'+c);
+		 }
+		 });
+
+		 });
+		 */
+
+	});
+</script>
+
+
+
+
+</head>
+<style>
+#ctrlBtns button.enable {
+	font-weight: bold;
+}
+</style>
+</body>
+<div>
+
+	Sel: <select id="apiSelector">
+
+	</select> Debug<input id="isDebug" type="checkbox" />
+	<div>
+		Desc: </br>
+		<div id="descField"
+			style="width: 50%; border: solid 1px gray; height: 100px; overflow:auto;"></div>
+	</div>
+	</br> </br> API: </br> <input id="apiField" style="width: 50%;" />
+</div>
+
+
+<div>
+	Data: </br>
+	<textarea id="dataField" style="width: 50%;"></textarea>
+
+</div>
+<div>
+	Result: </br>
+	<textarea id="resultField" style="width: 50%;font-size:14px;font-family:'細明體','Times New Roman','Georgia','Serif';">
+	</textarea>
+</div>
+
+
+
+<br>
+
+<div id="ctrlBtns">
+	<button id="getBtn" type="get">Get</button>
+
+	<button id="postBtn" type="post">Post</button>
+
+	<button id="delBtn" type="delete">Delete</button>
+
+	<button id="putBtn" type="put">Put</button>
+</div>
+
+<br>
+
+
+
+
+
+</body>
+
+</html>
