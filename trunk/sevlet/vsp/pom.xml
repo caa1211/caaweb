@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>vsp</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<description>A simple project with war packaging that depends on JSF 2.1 and 
+        javaee 6, in that order.</description>
+	<url>http://jsf-spec.java.net/</url>
+
+	<repositories>
+		<repository>
+			<id>CCMA</id>
+			<name>CCMA Repository</name>
+			<url>http://140.96.29.153:8080/nexus-2.0.5/content/groups/public/</url>
+		</repository>
+	</repositories>
+
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-servlet</artifactId>
+			<version>1.17</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+			<version>1.17</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hyperic.hq.hqapi1</groupId>
+			<artifactId>hqapi1</artifactId>
+			<version>5.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hyperic.hq.hqapi1</groupId>
+			<artifactId>hqapi1-tools</artifactId>
+			<version>5.0.0</version>
+		</dependency>
+
+		<!-- MYSQLsql JDBC Driver -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.10</version>
+		</dependency>
+
+		<!-- Hibernate Framework -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>3.6.9.Final</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>3.6.9.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.0.2.GA</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging-api</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.spec</groupId>
+			<artifactId>jboss-javaee-6.0</artifactId>
+			<version>1.0.0.Final</version>
+			<type>pom</type>
+			<scope>provided</scope>
+		</dependency>
+		
+				
+   		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>6.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+   		<dependency>
+   			<groupId>org.apache.httpcomponents</groupId>
+   			<artifactId>httpclient</artifactId>
+   			<version>4.2.3</version>
+   		</dependency>
+   		<dependency>
+   			<groupId>org.apache.httpcomponents</groupId>
+   			<artifactId>httpmime</artifactId>
+   			<version>4.2.3</version>
+   		</dependency>
+
+
+   		<dependency>
+   			<groupId>springframework</groupId>
+   			<artifactId>spring-aop</artifactId>
+   			<version>1.2.6</version>
+   		</dependency>
+
+   		<dependency>
+   			<groupId>org.apache.ant</groupId>
+   			<artifactId>ant-junit</artifactId>
+   			<version>1.8.4</version>
+   		</dependency>
+	</dependencies>
+	<groupId>org.ccma.itri.vsp</groupId>
+</project>
