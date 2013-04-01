@@ -97,3 +97,5 @@ user-select:text;
   .fileList tbody tr.edit td {
         background-color:#F8F8F2;
    }
+   
+   #jGrowl .message{border: solid 1px red; width:90%; overflow:hidden;}

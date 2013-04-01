@@ -636,7 +636,7 @@ function _L(str){
           var _param = $.extend({}, {img:"", callback: function(){}}, param);
           
           var $tr = $("<tr id='newFolder_'"+l+" class='listItem folder edit newFolder'></tr>");
-          var $td = $("<td class='nameArea'><img src='"+_param.img+"'/><span class='type'>1</span><div class='name'><a class='editAble' href='#'>"+ param.name+" ("+l+")" +"</a></div></td>")
+          var $td = $("<td class='nameArea'><img src='"+_param.img+"'/><span class='type'>1</span><div class='name'><a class='editAble' href='#' title='"+ param.name+"'>sssssssssss"+ param.name+" ("+l+")" +"</a></div></td>")
           $tr.append($td);
           $tr.append("<td>--</td>");
           $tr.append("<td>--</td>");

@@ -189,7 +189,7 @@
             
             nametd.append(nameType);
               
-           var nameObj = $("<div class='name'></div>");
+           var nameObj = $("<div class='name'>eee</div>");
            var actObj = $('<a href="#"></a>');
            actObj.html(itemObj.name);
            actObj.attr('href', itemObj.action);
